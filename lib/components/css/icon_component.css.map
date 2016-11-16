@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACA,GACA,CACE,OAAO,CAAE,YAAY,CAErB,OACA,CACE,KAAK,CAAE,GAAG,CACV,MAAM,CAAE,GAAG,CACX,YAAY,CAAE,CAAC,CACf,MAAM,CAAE,YAAY,CACpB,IAAI,CAAE,YAAY",
+"sources": ["icon_component.scss"],
+"names": [],
+"file": "icon_component.css"
+}
