@@ -8,6 +8,7 @@ import 'package:angular2/core.dart';
     selector: 'fo-icon',
     styleUrls: const ['css/icon_component.css'],
     templateUrl: 'html/icon_component.html',
+    preserveWhitespace: false,
     directives: const [IconComponent, SourcedDirective, TitledDirective])
 
 class IconComponent
