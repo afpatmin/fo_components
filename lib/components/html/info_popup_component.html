@@ -1,0 +1,8 @@
+<div *ngIf="!foIsOpen" class="background-overlay">
+    <div class="aligner">
+        <div [style.min-width]="titleWidth" class="popup">
+            <h2>{{title}}<fo-icon foSrc="close" foTitle="Close" (click)="foIsOpen = false"></fo-icon></h2>
+            <p>{{text}}</p>
+        </div>
+    </div>
+</div>

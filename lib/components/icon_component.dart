@@ -1,21 +1,37 @@
 // Copyright (c) 2016, Muienog AB. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
+library icon_component;
+
 import 'dart:html';
 import 'package:angular2/core.dart';
 
 @Component(
     selector: 'fo-icon',
-    styleUrls: const ['css/icon_component.css'],
+    styleUrls: const ['style/icon_component.css'],
     templateUrl: 'html/icon_component.html',
     preserveWhitespace: false,
-    directives: const [IconComponent, SourcedDirective, TitledDirective])
+    directives: const [SourcedDirective, TitledDirective],
+    changeDetection: ChangeDetectionStrategy.Detached)
 
-class IconComponent
+class IconComponent extends ComponentState
 {
   IconComponent();
-  @Input() String foSrc = "clock";
-  @Input() String foTitle = "Icon";
+  @Input() set foSrc(String value)
+  {
+    setState(() => _foSrc = value);
+  }
+
+  @Input() set foTitle(String value)
+  {
+    setState(() => _foTitle = value);
+  }
+
+  String get foSrc => _foSrc;
+  String get foTitle => _foTitle;
+
+  String _foSrc = "clock";
+  String _foTitle = "Icon";
 }
 
 @Directive(selector: '[foSourced]')

@@ -1,0 +1,60 @@
+@import 'constants';
+@import '_vendor_prefix';
+
+.red
+{
+  border-color: red;
+
+}
+
+div.background-overlay
+{
+  font-family: $fontFamily;
+
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+
+  div.aligner
+  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    div.popup
+    {
+      //@include foBoxShadow(0.2rem 0.2rem 0.4rem rgba(0,0,0,0.3));
+      @include foBorderRadius(0.2rem);
+      width: 40rem;
+      max-width: 90%;
+      overflow: hidden;
+      border: 0.2rem solid $color-2;
+      p
+      {
+        color: $color-text;
+        background-color: white;
+        margin: 0;
+        padding: 1em 1.5rem;
+      }
+      h2
+      {
+        color: white;
+        background-color: $color-2;
+        margin: 0;
+        padding: 0.7em 1.5rem;
+      }
+
+      fo-icon
+      {
+        float: right;
+        cursor: pointer;
+        //font-size: 0.8em;
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+@mixin foBackgroundSize($value)
+{
+  background-size: $value;
+  -webkit-background-size: $value;
+  -moz-background-size: $value;
+  -o-background-size: $value;
+}
+
+@mixin foBorderRadius($value)
+{
+  -webkit-border-radius: $value;
+  -moz-border-radius: $value;
+  border-radius: $value;
+}
+
+@mixin foBoxShadow($value)
+{
+  -webkit-box-shadow: $value;
+  -moz-box-shadow: $value;
+  box-shadow: $value;
+}
+
+@mixin foTransform($value)
+{
+  transform: $value;
+  -webkit-transform: $value;
+  -moz-transform: $value;
+  -ms-transform: $value;
+  -o-transform: $value;
+}
+
+@mixin foTransformOrigin($value)
+{
+  -webkit-transform-origin: $value;
+  -moz-transform-origin: $value;
+  -ms-transform-origin: $value;
+  -o-transform-origin: $value;
+  transform-origin: $value;
+}
+
+@mixin foTransition($value)
+{
+  -webkit-transition: $value;
+  -moz-transition: $value;
+  -o-transition: $value;
+  transition: $value;
+}
+
+@mixin foUserSelect($value)
+{
+  user-select: $value;
+  -webkit-user-select: $value;
+  -moz-user-select: $value;
+  -ms-user-select: $value;
+}

@@ -1,0 +1,22 @@
+$color-1: #333;
+$color-2: #01a79d;
+
+
+$color-3: #692;
+$color-alert: red;
+
+
+
+$color-info: blue;
+
+$color-success: green;
+$color-text: #444;
+
+
+@import url(https://fonts.googleapis.com/css?family=Lato);
+$fontFamily: 'Lato', Roboto, Helvetica, Arial, sans-serif;
+
+.hidden
+{
+  display: none;
+}
