@@ -2,7 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 library info_popup_component;
-
+import 'dart:html' as html show Event;
 
 import 'package:angular2/core.dart';
 import 'package:fo_components/components/icon_component.dart';
@@ -33,12 +33,29 @@ class InfoPopupComponent extends ComponentState
     setState(() => _title = value);
   }
 
-  @Input('foIsOpen') set foIsOpen(bool flag)
+  void close()
   {
-    setState(() => _foIsOpen = flag);
+    setState(() => _foIsOpen = false);
   }
 
-  bool _foIsOpen = true;
+  void open(html.Event e)
+  {
+    setState(() => _foIsOpen = true);
+  }
+
+  void onOk()
+  {
+    print("OK");
+    close();
+  }
+
+  void onCancel()
+  {
+    print("CANCEL");
+    close();
+  }
+
+  bool _foIsOpen = false;
   String _title = "Information";
   String _text;
 }

@@ -1,24 +1,32 @@
-<h1>FoComponents 0.0.1</h1>
-<h2>fo-icon</h2>
-<h4>Description</h4>
-<p>SVG icon</p>
-<h4>Attributes</h4>
-<ul>
-    <li>foSrc: Which icon id from within [icons.svg]</li>
-    <li>foTitle: Icon title and aria-label 
-</ul>
-<h4>Example</h4>
-<code>&lt;fo-icon foSrc="coins" foTitle="Coins"&gt;&lt;/fo-icon&gt;</code>
+#FoComponents 0.0.1
+##fo-icon
+###Description
+SVG icon
+###Attributes
+  * foSrc: Which icon id from within *icons.svg*
+  * foTitle: Icon title and aria-label 
 
-<h2>fo-popup</h2>
-<h4>Description</h4> 
-<p>A popup dialog with a title and text content covering the window.</p>
-<h4>Attributes</h4>
-<ul>
-    <li>foText: Text content</li>
-    <li>foTitle: Header title</li>
-</ul>
-<h4>Example</h4>
-<code>&lt;fo-popup foText="Something went wrong!" foTitle="Alert"&gt;&lt;/fo-popup&gt;</code>
-<h4>Remarks</h4>
-<p>No more than one popup window can be open at a time</p>
+###Example
+```html
+<fo-icon foSrc="coins" foTitle="Coins"></fo-icon>
+```
+
+###Remarks
+The caller must provide a svg file containing icons,
+in *[public_html]/gfx/icons/icons.svg*
+
+##fo-popup
+###Description 
+A popup dialog with a title and text content covering the window.
+###Attributes
+  * foText: Text content
+  * foTitle: Header title
+
+###Example
+```html
+<fo-popup #popup foText="{{strText}}" foTitle="Information"></fo-popup>
+<button (click)="popup.open()">Click me!</button>    
+```
+
+###Remarks
+No more than one popup window can be open at a time

@@ -1,2 +1,2 @@
-<h1 (click)="openPopup()">Click me</h1>
-<fo-info-popup [foIsOpen]="isOpen" [foText]="text" [foTitle]="title"></fo-info-popup>
+<h1 (click)="popup.open($event)">Click me</h1>
+<fo-info-popup #popup foText="{{text}}" foTitle="Popup Title"></fo-info-popup>

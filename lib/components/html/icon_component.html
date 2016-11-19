@@ -1,5 +1,5 @@
-<div role="presentation" foTitled [foTitle]="foTitle">
+<div role="presentation" title="{{foTitle}}" [attr.aria-label]="foTitle">
     <svg>
-        <use foSourced [foSrc]="foSrc"></use>
+        <use foSourced foSrc="{{foSrc}}"></use>
     </svg>
 </div>

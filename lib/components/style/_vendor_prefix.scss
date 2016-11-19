@@ -20,6 +20,13 @@
   box-shadow: $value;
 }
 
+@mixin foFilter($values...)
+{
+  filter: $values;
+  -webkit-filter: $values;
+  -ms-filter: $values;
+}
+
 @mixin foTransform($value)
 {
   transform: $value;

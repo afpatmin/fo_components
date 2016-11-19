@@ -1,18 +1,10 @@
-@import 'constants';
-@import '_vendor_prefix';
-
-.red
-{
-  border-color: red;
-
-}
+@import '_style';
 
 div.background-overlay
 {
   font-family: $fontFamily;
-
   position: fixed;
-  top: 70px;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
@@ -33,7 +25,14 @@ div.background-overlay
       width: 40rem;
       max-width: 90%;
       overflow: hidden;
-      border: 0.2rem solid $color-2;
+      border: 3px solid $color-2;
+      h2
+      {
+        color: white;
+        background-color: $color-2;
+        margin: 0;
+        padding: 0.5em 1.5rem;
+      }
       p
       {
         color: $color-text;
@@ -41,19 +40,12 @@ div.background-overlay
         margin: 0;
         padding: 1em 1.5rem;
       }
-      h2
-      {
-        color: white;
-        background-color: $color-2;
-        margin: 0;
-        padding: 0.7em 1.5rem;
-      }
 
       fo-icon
       {
         float: right;
         cursor: pointer;
-        //font-size: 0.8em;
+        font-size: 0.8em;
       }
     }
   }

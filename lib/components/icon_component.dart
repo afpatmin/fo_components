@@ -11,7 +11,7 @@ import 'package:angular2/core.dart';
     styleUrls: const ['style/icon_component.css'],
     templateUrl: 'html/icon_component.html',
     preserveWhitespace: false,
-    directives: const [SourcedDirective, TitledDirective],
+    directives: const [SourcedDirective],
     changeDetection: ChangeDetectionStrategy.Detached)
 
 class IconComponent extends ComponentState
@@ -46,23 +46,6 @@ class SourcedDirective implements OnInit
 
   @Input('foSrc')
   String src;
-
-  Element _host;
-}
-
-@Directive(selector: '[foTitled]')
-class TitledDirective implements OnInit
-{
-  TitledDirective(ElementRef element) : _host = element.nativeElement;
-
-  void ngOnInit()
-  {
-    _host.title = title;
-    _host.setAttribute("aria-label", title);
-  }
-
-  @Input('foTitle')
-  String title;
 
   Element _host;
 }
