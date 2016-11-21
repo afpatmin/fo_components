@@ -25,24 +25,19 @@ class InfoPopupComponent extends ComponentState
   String get title => _title;
   String get titleWidth => "${_title.length * 1.5}em";
 
-  @Input('foText') set text(String value)
-  {
-    setState(() => _text = value);
-  }
-
-  @Input('foTitle') set title(String value)
-  {
-    setState(() => _title = value);
-  }
-
   @Input('foIsConfirm') set isConfirm(bool flag)
   {
     setState(() => _isConfirm = flag);
   }
 
-  void open(html.Event e)
+  void open(html.Event e, String text, String title)
   {
-    setState(() => _isOpen = true);
+    setState(()
+    {
+      _isOpen = true;
+      _text = text;
+      _title = title;
+    });
   }
 
   void onOk()
@@ -63,6 +58,6 @@ class InfoPopupComponent extends ComponentState
   bool _isOpen;
   bool _isConfirm;
 
-  String _title = "Information";
-  String _text = "";
+  String _title;
+  String _text;
 }

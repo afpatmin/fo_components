@@ -27,8 +27,8 @@ A popup dialog with a title and text content covering the window.
 
 ###Example
 ```html
-<fo-popup #popup foText="{{strText}}" foTitle="Information" [foIsConfirm]="true" (close)="parseResponse($event)></fo-popup>
-<button (click)="popup.open()">Click me!</button>    
+<fo-popup #popup [foIsConfirm]="true" (close)="parseResponse($event)></fo-popup>
+<button (click)="popup.open($event, strText, strTitle)">Click me!</button>    
 ```
 
 ###Remarks
