@@ -16,9 +16,11 @@ import 'package:fo_components/components/icon_component.dart';
 
 class InfoPopupComponent extends ComponentState
 {
-  InfoPopupComponent();
+  InfoPopupComponent()
+      : _isConfirm = false, _isOpen = false;
 
-  bool get foIsOpen => _foIsOpen;
+  bool get isConfirm => _isConfirm;
+  bool get isOpen => _isOpen;
   String get text => _text;
   String get title => _title;
   String get titleWidth => "${_title.length * 1.5}em";
@@ -33,29 +35,34 @@ class InfoPopupComponent extends ComponentState
     setState(() => _title = value);
   }
 
-  void close()
+  @Input('foIsConfirm') set isConfirm(bool flag)
   {
-    setState(() => _foIsOpen = false);
+    setState(() => _isConfirm = flag);
   }
 
   void open(html.Event e)
   {
-    setState(() => _foIsOpen = true);
+    setState(() => _isOpen = true);
   }
 
   void onOk()
   {
-    print("OK");
-    close();
+    if (_isConfirm) userResponse.emit(true);
+    setState(() => _isOpen = false);
   }
 
   void onCancel()
   {
-    print("CANCEL");
-    close();
+    if (_isConfirm) userResponse.emit(false);
+    setState(() => _isOpen = false);
   }
 
-  bool _foIsOpen = false;
+  @Output('userResponse')
+  final EventEmitter<bool> userResponse = new EventEmitter();
+
+  bool _isOpen;
+  bool _isConfirm;
+
   String _title = "Information";
-  String _text;
+  String _text = "";
 }

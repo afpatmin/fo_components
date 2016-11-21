@@ -3,5 +3,6 @@
 
 library fo_components;
 
+export 'components/data_table_component.dart';
 export 'components/icon_component.dart';
 export 'components/info_popup_component.dart';

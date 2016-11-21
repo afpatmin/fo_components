@@ -1,2 +1,5 @@
-<h1 (click)="popup.open($event)">Click me</h1>
-<fo-info-popup #popup foText="{{text}}" foTitle="Popup Title"></fo-info-popup>
+<h1><fo-icon [style.color]="color" foSrc="coins" foTitle="Min ikon"></fo-icon></h1>
+
+<h1 [style.color]="color" (click)="popup.open($event)">Click me</h1>
+<fo-info-popup #popup (userResponse)="parseResponse($event)" [foIsConfirm]="true" foText="{{text}}" foTitle="Popup Title"></fo-info-popup>
+<fo-data-table></fo-data-table>

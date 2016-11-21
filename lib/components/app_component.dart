@@ -7,13 +7,18 @@ import 'package:fo_components/fo_components.dart';
 @Component(
     selector: 'fo-app',
     templateUrl: 'html/app_component.html',
-    directives: const [InfoPopupComponent],
+    directives: const [DataTableComponent, InfoPopupComponent, IconComponent],
     preserveWhitespace: false)
 
 class AppComponent
 {
 
+  void parseResponse(bool flag)
+  {
+    color = (flag == true) ? "green" : "red";
+  }
 
 
+  String color = "black";
   final String text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit...";
 }

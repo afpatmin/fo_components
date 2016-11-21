@@ -2,7 +2,7 @@ name: fo_components
 description: A collection of Angular Dart components
 author: Patrick Minogue <patrick.minogue@gmail.com>
 homepage: https://github.com/afpatmin
-version: 0.0.1133
+version: 0.0.1134
 environment:
   sdk: '>=1.19.0 <2.0.0'
 dependencies:
