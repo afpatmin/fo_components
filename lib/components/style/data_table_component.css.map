@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAEA,KACA,CACE,UAAU,CCMS,GAAG,CDLtB,KAAK,CAAE,IAAI,CACX,eAAe,CAAE,QAAQ,CACzB,MAAM,CAAC,iBAAkB,CAEzB,QACA,CACE,OAAO,CAAE,KAAK,CAKd,cACA,CACE,gBAAgB,CCjBZ,OAAO,CDkBX,KAAK,CAAE,KAAK,CACZ,iBACA,CACE,WAAW,CAAE,IAAI,CAOrB,8BACA,CACE,gBAAgB,CAAC,IAAI,CAEvB,6BACA,CACE,gBAAgB,CAAC,OAAO",
+"sources": ["data_table_component.scss","_constants.scss"],
 "names": [],
 "file": "data_table_component.css"
 }

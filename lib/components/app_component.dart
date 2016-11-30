@@ -7,11 +7,17 @@ import 'package:fo_components/fo_components.dart';
 @Component(
     selector: 'fo-app',
     templateUrl: 'html/app_component.html',
-    directives: const [DataTableComponent, InfoPopupComponent, IconComponent],
+    directives: const [DataTableComponent, IconComponent, InfoPopupComponent, InputComponent],
     preserveWhitespace: false)
 
-class AppComponent
+class AppComponent implements OnInit
 {
+
+  void ngOnInit()
+  {
+    table.add({"testcol1" : "value1-2", "testcol2":"value1-2"});
+    table.add({"testcol1" : "value2-2", "testcol2":"value2-2"});
+  }
 
   void parseResponse(bool flag)
   {
@@ -19,6 +25,14 @@ class AppComponent
   }
 
 
+  void printData(dynamic data)
+  {
+    print(data);
+  }
+
   String color = "black";
-  final String text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit...";
+
+
+
+  List<Map<String, String>> table = new List();
 }

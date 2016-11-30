@@ -1,0 +1,69 @@
+@import "constants";
+
+$height: 1.9rem;
+
+div#container
+{
+  margin-top: $default-margin-top;
+  width: 100%;
+  display: inline-table;
+
+  div#prefix, div#postfix
+  {
+    display: table-cell;
+    text-align: center;
+    vertical-align: bottom;
+    span
+    {
+      display: block;
+      padding: 0 0.25em;
+      line-height: $height;
+      background-color: $color-2;
+      color: white;
+    }
+  }
+
+  div#input-container
+  {
+    display: table-cell;
+    label
+    {
+      margin-left: 0.25em;
+      color: $color-2;
+      span
+      {
+        margin-left: 0.25em;
+        font-size: 0.8em;
+
+        fo-icon
+        {
+          cursor: pointer;
+        }
+      }
+    }
+
+    input
+    {
+      font-size: 1em;
+      border: 2px solid $color-2;
+      min-width: 6rem;
+      outline: none;
+      width: 100%;
+      padding: 0 0.25em;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      height: $height;
+      vertical-align: bottom;
+      color: $color-text;
+    }
+  }
+}
+
+p#error-output
+{
+  margin: 0;
+  padding: 0.25em;
+  text-align: right;
+  color: white;
+  background-color: $color-alert;
+}

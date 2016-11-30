@@ -2,11 +2,12 @@ name: fo_components
 description: A collection of Angular Dart components
 author: Patrick Minogue <patrick.minogue@gmail.com>
 homepage: https://github.com/afpatmin
-version: 0.0.1137
+version: 0.0.1144
 environment:
   sdk: '>=1.19.0 <2.0.0'
 dependencies:
-  angular2: ^2.0.0
+  angular2: 2.1.1
+  built_collection:
 dev_dependencies:
   browser: ^0.10.0
   dart_to_js_script_rewriter: ^1.0.1
@@ -17,4 +18,3 @@ transformers:
     platform_pipes:
     - 'package:angular2/common.dart#COMMON_PIPES'
     entry_points: web/main.dart
-#- dart_to_js_script_rewriter

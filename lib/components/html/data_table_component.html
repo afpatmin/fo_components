@@ -1,12 +1,12 @@
 <table>
     <thead>
     <tr>
-        <td>test head</td>
+        <td *ngFor="let cell of data.first | mapToKeys">{{cell}}</td>
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>test cell</td>
+    <tr *ngFor="let row of data" (click)="onRowSelect(row)">
+        <td *ngFor="let cell of row | mapToValues" (click)="foCellClick.emit(cell)">{{cell}}</td>
     </tr>
     </tbody>
 </table>

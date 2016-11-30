@@ -1,2 +1,2 @@
-
+table{margin-top:1em;width:100%;border-collapse:collapse;border:2px solid #01a79d}table td{padding:0.5em}table thead tr{background-color:#01a79d;color:white}table thead tr td{font-weight:bold}table tbody tr:nth-child(even){background-color:#eee}table tbody tr:nth-child(odd){background-color:#d5d5d5}
 /*# sourceMappingURL=data_table_component.css.map */

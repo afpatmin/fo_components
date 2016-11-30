@@ -2,4 +2,14 @@
 
 <h1 [style.color]="color" (click)="popup.open($event, 'TEXT CONTENT', 'TITLE CONTENT')">Click me</h1>
 <fo-info-popup #popup (userResponse)="parseResponse($event)" [foIsConfirm]="true"></fo-info-popup>
-<fo-data-table></fo-data-table>
+
+<form>
+    <fo-input foLabel="Förnamn" foDescription="Fyll i användarens förnamn!" foValidationMessage="Fyll i ett giltigt namn"></fo-input>
+    <button type="submit">Submit</button>
+</form>
+
+<fo-data-table [data]="table" #theTable></fo-data-table>
+
+<p>{{theTable.selectedRow}}</p>
+
+
