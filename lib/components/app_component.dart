@@ -3,13 +3,11 @@
 
 import 'package:angular2/core.dart';
 import 'package:fo_components/fo_components.dart';
-import 'package:fo_components/directives/submit_button_directive.dart';
-import 'package:fo_components/directives/form_directive.dart';
 
 @Component(
     selector: 'fo-app',
     templateUrl: 'html/app_component.html',
-    directives: const [DataTableComponent, FormDirective, IconComponent, InfoPopupComponent, InputComponent, SubmitButtonDirective],
+    directives: const [DataTableComponent, FormComponent, IconComponent, InfoPopupComponent, InputComponent],
     providers: const [],
     preserveWhitespace: false)
 
@@ -39,8 +37,6 @@ class AppComponent implements OnInit
   }
 
   String color = "black";
-
-
 
   List<Map<String, String>> table = new List();
 }

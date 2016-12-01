@@ -4,7 +4,6 @@
 library input_component;
 
 import 'package:angular2/core.dart';
-import 'package:angular2/common.dart';
 
 import 'package:fo_components/components/info_popup_component.dart';
 import 'package:fo_components/components/icon_component.dart';
@@ -14,8 +13,8 @@ import 'package:fo_components/components/icon_component.dart';
     styleUrls: const ['style/input_component.css'],
     templateUrl: 'html/input_component.html',
     preserveWhitespace: false,
-    directives: const [IconComponent, InfoPopupComponent, FORM_DIRECTIVES],
-    providers: const [FORM_PROVIDERS])
+    directives: const [IconComponent, InfoPopupComponent],
+    providers: const [])
 
 class InputComponent
 {
@@ -78,7 +77,7 @@ class InputComponent
 
   String _foClass = "";
   bool _foRequired = false;
-  RegExp _regExp;
+  RegExp _regExp = new RegExp(".*");
   String _type = "text";
 
   String foValue = "";
