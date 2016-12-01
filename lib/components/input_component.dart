@@ -17,16 +17,10 @@ import 'package:fo_components/components/icon_component.dart';
     directives: const [IconComponent, InfoPopupComponent, FORM_DIRECTIVES],
     providers: const [FORM_PROVIDERS])
 
-class InputComponent implements OnInit
+class InputComponent
 {
   InputComponent()
   {
-  }
-
-  void ngOnInit()
-  {
-    //control.validator = _validate;
-    //print(control.valid);
   }
 
   @Input('foDescription')
@@ -63,7 +57,7 @@ class InputComponent implements OnInit
   }
 
   @Input('foValidationMessage')
-  String foValidationMessage = "Enter a value";
+  String foValidationMessage;
 
   @Input('foRequired')
   void set foRequired(String value)
@@ -76,36 +70,16 @@ class InputComponent implements OnInit
   {
     _foClass = value;
   }
-/*
-  Map<String, dynamic> _validate(AbstractControl c)
-  {
-    Map<String, dynamic> ret = new Map();
 
-   // Map<String, dynamic> r1 = v.validate(c);
-   // if (r1 != null) ret.addAll(r1);
-
-    Map<String, dynamic> r2 = v2.validate(c);
-    if (r2 != null) ret.addAll(r2);
-
-    print(ret);
-    return ret;
-  }
-*/
   String get foClass => _foClass;
   bool get isRequired => _foRequired;
-  String get foPattern => _regExp.pattern;
+  String get foPattern => (_regExp == null) ? null : _regExp.pattern;
   String get foType => _type;
 
   String _foClass = "";
   bool _foRequired = false;
-  RegExp _regExp = new RegExp(r"(.*)");
+  RegExp _regExp;
   String _type = "text";
 
   String foValue = "";
-
-
-  //Control control = new Control("");
-
-  //Validator v = new MinLengthValidator("12");
- //alidator v2 = new MaxLengthValidator("13");
 }

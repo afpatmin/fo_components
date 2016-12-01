@@ -3,11 +3,14 @@
 
 import 'package:angular2/core.dart';
 import 'package:fo_components/fo_components.dart';
+import 'package:fo_components/directives/submit_button_directive.dart';
+import 'package:fo_components/directives/form_directive.dart';
 
 @Component(
     selector: 'fo-app',
     templateUrl: 'html/app_component.html',
-    directives: const [DataTableComponent, IconComponent, InfoPopupComponent, InputComponent],
+    directives: const [DataTableComponent, FormDirective, IconComponent, InfoPopupComponent, InputComponent, SubmitButtonDirective],
+    providers: const [],
     preserveWhitespace: false)
 
 class AppComponent implements OnInit
@@ -28,6 +31,11 @@ class AppComponent implements OnInit
   void printData(dynamic data)
   {
     print(data);
+  }
+
+  void onSubmit()
+  {
+    print("SUBMIT");
   }
 
   String color = "black";
