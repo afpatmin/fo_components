@@ -25,7 +25,7 @@ class InfoPopupComponent extends ComponentState
   String get title => _title;
   String get titleWidth => "${_title.length * 1.5}em";
 
-  @Input('foIsConfirm') set isConfirm(bool flag)
+  @Input('isConfirm') set isConfirm(bool flag)
   {
     setState(() => _isConfirm = flag);
   }
@@ -42,18 +42,18 @@ class InfoPopupComponent extends ComponentState
 
   void onOk()
   {
-    if (_isConfirm) userResponse.emit(true);
+    if (_isConfirm) response.emit(true);
     setState(() => _isOpen = false);
   }
 
   void onCancel()
   {
-    if (_isConfirm) userResponse.emit(false);
+    if (_isConfirm) response.emit(false);
     setState(() => _isOpen = false);
   }
 
-  @Output('userResponse')
-  final EventEmitter<bool> userResponse = new EventEmitter();
+  @Output('response')
+  final EventEmitter<bool> response = new EventEmitter();
 
   bool _isOpen;
   bool _isConfirm;

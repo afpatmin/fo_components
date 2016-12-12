@@ -17,24 +17,24 @@ import 'package:angular2/core.dart';
 class IconComponent extends ComponentState
 {
   IconComponent();
-  @Input() set foSrc(String value)
+  @Input() set src(String value)
   {
-    setState(() => _foSrc = value);
+    setState(() => _src = value);
   }
 
-  @Input() set foTitle(String value)
+  @Input() set title(String value)
   {
-    setState(() => _foTitle = value);
+    setState(() => _title = value);
   }
 
-  String get foSrc => _foSrc;
-  String get foTitle => _foTitle;
+  String get src => _src;
+  String get title => _title;
 
-  String _foSrc = "clock";
-  String _foTitle = "Icon";
+  String _src = "clock";
+  String _title = "Icon";
 }
 
-@Directive(selector: '[foSourced]')
+@Directive(selector: '[sourced]')
 class SourcedDirective implements OnInit
 {
   SourcedDirective(ElementRef element) : _host = element.nativeElement;
@@ -44,7 +44,7 @@ class SourcedDirective implements OnInit
     _host.setAttributeNS("http://www.w3.org/1999/xlink", "href", "gfx/icons/icons.svg#icon-" + src);
   }
 
-  @Input('foSrc')
+  @Input('src')
   String src;
 
   Element _host;

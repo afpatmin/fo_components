@@ -1,14 +1,40 @@
-<h1><fo-icon [style.color]="color" foSrc="coins" foTitle="Min ikon"></fo-icon></h1>
+<h1><fo-icon [style.color]="color" src="coins" title="Min ikon"></fo-icon></h1>
 
 <h1 [style.color]="color" (click)="popup.open($event, 'TEXT CONTENT', 'TITLE CONTENT')">Click me</h1>
-<fo-info-popup #popup (userResponse)="parseResponse($event)" [foIsConfirm]="true"></fo-info-popup>
-
+<fo-info-popup #popup (response)="parseResponse($event)" [isConfirm]="true"></fo-info-popup>
 
 <fo-data-table [data]="table" #theTable></fo-data-table>
-
 <p>{{theTable.selectedRow}}</p>
 
 
-<fo-form>
-    <fo-input foType="text" foLabel="cyka"></fo-input>
-</fo-form>
+<h2>NgForm</h2>
+<form [ngFormModel]="form" #f="ngForm">
+    <p>Login <input ngControl="login" /></p>
+    <p>Firstname <input ngControl="firstname" /></p>
+    <p>{{f.value | json}}</p>
+    <p>valid: {{f.valid}}</p>
+</form>
+<!--
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+    <h3>Control group: Credentials</h3>
+    <div ngControlGroup="credentials">
+        <p>Login: <input type="text" required ngControl="login" id="login" foAlert /></p>
+        <p>Password: <input type="password" ngControl="password" /></p>
+    </div>
+    <h3>Control group: Person</h3>
+    <div ngControlGroup="person">
+        <p><input type="checkbox" ngControl="check" /></p>
+
+
+        <label for="firstname">Firstname:&nbsp;
+            <fo-alert [hidden]="firstname.valid || (firstname.pristine && !formClicked)" title="hej" message="Fyll i ditt namn"></fo-alert>
+        </label>
+        <input id="firstname" type="email" ngControl="firstname" #firstname="ngForm" required />
+
+    </div>
+    <button type="submit" (click)="formClicked = true">Submit form</button>
+    <p>Submitted data:</p>
+</form>
+<pre>{{formData}}</pre>
+
+-->

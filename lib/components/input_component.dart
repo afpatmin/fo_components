@@ -4,7 +4,7 @@
 library input_component;
 
 import 'package:angular2/core.dart';
-
+import 'package:angular2/common.dart';
 import 'package:fo_components/components/info_popup_component.dart';
 import 'package:fo_components/components/icon_component.dart';
 
@@ -22,63 +22,63 @@ class InputComponent
   {
   }
 
-  @Input('foDescription')
-  String foDescription;
+  @Input('description')
+  String description;
 
-  @Input('foLabel')
-  String foLabel;
+  @Input('label')
+  String label;
 
-  @Input('foMax')
-  int foMax;
+  @Input('max')
+  int max;
 
-  @Input('foMin')
-  int foMin;
+  @Input('min')
+  int min;
 
-  @Input('foPattern')
-  void set foPattern(String value)
+  @Input('pattern')
+  void set pattern(String value)
   {
     _regExp = new RegExp(value);
   }
 
-  @Input('foPlaceholder')
-  String foPlaceholder = "";
+  @Input('placeholder')
+  String placeholder = "";
 
-  @Input('foPostfix')
-  String foPostfix;
+  @Input('postfix')
+  String postfix;
 
-  @Input('foPrefix')
-  String foPrefix;
+  @Input('prefix')
+  String prefix;
 
-  @Input('foType')
-  void set foType(String value)
+  @Input('type')
+  void set type(String value)
   {
     _type = value;
   }
 
-  @Input('foValidationMessage')
-  String foValidationMessage;
+  @Input('validationMessage')
+  String validationMessage;
 
-  @Input('foRequired')
-  void set foRequired(String value)
+  @Input('required')
+  void set required(String value)
   {
-    _foRequired = value != null;
+    _required = value != null;
   }
 
-  @Input('foClass')
-  void set foClass(String value)
+  @Input('className')
+  void set className(String value)
   {
-    _foClass = value;
+    _className = value;
   }
 
-  String get foClass => _foClass;
-  bool get isRequired => _foRequired;
-  String get foPattern => (_regExp == null) ? null : _regExp.pattern;
-  String get foType => _type;
+  String get className => _className;
+  bool get isRequired => _required;
+  String get pattern => (_regExp == null) ? null : _regExp.pattern;
+  String get type => _type;
 
-  String _foClass = "";
-  bool _foRequired = false;
+  String _className = "";
+  bool _required = false;
   RegExp _regExp = new RegExp(".*");
   String _type = "text";
 
-  String foValue = "";
+  String value = "";
 }
