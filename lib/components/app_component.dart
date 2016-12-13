@@ -25,7 +25,7 @@ class AppComponent implements OnInit
   {
     form = _formBuilder.group(
     {
-      "login": ["1234", FoValidators.isEmail],
+      "login": ["1234", Validators.required],
       "firstname": ["PATRICK", Validators.required]
     });
 
