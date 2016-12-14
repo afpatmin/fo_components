@@ -29,9 +29,19 @@ class FoValidators
     {
       output["material-input-error"] = "Enter alpha-numeric characters only";
     }
+    return output;
+  }
 
-
-
+  static Map<String, String> isPhoneNumber(AbstractControl control)
+  {
+    if (Validators.required(control) != null) return null;
+    String value = control.value;
+    Map<String, String> output = new Map();
+    RegExp r = new RegExp("[\+]{0,1}[0-9]{7,32}");
+    if (r.stringMatch(value) == null || r.stringMatch(value).length != value.length)
+    {
+      output["material-input-error"] = "Enter a valid phone number without spaces or dashes (+461234567)";
+    }
     return output;
   }
 
@@ -42,9 +52,9 @@ class FoValidators
     Map<String, String> output = new Map();
 
     RegExp r = new RegExp("07[0-9]{8}");
-    if (r.allMatches(value).length != 1)
+    if (r.stringMatch(value) == null || r.stringMatch(value).length != value.length)
     {
-      output["material-input-error"] = "Enter a valid swedish cell phone number without spaces (07xxxxxxxx)";
+      output["material-input-error"] = "Enter a valid swedish cell phone number without spaces (0712345678)";
     }
     return output;
   }
