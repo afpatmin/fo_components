@@ -10,6 +10,8 @@ div.background-overlay
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 100;
+  opacity: 0;
+  @include foTransition(opacity 0.2s ease);
 
   div.aligner
   {
@@ -20,7 +22,14 @@ div.background-overlay
 
     div.popup
     {
-      //@include foBoxShadow(0.2rem 0.2rem 0.4rem rgba(0,0,0,0.3));
+      transition: transform 0.2s ease;
+      -webkit-transition: -webkit-transform 0.2s ease;
+      -moz-transition: -moz-transform 0.2s ease;
+      -o-transition: -o-transform 0.2s ease;
+
+      @include foTransform(scale(0, 0));
+
+      @include foBoxShadow(0.2rem 0.2rem 0.4rem rgba(0,0,0,0.3));
       @include foBorderRadius(0.2rem);
       width: 40rem;
       max-width: 90%;
@@ -50,5 +59,14 @@ div.background-overlay
         font-size: 0.8em;
       }
     }
+    div.popup.open
+    {
+      @include foTransform(scale(1,1));
+    }
   }
+}
+
+div.background-overlay.open
+{
+  opacity: 1;
 }

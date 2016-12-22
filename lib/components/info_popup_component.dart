@@ -2,7 +2,8 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 library info_popup_component;
-import 'dart:html' as html show Event;
+import 'dart:async';
+import 'dart:html' as html;
 
 import 'package:angular2/core.dart';
 import 'package:fo_components/components/icon_component.dart';
@@ -12,15 +13,17 @@ import 'package:fo_components/components/icon_component.dart';
     styleUrls: const ['style/info_popup_component.css'],
     templateUrl: 'html/info_popup_component.html',
     preserveWhitespace: false,
-    directives: const [IconComponent])
+    directives: const [IconComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 
 class InfoPopupComponent extends ComponentState
 {
   InfoPopupComponent()
-      : _isConfirm = false, _isOpen = false;
+      : _isConfirm = false, _isOpen = false, _isReallyOpen = false;
 
   bool get isConfirm => _isConfirm;
   bool get isOpen => _isOpen;
+  bool get isReallyOpen => _isReallyOpen;
   String get text => _text;
   String get title => _title;
   String get titleWidth => "${_title.length * 1.5}em";
@@ -30,31 +33,42 @@ class InfoPopupComponent extends ComponentState
     setState(() => _isConfirm = flag);
   }
 
-  void open(html.Event e, String text, String title)
+  void open(html.MouseEvent e, String text, String title)
   {
     setState(()
     {
       _isOpen = true;
       _text = text;
       _title = title;
+
+      new Timer(const Duration(milliseconds: 100), () { setState(() { _isReallyOpen = true; }); });
     });
   }
 
   void onOk()
   {
     if (_isConfirm) response.emit(true);
-    setState(() => _isOpen = false);
+    setState(()
+    {
+      _isReallyOpen = false;
+      new Timer(const Duration(milliseconds: 300), () { setState(() => _isOpen = false); });
+    });
   }
 
   void onCancel()
   {
     if (_isConfirm) response.emit(false);
-    setState(() => _isOpen = false);
+    setState(()
+    {
+      _isReallyOpen = false;
+      new Timer(const Duration(milliseconds: 300), () { setState(() => _isOpen = false); });
+    });
   }
 
   @Output('response')
   final EventEmitter<bool> response = new EventEmitter();
 
+  bool _isReallyOpen;
   bool _isOpen;
   bool _isConfirm;
 
