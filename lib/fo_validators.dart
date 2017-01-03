@@ -58,4 +58,17 @@ class FoValidators
     }
     return output;
   }
+
+  static Map<String, String> isCancelBookingCode(AbstractControl control)
+  {
+    if (Validators.required(control) != null) return null;
+    String value = control.value;
+    Map<String, String> output = new Map();
+    RegExp r = new RegExp("[A-Z]{3}[0-9]{3}");
+    if (r.stringMatch(value) == null || r.stringMatch(value).length != value.length)
+    {
+      output["material-input-error"] = "Enter a value matching the following format: ABC123";
+    }
+    return output;
+  }
 }

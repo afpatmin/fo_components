@@ -15,7 +15,7 @@ import 'package:fo_components/fo_validators.dart';
     templateUrl: 'html/app_component.html',
     directives: const [AlertComponent, DataTableComponent, FORM_DIRECTIVES, IconComponent, InfoPopupComponent, InputComponent],
     viewBindings: const [FORM_BINDINGS],
-    providers: const [],
+    providers: const [FORM_PROVIDERS],
     preserveWhitespace: false)
 
 class AppComponent implements OnInit
