@@ -47,7 +47,7 @@ class InfoPopupComponent extends ComponentState
 
   void onOk()
   {
-    if (_isConfirm) response.emit(true);
+    response.emit(true);
     setState(()
     {
       _isReallyOpen = false;
@@ -57,7 +57,7 @@ class InfoPopupComponent extends ComponentState
 
   void onCancel()
   {
-    if (_isConfirm) response.emit(false);
+    response.emit(false);
     setState(()
     {
       _isReallyOpen = false;
