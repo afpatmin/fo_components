@@ -9,4 +9,7 @@ export 'components/icon_component.dart';
 export 'components/info_popup_component.dart';
 export 'components/input_component.dart';
 
+export 'pipes/map_to_keys_pipe.dart';
+export 'pipes/map_to_values_pipe.dart';
+
 export 'fo_validators.dart';
