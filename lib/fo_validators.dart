@@ -86,6 +86,19 @@ class FoValidators
     return output;
   }
 
+  static Map<String, String> isSwedishSocialSecurityNumber(AbstractControl control)
+  {
+    if (Validators.required(control) != null) return null;
+    String value = control.value;
+    Map<String, String> output = new Map();
+    RegExp r = new RegExp("(19|20)[0-9]{2,2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-2])[0-9]{4,4}");
+    if (r.stringMatch(value) == null || r.stringMatch(value).length != value.length)
+    {
+      output["material-input-error"] = "Enter a valid swedish social security number without spaces or symbols (YYYYMMDDXXXX)";
+    }
+    return output;
+  }
+
   static Map<String, String> isCancelBookingCode(AbstractControl control)
   {
     if (Validators.required(control) != null) return null;
