@@ -1,76 +1,34 @@
 // Copyright (c) 2016, BuyByMarcus Ltd. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'dart:convert';
-
 import 'package:angular2/core.dart';
-import 'package:angular2/common.dart';
-
-import 'package:fo_components/fo_components.dart';
-import 'package:fo_components/fo_validators.dart';
-
+import 'package:fo_components/fo_components.dart' show DataTableComponent;
+import 'package:fo_components/services/mock_user_service.dart';
 
 @Component(
     selector: 'fo-app',
-    templateUrl: 'html/app_component.html',
-    directives: const [AlertComponent, DataTableComponent, FORM_DIRECTIVES, IconComponent, InfoPopupComponent, InputComponent],
-    viewBindings: const [FORM_BINDINGS],
-    providers: const [FORM_PROVIDERS],
+    templateUrl: 'app_component.html',
+    directives: const [DataTableComponent],
+    viewBindings: const [],
+    providers: const [MockUserService],
     preserveWhitespace: false)
-
-class AppComponent implements OnInit
+class AppComponent
 {
-
-  AppComponent(this._formBuilder)
+  AppComponent(this.userService)
   {
-    form = _formBuilder.group(
-    {
-      "login": ["1234", Validators.required],
-      "firstname": ["PATRICK", Validators.required]
-    });
-
-
-
-
   }
 
-  void ngOnInit()
+  void printEvent(dynamic event)
   {
-    table.add({"testcol1" : "value1-2", "testcol2":"value1-2"});
-    table.add({"testcol1" : "value2-2", "testcol2":"value2-2"});
+    print(event);
   }
 
-  void parseResponse(bool flag)
+  void removeLast()
   {
-    color = (flag == true) ? "green" : "red";
+    userService.filteredData.remove(userService.filteredData.keys.last);
   }
 
+  final MockUserService userService;
 
-  void printData(dynamic data)
-  {
-    print(data);
-  }
-
-  void onSubmit(dynamic data)
-  {
-    formData = JSON.encode(data);
-  }
-
-  String formData = "";
-
-  String color = "black";
-
-  List<Map<String, String>> table = new List();
-
-
-
-  Control firstname = new Control("patrick");
-
-
-
-  bool formClicked = false;
-
-  final FormBuilder _formBuilder;
-  ControlGroup form;
-
+  int rows = 32;
 }

@@ -8,11 +8,11 @@ import 'package:angular2/core.dart';
 
 @Component(
     selector: 'fo-icon',
-    styleUrls: const ['style/icon_component.css'],
-    templateUrl: 'html/icon_component.html',
+    styleUrls: const ['icon_component.css'],
+    templateUrl: 'icon_component.html',
     preserveWhitespace: false,
     directives: const [SourcedDirective],
-    changeDetection: ChangeDetectionStrategy.Detached)
+    changeDetection: ChangeDetectionStrategy.Default)
 
 class IconComponent extends ComponentState
 {

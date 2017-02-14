@@ -3,11 +3,9 @@
 
 library fo_components;
 
-export 'components/alert_component.dart';
-export 'components/data_table_component.dart';
-export 'components/icon_component.dart';
-export 'components/info_popup_component.dart';
-export 'components/input_component.dart';
+export 'package:fo_components/components/data_table_component/data_table_component.dart';
+export 'package:fo_components/components/icon_component/icon_component.dart';
+export 'package:fo_components/components/info_popup_component/info_popup_component.dart';
 
 export 'directives/uppercase_directive.dart';
 export 'directives/lowercase_directive.dart';

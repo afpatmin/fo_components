@@ -6,12 +6,12 @@ import 'dart:async';
 import 'dart:html' as html;
 
 import 'package:angular2/core.dart';
-import 'package:fo_components/components/icon_component.dart';
+import 'package:fo_components/components/icon_component/icon_component.dart';
 
 @Component(
     selector: 'fo-info-popup',
-    styleUrls: const ['style/info_popup_component.css'],
-    templateUrl: 'html/info_popup_component.html',
+    styleUrls: const ['info_popup_component.css'],
+    templateUrl: 'info_popup_component.html',
     preserveWhitespace: false,
     directives: const [IconComponent],
     changeDetection: ChangeDetectionStrategy.OnPush)

@@ -1,0 +1,26 @@
+<p *ngIf="data.isEmpty" class="text-center">-Empty table -</p>
+<div *ngIf="data.isNotEmpty">
+    <table [class.faded]="disabled">
+        <thead>
+        <tr>
+            <td
+                *ngFor="let cell of data[data.keys.first].keys"
+                (click)="onSort(cell)">
+                {{cell | uppercase}}&nbsp;
+                <fo-icon [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" src="arrow-up"></fo-icon>
+                <fo-icon [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" src="arrow-down"></fo-icon>
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="#key of data.keys | range:firstIndex:lastIndex" (click)="foRowClick.emit(key)">
+            <td *ngFor="let cell of data[key].values" (click)="foCellClick.emit(cell)">{{cell}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <div id="select-step">
+        <span class="arrow" (click)="step(-1)">&laquo;</span>
+        <span class="page">{{firstIndex+1}}-{{lastIndex}} of {{data.length}}</span>
+        <span class="arrow" (click)="step(1)">&raquo;</span>
+    </div>
+</div>
