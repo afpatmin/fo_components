@@ -17,7 +17,7 @@ import 'package:fo_components/pipes/uppercase_pipe.dart';
     preserveWhitespace: false,
     pipes: const [UppercasePipe, RangePipe])
 
-class DataTableComponent extends ComponentState
+class DataTableComponent
 {
   DataTableComponent();
 
@@ -42,11 +42,8 @@ class DataTableComponent extends ComponentState
   @Input('data')
   void set data(Map<String, Map<String, String>> value)
   {
-    setState(()
-    {
-      _data = value;
-      _setIndices(0);
-    });
+    _data = value;
+    _setIndices(0);
   }
 
   @Input('rows')
@@ -59,7 +56,7 @@ class DataTableComponent extends ComponentState
   @Input('disabled')
   void set disabled(bool flag)
   {
-    setState(() => _disabled = flag);
+    _disabled = flag;
   }
 
   @Output('cellclick')
@@ -73,11 +70,8 @@ class DataTableComponent extends ComponentState
 
   void _setIndices(int first_index)
   {
-    setState(()
-    {
-      firstIndex = max(0, first_index);
-      lastIndex = min(firstIndex + _rows, _data.length);
-    });
+    firstIndex = max(0, first_index);
+    lastIndex = firstIndex + _rows;
   }
 
   bool get disabled => _disabled;

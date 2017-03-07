@@ -2,7 +2,7 @@
 <fo-data-table
     [data]="userService.filteredData"
     [rows]="15"
-    [loading]="userService.isLoading"
+    [disabled]="userService.isLoading"
     (search)="userService.search($event)"
     (searchinput)="userService.search($event)"
     (sort)="userService.sort($event['column'], $event['order'])"
