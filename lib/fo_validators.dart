@@ -51,7 +51,7 @@ class FoValidators
     if (Validators.required(control) != null) return null;
     String value = control.value;
     Map<String, String> output = new Map();
-    RegExp r = new RegExp("[0-9]+");
+    RegExp r = new RegExp("[0-9]+(\.[0-9]+)?");
     if (r.stringMatch(value) == null || r.stringMatch(value).length != value.length)
     {
       output["material-input-error"] = "Enter numbers only";
