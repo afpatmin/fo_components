@@ -1,26 +1,34 @@
-<p *ngIf="data.isEmpty" class="text-center">-Empty table -</p>
-<div *ngIf="data.isNotEmpty">
-    <table [class.faded]="disabled">
-        <thead>
-        <tr>
-            <td
-                *ngFor="let cell of data[data.keys.first].keys"
-                (click)="onSort(cell)">
-                {{cell | uppercase}}&nbsp;
-                <fo-icon [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" src="arrow-up"></fo-icon>
-                <fo-icon [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" src="arrow-down"></fo-icon>
-            </td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="#key of data.keys | range:firstIndex:lastIndex" (click)="foRowClick.emit(key)">
-            <td *ngFor="let cell of data[key].values" (click)="foCellClick.emit(cell)">{{cell}}</td>
-        </tr>
-        </tbody>
-    </table>
-    <div id="select-step">
-        <span class="arrow" (click)="step(-1)">&laquo;</span>
-        <span class="page">{{firstIndex+1}}-{{lastIndex}} of {{data.length}}</span>
-        <span class="arrow" (click)="step(1)">&raquo;</span>
+<div class="row">
+    <div class="large-4 large-offset-8 medium-6 medium-offset-6 columns">
+        <input type="text" maxlength="64" [(ngModel)]="searchPhrase" (keyup)="updateFilter()" />
+        <div class="search-icon-container"><fo-icon src="search" title="search"></fo-icon></div>
+    </div>
+</div>
+<p *ngIf="filteredData.isEmpty" class="text-center">-Empty table -</p>
+<div *ngIf="filteredData.isNotEmpty" class="row">
+    <div class="columns">
+        <table [class.faded]="disabled">
+            <thead>
+            <tr>
+                <td
+                    *ngFor="let cell of filteredData[filteredData.keys.first].keys"
+                    (click)="onSort(cell)">
+                    {{cell | uppercase}}&nbsp;
+                    <fo-icon [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" src="arrow-up"></fo-icon>
+                    <fo-icon [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" src="arrow-down"></fo-icon>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="#key of filteredData.keys | range:firstIndex:lastIndex" (click)="foRowClick.emit(key)">
+                <td *ngFor="let cell of filteredData[key].values" (click)="foCellClick.emit(cell)">{{cell}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div id="select-step">
+            <span class="arrow" (click)="step(-1)">&laquo;</span>
+            <span class="page">{{firstIndex+1}}-{{lastIndex}} of {{filteredData.length}}</span>
+            <span class="arrow" (click)="step(1)">&raquo;</span>
+        </div>
     </div>
 </div>

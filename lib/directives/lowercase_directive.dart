@@ -34,7 +34,7 @@ class LowercaseDirective implements OnInit
   }
 
 
-  final List<html.KeyCode> _skipCodes =
+  final List<int> _skipCodes =
   [
     html.KeyCode.SHIFT,
     html.KeyCode.CTRL,

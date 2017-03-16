@@ -34,7 +34,7 @@ class UppercaseDirective implements OnInit
     _input.dispatchEvent(new html.Event("input"));
   }
 
-  final List<html.KeyCode> _skipCodes =
+  final List<int> _skipCodes =
   [
     html.KeyCode.SHIFT,
     html.KeyCode.CTRL,
