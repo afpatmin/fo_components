@@ -16,6 +16,7 @@ import 'package:fo_components/pipes/uppercase_pipe.dart';
     directives: const [IconComponent],
     providers: const [],
     preserveWhitespace: false,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     pipes: const [UppercasePipe, RangePipe])
 
 class DataTableComponent
@@ -27,7 +28,7 @@ class DataTableComponent
 
   void step(int steps)
   {
-    if (!_disabled && (firstIndex + _rows < _data.length || steps < 0)) _setIndices(firstIndex + (steps * _rows));
+    if (!_disabled && (firstIndex + _numRows < _data.length || steps < 0)) _setIndices(firstIndex + (steps * _numRows));
   }
 
   void onSort(String column)
@@ -87,15 +88,16 @@ class DataTableComponent
   void set data(Map<String, Map<String, String>> value)
   {
     _data = (value == null) ? new Map() : value;
+    if (_data.isNotEmpty && _data.values.first.isNotEmpty) _columns = _data.values.first.keys.toList(growable: false);
     _setIndices(firstIndex);
     updateFilter();
     if (sortColumn.isNotEmpty) _sort();
   }
 
   @Input('rows')
-  void set rows(int value)
+  void set numRows(int value)
   {
-    _rows = value;
+    _numRows = value;
     _setIndices(0);
   }
 
@@ -117,11 +119,13 @@ class DataTableComponent
   void _setIndices(int first_index)
   {
     firstIndex = max(0, first_index);
-    lastIndex = firstIndex + _rows;
+    lastIndex = firstIndex + _numRows;
   }
 
   bool get disabled => _disabled;
-  int get rows => _rows;
+  int get numRows => _numRows;
+  List<String> get columns => _columns;
+
 
   @Output('cellclick')
   final EventEmitter<String> foCellClick = new EventEmitter();
@@ -140,8 +144,19 @@ class DataTableComponent
   String sortOrder = "DESC";
   String searchPhrase = "";
 
+  @Input('no-results-message')
+  String noResultsMessage = "No results found";
+
+  @Input('small-hidden-columns')
+  List<String> smallHiddenColumns = [];
+
+  @Input('medium-hidden-columns')
+  List<String> mediumHiddenColumns = [];
+
   int firstIndex = 0;
   int lastIndex = 1;
-  int _rows = 1;
+  int _numRows = 1;
   bool _disabled = false;
+
+  List<String> _columns = [];
 }

@@ -4,14 +4,21 @@
         <div class="search-icon-container"><fo-icon src="search" title="search"></fo-icon></div>
     </div>
 </div>
-<p *ngIf="filteredData.isEmpty" class="text-center">-Empty table -</p>
+<div *ngIf="filteredData.isEmpty" class="row">
+    <div class="columns">
+        <div class="empty-table">
+            <h4><fo-icon src="notification" title="Notification"></fo-icon>&nbsp;{{noResultsMessage}}</h4>
+        </div>
+    </div>
+</div>
 <div *ngIf="filteredData.isNotEmpty" class="row">
     <div class="columns">
         <table [class.faded]="disabled">
             <thead>
             <tr>
-                <td
-                    *ngFor="let cell of filteredData[filteredData.keys.first].keys"
+                <td *ngFor="let cell of columns"
+                    [class.hide-for-small]="smallHiddenColumns.contains(cell)"
+                    [class.hide-for-medium]="mediumHiddenColumns.contains(cell)"
                     (click)="onSort(cell)">
                     {{cell | uppercase}}&nbsp;
                     <fo-icon [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" src="arrow-up"></fo-icon>
@@ -21,7 +28,13 @@
             </thead>
             <tbody>
             <tr *ngFor="#key of filteredData.keys | range:firstIndex:lastIndex" (click)="foRowClick.emit(key)">
-                <td *ngFor="let cell of filteredData[key].values" (click)="foCellClick.emit(cell)">{{cell}}</td>
+                <td
+                    *ngFor="let cell of columns"
+                    [class.hide-for-small]="smallHiddenColumns.contains(cell)"
+                    [class.hide-for-medium]="mediumHiddenColumns.contains(cell)"
+                    (click)="foCellClick.emit(filteredData[key][cell])">
+                    {{filteredData[key][cell]}}
+                </td>
             </tr>
             </tbody>
         </table>

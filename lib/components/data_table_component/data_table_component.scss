@@ -3,8 +3,9 @@
 input[type=text]
 {
   margin-bottom: 0.5rem;
-  padding: 0 1.7rem 0 0.2rem;
+  padding: 0.2rem;
   border: 2px solid #ccc;
+  border-right: 1.7rem solid #ccc;
   border-radius: 0.3rem;
   color: $color-text;
 }
@@ -13,12 +14,6 @@ div.search-icon-container
 {
   display: inline-block;
   margin-left: -1.3rem;
-  -webkit-transform: translateY(0.17rem);
-  -moz-transform: translateY(0.17rem);
-  -ms-transform: translateY(0.17rem);
-  -o-transform: translateY(0.17rem);
-  transform: translateY(0.17rem);
-
   color: #aaa;
 }
 
@@ -71,6 +66,7 @@ table
       {
         font-weight: bold;
         cursor: pointer;
+        overflow: hidden;
       }
     }
   }
@@ -80,6 +76,10 @@ table
     tr
     {
       cursor: pointer;
+      td
+      {
+        overflow: hidden;
+      }
     }
     tr:nth-child(even)
     {
@@ -93,6 +93,21 @@ table
     {
       background-color: #eee;
     }
+  }
+}
+
+div.empty-table
+{
+  display: block;
+  min-width: 15em;
+  text-align: center;
+  background-color: #eee;
+  border-radius: 0.5em;
+
+  h4
+  {
+    color: $color-alert-bright;
+    margin: 0.5rem;
   }
 }
 
@@ -115,5 +130,21 @@ div#select-step
     -ms-user-select: none;
     user-select: none;
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 639px)
+{
+  .hide-for-small
+  {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1023px)
+{
+  .hide-for-medium
+  {
+    display: none;
   }
 }
