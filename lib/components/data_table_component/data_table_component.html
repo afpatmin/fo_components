@@ -1,5 +1,8 @@
 <div class="row">
-    <div class="large-4 large-offset-8 medium-6 medium-offset-6 columns">
+    <div class="large-8 medium-6 columns">
+        <h3 id="title">{{title}}</h3>
+    </div>
+    <div class="large-4 medium-6 columns">
         <input type="text" maxlength="64" [(ngModel)]="searchPhrase" (keyup)="updateFilter()" />
         <div class="search-icon-container"><fo-icon src="search" title="search"></fo-icon></div>
     </div>

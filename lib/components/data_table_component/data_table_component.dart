@@ -153,6 +153,9 @@ class DataTableComponent
   @Input('medium-hidden-columns')
   List<String> mediumHiddenColumns = [];
 
+  @Input('title')
+  String title = "";
+
   int firstIndex = 0;
   int lastIndex = 1;
   int _numRows = 1;
