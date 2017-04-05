@@ -22,6 +22,7 @@
                 <td *ngFor="let cell of columns"
                     [class.hide-for-small]="smallHiddenColumns.contains(cell)"
                     [class.hide-for-medium]="mediumHiddenColumns.contains(cell)"
+                    [class.hide-for-large]="largeHiddenColumns.contains(cell)"
                     (click)="onSort(cell)">
                     {{cell | uppercase}}&nbsp;
                     <fo-icon [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" src="arrow-up"></fo-icon>
@@ -35,6 +36,7 @@
                     *ngFor="let cell of columns"
                     [class.hide-for-small]="smallHiddenColumns.contains(cell)"
                     [class.hide-for-medium]="mediumHiddenColumns.contains(cell)"
+                    [class.hide-for-large]="largeHiddenColumns.contains(cell)"
                     (click)="foCellClick.emit(filteredData[key][cell])">
                     {{filteredData[key][cell]}}
                 </td>

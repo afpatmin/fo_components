@@ -61,13 +61,25 @@ class DataTableComponent
     {
       try
       {
+        // Number comparison
         num numA = num.parse(a[column]);
         num numB = num.parse(b[column]);
         return (order == "ASC") ? (numA - numB).toInt() : (numB - numA).toInt();
       }
       on FormatException
       {
-        return (order == "ASC") ? a[column].compareTo(b[column]) : b[column].compareTo(a[column]);
+        try
+        {
+          // Date comparison
+          DateTime dateA = DateTime.parse(a[column]);
+          DateTime dateB = DateTime.parse(b[column]);
+          return (order == "ASC") ? (dateA.difference(dateB)).inMinutes : (dateB.difference(dateA)).inMinutes;
+        }
+        on FormatException
+        {
+          // Default String comparison
+          return (order == "ASC") ? a[column].compareTo(b[column]) : b[column].compareTo(a[column]);
+        }
       }
     }
 
@@ -146,6 +158,9 @@ class DataTableComponent
 
   @Input('no-results-message')
   String noResultsMessage = "No results found";
+
+  @Input('large-hidden-columns')
+  List<String> largeHiddenColumns = [];
 
   @Input('small-hidden-columns')
   List<String> smallHiddenColumns = [];
