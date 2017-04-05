@@ -17,4 +17,4 @@ transformers:
     - 'package:angular2/common.dart#COMMON_DIRECTIVES'
     platform_pipes:
     - 'package:angular2/common.dart#COMMON_PIPES'
-    #entry_points: web/main.dart
+    entry_points: web/main.dart

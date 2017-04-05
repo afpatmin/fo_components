@@ -1,13 +1,4 @@
-<h1>DataTable</h1>
-<fo-data-table
-    [data]="userService.filteredData"
-    [rows]="15"
-    [disabled]="userService.isLoading"
-    (search)="userService.search($event)"
-    (searchinput)="userService.search($event)"
-    (sort)="userService.sort($event['column'], $event['order'])"
-    (rowclick)="printEvent($event)"
-    (cellclick)="printEvent($event)">
-</fo-data-table>
-
-<button (click)="removeLast()">RemoveLast</button>
+<div style="width:100%">
+    <fo-time-picker>
+    </fo-time-picker>
+</div>

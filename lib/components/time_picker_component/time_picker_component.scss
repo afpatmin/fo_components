@@ -1,0 +1,69 @@
+$color-1: black;
+$color-2: gray;
+$color-3: white;
+
+div#canvas
+{
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  margin: 1rem;
+  border-radius: 100%;
+  background-color: $color-3;
+  border: 0.8rem solid $color-2;
+
+  div.dial, div.number
+  {
+    position: absolute;
+  }
+
+  div.number
+  {
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: inline;
+    border-radius: 100%;
+    cursor: pointer;
+    padding: 0.1rem 0.125rem;
+    background-color: $color-2;
+    color: $color-3;
+  }
+  div.number:hover
+  {
+    background-color: $color-3;
+    color: $color-1;
+  }
+
+  div.hour
+  {
+    font-size: 1rem;
+  }
+
+  div.minute
+  {
+    font-size: 1rem;
+  }
+
+  h1.output
+  {
+    color: $color-2;
+    font-size: 2rem;
+    text-align: center;
+    width: 100%;
+  }
+}
