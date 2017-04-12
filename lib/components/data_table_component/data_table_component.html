@@ -31,7 +31,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="#key of filteredData.keys | range:firstIndex:lastIndex" (click)="foRowClick.emit(key)">
+            <tr *ngFor="let key of filteredData.keys | range:firstIndex:lastIndex" (click)="foRowClick.emit(key)">
                 <td
                     *ngFor="let cell of columns"
                     [class.hide-for-small]="smallHiddenColumns.contains(cell)"

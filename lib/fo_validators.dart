@@ -1,6 +1,6 @@
 library fo_validators;
 
-import 'package:angular2/common.dart' show AbstractControl, Validators;
+import 'package:angular2/angular2.dart' show AbstractControl, Validators;
 
 class FoValidators
 {

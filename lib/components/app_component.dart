@@ -8,7 +8,6 @@ import 'package:fo_components/fo_components.dart' show TimePickerComponent;
     selector: 'fo-app',
     templateUrl: 'app_component.html',
     directives: const [TimePickerComponent],
-    viewBindings: const [],
     providers: const [],
     preserveWhitespace: false)
 class AppComponent
