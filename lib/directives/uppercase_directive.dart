@@ -2,7 +2,7 @@ library attribute_directives.uppercase_directive;
 
 import 'dart:async';
 import 'dart:html' as html;
-import 'package:angular2/core.dart';
+import 'package:angular2/angular2.dart';
 
 @Directive(selector: '[foUppercase]')
 class UppercaseDirective implements OnInit

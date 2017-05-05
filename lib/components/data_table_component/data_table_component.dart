@@ -4,10 +4,9 @@
 library data_table_component;
 import 'dart:math';
 import 'dart:collection' show LinkedHashMap;
-import 'package:angular2/core.dart';
+import 'package:angular2/angular2.dart';
 import 'package:fo_components/components/icon_component/icon_component.dart';
 import 'package:fo_components/pipes/range_pipe.dart';
-import 'package:fo_components/pipes/uppercase_pipe.dart';
 
 @Component(
     selector: 'fo-data-table',
@@ -17,7 +16,7 @@ import 'package:fo_components/pipes/uppercase_pipe.dart';
     providers: const [],
     preserveWhitespace: false,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    pipes: const [UppercasePipe, RangePipe])
+    pipes: const [UpperCasePipe, RangePipe])
 
 class DataTableComponent
 {

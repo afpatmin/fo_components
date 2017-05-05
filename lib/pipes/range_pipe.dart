@@ -1,6 +1,6 @@
-import 'package:angular2/core.dart';
+import 'package:angular2/di.dart' show Pipe, PipeTransform;
 
-@Pipe('range')
+@Pipe("range")
 class RangePipe implements PipeTransform
 {
   Iterable<String> transform(Iterable<String> value, int from, int to)
