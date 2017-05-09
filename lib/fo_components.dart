@@ -7,6 +7,7 @@ export 'package:fo_components/components/data_table_component/data_table_compone
 export 'package:fo_components/components/icon_component/icon_component.dart';
 export 'package:fo_components/components/info_popup_component/info_popup_component.dart';
 export 'package:fo_components/components/time_picker_component/time_picker_component.dart';
+export 'package:fo_components/components/image_file_component/image_file_component.dart';
 export 'package:fo_components/pipes/range_pipe.dart';
 
 export 'directives/uppercase_directive.dart';

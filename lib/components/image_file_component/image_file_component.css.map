@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,GACA,CACE,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACZ,MAAM,CAAE,eAAe,CAGzB,gBACA,CACE,OAAO,CAAE,IAAI",
+"sources": ["image_file_component.scss"],
+"names": [],
+"file": "image_file_component.css"
+}

@@ -1,0 +1,2 @@
+<img [src]="source" alt="{{alt}}" (click)="fileInput.click()" />
+<input type="file" #fileInput (change)="onFileChange($event)" accept="image/*" />
