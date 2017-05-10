@@ -1,11 +1,25 @@
-img
+div.container
 {
-  width: 100%;
-  height: auto;
-  border: 1px solid black;
-}
+  text-align: center;
+  img
+  {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
 
-input[type=file]
-{
-  display: none;
+  input[type=file]
+  {
+    display: none;
+  }
+
+  material-button.add
+  {
+    margin: 2rem 0 3rem 0;
+  }
+
+  material-button.delete
+  {
+    margin: 0.5rem 0 1rem 0;
+  }
 }

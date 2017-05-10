@@ -1,2 +1,2 @@
-img{width:100%;height:auto;border:1px solid black}input[type=file]{display:none}
+div.container{text-align:center}div.container img{width:100%;height:auto;margin:0 auto}div.container input[type=file]{display:none}div.container material-button.add{margin:2rem 0 3rem 0}div.container material-button.delete{margin:0.5rem 0 1rem 0}
 /*# sourceMappingURL=image_file_component.css.map */

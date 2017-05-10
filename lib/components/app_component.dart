@@ -16,9 +16,6 @@ class AppComponent
   {
   }
 
-  void onLoaded(String event)
-  {
-    print(event);
-  }
+  String source;
 
 }

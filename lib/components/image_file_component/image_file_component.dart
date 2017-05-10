@@ -4,24 +4,30 @@
 import 'dart:async' show Stream, StreamController;
 import 'dart:convert' show ASCII, BASE64;
 import 'dart:html' as dom show CanvasElement, CanvasRenderingContext2D, File, FileReader, FileUploadInputElement, ImageElement, ProgressEvent;
-//import 'dart:math';
 import 'dart:typed_data' show ByteData, Endianness, Uint8List;
 import 'package:angular2/angular2.dart';
+import 'package:angular_components/angular_components.dart';
 
 
 @Component(
     selector: 'fo-image-file',
     templateUrl: 'image_file_component.html',
     styleUrls: const ['image_file_component.css'],
-    directives: const [],
+    directives: const [GlyphComponent, MaterialButtonComponent],
     providers: const [],
     preserveWhitespace: false)
-class ImageFileComponent
+
+class ImageFileComponent implements OnDestroy
 {
   ImageFileComponent()
   {
     _metaReader.onLoad.listen(_extractExifOrientationAndLoadImage);
     _reader.onLoad.listen(_generateScaledImage);
+  }
+
+  void ngOnDestroy()
+  {
+    _onSourceChangeController.close();
   }
 
   void onFileChange(dynamic event)
@@ -44,7 +50,13 @@ class ImageFileComponent
     }
   }
 
-  @Input('src')
+  void clearSource()
+  {
+    source = "";
+    _onSourceChangeController.add("");
+  }
+
+  @Input('source')
   String source = "";
 
   @Input('alt')
@@ -59,8 +71,8 @@ class ImageFileComponent
   @Input('maxByteSize')
   int maxByteSize = 1024000;
 
-  @Output('loaded')
-  Stream<String> get onLoaded => _onLoadedController.stream;
+  @Output('sourceChange')
+  Stream<String> get onSourceChange => _onSourceChangeController.stream;
 
   /// Loads image only after exif orientation has been extracted
   void _extractExifOrientationAndLoadImage(dom.ProgressEvent e)
@@ -183,7 +195,7 @@ class ImageFileComponent
         context.drawImage(temp, 0, 0);
       }
 
-      /// make sure the image filesize <= maxByteSize
+      /// make sure the image fileSize <= maxByteSize
       _byteSize = maxByteSize + 1;
       double quality = 0.9;
       while (_byteSize > maxByteSize && quality > 0.1)
@@ -198,7 +210,7 @@ class ImageFileComponent
         }
         else print("invalid src: $source");
       }
-      _onLoadedController.add(_base64Data);
+      _onSourceChangeController.add(source);
     });
   }
 
@@ -263,7 +275,7 @@ class ImageFileComponent
   int _orientation = 0;
   final dom.FileReader _metaReader = new dom.FileReader();
   final dom.FileReader _reader = new dom.FileReader();
-  final StreamController<String> _onLoadedController = new StreamController();
+  final StreamController<String> _onSourceChangeController = new StreamController();
   dom.FileUploadInputElement _fileInput;
 }
 
