@@ -1,8 +1,8 @@
 <div class="container">
-    <div *ngIf="!source.isEmpty">
+    <div *ngIf="source != null && !source.isEmpty" class="image">
         <img [src]="source" alt="{{alt}}" />
-        <material-button class="delete" raised (trigger)="clearSource()"><glyph icon="delete" size="x-large"></glyph></material-button>
+        <material-button class="delete red" clear-size raised (trigger)="fileInput.value = null; clearSource()"><glyph icon="delete" size="x-large"></glyph></material-button>
     </div>
-    <material-button class="add" raised *ngIf="source.isEmpty" (trigger)="fileInput.click()"><glyph icon="add_a_photo" size="x-large"></glyph></material-button>
+    <material-button class="add" raised *ngIf="source == null || source.isEmpty" (trigger)="fileInput.click()"><glyph icon="add_a_photo" size="x-large"></glyph></material-button>
     <input type="file" #fileInput (change)="onFileChange($event)" accept="image/jpg,image/jpeg,image/png,image/gif" />
 </div>

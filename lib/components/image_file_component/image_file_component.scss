@@ -1,25 +1,38 @@
+@import '../../common';
+
 div.container
 {
   text-align: center;
-  img
+
+  div.image
   {
-    width: 100%;
-    height: auto;
-    margin: 0 auto;
+    position: relative;
+    img
+    {
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+
+      @include box-shadow();
+    }
+
+    material-button.delete
+    {
+      position: absolute;
+      top: 0.25em;
+      right: 0.25em;
+      color: white;
+      background-color: $color-red;
+    }
   }
 
   input[type=file]
   {
-    display: none;
+    display: none !important;
   }
 
   material-button.add
   {
-    margin: 2rem 0 3rem 0;
-  }
-
-  material-button.delete
-  {
-    margin: 0.5rem 0 1rem 0;
+    margin: 2rem 0;
   }
 }

@@ -169,6 +169,7 @@ class ImageFileComponent implements OnDestroy
     /// Scale down the image
     dom.ImageElement temp = new dom.ImageElement();
     temp.src = base64;
+
     temp.onLoad.listen((_)
     {
       dom.CanvasElement canvas = null;

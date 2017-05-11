@@ -16,6 +16,4 @@ class AppComponent
   {
   }
 
-  String source;
-
 }

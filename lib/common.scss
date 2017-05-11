@@ -1,0 +1,10 @@
+$color-grey: #ccc;
+$color-red: #8b0000;
+
+
+@mixin box-shadow
+{
+  -webkit-box-shadow: 1px 1px 4px $color-grey;
+  -moz-box-shadow: 1px 1px 4px $color-grey;
+  box-shadow: 1px 1px 4px $color-grey;
+}

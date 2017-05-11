@@ -1,2 +1,2 @@
-div.container{text-align:center}div.container img{width:100%;height:auto;margin:0 auto}div.container input[type=file]{display:none}div.container material-button.add{margin:2rem 0 3rem 0}div.container material-button.delete{margin:0.5rem 0 1rem 0}
+div.container{text-align:center}div.container div.image{position:relative}div.container div.image img{width:100%;height:auto;margin:0 auto;-webkit-box-shadow:1px 1px 4px #ccc;-moz-box-shadow:1px 1px 4px #ccc;box-shadow:1px 1px 4px #ccc}div.container div.image material-button.delete{position:absolute;top:0.25em;right:0.25em;color:white;background-color:#8b0000}div.container input[type=file]{display:none !important}div.container material-button.add{margin:2rem 0}
 /*# sourceMappingURL=image_file_component.css.map */
