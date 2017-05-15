@@ -31,13 +31,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let key of filteredData.keys | range:firstIndex:lastIndex" (click)="foRowClick.emit(key)">
+            <tr *ngFor="let key of filteredData.keys | range:firstIndex:lastIndex" (click)="onRowClickController.add(key)">
                 <td
                     *ngFor="let cell of columns"
                     [class.hide-for-small]="smallHiddenColumns.contains(cell)"
                     [class.hide-for-medium]="mediumHiddenColumns.contains(cell)"
                     [class.hide-for-large]="largeHiddenColumns.contains(cell)"
-                    (click)="foCellClick.emit(filteredData[key][cell])">
+                    (click)="onCellClickController.add(filteredData[key][cell])">
                     {{filteredData[key][cell]}}
                 </td>
             </tr>

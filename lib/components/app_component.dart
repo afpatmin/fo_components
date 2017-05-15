@@ -2,7 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular2/angular2.dart';
-import 'package:fo_components/fo_components.dart' show TimePickerComponent, ImageFileComponent;
+import 'package:fo_components/fo_components.dart' show ImageFileComponent;
 
 @Component(
     selector: 'fo-app',
@@ -15,5 +15,4 @@ class AppComponent
   AppComponent()
   {
   }
-
 }

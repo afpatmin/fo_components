@@ -2,6 +2,8 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 library data_table_component;
+
+import 'dart:async' show Stream, StreamController;
 import 'dart:math';
 import 'dart:collection' show LinkedHashMap;
 import 'package:angular2/angular2.dart';
@@ -18,11 +20,16 @@ import 'package:fo_components/pipes/range_pipe.dart';
     changeDetection: ChangeDetectionStrategy.OnPush,
     pipes: const [UpperCasePipe, RangePipe])
 
-class DataTableComponent
+class DataTableComponent implements OnDestroy
 {
   DataTableComponent()
   {
     updateFilter();
+  }
+
+  void ngOnDestroy()
+  {
+
   }
 
   void step(int steps)
@@ -92,7 +99,7 @@ class DataTableComponent
     }
     _filteredData = bufferMap;
 
-    foSort.add({"column":sortColumn, "order":sortOrder});
+    _onSortController.add({"column":sortColumn, "order":sortOrder});
   }
 
   @Input('data')
@@ -139,13 +146,13 @@ class DataTableComponent
 
 
   @Output('cellclick')
-  final EventEmitter<String> foCellClick = new EventEmitter();
+  Stream<String> get onCellClickOutput => onCellClickController.stream;
 
   @Output('rowclick')
-  final EventEmitter<String> foRowClick = new EventEmitter();
+  Stream<String> get onRowClickOutput => onRowClickController.stream;
 
   @Output('sort')
-  final EventEmitter<Map<String, String>> foSort = new EventEmitter();
+  Stream<Map<String, String>> get onSortOutput => _onSortController.stream;
 
   Map<String, Map<String, String>> _data = new Map();
   Map<String, Map<String, String>> _filteredData = new Map();
@@ -176,4 +183,9 @@ class DataTableComponent
   bool _disabled = false;
 
   List<String> _columns = [];
+
+
+  final StreamController<String> onCellClickController = new StreamController();
+  final StreamController<String> onRowClickController = new StreamController();
+  final StreamController<Map<String, String>> _onSortController = new StreamController();
 }

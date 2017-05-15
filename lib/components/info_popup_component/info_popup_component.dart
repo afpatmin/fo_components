@@ -47,7 +47,7 @@ class InfoPopupComponent extends ComponentState
 
   void onOk()
   {
-    response.emit(true);
+    _onResponseController.add(true);
     setState(()
     {
       _isReallyOpen = false;
@@ -57,7 +57,7 @@ class InfoPopupComponent extends ComponentState
 
   void onCancel()
   {
-    response.emit(false);
+    _onResponseController.add(false);
     setState(()
     {
       _isReallyOpen = false;
@@ -66,7 +66,7 @@ class InfoPopupComponent extends ComponentState
   }
 
   @Output('response')
-  final EventEmitter<bool> response = new EventEmitter();
+  Stream<bool> get onResponseOutput => _onResponseController.stream;
 
   bool _isReallyOpen;
   bool _isOpen;
@@ -74,4 +74,6 @@ class InfoPopupComponent extends ComponentState
 
   String _title;
   String _text;
+
+  final StreamController<bool> _onResponseController = new StreamController();
 }
