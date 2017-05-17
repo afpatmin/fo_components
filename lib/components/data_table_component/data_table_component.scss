@@ -5,9 +5,15 @@ h3#title
   margin: 0;
 }
 
+glyph
+{
+  vertical-align: middle;
+}
+
 input[type=text]
 {
-  width: 100%;
+  width: 30%;
+  min-width: 7rem;
   margin-bottom: 0.5rem;
   padding: 0.2rem;
   border: 2px solid #ccc;
@@ -21,6 +27,14 @@ div.search-icon-container
   display: inline-block;
   margin-left: -1.3rem;
   color: #aaa;
+  glyph
+  {
+    -webkit-transform: translateX(-0.3rem);
+    -moz-transform: translateX(-0.3rem);
+    -ms-transform: translateX(-0.3rem);
+    -o-transform: translateX(-0.3rem);
+    transform: translateX(-0.3rem);
+  }
 }
 
 fieldset
@@ -44,7 +58,7 @@ table
 {
   -webkit-transition: opacity 0.2s;
   -moz-transition: opacity 0.2s;
-  -ms-transition: opacity 0.2s;
+  //-ms-transition: opacity 0.2s;
   -o-transition: opacity 0.2s;
   transition: opacity 0.2s;
   -webkit-user-select: none;
@@ -74,6 +88,7 @@ table
         font-weight: bold;
         cursor: pointer;
         overflow: hidden;
+        font-size: 13px;
       }
     }
   }
@@ -106,7 +121,8 @@ table
 div.empty-table
 {
   display: block;
-  min-width: 15em;
+  min-width: 10rem;
+  width: 100%;
   text-align: center;
   background-color: #eee;
   border-radius: 0.5em;
@@ -115,6 +131,8 @@ div.empty-table
   {
     color: $color-alert-bright;
     margin: 0.5rem;
+    padding: 0.5rem;
+    font-size: 20px;
   }
 }
 

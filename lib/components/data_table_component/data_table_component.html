@@ -4,13 +4,13 @@
     </div>
     <div class="large-4 medium-6 columns">
         <input type="text" maxlength="64" [(ngModel)]="searchPhrase" (keyup)="updateFilter()" />
-        <div class="search-icon-container"><fo-icon src="search" title="search"></fo-icon></div>
+        <div class="search-icon-container"><glyph size="x-large" icon="search"></glyph></div>
     </div>
 </div>
 <div *ngIf="filteredData.isEmpty" class="row">
     <div class="columns">
         <div class="empty-table">
-            <h4><fo-icon src="notification" title="Notification"></fo-icon>&nbsp;{{noResultsMessage}}</h4>
+            <h4><glyph size="x-large" icon="error"></glyph>&nbsp;{{noResultsMessage}}</h4>
         </div>
     </div>
 </div>
@@ -24,21 +24,21 @@
                     [class.hide-for-medium]="mediumHiddenColumns.contains(cell)"
                     [class.hide-for-large]="largeHiddenColumns.contains(cell)"
                     (click)="onSort(cell)">
-                    {{cell | uppercase}}&nbsp;
-                    <fo-icon [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" src="arrow-up"></fo-icon>
-                    <fo-icon [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" src="arrow-down"></fo-icon>
+                        {{cell | uppercase}}&nbsp;
+                        <glyph size="small" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></glyph>
+                        <glyph size="small" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></glyph>
                 </td>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let key of filteredData.keys | range:firstIndex:lastIndex" (click)="onRowClickController.add(key)">
                 <td
-                    *ngFor="let cell of columns"
-                    [class.hide-for-small]="smallHiddenColumns.contains(cell)"
-                    [class.hide-for-medium]="mediumHiddenColumns.contains(cell)"
-                    [class.hide-for-large]="largeHiddenColumns.contains(cell)"
-                    (click)="onCellClickController.add(filteredData[key][cell])">
-                    {{filteredData[key][cell]}}
+                        *ngFor="let cell of columns"
+                        [class.hide-for-small]="smallHiddenColumns.contains(cell)"
+                        [class.hide-for-medium]="mediumHiddenColumns.contains(cell)"
+                        [class.hide-for-large]="largeHiddenColumns.contains(cell)"
+                        (click)="onCellClickController.add(filteredData[key][cell])">
+                    {{filteredData[key].toTableRow()[cell]}}
                 </td>
             </tr>
             </tbody>

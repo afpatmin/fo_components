@@ -7,16 +7,15 @@ import 'dart:async' show Stream, StreamController;
 import 'dart:math';
 import 'dart:collection' show LinkedHashMap;
 import 'package:angular2/angular2.dart';
-import 'package:fo_components/components/icon_component/icon_component.dart';
+import 'package:angular_components/angular_components.dart';
 import 'package:fo_components/pipes/range_pipe.dart';
+import 'package:fo_components/data_table_model.dart';
 
 @Component(
     selector: 'fo-data-table',
     styleUrls: const ['data_table_component.css'],
     templateUrl: 'data_table_component.html',
-    directives: const [IconComponent],
-    providers: const [],
-    preserveWhitespace: false,
+    directives: const [materialDirectives],
     changeDetection: ChangeDetectionStrategy.OnPush,
     pipes: const [UpperCasePipe, RangePipe])
 
@@ -29,7 +28,9 @@ class DataTableComponent implements OnDestroy
 
   void ngOnDestroy()
   {
-
+    onCellClickController.close();
+    onRowClickController.close();
+    _onSortController.close();
   }
 
   void step(int steps)
@@ -89,11 +90,12 @@ class DataTableComponent implements OnDestroy
       }
     }
 
-    LinkedHashMap<String, Map<String, String>> bufferMap = new LinkedHashMap();
-    List<Map<String, String>> values = _filteredData.values.toList(growable: false);
-    values.sort((Map<String, String> a, Map<String, String> b) => sortFn(a, b, sortColumn, sortOrder));
+    LinkedHashMap<String, DataTableModel> bufferMap = new LinkedHashMap();
+    List<DataTableModel> values = _filteredData.values.toList(growable: false);
 
-    for (Map<String, String> value in values)
+    values.sort((DataTableModel a, DataTableModel b) => sortFn(a.toTableRow(), b.toTableRow(), sortColumn, sortOrder));
+
+    for (DataTableModel value in values)
     {
       bufferMap[_filteredData.keys.firstWhere((key) => _filteredData[key] == value)] = value;
     }
@@ -102,11 +104,29 @@ class DataTableComponent implements OnDestroy
     _onSortController.add({"column":sortColumn, "order":sortOrder});
   }
 
+  /*
   @Input('data')
   void set data(Map<String, Map<String, String>> value)
   {
     _data = (value == null) ? new Map() : value;
     if (_data.isNotEmpty && _data.values.first.isNotEmpty) _columns = _data.values.first.keys.toList(growable: false);
+    _setIndices(firstIndex);
+    updateFilter();
+    if (sortColumn.isNotEmpty) _sort();
+  }
+*/
+  @Input('models')
+  void set models(Map<String, DataTableModel> value)
+  {
+    _data = (value == null) ? new Map() : value;
+
+    print(_data);
+
+
+    if (_data.isNotEmpty && _data.values.first.toTableRow().isNotEmpty)
+    {
+      _columns = _data.values.first.toTableRow().keys.toList(growable: false);
+    }
     _setIndices(firstIndex);
     updateFilter();
     if (sortColumn.isNotEmpty) _sort();
@@ -120,16 +140,13 @@ class DataTableComponent implements OnDestroy
   }
 
   @Input('disabled')
-  void set disabled(bool flag)
-  {
-    _disabled = flag;
-  }
+  void set disabled(bool flag) { _disabled = flag; }
 
-  bool _find(List<String> needles, Map<String, String> haystack)
+  bool _find(List<String> needles, DataTableModel model)
   {
     for (String needle in needles.where((v) => v.isNotEmpty && v != ""))
     {
-      if (haystack.values.where((v) => v is String && v.toLowerCase().contains(needle.toLowerCase())).isNotEmpty) return true;
+      if (model.toTableRow().values.where((v) => v.toLowerCase().contains(needle.toLowerCase())).isNotEmpty) return true;
     }
     return false;
   }
@@ -154,9 +171,14 @@ class DataTableComponent implements OnDestroy
   @Output('sort')
   Stream<Map<String, String>> get onSortOutput => _onSortController.stream;
 
-  Map<String, Map<String, String>> _data = new Map();
-  Map<String, Map<String, String>> _filteredData = new Map();
-  Map<String, Map<String, String>> get filteredData => _filteredData;
+  //Map<String, Map<String, String>> _data = new Map();
+  //Map<String, Map<String, String>> _filteredData = new Map();
+  //Map<String, Map<String, String>> get filteredData => _filteredData;
+
+  Map<String, DataTableModel> _data = new Map();
+  Map<String, DataTableModel> _filteredData = new Map();
+  //Map<String, DataTableModel> get data => _data;
+  Map<String, DataTableModel> get filteredData => _filteredData;
 
   String sortColumn = "";
   String sortOrder = "DESC";
@@ -183,7 +205,6 @@ class DataTableComponent implements OnDestroy
   bool _disabled = false;
 
   List<String> _columns = [];
-
 
   final StreamController<String> onCellClickController = new StreamController();
   final StreamController<String> onRowClickController = new StreamController();
