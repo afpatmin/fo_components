@@ -3,7 +3,7 @@
 
 library data_table_component;
 
-import 'dart:async' show Stream, StreamController;
+import 'dart:async' show Future, Stream, StreamController;
 import 'dart:math';
 import 'dart:collection' show LinkedHashMap;
 import 'package:angular2/angular2.dart';
@@ -51,14 +51,13 @@ class DataTableComponent implements OnDestroy
   void updateFilter()
   {
     _filteredData.clear();
-    if (searchPhrase.isEmpty) _filteredData = new Map.from(_data);
+    if (searchPhrase.isEmpty) _filteredData = new List.from(_data);
     else
     {
       List<String> keywordList = searchPhrase.split(" ");
-      for (String key in _data.keys)
-      {
-        if (_find(keywordList, _data[key])) _filteredData[key] = _data[key];
-      }
+
+      _filteredData = _data.where((m) => _find(keywordList, m)).toList(growable: false);
+
     }
   }
 
@@ -91,45 +90,26 @@ class DataTableComponent implements OnDestroy
     }
 
     LinkedHashMap<String, DataTableModel> bufferMap = new LinkedHashMap();
-    List<DataTableModel> values = _filteredData.values.toList(growable: false);
+    List<DataTableModel> values = _filteredData.toList(growable: false);
 
     values.sort((DataTableModel a, DataTableModel b) => sortFn(a.toTableRow(), b.toTableRow(), sortColumn, sortOrder));
 
     for (DataTableModel value in values)
     {
-      bufferMap[_filteredData.keys.firstWhere((key) => _filteredData[key] == value)] = value;
+      bufferMap[_filteredData.firstWhere((key) => key.toTableRow()[key]) == value];
     }
-    _filteredData = bufferMap;
+    _filteredData = bufferMap.values;
 
     _onSortController.add({"column":sortColumn, "order":sortOrder});
   }
 
-  /*
-  @Input('data')
-  void set data(Map<String, Map<String, String>> value)
-  {
-    _data = (value == null) ? new Map() : value;
-    if (_data.isNotEmpty && _data.values.first.isNotEmpty) _columns = _data.values.first.keys.toList(growable: false);
-    _setIndices(firstIndex);
-    updateFilter();
-    if (sortColumn.isNotEmpty) _sort();
-  }
-*/
   @Input('models')
-  void set models(Map<String, DataTableModel> value)
+  void set models(List<DataTableModel> value)
   {
-    _data = (value == null) ? new Map() : value;
-
-    print(_data);
-
-
-    if (_data.isNotEmpty && _data.values.first.toTableRow().isNotEmpty)
-    {
-      _columns = _data.values.first.toTableRow().keys.toList(growable: false);
-    }
+    _data = value;
+    if (_columns == null || _columns.isEmpty && _data != null && _data.isNotEmpty) _columns = _data.first.toTableRow().keys.toList(growable: false);
     _setIndices(firstIndex);
     updateFilter();
-    if (sortColumn.isNotEmpty) _sort();
   }
 
   @Input('rows')
@@ -171,14 +151,9 @@ class DataTableComponent implements OnDestroy
   @Output('sort')
   Stream<Map<String, String>> get onSortOutput => _onSortController.stream;
 
-  //Map<String, Map<String, String>> _data = new Map();
-  //Map<String, Map<String, String>> _filteredData = new Map();
-  //Map<String, Map<String, String>> get filteredData => _filteredData;
-
-  Map<String, DataTableModel> _data = new Map();
-  Map<String, DataTableModel> _filteredData = new Map();
-  //Map<String, DataTableModel> get data => _data;
-  Map<String, DataTableModel> get filteredData => _filteredData;
+  List<DataTableModel> _data = new List();
+  List<DataTableModel> _filteredData = new List();
+  List<DataTableModel> get filteredData => _filteredData;
 
   String sortColumn = "";
   String sortOrder = "DESC";
@@ -190,11 +165,11 @@ class DataTableComponent implements OnDestroy
   @Input('large-hidden-columns')
   List<String> largeHiddenColumns = [];
 
-  @Input('small-hidden-columns')
-  List<String> smallHiddenColumns = [];
-
   @Input('medium-hidden-columns')
   List<String> mediumHiddenColumns = [];
+
+  @Input('small-hidden-columns')
+  List<String> smallHiddenColumns = [];
 
   @Input('title')
   String title = "";

@@ -3,37 +3,47 @@
 h3#title
 {
   margin: 0;
+  display: inline-block;
 }
 
 glyph
 {
-  vertical-align: middle;
+  vertical-align: text-bottom;
 }
 
-input[type=text]
+div#search
 {
-  width: 30%;
-  min-width: 7rem;
-  margin-bottom: 0.5rem;
-  padding: 0.2rem;
-  border: 2px solid #ccc;
-  border-right: 1.7rem solid #ccc;
-  border-radius: 0.3rem;
-  color: $color-text;
-}
-
-div.search-icon-container
-{
+  position: relative;
   display: inline-block;
-  margin-left: -1.3rem;
-  color: #aaa;
-  glyph
+  float: right;
+
+  input[type=text]
   {
-    -webkit-transform: translateX(-0.3rem);
-    -moz-transform: translateX(-0.3rem);
-    -ms-transform: translateX(-0.3rem);
-    -o-transform: translateX(-0.3rem);
-    transform: translateX(-0.3rem);
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 8rem;
+    margin-bottom: 0.5rem;
+    padding: 0.2rem;
+    border: 2px solid #ccc;
+    border-right: 1.7rem solid #ccc;
+    border-radius: 0.3rem;
+    color: $color-text;
+  }
+
+  div.search-icon-container
+  {
+    position: absolute;
+    top: 0.1rem;
+    right: -0.1rem;
+    color: #aaa;
+    glyph
+    {
+      -webkit-transform: translateX(-0.3rem);
+      -moz-transform: translateX(-0.3rem);
+      -ms-transform: translateX(-0.3rem);
+      -o-transform: translateX(-0.3rem);
+      transform: translateX(-0.3rem);
+    }
   }
 }
 

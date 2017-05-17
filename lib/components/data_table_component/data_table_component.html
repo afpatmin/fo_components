@@ -1,52 +1,43 @@
-<div class="row">
-    <div class="large-8 medium-6 columns">
-        <h3 id="title">{{title}}</h3>
-    </div>
-    <div class="large-4 medium-6 columns">
-        <input type="text" maxlength="64" [(ngModel)]="searchPhrase" (keyup)="updateFilter()" />
-        <div class="search-icon-container"><glyph size="x-large" icon="search"></glyph></div>
-    </div>
+
+<h3 id="title">{{title}}</h3>
+<div id="search">
+    <input type="text" maxlength="64" [(ngModel)]="searchPhrase" (keyup)="updateFilter()" />
+    <div class="search-icon-container"><glyph size="x-large" icon="search"></glyph></div>
 </div>
-<div *ngIf="filteredData.isEmpty" class="row">
-    <div class="columns">
-        <div class="empty-table">
-            <h4><glyph size="x-large" icon="error"></glyph>&nbsp;{{noResultsMessage}}</h4>
-        </div>
-    </div>
+<div *ngIf="filteredData.isEmpty" class="empty-table">
+    <h4><glyph size="x-large" icon="error"></glyph>&nbsp;{{noResultsMessage}}</h4>
 </div>
-<div *ngIf="filteredData.isNotEmpty" class="row">
-    <div class="columns">
-        <table [class.faded]="disabled">
-            <thead>
-            <tr>
-                <td *ngFor="let cell of columns"
+<div *ngIf="filteredData.isNotEmpty">
+    <table [class.faded]="disabled">
+        <thead>
+        <tr>
+            <td *ngFor="let cell of columns"
+                [class.hide-for-small]="smallHiddenColumns.contains(cell)"
+                [class.hide-for-medium]="mediumHiddenColumns.contains(cell)"
+                [class.hide-for-large]="largeHiddenColumns.contains(cell)"
+                (click)="onSort(cell)">
+                    {{cell | uppercase}}&nbsp;
+                    <glyph size="small" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></glyph>
+                    <glyph size="small" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></glyph>
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let model of filteredData | range:firstIndex:lastIndex" (click)="onRowClickController.add(model.id)">
+            <td
+                    *ngFor="let cell of columns"
                     [class.hide-for-small]="smallHiddenColumns.contains(cell)"
                     [class.hide-for-medium]="mediumHiddenColumns.contains(cell)"
                     [class.hide-for-large]="largeHiddenColumns.contains(cell)"
-                    (click)="onSort(cell)">
-                        {{cell | uppercase}}&nbsp;
-                        <glyph size="small" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></glyph>
-                        <glyph size="small" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></glyph>
-                </td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let key of filteredData.keys | range:firstIndex:lastIndex" (click)="onRowClickController.add(key)">
-                <td
-                        *ngFor="let cell of columns"
-                        [class.hide-for-small]="smallHiddenColumns.contains(cell)"
-                        [class.hide-for-medium]="mediumHiddenColumns.contains(cell)"
-                        [class.hide-for-large]="largeHiddenColumns.contains(cell)"
-                        (click)="onCellClickController.add(filteredData[key][cell])">
-                    {{filteredData[key].toTableRow()[cell]}}
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <div id="select-step">
-            <span class="arrow" (click)="step(-1)">&laquo;</span>
-            <span class="page">{{firstIndex+1}}-{{lastIndex}} of {{filteredData.length}}</span>
-            <span class="arrow" (click)="step(1)">&raquo;</span>
-        </div>
+                    (click)="onCellClickController.add(model.toTableRow()[cell])">
+                {{model.toTableRow()[cell]}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div id="select-step">
+        <span class="arrow" (click)="step(-1)">&laquo;</span>
+        <span class="page">{{firstIndex+1}}-{{lastIndex}} of {{filteredData.length}}</span>
+        <span class="arrow" (click)="step(1)">&raquo;</span>
     </div>
 </div>
