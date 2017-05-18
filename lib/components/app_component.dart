@@ -42,12 +42,12 @@ class AppComponent
 
     userStreamController.stream.listen((user)
     {
-      models.add(user);
-      models = new List.from(models);
+      models[user.id] = user;
+      models = new Map.from(models);
     });
   }
 
-  List<MockUser> models = new List();
+  Map<String, MockUser> models = new Map();
 
   StreamController<MockUser> userStreamController = new StreamController();
 
