@@ -3,7 +3,6 @@
 
 library icon_component;
 
-import 'dart:html';
 import 'package:angular2/angular2.dart';
 
 @Component(
@@ -11,41 +10,16 @@ import 'package:angular2/angular2.dart';
     styleUrls: const ['icon_component.css'],
     templateUrl: 'icon_component.html',
     preserveWhitespace: false,
-    directives: const [SourcedDirective],
-    changeDetection: ChangeDetectionStrategy.Default)
+    directives: const [],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 
-class IconComponent extends ComponentState
+class IconComponent
 {
   IconComponent();
-  @Input() set src(String value)
-  {
-    setState(() => _src = value);
-  }
-
-  @Input() set title(String value)
-  {
-    setState(() => _title = value);
-  }
-
-  String get src => _src;
-  String get title => _title;
-
-  String _src = "clock";
-  String _title = "Icon";
-}
-
-@Directive(selector: '[sourced]')
-class SourcedDirective implements OnInit
-{
-  SourcedDirective(ElementRef element) : _host = element.nativeElement;
-
-  void ngOnInit()
-  {
-    _host.setAttributeNS("http://www.w3.org/1999/xlink", "href", "gfx/icons/icons.svg#icon-" + src);
-  }
 
   @Input('src')
-  String src;
+  String src = "clock";
 
-  Element _host;
+  @Input('title')
+  String title = "Icon";
 }

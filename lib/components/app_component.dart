@@ -4,7 +4,7 @@
 import 'dart:async';
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:fo_components/fo_components.dart' show DataTableModel, DataTableComponent, ImageFileComponent;
+import 'package:fo_components/fo_components.dart';
 
 class MockUser extends DataTableModel
 {
@@ -13,6 +13,9 @@ class MockUser extends DataTableModel
   @override
   Map<String, String> toTableRow() => {"name":_name, "phone":_phone};
 
+  @override
+  String toString() => _name;
+
   final String _name;
   final String _phone;
 }
@@ -20,10 +23,10 @@ class MockUser extends DataTableModel
 @Component(
     selector: 'fo-app',
     templateUrl: 'app_component.html',
-    directives: const [materialDirectives, ImageFileComponent, DataTableComponent],
-    providers: const [],
-    preserveWhitespace: false)
-class AppComponent
+    directives: const [materialDirectives, FileUploadComponent, FoModalComponent, FoSelectComponent, IconComponent, ImageFileComponent, DataTableComponent],
+    providers: const [materialProviders]
+)
+class AppComponent implements OnInit
 {
   AppComponent()
   {
@@ -47,9 +50,23 @@ class AppComponent
     });
   }
 
+  void ngOnInit()
+  {
+    selectedModel = options.first;
+  }
+
+  void onUpload(dynamic event)
+  {
+    print(event);
+  }
+
   Map<String, MockUser> models = new Map();
 
   StreamController<MockUser> userStreamController = new StreamController();
+
+  MockUser selectedModel; // = new MockUser("dejan", "1231231321", "3");
+  List<MockUser> options = [new MockUser("patrick", "07091452342", "1"), new MockUser("bill", "12345", "2")];
+
 
   //Map<String, MockUser> mockModels = {"1" : new MockUser("patrick", "0709145324", "1"), "2" : new MockUser("annafrida", "0712312123", "2")};
 

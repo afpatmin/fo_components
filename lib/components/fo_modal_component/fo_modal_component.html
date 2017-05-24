@@ -1,0 +1,12 @@
+<modal [visible]="visible">
+    <material-dialog headered [class.fixed-height]="fixedHeight" [class.fixed-width]="fixedWidth" [error]="error">
+        <h3 header>
+            <material-button icon (trigger)="close()" class="float-right">
+                <glyph icon="close"></glyph>
+            </material-button>
+            {{title}}
+        </h3>
+        <ng-content></ng-content>
+        <p></p>
+    </material-dialog>
+</modal>

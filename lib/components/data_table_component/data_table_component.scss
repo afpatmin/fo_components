@@ -4,6 +4,7 @@ h3#title
 {
   margin: 0;
   display: inline-block;
+  font-size: 1.3rem;
 }
 
 glyph
@@ -38,11 +39,11 @@ div#search
     color: #aaa;
     glyph
     {
-      -webkit-transform: translateX(-0.3rem);
-      -moz-transform: translateX(-0.3rem);
-      -ms-transform: translateX(-0.3rem);
-      -o-transform: translateX(-0.3rem);
-      transform: translateX(-0.3rem);
+      -webkit-transform: translate(-0.3rem, 0.1rem);
+      -moz-transform: translate(-0.3rem, 0.1rem);
+      -ms-transform: translate(-0.3rem, 0.1rem);
+      -o-transform: translate(-0.3rem, 0.1rem);
+      transform: translate(-0.3rem, 0.1rem);
     }
   }
 }
@@ -79,7 +80,7 @@ table
   border-collapse: collapse;
   border:2px solid #eee;
   color: #333;
-  font-size: 0.7em;
+  font-size: 0.7rem;
   table-layout: fixed;
 
   td
@@ -98,7 +99,7 @@ table
         font-weight: bold;
         cursor: pointer;
         overflow: hidden;
-        font-size: 13px;
+        font-size: 0.9rem;
       }
     }
   }
@@ -142,7 +143,7 @@ div.empty-table
     color: $color-alert-bright;
     margin: 0.5rem;
     padding: 0.5rem;
-    font-size: 20px;
+    font-size: 1.5rem;
   }
 }
 

@@ -8,7 +8,6 @@ import 'dart:typed_data' show ByteData, Endianness, Uint8List;
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
 
-
 @Component(
     selector: 'fo-image-file',
     templateUrl: 'image_file_component.html',

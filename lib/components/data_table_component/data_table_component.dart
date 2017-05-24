@@ -8,6 +8,7 @@ import 'dart:math';
 import 'dart:collection' show LinkedHashMap;
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:fo_components/pipes/filter_pipe.dart';
 import 'package:fo_components/pipes/range_pipe.dart';
 import 'package:fo_components/data_table_model.dart';
 
@@ -16,15 +17,12 @@ import 'package:fo_components/data_table_model.dart';
     styleUrls: const ['data_table_component.css'],
     templateUrl: 'data_table_component.html',
     directives: const [materialDirectives],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    pipes: const [UpperCasePipe, RangePipe])
+    changeDetection: ChangeDetectionStrategy.Default,
+    pipes: const [FilterPipe, UpperCasePipe, RangePipe])
 
 class DataTableComponent implements OnDestroy
 {
-  DataTableComponent()
-  {
-    updateFilter();
-  }
+  DataTableComponent();
 
   void ngOnDestroy()
   {
@@ -48,19 +46,7 @@ class DataTableComponent implements OnDestroy
     }
   }
 
-  void updateFilter()
-  {
-    _filteredData.clear();
-    if (searchPhrase.isEmpty) _filteredData = new Map.from(_data);
-    else
-    {
-      List<String> keywordList = searchPhrase.split(" ");
-      for (String key in _data.keys)
-      {
-        if (_find(keywordList, _data[key])) _filteredData[key] = _data[key];
-      }
-    }
-  }
+  Map<String, DataTableModel> get data => _data;
 
   void _sort()
   {
@@ -91,15 +77,15 @@ class DataTableComponent implements OnDestroy
     }
 
     LinkedHashMap<String, DataTableModel> bufferMap = new LinkedHashMap();
-    List<DataTableModel> values = _filteredData.values.toList(growable: false);
+    List<DataTableModel> values = _data.values.toList(growable: false);
 
     values.sort((DataTableModel a, DataTableModel b) => sortFn(a.toTableRow(), b.toTableRow(), sortColumn, sortOrder));
 
     for (DataTableModel value in values)
     {
-      bufferMap[_filteredData.keys.firstWhere((key) => _filteredData[key] == value)] = value;
+      bufferMap[_data.keys.firstWhere((key) => _data[key] == value)] = value;
     }
-    _filteredData = bufferMap;
+    _data = bufferMap;
 
     _onSortController.add({"column":sortColumn, "order":sortOrder});
   }
@@ -108,13 +94,11 @@ class DataTableComponent implements OnDestroy
   void set models(Map<String, DataTableModel> value)
   {
     _data = (value == null) ? new Map() : value;
-
     if (_data.isNotEmpty && _data.values.first.toTableRow().isNotEmpty)
     {
       _columns = _data.values.first.toTableRow().keys.toList(growable: false);
     }
     _setIndices(firstIndex);
-    updateFilter();
     if (sortColumn.isNotEmpty) _sort();
   }
 
@@ -127,15 +111,6 @@ class DataTableComponent implements OnDestroy
 
   @Input('disabled')
   void set disabled(bool flag) { _disabled = flag; }
-
-  bool _find(List<String> needles, DataTableModel model)
-  {
-    for (String needle in needles.where((v) => v.isNotEmpty && v != ""))
-    {
-      if (model.toTableRow().values.where((v) => v.toLowerCase().contains(needle.toLowerCase())).isNotEmpty) return true;
-    }
-    return false;
-  }
 
   void _setIndices(int first_index)
   {
@@ -158,8 +133,6 @@ class DataTableComponent implements OnDestroy
   Stream<Map<String, String>> get onSortOutput => _onSortController.stream;
 
   Map<String, DataTableModel> _data = new Map();
-  Map<String, DataTableModel> _filteredData = new Map();
-  Map<String, DataTableModel> get filteredData => _filteredData;
 
   String sortColumn = "";
   String sortOrder = "DESC";

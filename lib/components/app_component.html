@@ -1,6 +1,16 @@
+<div>
+    <fo-select label="Användare" [(selectedModel)]="selectedModel" [options]="options"></fo-select>
+</div>
+
+<h2>{{selectedModel}}</h2>
+
 <div style="width:350px">
     <fo-image-file [maxByteSize]="1000"></fo-image-file>
 </div>
+<div>
+    <fo-file-upload (upload)="onUpload($event)"></fo-file-upload>
+</div>
+
 <div>
     <fo-data-table
         title="TITEL"
@@ -8,3 +18,8 @@
         [models]="models">
     </fo-data-table>
 </div>
+<div>
+    <fo-icon [src]="'arrow-right'"></fo-icon>
+</div>
+
+<fo-modal title="hej" [visible]="false" [fixedHeight]="false" [fixedWidth]="false" error="ERROR TEXT"><p>test</p></fo-modal>

@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,eACA,CACE,SAAS,CAAE,KAAK,CAChB,SAAS,CAAE,IAAI,CACf,UAAU,CAAE,IAAI,CAGlB,4BACA,CACE,MAAM,CAAE,IAAI,CAGd,2BACA,CACE,KAAK,CAAE,IAAI,CAGb,YACA,CACE,KAAK,CAAE,KAAK",
+"sources": ["fo_modal_component.scss"],
+"names": [],
+"file": "fo_modal_component.css"
+}

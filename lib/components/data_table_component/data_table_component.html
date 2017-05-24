@@ -1,12 +1,12 @@
 <h3 id="title">{{title}}</h3>
 <div id="search">
-    <input type="text" maxlength="64" [(ngModel)]="searchPhrase" (keyup)="updateFilter()" />
+    <input type="text" maxlength="64" [(ngModel)]="searchPhrase" />
     <div class="search-icon-container"><glyph size="x-large" icon="search"></glyph></div>
 </div>
-<div *ngIf="filteredData.isEmpty" class="empty-table">
+<div *ngIf="data.isEmpty" class="empty-table">
     <h4><glyph size="x-large" icon="error"></glyph>&nbsp;{{noResultsMessage}}</h4>
 </div>
-<div *ngIf="filteredData.isNotEmpty">
+<div *ngIf="data.isNotEmpty">
     <table [class.faded]="disabled">
         <thead>
         <tr>
@@ -22,21 +22,21 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let key of filteredData.keys | range:firstIndex:lastIndex" (click)="onRowClickController.add(key)">
+        <tr *ngFor="let key of data.keys | range:firstIndex:lastIndex | filter:data:searchPhrase" (click)="onRowClickController.add(key)">
             <td
                     *ngFor="let cell of columns"
                     [class.hide-for-small]="smallHiddenColumns.contains(cell)"
                     [class.hide-for-medium]="mediumHiddenColumns.contains(cell)"
                     [class.hide-for-large]="largeHiddenColumns.contains(cell)"
-                    (click)="onCellClickController.add(filteredData[key].toTableRow()[cell])">
-                {{filteredData[key].toTableRow()[cell]}}
+                    (click)="onCellClickController.add(data[key].toTableRow()[cell])">
+                {{data[key].toTableRow()[cell]}}
             </td>
         </tr>
         </tbody>
     </table>
     <div id="select-step">
         <span class="arrow" (click)="step(-1)">&laquo;</span>
-        <span class="page">{{firstIndex+1}}-{{lastIndex}} of {{filteredData.length}}</span>
+        <span class="page">{{firstIndex+1}}-{{lastIndex}} of {{data.length}}</span>
         <span class="arrow" (click)="step(1)">&raquo;</span>
     </div>
 </div>
