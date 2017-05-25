@@ -2,7 +2,12 @@
     <fo-select label="Användare" [(selectedModel)]="selectedModel" [options]="options"></fo-select>
 </div>
 
+<div>
+    <fo-multi-select label="Många användare" [(selectedModels)]="selectedModels" [options]="options"></fo-multi-select>
+</div>
+
 <h2>{{selectedModel}}</h2>
+<h2>{{selectedModels}}</h2>
 
 <div style="width:350px">
     <fo-image-file [maxByteSize]="1000"></fo-image-file>

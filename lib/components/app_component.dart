@@ -23,7 +23,7 @@ class MockUser extends DataTableModel
 @Component(
     selector: 'fo-app',
     templateUrl: 'app_component.html',
-    directives: const [materialDirectives, FileUploadComponent, FoModalComponent, FoSelectComponent, IconComponent, ImageFileComponent, DataTableComponent],
+    directives: const [materialDirectives, FileUploadComponent, FoModalComponent, FoMultiSelectComponent, FoSelectComponent, IconComponent, ImageFileComponent, DataTableComponent],
     providers: const [materialProviders]
 )
 class AppComponent implements OnInit
@@ -64,7 +64,8 @@ class AppComponent implements OnInit
 
   StreamController<MockUser> userStreamController = new StreamController();
 
-  MockUser selectedModel; // = new MockUser("dejan", "1231231321", "3");
+  MockUser selectedModel;
+  List<MockUser> selectedModels = new List();
   List<MockUser> options = [new MockUser("patrick", "07091452342", "1"), new MockUser("bill", "12345", "2")];
 
 

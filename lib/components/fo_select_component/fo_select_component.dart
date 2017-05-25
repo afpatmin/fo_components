@@ -18,11 +18,17 @@ class FoSelectComponent implements OnDestroy
   {
     selectionModel.selectionChanges.listen((List<SelectionChangeRecord<DataTableModel>> e)
     {
-      if (e.first.added.isEmpty) selectionModel.select(e.first.removed.first);
-      else if (e.first.added.isNotEmpty && e.first.added != selectedModel)
-      {
-        _onSelectedModelChangeController.add(e.first.added.first);
-      }
+      if (e.isEmpty) return;
+
+      SelectionChangeRecord scr = e.first;
+
+      /// Selected the same value again, and selectionOptions still contains the element
+      if (scr.added.isEmpty
+          && scr.removed.isNotEmpty
+          && selectionOptions.optionsList.contains(scr.removed.first)) selectionModel.select(scr.removed.first);
+
+      /// Selected a new value, fire change event
+      else if (scr.added.isNotEmpty) _onSelectedModelChangeController.add(scr.added.first);
     });
   }
 
@@ -52,17 +58,23 @@ class FoSelectComponent implements OnDestroy
   void set options(List<DataTableModel> value)
   {
     selectionOptions = new SelectionOptions<DataTableModel>([new OptionGroup(value)]);
+
+    /// Update selection based on current options
+    if (!value.contains(selectedModel))
+    {
+      selectionOptions.optionsList.isEmpty ? selectionModel.clear() : selectionModel.select(selectionOptions.optionsList.first);
+    }
   }
 
   @Input('selectedModel')
   void set selectedModelExternal(DataTableModel value)
   {
-    if (selectionOptions != null)
+    if (selectionOptions == null || value == null) selectionModel.clear();
+    else
     {
-      if (value != null && selectionOptions.optionsList.contains(value)) selectionModel.select(value);
+      if (selectionOptions.optionsList.contains(value)) selectionModel.select(value);
       else selectionModel.select(selectionOptions.optionsList.first);
     }
-    else selectionModel.clear();
   }
 
   @Output('selectedModelChange')
