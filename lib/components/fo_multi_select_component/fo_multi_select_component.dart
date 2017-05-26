@@ -33,7 +33,7 @@ class FoMultiSelectComponent implements OnDestroy
     _onSelectedModelsChangeController.close();
   }
 
-  String get buttonText => selectionModel.selectedValues.isEmpty ? "" : selectionModel.selectedValues.map((d) => d.toString()).join(", ");
+  String get buttonText => selectionModel.selectedValues.isEmpty ? nullSelectionButtonText : selectionModel.selectedValues.map((d) => d.toString()).join(", ");
 
   bool get visible => _visible;
 
@@ -46,6 +46,9 @@ class FoMultiSelectComponent implements OnDestroy
   @Input('label')
   String label = "";
 
+  @Input('nullSelectionButtonText')
+  String nullSelectionButtonText = "-";
+
   @Input('options')
   void set options(List<DataTableModel> value)
   {
@@ -57,6 +60,7 @@ class FoMultiSelectComponent implements OnDestroy
 
     /// else
     selectionOptions = new SelectionOptions<DataTableModel>([new OptionGroup(value)]);
+
 
     /// Update selection based on current options (de-select any values not contained in options)
     List<DataTableModel> invalid = selectionModel.selectedValues.where((v) => !selectionOptions.optionsList.contains(v)).toList(growable: false);

@@ -23,12 +23,14 @@ class FoSelectComponent implements OnDestroy
       SelectionChangeRecord scr = e.first;
 
       /// Selected the same value again, and selectionOptions still contains the element
-      if (scr.added.isEmpty
+      if (allowNullSelection == false
+          && scr.added.isEmpty
           && scr.removed.isNotEmpty
           && selectionOptions.optionsList.contains(scr.removed.first)) selectionModel.select(scr.removed.first);
 
       /// Selected a new value, fire change event
       else if (scr.added.isNotEmpty) _onSelectedModelChangeController.add(scr.added.first);
+      else if (allowNullSelection == true) _onSelectedModelChangeController.add(null);
     });
   }
 
@@ -51,8 +53,14 @@ class FoSelectComponent implements OnDestroy
   final StreamController<bool> _onVisibleChangeController = new StreamController();
   final StreamController<DataTableModel> _onSelectedModelChangeController = new StreamController();
 
+  @Input('allowNullSelection')
+  bool allowNullSelection = false;
+
   @Input('label')
   String label = "";
+
+  @Input('nullSelectionButtonText')
+  String nullSelectionButtonText = "-";
 
   @Input('options')
   void set options(List<DataTableModel> value)
@@ -62,7 +70,11 @@ class FoSelectComponent implements OnDestroy
     /// Update selection based on current options
     if (!value.contains(selectedModel))
     {
-      selectionOptions.optionsList.isEmpty ? selectionModel.clear() : selectionModel.select(selectionOptions.optionsList.first);
+      if (allowNullSelection == false)
+      {
+        selectionOptions.optionsList.isEmpty ? selectionModel.clear() : selectionModel.select(selectionOptions.optionsList.first);
+      }
+      else if (allowNullSelection == true && selectionOptions.optionsList.isEmpty) selectionModel.clear();
     }
   }
 

@@ -1,13 +1,13 @@
 <h3 id="title">{{title}}</h3>
 <div id="search">
-    <input type="text" maxlength="64" [(ngModel)]="searchPhrase" />
+    <input type="text" maxlength="64" [(ngModel)]="searchPhrase" #search />
     <div class="search-icon-container"><glyph size="x-large" icon="search"></glyph></div>
 </div>
-<div *ngIf="data.isEmpty" class="empty-table">
+<div *ngIf="filteredKeys.isEmpty" class="empty-table">
     <h4><glyph size="x-large" icon="error"></glyph>&nbsp;{{noResultsMessage}}</h4>
 </div>
-<div *ngIf="data.isNotEmpty">
-    <table [class.faded]="disabled">
+<div *ngIf="filteredKeys.isNotEmpty">
+    <table [class.faded]="disabled" class="output">
         <thead>
         <tr>
             <td *ngFor="let cell of columns"
@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let key of data.keys | range:firstIndex:lastIndex | filter:data:searchPhrase" (click)="onRowClickController.add(key)">
+        <tr *ngFor="let key of filteredKeys | range:firstIndex:lastIndex" (click)="onRowClickController.add(key)">
             <td
                     *ngFor="let cell of columns"
                     [class.hide-for-small]="smallHiddenColumns.contains(cell)"
@@ -35,8 +35,12 @@
         </tbody>
     </table>
     <div id="select-step">
-        <span class="arrow" (click)="step(-1)">&laquo;</span>
-        <span class="page">{{firstIndex+1}}-{{lastIndex}} of {{data.length}}</span>
-        <span class="arrow" (click)="step(1)">&raquo;</span>
+        <table>
+            <tr>
+                <td class="arrow" (click)="step(-1)"><glyph icon="navigate_before"></glyph></td>
+                <td class="page">{{firstIndex+1}}-{{lastIndex}} ({{filteredKeys.length}})</td>
+                <td class="arrow" (click)="step(1)"><glyph icon="navigate_next"></glyph></td>
+            </tr>
+        </table>
     </div>
 </div>

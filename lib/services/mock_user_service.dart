@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:angular2/angular2.dart';
-import 'package:fo_components/fo_filtering.dart';
 
 @Injectable()
 class MockUserService
@@ -33,27 +32,6 @@ class MockUserService
     data["24"] = {"firstname":"sara", "lastname":"bengsttson", "email":"saraha@gmail.com"};
 
     filteredData = new Map.from(data);
-  }
-
-  void search(String phrase)
-  {
-    isLoading = true;
-
-    new Timer(const Duration(seconds: 1), ()
-    {
-      filteredData = FoFiltering.filter(data, phrase);
-      isLoading = false;
-    });
-  }
-
-  void sort(String column, String order)
-  {
-    isLoading = true;
-    new Timer(const Duration(seconds: 1), ()
-    {
-      filteredData = FoFiltering.sort(filteredData, column, order);
-      isLoading = false;
-    });
   }
 
   bool isLoading = false;

@@ -65,7 +65,7 @@ fieldset
   display: none;
 }
 
-table
+table.output
 {
   -webkit-transition: opacity 0.2s;
   -moz-transition: opacity 0.2s;
@@ -152,20 +152,25 @@ div#data-info
   float: left;
 }
 
-div#select-step
+#select-step
 {
-  float: right;
-  span
+  text-align: center;
+  font-size: 0.9rem;
+  color: #888;
+  height: 2rem;
+
+  table
   {
-    margin: 0.2em;
-  }
-  span.arrow
-  {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: pointer;
+    float: right;
+    width: 10rem;
+    .arrow
+    {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      cursor: pointer;
+    }
   }
 }
 

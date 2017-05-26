@@ -8,7 +8,6 @@ import 'dart:math';
 import 'dart:collection' show LinkedHashMap;
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:fo_components/pipes/filter_pipe.dart';
 import 'package:fo_components/pipes/range_pipe.dart';
 import 'package:fo_components/data_table_model.dart';
 
@@ -18,7 +17,7 @@ import 'package:fo_components/data_table_model.dart';
     templateUrl: 'data_table_component.html',
     directives: const [materialDirectives],
     changeDetection: ChangeDetectionStrategy.Default,
-    pipes: const [FilterPipe, UpperCasePipe, RangePipe])
+    pipes: const [UpperCasePipe, RangePipe])
 
 class DataTableComponent implements OnDestroy
 {
@@ -47,6 +46,25 @@ class DataTableComponent implements OnDestroy
   }
 
   Map<String, DataTableModel> get data => _data;
+
+  List<String> get filteredKeys
+  {
+    bool find(List<String> needles, DataTableModel model)
+    {
+      for (String needle in needles.where((v) => v.isNotEmpty && v != ""))
+      {
+        if (model.toTableRow().values.where((v) => v.toLowerCase().contains(needle.toLowerCase())).isNotEmpty) return true;
+      }
+      return false;
+    }
+
+    if (searchPhrase.isEmpty) return data.keys.toList(growable: false);
+    else
+    {
+      List<String> keywordList = searchPhrase.split(" ");
+      return data.keys.where((key) => find(keywordList, data[key])).toList(growable: false);
+    }
+  }
 
   void _sort()
   {
@@ -115,6 +133,7 @@ class DataTableComponent implements OnDestroy
   void _setIndices(int first_index)
   {
     firstIndex = max(0, first_index);
+    if (searchPhrase.isNotEmpty) firstIndex = max(0, min(firstIndex, filteredKeys.length - _numRows));
     lastIndex = firstIndex + _numRows;
   }
 
@@ -159,7 +178,6 @@ class DataTableComponent implements OnDestroy
   bool _disabled = false;
 
   List<String> _columns = [];
-
   final StreamController<String> onCellClickController = new StreamController();
   final StreamController<String> onRowClickController = new StreamController();
   final StreamController<Map<String, String>> _onSortController = new StreamController();

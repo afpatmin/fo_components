@@ -1,8 +1,8 @@
-abstract class DataTableModel
+class DataTableModel
 {
   DataTableModel(this.id);
 
-  Map<String, String> toTableRow();
+  Map<String, String> toTableRow() => {"id":id};
 
   String id;
 

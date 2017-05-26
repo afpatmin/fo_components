@@ -1,5 +1,5 @@
 <div>
-    <fo-select label="Användare" [(selectedModel)]="selectedModel" [options]="options"></fo-select>
+    <fo-select label="Användare" [(selectedModel)]="selectedModel" [options]="options" [allowNullSelection]="true"></fo-select>
 </div>
 
 <div>
@@ -19,7 +19,7 @@
 <div>
     <fo-data-table
         title="TITEL"
-        [rows]="10"
+        [rows]="3"
         [models]="models">
     </fo-data-table>
 </div>
