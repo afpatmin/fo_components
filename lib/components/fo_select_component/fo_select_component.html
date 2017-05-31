@@ -1,10 +1,10 @@
-<label (click)="(visible = true)">{{label}}:&nbsp;
-    <material-dropdown-select
-            [buttonText]="selectedModel == null ? nullSelectionButtonText : selectedModel.toString()"
-            [popupMatchInputWidth]="false"
-            [options]="selectionOptions"
-            [selection]="selectionModel"
-            [(visible)]="visible">
-    </material-dropdown-select>
-</label>
+<label (click)="(visible = true)">{{label}}</label>
+<material-dropdown-select
+        [buttonText]="selectedModel == null ? nullSelectionButtonText : selectedModel.toString()"
+        [popupMatchInputWidth]="false"
+        [options]="selectionOptions"
+        [selection]="selectionModel"
+        [(visible)]="visible">
+</material-dropdown-select>
+
 
