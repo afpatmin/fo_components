@@ -1,5 +1,5 @@
-$color-1: black;
-$color-2: gray;
+$color-1: #333;
+$color-2: #666;
 $color-3: white;
 
 div#canvas
@@ -16,12 +16,10 @@ div#canvas
   -ms-user-select: none;
   user-select: none;
   position: relative;
-  width: 10rem;
-  height: 10rem;
-  margin: 1rem;
-  border-radius: 100%;
-  background-color: $color-3;
-  border: 0.8rem solid $color-2;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 0.5rem;
+  background-color: white;
 
   div.dial, div.number
   {
@@ -37,33 +35,63 @@ div#canvas
     transform: translate(-50%, -50%);
     text-align: center;
     display: inline;
-    border-radius: 100%;
+    border-radius: 0.2rem;
     cursor: pointer;
     padding: 0.1rem 0.125rem;
-    background-color: $color-2;
-    color: $color-3;
+    color: $color-1;
   }
   div.number:hover
   {
-    background-color: $color-3;
-    color: $color-1;
+    background-color: $color-2;
+    color: $color-3;
   }
 
   div.hour
   {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   div.minute
   {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   h1.output
   {
+    cursor: pointer;
     color: $color-2;
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-align: center;
     width: 100%;
+  }
+
+  div.midnight-toggle
+  {
+    position: absolute;
+    bottom: 0.2rem;
+    cursor: pointer;
+    font-size: 0.7rem;
+    padding: 0.3rem 0.4rem;
+    border-radius: 0.2rem;
+  }
+  div.midnight-toggle:hover
+  {
+    background-color: $color-2;
+    color: white;
+  }
+  div.midnight-toggle.active
+  {
+    background-color: $color-1;
+    color: white;
+
+  }
+
+  div#am
+  {
+    left: 1rem;
+  }
+  div#pm
+  {
+    right: 1rem;
   }
 }

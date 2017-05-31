@@ -3,11 +3,17 @@
 </div>
 
 <div>
-    <fo-multi-select label="Många användare" [(selectedModels)]="selectedModels" [options]="options"></fo-multi-select>
+    <fo-multi-select label="Många användare" [(selectedModels)]="selectedModels" [options]="options" [closeOnSelect]="false"></fo-multi-select>
 </div>
 
 <h2>{{selectedModel}}</h2>
 <h2>{{selectedModels}}</h2>
+
+<div>
+    <fo-time-picker [(time)]="time">
+    </fo-time-picker>
+    <h3>{{time}}</h3>
+</div>
 
 <div style="width:350px">
     <fo-image-file [maxByteSize]="1000"></fo-image-file>

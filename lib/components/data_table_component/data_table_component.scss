@@ -1,4 +1,9 @@
-@import '../style/_constants';
+@import '../../style/_constants';
+
+:host
+{
+  width:100%;
+}
 
 h3#title
 {

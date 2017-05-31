@@ -1,0 +1,32 @@
+<label *ngIf="label != null" (click)="strHour = null; strMinute = null">{{label}}</label>
+<div id="canvas">
+    <div *ngIf="strHour == null">
+        <div
+            *ngFor="let hour of amHours"
+            class="number hour"
+            [style.top]="calcHourTop(hour)"
+            [style.left]="calcHourLeft(hour)"
+            (click)="strHour = hour">
+            {{hour == '00' ? '12' : hour}}
+        </div>
+    </div>
+    <div *ngIf="strHour != null && strMinute == null">
+        <div
+            *ngFor="let minute of minutes"
+            class="number minute"
+            [style.top]="calcMinuteTop(minute)"
+            [style.left]="calcMinuteLeft(minute)"
+            (click)="strMinute = minute">
+            {{minute}}
+        </div>
+    </div>
+    <h1
+        class="output"
+        (click)="strHour = null; strMinute = null">
+        {{strHour}}:{{strMinute}}
+    </h1>
+    <div *ngIf="strHour != null && strMinute != null">
+        <div class="midnight-toggle" [class.active]="amMode" id="am" (click)="amMode = true">AM</div>
+        <div class="midnight-toggle" [class.active]="!amMode" id="pm" (click)="amMode = false">PM</div>
+    </div>
+</div>

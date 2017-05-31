@@ -23,7 +23,18 @@ class MockUser extends DataTableModel
 @Component(
     selector: 'fo-app',
     templateUrl: 'app_component.html',
-    directives: const [materialDirectives, FileUploadComponent, FoModalComponent, FoMultiSelectComponent, FoSelectComponent, IconComponent, ImageFileComponent, DataTableComponent],
+    directives: const
+    [
+      materialDirectives,
+      FileUploadComponent,
+      FoModalComponent,
+      FoMultiSelectComponent,
+      FoSelectComponent,
+      IconComponent,
+      ImageFileComponent,
+      DataTableComponent,
+      FoTimePickerComponent
+    ],
     providers: const [materialProviders]
 )
 class AppComponent implements OnInit
@@ -69,6 +80,8 @@ class AppComponent implements OnInit
   List<MockUser> options = [new MockUser("patrick", "07091452342", "1"), new MockUser("bill", "12345", "2")];
 
 
+
+  String time = "11:00";
   //Map<String, MockUser> mockModels = {"1" : new MockUser("patrick", "0709145324", "1"), "2" : new MockUser("annafrida", "0712312123", "2")};
 
 

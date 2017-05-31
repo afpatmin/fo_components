@@ -1,10 +1,9 @@
-<label (click)="(visible = true)">{{label}}:&nbsp;
-    <material-dropdown-select
-            [buttonText]="buttonText"
-            [popupMatchInputWidth]="false"
-            [options]="selectionOptions"
-            [selection]="selectionModel"
-            [(visible)]="visible">
-    </material-dropdown-select>
-</label>
+<material-dropdown-select
+        [buttonText]="label"
+        [popupMatchInputWidth]="false"
+        [options]="selectionOptions"
+        [selection]="selectionModel"
+        [(visible)]="visible">
+</material-dropdown-select>
+<div class="selected-values">{{selectedValues}}</div>
 

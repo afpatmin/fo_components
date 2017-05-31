@@ -2,7 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:html' as dom show File, FileReader, FileUploadInputElement, ProgressEvent;
+import 'dart:html' as dom show File, FileUploadInputElement;
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
 

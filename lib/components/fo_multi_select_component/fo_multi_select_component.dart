@@ -20,7 +20,7 @@ class FoMultiSelectComponent implements OnDestroy
     {
       if (e.isEmpty) return;
 
-      visible = false;
+      visible = !closeOnSelect;
 
       /// Value changed
       if (e.first.added.isNotEmpty || e.first.removed.isNotEmpty) _onSelectedModelsChangeController.add(selectionModel.selectedValues.toList(growable: false));
@@ -33,7 +33,8 @@ class FoMultiSelectComponent implements OnDestroy
     _onSelectedModelsChangeController.close();
   }
 
-  String get buttonText => selectionModel.selectedValues.isEmpty ? nullSelectionButtonText : selectionModel.selectedValues.map((d) => d.toString()).join(", ");
+  String get selectedValues
+  => selectionModel.selectedValues.isEmpty ? nullSelectionButtonText : selectionModel.selectedValues.map((d) => d.toString()).join(", ");
 
   bool get visible => _visible;
 
@@ -42,6 +43,9 @@ class FoMultiSelectComponent implements OnDestroy
   SelectionModel<DataTableModel> selectionModel = new SelectionModel.withList(allowMulti: true);
   final StreamController<bool> _onVisibleChangeController = new StreamController();
   final StreamController<List<DataTableModel>> _onSelectedModelsChangeController = new StreamController();
+
+  @Input('closeOnSelect')
+  bool closeOnSelect = true;
 
   @Input('label')
   String label = "";
@@ -61,7 +65,6 @@ class FoMultiSelectComponent implements OnDestroy
     /// else
     selectionOptions = new SelectionOptions<DataTableModel>([new OptionGroup(value)]);
 
-
     /// Update selection based on current options (de-select any values not contained in options)
     List<DataTableModel> invalid = selectionModel.selectedValues.where((v) => !selectionOptions.optionsList.contains(v)).toList(growable: false);
     invalid.forEach(selectionModel.deselect);
@@ -71,7 +74,12 @@ class FoMultiSelectComponent implements OnDestroy
   void set selectedModelsExternal(List<DataTableModel> value)
   {
     if (selectionOptions == null || value == null || value.isEmpty) selectionModel.clear();
-    else value.where(selectionOptions.optionsList.contains).forEach(selectionModel.select);
+    else for (DataTableModel model in value) selectionModel.select(selectionOptions.optionsList.firstWhere((e) => e == model));
+
+
+
+    //_onSelectedModelsChangeController.add(value);
+    _visible = false;
   }
 
   @Output('selectedModelsChange')

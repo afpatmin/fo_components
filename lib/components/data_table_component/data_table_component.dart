@@ -70,6 +70,9 @@ class DataTableComponent implements OnDestroy
   {
     int sortFn(Map<String, String> a, Map<String, String> b, String column, String order)
     {
+      if (a[column] == null) a[column] = "-";
+      if (b[column] == null) b[column] = "-";
+
       try
       {
         // Number comparison

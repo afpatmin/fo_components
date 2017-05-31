@@ -10,7 +10,7 @@ export 'package:fo_components/components/fo_multi_select_component/fo_multi_sele
 export 'package:fo_components/components/fo_select_component/fo_select_component.dart';
 export 'package:fo_components/components/icon_component/icon_component.dart';
 export 'package:fo_components/components/image_file_component/image_file_component.dart';
-export 'package:fo_components/components/time_picker_component/time_picker_component.dart';
+export 'package:fo_components/components/fo_time_picker_component/fo_time_picker_component.dart';
 export 'package:fo_components/pipes/range_pipe.dart';
 export 'package:fo_components/data_table_model.dart';
 
