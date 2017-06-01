@@ -1,3 +1,4 @@
+import 'dart:convert';
 class DataTableModel
 {
   DataTableModel(this.id);
@@ -9,6 +10,8 @@ class DataTableModel
     return id == other.id;
   }
 
+  @override
+  int get hashCode => id.hashCode;
 
   Map<String, String> toTableRow() => {"id":id};
 

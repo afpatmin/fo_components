@@ -1,3 +1,8 @@
+div.header
+{
+  color: white;
+}
+
 material-dialog
 {
   min-width: 15rem;
@@ -8,6 +13,13 @@ material-dialog
 material-dialog.fixed-height
 {
   height: 95vh;
+  overflow-y: scroll;
+
+  div.content
+  {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 material-dialog.fixed-width

@@ -3,12 +3,9 @@
     <input type="text" maxlength="64" [(ngModel)]="searchPhrase" #search />
     <div class="search-icon-container"><glyph size="x-large" icon="search"></glyph></div>
 </div>
-<div *ngIf="filteredKeys.isEmpty" class="empty-table">
-    <h4><glyph size="x-large" icon="error"></glyph>&nbsp;{{noResultsMessage}}</h4>
-</div>
-<div *ngIf="filteredKeys.isNotEmpty">
+<div>
     <table [class.faded]="disabled" class="output">
-        <thead>
+        <thead *ngIf="filteredKeys.isNotEmpty">
         <tr>
             <td *ngFor="let cell of columns"
                 [class.hide-for-small]="smallHiddenColumns.contains(cell)"
@@ -31,6 +28,9 @@
                     (click)="onCellClickController.add(data[key].toTableRow()[cell])">
                 {{data[key].toTableRow()[cell]}}
             </td>
+        </tr>
+        <tr *ngIf="filteredKeys.isEmpty">
+            <td attr.colspan="{{columns.length}}" class="empty-info"><h4><glyph size="x-large" icon="error"></glyph>&nbsp;{{noResultsMessage}}</h4></td>
         </tr>
         </tbody>
     </table>

@@ -104,7 +104,7 @@ table.output
         font-weight: bold;
         cursor: pointer;
         overflow: hidden;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
       }
     }
   }
@@ -118,6 +118,21 @@ table.output
       {
         overflow: hidden;
       }
+
+      td.empty-info
+      {
+        h4
+        {
+          color: $color-alert-bright;
+          margin: 0.4rem;
+          padding: 0.2rem;
+          line-height: 100%;
+          font-size: 1.2rem;
+          text-align: center;
+
+        }
+      }
+
     }
     tr:nth-child(even)
     {
@@ -134,23 +149,6 @@ table.output
   }
 }
 
-div.empty-table
-{
-  display: block;
-  min-width: 10rem;
-  width: 100%;
-  text-align: center;
-  background-color: #eee;
-  border-radius: 0.5em;
-
-  h4
-  {
-    color: $color-alert-bright;
-    margin: 0.5rem;
-    padding: 0.5rem;
-    font-size: 1.5rem;
-  }
-}
 
 div#data-info
 {
