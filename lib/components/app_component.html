@@ -2,7 +2,7 @@
     <fo-select label="Användare" [(selectedModel)]="selectedModel" [options]="options" [allowNullSelection]="true"></fo-select>
 </div>
 
-<div>
+<div style="max-width: 300px;">
     <fo-multi-select label="Många användare" [(selectedModels)]="selectedModels" [options]="options" [closeOnSelect]="false"></fo-multi-select>
 </div>
 
@@ -33,4 +33,4 @@
     <fo-icon [src]="'arrow-right'"></fo-icon>
 </div>
 
-<fo-modal title="hej" [visible]="true" [fixedHeight]="false" [fixedWidth]="true" error="ERROR TEXT"><p>test</p></fo-modal>
+<fo-modal title="hej" [(visible)]="popupVisible" [fixedHeight]="false" [fixedWidth]="true" error="ERROR TEXT"><p>test</p></fo-modal>

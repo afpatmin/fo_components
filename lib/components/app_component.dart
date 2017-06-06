@@ -33,7 +33,8 @@ class MockUser extends DataTableModel
       IconComponent,
       ImageFileComponent,
       DataTableComponent,
-      FoTimePickerComponent
+      FoTimePickerComponent,
+      ShortenOverflowTextDirective
     ],
     providers: const [materialProviders]
 )
@@ -77,9 +78,17 @@ class AppComponent implements OnInit
 
   MockUser selectedModel;
   List<MockUser> selectedModels = new List();
-  List<MockUser> options = [new MockUser("patrick", "07091452342", "1"), new MockUser("bill", "12345", "2")];
+  List<MockUser> options =
+  [
+    new MockUser("patrickad adf adfa dfadf a", "07091452342", "1"),
+    new MockUser("billa dfasdf adfa dfasdfadfadfafd", "12345", "2"),
+    new MockUser("peteadfadfadfa dfadfadsfadfadfadsfadfadfr", "12345", "3"),
+    new MockUser("marcusadfad", "12345", "4"),
+    new MockUser("bullen minogue", "12345", "5")
+  ];
 
 
+  bool popupVisible = false;
 
   String time = "11:00";
   //Map<String, MockUser> mockModels = {"1" : new MockUser("patrick", "0709145324", "1"), "2" : new MockUser("annafrida", "0712312123", "2")};

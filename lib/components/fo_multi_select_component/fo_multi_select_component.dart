@@ -5,14 +5,16 @@ import 'dart:async' show Stream, StreamController;
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:fo_components/data_table_model.dart';
+import 'package:fo_components/directives/shorten_overflow_text_directive.dart';
 
 @Component(
     selector: 'fo-multi-select',
     styleUrls: const ['fo_multi_select_component.css'],
     templateUrl: 'fo_multi_select_component.html',
-    directives: const [materialDirectives]
+    directives: const [materialDirectives, ShortenOverflowTextDirective],
+    changeDetection: ChangeDetectionStrategy.OnPush
 )
-class FoMultiSelectComponent implements OnDestroy
+class FoMultiSelectComponent implements OnInit, OnDestroy
 {
   FoMultiSelectComponent()
   {
@@ -25,6 +27,11 @@ class FoMultiSelectComponent implements OnDestroy
       /// Value changed
       if (e.first.added.isNotEmpty || e.first.removed.isNotEmpty) _onSelectedModelsChangeController.add(selectionModel.selectedValues.toList(growable: false));
     });
+  }
+
+  void ngOnInit()
+  {
+  //  nullSelectionButtonText = "-";
   }
 
   void ngOnDestroy()
@@ -75,8 +82,6 @@ class FoMultiSelectComponent implements OnDestroy
   {
     if (selectionOptions == null || value == null || value.isEmpty) selectionModel.clear();
     else for (DataTableModel model in value) selectionModel.select(selectionOptions.optionsList.firstWhere((e) => e == model));
-
-
 
     //_onSelectedModelsChangeController.add(value);
     _visible = false;
