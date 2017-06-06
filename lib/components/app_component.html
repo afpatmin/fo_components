@@ -1,3 +1,21 @@
+<fo-sidebar title="menu" [(visible)]="sidebarVisible">
+    <div group>
+        <div label>Category #1</div>
+        <material-list-item>Item #1</material-list-item>
+        <material-list-item>Item #2</material-list-item>
+        <material-list-item>Item #3</material-list-item>
+    </div>
+    <div group>
+        <div label>Category #2</div>
+        <material-list-item>Item #4</material-list-item>
+    </div>
+</fo-sidebar>
+<material-button
+        raised
+        (trigger)="sidebarVisible = true">
+    open sidenav
+</material-button>
+
 <div>
     <fo-select label="Användare" [(selectedModel)]="selectedModel" [options]="options" [allowNullSelection]="true"></fo-select>
 </div>

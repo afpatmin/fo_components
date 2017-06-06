@@ -1,2 +1,53 @@
-@import url(https://fonts.googleapis.com/css?family=Lato);button{-webkit-transition:all 0.4s ease;-moz-transition:all 0.4s ease;-o-transition:all 0.4s ease;transition:all 0.4s ease;background-color:#01a79d;border:0;color:white;cursor:pointer;font-size:1.1em;margin-right:0.3em;outline:none;padding:0.5em 1em}button:hover{filter:brightness(120%);-webkit-filter:brightness(120%);-ms-filter:brightness(120%)}.float-left{float:left}.float-right{float:right}.hidden{display:none}.text-center{text-align:center}.text-right{text-align:right}:host{display:inline-block}div{vertical-align:text-top}div svg{-webkit-transform:translateY(0.08em);-moz-transform:translateY(0.08em);-ms-transform:translateY(0.08em);-o-transform:translateY(0.08em);transform:translateY(0.08em);width:1em;height:1em;stroke-width:0;stroke:currentColor;fill:currentColor}
+@import url(https://fonts.googleapis.com/css?family=Lato);
+button {
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  background-color: #01a79d;
+  border: 0;
+  color: white;
+  cursor: pointer;
+  font-size: 1.1em;
+  margin-right: 0.3em;
+  outline: none;
+  padding: 0.5em 1em; }
+
+button:hover {
+  filter: brightness(120%);
+  -webkit-filter: brightness(120%);
+  -ms-filter: brightness(120%); }
+
+.float-left {
+  float: left; }
+
+.float-right {
+  float: right; }
+
+.hidden {
+  display: none; }
+
+.text-center {
+  text-align: center; }
+
+.text-right {
+  text-align: right; }
+
+:host {
+  display: inline-block; }
+
+div {
+  vertical-align: text-top; }
+  div svg {
+    -webkit-transform: translateY(0.08em);
+    -moz-transform: translateY(0.08em);
+    -ms-transform: translateY(0.08em);
+    -o-transform: translateY(0.08em);
+    transform: translateY(0.08em);
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor; }
+
 /*# sourceMappingURL=icon_component.css.map */

@@ -33,6 +33,7 @@ class MockUser extends DataTableModel
       IconComponent,
       ImageFileComponent,
       DataTableComponent,
+      FoSidebarComponent,
       FoTimePickerComponent
     ],
     providers: const [materialProviders]
@@ -82,6 +83,8 @@ class AppComponent implements OnInit
 
 
   String time = "11:00";
+
+  bool sidebarVisible = true;
   //Map<String, MockUser> mockModels = {"1" : new MockUser("patrick", "0709145324", "1"), "2" : new MockUser("annafrida", "0712312123", "2")};
 
 

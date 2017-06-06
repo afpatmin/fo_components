@@ -8,6 +8,7 @@ export 'package:fo_components/components/fo_file_upload_component/fo_file_upload
 export 'package:fo_components/components/fo_modal_component/fo_modal_component.dart';
 export 'package:fo_components/components/fo_multi_select_component/fo_multi_select_component.dart';
 export 'package:fo_components/components/fo_select_component/fo_select_component.dart';
+export 'package:fo_components/components/fo_sidebar_component/fo_sidebar_component.dart';
 export 'package:fo_components/components/icon_component/icon_component.dart';
 export 'package:fo_components/components/image_file_component/image_file_component.dart';
 export 'package:fo_components/components/fo_time_picker_component/fo_time_picker_component.dart';
