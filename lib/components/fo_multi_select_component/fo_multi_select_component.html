@@ -5,5 +5,4 @@
         [selection]="selectionModel"
         [(visible)]="visible">
 </material-dropdown-select>
-<div class="selected-values">{{selectedValues}}</div>
-
+<div class="selected-values"><span [foShortenOverflow]="selectedValues">{{selectedValues}}</span></div>

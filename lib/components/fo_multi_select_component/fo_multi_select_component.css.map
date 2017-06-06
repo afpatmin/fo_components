@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,wBACA,CACE,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,KAAK,CAElB,mBACA,CACE,SAAS,CAAE,KAAK,CAChB,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,eAAe",
+"mappings": "AAAA,wBACA,CACE,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,KAAK,CAElB,mBACA,CACE,SAAS,CAAE,KAAK,CAChB,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,mBAAmB,CAC3B,WAAW,CAAE,MAAM",
 "sources": ["fo_multi_select_component.scss"],
 "names": [],
 "file": "fo_multi_select_component.css"
