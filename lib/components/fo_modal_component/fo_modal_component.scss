@@ -13,7 +13,6 @@ material-dialog
 material-dialog.fixed-height
 {
   height: 95vh;
-  overflow-y: scroll;
 
   div.content
   {
@@ -25,6 +24,7 @@ material-dialog.fixed-height
 material-dialog.fixed-width
 {
   width: 90vw;
+  max-width: 1250px;
 }
 
 .float-right
