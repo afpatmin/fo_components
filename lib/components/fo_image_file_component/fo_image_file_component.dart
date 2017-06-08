@@ -10,15 +10,15 @@ import 'package:angular_components/angular_components.dart';
 
 @Component(
     selector: 'fo-image-file',
-    templateUrl: 'image_file_component.html',
-    styleUrls: const ['image_file_component.css'],
+    templateUrl: 'fo_image_file_component.html',
+    styleUrls: const ['fo_image_file_component.css'],
     directives: const [GlyphComponent, MaterialButtonComponent],
     providers: const [],
     preserveWhitespace: false)
 
-class ImageFileComponent implements OnDestroy
+class FoImageFileComponent implements OnDestroy
 {
-  ImageFileComponent()
+  FoImageFileComponent()
   {
     _metaReader.onLoad.listen(_extractExifOrientationAndLoadImage);
     _reader.onLoad.listen(_generateScaledImage);
@@ -57,6 +57,9 @@ class ImageFileComponent implements OnDestroy
 
   @Input('source')
   String source = "";
+
+  @Input('label')
+  String label = "Image";
 
   @Input('alt')
   String alt = "";

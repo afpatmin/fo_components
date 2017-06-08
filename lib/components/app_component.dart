@@ -31,7 +31,7 @@ class MockUser extends DataTableModel
       FoMultiSelectComponent,
       FoSelectComponent,
       IconComponent,
-      ImageFileComponent,
+      FoImageFileComponent,
       DataTableComponent,
       FoSidebarComponent,
       FoTimePickerComponent

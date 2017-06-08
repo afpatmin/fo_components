@@ -1,2 +1,2 @@
-:host>div{margin-top:1rem;margin-bottom:1rem}:host>div input{display:none}
+:host div.container{border:1px dashed #ccc;padding:0.5rem;text-align:center}:host div.container input{display:none}:host div.container p{margin:0.5rem 0}:host div.container glyph.cancel-button{cursor:pointer;color:#8b0000}
 /*# sourceMappingURL=fo_file_upload_component.css.map */

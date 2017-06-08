@@ -1,10 +1,26 @@
-:host > div
-{
-  input
-  {
-    display: none;
-  }
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+@import '../../style/common';
 
+:host
+{
+  div.container
+  {
+    border: 1px dashed $color-grey;
+    padding: 0.5rem;
+    text-align: center;
+
+    input
+    {
+      display: none;
+    }
+    p
+    {
+      margin: 0.5rem 0;
+    }
+
+    glyph.cancel-button
+    {
+      cursor: pointer;
+      color: $color-red;
+    }
+  }
 }
