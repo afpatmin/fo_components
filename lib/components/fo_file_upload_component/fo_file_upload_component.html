@@ -1,10 +1,11 @@
-<div>
-    <h3>{{title}}</h3>
+<label>{{label}}</label>
+<div class="container">
     <input #input type="file" (change)="onFileChange($event)" accept="image/jpg,image/jpeg,image/png,image/gif,application/pdf" />
     <material-button raised (trigger)="input.click()"><glyph icon="folder_open"></glyph></material-button>
-    <span *ngIf="file != null">
-        <material-button raised [disabled]="disabled" (trigger)="onUploadController.add(file)"><glyph icon="file_upload"></glyph></material-button>
-        <p>{{file.name}} ({{(file.size / 1024).round()}}kb)</p>
-    </span>
-
+    <material-button raised [disabled]="disabled || file == null" (trigger)="onUploadController.add(file)"><glyph icon="file_upload"></glyph></material-button>
+    <p>
+        <span *ngIf="file == null">...</span>
+        <span *ngIf="file != null">{{file.name}} ({{(file.size / 1024).round()}}kb)</span>
+        <glyph *ngIf="file != null" icon="cancel" size="small" class="cancel-button" (click)="file = null"></glyph>
+    </p>
 </div>

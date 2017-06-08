@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "AAAA,SACA,CAKE,UAAU,CAAE,IAAI,CAChB,aAAa,CAAE,IAAI,CALnB,eACA,CACE,OAAO,CAAE,IAAI",
-"sources": ["fo_file_upload_component.scss"],
+"mappings": "AAIE,mBACA,CACE,MAAM,CAAE,eAAsB,CAC9B,OAAO,CAAE,MAAM,CACf,UAAU,CAAE,MAAM,CAElB,yBACA,CACE,OAAO,CAAE,IAAI,CAEf,qBACA,CACE,MAAM,CAAE,QAAQ,CAGlB,uCACA,CACE,MAAM,CAAE,OAAO,CACf,KAAK,CCrBC,OAAO",
+"sources": ["fo_file_upload_component.scss","../../style/common.scss"],
 "names": [],
 "file": "fo_file_upload_component.css"
 }

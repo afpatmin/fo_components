@@ -30,8 +30,8 @@ class FileUploadComponent implements OnDestroy
   dom.FileUploadInputElement _fileInput;
   dom.File file;
 
-  @Input('title')
-  String title = "Upload file";
+  @Input('label')
+  String label = "File";
 
   @Input('disabled')
   bool disabled = false;
