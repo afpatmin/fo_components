@@ -5,6 +5,7 @@ $width: 300px;
 
 :host /deep/
 {
+  /*
   div.background
   {
     position: fixed;
@@ -19,7 +20,7 @@ $width: 300px;
   div.background.visible
   {
     display: inherit;
-  }
+  }*/
 
   div.transformer
   {
@@ -44,7 +45,7 @@ $width: 300px;
     div.header
     {
       padding: 5rem 0.5rem 1rem 1rem;
-      background-color: $color-1;
+      background-color: $color-grey-dark;
 
       h3
       {

@@ -38,9 +38,10 @@ class FoSidebarComponent implements OnDestroy
   @Output('visibleChange')
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
 
+  /*
   @HostListener('click', const ['\$event'])
   void onHostClick(dom.MouseEvent e)
   {
     close();
-  }
+  }*/
 }
