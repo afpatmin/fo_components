@@ -7,7 +7,7 @@ class DataTableModel
   operator == (dynamic other)
   {
     if (!(other is DataTableModel)) return false;
-    return id == other.id;
+    return hashCode.compareTo(other.hashCode) == 0;
   }
 
   @override

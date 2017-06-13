@@ -1,7 +1,7 @@
 // Copyright (c) 2017, Patrick Minogue. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'dart:async' show Stream, StreamController;
+import 'dart:async' show Stream, StreamController, StreamSubscription;
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:fo_components/data_table_model.dart';
@@ -12,37 +12,60 @@ import 'package:fo_components/data_table_model.dart';
     templateUrl: 'fo_select_component.html',
     directives: const [materialDirectives]
 )
-class FoSelectComponent implements OnDestroy
+class FoSelectComponent implements AfterContentInit, OnDestroy
 {
-  FoSelectComponent()
+  FoSelectComponent();
+
+  void ngAfterContentInit()
   {
-    selectionModel.selectionChanges.listen((List<SelectionChangeRecord<DataTableModel>> e)
+    if (selectionOptions == null) return;
+
+    if (selectedModel != null) selectedId = selectedModel.id;
+    if (selectedId != null)
     {
-      if (e.isEmpty) return;
-
-      SelectionChangeRecord scr = e.first;
-
-      /// Selected the same value again, and selectionOptions still contains the element
-      if (allowNullSelection == false
-          && scr.added.isEmpty
-          && scr.removed.isNotEmpty
-          && selectionOptions.optionsList.contains(scr.removed.first)) selectionModel.select(scr.removed.first);
-
-      /// Selected a new value, fire change event
-      else if (scr.added.isNotEmpty) _onSelectedModelChangeController.add(scr.added.first);
-      else if (allowNullSelection == true) _onSelectedModelChangeController.add(null);
-    });
+      if (selectionOptions == null || selectionOptions.optionsList.isEmpty || selectedId == null) selectionModel.clear();
+      else
+      {
+        selectedModel = selectionOptions.optionsList.firstWhere((model) => model.id == selectedId, orElse: () => null);
+        selectionModel.select((selectedModel == null) ? selectionOptions.optionsList.first : selectedModel);
+      }
+    }
+    selectionChangeListener = selectionModel.selectionChanges.listen(onSelectionChanges);
   }
 
   void ngOnDestroy()
   {
     _onVisibleChangeController.close();
     _onSelectedModelChangeController.close();
+    _onSelectedIdChangeController.close();
+    selectionChangeListener.cancel();
   }
 
-  DataTableModel get selectedModel
+  void onSelectionChanges(List<SelectionChangeRecord<DataTableModel>> e)
   {
-    return selectionModel.selectedValues.isEmpty ? null : selectionModel.selectedValues.first;
+    if (e.isEmpty) return;
+
+    SelectionChangeRecord scr = e.first;
+
+    if (allowNullSelection == false
+        && scr.added.isEmpty
+        && scr.removed.isNotEmpty
+        && selectionOptions.optionsList.contains(scr.removed.first))
+    {
+      selectedModel = scr.removed.first;
+      selectionChangeListener.cancel();
+      selectionModel.select(selectedModel);
+      selectionChangeListener = selectionModel.selectionChanges.listen(onSelectionChanges);
+    }
+    else if (scr.added.isNotEmpty)
+    {
+      selectedModel = scr.added.first;
+      selectedId = selectedModel.id;
+    }
+    else if (allowNullSelection == true) selectedModel = selectedId = null;
+
+    _onSelectedModelChangeController.add(selectedModel);
+    _onSelectedIdChangeController.add(selectedId);
   }
 
   bool get visible => _visible;
@@ -52,6 +75,8 @@ class FoSelectComponent implements OnDestroy
   SelectionModel<DataTableModel> selectionModel = new SelectionModel.withList(allowMulti: false);
   final StreamController<bool> _onVisibleChangeController = new StreamController();
   final StreamController<DataTableModel> _onSelectedModelChangeController = new StreamController();
+  final StreamController<String> _onSelectedIdChangeController = new StreamController();
+  StreamSubscription<List<SelectionChangeRecord<DataTableModel>>> selectionChangeListener;
 
   @Input('allowNullSelection')
   bool allowNullSelection = false;
@@ -63,31 +88,16 @@ class FoSelectComponent implements OnDestroy
   String nullSelectionButtonText = "-";
 
   @Input('options')
-  void set options(List<DataTableModel> value)
-  {
-    selectionOptions = new SelectionOptions<DataTableModel>([new OptionGroup(value)]);
+  void set options(List<DataTableModel> value) { selectionOptions = new SelectionOptions<DataTableModel>([new OptionGroup(value)]); }
 
-    /// Update selection based on current options
-    if (!value.contains(selectedModel))
-    {
-      if (allowNullSelection == false)
-      {
-        selectionOptions.optionsList.isEmpty ? selectionModel.clear() : selectionModel.select(selectionOptions.optionsList.first);
-      }
-      else if (allowNullSelection == true && selectionOptions.optionsList.isEmpty) selectionModel.clear();
-    }
-  }
+  @Input('selectedId')
+  String selectedId;
 
   @Input('selectedModel')
-  void set selectedModelExternal(DataTableModel value)
-  {
-    if (selectionOptions == null || value == null) selectionModel.clear();
-    else
-    {
-      if (selectionOptions.optionsList.contains(value)) selectionModel.select(value);
-      else selectionModel.select(selectionOptions.optionsList.first);
-    }
-  }
+  DataTableModel selectedModel;
+
+  @Output('selectedIdChange')
+  Stream<String> get onSelectedIdChangeOutput => _onSelectedIdChangeController.stream;
 
   @Output('selectedModelChange')
   Stream<DataTableModel> get onSelectedModelChangeOutput => _onSelectedModelChangeController.stream;

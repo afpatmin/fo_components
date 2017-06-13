@@ -53,7 +53,7 @@ class DataTableComponent implements OnDestroy
     {
       for (String needle in needles.where((v) => v.isNotEmpty && v != ""))
       {
-        if (model.toTableRow().values.where((v) => v.toLowerCase().contains(needle.toLowerCase())).isNotEmpty) return true;
+        if (model.toTableRow().values.where((v) => v != null && v.toLowerCase().contains(needle.toLowerCase())).isNotEmpty) return true;
       }
       return false;
     }

@@ -55,16 +55,21 @@ class AppComponent implements OnInit
     new Timer(const Duration(milliseconds:4300), () => userStreamController.add(new MockUser("richard", "012312", "11")));
     new Timer(const Duration(milliseconds:5000), () => userStreamController.add(new MockUser("charo", "5555", "12")));
 
+    selectedModels.add(options.last);
+
     userStreamController.stream.listen((user)
     {
       models[user.id] = user;
       models = new Map.from(models);
     });
+
+    selectedModel = options.last;
   }
+
 
   void ngOnInit()
   {
-    selectedModel = options.first;
+
   }
 
   void onUpload(dynamic event)
@@ -77,9 +82,10 @@ class AppComponent implements OnInit
   StreamController<MockUser> userStreamController = new StreamController();
 
   MockUser selectedModel;
-  List<MockUser> selectedModels = new List();
-  List<MockUser> options = [new MockUser("patrick", "07091452342", "1"), new MockUser("bill", "12345", "2")];
+  String selectedId = "2";
 
+  List<MockUser> options = [new MockUser("patrick", "07091452342", "1"), new MockUser("bill", "12345", "2")];
+  List<MockUser> selectedModels = new List();
 
 
   String time = "11:00";

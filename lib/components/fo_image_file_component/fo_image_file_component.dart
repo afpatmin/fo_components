@@ -3,7 +3,7 @@
 
 import 'dart:async' show Stream, StreamController;
 import 'dart:convert' show ASCII, BASE64;
-import 'dart:html' as dom show CanvasElement, CanvasRenderingContext2D, File, FileReader, FileUploadInputElement, ImageElement, ProgressEvent;
+import 'dart:html' as dom;
 import 'dart:typed_data' show ByteData, Endianness, Uint8List;
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
@@ -29,24 +29,50 @@ class FoImageFileComponent implements OnDestroy
     _onSourceChangeController.close();
   }
 
+  void onDrop(dom.MouseEvent event)
+  {
+    event.preventDefault();
+    dom.DataTransfer dt = event.dataTransfer;
+    try
+    {
+      if (dt.files.isNotEmpty) _processFile(dt.files.last);
+    }
+    catch (e)
+    {
+      invalidFile = true;
+      print(e);
+    }
+  }
+
   void onFileChange(dynamic event)
   {
     _fileInput = event.target;
-
-    if (_fileInput.files.isNotEmpty)
+    try
     {
-      /// verify this is .jpeg/.png/.bmp/.gif
-      dom.File f = _fileInput.files.last;
-      /// JPG file - read EXIF metadata so that we can figure out image orientation and rotate accordingly
-      if (f.type == "image/jpeg" || f.type == "image/jpg")
-      {
-        /// EXIF specifications states metadata will always be in the first 64kb of the file, we double it just in case.
-        _metaReader.readAsArrayBuffer(f.slice(0, 131072));
-      }
-      /// Any other supported format, skip metadata
-      else if (f.type == "image/png" || f.type == "image/gif" || f.type == "image/bmp") _reader.readAsDataUrl(f);
-      else throw new Exception("error_invalid_file");
+      if (_fileInput.files.isNotEmpty) _processFile(_fileInput.files.last);
     }
+    catch (e)
+    {
+      invalidFile = true;
+      print(e);
+    }
+  }
+
+  void _processFile(dom.File file)
+  {
+    _base64Data = source = null;
+    invalidFile = false;
+    _file = file;
+    /// Verify this is .jpeg/.png/.bmp/.gif
+    /// JPG file - read EXIF metadata so that we can figure out image orientation and rotate accordingly
+    if (_file.type == "image/jpeg" || _file.type == "image/jpg")
+    {
+      /// EXIF specifications states metadata will always be in the first 64kb of the file, we double it just in case.
+      _metaReader.readAsArrayBuffer(_file.slice(0, 131072));
+    }
+    /// Any other supported format, skip metadata
+    else if (_file.type == "image/png" || _file.type == "image/gif" || _file.type == "image/bmp") _reader.readAsDataUrl(_file);
+    else throw new Exception("Invalid file");
   }
 
   void clearSource()
@@ -152,7 +178,7 @@ class FoImageFileComponent implements OnDestroy
     }
 
     /// Done reading metadata, read actual image
-    _reader.readAsDataUrl(_fileInput.files.first);
+    _reader.readAsDataUrl(_file);
   }
 
   void _generateScaledImage(dom.ProgressEvent e)
@@ -272,14 +298,18 @@ class FoImageFileComponent implements OnDestroy
     }
   }
 
-
   String _base64Data = "";
+  bool invalidFile = false;
   int _byteSize;
   int _orientation = 0;
   final dom.FileReader _metaReader = new dom.FileReader();
   final dom.FileReader _reader = new dom.FileReader();
   final StreamController<String> _onSourceChangeController = new StreamController();
   dom.FileUploadInputElement _fileInput;
+  dom.File _file;
+
+  @Input('invalidFileMessage')
+  String invalidFileMessage = "Invalid file";
 }
 
 

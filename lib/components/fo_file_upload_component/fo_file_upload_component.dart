@@ -2,7 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:html' as dom show File, FileUploadInputElement;
+import 'dart:html' as dom;
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
 
@@ -19,6 +19,13 @@ class FileUploadComponent implements OnDestroy
   void ngOnDestroy()
   {
     onUploadController.close();
+  }
+
+  void onDrop(dom.MouseEvent event)
+  {
+    event.preventDefault();
+    dom.DataTransfer dt = event.dataTransfer;
+    file = (dt.files.isEmpty) ? null : file = dt.files.last;
   }
 
   void onFileChange(dynamic event)

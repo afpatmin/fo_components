@@ -3,7 +3,18 @@ $color-2: #01a79d;
 $color-3: #692;
 $color-alert: #ff5555;
 $color-alert-bright: #cc9999;
+$color-grey: #ccc;
+$color-grey-dark: #666;
+$color-red: #8b0000;
 $color-info: blue;
 $color-success: green;
 $color-text: #444;
 $default-margin-top: 1em;
+
+
+@mixin box-shadow
+{
+  -webkit-box-shadow: 1px 1px 4px $color-grey;
+  -moz-box-shadow: 1px 1px 4px $color-grey;
+  box-shadow: 1px 1px 4px $color-grey;
+}
