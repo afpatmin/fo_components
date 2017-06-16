@@ -19,9 +19,18 @@ import 'package:fo_components/data_table_model.dart';
     changeDetection: ChangeDetectionStrategy.Default,
     pipes: const [UpperCasePipe, RangePipe])
 
-class DataTableComponent implements OnDestroy
+class DataTableComponent implements OnChanges, OnDestroy
 {
   DataTableComponent();
+
+  void ngOnChanges(Map<String, SimpleChange> changes)
+  {
+    if (changes.containsKey("rows"))
+    {
+      _setIndices(0);
+    }
+
+  }
 
   void ngOnDestroy()
   {
@@ -32,12 +41,12 @@ class DataTableComponent implements OnDestroy
 
   void step(int steps)
   {
-    if (!_disabled && (firstIndex + _numRows < _data.length || steps < 0)) _setIndices(firstIndex + (steps * _numRows));
+    if (!disabled) _setIndices(firstIndex + (steps * rows));
   }
 
   void onSort(String column)
   {
-    if (!_disabled)
+    if (!disabled)
     {
       sortColumn = column;
       sortOrder = (sortOrder == "ASC") ? "DESC" : "ASC";
@@ -123,38 +132,30 @@ class DataTableComponent implements OnDestroy
     if (sortColumn.isNotEmpty) _sort();
   }
 
-  @Input('rows')
-  void set numRows(int value)
-  {
-    _numRows = value;
-    _setIndices(0);
-  }
-
-  @Input('disabled')
-  void set disabled(bool flag) { _disabled = flag; }
-
   void _setIndices(int first_index)
   {
-    firstIndex = max(0, first_index);
-    if (searchPhrase.isNotEmpty) firstIndex = max(0, min(firstIndex, filteredKeys.length - _numRows));
-    lastIndex = firstIndex + _numRows;
+    if (first_index < 0 || first_index >= _data.length) return;
+
+    firstIndex = first_index;
+    if (searchPhrase.isNotEmpty) firstIndex = max(0, min(firstIndex, filteredKeys.length - rows));
+    lastIndex = firstIndex + rows;
+
+    currentPage = (filteredKeys.isEmpty) ? 0 : (firstIndex.toDouble() / rows).ceil() + 1;
   }
 
-  bool get disabled => _disabled;
-  int get numRows => _numRows;
   List<String> get columns => _columns;
 
-
-  @Output('cellclick')
-  Stream<String> get onCellClickOutput => onCellClickController.stream;
-
-  @Output('rowclick')
-  Stream<String> get onRowClickOutput => onRowClickController.stream;
-
-  @Output('sort')
-  Stream<Map<String, String>> get onSortOutput => _onSortController.stream;
+  int get totalPages => (filteredKeys.length.toDouble() / rows).ceil();
 
   Map<String, DataTableModel> _data = new Map();
+  int firstIndex = 0;
+  int lastIndex = 1;
+  int currentPage = 1;
+
+  List<String> _columns = [];
+  final StreamController<String> onCellClickController = new StreamController();
+  final StreamController<String> onRowClickController = new StreamController();
+  final StreamController<Map<String, String>> _onSortController = new StreamController();
 
   String sortColumn = "";
   String sortOrder = "DESC";
@@ -175,13 +176,18 @@ class DataTableComponent implements OnDestroy
   @Input('title')
   String title = "";
 
-  int firstIndex = 0;
-  int lastIndex = 1;
-  int _numRows = 1;
-  bool _disabled = false;
+  @Input('rows')
+  int rows = 1;
 
-  List<String> _columns = [];
-  final StreamController<String> onCellClickController = new StreamController();
-  final StreamController<String> onRowClickController = new StreamController();
-  final StreamController<Map<String, String>> _onSortController = new StreamController();
+  @Input('disabled')
+  bool disabled = false;
+
+  @Output('cellclick')
+  Stream<String> get onCellClickOutput => onCellClickController.stream;
+
+  @Output('rowclick')
+  Stream<String> get onRowClickOutput => onRowClickController.stream;
+
+  @Output('sort')
+  Stream<Map<String, String>> get onSortOutput => _onSortController.stream;
 }

@@ -1,6 +1,13 @@
 <div class="transformer" [class.closed]="!visible">
     <div class="header">
-        <h3>{{title}}</h3>
+        <p>
+            <glyph
+                    size="large"
+                    [icon]="lockIcon"
+                    (click)="toggleLocked($event)">
+            </glyph>
+            &nbsp;{{title}}
+        </p>
     </div>
     <div class="content">
         <material-list>

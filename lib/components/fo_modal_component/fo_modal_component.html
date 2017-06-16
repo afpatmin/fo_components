@@ -6,7 +6,7 @@
             </material-button>
             {{title}}
         </div>
-        <div class="content">
+        <div class="content" *ngIf="visible">
             <ng-content></ng-content>
         </div>
     </material-dialog>

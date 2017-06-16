@@ -5,13 +5,12 @@ import 'dart:async' show Stream, StreamController, StreamSubscription;
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:fo_components/data_table_model.dart';
-import 'package:fo_components/directives/shorten_overflow_text_directive.dart';
 
 @Component(
     selector: 'fo-multi-select',
     styleUrls: const ['fo_multi_select_component.css'],
     templateUrl: 'fo_multi_select_component.html',
-    directives: const [materialDirectives, ShortenOverflowTextDirective],
+    directives: const [materialDirectives],
     changeDetection: ChangeDetectionStrategy.OnPush
 )
 class FoMultiSelectComponent implements AfterContentInit, OnDestroy
@@ -21,7 +20,7 @@ class FoMultiSelectComponent implements AfterContentInit, OnDestroy
   void ngAfterContentInit()
   {
     _selectionChangeListener?.cancel();
-    selectionModel.clear();
+   // selectionModel.clear();
     selectedModels.forEach(selectionModel.select);
     _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<DataTableModel>> e)
     {

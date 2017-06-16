@@ -14,7 +14,6 @@ export 'package:fo_components/components/icon_component/icon_component.dart';
 export 'package:fo_components/components/fo_time_picker_component/fo_time_picker_component.dart';
 
 export 'directives/lowercase_directive.dart';
-export 'package:fo_components/directives/shorten_overflow_text_directive.dart';
 export 'directives/uppercase_directive.dart';
 
 export 'package:fo_components/pipes/range_pipe.dart';

@@ -1,2 +1,2 @@
-label{display:block;margin-bottom:0.2rem;font-size:0.9em;color:#888}material-dropdown-select{width:100%;max-width:40rem;margin-bottom:1rem}
+:host{margin-bottom:1rem;display:block}:host label{width:100%;display:inline-block;margin-bottom:0.2em;font-size:0.8em;color:#888}
 /*# sourceMappingURL=fo_select_component.css.map */

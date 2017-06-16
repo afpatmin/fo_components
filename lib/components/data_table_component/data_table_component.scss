@@ -14,7 +14,7 @@ h3#title
 
 glyph
 {
-  vertical-align: text-bottom;
+  vertical-align: text-top;
 }
 
 div#search
@@ -104,6 +104,7 @@ table.output
         font-weight: bold;
         cursor: pointer;
         overflow: hidden;
+        text-overflow: ellipsis;
         font-size: 0.8rem;
       }
     }
@@ -117,6 +118,7 @@ table.output
       td
       {
         overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       td.empty-info
@@ -129,7 +131,6 @@ table.output
           line-height: 100%;
           font-size: 1.2rem;
           text-align: center;
-
         }
       }
 
@@ -173,6 +174,10 @@ div#data-info
       -ms-user-select: none;
       user-select: none;
       cursor: pointer;
+    }
+    glyph.disabled
+    {
+      opacity: 0.4;
     }
   }
 }

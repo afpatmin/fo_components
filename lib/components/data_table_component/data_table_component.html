@@ -37,9 +37,9 @@
     <div id="select-step">
         <table>
             <tr>
-                <td class="arrow" (click)="step(-1)"><glyph icon="navigate_before"></glyph></td>
-                <td class="page">{{firstIndex+1}}-{{lastIndex}} ({{filteredKeys.length}})</td>
-                <td class="arrow" (click)="step(1)"><glyph icon="navigate_next"></glyph></td>
+                <td class="arrow" (click)="step(-1)"><glyph [class.disabled]="firstIndex <= 0" icon="navigate_before"></glyph></td>
+                <td class="page">page {{currentPage}}/{{totalPages}} ({{filteredKeys.length}})</td>
+                <td class="arrow" (click)="step(1)"><glyph [class.disabled]="lastIndex >= filteredKeys.length" icon="navigate_next"></glyph></td>
             </tr>
         </table>
     </div>

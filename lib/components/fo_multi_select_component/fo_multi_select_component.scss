@@ -1,13 +1,9 @@
-material-dropdown-select
-{
-  width: 100%;
-  max-width: 40rem;
-}
 div.selected-values
 {
   font-size: 0.9em;
   color: #888;
-  margin: 0.3rem 0 0.912rem 0;
+  margin: 0.2rem 0 0.912rem 0;
   white-space: nowrap;
-  //overflow: hidden;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

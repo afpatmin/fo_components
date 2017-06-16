@@ -18,17 +18,14 @@ class FoSelectComponent implements AfterContentInit, OnDestroy
 
   void ngAfterContentInit()
   {
-    if (selectionOptions == null) return;
-
     if (selectedModel != null) selectedId = selectedModel.id;
     if (selectedId != null)
     {
-      if (selectionOptions == null || selectionOptions.optionsList.isEmpty || selectedId == null) selectionModel.clear();
-      else
+      if (selectedModel == null)
       {
-        selectedModel = selectionOptions.optionsList.firstWhere((model) => model.id == selectedId, orElse: () => null);
-        selectionModel.select((selectedModel == null) ? selectionOptions.optionsList.first : selectedModel);
+        selectedModel = selectionOptions.optionsList.firstWhere((model) => model.id.compareTo(selectedId) == 0, orElse: () => null);
       }
+      if (selectedModel != null) selectionModel.select(selectedModel);
     }
     selectionChangeListener = selectionModel.selectionChanges.listen(onSelectionChanges);
   }
@@ -71,7 +68,7 @@ class FoSelectComponent implements AfterContentInit, OnDestroy
   bool get visible => _visible;
 
   bool _visible = false;
-  SelectionOptions<DataTableModel> selectionOptions;
+  SelectionOptions<DataTableModel> selectionOptions = new SelectionOptions<DataTableModel>([]);
   SelectionModel<DataTableModel> selectionModel = new SelectionModel.withList(allowMulti: false);
   final StreamController<bool> _onVisibleChangeController = new StreamController();
   final StreamController<DataTableModel> _onSelectedModelChangeController = new StreamController();
