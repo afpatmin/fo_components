@@ -11,4 +11,9 @@
     font-size: 0.8em;
     color: #888;
   }
+
+  /deep/ material-dropdown-select.full-width
+  {
+    width: 100%;
+  }
 }

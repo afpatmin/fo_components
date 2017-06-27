@@ -1,6 +1,6 @@
 <label (click)="(visible = true)">{{label}}</label>
 <material-dropdown-select
-        [width]="5"
+        [class.full-width]="fullWidth"
         [buttonText]="selectedModel == null ? nullSelectionButtonText : selectedModel.toString()"
         [popupMatchInputWidth]="true"
         [options]="selectionOptions"

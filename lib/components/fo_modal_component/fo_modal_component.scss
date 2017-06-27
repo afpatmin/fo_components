@@ -1,13 +1,18 @@
-div.header
-{
-  color: white;
-}
-
 material-dialog
 {
   min-width: 15rem;
   max-width: 90vw;
   max-height: 95vh;
+
+  /deep/ div.content
+  {
+    padding-bottom: 1rem;
+  }
+
+  /deep/ div.header
+  {
+    color: white;
+  }
 }
 
 material-dialog.fixed-height

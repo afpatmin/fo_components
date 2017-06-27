@@ -176,6 +176,9 @@ class DataTableComponent implements OnChanges, OnDestroy
   @Input('title')
   String title = "";
 
+  @Input('page-title')
+  String pageTitle = "page";
+
   @Input('rows')
   int rows = 1;
 

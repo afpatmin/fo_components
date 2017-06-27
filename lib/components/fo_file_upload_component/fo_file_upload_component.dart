@@ -34,14 +34,34 @@ class FileUploadComponent implements OnDestroy
     file = (_fileInput.files.isNotEmpty) ? _fileInput.files.last : null;
   }
 
+  void clearSelection()
+  {
+    file = null;
+    _fileInput?.value = "";
+  }
+
+  void upload()
+  {
+    onUploadController.add(file);
+    clearSelection();
+  }
+
+  bool get valid => file != null && file.size <= maxByteSize;
+
   dom.FileUploadInputElement _fileInput;
   dom.File file;
+
+  @Input('disabled')
+  bool disabled = false;
 
   @Input('label')
   String label = "File";
 
-  @Input('disabled')
-  bool disabled = false;
+  @Input('maxByteSize')
+  int maxByteSize = 1048576;
+
+  @Input('maxByteSizeExceededMessage')
+  String maxByteSizeExceededMessage = "Max bytesize exceeded";
 
   @Output('upload')
   Stream<dom.File> get onUploadOutput => onUploadController.stream;

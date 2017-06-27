@@ -1,7 +1,7 @@
 // Copyright (c) 2017, Patrick Minogue. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'dart:async' show Stream, Timer, StreamController, StreamSubscription;
+import 'dart:async' show Stream, StreamController, StreamSubscription;
 import 'dart:html' as dom;
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
@@ -12,42 +12,46 @@ import 'package:angular_components/angular_components.dart';
     templateUrl: 'fo_sidebar_component.html',
     directives: const [materialDirectives]
 )
-class FoSidebarComponent implements OnDestroy, OnChanges
+class FoSidebarComponent implements OnDestroy
 {
-  FoSidebarComponent();
-
-  void ngOnChanges(Map<String, SimpleChange> changes)
+  FoSidebarComponent()
   {
-    if (changes.containsKey("visible"))
+    _onWindowClickListener = dom.document.onClick.listen((e)
     {
-      if (changes["visible"].currentValue == true)
-      {
-        _onClickListener?.cancel();
-        new Timer(const Duration(milliseconds: 100), ()
-        {
-          _onClickListener = dom.document.onClick.listen((e) => _onVisibleChangeController.add(locked));
-        });
-      }
-    }
+      if (visible && !locked) visible = locked = false;
+
+      _onVisibleChangeController.add(visible);
+    });
   }
 
   void ngOnDestroy()
   {
     _onVisibleChangeController.close();
-    _onClickListener?.cancel();
+    _onWindowClickListener.cancel();
   }
 
   void toggleLocked(dom.Event e)
   {
     e.stopPropagation();
     locked = !locked;
-    lockIcon = locked ? "lock" : "lock_open";
+  }
 
+  void toggleOpen(dom.Event e)
+  {
+    e.stopPropagation();
+    visible = !visible;
+
+    /// Can't be locked and not visible
+    if (!visible) locked = false;
+
+    _onVisibleChangeController.add(visible);
   }
 
   final StreamController<bool> _onVisibleChangeController = new StreamController();
-  StreamSubscription<dom.Event> _onClickListener;
-  String lockIcon = "lock_open";
+  StreamSubscription<dom.Event> _onWindowClickListener;
+
+  @Input('backgroundColor')
+  String backgroundColor = "#666";
 
   @Input('locked')
   bool locked = false;

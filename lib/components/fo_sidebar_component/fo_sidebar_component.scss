@@ -1,62 +1,89 @@
 @import "../../style/constants";
 
-$width: 300px;
+$width: 200px;
 
 :host /deep/
 {
-  div.container
-  {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: $width;
-    right: 0;
-    background-color: rgba(0,0,0,0.2);
-  }
-
   div.transformer
   {
     position: fixed;
+    z-index: 999;
     top: 0;
+    bottom: 0;
     left: 0;
     width: $width;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background-color: white;
-    z-index: 999;
-    padding: 0;
-    @include box-shadow();
-
     -webkit-transition: transform 100ms ease;
     -moz-transition: transform 100ms ease;
     -o-transition: transform 100ms ease;
     transition: transform 100ms ease;
 
-    div.header
+    div.button
     {
-      padding: 5rem 0.5rem 1rem 1rem;
-      background-color: $color-grey-dark;
+      position: absolute;
+      right: -1.6rem;
+      width: 2rem;
+      padding: 0.3rem;
+      background-color: white;
+      border: 1px solid $color-grey;
+      border-radius: 0.2rem;
+      cursor: pointer;
+      text-align: center;
 
-      p
+      glyph
       {
-        margin: 0;
-        color: white;
-        text-transform: uppercase;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
         vertical-align: middle;
-        glyph
-        {
-          cursor: pointer;
-        }
       }
     }
 
-    div.content
+    div.button.toggle-open
     {
+      top: 5.3rem;
+    }
+    div.button.toggle-locked
+    {
+      top: 9.7rem;
+    }
 
+    div.container
+    {
+      position: absolute;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background-color: white;
+      padding: 0;
+      @include box-shadow();
+      width: 100%;
+      height: 100%;
+
+      div.header
+      {
+        padding: 5.7rem 0.5rem 1rem 1rem;
+        //background-color: $color-grey-dark;
+
+        p
+        {
+          margin: 0;
+          color: white;
+          text-transform: uppercase;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          vertical-align: middle;
+          glyph
+          {
+            cursor: pointer;
+          }
+        }
+      }
+
+      div.content
+      {
+        glyph
+        {
+          color: $color-grey-dark;
+        }
+
+      }
     }
   }
   div.transformer.closed

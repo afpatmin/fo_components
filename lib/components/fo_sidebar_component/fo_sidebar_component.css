@@ -1,2 +1,60 @@
-:host /deep/ div.container{position:fixed;top:0;bottom:0;left:300px;right:0;background-color:rgba(0,0,0,0.2)}:host /deep/ div.transformer{position:fixed;top:0;left:0;width:300px;height:100%;overflow-x:hidden;overflow-y:auto;background-color:white;z-index:999;padding:0;-webkit-box-shadow:1px 1px 4px #ccc;-moz-box-shadow:1px 1px 4px #ccc;box-shadow:1px 1px 4px #ccc;-webkit-transition:transform 100ms ease;-moz-transition:transform 100ms ease;-o-transition:transform 100ms ease;transition:transform 100ms ease}:host /deep/ div.transformer div.header{padding:5rem 0.5rem 1rem 1rem;background-color:#666}:host /deep/ div.transformer div.header p{margin:0;color:white;text-transform:uppercase;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle}:host /deep/ div.transformer div.header p glyph{cursor:pointer}:host /deep/ div.transformer.closed{-webkit-transform:translateX(-300px);-moz-transform:translateX(-300px);-ms-transform:translateX(-300px);-o-transform:translateX(-300px);transform:translateX(-300px)}
+:host /deep/ div.transformer {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 200px;
+  -webkit-transition: transform 100ms ease;
+  -moz-transition: transform 100ms ease;
+  -o-transition: transform 100ms ease;
+  transition: transform 100ms ease; }
+  :host /deep/ div.transformer div.button {
+    position: absolute;
+    right: -1.6rem;
+    width: 2rem;
+    padding: 0.3rem;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    text-align: center; }
+    :host /deep/ div.transformer div.button glyph {
+      vertical-align: middle; }
+  :host /deep/ div.transformer div.button.toggle-open {
+    top: 5.3rem; }
+  :host /deep/ div.transformer div.button.toggle-locked {
+    top: 9.7rem; }
+  :host /deep/ div.transformer div.container {
+    position: absolute;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: white;
+    padding: 0;
+    -webkit-box-shadow: 1px 1px 4px #666;
+    -moz-box-shadow: 1px 1px 4px #666;
+    box-shadow: 1px 1px 4px #666;
+    width: 100%;
+    height: 100%; }
+    :host /deep/ div.transformer div.container div.header {
+      padding: 5.7rem 0.5rem 1rem 1rem; }
+      :host /deep/ div.transformer div.container div.header p {
+        margin: 0;
+        color: white;
+        text-transform: uppercase;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle; }
+        :host /deep/ div.transformer div.container div.header p glyph {
+          cursor: pointer; }
+    :host /deep/ div.transformer div.container div.content glyph {
+      color: #666; }
+:host /deep/ div.transformer.closed {
+  -webkit-transform: translateX(-200px);
+  -moz-transform: translateX(-200px);
+  -ms-transform: translateX(-200px);
+  -o-transform: translateX(-200px);
+  transform: translateX(-200px); }
+
 /*# sourceMappingURL=fo_sidebar_component.css.map */

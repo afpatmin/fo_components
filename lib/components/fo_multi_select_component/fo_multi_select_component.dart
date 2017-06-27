@@ -13,21 +13,29 @@ import 'package:fo_components/data_table_model.dart';
     directives: const [materialDirectives],
     changeDetection: ChangeDetectionStrategy.OnPush
 )
-class FoMultiSelectComponent implements AfterContentInit, OnDestroy
+class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
 {
   FoMultiSelectComponent();
 
-  void ngAfterContentInit()
+  void ngOnInit()
   {
-    _selectionChangeListener?.cancel();
-   // selectionModel.clear();
-    selectedModels.forEach(selectionModel.select);
     _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<DataTableModel>> e)
     {
-      if (e.isEmpty) return;
-      visible = !closeOnSelect;
-      _onSelectedModelsChangeController.add(selectionModel.selectedValues.toList(growable: false));
+      _onSelectedModelsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.toList(growable: false));
     });
+  }
+
+  void ngOnChanges(Map<String, SimpleChange> changes)
+  {
+    if (changes.containsKey("selectedModels"))
+    {
+      _selectionChangeListener?.cancel();
+      selectedModels.forEach(selectionModel.select);
+      _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<DataTableModel>> e)
+      {
+        _onSelectedModelsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.toList(growable: false));
+      });
+    }
   }
 
   void ngOnDestroy()

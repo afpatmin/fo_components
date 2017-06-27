@@ -104,7 +104,7 @@ class FoTimePickerComponent implements OnDestroy, AfterViewInit
   bool _amMode = false;
 
   @Input('label')
-  String label;
+  String label = "Time";
 
   @Input('time')
   void set time(String value)

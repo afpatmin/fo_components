@@ -1,4 +1,4 @@
-<label *ngIf="label != null" (click)="strHour = null; strMinute = null">{{label}}</label>
+<p class="label" *ngIf="strHour != null && strMinute != null" (click)="strHour = null; strMinute = null">{{label}}</p>
 <div id="canvas">
     <div *ngIf="strHour == null">
         <div

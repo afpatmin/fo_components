@@ -1,17 +1,22 @@
 <div class="transformer" [class.closed]="!visible">
-    <div class="header">
+    <div class="button toggle-open" (click)="toggleOpen($event)">
         <p>
-            <glyph
-                    size="large"
-                    [icon]="lockIcon"
-                    (click)="toggleLocked($event)">
-            </glyph>
-            &nbsp;{{title}}
+            <glyph [icon]="visible ? 'chevron_left' : 'chevron_right'"></glyph>
         </p>
     </div>
-    <div class="content">
-        <material-list>
-            <ng-content></ng-content>
-        </material-list>
+    <div class="button toggle-locked" *ngIf="visible" (click)="toggleLocked($event)">
+        <p>
+            <glyph [icon]="locked ? 'lock' : 'lock_open'" size="large"></glyph>
+        </p>
+    </div>
+    <div class="container">
+        <div class="header" [style.background-color]="backgroundColor">
+            <p>{{title}}</p>
+        </div>
+        <div class="content">
+            <material-list>
+                <ng-content></ng-content>
+            </material-list>
+        </div>
     </div>
 </div>

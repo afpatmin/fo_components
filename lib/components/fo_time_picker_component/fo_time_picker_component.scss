@@ -2,8 +2,20 @@ $color-1: #333;
 $color-2: #666;
 $color-3: white;
 
+p.label
+{
+  text-align: center;
+  margin: 0;
+  font-size: 0.9em;
+  color: $color-2;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
 div#canvas
 {
+  margin: 0 auto;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
@@ -19,7 +31,6 @@ div#canvas
   width: 6rem;
   height: 6rem;
   border-radius: 0.5rem;
-  background-color: white;
 
   div.dial, div.number
   {

@@ -14,7 +14,7 @@ $default-margin-top: 1em;
 
 @mixin box-shadow
 {
-  -webkit-box-shadow: 1px 1px 4px $color-grey;
-  -moz-box-shadow: 1px 1px 4px $color-grey;
-  box-shadow: 1px 1px 4px $color-grey;
+  -webkit-box-shadow: 1px 1px 4px $color-grey-dark;
+  -moz-box-shadow: 1px 1px 4px $color-grey-dark;
+  box-shadow: 1px 1px 4px $color-grey-dark;
 }

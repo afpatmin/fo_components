@@ -10,24 +10,42 @@ import 'package:fo_components/data_table_model.dart';
     selector: 'fo-select',
     styleUrls: const ['fo_select_component.css'],
     templateUrl: 'fo_select_component.html',
-    directives: const [materialDirectives]
+    directives: const [materialDirectives],
+    changeDetection: ChangeDetectionStrategy.OnPush
 )
-class FoSelectComponent implements AfterContentInit, OnDestroy
+class FoSelectComponent implements OnChanges, OnDestroy
 {
-  FoSelectComponent();
-
-  void ngAfterContentInit()
+  FoSelectComponent()
   {
-    if (selectedModel != null) selectedId = selectedModel.id;
-    if (selectedId != null)
+    selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+  }
+
+  void ngOnChanges(Map<String, SimpleChange> changes)
+  {
+    if (changes.containsKey("selectedModel") || changes.containsKey("selectedId"))
     {
-      if (selectedModel == null)
+      if (selectedModel != null) selectedId = selectedModel.id;
+      if (selectedId != null)
       {
-        selectedModel = selectionOptions.optionsList.firstWhere((model) => model.id.compareTo(selectedId) == 0, orElse: () => null);
+        if (selectedModel == null)
+        {
+          selectedModel = selectionOptions.optionsList.firstWhere((model) => model.id.compareTo(selectedId) == 0, orElse: () => null);
+        }
+        if (selectedModel != null)
+        {
+          selectionChangeListener.cancel();
+          selectionModel.select(selectedModel);
+          selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+        }
       }
-      if (selectedModel != null) selectionModel.select(selectedModel);
     }
-    selectionChangeListener = selectionModel.selectionChanges.listen(onSelectionChanges);
+    if (changes.containsKey("options") && !selectionOptions.optionsList.contains(selectedModel))
+    {
+      selectionChangeListener.cancel();
+      if (selectionOptions.optionsList.isEmpty) selectionModel.clear();
+      else selectionModel.select(selectionOptions.optionsList.first);
+      selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+    }
   }
 
   void ngOnDestroy()
@@ -35,10 +53,10 @@ class FoSelectComponent implements AfterContentInit, OnDestroy
     _onVisibleChangeController.close();
     _onSelectedModelChangeController.close();
     _onSelectedIdChangeController.close();
-    selectionChangeListener.cancel();
+    selectionChangeListener?.cancel();
   }
 
-  void onSelectionChanges(List<SelectionChangeRecord<DataTableModel>> e)
+  void _onSelectionChanges(List<SelectionChangeRecord<DataTableModel>> e)
   {
     if (e.isEmpty) return;
 
@@ -52,7 +70,7 @@ class FoSelectComponent implements AfterContentInit, OnDestroy
       selectedModel = scr.removed.first;
       selectionChangeListener.cancel();
       selectionModel.select(selectedModel);
-      selectionChangeListener = selectionModel.selectionChanges.listen(onSelectionChanges);
+      selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
     }
     else if (scr.added.isNotEmpty)
     {
@@ -65,9 +83,6 @@ class FoSelectComponent implements AfterContentInit, OnDestroy
     _onSelectedIdChangeController.add(selectedId);
   }
 
-  bool get visible => _visible;
-
-  bool _visible = false;
   SelectionOptions<DataTableModel> selectionOptions = new SelectionOptions<DataTableModel>([]);
   SelectionModel<DataTableModel> selectionModel = new SelectionModel.withList(allowMulti: false);
   final StreamController<bool> _onVisibleChangeController = new StreamController();
@@ -84,6 +99,9 @@ class FoSelectComponent implements AfterContentInit, OnDestroy
   @Input('nullSelectionButtonText')
   String nullSelectionButtonText = "-";
 
+  @Input('fullWidth')
+  bool fullWidth = false;
+
   @Input('options')
   void set options(List<DataTableModel> value) { selectionOptions = new SelectionOptions<DataTableModel>([new OptionGroup(value)]); }
 
@@ -93,14 +111,14 @@ class FoSelectComponent implements AfterContentInit, OnDestroy
   @Input('selectedModel')
   DataTableModel selectedModel;
 
+  @Input('visible')
+  bool visible = false;
+
   @Output('selectedIdChange')
   Stream<String> get onSelectedIdChangeOutput => _onSelectedIdChangeController.stream;
 
   @Output('selectedModelChange')
   Stream<DataTableModel> get onSelectedModelChangeOutput => _onSelectedModelChangeController.stream;
-
-  @Input('visible')
-  void set visible(bool value) { _visible = value; }
 
   @Output('visibleChange')
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;

@@ -229,12 +229,12 @@ class FoImageFileComponent implements OnDestroy
       double quality = 0.9;
       while (_byteSize > maxByteSize && quality > 0.1)
       {
-        source = canvas.toDataUrl("image/jpeg", quality);
+        source = canvas.toDataUrl(_file.type, quality);
         quality -= 0.1;
 
-        if (source.contains("data:image/jpeg;base64,"))
+        if (source.contains("data:${_file.type};base64,"))
         {
-          _base64Data = source.substring("data:image/jpge;base64,".length);
+          _base64Data = source.substring("data:${_file.type};base64,".length);
           _byteSize = BASE64.decode(_base64Data).length;
         }
         else print("invalid src: $source");
