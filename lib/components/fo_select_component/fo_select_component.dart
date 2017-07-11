@@ -13,38 +13,32 @@ import 'package:fo_components/data_table_model.dart';
     directives: const [materialDirectives],
     changeDetection: ChangeDetectionStrategy.OnPush
 )
-class FoSelectComponent implements OnChanges, OnDestroy
+class FoSelectComponent implements AfterContentInit, OnChanges, OnDestroy
 {
   FoSelectComponent()
   {
-    selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+    _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
   }
+
+  void ngAfterContentInit()
+  {
+    if (selectedModel != null) selectedId = selectedModel.id;
+    if (selectedId != null)
+    {
+      selectedModel = selectionOptions.optionsList.firstWhere((m) => m.id.compareTo(selectedId) == 0, orElse: () => null);
+    }
+  }
+
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-    if (changes.containsKey("selectedModel") || changes.containsKey("selectedId"))
+    if (changes.containsKey("options") && selectedModel != null && !selectionOptions.optionsList.contains(selectedModel))
     {
-      if (selectedModel != null) selectedId = selectedModel.id;
-      if (selectedId != null)
+      if (selectedModel != null && !selectionOptions.optionsList.contains(selectedModel) && selectionOptions.isNotEmpty)
       {
-        if (selectedModel == null)
-        {
-          selectedModel = selectionOptions.optionsList.firstWhere((model) => model.id.compareTo(selectedId) == 0, orElse: () => null);
-        }
-        if (selectedModel != null)
-        {
-          selectionChangeListener.cancel();
-          selectionModel.select(selectedModel);
-          selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
-        }
+        selectionModel.select(selectionOptions.optionsList.first);
       }
-    }
-    if (changes.containsKey("options") && !selectionOptions.optionsList.contains(selectedModel))
-    {
-      selectionChangeListener.cancel();
-      if (selectionOptions.optionsList.isEmpty) selectionModel.clear();
-      else selectionModel.select(selectionOptions.optionsList.first);
-      selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+      else if (allowNullSelection) selectionModel.clear();
     }
   }
 
@@ -53,31 +47,27 @@ class FoSelectComponent implements OnChanges, OnDestroy
     _onVisibleChangeController.close();
     _onSelectedModelChangeController.close();
     _onSelectedIdChangeController.close();
-    selectionChangeListener?.cancel();
+    _selectionChangeListener.cancel();
   }
 
   void _onSelectionChanges(List<SelectionChangeRecord<DataTableModel>> e)
   {
     if (e.isEmpty) return;
 
-    SelectionChangeRecord scr = e.first;
-
-    if (allowNullSelection == false
-        && scr.added.isEmpty
-        && scr.removed.isNotEmpty
-        && selectionOptions.optionsList.contains(scr.removed.first))
+    if (allowNullSelection)
     {
-      selectedModel = scr.removed.first;
-      selectionChangeListener.cancel();
-      selectionModel.select(selectedModel);
-      selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+      if (e.first.added.isEmpty) selectedModel = selectedId = null;
+      else
+      {
+        selectedModel = e.first.added.first;
+        selectedId = selectedModel.id;
+      }
     }
-    else if (scr.added.isNotEmpty)
+    else if (!allowNullSelection && e.first.added.isNotEmpty)
     {
-      selectedModel = scr.added.first;
+      selectedModel = e.first.added.first;
       selectedId = selectedModel.id;
     }
-    else if (allowNullSelection == true) selectedModel = selectedId = null;
 
     _onSelectedModelChangeController.add(selectedModel);
     _onSelectedIdChangeController.add(selectedId);
@@ -88,7 +78,7 @@ class FoSelectComponent implements OnChanges, OnDestroy
   final StreamController<bool> _onVisibleChangeController = new StreamController();
   final StreamController<DataTableModel> _onSelectedModelChangeController = new StreamController();
   final StreamController<String> _onSelectedIdChangeController = new StreamController();
-  StreamSubscription<List<SelectionChangeRecord<DataTableModel>>> selectionChangeListener;
+  StreamSubscription<List<SelectionChangeRecord<DataTableModel>>> _selectionChangeListener;
 
   @Input('allowNullSelection')
   bool allowNullSelection = false;
