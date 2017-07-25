@@ -1,0 +1,24 @@
+<fo-modal
+        [title]="strTitle"
+        [visible]="visible"
+        [showCloseButton]="false"
+        [error]="errorMessage">
+    <div class="login-container">
+        <material-input
+                [label]="strUsername"
+                [(ngModel)]="username">
+        </material-input>
+        <material-input
+                type="password"
+                [label]="strPassword"
+                [displayBottomPanel]="false"
+                [(ngModel)]="password">
+        </material-input>
+        <p *ngIf="showForgotPassword" class="forgot-password" (click)="onForgotPasswordController.add(null)">{{strForgotPassword}}</p>
+        <div class="button-container">
+            <material-button raised clear-size [disabled]="username.isEmpty || password.isEmpty" (trigger)="onLogin()">
+                {{strLogin}}
+            </material-button>
+        </div>
+    </div>
+</fo-modal>

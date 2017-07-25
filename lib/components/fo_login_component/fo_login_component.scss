@@ -1,0 +1,18 @@
+div.login-container
+{
+  padding-top: 1em;
+
+  p.forgot-password
+  {
+    text-align: right;
+    margin: 0;
+    font-size: 0.8em;
+    cursor: pointer;
+    //display: inline-block;
+  }
+  div.button-container
+  {
+    margin-top: 1.5em;
+    text-align: right;
+  }
+}

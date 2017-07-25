@@ -1,0 +1,12 @@
+div.login-container {
+  padding-top: 1em; }
+  div.login-container p.forgot-password {
+    text-align: right;
+    margin: 0;
+    font-size: 0.8em;
+    cursor: pointer; }
+  div.login-container div.button-container {
+    margin-top: 1.5em;
+    text-align: right; }
+
+/*# sourceMappingURL=fo_login_component.css.map */

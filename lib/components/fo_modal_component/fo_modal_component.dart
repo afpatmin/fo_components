@@ -41,6 +41,9 @@ class FoModalComponent implements OnDestroy
   @Input('fixedHeight')
   bool fixedHeight = false;
 
+  @Input('showCloseButton')
+  bool showCloseButton = true;
+
   @Output('visibleChange')
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
 
