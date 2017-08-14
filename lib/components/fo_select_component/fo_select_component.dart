@@ -89,6 +89,9 @@ class FoSelectComponent implements AfterContentInit, OnChanges, OnDestroy
   @Input('nullSelectionButtonText')
   String nullSelectionButtonText = "-";
 
+  @Input('disabled')
+  bool disabled = false;
+
   @Input('fullWidth')
   bool fullWidth = false;
 
