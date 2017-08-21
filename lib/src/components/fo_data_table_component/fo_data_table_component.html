@@ -1,0 +1,46 @@
+<h3 id="title">{{title}}</h3>
+<div id="search">
+    <input type="text" maxlength="64" [(ngModel)]="searchPhrase" #search />
+    <div class="search-icon-container"><glyph size="x-large" icon="search"></glyph></div>
+</div>
+<div>
+    <table [class.faded]="disabled" class="output">
+        <thead *ngIf="filteredKeys.isNotEmpty">
+        <tr>
+            <td *ngFor="let cell of columns"
+                [class.hide-for-small]="smallHiddenColumns.contains(cell)"
+                [class.hide-for-medium]="mediumHiddenColumns.contains(cell)"
+                [class.hide-for-large]="largeHiddenColumns.contains(cell)"
+                (click)="onSort(cell)">
+                    {{cell | phrase | uppercase}}&nbsp;
+                    <glyph size="small" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></glyph>
+                    <glyph size="small" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></glyph>
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let key of filteredKeys | range:firstIndex:lastIndex" (click)="onRowClickController.add(key)">
+            <td
+                    *ngFor="let cell of columns"
+                    [class.hide-for-small]="smallHiddenColumns.contains(cell)"
+                    [class.hide-for-medium]="mediumHiddenColumns.contains(cell)"
+                    [class.hide-for-large]="largeHiddenColumns.contains(cell)"
+                    (click)="onCellClickController.add(data[key].toTableRow()[cell])">
+                {{data[key].toTableRow()[cell] | phrase:false}}
+            </td>
+        </tr>
+        <tr *ngIf="filteredKeys.isEmpty">
+            <td attr.colspan="{{columns.length}}" class="empty-info"><h4><glyph size="x-large" icon="error"></glyph>&nbsp;{{'no_results' | phrase}}</h4></td>
+        </tr>
+        </tbody>
+    </table>
+    <div id="select-step">
+        <table>
+            <tr>
+                <td class="arrow" (click)="step(-1)"><glyph [class.disabled]="firstIndex <= 0" icon="navigate_before"></glyph></td>
+                <td class="page">{{'page' | phrase}} {{currentPage}}/{{totalPages}} ({{filteredKeys.length}} {{'rows' | phrase:false}})</td>
+                <td class="arrow" (click)="step(1)"><glyph [class.disabled]="lastIndex >= filteredKeys.length" icon="navigate_next"></glyph></td>
+            </tr>
+        </table>
+    </div>
+</div>

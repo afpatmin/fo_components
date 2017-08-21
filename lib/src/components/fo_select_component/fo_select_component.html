@@ -1,0 +1,17 @@
+<label (click)="visible = true">
+    {{label}}
+    <glyph  *ngIf="tooltip != null"
+            [materialTooltip]="tooltip"
+            icon="help_outline"
+            size="medium">
+    </glyph>
+</label>
+<material-dropdown-select
+        [class.full-width]="fullWidth"
+        [disabled]="disabled"
+        [buttonText]="selectedModel == null ? nullSelectionButtonText : selectedModel.toString()"
+        [popupMatchInputWidth]="true"
+        [options]="selectionOptions"
+        [selection]="selectionModel"
+        [(visible)]="visible">
+</material-dropdown-select>

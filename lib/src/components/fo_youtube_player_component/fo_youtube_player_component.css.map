@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,uBACA;EACE,QAAQ,EAAE,QAAQ;EAClB,cAAc,EAAE,MAAM;EACtB,WAAW,EAAE,CAAC;EACd,MAAM,EAAE,CAAC;EAET,6CACA;IACE,QAAQ,EAAE,QAAQ;IAClB,GAAG,EAAE,CAAC;IACN,IAAI,EAAE,CAAC;IACP,KAAK,EAAE,IAAI;IACX,MAAM,EAAE,IAAI",
+"sources": ["fo_youtube_player_component.scss"],
+"names": [],
+"file": "fo_youtube_player_component.css"
+}

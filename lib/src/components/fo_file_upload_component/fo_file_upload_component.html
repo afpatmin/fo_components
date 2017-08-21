@@ -1,0 +1,14 @@
+<label>{{label}}</label>
+<div class="container" (dragenter)="$event.preventDefault()" (dragover)="$event.preventDefault()" (drop)="onDrop($event)">
+    <input #input type="file" (change)="onFileChange($event)" accept="image/*,.pdf" />
+    <material-button raised (trigger)="input.click()"><glyph icon="folder_open"></glyph></material-button>
+    <material-button raised [disabled]="disabled || !valid" (trigger)="upload()"><glyph icon="file_upload"></glyph></material-button>
+    <p>
+        <span *ngIf="file == null">...</span>
+        <span *ngIf="file != null">{{file.name}} ({{(file.size / 1024).round()}}kb)</span>
+        <glyph *ngIf="file != null" icon="cancel" size="small" class="cancel-button" (click)="clearSelection()"></glyph>
+    </p>
+    <p class="alert" *ngIf="file != null && file.size > maxByteSize">
+        {{'max_bytesize_exceeded' | phrase}} ({{(maxByteSize/1024).ceil()}}kb)
+    </p>
+</div>

@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,KACA;EACE,aAAa,EAAE,IAAI;EACnB,OAAO,EAAE,KAAK;EAEd,WACA;IACE,KAAK,EAAE,IAAI;IACX,OAAO,EAAE,YAAY;IACrB,aAAa,EAAE,KAAK;IACpB,SAAS,EAAE,KAAK;IAChB,KAAK,EAAE,IAAI;EAGb,gDACA;IACE,KAAK,EAAE,IAAI",
-"sources": ["fo_select_component.scss"],
-"names": [],
-"file": "fo_select_component.css"
-}
