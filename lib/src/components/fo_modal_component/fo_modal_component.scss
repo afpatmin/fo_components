@@ -3,6 +3,7 @@ material-dialog
   min-width: 15rem;
   max-width: 90vw;
   max-height: 95vh;
+  text-align: left;
 
   /deep/ div.content
   {
@@ -12,6 +13,15 @@ material-dialog
   /deep/ div.header
   {
     color: white;
+    h3
+    {
+      line-height: 160%;
+
+      material-button
+      {
+        margin-left: 1rem;
+      }
+    }
   }
 }
 

@@ -1,10 +1,22 @@
 <modal [visible]="visible">
-    <material-dialog headered [class.fixed-height]="fixedHeight" [class.fixed-width]="fixedWidth" [error]="error">
+    <material-dialog
+            headered
+            [class.fixed-height]="fixedHeight"
+            [class.fixed-width]="fixedWidth"
+            [error]="error">
         <div class="header" header>
-            <material-button *ngIf="showCloseButton" raised icon (trigger)="close()" class="float-right">
-                <glyph icon="close" size="large"></glyph>
-            </material-button>
-            <h3>{{title}}</h3>
+            <h3>
+                {{title}}
+                <material-button
+                        *ngIf="showCloseButton"
+                        class="float-right"
+                        raised
+                        icon
+                        clear-size
+                        (trigger)="close()">
+                    <glyph icon="close" size="medium"></glyph>
+                </material-button>
+            </h3>
         </div>
         <div class="content" *ngIf="visible">
             <ng-content></ng-content>
