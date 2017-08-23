@@ -26,10 +26,7 @@ class DataTableComponent implements OnChanges, OnDestroy
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-    if (changes.containsKey("rows"))
-    {
-      _setIndices(0);
-    }
+    if (changes.containsKey("rows") || changes.containsKey("models")) _setIndices(0);
 
   }
 

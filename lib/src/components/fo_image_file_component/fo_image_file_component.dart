@@ -7,6 +7,7 @@ import 'dart:html' as dom;
 import 'dart:typed_data' show ByteData, Endianness, Uint8List;
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
+import '../../../src/pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-image-file',
@@ -14,7 +15,7 @@ import 'package:angular_components/angular_components.dart';
     styleUrls: const ['fo_image_file_component.css'],
     directives: const [GlyphComponent, MaterialButtonComponent],
     providers: const [],
-    preserveWhitespace: false)
+    pipes: const [PhrasePipe],)
 
 class FoImageFileComponent implements OnDestroy
 {
@@ -31,6 +32,7 @@ class FoImageFileComponent implements OnDestroy
 
   void onDrop(dom.MouseEvent event)
   {
+    if (disabled) return;
     event.preventDefault();
     dom.DataTransfer dt = event.dataTransfer;
     try
@@ -80,27 +82,6 @@ class FoImageFileComponent implements OnDestroy
     source = "";
     _onSourceChangeController.add("");
   }
-
-  @Input('source')
-  String source = "";
-
-  @Input('label')
-  String label = "Image";
-
-  @Input('alt')
-  String alt = "";
-
-  @Input('maxWidth')
-  int maxWidth = 1024;
-
-  @Input('maxHeight')
-  int maxHeight = 1024;
-
-  @Input('maxByteSize')
-  int maxByteSize = 1024000;
-
-  @Output('sourceChange')
-  Stream<String> get onSourceChange => _onSourceChangeController.stream;
 
   /// Loads image only after exif orientation has been extracted
   void _extractExifOrientationAndLoadImage(dom.ProgressEvent e)
@@ -308,8 +289,30 @@ class FoImageFileComponent implements OnDestroy
   dom.FileUploadInputElement _fileInput;
   dom.File _file;
 
-  @Input('invalidFileMessage')
-  String invalidFileMessage = "Invalid file";
+  @Input('disabled')
+  bool disabled = false;
+
+  @Input('source')
+  String source = "";
+
+  @Input('label')
+  String label = "Image";
+
+  @Input('alt')
+  String alt = "";
+
+  @Input('maxWidth')
+  int maxWidth = 1024;
+
+  @Input('maxHeight')
+  int maxHeight = 1024;
+
+  @Input('maxByteSize')
+  int maxByteSize = 1024000;
+
+  @Output('sourceChange')
+  Stream<String> get onSourceChange => _onSourceChangeController.stream;
+
 }
 
 

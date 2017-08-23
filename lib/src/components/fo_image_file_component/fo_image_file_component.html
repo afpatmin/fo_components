@@ -1,10 +1,27 @@
 <label>{{label}}</label>
-<div class="container" (dragenter)="$event.preventDefault()" (dragover)="$event.preventDefault()" (drop)="onDrop($event)">
+<div class="container"
+     (dragenter)="$event.preventDefault()"
+     (dragover)="$event.preventDefault()"
+     (drop)="onDrop($event)">
     <div *ngIf="source != null && !source.isEmpty" class="image">
         <img [src]="source" alt="{{alt}}" />
-        <material-button class="delete red" clear-size raised (trigger)="fileInput.value = null; clearSource()"><glyph icon="delete" size="x-large"></glyph></material-button>
+        <material-button
+                class="delete red"
+                clear-size
+                raised
+                [disabled]="disabled"
+                (trigger)="fileInput.value = null; clearSource()">
+            <glyph icon="delete" size="x-large"></glyph>
+        </material-button>
     </div>
-    <material-button class="add" raised *ngIf="source == null || source.isEmpty" (trigger)="fileInput.click()"><glyph icon="add_a_photo" size="x-large"></glyph></material-button>
+    <material-button
+            class="add"
+            raised
+            *ngIf="source == null || source.isEmpty"
+            [disabled]="disabled"
+            (trigger)="fileInput.click()">
+        <glyph icon="add_a_photo" size="x-large"></glyph>
+    </material-button>
     <input type="file" #fileInput (change)="onFileChange($event)" accept="image/jpg,image/jpeg,image/png,image/gif" />
-    <p *ngIf="invalidFile" class="error-output">{{invalidFileMessage}}</p>
+    <p *ngIf="invalidFile" class="error-output">{{'invalid_file' | phrase}}</p>
 </div>
