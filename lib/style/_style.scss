@@ -1,9 +1,6 @@
 @import "constants";
 @import "vendor_prefix";
 
-@import url(https://fonts.googleapis.com/css?family=Lato);
-$fontFamily: 'Lato', Roboto, Helvetica, Arial, sans-serif;
-
 button
 {
   @include foTransition(all 0.4s ease);

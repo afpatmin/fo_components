@@ -18,7 +18,7 @@ class LowercaseDirective implements OnInit
   @HostListener('keyup', const ['\$event'])
   void onInput(html.KeyboardEvent e)
   {
-    if (_skipCodes.contains(e.keyCode)) return;
+    if (_skipCodes.contains(e.keyCode) || e.ctrlKey) return;
     new Timer(const Duration(milliseconds: 50), ()
     {
       _input.value = _input.value.toLowerCase();
