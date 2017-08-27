@@ -13,14 +13,10 @@ export 'src/components/fo_select_component/fo_select_component.dart';
 export 'src/components/fo_sidebar_component/fo_sidebar_component.dart';
 export 'src/components/fo_youtube_player_component/fo_youtube_player_component.dart';
 export 'src/components/fo_time_picker_component/fo_time_picker_component.dart';
-
 export 'src/directives/lowercase_directive.dart';
 export 'src/directives/uppercase_directive.dart';
-
+export 'src/models/data_table_model.dart';
 export 'src/pipes/range_pipe.dart';
 export 'src/pipes/phrase_pipe.dart';
-
 export 'src/services/phrase_service.dart';
-
-
-export 'src/models/data_table_model.dart';
+export 'src/validators/fo_validators.dart';
