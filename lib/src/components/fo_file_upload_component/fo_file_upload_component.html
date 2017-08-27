@@ -6,7 +6,7 @@
     <p>
         <span *ngIf="file == null">...</span>
         <span *ngIf="file != null">{{file.name}} ({{(file.size / 1024).round()}}kb)</span>
-        <glyph *ngIf="file != null" icon="cancel" size="small" class="cancel-button" (click)="clearSelection()"></glyph>
+        <glyph *ngIf="file != null" icon="cancel" size="small" class="color-alert clickable" (click)="clearSelection()"></glyph>
     </p>
     <p class="alert" *ngIf="file != null && file.size > maxByteSize">
         {{'max_bytesize_exceeded' | phrase}} ({{(maxByteSize/1024).ceil()}}kb)

@@ -1,13 +1,10 @@
-$color-1: #333;
-$color-2: #666;
-$color-3: white;
+//@import '../../style/grid1/colors';
 
 p.label
 {
   text-align: center;
   margin: 0;
   font-size: 0.9em;
-  color: $color-2;
   position: absolute;
   left: 0;
   right: 0;
@@ -34,6 +31,7 @@ div#canvas
 
   div.dial, div.number
   {
+    //color: $color1;
     position: absolute;
   }
 
@@ -49,12 +47,11 @@ div#canvas
     border-radius: 0.2rem;
     cursor: pointer;
     padding: 0.1rem 0.125rem;
-    color: $color-1;
   }
   div.number:hover
   {
-    background-color: $color-2;
-    color: $color-3;
+    //background-color: $color2;
+    //color: $color3;
   }
 
   div.hour
@@ -69,8 +66,8 @@ div#canvas
 
   h1.output
   {
+    //color: $color2;
     cursor: pointer;
-    color: $color-2;
     font-size: 1.5rem;
     text-align: center;
     width: 100%;
@@ -87,14 +84,13 @@ div#canvas
   }
   div.midnight-toggle:hover
   {
-    background-color: $color-2;
-    color: white;
+    //background-color: $color2;
+    //color: $colorWhite;
   }
   div.midnight-toggle.active
   {
-    background-color: $color-1;
-    color: white;
-
+    //background-color: $color1;
+    //color: $colorWhite;
   }
 
   div#am

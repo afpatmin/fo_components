@@ -1,4 +1,4 @@
-@import '../../../style/_constants';
+//@import '../../../style/_constants';
 
 :host
 {
@@ -10,7 +10,7 @@
     margin: 0;
     display: inline-block;
     font-size: 1rem;
-    color: $color-grey-dark;
+    //color: $color-grey-dark;
   }
 
   h3#table-actions
@@ -27,44 +27,6 @@
 
 }
 
-
-/*
-div#search
-{
-  position: relative;
-  display: inline-block;
-  float: right;
-
-  input[type=text]
-  {
-    box-sizing: border-box;
-    width: 100%;
-    min-width: 8rem;
-    margin-bottom: 0.5rem;
-    padding: 0.2rem;
-    border: 2px solid #ccc;
-    border-right: 1.7rem solid #ccc;
-    border-radius: 0.3rem;
-    color: $color-text;
-  }
-
-  div.search-icon-container
-  {
-    position: absolute;
-    top: 0.1rem;
-    right: -0.1rem;
-    color: #aaa;
-    glyph
-    {
-      -webkit-transform: translate(-0.35rem, -0.1rem);
-      -moz-transform: translate(-0.35rem, -0.1rem);
-      -ms-transform: translate(-0.35rem, -0.1rem);
-      -o-transform: translate(-0.35rem, -0.1rem);
-      transform: translate(-0.35rem, -0.1rem);
-    }
-  }
-}
-*/
 fieldset
 {
   border: 0;
@@ -137,7 +99,7 @@ table.output
       {
         h4
         {
-          color: $color-alert-bright;
+         // color: $color-alert-bright;
           margin: 0.4rem;
           padding: 0.2rem;
           line-height: 100%;

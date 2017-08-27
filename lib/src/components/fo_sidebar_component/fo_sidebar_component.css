@@ -40,9 +40,6 @@
       overflow-y: auto;
       background-color: white;
       padding: 0;
-      -webkit-box-shadow: 1px 1px 4px #666;
-      -moz-box-shadow: 1px 1px 4px #666;
-      box-shadow: 1px 1px 4px #666;
       width: 100%;
       height: 100%; }
       :host /deep/ div.transformer div.container div.header {
@@ -58,6 +55,6 @@
           :host /deep/ div.transformer div.container div.header p glyph {
             cursor: pointer; }
       :host /deep/ div.transformer div.container div.content glyph {
-        color: #666; }
+        color: #888; }
 
 /*# sourceMappingURL=fo_sidebar_component.css.map */

@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "AAIE,mBACA;EACE,MAAM,EAAE,eAAsB;EAC9B,OAAO,EAAE,MAAM;EACf,UAAU,EAAE,MAAM;EAElB,yBACA;IACE,OAAO,EAAE,IAAI;EAEf,qBACA;IACE,MAAM,EAAE,QAAQ;EAGlB,uCACA;IACE,MAAM,EAAE,OAAO;IACf,KAAK,ECfC,OAAO",
-"sources": ["fo_file_upload_component.scss","../../style/_constants.scss"],
+"mappings": "AAIE,mBACA;EACE,MAAM,EAAE,eAAe;EACvB,OAAO,EAAE,MAAM;EACf,UAAU,EAAE,MAAM;EAElB,yBACA;IACE,OAAO,EAAE,IAAI;EAEf,qBACA;IACE,MAAM,EAAE,QAAQ",
+"sources": ["fo_file_upload_component.scss"],
 "names": [],
 "file": "fo_file_upload_component.css"
 }

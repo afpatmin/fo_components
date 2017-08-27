@@ -2,7 +2,6 @@ p.label {
   text-align: center;
   margin: 0;
   font-size: 0.9em;
-  color: #666;
   position: absolute;
   left: 0;
   right: 0; }
@@ -36,18 +35,13 @@ div#canvas {
     display: inline;
     border-radius: 0.2rem;
     cursor: pointer;
-    padding: 0.1rem 0.125rem;
-    color: #333; }
-  div#canvas div.number:hover {
-    background-color: #666;
-    color: white; }
+    padding: 0.1rem 0.125rem; }
   div#canvas div.hour {
     font-size: 0.8rem; }
   div#canvas div.minute {
     font-size: 0.8rem; }
   div#canvas h1.output {
     cursor: pointer;
-    color: #666;
     font-size: 1.5rem;
     text-align: center;
     width: 100%; }
@@ -58,12 +52,6 @@ div#canvas {
     font-size: 0.7rem;
     padding: 0.3rem 0.4rem;
     border-radius: 0.2rem; }
-  div#canvas div.midnight-toggle:hover {
-    background-color: #666;
-    color: white; }
-  div#canvas div.midnight-toggle.active {
-    background-color: #333;
-    color: white; }
   div#canvas div#am {
     left: 1rem; }
   div#canvas div#pm {

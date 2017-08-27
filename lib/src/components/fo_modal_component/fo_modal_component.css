@@ -1,2 +1,28 @@
-material-dialog{min-width:15rem;max-width:90vw;max-height:95vh;text-align:left}material-dialog /deep/ div.content{padding-bottom:1rem}material-dialog /deep/ div.header{color:white}material-dialog /deep/ div.header h3{line-height:160%}material-dialog /deep/ div.header h3 material-button{margin-left:1rem}material-dialog.fixed-height{height:95vh}material-dialog.fixed-height div.content{margin-top:1rem;margin-bottom:1rem}material-dialog.fixed-width{width:90vw;max-width:1250px}.float-right{float:right}
+material-dialog {
+  min-width: 15rem;
+  max-width: 90vw;
+  max-height: 95vh;
+  text-align: left; }
+  material-dialog /deep/ div.content {
+    padding-bottom: 1rem; }
+  material-dialog /deep/ div.header {
+    color: white; }
+    material-dialog /deep/ div.header h3 {
+      line-height: 160%; }
+      material-dialog /deep/ div.header h3 material-button {
+        margin-left: 1rem; }
+
+material-dialog.fixed-height {
+  height: 95vh; }
+  material-dialog.fixed-height div.content {
+    margin-top: 1rem;
+    margin-bottom: 1rem; }
+
+material-dialog.fixed-width {
+  width: 90vw;
+  max-width: 1250px; }
+
+.float-right {
+  float: right; }
+
 /*# sourceMappingURL=fo_modal_component.css.map */

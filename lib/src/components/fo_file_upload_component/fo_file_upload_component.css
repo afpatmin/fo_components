@@ -6,8 +6,5 @@
     display: none; }
   :host div.container p {
     margin: 0.5rem 0; }
-  :host div.container glyph.cancel-button {
-    cursor: pointer;
-    color: #8b0000; }
 
 /*# sourceMappingURL=fo_file_upload_component.css.map */
