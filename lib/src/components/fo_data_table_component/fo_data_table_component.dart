@@ -45,6 +45,12 @@ class DataTableComponent implements OnChanges, OnDestroy
     if (!disabled) _setIndices(firstIndex + (steps * rows));
   }
 
+  void onSearchPhraseChange(String value)
+  {
+    searchPhrase = value;
+    _setIndices(0);
+  }
+
   void onSort(String column)
   {
     if (!disabled)
@@ -63,7 +69,9 @@ class DataTableComponent implements OnChanges, OnDestroy
     {
       for (String needle in needles.where((v) => v.isNotEmpty && v != ""))
       {
-        if (model.toTableRow().values.where((v) => v != null && v.toLowerCase().contains(needle.toLowerCase())).isNotEmpty) return true;
+        if (model.toTableRow().values
+            .where((v) => v != null && v.toLowerCase()
+            .contains(needle.toLowerCase())).isNotEmpty) return true;
       }
       return false;
     }
@@ -121,18 +129,6 @@ class DataTableComponent implements OnChanges, OnDestroy
     _onSortController.add({"column":sortColumn, "order":sortOrder});
   }
 
-  @Input('models')
-  void set models(Map<String, DataTableModel> value)
-  {
-    _data = (value == null) ? new Map() : value;
-    if (_data.isNotEmpty && _data.values.first.toTableRow().isNotEmpty)
-    {
-      _columns = _data.values.first.toTableRow().keys.toList(growable: false);
-    }
-    _setIndices(firstIndex);
-    if (sortColumn.isNotEmpty) _sort();
-  }
-
   void _setIndices(int first_index)
   {
     if (first_index < 0 || first_index >= _data.length) return;
@@ -170,6 +166,18 @@ class DataTableComponent implements OnChanges, OnDestroy
 
   @Input('medium-hidden-columns')
   List<String> mediumHiddenColumns = [];
+
+  @Input('models')
+  void set models(Map<String, DataTableModel> value)
+  {
+    _data = (value == null) ? new Map() : value;
+    if (_data.isNotEmpty && _data.values.first.toTableRow().isNotEmpty)
+    {
+      _columns = _data.values.first.toTableRow().keys.toList(growable: false);
+    }
+    _setIndices(firstIndex);
+    if (sortColumn.isNotEmpty) _sort();
+  }
 
   @Input('title')
   String title = "";

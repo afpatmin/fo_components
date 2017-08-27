@@ -3,21 +3,32 @@
 :host
 {
   width:100%;
+
+  h3#table-title
+  {
+    width: 50%;
+    margin: 0;
+    display: inline-block;
+    font-size: 1rem;
+    color: $color-grey-dark;
+  }
+
+  h3#table-actions
+  {
+    width: 50%;
+    display: inline-block;
+  }
+
+
+  glyph
+  {
+    vertical-align: text-top;
+  }
+
 }
 
-h3#title
-{
-  margin: 0;
-  display: inline-block;
-  font-size: 1rem;
-  color: $color-grey-dark;
-}
 
-glyph
-{
-  vertical-align: text-top;
-}
-
+/*
 div#search
 {
   position: relative;
@@ -53,7 +64,7 @@ div#search
     }
   }
 }
-
+*/
 fieldset
 {
   border: 0;

@@ -1,20 +1,20 @@
 <fo-modal
-        *ngIf="visible"
-        title="{{strTitle}} - {{state | phrase}}"
+        *ngIf="visible && client != null"
+        title="{{strTitle | phrase}} - {{state | phrase}}"
         [visible]="true"
         [showCloseButton]="false"
         [error]="errorMessage | phrase">
     <div class="login-container" *ngIf="state == 'login'">
         <material-input
                 [disabled]="client.loading"
-                [label]="'username' | phrase"
+                [label]="'username' | phrase" floatingLabel
                 [(ngModel)]="username"
                 (keyup)="onKeyUp($event)">
         </material-input>
         <material-input
                 [disabled]="client.loading"
                 type="password"
-                [label]="password | phrase"
+                [label]="'password' | phrase" floatingLabel
                 [displayBottomPanel]="false"
                 [(ngModel)]="password"
                 (keyup)="onKeyUp($event)">
@@ -48,7 +48,7 @@
             <material-button
                     raised
                     clear-size
-                    [disabled]="client.loading || username.isEmpty || resetPasswordSent"
+                    [disabled]="client.loading || username.isEmpty || recoverPasswordSent"
                     (trigger)="onRecoverPassword()">
                 {{'send' | phrase}}
             </material-button>

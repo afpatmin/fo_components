@@ -1,8 +1,20 @@
-<h3 id="title">{{title}}</h3>
+<h3 id="table-title">{{title | phrase}}</h3>
+
+<h3 id="table-actions">
+    <material-input
+            trailingGlyph="search"
+            [rightAlign]="true"
+            label="{{'search' | phrase}}">
+    </material-input>
+</h3>
+
+<!--
 <div id="search">
-    <input type="text" maxlength="64" [(ngModel)]="searchPhrase" #search />
+    <material-button clear-size><glyph size="x-large" icon="file_download"></glyph></material-button>
+    <input type="text" maxlength="64" [ngModel]="searchPhrase" (ngModelChange)="onSearchPhraseChange($event)" />
     <div class="search-icon-container"><glyph size="x-large" icon="search"></glyph></div>
 </div>
+-->
 <div>
     <table [class.faded]="disabled" class="output">
         <thead *ngIf="filteredKeys.isNotEmpty">
@@ -13,8 +25,8 @@
                 [class.hide-for-large]="largeHiddenColumns.contains(cell)"
                 (click)="onSort(cell)">
                     {{cell | phrase | uppercase}}&nbsp;
-                    <glyph size="small" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></glyph>
-                    <glyph size="small" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></glyph>
+                    <glyph size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></glyph>
+                    <glyph size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></glyph>
             </td>
         </tr>
         </thead>
@@ -26,7 +38,7 @@
                     [class.hide-for-medium]="mediumHiddenColumns.contains(cell)"
                     [class.hide-for-large]="largeHiddenColumns.contains(cell)"
                     (click)="onCellClickController.add(data[key].toTableRow()[cell])">
-                {{data[key].toTableRow()[cell] | phrase:false}}
+                {{data[key].toTableRow()[cell]}}
             </td>
         </tr>
         <tr *ngIf="filteredKeys.isEmpty">

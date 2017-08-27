@@ -1,5 +1,5 @@
 <label (click)="visible = true">
-    {{label}}
+    {{label | phrase}}
     <glyph  *ngIf="tooltip != null"
             [materialTooltip]="tooltip"
             icon="help_outline"

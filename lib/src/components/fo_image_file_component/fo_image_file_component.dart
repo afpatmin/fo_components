@@ -7,14 +7,14 @@ import 'dart:html' as dom;
 import 'dart:typed_data' show ByteData, Endianness, Uint8List;
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:fo_components/fo_components.dart' show PhrasePipe;
 
 @Component(
     selector: 'fo-image-file',
     templateUrl: 'fo_image_file_component.html',
     styleUrls: const ['fo_image_file_component.css'],
     directives: const [GlyphComponent, MaterialButtonComponent],
-    providers: const [],
-    preserveWhitespace: false)
+    pipes: const [PhrasePipe])
 
 class FoImageFileComponent implements OnDestroy
 {
@@ -307,9 +307,6 @@ class FoImageFileComponent implements OnDestroy
   final StreamController<String> _onSourceChangeController = new StreamController();
   dom.FileUploadInputElement _fileInput;
   dom.File _file;
-
-  @Input('invalidFileMessage')
-  String invalidFileMessage = "Invalid file";
 }
 
 

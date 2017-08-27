@@ -1,6 +1,15 @@
 div.login-container
 {
   padding-top: 1em;
+  width: 23rem;
+  max-width: 100%;
+  min-width: 10rem;
+
+  material-input
+  {
+    display: block;
+    width: 100%;
+  }
 
   p.forgot-password
   {
@@ -8,7 +17,6 @@ div.login-container
     margin: 0;
     font-size: 0.8em;
     cursor: pointer;
-    //display: inline-block;
   }
   div.button-container
   {

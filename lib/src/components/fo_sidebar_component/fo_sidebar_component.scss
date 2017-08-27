@@ -1,4 +1,4 @@
-@import "../../style/constants";
+@import "../../../style/constants";
 
 $width: 200px;
 
@@ -7,11 +7,11 @@ $width: 200px;
   div.transformer
   {
     position: fixed;
-    z-index: 999;
+    z-index: 98;
     top: 0;
     bottom: 0;
     left: 0;
-    width: $width;
+    //width: $width;
     -webkit-transition: transform 100ms ease;
     -moz-transition: transform 100ms ease;
     -o-transition: transform 100ms ease;
@@ -58,7 +58,6 @@ $width: 200px;
       div.header
       {
         padding: 5.7rem 0.5rem 1rem 1rem;
-        //background-color: $color-grey-dark;
 
         p
         {
@@ -86,6 +85,7 @@ $width: 200px;
       }
     }
   }
+  /*
   div.transformer.closed
   {
     -webkit-transform: translateX(-$width);
@@ -93,5 +93,5 @@ $width: 200px;
     -ms-transform: translateX(-$width);
     -o-transform: translateX(-$width);
     transform: translateX(-$width);
-  }
+  }*/
 }

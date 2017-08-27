@@ -16,8 +16,11 @@ class FoYouTubePlayerComponent implements AfterContentInit, OnChanges, OnDestroy
 
   void ngAfterContentInit()
   {
+    if (apiLoaded) throw new StateError("Only one fo-youtube-player can be created per app");
+
     document.head.children.add(new ScriptElement()..src = "https://www.youtube.com/iframe_api");
     context['onYouTubeIframeAPIReady'] = _onAPIReady;
+    apiLoaded = true;
   }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
@@ -38,8 +41,7 @@ class FoYouTubePlayerComponent implements AfterContentInit, OnChanges, OnDestroy
     /**
      * Youtube API is ready, initialize video
      */
-    _player = new JsObject(context['YT']['Player'], ['youtube-player-video', params]);
-    
+    _player = new JsObject(context['YT']['Player'], [elementId, params]);
   }
 
   void _onReady(JsObject event)
@@ -99,6 +101,9 @@ class FoYouTubePlayerComponent implements AfterContentInit, OnChanges, OnDestroy
 
   JsObject _player;
 
+  @Input('elementId')
+  String elementId;
+
   @Input('videoId')
   String videoId;
 
@@ -107,4 +112,6 @@ class FoYouTubePlayerComponent implements AfterContentInit, OnChanges, OnDestroy
 
   @Output('stateChange')
   Stream<String> get stateChangeOutput => _onStateChangeController.stream;
+
+  static bool apiLoaded = false;
 }

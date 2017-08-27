@@ -4,13 +4,14 @@
 import 'dart:async' show Stream, StreamController, StreamSubscription;
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:fo_components/src/models/data_table_model.dart';
+import 'package:fo_components/fo_components.dart' show DataTableModel, PhrasePipe;
 
 @Component(
     selector: 'fo-multi-select',
     styleUrls: const ['fo_multi_select_component.css'],
     templateUrl: 'fo_multi_select_component.html',
     directives: const [materialDirectives],
+    pipes: const [PhrasePipe],
     changeDetection: ChangeDetectionStrategy.OnPush
 )
 class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy

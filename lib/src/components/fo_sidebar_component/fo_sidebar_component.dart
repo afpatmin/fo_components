@@ -5,12 +5,14 @@ import 'dart:async' show Stream, StreamController, StreamSubscription;
 import 'dart:html' as dom;
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:fo_components/fo_components.dart';
 
 @Component(
     selector: 'fo-sidebar',
     styleUrls: const ['fo_sidebar_component.css'],
     templateUrl: 'fo_sidebar_component.html',
-    directives: const [materialDirectives]
+    directives: const [materialDirectives],
+    pipes: const [PhrasePipe]
 )
 class FoSidebarComponent implements OnDestroy
 {
@@ -47,6 +49,11 @@ class FoSidebarComponent implements OnDestroy
     _onVisibleChangeController.add(visible);
   }
 
+  String get transform
+  {
+    return (visible) ? "" : "translateX(-$width)";
+  }
+
   final StreamController<bool> _onVisibleChangeController = new StreamController();
   StreamSubscription<dom.Event> _onWindowClickListener;
 
@@ -61,6 +68,9 @@ class FoSidebarComponent implements OnDestroy
 
   @Input('visible')
   bool visible = false;
+
+  @Input('width')
+  String width = "200px";
 
   @Output('visibleChange')
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;

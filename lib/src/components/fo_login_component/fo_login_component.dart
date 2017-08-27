@@ -15,19 +15,13 @@ import '../../../src/pipes/phrase_pipe.dart';
     templateUrl: 'fo_login_component.html',
     directives: const [materialDirectives, FoModalComponent],
     pipes: const [PhrasePipe])
-class FoLoginComponent implements AfterContentInit, OnDestroy
+class FoLoginComponent implements OnDestroy
 {
   FoLoginComponent();
-
-  void ngAfterContentInit()
-  {
-    state = "login";
-  }
 
   void ngOnDestroy()
   {
     _onLoginController.close();
-    _onResetPasswordController.close();
   }
 
   Future onLogin() async
@@ -69,15 +63,19 @@ class FoLoginComponent implements AfterContentInit, OnDestroy
       errorMessage = null;
       try
       {
-        String token = await client.resetToken(username);
-        resetPasswordSent = true;
-        _onResetPasswordController.add({"username":username, "token":token});
+        await client.sendCredentials(
+            username,
+            emailFrom: recoverPasswordFromEmail,
+            emailMessage: recoverPasswordMessageEmail,
+            emailSubject: recoverPasswordSubjectEmail,
+            smsMessage: recoverPasswordMessageSMS,
+            smsFrom: recoverPasswordFromSMS);
+
+        recoverPasswordSent = true;
         state = "reset_password";
       }
-      on Exception
-      {
-        errorMessage = "user_not_found";
-      }
+
+      catch (e, s) { print(s); errorMessage = e.message; }
     }
   }
 
@@ -86,49 +84,34 @@ class FoLoginComponent implements AfterContentInit, OnDestroy
     try
     {
       errorMessage = null;
-      await client.resetPassword(username, password, token);
+      await client.updatePassword(username, password, token);
       token = "";
       setState("login");
     }
-    on Exception catch (e)
+    catch (e, s)
     {
-      print(e);
-      errorMessage = "invalid_token";
+      print(s);
+      errorMessage = e.message;
     }
-
   }
 
   void setState(String new_state)
   {
     state = new_state;
-    resetPasswordSent = false;
+    recoverPasswordSent = false;
     errorMessage = null;
-
-    if (state == "login")
-    {
-
-    }
-    else if (state == "forgot_password")
-    {
-
-    }
-    else if (state == "reset_password")
-    {
-
-    }
   }
 
   String username = "patrick.minogue@gmail.com";
   String password = "testa";
   String token = "";
 
-  String state = "";
+  String state = "login";
   String errorMessage;
-  bool resetPasswordSent = false;
+  bool recoverPasswordSent = false;
   bool visible = true;
 
   final StreamController<Map<String, String>> _onLoginController = new StreamController();
-  final StreamController<Map<String, String>> _onResetPasswordController = new StreamController();
 
   @Input('client')
   ViAuthClient client;
@@ -139,9 +122,28 @@ class FoLoginComponent implements AfterContentInit, OnDestroy
   @Input('title')
   String strTitle = "Login";
 
+  /**
+   * This is the message which will be sent to the user by email when attempting
+   * recover its password.
+   * %token% placeholders are replaced by a new valid token
+   * %password% placeholders are replaced by a new auto-generated password
+   * %username% placeholders are replaced by the users username
+   */
+  @Input('recoverPasswordMessageEmail')
+  String recoverPasswordMessageEmail; // = "token: %token%, username/password: %username% / %password%";
+
+  @Input('recoverPasswordSubjectEmail')
+  String recoverPasswordSubjectEmail = "Recover your password";
+
+  @Input('recoverPasswordFromEmail')
+  String recoverPasswordFromEmail;
+
+  @Input('recoverPasswordMessageSMS')
+  String recoverPasswordMessageSMS; // = "token: %token%, username/password: %username% / %password%";
+
+  @Input('recoverPasswordFromSMS')
+  String recoverPasswordFromSMS;
+
   @Output('login')
   Stream<Map<String, String>> get onLoginOutput => _onLoginController.stream;
-
-  @Output('resetPassword')
-  Stream<Map<String, String>> get onResetPasswordOutput => _onResetPasswordController.stream;
 }

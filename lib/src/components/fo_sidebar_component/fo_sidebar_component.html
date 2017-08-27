@@ -1,4 +1,4 @@
-<div class="transformer" [class.closed]="!visible">
+<div class="transformer" [style.width]="width" [style.transform]="transform">
     <div class="button toggle-open" (click)="toggleOpen($event)">
         <p>
             <glyph [icon]="visible ? 'chevron_left' : 'chevron_right'"></glyph>
@@ -11,7 +11,7 @@
     </div>
     <div class="container">
         <div class="header" [style.background-color]="backgroundColor">
-            <p>{{title}}</p>
+            <p>{{title | phrase}}</p>
         </div>
         <div class="content">
             <material-list>
