@@ -4,21 +4,20 @@
 library data_table_component;
 
 import 'dart:async' show Stream, StreamController;
+import 'dart:html' as dom;
 import 'dart:math';
 import 'dart:collection' show LinkedHashMap;
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
-import '../../pipes/phrase_pipe.dart';
-import '../../pipes/range_pipe.dart';
-import '../../models/data_table_model.dart';
+import 'package:fo_components/fo_components.dart';
 
 @Component(
     selector: 'fo-data-table',
     styleUrls: const ['fo_data_table_component.css'],
     templateUrl: 'fo_data_table_component.html',
-    directives: const [materialDirectives],
-    changeDetection: ChangeDetectionStrategy.Default,
-    pipes: const [PhrasePipe, RangePipe, UpperCasePipe])
+    directives: const [FoSelectComponent, materialDirectives],
+    pipes: const [PhrasePipe, RangePipe],
+    changeDetection: ChangeDetectionStrategy.Default)
 
 class DataTableComponent implements OnChanges, OnDestroy
 {
@@ -26,8 +25,11 @@ class DataTableComponent implements OnChanges, OnDestroy
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-    if (changes.containsKey("rows") || changes.containsKey("models")) _setIndices(0);
 
+    if (changes.containsKey("rows") || changes.containsKey("models"))
+    {
+      _setIndices(0);
+    }
   }
 
   void ngOnDestroy()
@@ -39,7 +41,7 @@ class DataTableComponent implements OnChanges, OnDestroy
 
   void step(int steps)
   {
-    if (!disabled) _setIndices(firstIndex + (steps * rows));
+    _setIndices(firstIndex + (steps * rows));
   }
 
   void onSearchPhraseChange(String value)
@@ -56,6 +58,24 @@ class DataTableComponent implements OnChanges, OnDestroy
       sortOrder = (sortOrder == "ASC") ? "DESC" : "ASC";
       _sort();
     }
+  }
+
+  void onDownloadDataCSV()
+  {
+    /**
+     * Generate CSV string (Property1;Property2;Property3;Property4;Property5\n)
+     */
+    StringBuffer sb = new StringBuffer();
+
+    for (String key in filteredKeys)
+    {
+      sb.writeln(_data[key].toTableRow().values.join(";"));
+    }
+
+    String csv = Uri.encodeComponent(sb.toString());
+    new dom.AnchorElement(href:"data:text/plain;charset=utf-8,$csv")
+      ..setAttribute("download", "data.csv")
+      ..click();
   }
 
   Map<String, DataTableModel> get data => _data;
@@ -137,32 +157,49 @@ class DataTableComponent implements OnChanges, OnDestroy
     currentPage = (filteredKeys.isEmpty) ? 0 : (firstIndex.toDouble() / rows).ceil() + 1;
   }
 
-  List<String> get columns => _columns;
+  List<String> get col => _col;
 
   int get totalPages => (filteredKeys.length.toDouble() / rows).ceil();
+
+  String get strRows => rows.toString();
+
+  void set strRows(String value)
+  {
+    rows = int.parse(value);
+    _setIndices(0);
+  }
+
+  final List<DataTableModel> rowModels =
+  [
+    new DataTableModel("5"),
+    new DataTableModel("10"),
+    new DataTableModel("15"),
+    new DataTableModel("20"),
+    new DataTableModel("25"),
+    new DataTableModel("50")
+  ];
 
   Map<String, DataTableModel> _data = new Map();
   int firstIndex = 0;
   int lastIndex = 1;
   int currentPage = 1;
+  String sortColumn = "";
+  String sortOrder = "DESC";
+  String searchPhrase = "";
+  List<String> _col = [];
 
-  List<String> _columns = [];
   final StreamController<String> onCellClickController = new StreamController();
   final StreamController<String> onRowClickController = new StreamController();
   final StreamController<Map<String, String>> _onSortController = new StreamController();
 
-  String sortColumn = "";
-  String sortOrder = "DESC";
-  String searchPhrase = "";
+  @Input('large-hidden-col')
+  List<String> largeHiddencol = [];
 
-  @Input('large-hidden-columns')
-  List<String> largeHiddenColumns = [];
+  @Input('small-hidden-col')
+  List<String> smallHiddencol = [];
 
-  @Input('small-hidden-columns')
-  List<String> smallHiddenColumns = [];
-
-  @Input('medium-hidden-columns')
-  List<String> mediumHiddenColumns = [];
+  @Input('medium-hidden-col')
+  List<String> mediumHiddencol = [];
 
   @Input('models')
   void set models(Map<String, DataTableModel> value)
@@ -170,7 +207,7 @@ class DataTableComponent implements OnChanges, OnDestroy
     _data = (value == null) ? new Map() : value;
     if (_data.isNotEmpty && _data.values.first.toTableRow().isNotEmpty)
     {
-      _columns = _data.values.first.toTableRow().keys.toList(growable: false);
+      _col = _data.values.first.toTableRow().keys.toList(growable: false);
     }
     _setIndices(firstIndex);
     if (sortColumn.isNotEmpty) _sort();
@@ -180,10 +217,13 @@ class DataTableComponent implements OnChanges, OnDestroy
   String title = "";
 
   @Input('rows')
-  int rows = 1;
+  int rows = 10;
 
   @Input('disabled')
   bool disabled = false;
+
+  @Input('showDownloadButton')
+  bool showDownloadButton = true;
 
   @Output('cellclick')
   Stream<String> get onCellClickOutput => onCellClickController.stream;

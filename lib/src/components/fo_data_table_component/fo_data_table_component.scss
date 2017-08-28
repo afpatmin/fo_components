@@ -1,30 +1,14 @@
-//@import '../../../style/_constants';
+@import '../../../style/grid1/grid';
+@import '../../../style/grid1/theme';
 
 :host
 {
   width:100%;
 
-  h3#table-title
-  {
-    width: 50%;
-    margin: 0;
-    display: inline-block;
-    font-size: 1rem;
-    //color: $color-grey-dark;
-  }
-
-  h3#table-actions
-  {
-    width: 50%;
-    display: inline-block;
-  }
-
-
   glyph
   {
     vertical-align: text-top;
   }
-
 }
 
 fieldset
@@ -37,11 +21,6 @@ fieldset
 .faded
 {
   opacity: 0.6;
-}
-
-.hidden
-{
-  display: none;
 }
 
 table.output
@@ -58,7 +37,7 @@ table.output
   width: 100%;
   border-collapse: collapse;
   border:2px solid #eee;
-  color: #333;
+  //color: $colorBlack;
   font-size: 0.7rem;
   table-layout: fixed;
 
@@ -82,6 +61,7 @@ table.output
         font-size: 0.8rem;
       }
     }
+    border-bottom: 3px solid #ddd;
   }
 
   tbody
@@ -99,7 +79,6 @@ table.output
       {
         h4
         {
-         // color: $color-alert-bright;
           margin: 0.4rem;
           padding: 0.2rem;
           line-height: 100%;
@@ -124,58 +103,23 @@ table.output
   }
 }
 
-
-div#data-info
-{
-  float: left;
-}
-
 #select-step
 {
-  text-align: center;
   font-size: 0.9rem;
   color: #888;
-  height: 2rem;
 
-  table
+  span
   {
-    float: right;
-    //width: 10rem;
-    .arrow
-    {
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      cursor: pointer;
-    }
-    glyph.disabled
-    {
-      opacity: 0.4;
-    }
+    margin-left: 0.5rem;
+  }
+
+  glyph.disabled
+  {
+    opacity: 0.3;
   }
 }
 
-@media screen and (min-width: 1024px)
+material-input
 {
-  .hide-for-large
-  {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 639px)
-{
-  .hide-for-small
-  {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 1023px)
-{
-  .hide-for-medium
-  {
-    display: none;
-  }
+  width: 100% !important;
 }

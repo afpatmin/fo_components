@@ -1,62 +1,91 @@
-<<<<<<< HEAD
-<h3 id="title">{{title | phrase}}</h3>
-=======
-<h3 id="table-title">{{title | phrase}}</h3>
-
-<h3 id="table-actions">
-    <material-input
-            trailingGlyph="search"
-            [rightAlign]="true"
-            label="{{'search' | phrase}}">
-    </material-input>
-</h3>
-
-<!--
->>>>>>> style import update
-<div id="search">
-    <material-button clear-size><glyph size="x-large" icon="file_download"></glyph></material-button>
-    <input type="text" maxlength="64" [ngModel]="searchPhrase" (ngModelChange)="onSearchPhraseChange($event)" />
-    <div class="search-icon-container"><glyph size="x-large" icon="search"></glyph></div>
+<div class="row collapse">
+    <div class="s12 m8 l9 col">
+        <h3 class="color-black margin-bottom-none">{{title | phrase}}</h3>
+    </div>
+    <div class="s12 m4 l3 col">
+        <material-input
+                trailingGlyph="search"
+                [rightAlign]="true"
+                [displayBottomPanel]="false"
+                [disabled]="disabled"
+                label="{{'search' | phrase}}"
+                (change)="onSearchPhraseChange($event)">
+        </material-input>
+    </div>
 </div>
--->
-<div>
-    <table [class.faded]="disabled" class="output">
-        <thead *ngIf="filteredKeys.isNotEmpty">
-        <tr>
-            <td *ngFor="let cell of columns"
-                [class.hide-for-small]="smallHiddenColumns.contains(cell)"
-                [class.hide-for-medium]="mediumHiddenColumns.contains(cell)"
-                [class.hide-for-large]="largeHiddenColumns.contains(cell)"
-                (click)="onSort(cell)">
-                    {{cell | phrase | uppercase}}&nbsp;
+
+<div class="row collapse">
+    <div class="s12 col">
+        <table [class.faded]="disabled" class="output color-black box-shadow margin-bottom-x-small">
+            <thead *ngIf="filteredKeys.isNotEmpty">
+            <tr>
+                <td *ngFor="let cell of col"
+                    [class.hide-for-small]="smallHiddencol.contains(cell)"
+                    [class.hide-for-medium]="mediumHiddencol.contains(cell)"
+                    [class.hide-for-large]="largeHiddencol.contains(cell)"
+                    (click)="onSort(cell)">
+                    {{cell | phrase}}
                     <glyph size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></glyph>
                     <glyph size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></glyph>
-            </td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let key of filteredKeys | range:firstIndex:lastIndex" (click)="onRowClickController.add(key)">
-            <td
-                    *ngFor="let cell of columns"
-                    [class.hide-for-small]="smallHiddenColumns.contains(cell)"
-                    [class.hide-for-medium]="mediumHiddenColumns.contains(cell)"
-                    [class.hide-for-large]="largeHiddenColumns.contains(cell)"
-                    (click)="onCellClickController.add(data[key].toTableRow()[cell])">
-                {{data[key].toTableRow()[cell]}}
-            </td>
-        </tr>
-        <tr *ngIf="filteredKeys.isEmpty">
-            <td attr.colspan="{{columns.length}}" class="empty-info"><h4><glyph size="x-large" icon="error"></glyph>&nbsp;{{'no_results' | phrase}}</h4></td>
-        </tr>
-        </tbody>
-    </table>
-    <div id="select-step">
-        <table>
-            <tr>
-                <td class="arrow" (click)="step(-1)"><glyph [class.disabled]="firstIndex <= 0" icon="navigate_before"></glyph></td>
-                <td class="page">{{'page' | phrase}} {{currentPage}}/{{totalPages}} ({{filteredKeys.length}} {{'rows' | phrase:false}})</td>
-                <td class="arrow" (click)="step(1)"><glyph [class.disabled]="lastIndex >= filteredKeys.length" icon="navigate_next"></glyph></td>
+                </td>
             </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let key of filteredKeys | range:firstIndex:lastIndex" (click)="onRowClickController.add(key)">
+                <td
+                        *ngFor="let cell of col"
+                        [class.hide-for-small]="smallHiddencol.contains(cell)"
+                        [class.hide-for-medium]="mediumHiddencol.contains(cell)"
+                        [class.hide-for-large]="largeHiddencol.contains(cell)"
+                        (click)="onCellClickController.add(data[key].toTableRow()[cell])">
+                    {{data[key].toTableRow()[cell]}}
+                </td>
+            </tr>
+            <tr *ngIf="filteredKeys.isEmpty">
+                <td attr.colspan="{{col.length}}" class="empty-info color-alert"><h4><glyph size="x-large" icon="error"></glyph>&nbsp;{{'no_results' | phrase}}</h4></td>
+            </tr>
+            </tbody>
         </table>
+    </div>
+</div>
+<div class="row collapse">
+    <div class="s12 m4 col">
+        <material-button
+                *ngIf="showDownloadButton"
+                class="margin-bottom-small"
+                clear-size
+                raised
+                [disabled]="disabled || data.isEmpty"
+                [materialTooltip]="'download_csv' | phrase"
+                (click)="onDownloadDataCSV()">
+            <glyph class="color-black" size="medium" icon="file_download"></glyph>
+        </material-button>
+    </div>
+    <div class="s12 m8 col text-right">
+        <div class="text-right" id="select-step">
+            <div class="display-inline-block">
+                <glyph
+                        class="clickable vertical-align-middle"
+                        [class.disabled]="firstIndex <= 0"
+                        icon="navigate_before"
+                        (click)="step(-1)">
+                </glyph>
+                {{'page' | phrase}} {{currentPage}}/{{totalPages}} ({{filteredKeys.length}} {{'rows' | phrase:false}})
+                <glyph
+                        class="clickable vertical-align-middle"
+                        [class.disabled]="lastIndex >= filteredKeys.length"
+                        icon="navigate_next"
+                        (click)="step(1)">
+                </glyph>
+            </div>
+            <div class="display-inline-block">
+                <span>{{'rows' | phrase}}/{{'page' | phrase:false}}:</span>
+                <fo-select
+                        class="display-inline-block"
+                        [options]="rowModels"
+                        [(selectedId)]="strRows">
+                </fo-select>
+            </div>
+        </div>
     </div>
 </div>
