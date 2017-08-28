@@ -1,17 +1,15 @@
-//@import '../../style/grid1/theme';
-
-$width: 200px;
+@import '../../../style/grid1/theme';
 
 :host /deep/
 {
   div.transformer
   {
+    text-align: left;
     position: fixed;
     z-index: 98;
     top: 0;
     bottom: 0;
     left: 0;
-    //width: $width;
     -webkit-transition: transform 100ms ease;
     -moz-transition: transform 100ms ease;
     -o-transition: transform 100ms ease;
@@ -20,14 +18,14 @@ $width: 200px;
     div.button
     {
       position: absolute;
-      right: -1.6rem;
+      right: -1.5rem;
       width: 2rem;
-      padding: 0.3rem;
+      padding: 0;
       background-color: white;
       border: 1px solid #ccc;
       border-radius: 0.2rem;
       cursor: pointer;
-      text-align: center;
+      text-align: right;
 
       glyph
       {
@@ -41,7 +39,11 @@ $width: 200px;
     }
     div.button.toggle-locked
     {
-      top: 9.7rem;
+      top: 9.2rem;
+      glyph
+      {
+        margin-right: 0.2rem;
+      }
     }
 
     div.container

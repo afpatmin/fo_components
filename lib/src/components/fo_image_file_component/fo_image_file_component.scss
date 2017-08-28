@@ -1,4 +1,4 @@
-//@import '../../style/grid1/theme';
+@import '../../../style/grid1/colors';
 
 div.container
 {
@@ -18,10 +18,11 @@ div.container
 
     material-button.delete
     {
+      background-color: $colorAlert;
       position: absolute;
       top: 0.25em;
       right: 0.25em;
-      color: white;
+      color: $colorWhite;
     }
   }
 
@@ -32,6 +33,7 @@ div.container
 
   p.error-output
   {
+    background-color: $colorAlertBright;
     color: white;
     padding: 0.5rem;
     margin: 0.5rem 0 0 0;

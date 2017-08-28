@@ -269,6 +269,10 @@ div.row.expand
 
 .clickable { cursor: pointer; }
 
+.display-block { display: block !important; }
+.display-inline { display: inline !important; }
+.display-inline-block { display: inline-block !important; }
+
 .hidden { display: none; }
 
 .margin-bottom-none { margin-bottom: 0 !important; }
@@ -287,7 +291,7 @@ div.row.expand
 
 .margin-top-none { margin-top: 0 !important; }
 .margin-top-x-small { margin-top: $x-small !important; }
-.margin-top-small { margin-top: $small !important; }
+.margin-top-medium { margin-top: $small !important; }
 .margin-top-medium { margin-top: $medium !important; }
 .margin-top-large { margin-top: $large !important; }
 .margin-top-x-large { margin-top: $x-large !important; }
@@ -327,6 +331,7 @@ div.row.expand
 .text-right { text-align: right; }
 .text-small { font-size: 0.9em; }
 
-.vertical-align-baseline { vertical-align: baseline; }
-.vertical-align-text-top { vertical-align: text-top; }
-.vertical-align-text-bottom { vertical-align: text-bottom; }
+.vertical-align-baseline { vertical-align: baseline !important; }
+.vertical-align-middle { vertical-align: middle !important; }
+.vertical-align-text-top { vertical-align: text-top !important; }
+.vertical-align-text-bottom { vertical-align: text-bottom !important; }

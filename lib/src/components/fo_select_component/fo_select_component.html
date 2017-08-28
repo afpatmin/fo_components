@@ -1,4 +1,4 @@
-<label (click)="visible = true">
+<label (click)="visible = true" *ngIf="label.isNotEmpty">
     {{label | phrase}}
     <glyph  *ngIf="tooltip != null"
             [materialTooltip]="tooltip"
