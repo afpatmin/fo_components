@@ -3,13 +3,13 @@
 
 import 'dart:async' show Stream, StreamController;
 import 'dart:math';
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 
 @Component(
     selector: 'fo-time-picker',
     styleUrls: const ['fo_time_picker_component.css'],
     templateUrl: 'fo_time_picker_component.html',
-    directives: const [],
+    directives: const [CORE_DIRECTIVES],
     changeDetection: ChangeDetectionStrategy.OnPush)
 
 class FoTimePickerComponent implements OnDestroy, AfterViewInit

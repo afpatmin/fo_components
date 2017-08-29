@@ -3,7 +3,7 @@
 
 import 'dart:async' show Stream, StreamController, StreamSubscription;
 import 'dart:html' as dom;
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:fo_components/fo_components.dart';
 
@@ -11,7 +11,7 @@ import 'package:fo_components/fo_components.dart';
     selector: 'fo-sidebar',
     styleUrls: const ['fo_sidebar_component.css'],
     templateUrl: 'fo_sidebar_component.html',
-    directives: const [materialDirectives],
+    directives: const [CORE_DIRECTIVES, materialDirectives, MaterialIconComponent],
     pipes: const [PhrasePipe]
 )
 class FoSidebarComponent implements OnDestroy
@@ -21,7 +21,6 @@ class FoSidebarComponent implements OnDestroy
     _onWindowClickListener = dom.document.onClick.listen((e)
     {
       if (visible && !locked) visible = locked = false;
-
       _onVisibleChangeController.add(visible);
     });
   }

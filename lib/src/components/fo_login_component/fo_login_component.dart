@@ -3,7 +3,7 @@
 
 import 'dart:async';
 import 'dart:html' as dom;
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:fo_components/fo_components.dart' show FoModalComponent;
 import 'package:vi_auth_client/vi_auth_client.dart';
@@ -13,7 +13,7 @@ import '../../../src/pipes/phrase_pipe.dart';
     selector: 'fo-login',
     styleUrls: const ['fo_login_component.css'],
     templateUrl: 'fo_login_component.html',
-    directives: const [materialDirectives, FoModalComponent],
+    directives: const [CORE_DIRECTIVES, materialDirectives, FoModalComponent],
     pipes: const [PhrasePipe])
 class FoLoginComponent implements OnDestroy
 {

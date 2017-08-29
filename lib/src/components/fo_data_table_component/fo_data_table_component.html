@@ -25,8 +25,8 @@
                     [class.hide-for-large]="largeHiddencol.contains(cell)"
                     (click)="onSort(cell)">
                     {{cell | phrase}}
-                    <glyph size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></glyph>
-                    <glyph size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></glyph>
+                    <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
+                    <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></material-icon>
                 </td>
             </tr>
             </thead>
@@ -42,7 +42,7 @@
                 </td>
             </tr>
             <tr *ngIf="filteredKeys.isEmpty">
-                <td attr.colspan="{{col.length}}" class="empty-info color-alert"><h4><glyph size="x-large" icon="error"></glyph>&nbsp;{{'no_results' | phrase}}</h4></td>
+                <td attr.colspan="{{col.length}}" class="empty-info color-alert"><h4><material-icon size="x-large" icon="error"></material-icon>&nbsp;{{'no_results' | phrase}}</h4></td>
             </tr>
             </tbody>
         </table>
@@ -58,25 +58,25 @@
                 [disabled]="disabled || data.isEmpty"
                 [materialTooltip]="'download_csv' | phrase"
                 (click)="onDownloadDataCSV()">
-            <glyph class="color-black" size="medium" icon="file_download"></glyph>
+            <material-icon class="color-black" size="medium" icon="file_download"></material-icon>
         </material-button>
     </div>
     <div class="s12 m8 col text-right">
         <div class="text-right" id="select-step">
             <div class="display-inline-block">
-                <glyph
+                <material-icon
                         class="clickable vertical-align-middle"
                         [class.disabled]="firstIndex <= 0"
                         icon="navigate_before"
                         (click)="step(-1)">
-                </glyph>
+                </material-icon>
                 {{'page' | phrase}} {{currentPage}}/{{totalPages}} ({{filteredKeys.length}} {{'rows' | phrase:false}})
-                <glyph
+                <material-icon
                         class="clickable vertical-align-middle"
                         [class.disabled]="lastIndex >= filteredKeys.length"
                         icon="navigate_next"
                         (click)="step(1)">
-                </glyph>
+                </material-icon>
             </div>
             <div class="display-inline-block">
                 <span>{{'rows' | phrase}}/{{'page' | phrase:false}}:</span>

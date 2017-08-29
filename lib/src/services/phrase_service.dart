@@ -1,4 +1,4 @@
-import 'package:angular2/di.dart';
+import 'package:angular/di.dart';
 
 @Injectable()
 class PhraseService

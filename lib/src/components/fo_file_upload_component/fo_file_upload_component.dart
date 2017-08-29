@@ -3,7 +3,7 @@
 
 import 'dart:async';
 import 'dart:html' as dom;
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import '../../../src/pipes/phrase_pipe.dart';
 
@@ -11,7 +11,7 @@ import '../../../src/pipes/phrase_pipe.dart';
     selector: 'fo-file-upload',
     templateUrl: 'fo_file_upload_component.html',
     styleUrls: const ['fo_file_upload_component.css'],
-    directives: const [materialDirectives],
+    directives: const [CORE_DIRECTIVES, materialDirectives],
     pipes: const [PhrasePipe])
 class FileUploadComponent implements OnDestroy
 {

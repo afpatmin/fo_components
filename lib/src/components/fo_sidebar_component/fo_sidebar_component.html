@@ -1,12 +1,12 @@
 <div class="transformer" [style.width]="width" [style.transform]="transform">
     <div class="button toggle-open" (click)="toggleOpen($event)">
         <p>
-            <glyph [icon]="visible ? 'chevron_left' : 'chevron_right'"></glyph>
+            <material-icon [icon]="visible ? 'chevron_left' : 'chevron_right'"></material-icon>
         </p>
     </div>
     <div class="button toggle-locked" *ngIf="visible" (click)="toggleLocked($event)">
         <p>
-            <glyph [icon]="locked ? 'lock' : 'lock_open'" size="large"></glyph>
+            <material-icon [icon]="locked ? 'lock' : 'lock_open'" size="large"></material-icon>
         </p>
     </div>
     <div class="container box-shadow">

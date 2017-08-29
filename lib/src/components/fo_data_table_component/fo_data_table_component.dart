@@ -7,7 +7,7 @@ import 'dart:async' show Stream, StreamController;
 import 'dart:html' as dom;
 import 'dart:math';
 import 'dart:collection' show LinkedHashMap;
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:fo_components/fo_components.dart';
 
@@ -15,7 +15,7 @@ import 'package:fo_components/fo_components.dart';
     selector: 'fo-data-table',
     styleUrls: const ['fo_data_table_component.css'],
     templateUrl: 'fo_data_table_component.html',
-    directives: const [FoSelectComponent, materialDirectives],
+    directives: const [CORE_DIRECTIVES, FoSelectComponent, materialDirectives],
     pipes: const [PhrasePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.Default)
 

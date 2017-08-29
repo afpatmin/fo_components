@@ -2,7 +2,7 @@ library attribute_directives.lowercase_directive;
 
 import 'dart:async';
 import 'dart:html' as html;
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 
 @Directive(selector: '[foLowercase]')
 class LowercaseDirective implements OnInit

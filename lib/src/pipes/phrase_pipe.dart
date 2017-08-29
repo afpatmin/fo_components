@@ -1,7 +1,7 @@
-import 'package:angular2/di.dart' show Pipe, PipeTransform;
+import 'package:angular/di.dart' show Pipe, PipeTransform;
 import '../services/phrase_service.dart';
 
-@Pipe("phrase")
+@Pipe('phrase')
 class PhrasePipe implements PipeTransform
 {
   PhrasePipe(this._phraseService);

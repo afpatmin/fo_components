@@ -1,10 +1,10 @@
 <label (click)="visible = true" *ngIf="label.isNotEmpty">
     {{label | phrase}}
-    <glyph  *ngIf="tooltip != null"
+    <material-icon  *ngIf="tooltip != null"
             [materialTooltip]="tooltip"
             icon="help_outline"
             size="medium">
-    </glyph>
+    </material-icon>
 </label>
 <material-dropdown-select
         [class.full-width]="fullWidth"
@@ -14,4 +14,12 @@
         [options]="selectionOptions"
         [selection]="selectionModel"
         [(visible)]="visible">
+    <!--
+    <div header>
+        <material-select-searchbox
+                [label]="'search' | phrase"
+                [filterable]="selectionOptions">
+        </material-select-searchbox>
+    </div>
+    -->
 </material-dropdown-select>

@@ -1,4 +1,4 @@
-import 'package:angular2/di.dart' show Pipe, PipeTransform;
+import 'package:angular/di.dart' show Pipe, PipeTransform;
 
 @Pipe("range")
 class RangePipe implements PipeTransform

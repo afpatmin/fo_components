@@ -1,3 +1,5 @@
+//import 'package:angular_components/angular_components.dart' show Filterable;
+
 class DataTableModel
 {
   DataTableModel(this.id);

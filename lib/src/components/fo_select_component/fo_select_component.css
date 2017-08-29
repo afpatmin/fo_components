@@ -1,15 +1,2 @@
-:host {
-  margin-bottom: 1rem;
-  display: block; }
-  :host label {
-    width: 100%;
-    display: inline-block;
-    margin-bottom: 0.2em;
-    font-size: 0.8em;
-    color: #888; }
-  :host glyph {
-    vertical-align: text-top; }
-  :host /deep/ material-dropdown-select.full-width {
-    width: 100%; }
-
+:host{margin-bottom:1rem;display:block}:host label{width:100%;display:inline-block;margin-bottom:0.2em;font-size:0.8em;color:#888}:host material-icon{vertical-align:text-top}:host /deep/ material-dropdown-select.full-width{width:100%}
 /*# sourceMappingURL=fo_select_component.css.map */

@@ -2,17 +2,16 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async' show Stream, StreamController, StreamSubscription;
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import '../../pipes/phrase_pipe.dart';
 import '../../models/data_table_model.dart';
-
 
 @Component(
     selector: 'fo-select',
     styleUrls: const ['fo_select_component.css'],
     templateUrl: 'fo_select_component.html',
-    directives: const [materialDirectives],
+    directives: const [CORE_DIRECTIVES, materialDirectives, MaterialSelectSearchboxComponent],
     pipes: const [PhrasePipe],
     changeDetection: ChangeDetectionStrategy.OnPush
 )

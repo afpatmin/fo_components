@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:html';
 import 'dart:js';
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 
 typedef void YoutubeCallback(dynamic event);
 
