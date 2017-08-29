@@ -1,26 +1,2 @@
-/* TODO: update these variables with the of your app colors and font */
-div.container {
-  border: 1px dashed #ccc;
-  padding: 0.5rem;
-  text-align: center; }
-  div.container div.image {
-    position: relative; }
-    div.container div.image img {
-      width: 100%;
-      height: auto;
-      margin: 0 auto; }
-    div.container div.image material-button.delete {
-      background-color: palevioletred;
-      position: absolute;
-      top: 0.25em;
-      right: 0.25em;
-      color: #fff; }
-  div.container input[type=file] {
-    display: none !important; }
-  div.container p.error-output {
-    background-color: #f0c1d1;
-    color: white;
-    padding: 0.5rem;
-    margin: 0.5rem 0 0 0; }
-
+div.container{border:1px dashed #ccc;padding:0.5rem;text-align:center}div.container div.image{position:relative}div.container div.image img{width:100%;height:auto;margin:0 auto}div.container div.image material-button.delete{background-color:#db7093;position:absolute;top:0.25em;right:0.25em;color:#fff}div.container input[type=file]{display:none !important}div.container p.error-output{background-color:#f0c1d1;color:white;padding:0.5rem;margin:0.5rem 0 0 0}
 /*# sourceMappingURL=fo_image_file_component.css.map */

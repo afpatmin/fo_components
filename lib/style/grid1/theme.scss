@@ -11,9 +11,9 @@ $fontStack: Arial, "Helvetica Neue", Helvetica, sans-serif;
 
 .box-shadow
 {
-  -webkit-box-shadow: 1px 1px 4px #888;
-  -moz-box-shadow: 1px 1px 4px #888;
-  box-shadow: 1px 1px 4px #888;
+  -webkit-box-shadow: 1px 1px 4px $colorBlack;
+  -moz-box-shadow: 1px 1px 4px $colorBlack;
+  box-shadow: 1px 1px 4px $colorBlack;
 }
 
 .background-color-1 { background-color: $color1 !important; }

@@ -3,19 +3,22 @@ import 'package:fo_components/src/services/phrase_service.dart';
 
 class FoValidators
 {
-  static Map<String, String> required(AbstractControl control)
+  static ValidatorFn required([String error_phrase = "enter_a_value"])
   {
-    if (control.value == null || control.value.isEmpty)
+    return (AbstractControl control)
     {
-      PhraseService ps = new PhraseService();
-      return {"error" : ps.get("enter_a_value")};
-    }
-    else return null;
+      if (control.value == null || control.value.toString().isEmpty)
+      {
+        PhraseService ps = new PhraseService();
+        return {"error" : ps.get(error_phrase)};
+      }
+      else return null;
+    };
   }
 
   static Map<String, String> alpha(AbstractControl control)
   {
-    if (required(control) != null) return null;
+   // if (required(control) != null) return null;
 
     String value = control.value;
     RegExp r = new RegExp(r"[a-zA-ZåäöÅÄÖ]");
@@ -29,7 +32,7 @@ class FoValidators
 
   static Map<String, String> alphaNumeric(AbstractControl control)
   {
-    if (required(control) != null) return null;
+    //if (required(control) != null) return null;
 
     String value = control.value;
     RegExp r = new RegExp(r"[a-zA-ZåäöÅÄÖ0-9 ]");
@@ -58,7 +61,7 @@ class FoValidators
 
   static Map<String, String> phoneNumber(AbstractControl control)
   {
-    if (required(control) != null) return null;
+    //if (required(control) != null) return null;
 
     RegExp r = new RegExp("[\+]{0,1}[0-9\- ]{7,32}");
     if (r.stringMatch(control.value) != control.value)
@@ -71,7 +74,7 @@ class FoValidators
 
   static Map<String, String> swedishCellphoneNumber(AbstractControl control)
   {
-    if (required(control) != null) return null;
+    //if (required(control) != null) return null;
 
     RegExp r = new RegExp("07[0-9]{8}");
     if (r.allMatches(control.value).length != control.value.length)
@@ -84,7 +87,7 @@ class FoValidators
 
   static Map<String, String> swedishSocialSecurityNumber(AbstractControl control)
   {
-    if (required(control) != null) return null;
+    //if (required(control) != null) return null;
 
     RegExp r = new RegExp("(19|20)[0-9]{2,2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-2])[0-9]{4,4}");
 

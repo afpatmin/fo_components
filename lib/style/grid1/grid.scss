@@ -3,7 +3,7 @@ $large: 2rem;
 $medium: 1rem;
 $small: 0.5rem;
 $x-small: 0.25rem;
-
+$maxWidth: 1280px;
 $large-width-threshold: 1024px;
 $medium-width-threshold: 750px;
 $colSpan: 12;
@@ -19,7 +19,7 @@ div.row
 {
   text-align: left;
   width: 100%;
-  max-width: 1280px;
+  max-width: $maxWidth;
   font-size: 0;
   display: inline-block;
   position: relative;
@@ -266,11 +266,14 @@ div.row.expand
   max-width: 100%;
 }
 
+
 .clickable { cursor: pointer; }
 
-.display-block { display: block !important; }
-display-inline { display: inline !important; }
-display-inline-block { display: inline-block !important; }
+.display-block { display: block; }
+.display-inline-block { display: inline-block; }
+
+.float-left { float: left; }
+.float-right { float: right; }
 
 .hidden { display: none; }
 
@@ -330,7 +333,6 @@ display-inline-block { display: inline-block !important; }
 .text-right { text-align: right; }
 .text-small { font-size: 0.9em; }
 
-.vertical-align-baseline { vertical-align: baseline !important; }
-.vertial-align-middle { vertical-align: middle !important; }
-.vertical-align-text-top { vertical-align: text-top !important; }
-.vertical-align-text-bottom { vertical-align: text-bottom !important; }
+.vertical-align-baseline { vertical-align: baseline; }
+.vertical-align-text-top { vertical-align: text-top; }
+.vertical-align-text-bottom { vertical-align: text-bottom; }
