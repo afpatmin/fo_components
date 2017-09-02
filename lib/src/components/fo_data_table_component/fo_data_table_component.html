@@ -17,8 +17,11 @@
 <div class="row collapse">
     <div class="s12 col">
         <table [class.faded]="disabled" class="output color-black box-shadow margin-bottom-x-small">
-            <thead *ngIf="filteredKeys.isNotEmpty">
+            <thead *ngIf="data.isNotEmpty">
             <tr>
+                <td *ngIf="showCheckboxes">
+                    <material-checkbox (checkedChange)="onAllCheckedChange($event)"></material-checkbox>
+                </td>
                 <td *ngFor="let cell of col"
                     [class.hide-for-small]="smallHiddencol.contains(cell)"
                     [class.hide-for-medium]="mediumHiddencol.contains(cell)"
@@ -28,10 +31,18 @@
                     <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
                     <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></material-icon>
                 </td>
+                <td *ngIf="showDeleteButtons" class="buttonCell"></td>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let key of filteredKeys | range:firstIndex:lastIndex" (click)="onRowClickController.add(key)">
+                <td *ngIf="showCheckboxes">
+                    <material-checkbox
+                            [checked]="selectedRows.contains(key)"
+                            (checkedChange)="onCheckedChange(key, $event)"
+                            (click)="$event.stopPropagation()">
+                    </material-checkbox>
+                </td>
                 <td
                         *ngFor="let cell of col"
                         [class.hide-for-small]="smallHiddencol.contains(cell)"
@@ -39,6 +50,9 @@
                         [class.hide-for-large]="largeHiddencol.contains(cell)"
                         (click)="onCellClickController.add(data[key].toTableRow()[cell])">
                     {{data[key].toTableRow()[cell]}}
+                </td>
+                <td *ngIf="showDeleteButtons" class="text-center">
+                    <material-icon class="clickable color-alert" icon="delete_forever" size="x-large" (click)="deleteBufferId = key; $event.stopPropagation()"></material-icon>
                 </td>
             </tr>
             <tr *ngIf="filteredKeys.isEmpty">
@@ -82,10 +96,31 @@
                 <span>{{'rows' | phrase}}/{{'page' | phrase:false}}:</span>
                 <fo-select
                         class="display-inline-block"
-                        [options]="rowModels"
-                        [(selectedId)]="strRows">
+                        [options]="rowOptions"
+                        [selectedModel]="selectedRowOption"
+                        (selectedModelChange)="selectedRowOption = $event; setIndices(0);">
                 </fo-select>
             </div>
         </div>
     </div>
 </div>
+
+<fo-modal
+        title="{{'confirm' | phrase}}"
+        [visible]="deleteBufferId != null"
+        (visibleChange)="deleteBufferId = null"
+        [showCloseButton]="false">
+    <p>{{'are_you_sure_delete_this_resource' | phrase}}</p>
+    <p class="text-right margin-bottom-none">
+        <material-button
+                raised
+                (trigger)="deleteBufferId = null">
+            {{'cancel' | phrase}}
+        </material-button>
+        <material-button
+                raised
+                (trigger)="onDeleteController.add(deleteBufferId); deleteBufferId = null;">
+            {{'ok' | phrase}}
+        </material-button>
+    </p>
+</fo-modal>

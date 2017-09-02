@@ -1,8 +1,14 @@
 <material-dropdown-select
         [buttonText]="label | phrase"
         [popupMatchInputWidth]="false"
-        [options]="selectionOptions"
+        [options]="options"
         [selection]="selectionModel"
         [(visible)]="visible">
+    <div *ngIf="showSearch" header>
+        <material-select-searchbox
+                [label]="'search' | phrase"
+                [filterable]="options">
+        </material-select-searchbox>
+    </div>
 </material-dropdown-select>
 <div class="selected-values">{{selectedValues}}</div>

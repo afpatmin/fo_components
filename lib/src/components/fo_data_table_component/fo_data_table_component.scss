@@ -1,4 +1,3 @@
-//@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 @import '../../../../../../Visurus/Grid/v1/grid';
 @import '../../../../../../Visurus/Grid/v1/theme';
 
@@ -60,6 +59,11 @@ table.output
         overflow: hidden;
         text-overflow: ellipsis;
         font-size: 0.8rem;
+      }
+
+      td.buttonCell
+      {
+        width: 1rem;
       }
     }
     border-bottom: 2px solid #ddd;

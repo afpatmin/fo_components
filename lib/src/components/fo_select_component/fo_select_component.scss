@@ -1,3 +1,5 @@
+@import '../../../../../../Visurus/Grid/v1/theme';
+
 :host
 {
   margin-bottom: 1rem;
@@ -6,9 +8,9 @@
   label
   {
     width: 100%;
+    margin-bottom: 0.5rem;
     display: inline-block;
-    margin-bottom: 0.2em;
-    font-size: 0.8em;
+    font-size: 0.75em;
     color: #888;
   }
 

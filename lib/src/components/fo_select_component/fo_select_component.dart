@@ -1,86 +1,78 @@
 // Copyright (c) 2017, Patrick Minogue. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'dart:async' show Stream, StreamController, StreamSubscription;
+import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import '../../pipes/phrase_pipe.dart';
-import '../../models/data_table_model.dart';
+import '../../models/fo_model.dart';
 
 @Component(
     selector: 'fo-select',
     styleUrls: const ['fo_select_component.css'],
     templateUrl: 'fo_select_component.html',
-    directives: const [CORE_DIRECTIVES, materialDirectives, MaterialSelectSearchboxComponent],
+    directives: const [CORE_DIRECTIVES, materialDirectives],
     pipes: const [PhrasePipe],
     changeDetection: ChangeDetectionStrategy.OnPush
 )
-class FoSelectComponent implements AfterContentInit, OnChanges, OnDestroy
+class FoSelectComponent implements OnInit, OnDestroy
 {
   FoSelectComponent()
   {
     _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
   }
 
-  void ngAfterContentInit()
+  void ngOnInit()
   {
-    if (selectedModel != null) selectedId = selectedModel.id;
-    if (selectedId != null)
+    /*
+    if (allowNullSelection)
     {
-      selectedModel = selectionOptions.optionsList.firstWhere((m) => m.id.compareTo(selectedId) == 0, orElse: () => null);
+      options.optionsList.add(null);
+      options = new StringSelectionOptions(options.optionsList);
     }
+    */
   }
 
-
+  /*
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-    if (changes.containsKey("options") && selectedModel != null && !selectionOptions.optionsList.contains(selectedModel))
+    if (changes.containsKey("options") && options != null)
     {
-      if (selectedModel != null && !selectionOptions.optionsList.contains(selectedModel) && selectionOptions.isNotEmpty)
-      {
-        selectionModel.select(selectionOptions.optionsList.first);
-      }
-      else if (allowNullSelection) selectionModel.clear();
+
+
     }
   }
-
+*/
   void ngOnDestroy()
   {
     _onVisibleChangeController.close();
     _onSelectedModelChangeController.close();
-    _onSelectedIdChangeController.close();
     _selectionChangeListener.cancel();
   }
 
-  void _onSelectionChanges(List<SelectionChangeRecord<DataTableModel>> e)
+  void setVisible(bool flag)
   {
-    if (e.isEmpty) return;
-
-    if (allowNullSelection)
-    {
-      if (e.first.added.isEmpty) selectedModel = selectedId = null;
-      else
-      {
-        selectedModel = e.first.added.first;
-        selectedId = selectedModel.id;
-      }
-    }
-    else if (!allowNullSelection && e.first.added.isNotEmpty)
-    {
-      selectedModel = e.first.added.first;
-      selectedId = selectedModel.id;
-    }
-
-    _onSelectedModelChangeController.add(selectedModel);
-    _onSelectedIdChangeController.add(selectedId);
+    if (!disabled) visible = flag;
   }
 
-  SelectionOptions<DataTableModel> selectionOptions = new SelectionOptions<DataTableModel>([]);
-  SelectionModel<DataTableModel> selectionModel = new SelectionModel.withList(allowMulti: false);
+  void _onSelectionChanges(List<SelectionChangeRecord<FoModel>> e)
+  {
+    if (e.isEmpty) return;
+    if (e.first.added.isNotEmpty) selectedModel = e.first.added.first;
+    _onSelectedModelChangeController.add(selectedModel);
+  }
+
+  void clearSelection()
+  {
+    selectionModel.clear();
+    selectedModel = null;
+    _onSelectedModelChangeController.add(null);
+  }
+
+  SelectionModel<FoModel> selectionModel = new SelectionModel.withList(allowMulti: false);
+  StreamSubscription<List<SelectionChangeRecord<FoModel>>> _selectionChangeListener;
   final StreamController<bool> _onVisibleChangeController = new StreamController();
-  final StreamController<DataTableModel> _onSelectedModelChangeController = new StreamController();
-  final StreamController<String> _onSelectedIdChangeController = new StreamController();
-  StreamSubscription<List<SelectionChangeRecord<DataTableModel>>> _selectionChangeListener;
+  final StreamController<FoModel> _onSelectedModelChangeController = new StreamController();
 
   @Input('allowNullSelection')
   bool allowNullSelection = false;
@@ -88,9 +80,11 @@ class FoSelectComponent implements AfterContentInit, OnChanges, OnDestroy
   @Input('label')
   String label = "";
 
+
+  /*
   @Input('nullSelectionButtonText')
   String nullSelectionButtonText = "-";
-
+*/
   @Input('disabled')
   bool disabled = false;
 
@@ -98,13 +92,13 @@ class FoSelectComponent implements AfterContentInit, OnChanges, OnDestroy
   bool fullWidth = false;
 
   @Input('options')
-  void set options(List<DataTableModel> value) { selectionOptions = new SelectionOptions<DataTableModel>([new OptionGroup(value)]); }
-
-  @Input('selectedId')
-  String selectedId;
+  StringSelectionOptions<FoModel> options = new StringSelectionOptions<FoModel>([]);
 
   @Input('selectedModel')
-  DataTableModel selectedModel;
+  FoModel selectedModel;
+
+  @Input('showSearch')
+  bool showSearch = false;
 
   @Input('tooltip')
   String tooltip;
@@ -112,12 +106,37 @@ class FoSelectComponent implements AfterContentInit, OnChanges, OnDestroy
   @Input('visible')
   bool visible = false;
 
-  @Output('selectedIdChange')
-  Stream<String> get onSelectedIdChangeOutput => _onSelectedIdChangeController.stream;
-
   @Output('selectedModelChange')
-  Stream<DataTableModel> get onSelectedModelChangeOutput => _onSelectedModelChangeController.stream;
+  Stream<FoModel> get onSelectedModelChangeOutput => _onSelectedModelChangeController.stream;
 
   @Output('visibleChange')
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
 }
+
+class NullSelection extends FoModel
+{
+  NullSelection([this._label = "-"]) : super(null);
+
+  @override
+  String toString() => _label;
+
+  final String _label;
+}
+
+/*
+class FoSelectionOptions<FoModel> extends StringSelectionOptions<FoModel> //implements Selectable
+{
+  FoSelectionOptions(List<FoModel> options) : super(options, toFilterableString: (FoModel option) => option.toString());
+
+  FoSelectionOptions.withOptionGroups(List<OptionGroup> optionGroups) :
+        super.withOptionGroups(optionGroups, toFilterableString: (FoModel option) => option.toString());
+
+  /*
+  @override
+  SelectableOption getSelectable(item)
+  {
+    return item is DataTableModel ? SelectableOption.Selectable : SelectableOption.Disabled;
+  }
+  */
+
+}*/

@@ -6,7 +6,6 @@ library data_table_component;
 import 'dart:async' show Stream, StreamController;
 import 'dart:html' as dom;
 import 'dart:math';
-import 'dart:collection' show LinkedHashMap;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:fo_components/fo_components.dart';
@@ -15,39 +14,72 @@ import 'package:fo_components/fo_components.dart';
     selector: 'fo-data-table',
     styleUrls: const ['fo_data_table_component.css'],
     templateUrl: 'fo_data_table_component.html',
-    directives: const [CORE_DIRECTIVES, FoSelectComponent, materialDirectives],
+    directives: const [CORE_DIRECTIVES, FoModalComponent, FoSelectComponent, materialDirectives, MaterialIconComponent],
     pipes: const [PhrasePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.Default)
 
-class DataTableComponent implements OnChanges, OnDestroy
+class DataTableComponent implements OnChanges, OnInit, OnDestroy
 {
-  DataTableComponent();
+  DataTableComponent(this._phraseService);
+
+  void ngOnInit()
+  {
+    selectedRowOption = rowOptions.optionsList.firstWhere((r) => r.count == rows, orElse: () => rowOptions.optionsList.first);
+    firstIndex = 0;
+    lastIndex = selectedRowOption.count;
+
+    if (data == null) data = new Map();
+
+    filteredKeys = data.keys;
+  }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-
-    if (changes.containsKey("rows") || changes.containsKey("models"))
+    if (changes.containsKey("rows") || changes.containsKey("data"))
     {
-      _setIndices(0);
+      if (data == null) data = new Map();
+      selectedRowOption = rowOptions.optionsList.firstWhere((r) => r.count == rows, orElse: () => rowOptions.optionsList.first);
+      setIndices(0);
+    }
+    if (changes.containsKey("data"))
+    {
+      filteredKeys = data.keys;
     }
   }
 
   void ngOnDestroy()
   {
     onCellClickController.close();
+    onDeleteController.close();
     onRowClickController.close();
+    onSelectedRowsController.close();
     _onSortController.close();
   }
 
   void step(int steps)
   {
-    _setIndices(firstIndex + (steps * rows));
+    setIndices(firstIndex + (steps * selectedRowOption.count));
   }
 
   void onSearchPhraseChange(String value)
   {
     searchPhrase = value;
-    _setIndices(0);
+    sortColumn = null;
+
+    if (searchPhrase != null && searchPhrase.isNotEmpty)
+    {
+      bool find(FoModel model, List<String> keywords)
+      {
+        return (model.toTableRow().values.firstWhere((value) => (keywords.firstWhere((keyword) =>
+            value.toString().toLowerCase().contains(keyword), orElse: () => null) != null), orElse: () => null) != null);
+      }
+
+      List<String> keywords = searchPhrase.toLowerCase().split(" ");
+      filteredKeys = data.values.where((model) => find(model, keywords)).map((value) => data.keys.firstWhere((key) => data[key] == value));
+    }
+    else filteredKeys = data.keys;
+
+    setIndices(0);
   }
 
   void onSort(String column)
@@ -56,141 +88,133 @@ class DataTableComponent implements OnChanges, OnDestroy
     {
       sortColumn = column;
       sortOrder = (sortOrder == "ASC") ? "DESC" : "ASC";
-      _sort();
+
+      if (sortOrder != null && sortColumn != null && sortColumn.isNotEmpty)
+      {
+        int sort(Map<String, String> a, Map<String, String> b)
+        {
+          if (a[sortColumn] == null) a[sortColumn] = "-";
+          if (b[sortColumn] == null) b[sortColumn] = "-";
+
+          try
+          {
+            // Number comparison
+            num numA = num.parse(a[sortColumn]);
+            num numB = num.parse(b[sortColumn]);
+            return (sortOrder == "ASC") ? (numA - numB).toInt() : (numB - numA).toInt();
+          }
+          on FormatException
+          {
+            try
+            {
+              // Date comparison
+              DateTime dateA = DateTime.parse(a[sortColumn]);
+              DateTime dateB = DateTime.parse(b[sortColumn]);
+              return (sortOrder == "ASC") ? (dateA.difference(dateB)).inMinutes : (dateB.difference(dateA)).inMinutes;
+            }
+            on FormatException
+            {
+              // Default String comparison
+              String colA = a[sortColumn].toString().toLowerCase();
+              String colB = b[sortColumn].toString().toLowerCase();
+
+              return (sortOrder == "ASC") ? colA.compareTo(colB) : colB.compareTo(colA);
+            }
+          }
+        }
+
+        List<FoModel> values = filteredKeys.map((key) => data[key]).toList(growable: false);
+        values.sort((FoModel a, FoModel b) => sort(a.toTableRow(), b.toTableRow()));
+
+        filteredKeys = values.map((model) => model.id);
+      }
     }
   }
 
   void onDownloadDataCSV()
   {
-    /**
-     * Generate CSV string (Property1;Property2;Property3;Property4;Property5\n)
-     */
-    StringBuffer sb = new StringBuffer();
-
-    for (String key in filteredKeys)
+    if (data.isNotEmpty)
     {
-      sb.writeln(_data[key].toTableRow().values.join(";"));
-    }
+      /**
+       * Generate CSV string (Property1;Property2;Property3;Property4;Property5\n)
+       */
+      StringBuffer sb = new StringBuffer();
 
-    String csv = Uri.encodeComponent(sb.toString());
-    new dom.AnchorElement(href:"data:text/plain;charset=utf-8,$csv")
-      ..setAttribute("download", "data.csv")
-      ..click();
-  }
+      String columns = data.values.first.toTableRow().keys.map(_phraseService.get).join(";");
+      sb.writeln(columns);
 
-  Map<String, DataTableModel> get data => _data;
-
-  List<String> get filteredKeys
-  {
-    bool find(List<String> needles, DataTableModel model)
-    {
-      for (String needle in needles.where((v) => v.isNotEmpty && v != ""))
+      for (String key in filteredKeys)
       {
-        if (model.toTableRow().values
-            .where((v) => v != null && v.toLowerCase()
-            .contains(needle.toLowerCase())).isNotEmpty) return true;
+        String row = data[key].toTableRow().values.join(";");
+        sb.writeln(row);
       }
-      return false;
-    }
 
-    if (searchPhrase.isEmpty) return data.keys.toList(growable: false);
-    else
-    {
-      List<String> keywordList = searchPhrase.split(" ");
-      return data.keys.where((key) => find(keywordList, data[key])).toList(growable: false);
+      String csv = Uri.encodeComponent(sb.toString());
+      new dom.AnchorElement(href:"data:text/csv;charset=utf-8,\uFEFF$csv")
+        ..setAttribute("download", "data.csv")
+        ..click();
     }
   }
 
-  void _sort()
+  void setIndices(int first_index)
   {
-    int sortFn(Map<String, String> a, Map<String, String> b, String column, String order)
-    {
-      if (a[column] == null) a[column] = "-";
-      if (b[column] == null) b[column] = "-";
+    if (first_index < 0 || first_index >= data.length) return;
 
-      try
-      {
-        // Number comparison
-        num numA = num.parse(a[column]);
-        num numB = num.parse(b[column]);
-        return (order == "ASC") ? (numA - numB).toInt() : (numB - numA).toInt();
-      }
-      on FormatException
-      {
-        try
-        {
-          // Date comparison
-          DateTime dateA = DateTime.parse(a[column]);
-          DateTime dateB = DateTime.parse(b[column]);
-          return (order == "ASC") ? (dateA.difference(dateB)).inMinutes : (dateB.difference(dateA)).inMinutes;
-        }
-        on FormatException
-        {
-          // Default String comparison
-          return (order == "ASC") ? a[column].compareTo(b[column]) : b[column].compareTo(a[column]);
-        }
-      }
-    }
-
-    LinkedHashMap<String, DataTableModel> bufferMap = new LinkedHashMap();
-    List<DataTableModel> values = _data.values.toList(growable: false);
-
-    values.sort((DataTableModel a, DataTableModel b) => sortFn(a.toTableRow(), b.toTableRow(), sortColumn, sortOrder));
-
-    for (DataTableModel value in values)
-    {
-      bufferMap[_data.keys.firstWhere((key) => _data[key] == value)] = value;
-    }
-    _data = bufferMap;
-
-    _onSortController.add({"column":sortColumn, "order":sortOrder});
-  }
-
-  void _setIndices(int first_index)
-  {
-    if (first_index < 0 || first_index >= _data.length) return;
+    int rowCount = selectedRowOption.count;
 
     firstIndex = first_index;
-    if (searchPhrase.isNotEmpty) firstIndex = max(0, min(firstIndex, filteredKeys.length - rows));
-    lastIndex = firstIndex + rows;
+    if (searchPhrase != null && searchPhrase.isNotEmpty) firstIndex = max(0, min(firstIndex, filteredKeys.length - rowCount));
+    lastIndex = firstIndex + rowCount;
 
-    currentPage = (filteredKeys.isEmpty) ? 0 : (firstIndex.toDouble() / rows).ceil() + 1;
+    currentPage = (data.isEmpty) ? 0 : (firstIndex.toDouble() / rowCount).ceil() + 1;
   }
 
-  List<String> get col => _col;
+  Iterable<String> get col => data.isEmpty ? [] : data.values.first.toTableRow().keys;
 
-  int get totalPages => (filteredKeys.length.toDouble() / rows).ceil();
+  int get totalPages => (filteredKeys.length.toDouble() / selectedRowOption.count).ceil();
 
-  String get strRows => rows.toString();
-
-  void set strRows(String value)
-  {
-    rows = int.parse(value);
-    _setIndices(0);
-  }
-
-  final List<DataTableModel> rowModels =
+  final StringSelectionOptions<RowOption> rowOptions = new StringSelectionOptions(
   [
-    new DataTableModel("5"),
-    new DataTableModel("10"),
-    new DataTableModel("15"),
-    new DataTableModel("20"),
-    new DataTableModel("25"),
-    new DataTableModel("50")
-  ];
+    new RowOption(5, "5"),
+    new RowOption(10, "10"),
+    new RowOption(15, "15"),
+    new RowOption(20, "20"),
+    new RowOption(25, "25"),
+    new RowOption(50, "50"),
+    new RowOption(100, "100"),
+  ]);
 
-  Map<String, DataTableModel> _data = new Map();
+  void onCheckedChange(String id, bool state)
+  {
+    if (state) selectedRows.add(id);
+    else selectedRows.remove(id);
+
+    onSelectedRowsController.add(selectedRows);
+  }
+
+  void onAllCheckedChange(bool state)
+  {
+    if (state) selectedRows = filteredKeys.toList();
+    else selectedRows.clear();
+  }
+
+  RowOption selectedRowOption;
+
+  String deleteBufferId;
   int firstIndex = 0;
   int lastIndex = 1;
   int currentPage = 1;
   String sortColumn = "";
   String sortOrder = "DESC";
   String searchPhrase = "";
-  List<String> _col = [];
+  Iterable<String> filteredKeys;
 
   final StreamController<String> onCellClickController = new StreamController();
+  final StreamController<List<String>> onSelectedRowsController = new StreamController();
+  final StreamController<String> onDeleteController = new StreamController();
   final StreamController<String> onRowClickController = new StreamController();
   final StreamController<Map<String, String>> _onSortController = new StreamController();
+  final PhraseService _phraseService;
 
   @Input('large-hidden-col')
   List<String> largeHiddencol = [];
@@ -202,19 +226,16 @@ class DataTableComponent implements OnChanges, OnDestroy
   List<String> mediumHiddencol = [];
 
   @Input('models')
-  void set models(Map<String, DataTableModel> value)
-  {
-    _data = (value == null) ? new Map() : value;
-    if (_data.isNotEmpty && _data.values.first.toTableRow().isNotEmpty)
-    {
-      _col = _data.values.first.toTableRow().keys.toList(growable: false);
-    }
-    _setIndices(firstIndex);
-    if (sortColumn.isNotEmpty) _sort();
-  }
+  Map<String, FoModel> data = new Map();
+
+  @Input('showCheckboxes')
+  bool showCheckboxes = false;
 
   @Input('title')
   String title = "";
+
+  @Input('selectedRows')
+  List<String> selectedRows = new List();
 
   @Input('rows')
   int rows = 10;
@@ -222,15 +243,30 @@ class DataTableComponent implements OnChanges, OnDestroy
   @Input('disabled')
   bool disabled = false;
 
+  @Input('showDeleteButtons')
+  bool showDeleteButtons = false;
+
   @Input('showDownloadButton')
   bool showDownloadButton = true;
 
   @Output('cellclick')
   Stream<String> get onCellClickOutput => onCellClickController.stream;
 
+  @Output('delete')
+  Stream<String> get onDeleteOutput => onDeleteController.stream;
+
   @Output('rowclick')
   Stream<String> get onRowClickOutput => onRowClickController.stream;
 
+  @Output('selectedRowsChange')
+  Stream<List<String>> get selectedRowsChange => onSelectedRowsController.stream;
+
   @Output('sort')
   Stream<Map<String, String>> get onSortOutput => _onSortController.stream;
+}
+
+class RowOption extends FoModel
+{
+  RowOption(this.count, String id) : super(id);
+  final int count;
 }

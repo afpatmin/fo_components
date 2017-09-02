@@ -90,6 +90,9 @@ class FoImageFileComponent implements OnDestroy
   @Input('alt')
   String alt = "";
 
+  @Input('disabled')
+  bool disabled = false;
+
   @Input('maxWidth')
   int maxWidth = 1024;
 

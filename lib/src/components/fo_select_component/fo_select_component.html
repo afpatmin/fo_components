@@ -1,25 +1,30 @@
-<label (click)="visible = true" *ngIf="label.isNotEmpty">
+<label (click)="setVisible(true)" *ngIf="label.isNotEmpty">
     {{label | phrase}}
     <material-icon  *ngIf="tooltip != null"
             [materialTooltip]="tooltip"
             icon="help_outline"
             size="medium">
     </material-icon>
+    <material-icon
+            *ngIf="allowNullSelection && selectedModel != null"
+            class="clickable color-alert"
+            icon="cancel"
+            size="medium"
+            (click)="clearSelection()">
+    </material-icon>
 </label>
 <material-dropdown-select
         [class.full-width]="fullWidth"
         [disabled]="disabled"
-        [buttonText]="selectedModel == null ? nullSelectionButtonText : selectedModel.toString()"
+        [buttonText]="selectedModel == null ? '-' : selectedModel.toString()"
         [popupMatchInputWidth]="true"
-        [options]="selectionOptions"
+        [options]="options"
         [selection]="selectionModel"
         [(visible)]="visible">
-    <!--
-    <div header>
+    <div *ngIf="showSearch" header>
         <material-select-searchbox
                 [label]="'search' | phrase"
-                [filterable]="selectionOptions">
+                [filterable]="options">
         </material-select-searchbox>
     </div>
-    -->
 </material-dropdown-select>

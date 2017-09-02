@@ -7,12 +7,16 @@ environment:
   sdk: '>=1.24.2 <2.0.0'
 
 dependencies:
-  angular: "^4.0.0-beta"
-  angular_components: "^0.6.0-beta"
+  angular: "^4.0.0"
+  angular_components: "^0.6.0"
   vi_auth_client:
     path: ../ViAuthClient
 
-transformers:
-  - angular
+dev_dependencies:
+  browser: ^0.10.0+2
+  dart_to_js_script_rewriter: ^1.0.3
 
-#dev_dependencies:
+
+transformers:
+- angular
+- dart_to_js_script_rewriter

@@ -4,23 +4,21 @@
 import 'dart:async' show Stream, StreamController, StreamSubscription;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:fo_components/fo_components.dart' show DataTableModel, PhrasePipe;
+import 'package:fo_components/fo_components.dart' show FoModel, PhrasePipe;
 
 @Component(
     selector: 'fo-multi-select',
     styleUrls: const ['fo_multi_select_component.css'],
     templateUrl: 'fo_multi_select_component.html',
-    directives: const [materialDirectives],
+    directives: const [CORE_DIRECTIVES, materialDirectives],
     pipes: const [PhrasePipe],
     changeDetection: ChangeDetectionStrategy.OnPush
 )
-class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
+class FoMultiSelectComponent implements OnChanges, OnDestroy
 {
-  FoMultiSelectComponent();
-
-  void ngOnInit()
+  FoMultiSelectComponent()
   {
-    _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<DataTableModel>> e)
+    _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<FoModel>> e)
     {
       _onSelectedModelsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.toList(growable: false));
     });
@@ -32,7 +30,7 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
     {
       _selectionChangeListener?.cancel();
       selectedModels.forEach(selectionModel.select);
-      _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<DataTableModel>> e)
+      _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<FoModel>> e)
       {
         _onSelectedModelsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.toList(growable: false));
       });
@@ -48,17 +46,10 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
 
   String get selectedValues => selectionModel.selectedValues.isEmpty ? nullSelectionButtonText : selectionModel.selectedValues.map((d) => d.toString()).join(", ");
 
-  bool get visible => _visible;
-
-  bool _visible = false;
-  SelectionOptions<DataTableModel> selectionOptions;
-  SelectionModel<DataTableModel> selectionModel = new SelectionModel.withList(allowMulti: true);
+  SelectionModel<FoModel> selectionModel = new SelectionModel.withList(allowMulti: true);
   final StreamController<bool> _onVisibleChangeController = new StreamController();
-  final StreamController<List<DataTableModel>> _onSelectedModelsChangeController = new StreamController();
-  StreamSubscription<List<SelectionChangeRecord<DataTableModel>>> _selectionChangeListener;
-
-  @Input('closeOnSelect')
-  bool closeOnSelect = true;
+  final StreamController<List<FoModel>> _onSelectedModelsChangeController = new StreamController();
+  StreamSubscription<List<SelectionChangeRecord<FoModel>>> _selectionChangeListener;
 
   @Input('label')
   String label = "";
@@ -67,20 +58,21 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
   String nullSelectionButtonText = "-";
 
   @Input('options')
-  void set options(List<DataTableModel> value)
-  {
-    selectionOptions = (value == null) ? null : new SelectionOptions<DataTableModel>([new OptionGroup(value)]);
-  }
+  StringSelectionOptions<FoModel> options = new StringSelectionOptions([]);
 
   @Input('selectedModels')
-  List<DataTableModel> selectedModels;
+  List<FoModel> selectedModels;
 
-  @Output('selectedModelsChange')
-  Stream<List<DataTableModel>> get onSelectedModelsChangeOutput => _onSelectedModelsChangeController.stream;
+  @Input('showSearch')
+  bool showSearch = false;
 
   @Input('visible')
-  void set visible(bool value) { _visible = value; }
+  bool visible = false;
 
   @Output('visibleChange')
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
+
+  @Output('selectedModelsChange')
+  Stream<List<FoModel>> get onSelectedModelsChangeOutput => _onSelectedModelsChangeController.stream;
+
 }

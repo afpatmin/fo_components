@@ -1,13 +1,11 @@
-//import 'package:angular_components/angular_components.dart' show Filterable;
-
-class DataTableModel
+class FoModel
 {
-  DataTableModel(this.id);
+  FoModel(this.id);
 
   @override
   operator == (dynamic other)
   {
-    if (!(other is DataTableModel)) return false;
+    if (!(other is FoModel)) return false;
     return hashCode.compareTo(other.hashCode) == 0;
   }
 
@@ -17,6 +15,8 @@ class DataTableModel
   Map<String, String> toTableRow() => {"id":id};
 
   String id;
+
+//  bool selected = false;
 
   @override
   String toString() => id;

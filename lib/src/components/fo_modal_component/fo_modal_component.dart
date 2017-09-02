@@ -10,7 +10,7 @@ import 'package:fo_components/fo_components.dart' show PhrasePipe;
     selector: 'fo-modal',
     styleUrls: const ['fo_modal_component.css'],
     templateUrl: 'fo_modal_component.html',
-    directives: const [CORE_DIRECTIVES, materialDirectives],
+    directives: const [CORE_DIRECTIVES, materialDirectives, MaterialIconComponent],
     pipes: const [PhrasePipe]
 )
 class FoModalComponent implements OnDestroy

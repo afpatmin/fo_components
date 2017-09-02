@@ -15,8 +15,10 @@ export 'src/components/fo_youtube_player_component/fo_youtube_player_component.d
 export 'src/components/fo_time_picker_component/fo_time_picker_component.dart';
 export 'src/directives/lowercase_directive.dart';
 export 'src/directives/uppercase_directive.dart';
-export 'src/models/data_table_model.dart';
-export 'src/pipes/range_pipe.dart';
+export 'src/models/fo_model.dart';
+export 'src/pipes/filter_pipe.dart';
 export 'src/pipes/phrase_pipe.dart';
+export 'src/pipes/range_pipe.dart';
+export 'src/pipes/sort_pipe.dart';
 export 'src/services/phrase_service.dart';
 export 'src/validators/fo_validators.dart';

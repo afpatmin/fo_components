@@ -8,7 +8,7 @@
         <span *ngIf="file != null">{{file.name}} ({{(file.size / 1024).round()}}kb)</span>
         <material-icon *ngIf="file != null" icon="cancel" size="small" class="color-alert clickable" (click)="clearSelection()"></material-icon>
     </p>
-    <p class="alert" *ngIf="file != null && file.size > maxByteSize">
-        {{'max_bytesize_exceeded' | phrase}} ({{(maxByteSize/1024).ceil()}}kb)
+    <p class="color-alert" *ngIf="file != null && file.size > maxByteSize">
+        {{'max_filesize_exceeded' | phrase}} ({{((maxByteSize/1024)/1024).ceil()}}mb)
     </p>
 </div>
