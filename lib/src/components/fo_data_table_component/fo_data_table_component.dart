@@ -61,9 +61,8 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     setIndices(firstIndex + (steps * selectedRowOption.count));
   }
 
-  void onSearchPhraseChange(String value)
+  void onSearch()
   {
-    searchPhrase = value;
     sortColumn = null;
 
     if (searchPhrase != null && searchPhrase.isNotEmpty)
@@ -80,6 +79,11 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     else filteredKeys = data.keys;
 
     setIndices(0);
+  }
+
+  void onSearchKeyUp(dom.KeyboardEvent e)
+  {
+    if (e.keyCode == dom.KeyCode.ENTER || e.keyCode == dom.KeyCode.MAC_ENTER) onSearch();
   }
 
   void onSort(String column)
