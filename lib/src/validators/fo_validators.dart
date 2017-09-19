@@ -18,7 +18,8 @@ class FoValidators
 
   static Map<String, String> alpha(AbstractControl control)
   {
-    if ((required())(control) != null) return null;
+    //if ((required())(control) != null) return null;
+    if (control.value == null || control.value.toString().isEmpty) return null;
 
     if (new RegExp(r"[a-zA-ZåäöÅÄÖ ]").allMatches(control.value).length != control.value.length)
     {
@@ -30,7 +31,8 @@ class FoValidators
 
   static Map<String, String> alphaNumeric(AbstractControl control)
   {
-    if ((required())(control) != null) return null;
+    //if ((required())(control) != null) return null;
+    if (control.value == null || control.value.toString().isEmpty) return null;
 
     String value = control.value;
     RegExp r = new RegExp(r"[a-zA-ZåäöÅÄÖ0-9 ]");
@@ -44,7 +46,8 @@ class FoValidators
 
   static Map<String, String> email(AbstractControl control)
   {
-    if ((required())(control) != null) return null;
+    //if ((required())(control) != null) return null;
+    if (control.value == null || control.value.toString().isEmpty) return null;
 
     RegExp r = new RegExp(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)");
     if (r.stringMatch(control.value) != control.value)
@@ -57,7 +60,8 @@ class FoValidators
 
   static Map<String, String> linkedInId(AbstractControl control)
   {
-    if ((required())(control) != null) return null;
+    //if ((required())(control) != null) return null;
+    if (control.value == null || control.value.toString().isEmpty) return null;
 
     if (new RegExp(r"[a-z0-9åäö\-\\/]{5,50}").stringMatch(control.value) != control.value)
     {
@@ -69,7 +73,8 @@ class FoValidators
 
   static Map<String, String> numeric(AbstractControl control)
   {
-    if ((required())(control) != null) return null;
+    //if ((required())(control) != null) return null;
+    if (control.value == null || control.value.toString().isEmpty) return null;
 
     if (control.value is num) return null;
     else
@@ -86,7 +91,8 @@ class FoValidators
 
   static Map<String, String> phoneNumber(AbstractControl control)
   {
-    if ((required())(control) != null) return null;
+    //if ((required())(control) != null) return null;
+    if (control.value == null || control.value.toString().isEmpty) return null;
 
     if (new RegExp(r"[\+]{0,1}[0-9\- ]{7,32}").stringMatch(control.value) != control.value)
     {
@@ -98,7 +104,9 @@ class FoValidators
 
   static Map<String, String> swedishCellphoneNumber(AbstractControl control)
   {
-    if ((required())(control) != null) return null;
+    //if ((required())(control) != null) return null;
+    if (control.value == null || control.value.toString().isEmpty) return null;
+
     if (new RegExp("07[0-9]{8}").stringMatch(control.value) != control.value)
     {
       final PhraseService ps = new PhraseService();
@@ -109,7 +117,7 @@ class FoValidators
 
   static Map<String, String> swedishSocialSecurityNumber(AbstractControl control)
   {
-    if ((required())(control) != null) return null;
+    if (control.value == null || control.value.toString().isEmpty) return null;
 
     RegExp r = new RegExp("(19|20)[0-9]{2,2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-2])[0-9]{4,4}");
     if (r.stringMatch(control.value) != control.value)
@@ -122,7 +130,8 @@ class FoValidators
 
   static Map<String, String> url(AbstractControl control)
   {
-    if ((required())(control) != null) return null;
+    if (control.value == null || control.value.toString().isEmpty) return null;
+
     RegExp r = new RegExp(r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)");
     if (r.stringMatch(control.value) != control.value)
     {
@@ -134,7 +143,8 @@ class FoValidators
 
   static Map<String, String> youtubeId(AbstractControl control)
   {
-    if ((required())(control) != null) return null;
+    if (control.value == null || control.value.toString().isEmpty) return null;
+
     if (new RegExp(r"[a-zA-Z0-9_]{11}").stringMatch(control.value) != control.value)
     {
       final PhraseService ps = new PhraseService();

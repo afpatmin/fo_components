@@ -20,8 +20,6 @@ class FoModalComponent implements OnDestroy
   void ngOnDestroy()
   {
     _onVisibleChangeController.close();
-
-
   }
 
   void close()
