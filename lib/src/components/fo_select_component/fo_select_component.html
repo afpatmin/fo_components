@@ -1,7 +1,8 @@
 <label (click)="setVisible(true)" *ngIf="label.isNotEmpty">
     {{label | phrase}}
     <material-icon  *ngIf="tooltip != null"
-            [materialTooltip]="tooltip"
+            class="clickable"
+            (click)="tooltipModalVisible = true; $event.stopPropagation();"
             icon="help_outline"
             size="medium">
     </material-icon>
@@ -15,7 +16,7 @@
 </label>
 <material-dropdown-select
         [class.full-width]="fullWidth"
-        [disabled]="disabled"
+        [disabled]="disabled || options == null || selectionModel == null"
         [buttonText]="selectedModel == null ? '-' : selectedModel.toString()"
         [popupMatchInputWidth]="true"
         [options]="options"
@@ -28,3 +29,10 @@
         </material-select-searchbox>
     </div>
 </material-dropdown-select>
+
+<fo-modal
+        title="{{'information' | phrase}}"
+        [(visible)]="tooltipModalVisible"
+        [showCloseButton]="true">
+    <p>{{tooltip | phrase}}</p>
+</fo-modal>

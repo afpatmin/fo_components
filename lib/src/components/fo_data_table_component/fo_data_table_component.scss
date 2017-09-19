@@ -4,7 +4,6 @@
 :host
 {
   width:100%;
-
   material-icon
   {
     vertical-align: text-top;
@@ -27,7 +26,6 @@ table.output
 {
   -webkit-transition: opacity 0.2s;
   -moz-transition: opacity 0.2s;
-  //-ms-transition: opacity 0.2s;
   -o-transition: opacity 0.2s;
   transition: opacity 0.2s;
   -webkit-user-select: none;
@@ -35,9 +33,9 @@ table.output
   -ms-user-select: none;
   user-select: none;
   width: 100%;
+  min-width: 240px;
   border-collapse: collapse;
   border:2px solid #eee;
-  //color: $colorBlack;
   font-size: 0.7rem;
   table-layout: fixed;
 
@@ -126,5 +124,5 @@ table.output
 
 material-input
 {
-  width: auto !important; //100% !important;
+  width: 100%;
 }

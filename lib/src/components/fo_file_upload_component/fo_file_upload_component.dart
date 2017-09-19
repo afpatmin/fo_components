@@ -5,7 +5,7 @@ import 'dart:async';
 import 'dart:html' as dom;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import '../../../src/pipes/phrase_pipe.dart';
+import 'package:fo_components/fo_components.dart';
 
 @Component(
     selector: 'fo-file-upload',

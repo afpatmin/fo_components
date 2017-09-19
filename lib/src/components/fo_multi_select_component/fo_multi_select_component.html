@@ -1,4 +1,5 @@
 <material-dropdown-select
+        [disabled]="disabled || options == null || selectionModel == null"
         [buttonText]="label | phrase"
         [popupMatchInputWidth]="false"
         [options]="options"

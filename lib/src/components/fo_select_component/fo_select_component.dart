@@ -4,45 +4,23 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import '../../pipes/phrase_pipe.dart';
-import '../../models/fo_model.dart';
+import 'package:fo_components/fo_components.dart';
 
 @Component(
     selector: 'fo-select',
     styleUrls: const ['fo_select_component.css'],
     templateUrl: 'fo_select_component.html',
-    directives: const [CORE_DIRECTIVES, materialDirectives],
+    directives: const [CORE_DIRECTIVES, materialDirectives, FoModalComponent],
     pipes: const [PhrasePipe],
     changeDetection: ChangeDetectionStrategy.OnPush
 )
-class FoSelectComponent implements OnInit, OnDestroy
+class FoSelectComponent implements OnDestroy
 {
   FoSelectComponent()
   {
     _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
   }
 
-  void ngOnInit()
-  {
-    /*
-    if (allowNullSelection)
-    {
-      options.optionsList.add(null);
-      options = new StringSelectionOptions(options.optionsList);
-    }
-    */
-  }
-
-  /*
-  void ngOnChanges(Map<String, SimpleChange> changes)
-  {
-    if (changes.containsKey("options") && options != null)
-    {
-
-
-    }
-  }
-*/
   void ngOnDestroy()
   {
     _onVisibleChangeController.close();
@@ -74,17 +52,14 @@ class FoSelectComponent implements OnInit, OnDestroy
   final StreamController<bool> _onVisibleChangeController = new StreamController();
   final StreamController<FoModel> _onSelectedModelChangeController = new StreamController();
 
+  bool tooltipModalVisible = false;
+
   @Input('allowNullSelection')
   bool allowNullSelection = false;
 
   @Input('label')
   String label = "";
 
-
-  /*
-  @Input('nullSelectionButtonText')
-  String nullSelectionButtonText = "-";
-*/
   @Input('disabled')
   bool disabled = false;
 
@@ -122,21 +97,3 @@ class NullSelection extends FoModel
 
   final String _label;
 }
-
-/*
-class FoSelectionOptions<FoModel> extends StringSelectionOptions<FoModel> //implements Selectable
-{
-  FoSelectionOptions(List<FoModel> options) : super(options, toFilterableString: (FoModel option) => option.toString());
-
-  FoSelectionOptions.withOptionGroups(List<OptionGroup> optionGroups) :
-        super.withOptionGroups(optionGroups, toFilterableString: (FoModel option) => option.toString());
-
-  /*
-  @override
-  SelectableOption getSelectable(item)
-  {
-    return item is DataTableModel ? SelectableOption.Selectable : SelectableOption.Disabled;
-  }
-  */
-
-}*/

@@ -30,6 +30,8 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
     {
       _selectionChangeListener?.cancel();
 
+      if (selectedModels == null) selectedModels = new List();
+
       selectionModel = new SelectionModel.withList(selectedValues: selectedModels, allowMulti: true);
 
       _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<FoModel>> e)
@@ -52,6 +54,9 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
   final StreamController<bool> _onVisibleChangeController = new StreamController();
   final StreamController<List<FoModel>> _onSelectedModelsChangeController = new StreamController();
   StreamSubscription<List<SelectionChangeRecord<FoModel>>> _selectionChangeListener;
+
+  @Input('disabled')
+  bool disabled = false;
 
   @Input('label')
   String label = "";

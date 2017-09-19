@@ -13,16 +13,22 @@ material-dialog
     padding-bottom: 1rem;
   }
 
-  /deep/ div.header
+  /deep/ header
   {
-    color: white;
-    h3
-    {
-      line-height: 160%;
+    padding: 0 !important;
 
-      material-button
+    div.header
+    {
+      padding: 16px;
+      color: white;
+      h3
       {
-        margin-left: 1rem;
+        line-height: 160%;
+
+        material-button
+        {
+          margin-left: 1rem;
+        }
       }
     }
   }

@@ -16,7 +16,7 @@ import 'package:fo_components/fo_components.dart';
     templateUrl: 'fo_data_table_component.html',
     directives: const [CORE_DIRECTIVES, FoModalComponent, FoSelectComponent, materialDirectives, MaterialIconComponent],
     pipes: const [PhrasePipe, RangePipe],
-    changeDetection: ChangeDetectionStrategy.Default)
+    changeDetection: ChangeDetectionStrategy.OnPush)
 
 class DataTableComponent implements OnChanges, OnInit, OnDestroy
 {
@@ -29,8 +29,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     lastIndex = selectedRowOption.count;
 
     if (data == null) data = new Map();
-
-    //_filteredKeys = data.keys;
   }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
@@ -39,13 +37,11 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     {
       if (data == null) data = new Map();
       selectedRowOption = rowOptions.optionsList.firstWhere((r) => r.count == rows, orElse: () => rowOptions.optionsList.first);
+
+      _filteredKeys = data.keys;
+      onSearch();
       setIndices(0);
     }
-    /*
-    if (changes.containsKey("data"))
-    {
-      _filteredKeys = data.keys;
-    }*/
   }
 
   void ngOnDestroy()
@@ -80,11 +76,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     else _filteredKeys = data.keys;
 
     setIndices(0);
-  }
-
-  void onSearchKeyUp(dom.KeyboardEvent e)
-  {
-    if (e.keyCode == dom.KeyCode.ENTER || e.keyCode == dom.KeyCode.MAC_ENTER) onSearch();
   }
 
   void onSort(String column)
@@ -148,13 +139,25 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
       String columns = data.values.first.toTableRow().keys.map(_phraseService.get).join(";");
       sb.writeln(columns);
 
-      for (String key in _filteredKeys)
+      for (String key in filteredKeys)
       {
-        String row = data[key].toTableRow().values.join(";");
-        sb.writeln(row);
+        Map<String, String> dataRow = data[key].toTableRow();
+
+        /// Add "'"-character if ¨the cell has a leading '0'-character. This will stop Excel from skipping leading 0
+        for (String key in dataRow.keys)
+        {
+          try
+          {
+            num.parse(dataRow[key]);
+            if (dataRow[key].startsWith("0")) dataRow[key] = '="' + dataRow[key] + '"';
+          }
+          catch (e) { /* Not a number, continue */ }
+        }
+        sb.writeln(dataRow.values.join(";"));
       }
 
       String csv = Uri.encodeComponent(sb.toString());
+      /* \uFEFF: UTF-8 BOM */
       new dom.AnchorElement(href:"data:text/csv;charset=utf-8,\uFEFF$csv")
         ..setAttribute("download", "data.csv")
         ..click();
@@ -168,7 +171,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     int rowCount = selectedRowOption.count;
 
     firstIndex = first_index;
-    if (searchPhrase != null && searchPhrase.isNotEmpty) firstIndex = max(0, min(firstIndex, _filteredKeys.length - rowCount));
+    if (searchPhrase != null && searchPhrase.isNotEmpty) firstIndex = max(0, min(firstIndex, filteredKeys.length - rowCount));
     lastIndex = firstIndex + rowCount;
 
     currentPage = (data.isEmpty) ? 0 : (firstIndex.toDouble() / rowCount).ceil() + 1;
@@ -194,12 +197,13 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     if (state) selectedRows.add(id);
     else selectedRows.remove(id);
 
+
     onSelectedRowsController.add(selectedRows);
   }
 
   void onAllCheckedChange(bool state)
   {
-    if (state) selectedRows = _filteredKeys.toList();
+    if (state == true) selectedRows = filteredKeys.toList();
     else selectedRows.clear();
   }
 
@@ -215,6 +219,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   String sortOrder = "DESC";
   String searchPhrase = "";
   Iterable<String> _filteredKeys;
+  bool infoModalOpen = false;
 
   final StreamController<String> onCellClickController = new StreamController();
   final StreamController<List<String>> onSelectedRowsController = new StreamController();
@@ -224,13 +229,13 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   final PhraseService _phraseService;
 
   @Input('large-hidden-col')
-  List<String> largeHiddencol = [];
+  List<String> largeHiddenCol = [];
 
   @Input('small-hidden-col')
-  List<String> smallHiddencol = [];
+  List<String> smallHiddenCol = [];
 
   @Input('medium-hidden-col')
-  List<String> mediumHiddencol = [];
+  List<String> mediumHiddenCol = [];
 
   @Input('models')
   Map<String, FoModel> data = new Map();
@@ -240,6 +245,9 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   @Input('title')
   String title = "";
+
+  @Input('description')
+  String description;
 
   @Input('selectedRows')
   List<String> selectedRows = new List();

@@ -5,9 +5,8 @@ import 'dart:async';
 import 'dart:html' as dom;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:fo_components/fo_components.dart' show FoModalComponent;
+import 'package:fo_components/fo_components.dart';
 import 'package:vi_auth_client/vi_auth_client.dart';
-import '../../../src/pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-login',

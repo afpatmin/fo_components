@@ -1,76 +1,101 @@
 // Copyright (c) 2017, Patrick Minogue. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'dart:async' show Stream, StreamController, StreamSubscription;
-import 'dart:html' as dom;
+import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:angular_router/angular_router.dart';
 import 'package:fo_components/fo_components.dart';
 
 @Component(
     selector: 'fo-sidebar',
     styleUrls: const ['fo_sidebar_component.css'],
     templateUrl: 'fo_sidebar_component.html',
-    directives: const [CORE_DIRECTIVES, materialDirectives, MaterialIconComponent],
+    directives: const [CORE_DIRECTIVES, materialDirectives, ROUTER_DIRECTIVES],
     pipes: const [PhrasePipe]
 )
-class FoSidebarComponent implements OnDestroy
+class FoSidebarComponent implements OnInit, OnDestroy
 {
-  FoSidebarComponent()
+  FoSidebarComponent(this._router);
+
+  void ngOnInit()
   {
-    _onWindowClickListener = dom.document.onClick.listen((e)
+    setHeaderIcon("index.html");
+    _onStartNavigationListener = _router.onStartNavigation.listen(setHeaderIcon);
+  }
+
+  void setHeaderIcon(String event)
+  {
+    if (_router.currentInstruction != null)
     {
-      if (visible && !locked) visible = locked = false;
-      _onVisibleChangeController.add(visible);
-    });
+      for (FoSidebarCategory category in categories)
+      {
+        FoSidebarItem item = category.items.firstWhere((item) => item.url == event, orElse: () => null);
+        if (item != null) pageIcon = item.icon;
+      }
+    }
   }
 
   void ngOnDestroy()
   {
-    _onVisibleChangeController.close();
-    _onWindowClickListener.cancel();
+    _onExpandedChangeController.close();
+    _onStartNavigationListener.cancel();
   }
 
-  void toggleLocked(dom.Event e)
+  void toggleExpanded()
   {
-    e.stopPropagation();
-    locked = !locked;
+    expanded = !expanded;
+
+    animating = true;
+    new Timer(const Duration(milliseconds: 100), () => animating = false);
+
+    _onExpandedChangeController.add(expanded);
   }
 
-  void toggleOpen(dom.Event e)
-  {
-    e.stopPropagation();
-    visible = !visible;
+  String get sidebarWidth => (expanded) ? "${width}px" : "${miniWidth}px";
 
-    /// Can't be locked and not visible
-    if (!visible) locked = false;
+  String get pageHeader => (_router.currentInstruction == null) ? "" : _router.currentInstruction.path;
 
-    _onVisibleChangeController.add(visible);
-  }
-
-  String get transform
-  {
-    return (visible) ? "" : "translateX(-$width)";
-  }
-
-  final StreamController<bool> _onVisibleChangeController = new StreamController();
-  StreamSubscription<dom.Event> _onWindowClickListener;
+  final Router _router;
+  bool animating = false;
+  String pageIcon = "";
+  final StreamController<bool> _onExpandedChangeController = new StreamController();
+  StreamSubscription<String> _onStartNavigationListener;
+  final int miniWidth = 40;
 
   @Input('backgroundColor')
   String backgroundColor = "#666";
 
-  @Input('locked')
-  bool locked = false;
+  @Input('header')
+  String header = "Menu";
 
-  @Input('title')
-  String title = "Menu";
-
-  @Input('visible')
-  bool visible = false;
+  @Input('expanded')
+  bool expanded = false;
 
   @Input('width')
-  String width = "200px";
+  int width = 200;
 
-  @Output('visibleChange')
-  Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
+  @Input('categories')
+  List<FoSidebarCategory> categories = new List();
+
+  @Output('expandedChange')
+  Stream<bool> get onExpandedChangeOutput => _onExpandedChangeController.stream;
+}
+
+class FoSidebarCategory
+{
+  FoSidebarCategory(this.title, this.items);
+
+  final List<FoSidebarItem> items;
+  final String title;
+}
+
+class FoSidebarItem
+{
+  FoSidebarItem(this.url, this.label, this.routerLink, this.icon);
+
+  final String url;
+  final String label;
+  final String routerLink;
+  final String icon;
 }

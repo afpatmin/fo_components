@@ -55,10 +55,10 @@
   background-color: white !important; }
 
 .background-color-alert {
-  background-color: palevioletred !important; }
+  background-color: #e33 !important; }
 
 .background-color-alert-bright {
-  background-color: #f0c1d1 !important; }
+  background-color: #f69191 !important; }
 
 .background-color-black {
   background-color: #555 !important; }
@@ -112,10 +112,10 @@
   color: white !important; }
 
 .color-alert {
-  color: palevioletred !important; }
+  color: #e33 !important; }
 
 .color-alert-bright {
-  color: #f0c1d1 !important; }
+  color: #f69191 !important; }
 
 .color-black {
   color: #555 !important; }
@@ -132,23 +132,31 @@ hr {
 material-checkbox div.icon-container glyph.icon.filled {
   color: #1b9aaa; }
 
+material-radio div.icon-container.checked {
+  color: #1b9aaa !important; }
+
 material-tab-strip div.navi-bar div.tab-indicator {
   background-color: #1b9aaa; }
 material-tab-strip tab-button.active {
   color: #1b9aaa !important; }
 
+.material-toggle.checked div.tgl-container div.tgl-bar {
+  background-color: #3e3 !important; }
+.material-toggle.checked div.tgl-container div.tgl-btn-container div.tgl-btn {
+  background-color: #3e3 !important; }
+
 material-input span.label-text.focused {
   color: #1b9aaa !important; }
 material-input span.label-text.invalid {
-  color: palevioletred !important; }
+  color: #e33 !important; }
 material-input div.focused-underline {
   background-color: #1b9aaa !important; }
 material-input div.focused-underline.invalid {
-  background-color: palevioletred !important; }
+  background-color: #e33 !important; }
 material-input div.unfocused-underline.invalid {
-  background-color: palevioletred !important; }
+  background-color: #e33 !important; }
 material-input div.error-text {
-  color: palevioletred !important; }
+  color: #e33 !important; }
 
 material-spinner {
   border-color: #1b9aaa !important; }

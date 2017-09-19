@@ -1,89 +1,174 @@
 @import '../../../../../Grid/v1/theme';
+@import '../../../../../Grid/v1/grid';
 
-
-:host /deep/
+:host
 {
   div.transformer
   {
-    text-align: left;
-    position: fixed;
-    z-index: 98;
+    position: relative;
+    height: 100%;
+    display: block;
     top: 0;
-    bottom: 0;
     left: 0;
-    -webkit-transition: transform 100ms ease;
-    -moz-transition: transform 100ms ease;
-    -o-transition: transform 100ms ease;
-    transition: transform 100ms ease;
 
-    div.button
+    .fade-opacity
     {
-      position: absolute;
-      right: -1.5rem;
-      width: 2rem;
-      padding: 0;
-      background-color: white;
-      border: 1px solid #ccc;
-      border-radius: 0.2rem;
-      cursor: pointer;
-      text-align: right;
-
-      material-icon
-      {
-        vertical-align: middle;
-      }
+      -webkit-transition: opacity 200ms ease;
+      -moz-transition: opacity 200ms ease;
+      -o-transition: opacity 200ms ease;
+      transition: opacity 200ms ease;
     }
 
-    div.button.toggle-open
+    table
     {
-      top: 5.3rem;
-    }
-    div.button.toggle-locked
-    {
-      top: 9.2rem;
-      material-icon
-      {
-        margin-right: 0.2rem;
-      }
-    }
-
-    div.container
-    {
-      position: absolute;
-      overflow-x: hidden;
-      overflow-y: auto;
-      background-color: white;
-      padding: 0;
       width: 100%;
-      height: 100%;
+      margin: 0;
+      border-collapse: collapse;
+      table-layout: fixed;
 
-      div.header
+      tr
       {
-        padding: 5.7rem 0.5rem 1rem 1rem;
-
-        p
+        td
         {
-          margin: 0;
-          color: white;
-          text-transform: uppercase;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          vertical-align: middle;
-          material-icon
+          overflow-y: auto;
+          overflow-x: auto;
+          vertical-align: top;
+          -webkit-transition: width 100ms ease;
+          -moz-transition: width 100ms ease;
+          -o-transition: width 100ms ease;
+          transition: width 100ms ease;
+
+          div#sidebar
           {
+            display: flex;
+            flex-direction: column;
+            -webkit-transition: width 100ms ease;
+            -moz-transition: width 100ms ease;
+            -o-transition: width 100ms ease;
+            transition: width 100ms ease;
+
+            text-align: left;
+            position: fixed;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            background-color: white;
+            padding: 0;
+            top: 0;
+            left: 0;
+
+            div#sidebar-header
+            {
+              flex: none;
+              height: 7.5rem;
+              p
+              {
+                margin: 5.5rem 1rem 0 1rem;
+                color: white;
+                text-transform: uppercase;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                vertical-align: middle;
+              }
+            }
+
+            #sidebar-list
+            {
+              flex: 1;
+              overflow-y: auto;
+              -ms-overflow-style: none;
+              material-list
+              {
+                material-list-item
+                {
+                  material-icon
+                  {
+                    color: #888;
+                  }
+                }
+                material-list-item.router-link-active
+                {
+                  background-color: #ddd;
+
+                  material-icon
+                  {
+                    //color: white;
+                  }
+                }
+              }
+            }
+            #sidebar-list::-webkit-scrollbar
+            {
+              width: 0 !important
+            }
+            div.mini-item
+            {
+              material-icon
+              {
+                color: #888;
+              }
+            }
+            div.mini-item:hover
+            {
+              background-color: #eee;
+            }
+
+            hr
+            {
+              margin-top: 0.5em;
+              margin-bottom: 0.5em;
+            }
+
+          }
+          div#toggle
+          {
+            flex: 0;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+           // position:absolute;
+            //bottom: 0;
+            left: 0;
+            width: 100%;
             cursor: pointer;
+            border-top: 1px solid #ddd;
+            background-color: #eee;
+            padding: 0.5rem 0;
+            material-icon
+            {
+              margin-right: 0.5rem;
+            }
+          }
+
+          div#main-row
+          {
+            min-width: 315px;
+            #page-header
+            {
+              margin: 0 0 1rem 0;
+              //padding: 0.5rem 1rem;
+              //color: white;
+              material-icon
+              {
+                ::ng-deep i
+                {
+                  font-size: 3rem;
+                }
+              }
+            }
+            div#page-content
+            {
+              margin-bottom: 2rem;
+              margin-left: 0.5em;
+              //padding: 1rem;
+              //border: 1px solid #ccc;
+              //border-top: 0;
+              overflow-x: auto;
+            }
           }
         }
-      }
-
-      div.content
-      {
-        material-icon
-        {
-          color: #888;
-        }
-
       }
     }
   }

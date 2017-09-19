@@ -1,22 +1,57 @@
-<div class="transformer" [style.width]="width" [style.transform]="transform">
-    <div class="button toggle-open" (click)="toggleOpen($event)">
-        <p>
-            <material-icon [icon]="visible ? 'chevron_left' : 'chevron_right'"></material-icon>
-        </p>
-    </div>
-    <div class="button toggle-locked" *ngIf="visible" (click)="toggleLocked($event)">
-        <p>
-            <material-icon [icon]="locked ? 'lock' : 'lock_open'" size="large"></material-icon>
-        </p>
-    </div>
-    <div class="container box-shadow">
-        <div class="header" [style.background-color]="backgroundColor">
-            <p>{{title | phrase}}</p>
-        </div>
-        <div class="content">
-            <material-list>
-                <ng-content></ng-content>
-            </material-list>
-        </div>
-    </div>
+<div class="transformer">
+    <table>
+        <tr>
+            <!-- Sidebar -->
+            <td [style.width]="sidebarWidth">
+                <div id="sidebar" class="box-shadow" [style.width]="sidebarWidth">
+                    <div id="sidebar-header" [style.background-color]="backgroundColor">
+                        <p *ngIf="expanded" class="fade-opacity" [style.opacity]="animating ? 0 : 1">{{header | phrase}}</p>
+                    </div>
+                    <div id="sidebar-list">
+                        <material-list *ngIf="expanded" class="fade-opacity" [style.opacity]="animating ? 0 : 1">
+                            <div group *ngFor="let category of categories">
+                                <!--<div label>{{category.title | phrase}}</div>-->
+                                <material-list-item
+                                        *ngFor="let item of category.items"
+                                        [routerLink]="[item.routerLink]">
+                                    <material-icon [icon]="item.icon" size="x-large" baseline></material-icon>&nbsp;{{item.label | phrase}}
+                                </material-list-item>
+                            </div>
+                        </material-list>
+
+                        <div *ngIf="!expanded" class="margin-top-medium fade-opacity" [style.opacity]="animating ? 0 : 1">
+                            <div *ngFor="let category of categories">
+                                <div
+                                        *ngFor="let item of category.items"
+                                        [routerLink]="[item.routerLink]"
+                                        class="clickable text-center padding-top-small padding-bottom-small mini-item"
+                                        [materialTooltip]="item.label | phrase">
+                                    <material-icon [icon]="item.icon" size="x-large" baseline></material-icon>
+                                </div>
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="toggle" class="text-right" (click)="toggleExpanded()">
+                        <material-icon baseline [icon]="(expanded) ? 'keyboard_arrow_left' : 'keyboard_arrow_right'"></material-icon>
+                    </div>
+                </div>
+            </td>
+
+            <!-- Page Content -->
+            <td>
+                <div class="row" id="main-row">
+                    <div class="col">
+                        <h3 id="page-header">
+                            <material-icon [style.color]="backgroundColor" baseline [icon]="pageIcon"></material-icon>
+                            {{pageHeader | phrase}}
+                        </h3>
+                        <div id="page-content">
+                            <router-outlet></router-outlet>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>

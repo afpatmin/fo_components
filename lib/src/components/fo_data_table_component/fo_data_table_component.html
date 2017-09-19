@@ -1,6 +1,16 @@
 <div class="row">
     <div class="s12 m7 l8 col">
-        <h3 class="color-black margin-bottom-none">{{title | phrase}}</h3>
+        <h3 class="color-black margin-bottom-none">
+            {{title | phrase}}
+            <material-icon
+                    baseline
+                    *ngIf="description != null"
+                    size="x-large"
+                    icon="help_outline"
+                    (click)="infoModalOpen = true"
+                    class="clickable">
+            </material-icon>
+        </h3>
     </div>
     <div class="s12 m5 l4 col text-right">
         <material-input
@@ -8,12 +18,10 @@
                 [displayBottomPanel]="false"
                 [disabled]="disabled"
                 label="{{'filter' | phrase}}"
+                trailingGlyph="search"
                 [(ngModel)]="searchPhrase"
-                (keyup)="onSearchKeyUp($event)">
+                (keyup)="onSearch()">
         </material-input>
-        <material-button raised clear-size (trigger)="onSearch()">
-            <material-icon icon="search" size="x-large"></material-icon>
-        </material-button>
     </div>
 </div>
 
@@ -26,9 +34,9 @@
                     <material-checkbox (checkedChange)="onAllCheckedChange($event)"></material-checkbox>
                 </td>
                 <td *ngFor="let cell of col"
-                    [class.hide-for-small]="smallHiddencol.contains(cell)"
-                    [class.hide-for-medium]="mediumHiddencol.contains(cell)"
-                    [class.hide-for-large]="largeHiddencol.contains(cell)"
+                    [class.hide-for-small]="smallHiddenCol.contains(cell)"
+                    [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
+                    [class.hide-for-large]="largeHiddenCol.contains(cell)"
                     (click)="onSort(cell)">
                     {{cell | phrase}}
                     <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
@@ -48,9 +56,9 @@
                 </td>
                 <td
                         *ngFor="let cell of col"
-                        [class.hide-for-small]="smallHiddencol.contains(cell)"
-                        [class.hide-for-medium]="mediumHiddencol.contains(cell)"
-                        [class.hide-for-large]="largeHiddencol.contains(cell)"
+                        [class.hide-for-small]="smallHiddenCol.contains(cell)"
+                        [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
+                        [class.hide-for-large]="largeHiddenCol.contains(cell)"
                         (click)="onCellClickController.add(data[key].toTableRow()[cell])">
                     {{data[key].toTableRow()[cell]}}
                 </td>
@@ -65,8 +73,8 @@
         </table>
     </div>
 </div>
-<div class="row collapse">
-    <div class="s12 m4 col">
+<div class="row">
+    <div class="s3 m2 col">
         <material-button
                 *ngIf="showDownloadButton"
                 class="margin-bottom-small"
@@ -78,9 +86,9 @@
             <material-icon class="color-black" size="medium" icon="file_download"></material-icon>
         </material-button>
     </div>
-    <div class="s12 m8 col text-right">
+    <div class="s9 m10 col text-right">
         <div class="text-right" id="select-step">
-            <div class="display-inline-block">
+            <div class="display-inline-block nowrap">
                 <material-icon
                         class="clickable vertical-align-middle"
                         [class.disabled]="firstIndex <= 0"
@@ -95,7 +103,7 @@
                         (click)="step(1)">
                 </material-icon>
             </div>
-            <div class="display-inline-block">
+            <div class="display-inline-block nowrap">
                 <span>{{'rows' | phrase}}/{{'page' | phrase:false}}:</span>
                 <fo-select
                         class="display-inline-block"
@@ -126,4 +134,11 @@
             {{'ok' | phrase}}
         </material-button>
     </p>
+</fo-modal>
+
+<fo-modal
+        title="{{'information' | phrase}}"
+        [(visible)]="infoModalOpen"
+        [showCloseButton]="true">
+    <p>{{description | phrase}}</p>
 </fo-modal>

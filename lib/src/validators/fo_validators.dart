@@ -1,5 +1,5 @@
 import 'package:angular_forms/angular_forms.dart';
-import 'package:fo_components/src/services/phrase_service.dart';
+import 'package:fo_components/fo_components.dart';
 
 class FoValidators
 {
@@ -67,6 +67,30 @@ class FoValidators
     else return null;
   }
 
+  static ValidatorFn minLength(num minLength)
+  {
+    return /* Map < String , dynamic > */ (AbstractControl control)
+    {
+      if (Validators.required(control) != null) return null;
+
+      String v = control.value;
+      if (v.length < minLength)
+      {
+        final PhraseService ps = new PhraseService();
+        return
+        {
+          'minlength':
+          {
+            'requiredLength': minLength,
+            'actualLength': v.length
+          },
+          "error" : ps.get("enter_at_least_num_letters", params: {"num":minLength.toString()})
+        };
+      }
+      return null;
+    };
+  }
+
   static Map<String, String> numeric(AbstractControl control)
   {
     if ((required())(control) != null) return null;
@@ -132,10 +156,21 @@ class FoValidators
     else return null;
   }
 
+  static Map<String, String> noWhiteSpace(AbstractControl control)
+  {
+    if ((required())(control) != null) return null;
+    if (control.value.toString().contains(" "))
+    {
+      final PhraseService ps = new PhraseService();
+      return {"error":ps.get("no_whitespace_allowed")};
+    }
+    else return null;
+  }
+
   static Map<String, String> youtubeId(AbstractControl control)
   {
     if ((required())(control) != null) return null;
-    if (new RegExp(r"[a-zA-Z0-9_]{11}").stringMatch(control.value) != control.value)
+    if (new RegExp(r"[a-zA-Z0-9_-]{11}").stringMatch(control.value) != control.value)
     {
       final PhraseService ps = new PhraseService();
       return {"error":ps.get("invalid_youtube_id")};

@@ -29,7 +29,7 @@ class PhraseService
       {
         params.forEach((key, value)
         {
-          phrase = phrase.replaceAll("%$key%", value);
+          if (value != null) phrase = phrase.replaceAll("%$key%", value);
         });
       }
       return phrase;

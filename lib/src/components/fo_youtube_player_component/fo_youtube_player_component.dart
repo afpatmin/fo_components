@@ -82,7 +82,8 @@ class FoYouTubePlayerComponent implements AfterContentInit, OnChanges, OnDestroy
     Map<String, String> vars = new Map();
     vars["fs"] = "1";
     vars["rel"] = "0";                // Show related videos at the end of playback
-    vars["modestbranding"] = "1";     // Show minimal youtube branding
+    vars["modestbranding"] = "0";     // Show minimal youtube branding
+    vars["showinfo"] = "1";
     vars["origin"] = Uri.base.origin;
     vars["enablejsapi"] = "1";
     vars["autoplay"] = autoplay ? "1" : "0";
@@ -101,8 +102,7 @@ class FoYouTubePlayerComponent implements AfterContentInit, OnChanges, OnDestroy
 
   JsObject _player;
 
-  @Input('elementId')
-  String elementId;
+  final String elementId = "youtube-player-container";
 
   @Input('videoId')
   String videoId;

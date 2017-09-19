@@ -117,11 +117,15 @@ class FoTimePickerComponent implements OnDestroy, AfterViewInit
       RegExp r = new RegExp(r"[0-9]{2}:[0-9]{2}");
       String strMatch = r.stringMatch(value);
 
-      if (strMatch == null || strMatch.compareTo(value) != 0) throw new FormatException("Invalid time format (must be HH:MM)");
-
+      if (strMatch == null || strMatch.compareTo(value) != 0)
+      {
+        r = new RegExp(r"[0-9]{2}:[0-9]{2}:[0-9]{2}");
+        strMatch = r.stringMatch(value);
+        if (strMatch == null || strMatch.compareTo(value) != 0) throw new FormatException("Invalid time format (must be HH:MM)");
+      }
       List<String> split = value.split(":");
-      _strHour = split.first;
-      _strMinute = split.last;
+      _strHour = split[0];
+      _strMinute = split[1];
 
       _evalAmPm();
     }
