@@ -30,7 +30,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
     if (data == null) data = new Map();
 
-    filteredKeys = data.keys;
+    //_filteredKeys = data.keys;
   }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
@@ -41,10 +41,11 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
       selectedRowOption = rowOptions.optionsList.firstWhere((r) => r.count == rows, orElse: () => rowOptions.optionsList.first);
       setIndices(0);
     }
+    /*
     if (changes.containsKey("data"))
     {
-      filteredKeys = data.keys;
-    }
+      _filteredKeys = data.keys;
+    }*/
   }
 
   void ngOnDestroy()
@@ -61,9 +62,8 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     setIndices(firstIndex + (steps * selectedRowOption.count));
   }
 
-  void onSearchPhraseChange(String value)
+  void onSearch()
   {
-    searchPhrase = value;
     sortColumn = null;
 
     if (searchPhrase != null && searchPhrase.isNotEmpty)
@@ -75,11 +75,16 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
       }
 
       List<String> keywords = searchPhrase.toLowerCase().split(" ");
-      filteredKeys = data.values.where((model) => find(model, keywords)).map((value) => data.keys.firstWhere((key) => data[key] == value));
+      _filteredKeys = data.values.where((model) => find(model, keywords)).map((value) => data.keys.firstWhere((key) => data[key] == value));
     }
-    else filteredKeys = data.keys;
+    else _filteredKeys = data.keys;
 
     setIndices(0);
+  }
+
+  void onSearchKeyUp(dom.KeyboardEvent e)
+  {
+    if (e.keyCode == dom.KeyCode.ENTER || e.keyCode == dom.KeyCode.MAC_ENTER) onSearch();
   }
 
   void onSort(String column)
@@ -126,7 +131,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
         List<FoModel> values = filteredKeys.map((key) => data[key]).toList(growable: false);
         values.sort((FoModel a, FoModel b) => sort(a.toTableRow(), b.toTableRow()));
 
-        filteredKeys = values.map((model) => model.id);
+        _filteredKeys = values.map((model) => model.id);
       }
     }
   }
@@ -143,7 +148,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
       String columns = data.values.first.toTableRow().keys.map(_phraseService.get).join(";");
       sb.writeln(columns);
 
-      for (String key in filteredKeys)
+      for (String key in _filteredKeys)
       {
         String row = data[key].toTableRow().values.join(";");
         sb.writeln(row);
@@ -163,7 +168,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     int rowCount = selectedRowOption.count;
 
     firstIndex = first_index;
-    if (searchPhrase != null && searchPhrase.isNotEmpty) firstIndex = max(0, min(firstIndex, filteredKeys.length - rowCount));
+    if (searchPhrase != null && searchPhrase.isNotEmpty) firstIndex = max(0, min(firstIndex, _filteredKeys.length - rowCount));
     lastIndex = firstIndex + rowCount;
 
     currentPage = (data.isEmpty) ? 0 : (firstIndex.toDouble() / rowCount).ceil() + 1;
@@ -194,9 +199,11 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   void onAllCheckedChange(bool state)
   {
-    if (state) selectedRows = filteredKeys.toList();
+    if (state) selectedRows = _filteredKeys.toList();
     else selectedRows.clear();
   }
+
+  Iterable<String> get filteredKeys => _filteredKeys == null ? data.keys : _filteredKeys;
 
   RowOption selectedRowOption;
 
@@ -207,7 +214,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   String sortColumn = "";
   String sortOrder = "DESC";
   String searchPhrase = "";
-  Iterable<String> filteredKeys;
+  Iterable<String> _filteredKeys;
 
   final StreamController<String> onCellClickController = new StreamController();
   final StreamController<List<String>> onSelectedRowsController = new StreamController();

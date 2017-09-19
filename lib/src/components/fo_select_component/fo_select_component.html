@@ -10,7 +10,7 @@
             class="clickable color-alert"
             icon="cancel"
             size="medium"
-            (click)="clearSelection()">
+            (click)="clearSelection(); $event.stopPropagation();">
     </material-icon>
 </label>
 <material-dropdown-select

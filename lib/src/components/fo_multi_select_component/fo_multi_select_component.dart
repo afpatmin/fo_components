@@ -20,7 +20,7 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
   {
     _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<FoModel>> e)
     {
-      _onSelectedModelsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.toList(growable: false));
+      _onSelectedModelsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.toList());
     });
   }
 
@@ -29,10 +29,12 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
     if (changes.containsKey("selectedModels"))
     {
       _selectionChangeListener?.cancel();
-      selectedModels.forEach(selectionModel.select);
+
+      selectionModel = new SelectionModel.withList(selectedValues: selectedModels, allowMulti: true);
+
       _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<FoModel>> e)
       {
-        _onSelectedModelsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.toList(growable: false));
+        _onSelectedModelsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.toList());
       });
     }
   }

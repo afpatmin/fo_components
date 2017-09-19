@@ -1,20 +1,23 @@
-<div class="row collapse">
-    <div class="s12 m8 l9 col">
+<div class="row">
+    <div class="s12 m7 l8 col">
         <h3 class="color-black margin-bottom-none">{{title | phrase}}</h3>
     </div>
-    <div class="s12 m4 l3 col">
+    <div class="s12 m5 l4 col text-right">
         <material-input
-                trailingGlyph="search"
-                [rightAlign]="true"
+                class="text-left"
                 [displayBottomPanel]="false"
                 [disabled]="disabled"
-                label="{{'search' | phrase}}"
-                (change)="onSearchPhraseChange($event)">
+                label="{{'filter' | phrase}}"
+                [(ngModel)]="searchPhrase"
+                (keyup)="onSearchKeyUp($event)">
         </material-input>
+        <material-button raised clear-size (trigger)="onSearch()">
+            <material-icon icon="search" size="x-large"></material-icon>
+        </material-button>
     </div>
 </div>
 
-<div class="row collapse">
+<div class="row">
     <div class="s12 col">
         <table [class.faded]="disabled" class="output color-black box-shadow margin-bottom-x-small">
             <thead *ngIf="data.isNotEmpty">
