@@ -20,20 +20,8 @@ class FoSidebarComponent implements OnInit, OnDestroy
 
   void ngOnInit()
   {
-    setHeaderIcon("index.html");
-    _onStartNavigationListener = _router.onStartNavigation.listen(setHeaderIcon);
-  }
-
-  void setHeaderIcon(String event)
-  {
-    if (_router.currentInstruction != null)
-    {
-      for (FoSidebarCategory category in categories)
-      {
-        FoSidebarItem item = category.items.firstWhere((item) => item.url == event, orElse: () => null);
-        if (item != null) pageIcon = item.icon;
-      }
-    }
+    new Timer(const Duration(milliseconds: 500), () => _setPageHeader("index.html"));
+    _onStartNavigationListener = _router.onStartNavigation.listen(_setPageHeader);
   }
 
   void ngOnDestroy()
@@ -52,12 +40,29 @@ class FoSidebarComponent implements OnInit, OnDestroy
     _onExpandedChangeController.add(expanded);
   }
 
+  void _setPageHeader(String event)
+  {
+    if (_router.currentInstruction != null)
+    {
+      for (FoSidebarCategory category in categories)
+      {
+        FoSidebarItem item = category.items.firstWhere((item) => item.url == event, orElse: () => null);
+        if (item != null)
+        {
+          pageIcon = item.icon;
+          pageHeader = item.label;
+        }
+      }
+    }
+  }
+
   String get sidebarWidth => (expanded) ? "${width}px" : "${miniWidth}px";
 
-  String get pageHeader => (_router.currentInstruction == null) ? "" : _router.currentInstruction.path;
+  //String get pageHeader => (_router.currentInstruction == null) ? "" : _router.currentInstruction.path;
 
   final Router _router;
   bool animating = false;
+  String pageHeader = "";
   String pageIcon = "";
   final StreamController<bool> _onExpandedChangeController = new StreamController();
   StreamSubscription<String> _onStartNavigationListener;
@@ -68,6 +73,9 @@ class FoSidebarComponent implements OnInit, OnDestroy
 
   @Input('header')
   String header = "Menu";
+
+  @Input('paddingTop')
+  String paddingTop = "100px";
 
   @Input('expanded')
   bool expanded = false;

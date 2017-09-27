@@ -8,27 +8,27 @@ material-dialog
   max-height: 95vh;
   text-align: left;
 
-  /deep/ div.content
+  ::ng-deep div.content
   {
     padding-bottom: 1rem;
   }
+}
 
-  /deep/ header
+material-dialog > ::ng-deep header
+{
+  padding: 0 !important;
+
+  div.header
   {
-    padding: 0 !important;
-
-    div.header
+    padding: 16px;
+    color: white;
+    h3
     {
-      padding: 16px;
-      color: white;
-      h3
-      {
-        line-height: 160%;
+      line-height: 160%;
 
-        material-button
-        {
-          margin-left: 1rem;
-        }
+      material-button
+      {
+        margin-left: 1rem;
       }
     }
   }

@@ -19,7 +19,7 @@
     vertical-align: text-top;
   }
 
-  /deep/ material-dropdown-select.full-width
+  ::ng-deep material-dropdown-select.full-width
   {
     width: 100%;
   }

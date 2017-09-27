@@ -10,11 +10,11 @@
                     <div id="sidebar-list">
                         <material-list *ngIf="expanded" class="fade-opacity" [style.opacity]="animating ? 0 : 1">
                             <div group *ngFor="let category of categories">
-                                <!--<div label>{{category.title | phrase}}</div>-->
+                                <div label>{{category.title | phrase}}</div>
                                 <material-list-item
                                         *ngFor="let item of category.items"
                                         [routerLink]="[item.routerLink]">
-                                    <material-icon [icon]="item.icon" size="x-large" baseline></material-icon>&nbsp;{{item.label | phrase}}
+                                    <material-icon [icon]="item.icon" baseline></material-icon>&nbsp;{{item.label | phrase}}
                                 </material-list-item>
                             </div>
                         </material-list>
@@ -40,7 +40,7 @@
 
             <!-- Page Content -->
             <td>
-                <div class="row" id="main-row">
+                <div class="row" id="main-row" [style.padding-top]="paddingTop">
                     <div class="col">
                         <h3 id="page-header">
                             <material-icon [style.color]="backgroundColor" baseline [icon]="pageIcon"></material-icon>

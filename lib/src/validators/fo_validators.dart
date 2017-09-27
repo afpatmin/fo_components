@@ -55,6 +55,25 @@ class FoValidators
     else return null;
   }
 
+  static Map<String, String> integer(AbstractControl control)
+  {
+    if ((required())(control) != null) return null;
+
+    if (control.value is int) return null;
+    else
+    {
+      try { int.parse(control.value); }
+      on FormatException
+      {
+        final PhraseService ps = new PhraseService();
+        return {"error" : ps.get("enter_integers_only")};
+      }
+      return null;
+    }
+
+
+  }
+
   static Map<String, String> linkedInId(AbstractControl control)
   {
     if ((required())(control) != null) return null;
@@ -89,6 +108,18 @@ class FoValidators
       }
       return null;
     };
+  }
+
+  static Map<String, String> noSpaces(AbstractControl control)
+  {
+    if ((required())(control) != null) return null;
+    String v = control.value.toString();
+    if (v.contains(" "))
+    {
+      final PhraseService ps = new PhraseService();
+      return {"error": ps.get("enter_no_spaces")};
+    }
+    return null;
   }
 
   static Map<String, String> numeric(AbstractControl control)

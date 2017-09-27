@@ -1,10 +1,10 @@
 <label>{{label | phrase}}</label>
 <div class="container" (dragenter)="$event.preventDefault()" (dragover)="$event.preventDefault()" (drop)="onDrop($event)">
-    <input #input type="file" (change)="onFileChange($event)" accept="image/*,.pdf" />
-    <p class="margin-top-small margin-bottom-small">
+    <input #input type="file" (change)="onFileChange($event)" [accept]="accept" />
+    <p *ngIf="!valid" class="margin-top-small margin-bottom-small">
         <material-button raised (trigger)="input.click()"><material-icon icon="folder_open"></material-icon></material-button>
     </p>
-    <p class="margin-top-small margin-bottom-small">
+    <p *ngIf="valid" class="margin-top-small margin-bottom-small">
         <material-button raised [disabled]="disabled || !valid" (trigger)="upload()"><material-icon icon="file_upload"></material-icon></material-button>
     </p>
     <p>

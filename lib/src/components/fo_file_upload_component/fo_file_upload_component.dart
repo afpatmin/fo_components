@@ -52,6 +52,9 @@ class FileUploadComponent implements OnDestroy
   dom.FileUploadInputElement _fileInput;
   dom.File file;
 
+  @Input('accept')
+  String accept = "image/*,.pdf";
+
   @Input('disabled')
   bool disabled = false;
 

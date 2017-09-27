@@ -38,7 +38,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
       if (data == null) data = new Map();
       selectedRowOption = rowOptions.optionsList.firstWhere((r) => r.count == rows, orElse: () => rowOptions.optionsList.first);
 
-      _filteredKeys = data.keys;
+      //_filteredKeys = data.keys;
       onSearch();
       setIndices(0);
     }
@@ -73,7 +73,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
       List<String> keywords = searchPhrase.toLowerCase().split(" ");
       _filteredKeys = data.values.where((model) => find(model, keywords)).map((value) => data.keys.firstWhere((key) => data[key] == value));
     }
-    else _filteredKeys = data.keys;
+    else _filteredKeys = null;
 
     setIndices(0);
   }
