@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
-import 'package:fo_components/fo_components.dart';
+import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-sidebar',

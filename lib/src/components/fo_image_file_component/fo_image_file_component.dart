@@ -7,7 +7,7 @@ import 'dart:html' as dom;
 import 'dart:typed_data' show ByteData, Endianness, Uint8List;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:fo_components/fo_components.dart' show PhrasePipe;
+import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-image-file',

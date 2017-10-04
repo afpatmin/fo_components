@@ -1,4 +1,5 @@
 <material-dropdown-select
+        [class.full-width]="fullWidth"
         [disabled]="disabled || options == null || selectionModel == null"
         [buttonText]="label | phrase"
         [popupMatchInputWidth]="false"
@@ -12,4 +13,11 @@
         </material-select-searchbox>
     </div>
 </material-dropdown-select>
-<div class="selected-values">{{selectedValues}}</div>
+
+
+<reorder-list *ngIf="selectionModel.isNotEmpty" (reorder)="onReorder($event)" class="selected-values">
+    <span *ngFor="let value of selectionModel.selectedValues" reorderItem>
+        {{value.toString()}}
+    </span>
+</reorder-list>
+<div *ngIf="selectionModel.isEmpty" class="selected-values">{{nullSelectionButtonText | phrase}}</div>

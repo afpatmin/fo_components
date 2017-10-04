@@ -1,0 +1,12 @@
+<material-input
+        label="{{label | phrase}}" floatingLabel
+        [displayBottomPanel]="false"
+        (keyup)="onKeyUp($event)"
+        [(ngModel)]="inputValue">
+</material-input>
+<material-button raised clear-size (trigger)="add()">
+    <material-icon icon="add_outline" size="large"></material-icon>
+</material-button>
+<div>
+    <material-chip *ngFor="let item of value" (remove)="remove(item)">{{item}}</material-chip>
+</div>

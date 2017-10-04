@@ -1,5 +1,5 @@
 import 'package:angular_forms/angular_forms.dart';
-import 'package:fo_components/fo_components.dart';
+import '../services/phrase_service.dart';
 
 class FoValidators
 {

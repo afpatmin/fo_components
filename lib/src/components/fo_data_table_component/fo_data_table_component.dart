@@ -8,7 +8,12 @@ import 'dart:html' as dom;
 import 'dart:math';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:fo_components/fo_components.dart';
+import '../fo_modal_component/fo_modal_component.dart';
+import '../fo_select_component/fo_select_component.dart';
+import '../../models/fo_model.dart';
+import '../../pipes/phrase_pipe.dart';
+import '../../pipes/range_pipe.dart';
+import '../../services/phrase_service.dart';
 
 @Component(
     selector: 'fo-data-table',
@@ -16,7 +21,7 @@ import 'package:fo_components/fo_components.dart';
     templateUrl: 'fo_data_table_component.html',
     directives: const [CORE_DIRECTIVES, FoModalComponent, FoSelectComponent, materialDirectives, MaterialIconComponent],
     pipes: const [PhrasePipe, RangePipe],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.Default)
 
 class DataTableComponent implements OnChanges, OnInit, OnDestroy
 {

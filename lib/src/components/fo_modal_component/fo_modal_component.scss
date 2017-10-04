@@ -7,18 +7,13 @@ material-dialog
   max-width: 90vw;
   max-height: 95vh;
   text-align: left;
-
-  ::ng-deep div.content
-  {
-    padding-bottom: 1rem;
-  }
 }
 
 material-dialog > ::ng-deep header
 {
   padding: 0 !important;
 
-  div.header
+  div.modal-header
   {
     padding: 16px;
     color: white;
@@ -34,11 +29,19 @@ material-dialog > ::ng-deep header
   }
 }
 
+material-dialog
+{
+  div.modal-content
+  {
+    padding-bottom: 0.5rem;
+  }
+}
+
 material-dialog.fixed-height
 {
   height: 95vh;
 
-  div.content
+  div.modal-content
   {
     margin-top: 1rem;
     margin-bottom: 1rem;

@@ -4,7 +4,8 @@
 import 'dart:async' show Stream, StreamController, StreamSubscription;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:fo_components/fo_components.dart' show FoModel, PhrasePipe;
+import '../../models/fo_model.dart';
+import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-multi-select',
@@ -12,7 +13,7 @@ import 'package:fo_components/fo_components.dart' show FoModel, PhrasePipe;
     templateUrl: 'fo_multi_select_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives],
     pipes: const [PhrasePipe],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.Default
 )
 class FoMultiSelectComponent implements OnChanges, OnDestroy
 {
@@ -21,6 +22,7 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
     _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<FoModel>> e)
     {
       _onSelectedModelsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.toList());
+      _onSelectedIdsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.map((model) => model.id).toList());
     });
   }
 
@@ -28,35 +30,61 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
   {
     if (changes.containsKey("selectedModels"))
     {
-      _selectionChangeListener?.cancel();
+      if (selectionModel.selectedValues.length == selectedModels.length) return;
 
-      if (selectedModels == null) selectedModels = new List();
+      selectionModel.clear();
+      selectedIds.clear();
+      selectedModels.forEach(selectionModel.select);
+      selectedIds = selectedModels.map((model) => model.id).toList();
+    }
+    else if (changes.containsKey("selectedIds"))
+    {
+      if (selectionModel.selectedValues.length == selectedIds.length) return;
 
-      selectionModel = new SelectionModel.withList(selectedValues: selectedModels, allowMulti: true);
-
-      _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<FoModel>> e)
+      selectionModel.clear();
+      selectedModels.clear();
+      for (String id in selectedIds)
       {
-        _onSelectedModelsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.toList());
-      });
+        FoModel model = options.optionsList.firstWhere((m) => m.id == id, orElse: () => null);
+        if (model != null)
+        {
+          selectionModel.select(model);
+          selectedModels.add(model);
+        }
+      }
     }
   }
 
   void ngOnDestroy()
   {
     _onVisibleChangeController.close();
+    _onSelectedIdsChangeController.close();
     _onSelectedModelsChangeController.close();
     _selectionChangeListener?.cancel();
   }
 
-  String get selectedValues => selectionModel.selectedValues.isEmpty ? nullSelectionButtonText : selectionModel.selectedValues.map((d) => d.toString()).join(", ");
+  void onReorder(ReorderEvent event)
+  {
+    FoModel sourceModel = selectedModels.elementAt(event.sourceIndex);
+    selectedModels.removeAt(event.sourceIndex);
+    selectedModels.insert(event.destIndex, sourceModel);
+    selectedIds = selectedModels.map((model) => model.id).toList();
+
+    selectionModel.clear();
+    selectedModels.forEach(selectionModel.select);
+  }
 
   SelectionModel<FoModel> selectionModel = new SelectionModel.withList(allowMulti: true);
   final StreamController<bool> _onVisibleChangeController = new StreamController();
   final StreamController<List<FoModel>> _onSelectedModelsChangeController = new StreamController();
+  final StreamController<List<String>> _onSelectedIdsChangeController = new StreamController();
   StreamSubscription<List<SelectionChangeRecord<FoModel>>> _selectionChangeListener;
 
   @Input('disabled')
   bool disabled = false;
+
+  @Input('fullWidth')
+  bool fullWidth = false;
 
   @Input('label')
   String label = "";
@@ -67,8 +95,11 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
   @Input('options')
   StringSelectionOptions<FoModel> options = new StringSelectionOptions([]);
 
+  @Input('selectedIds')
+  List<String> selectedIds = new List();
+
   @Input('selectedModels')
-  List<FoModel> selectedModels;
+  List<FoModel> selectedModels = new List();
 
   @Input('showSearch')
   bool showSearch = false;
@@ -79,7 +110,9 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
   @Output('visibleChange')
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
 
+  @Output('selectedIdsChange')
+  Stream<List<String>> get onSelectedIdsChangeOutput => _onSelectedIdsChangeController.stream;
+
   @Output('selectedModelsChange')
   Stream<List<FoModel>> get onSelectedModelsChangeOutput => _onSelectedModelsChangeController.stream;
-
 }

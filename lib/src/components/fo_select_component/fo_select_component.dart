@@ -4,7 +4,9 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:fo_components/fo_components.dart';
+import '../fo_modal_component/fo_modal_component.dart';
+import '../../models/fo_model.dart';
+import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-select',
@@ -56,6 +58,9 @@ class FoSelectComponent implements OnDestroy
 
   @Input('allowNullSelection')
   bool allowNullSelection = false;
+
+  @Input('nullSelectionButtonText')
+  String nullSelectionButtonText = "-";
 
   @Input('label')
   String label = "";
