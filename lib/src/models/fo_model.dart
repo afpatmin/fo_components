@@ -1,6 +1,6 @@
 class FoModel
 {
-  FoModel(this.id);
+  FoModel(this.id, [this.label = null]);
 
   @override
   operator == (dynamic other)
@@ -12,12 +12,11 @@ class FoModel
   @override
   int get hashCode => id.hashCode;
 
-  Map<String, String> toTableRow() => {"id":id};
+  Map<String, String> toTableRow() => label == null ? {"id":id} : {"id":id, "label":label};
 
   String id;
-
-//  bool selected = false;
+  String label;
 
   @override
-  String toString() => id;
+  String toString() => label == null ? id : label;
 }

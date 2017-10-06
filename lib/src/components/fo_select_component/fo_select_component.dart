@@ -16,16 +16,26 @@ import '../../pipes/phrase_pipe.dart';
     pipes: const [PhrasePipe],
     changeDetection: ChangeDetectionStrategy.OnPush
 )
-class FoSelectComponent implements OnDestroy
+class FoSelectComponent implements OnChanges, OnDestroy
 {
   FoSelectComponent()
   {
     _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
   }
 
+  void ngOnChanges(Map<String, SimpleChange> changes)
+  {
+    if (changes.containsKey("selectedModel")) selectedId = selectedModel?.id;
+    else if (changes.containsKey("selectedId"))
+    {
+      selectedModel = (selectedId == null) ? null : options.optionsList.firstWhere((m) => m.id == selectedId, orElse: () => null);
+    }
+  }
+
   void ngOnDestroy()
   {
     _onVisibleChangeController.close();
+    _onSelectedIdChangeController.close();
     _onSelectedModelChangeController.close();
     _selectionChangeListener.cancel();
   }
@@ -38,7 +48,12 @@ class FoSelectComponent implements OnDestroy
   void _onSelectionChanges(List<SelectionChangeRecord<FoModel>> e)
   {
     if (e.isEmpty) return;
-    if (e.first.added.isNotEmpty) selectedModel = e.first.added.first;
+    if (e.first.added.isNotEmpty)
+    {
+      selectedModel = e.first.added.first;
+      selectedId = selectedModel.id;
+    }
+    _onSelectedIdChangeController.add(selectedModel?.id);
     _onSelectedModelChangeController.add(selectedModel);
   }
 
@@ -46,12 +61,15 @@ class FoSelectComponent implements OnDestroy
   {
     selectionModel.clear();
     selectedModel = null;
+    selectedId = null;
     _onSelectedModelChangeController.add(null);
+    _onSelectedIdChangeController.add(null);
   }
 
   SelectionModel<FoModel> selectionModel = new SelectionModel.withList(allowMulti: false);
   StreamSubscription<List<SelectionChangeRecord<FoModel>>> _selectionChangeListener;
   final StreamController<bool> _onVisibleChangeController = new StreamController();
+  final StreamController<String> _onSelectedIdChangeController = new StreamController();
   final StreamController<FoModel> _onSelectedModelChangeController = new StreamController();
 
   bool tooltipModalVisible = false;
@@ -74,6 +92,9 @@ class FoSelectComponent implements OnDestroy
   @Input('options')
   StringSelectionOptions<FoModel> options = new StringSelectionOptions<FoModel>([]);
 
+  @Input('selectedId')
+  String selectedId;
+
   @Input('selectedModel')
   FoModel selectedModel;
 
@@ -85,6 +106,9 @@ class FoSelectComponent implements OnDestroy
 
   @Input('visible')
   bool visible = false;
+
+  @Output('selectedIdChange')
+  Stream<String> get onSelectedIdChangeOutput => _onSelectedIdChangeController.stream;
 
   @Output('selectedModelChange')
   Stream<FoModel> get onSelectedModelChangeOutput => _onSelectedModelChangeController.stream;

@@ -30,7 +30,7 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
   {
     if (changes.containsKey("selectedModels"))
     {
-      if (selectionModel.selectedValues.length == selectedModels.length) return;
+      if (selectedModels == null || selectionModel.selectedValues.length == selectedModels.length) return;
 
       selectionModel.clear();
       selectedIds.clear();
@@ -39,7 +39,7 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
     }
     else if (changes.containsKey("selectedIds"))
     {
-      if (selectionModel.selectedValues.length == selectedIds.length) return;
+      if (selectedIds == null || selectionModel.selectedValues.length == selectedIds.length) return;
 
       selectionModel.clear();
       selectedModels.clear();
