@@ -7,6 +7,7 @@ export 'src/components/fo_data_table_component/fo_data_table_component.dart';
 export 'src/components/fo_file_upload_component/fo_file_upload_component.dart';
 export 'src/components/fo_modal_component/fo_modal_component.dart';
 export 'src/components/fo_image_file_component/fo_image_file_component.dart';
+export 'src/components/fo_image_map_component/fo_image_map_component.dart';
 export 'src/components/fo_login_component/fo_login_component.dart';
 export 'src/components/fo_multi_select_component/fo_multi_select_component.dart';
 export 'src/components/fo_multi_input_component/fo_multi_input_component.dart';

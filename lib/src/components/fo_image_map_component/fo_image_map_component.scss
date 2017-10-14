@@ -1,0 +1,42 @@
+@import '../../../../../../Visurus/Grid/v1/colors';
+
+:host > div
+{
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  img
+  {
+
+  }
+
+  svg
+  {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    .shape
+    {
+      opacity: 0;
+      -webkit-transition: opacity 200ms ease;
+      -moz-transition: opacity 200ms ease;
+      -o-transition: opacity 200ms ease;
+      transition: opacity 200ms ease;
+
+      stroke: $color1;
+      stroke-width: 1px;
+      fill: $color1;
+      fill-opacity: 0.5;
+
+    }
+
+    .shape.visible
+    {
+      opacity: 1;
+    }
+  }
+}

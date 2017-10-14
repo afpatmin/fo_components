@@ -1,0 +1,34 @@
+<div>
+    <img [src]="src" alt="image" />
+
+    <svg *ngFor="let zone of zones" width="100%" height="100%" viewBox="0 0 100 100">
+        <ellipse
+                *ngFor="let ellipse of zone.ellipses"
+                class="shape"
+                [class.visible]="zone.marked"
+                [attr.cx]="ellipse.x" [attr.cy]="ellipse.y"
+                [attr.rx]="ellipse.rx" [attr.ry]="ellipse.ry"
+                (click)="onClick(zone)">
+        </ellipse>
+        <rect
+                *ngFor="let rectangle of zone.rectangles"
+                class="shape"
+                [class.visible]="zone.marked"
+                [attr.x]="rectangle.x" [attr.y]="rectangle.y"
+                [attr.width]="rectangle.width" [attr.height]="rectangle.height">
+        </rect>
+        <polygon
+                *ngFor="let polygon of zone.polygons"
+                class="shape"
+                [class.visible]="zone.marked"
+                [attr.points]="polygon.points">
+        </polygon>
+    </svg>
+</div>
+<fo-multi-select
+        [label]="label"
+        [fullWidth]="true"
+        [options]="zoneOptions"
+        [selectedIds]="selectedIds"
+        (selectedIdsChange)="onSelectionChange($event)">
+</fo-multi-select>

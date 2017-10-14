@@ -142,6 +142,8 @@ div.row.expand {
   {
 
   }*/ }
+  .flex-aligner .flex-bottom {
+    align-self: flex-end; }
 
 .flex-aligner > div {
   width: 100%; }
@@ -293,8 +295,14 @@ div.row.expand {
 .text-right {
   text-align: right; }
 
+.text-large {
+  font-size: 1.1em; }
+
 .text-small {
   font-size: 0.9em; }
+
+.text-x-small {
+  font-size: 0.8em; }
 
 .vertical-align-baseline {
   vertical-align: baseline !important; }
