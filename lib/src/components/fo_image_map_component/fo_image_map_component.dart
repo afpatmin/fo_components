@@ -86,9 +86,9 @@ class FoZoneModel extends FoModel
   FoZoneModel(this._shapes, String id, String label) : super(id, label);
   List<FoShape> get shapes => _shapes;
 
-  Iterable<FoShapeEllipse> get ellipses => _shapes.where((s) => s.type == "ellipse");
-  Iterable<FoShapeRectangle> get rectangles => _shapes.where((s) => s.type == "rectangle");
-  Iterable<FoShapePolygon> get polygons => _shapes.where((s) => s.type == "polygon");
+  Iterable<FoShape> get ellipses => _shapes.where((s) => s.type == "ellipse");
+  Iterable<FoShape> get rectangles => _shapes.where((s) => s.type == "rectangle");
+  Iterable<FoShape> get polygons => _shapes.where((s) => s.type == "polygon");
 
   final List<FoShape> _shapes;
   bool marked = false;

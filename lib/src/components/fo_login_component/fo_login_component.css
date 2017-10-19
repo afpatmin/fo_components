@@ -2,17 +2,19 @@ div.login-container {
   padding-top: 1em;
   width: 23rem;
   max-width: 100%;
-  min-width: 10rem; }
-  div.login-container material-input {
-    display: block;
-    width: 100%; }
-  div.login-container p.forgot-password {
-    text-align: right;
-    margin: 0;
-    font-size: 0.8em;
-    cursor: pointer; }
-  div.login-container div.button-container {
-    margin-top: 1.5em;
-    text-align: right; }
-
-/*# sourceMappingURL=fo_login_component.css.map */
+  min-width: 10rem;
+}
+div.login-container material-input {
+  display: block;
+  width: 100%;
+}
+div.login-container p.forgot-password {
+  text-align: right;
+  margin: 0;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+div.login-container div.button-container {
+  margin-top: 1.5em;
+  text-align: right;
+}

@@ -1,2 +1,9 @@
-.selected-values{font-size:0.9em;color:#888;margin:0.2rem 0 0.912rem 0}::ng-deep material-dropdown-select.full-width{width:100%}
-/*# sourceMappingURL=fo_multi_select_component.css.map */
+.selected-values {
+  font-size: 0.9em;
+  color: #888;
+  margin: 0.2rem 0 0.912rem 0;
+}
+
+::ng-deep material-dropdown-select.full-width {
+  width: 100%;
+}

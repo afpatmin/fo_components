@@ -2,171 +2,228 @@
 .border-radius {
   -webkit-border-radius: 0.5rem;
   -moz-border-radius: 0.5rem;
-  border-radius: 0.5rem; }
+  border-radius: 0.5rem;
+}
 
 .box-shadow {
   -webkit-box-shadow: 1px 1px 4px #555;
   -moz-box-shadow: 1px 1px 4px #555;
-  box-shadow: 1px 1px 4px #555; }
+  box-shadow: 1px 1px 4px #555;
+}
 
 .background-color-1 {
-  background-color: #1b9aaa !important; }
+  background-color: #1b9aaa !important;
+}
 
 .background-color-2 {
-  background-color: #f5f5f5 !important; }
+  background-color: #f5f5f5 !important;
+}
 
 .background-color-3 {
-  background-color: #ccc !important; }
+  background-color: #ccc !important;
+}
 
 .background-color-1-x-dark {
-  background-color: black !important; }
+  background-color: black !important;
+}
 
 .background-color-2-x-dark {
-  background-color: #8f8f8f !important; }
+  background-color: #8f8f8f !important;
+}
 
 .background-color-3-x-dark {
-  background-color: #666666 !important; }
+  background-color: #666666 !important;
+}
 
 .background-color-1-dark {
-  background-color: #0d4a52 !important; }
+  background-color: #0d4a52 !important;
+}
 
 .background-color-2-dark {
-  background-color: #c2c2c2 !important; }
+  background-color: #c2c2c2 !important;
+}
 
 .background-color-3-dark {
-  background-color: #999999 !important; }
+  background-color: #999999 !important;
+}
 
 .background-color-1-bright {
-  background-color: #49d1e2 !important; }
+  background-color: #49d1e2 !important;
+}
 
 .background-color-2-bright {
-  background-color: white !important; }
+  background-color: white !important;
+}
 
 .background-color-3-bright {
-  background-color: white !important; }
+  background-color: white !important;
+}
 
 .background-color-1-x-bright {
-  background-color: #a1e7f0 !important; }
+  background-color: #a1e7f0 !important;
+}
 
 .background-color-2-x-bright {
-  background-color: white !important; }
+  background-color: white !important;
+}
 
 .background-color-3-x-bright {
-  background-color: white !important; }
+  background-color: white !important;
+}
 
 .background-color-alert {
-  background-color: #e33 !important; }
+  background-color: #e33 !important;
+}
 
 .background-color-alert-bright {
-  background-color: #f69191 !important; }
+  background-color: #f69191 !important;
+}
 
 .background-color-black {
-  background-color: #555 !important; }
+  background-color: #555 !important;
+}
 
 .background-color-white {
-  background-color: #fff !important; }
+  background-color: #fff !important;
+}
 
 .color-1 {
-  color: #1b9aaa !important; }
+  color: #1b9aaa !important;
+}
 
 .color-2 {
-  color: #f5f5f5 !important; }
+  color: #f5f5f5 !important;
+}
 
 .color-3 {
-  color: #ccc !important; }
+  color: #ccc !important;
+}
 
 .color-1-x-dark {
-  color: black !important; }
+  color: black !important;
+}
 
 .color-2-x-dark {
-  color: #8f8f8f !important; }
+  color: #8f8f8f !important;
+}
 
 .color-3-x-dark {
-  color: #666666 !important; }
+  color: #666666 !important;
+}
 
 .color-1-dark {
-  color: #0d4a52 !important; }
+  color: #0d4a52 !important;
+}
 
 .color-2-dark {
-  color: #c2c2c2 !important; }
+  color: #c2c2c2 !important;
+}
 
 .color-3-dark {
-  color: #999999 !important; }
+  color: #999999 !important;
+}
 
 .color-1-bright {
-  color: #49d1e2 !important; }
+  color: #49d1e2 !important;
+}
 
 .color-2-bright {
-  color: white !important; }
+  color: white !important;
+}
 
 .color-3-bright {
-  color: white !important; }
+  color: white !important;
+}
 
 .color-1-x-bright {
-  color: #a1e7f0 !important; }
+  color: #a1e7f0 !important;
+}
 
 .color-2-x-bright {
-  color: white !important; }
+  color: white !important;
+}
 
 .color-3-x-bright {
-  color: white !important; }
+  color: white !important;
+}
 
 .color-alert {
-  color: #e33 !important; }
+  color: #e33 !important;
+}
 
 .color-alert-bright {
-  color: #f69191 !important; }
+  color: #f69191 !important;
+}
 
 .color-black {
-  color: #555 !important; }
+  color: #555 !important;
+}
 
 .color-white {
-  color: #fff !important; }
+  color: #fff !important;
+}
 
 html {
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; }
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
 
 hr {
-  border: 1px solid #f5f5f5; }
+  border: 1px solid #f5f5f5;
+}
 
 material-checkbox div.icon-container glyph.icon.filled {
-  color: #1b9aaa; }
+  color: #1b9aaa;
+}
 
 material-radio div.icon-container.checked {
-  color: #1b9aaa !important; }
+  color: #1b9aaa !important;
+}
 
 material-tab-strip div.navi-bar div.tab-indicator {
-  background-color: #1b9aaa; }
+  background-color: #1b9aaa;
+}
 material-tab-strip tab-button.active {
-  color: #1b9aaa !important; }
+  color: #1b9aaa !important;
+}
 
 .material-toggle.checked div.tgl-container div.tgl-bar {
-  background-color: #3e3 !important; }
+  background-color: #3e3 !important;
+}
 .material-toggle.checked div.tgl-container div.tgl-btn-container div.tgl-btn {
-  background-color: #3e3 !important; }
+  background-color: #3e3 !important;
+}
 
 material-input span.label-text.focused {
-  color: #1b9aaa !important; }
+  color: #1b9aaa !important;
+}
 material-input span.label-text.invalid {
-  color: #e33 !important; }
+  color: #e33 !important;
+}
 material-input div.focused-underline {
-  background-color: #1b9aaa !important; }
+  background-color: #1b9aaa !important;
+}
 material-input div.focused-underline.invalid {
-  background-color: #e33 !important; }
+  background-color: #e33 !important;
+}
 material-input div.unfocused-underline.invalid {
-  background-color: #e33 !important; }
+  background-color: #e33 !important;
+}
 material-input div.error-text {
-  color: #e33 !important; }
+  color: #e33 !important;
+}
 
 material-spinner {
-  border-color: #1b9aaa !important; }
+  border-color: #1b9aaa !important;
+}
 
 material-tab div.tab-content:first-child {
   display: block;
-  width: 100%; }
+  width: 100%;
+}
 
 material-yes-no-buttons.action-buttons {
-  color: #1b9aaa !important; }
+  color: #1b9aaa !important;
+}
 
 /* TODO: update these variables with the of your app colors and font */
 p.label {
@@ -175,7 +232,8 @@ p.label {
   font-size: 0.9em;
   position: absolute;
   left: 0;
-  right: 0; }
+  right: 0;
+}
 
 div#canvas {
   margin: 0 auto;
@@ -193,50 +251,60 @@ div#canvas {
   position: relative;
   width: 6rem;
   height: 6rem;
-  border-radius: 0.5rem; }
-  div#canvas div.dial, div#canvas div.number {
-    color: #1b9aaa;
-    position: absolute; }
-  div#canvas div.number {
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    text-align: center;
-    display: inline;
-    border-radius: 0.2rem;
-    cursor: pointer;
-    padding: 0.1rem 0.125rem; }
-  div#canvas div.number:hover {
-    background-color: #f5f5f5;
-    color: #ccc; }
-  div#canvas div.hour {
-    font-size: 0.8rem; }
-  div#canvas div.minute {
-    font-size: 0.8rem; }
-  div#canvas h1.output {
-    color: #1b9aaa;
-    cursor: pointer;
-    font-size: 1.5rem;
-    text-align: center;
-    width: 100%; }
-  div#canvas div.midnight-toggle {
-    position: absolute;
-    bottom: 0.2rem;
-    cursor: pointer;
-    font-size: 0.7rem;
-    padding: 0.3rem 0.4rem;
-    border-radius: 0.2rem; }
-  div#canvas div.midnight-toggle:hover {
-    background-color: #f5f5f5;
-    color: #fff; }
-  div#canvas div.midnight-toggle.active {
-    background-color: #1b9aaa;
-    color: #fff; }
-  div#canvas div#am {
-    left: 1rem; }
-  div#canvas div#pm {
-    right: 1rem; }
-
-/*# sourceMappingURL=fo_time_picker_component.css.map */
+  border-radius: 0.5rem;
+}
+div#canvas div.dial, div#canvas div.number {
+  color: #1b9aaa;
+  position: absolute;
+}
+div#canvas div.number {
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: inline;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  padding: 0.1rem 0.125rem;
+}
+div#canvas div.number:hover {
+  background-color: #f5f5f5;
+  color: #ccc;
+}
+div#canvas div.hour {
+  font-size: 0.8rem;
+}
+div#canvas div.minute {
+  font-size: 0.8rem;
+}
+div#canvas h1.output {
+  color: #1b9aaa;
+  cursor: pointer;
+  font-size: 1.5rem;
+  text-align: center;
+  width: 100%;
+}
+div#canvas div.midnight-toggle {
+  position: absolute;
+  bottom: 0.2rem;
+  cursor: pointer;
+  font-size: 0.7rem;
+  padding: 0.3rem 0.4rem;
+  border-radius: 0.2rem;
+}
+div#canvas div.midnight-toggle:hover {
+  background-color: #f5f5f5;
+  color: #fff;
+}
+div#canvas div.midnight-toggle.active {
+  background-color: #1b9aaa;
+  color: #fff;
+}
+div#canvas div#am {
+  left: 1rem;
+}
+div#canvas div#pm {
+  right: 1rem;
+}
