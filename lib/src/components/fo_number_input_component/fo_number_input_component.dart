@@ -8,7 +8,7 @@ import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-number-input',
-    styleUrls: const ['fo_number_input_component.css'],
+    styleUrls: const ['fo_number_input_component.scss.css'],
     templateUrl: 'fo_number_input_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives],
     pipes: const [PhrasePipe]
