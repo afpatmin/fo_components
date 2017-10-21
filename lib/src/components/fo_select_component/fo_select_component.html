@@ -14,21 +14,31 @@
             (click)="clearSelection(); $event.stopPropagation();">
     </material-icon>
 </label>
-<material-dropdown-select
-        [class.full-width]="fullWidth"
-        [disabled]="disabled || options == null || selectionModel == null"
-        [buttonText]="selectedModel == null ? nullSelectionButtonText : selectedModel.toString()"
-        [popupMatchInputWidth]="true"
-        [options]="options"
-        [selection]="selectionModel"
-        [(visible)]="visible">
-    <div *ngIf="showSearch" header>
-        <material-select-searchbox
-                [label]="'search' | phrase"
-                [filterable]="options">
-        </material-select-searchbox>
-    </div>
-</material-dropdown-select>
+<div class="flex-container">
+    <material-dropdown-select
+            [class.full-width]="fullWidth"
+            [disabled]="disabled || options == null || selectionModel == null"
+            [buttonText]="selectedModel == null ? nullSelectionButtonText : selectedModel.toString()"
+            [popupMatchInputWidth]="true"
+            [options]="options"
+            [selection]="selectionModel"
+            [(visible)]="visible">
+        <div *ngIf="showSearch" header>
+            <material-select-searchbox
+                    [label]="'search' | phrase"
+                    [filterable]="options">
+            </material-select-searchbox>
+        </div>
+    </material-dropdown-select>
+    <material-button
+            [disabled]="selectedModel == null"
+            *ngIf="showActionButton"
+            raised
+            (trigger)="onActionButtonTriggerController.add(selectedModel)">
+        <material-icon [icon]="actionButtonIcon" size="x-large"></material-icon>
+    </material-button>
+
+</div>
 
 <fo-modal
         title="{{'information' | phrase}}"

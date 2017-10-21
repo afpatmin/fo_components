@@ -37,6 +37,7 @@ class FoSelectComponent implements OnChanges, OnDestroy
     _onVisibleChangeController.close();
     _onSelectedIdChangeController.close();
     _onSelectedModelChangeController.close();
+    onActionButtonTriggerController.close();
     _selectionChangeListener.cancel();
   }
 
@@ -71,8 +72,12 @@ class FoSelectComponent implements OnChanges, OnDestroy
   final StreamController<bool> _onVisibleChangeController = new StreamController();
   final StreamController<String> _onSelectedIdChangeController = new StreamController();
   final StreamController<FoModel> _onSelectedModelChangeController = new StreamController();
+  final StreamController<FoModel> onActionButtonTriggerController = new StreamController();
 
   bool tooltipModalVisible = false;
+
+  @Input('actionButtonIcon')
+  String actionButtonIcon = "add";
 
   @Input('allowNullSelection')
   bool allowNullSelection = false;
@@ -98,6 +103,9 @@ class FoSelectComponent implements OnChanges, OnDestroy
   @Input('selectedModel')
   FoModel selectedModel;
 
+  @Input('showActionButton')
+  bool showActionButton = false;
+
   @Input('showSearch')
   bool showSearch = false;
 
@@ -112,6 +120,9 @@ class FoSelectComponent implements OnChanges, OnDestroy
 
   @Output('selectedModelChange')
   Stream<FoModel> get onSelectedModelChangeOutput => _onSelectedModelChangeController.stream;
+
+  @Output('actionButtonTrigger')
+  Stream<FoModel> get onActionButtonTriggerOutput => onActionButtonTriggerController.stream;
 
   @Output('visibleChange')
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;

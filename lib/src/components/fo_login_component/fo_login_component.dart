@@ -102,8 +102,8 @@ class FoLoginComponent implements OnDestroy
     errorMessage = null;
   }
 
-  String username = "";
-  String password = "";
+  String username = "patrick.minogue@gmail.com  ";
+  String password = "test";
   String token = "";
 
   String state = "login";

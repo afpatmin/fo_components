@@ -21,7 +21,6 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
   {
     _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<FoModel>> e)
     {
-      _onSelectedModelsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.toList());
       _onSelectedIdsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.map((model) => model.id).toList());
     });
   }
@@ -59,7 +58,6 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
   {
     _onVisibleChangeController.close();
     _onSelectedIdsChangeController.close();
-    _onSelectedModelsChangeController.close();
     _selectionChangeListener?.cancel();
   }
 
@@ -75,8 +73,8 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
   }
 
   SelectionModel<FoModel> selectionModel = new SelectionModel.withList(allowMulti: true);
+  List<FoModel> selectedModels = new List();
   final StreamController<bool> _onVisibleChangeController = new StreamController();
-  final StreamController<List<FoModel>> _onSelectedModelsChangeController = new StreamController();
   final StreamController<List<String>> _onSelectedIdsChangeController = new StreamController();
   StreamSubscription<List<SelectionChangeRecord<FoModel>>> _selectionChangeListener;
 
@@ -98,9 +96,6 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
   @Input('selectedIds')
   List<String> selectedIds = new List();
 
-  @Input('selectedModels')
-  List<FoModel> selectedModels = new List();
-
   @Input('showSearch')
   bool showSearch = false;
 
@@ -112,7 +107,4 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
 
   @Output('selectedIdsChange')
   Stream<List<String>> get onSelectedIdsChangeOutput => _onSelectedIdsChangeController.stream;
-
-  @Output('selectedModelsChange')
-  Stream<List<FoModel>> get onSelectedModelsChangeOutput => _onSelectedModelsChangeController.stream;
 }

@@ -19,8 +19,24 @@
     vertical-align: text-top;
   }
 
-  ::ng-deep material-dropdown-select.full-width
+  div.flex-container
   {
-    width: 100%;
+    display: flex;
+
+    material-dropdown-select
+    {
+      flex: 0.8;
+    }
+    material-button
+    {
+      flex: 0.2;
+    }
+
+    material-dropdown-select.full-width
+    {
+
+      width: 100%;
+    }
+
   }
 }

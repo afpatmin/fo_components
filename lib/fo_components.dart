@@ -11,6 +11,7 @@ export 'src/components/fo_image_map_component/fo_image_map_component.dart';
 export 'src/components/fo_login_component/fo_login_component.dart';
 export 'src/components/fo_multi_select_component/fo_multi_select_component.dart';
 export 'src/components/fo_multi_input_component/fo_multi_input_component.dart';
+export 'src/components/fo_number_input_component/fo_number_input_component.dart';
 export 'src/components/fo_select_component/fo_select_component.dart';
 export 'src/components/fo_sidebar_component/fo_sidebar_component.dart';
 export 'src/components/fo_youtube_player_component/fo_youtube_player_component.dart';
