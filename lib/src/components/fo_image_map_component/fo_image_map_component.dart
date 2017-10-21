@@ -10,7 +10,7 @@ import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-image-map',
-    styleUrls: const ['fo_image_map_component.css'],
+    styleUrls: const ['fo_image_map_component.scss.css'],
     templateUrl: 'fo_image_map_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives, FoMultiSelectComponent],
     pipes: const [PhrasePipe],
@@ -44,9 +44,11 @@ class FoImageMapComponent implements OnChanges, OnDestroy
 
   void onClick(FoZoneModel zone)
   {
+    /*
     zone.marked = !zone.marked;
     selectedIds = zones.where((z) => z.marked).map((model) => model.id).toList(growable: false);
     _onSelectedIdsChangeController.add(selectedIds);
+    */
   }
 
   void onSelectionChange(List<String> selected_ids)
@@ -77,6 +79,9 @@ class FoImageMapComponent implements OnChanges, OnDestroy
   @Input('selectedIds')
   List<String> selectedIds = [];
 
+  @Input('showSelector')
+  bool showSelector = true;
+
   @Output('selectedIdsChange')
   Stream<List<String>> get onSelectedIdsChangeOutput => _onSelectedIdsChangeController.stream;
 }
@@ -96,7 +101,7 @@ class FoZoneModel extends FoModel
 
 abstract class FoShape
 {
-  FoShape(this._x, this._y, this.type);
+  FoShape(this._x, this._y, this.type, this.roundedCorners, this.transform);
 
   String get x => "$_x";
   String get y => "$_y";
@@ -105,11 +110,13 @@ abstract class FoShape
   final int _y;
 
   final String type;
+  final bool roundedCorners;
+  final String transform;
 }
 
 class FoShapeEllipse extends FoShape
 {
-  FoShapeEllipse(int x, int y, this._rx, this._ry) : super(x, y, "ellipse");
+  FoShapeEllipse(int x, int y, this._rx, this._ry) : super(x, y, "ellipse", false, "");
 
   String get rx => "$_rx";
   String get ry => "$_ry";
@@ -120,7 +127,7 @@ class FoShapeEllipse extends FoShape
 
 class FoShapePolygon extends FoShape
 {
-  FoShapePolygon(this._points) : super(null, null, "polygon");
+  FoShapePolygon(this._points, {bool rounded_corners = true, String transform = ""}) : super(null, null, "polygon", rounded_corners, transform);
 
   String get points => _points.map((point) => point.toString()).join(" ");
 
@@ -140,7 +147,7 @@ class FoShapePoint
 
 class FoShapeRectangle extends FoShape
 {
-  FoShapeRectangle(int x, int y, this._width, this._height) : super(x, y, "rectangle");
+  FoShapeRectangle(int x, int y, this._width, this._height, {bool rounded_corners = true, String transform = ""}) : super(x, y, "rectangle", rounded_corners, transform);
 
   String get width => "$_width";
   String get height => "$_height";

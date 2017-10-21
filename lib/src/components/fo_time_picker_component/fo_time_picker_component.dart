@@ -7,7 +7,7 @@ import 'package:angular/angular.dart';
 
 @Component(
     selector: 'fo-time-picker',
-    styleUrls: const ['fo_time_picker_component.css'],
+    styleUrls: const ['fo_time_picker_component.scss.css'],
     templateUrl: 'fo_time_picker_component.html',
     directives: const [CORE_DIRECTIVES],
     changeDetection: ChangeDetectionStrategy.OnPush)

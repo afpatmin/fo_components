@@ -14,9 +14,9 @@ dependencies:
     path: ../Grid
   vi_auth_client:
     path: ../ViAuthClient
-
-dev_dependencies:
   sass_builder: ^1.0.1
 
 transformers:
+- sass_builder:
+    outputExtension: .scss.css
 - angular

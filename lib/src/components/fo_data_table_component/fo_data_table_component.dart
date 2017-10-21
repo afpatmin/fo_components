@@ -17,7 +17,7 @@ import '../../services/phrase_service.dart';
 
 @Component(
     selector: 'fo-data-table',
-    styleUrls: const ['fo_data_table_component.css'],
+    styleUrls: const ['fo_data_table_component.scss.css'],
     templateUrl: 'fo_data_table_component.html',
     directives: const [CORE_DIRECTIVES, FoModalComponent, FoSelectComponent, materialDirectives, MaterialIconComponent],
     pipes: const [PhrasePipe, RangePipe],

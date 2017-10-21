@@ -11,7 +11,7 @@ import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-login',
-    styleUrls: const ['fo_login_component.css'],
+    styleUrls: const ['fo_login_component.scss.css'],
     templateUrl: 'fo_login_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives, FoModalComponent],
     pipes: const [PhrasePipe])

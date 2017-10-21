@@ -8,7 +8,7 @@ import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-modal',
-    styleUrls: const ['fo_modal_component.css'],
+    styleUrls: const ['fo_modal_component.scss.css'],
     templateUrl: 'fo_modal_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives],
     pipes: const [PhrasePipe]

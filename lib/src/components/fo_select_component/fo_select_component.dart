@@ -10,7 +10,7 @@ import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-select',
-    styleUrls: const ['fo_select_component.css'],
+    styleUrls: const ['fo_select_component.scss.css'],
     templateUrl: 'fo_select_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives, FoModalComponent],
     pipes: const [PhrasePipe],

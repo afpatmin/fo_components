@@ -9,7 +9,7 @@ import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-multi-input',
-    styleUrls: const ['fo_multi_input_component.css'],
+    styleUrls: const ['fo_multi_input_component.scss.css'],
     templateUrl: 'fo_multi_input_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives],
     pipes: const [PhrasePipe]

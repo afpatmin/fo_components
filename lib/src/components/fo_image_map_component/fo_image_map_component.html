@@ -8,6 +8,7 @@
                 [class.visible]="zone.marked"
                 [attr.cx]="ellipse.x" [attr.cy]="ellipse.y"
                 [attr.rx]="ellipse.rx" [attr.ry]="ellipse.ry"
+                [attr.transform]="ellipse.transform"
                 (click)="onClick(zone)">
         </ellipse>
         <rect
@@ -15,17 +16,22 @@
                 class="shape"
                 [class.visible]="zone.marked"
                 [attr.x]="rectangle.x" [attr.y]="rectangle.y"
-                [attr.width]="rectangle.width" [attr.height]="rectangle.height">
+                [attr.width]="rectangle.width" [attr.height]="rectangle.height"
+                [attr.transform]="rectangle.transform">
+                (click)="onClick(zone)">
         </rect>
         <polygon
                 *ngFor="let polygon of zone.polygons"
                 class="shape"
                 [class.visible]="zone.marked"
-                [attr.points]="polygon.points">
+                [attr.points]="polygon.points"
+                [attr.transform]="polygon.transform"
+                (click)="onClick(zone)">
         </polygon>
     </svg>
 </div>
 <fo-multi-select
+        *ngIf="showSelector"
         [label]="label"
         [fullWidth]="true"
         [options]="zoneOptions"

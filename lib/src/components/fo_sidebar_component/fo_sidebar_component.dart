@@ -9,7 +9,7 @@ import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-sidebar',
-    styleUrls: const ['fo_sidebar_component.css'],
+    styleUrls: const ['fo_sidebar_component.scss.css'],
     templateUrl: 'fo_sidebar_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives, ROUTER_DIRECTIVES],
     pipes: const [PhrasePipe]
