@@ -10,7 +10,9 @@ import 'package:angular/angular.dart';
     styleUrls: const ['fo_time_picker_component.scss.css'],
     templateUrl: 'fo_time_picker_component.html',
     directives: const [CORE_DIRECTIVES],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    visibility: Visibility.none
+)
 
 class FoTimePickerComponent implements OnDestroy, AfterViewInit
 {

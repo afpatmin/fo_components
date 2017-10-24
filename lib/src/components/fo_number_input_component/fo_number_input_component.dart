@@ -11,7 +11,8 @@ import '../../pipes/phrase_pipe.dart';
     styleUrls: const ['fo_number_input_component.scss.css'],
     templateUrl: 'fo_number_input_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives],
-    pipes: const [PhrasePipe]
+    pipes: const [PhrasePipe],
+    visibility: Visibility.none
 )
 class FoNumberInputComponent implements OnDestroy
 {

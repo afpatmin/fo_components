@@ -14,7 +14,9 @@ import '../../pipes/phrase_pipe.dart';
     styleUrls: const ['fo_login_component.scss.css'],
     templateUrl: 'fo_login_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives, FoModalComponent],
-    pipes: const [PhrasePipe])
+    pipes: const [PhrasePipe],
+    visibility: Visibility.none
+)
 class FoLoginComponent implements OnDestroy
 {
   FoLoginComponent();
@@ -102,8 +104,8 @@ class FoLoginComponent implements OnDestroy
     errorMessage = null;
   }
 
-  String username = "patrick.minogue@gmail.com  ";
-  String password = "test";
+  String username = "";
+  String password = "";
   String token = "";
 
   String state = "login";

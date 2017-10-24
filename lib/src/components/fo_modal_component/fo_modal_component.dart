@@ -11,7 +11,8 @@ import '../../pipes/phrase_pipe.dart';
     styleUrls: const ['fo_modal_component.scss.css'],
     templateUrl: 'fo_modal_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives],
-    pipes: const [PhrasePipe]
+    pipes: const [PhrasePipe],
+    visibility: Visibility.none
 )
 class FoModalComponent implements OnDestroy
 {
@@ -20,8 +21,6 @@ class FoModalComponent implements OnDestroy
   void ngOnDestroy()
   {
     _onVisibleChangeController.close();
-
-
   }
 
   void close()

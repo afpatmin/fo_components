@@ -45,6 +45,14 @@
                         <h3 id="page-header">
                             <material-icon [style.color]="backgroundColor" baseline [icon]="pageIcon"></material-icon>
                             {{pageHeader | phrase}}
+                            <material-button
+                                    *ngIf="instructionsUrl != null"
+                                    raised
+                                    clear-size
+                                    class="float-right"
+                                    (trigger)="instructionsModalVisible = true">
+                                {{'instructions' | phrase}}
+                            </material-button>
                         </h3>
                         <div id="page-content">
                             <router-outlet></router-outlet>
@@ -55,3 +63,9 @@
         </tr>
     </table>
 </div>
+
+<fo-modal
+        title="{{'instructions' | phrase}}"
+        [(visible)]="instructionsModalVisible">
+    <iframe width="340" height="290" [src]="instructionsUrl" frameborder="0" allowfullscreen scrolling="no"></iframe>
+</fo-modal>

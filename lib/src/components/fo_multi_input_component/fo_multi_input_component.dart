@@ -12,7 +12,8 @@ import '../../pipes/phrase_pipe.dart';
     styleUrls: const ['fo_multi_input_component.scss.css'],
     templateUrl: 'fo_multi_input_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives],
-    pipes: const [PhrasePipe]
+    pipes: const [PhrasePipe],
+    visibility: Visibility.none
 )
 class FoMultiInputComponent implements OnDestroy
 {

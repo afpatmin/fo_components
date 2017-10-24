@@ -13,7 +13,8 @@ import '../../pipes/phrase_pipe.dart';
     templateUrl: 'fo_multi_select_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives],
     pipes: const [PhrasePipe],
-    changeDetection: ChangeDetectionStrategy.Default
+    changeDetection: ChangeDetectionStrategy.Default,
+    visibility: Visibility.none
 )
 class FoMultiSelectComponent implements OnChanges, OnDestroy
 {

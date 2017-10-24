@@ -14,7 +14,8 @@ import '../../pipes/phrase_pipe.dart';
     templateUrl: 'fo_select_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives, FoModalComponent],
     pipes: const [PhrasePipe],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    visibility: Visibility.none
 )
 class FoSelectComponent implements OnChanges, OnDestroy
 {

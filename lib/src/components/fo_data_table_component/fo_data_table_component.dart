@@ -1,8 +1,6 @@
 // Copyright (c) 2017, Muienog AB. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-library data_table_component;
-
 import 'dart:async' show Stream, StreamController;
 import 'dart:html' as dom;
 import 'dart:math';
@@ -21,7 +19,8 @@ import '../../services/phrase_service.dart';
     templateUrl: 'fo_data_table_component.html',
     directives: const [CORE_DIRECTIVES, FoModalComponent, FoSelectComponent, materialDirectives, MaterialIconComponent],
     pipes: const [PhrasePipe, RangePipe],
-    changeDetection: ChangeDetectionStrategy.Default)
+    changeDetection: ChangeDetectionStrategy.Default,
+    visibility: Visibility.none)
 
 class DataTableComponent implements OnChanges, OnInit, OnDestroy
 {

@@ -14,7 +14,9 @@ import '../../pipes/phrase_pipe.dart';
     templateUrl: 'fo_image_file_component.html',
     styleUrls: const ['fo_image_file_component.scss.css'],
     directives: const [CORE_DIRECTIVES, MaterialIconComponent, MaterialButtonComponent],
-    pipes: const [PhrasePipe])
+    pipes: const [PhrasePipe],
+    visibility: Visibility.none
+)
 
 class FoImageFileComponent implements OnDestroy
 {

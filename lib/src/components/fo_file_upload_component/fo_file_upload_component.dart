@@ -12,7 +12,8 @@ import '../../pipes/phrase_pipe.dart';
     templateUrl: 'fo_file_upload_component.html',
     styleUrls: const ['fo_file_upload_component.scss.css'],
     directives: const [CORE_DIRECTIVES, materialDirectives],
-    pipes: const [PhrasePipe])
+    pipes: const [PhrasePipe],
+    visibility: Visibility.none)
 class FileUploadComponent implements OnDestroy
 {
   FileUploadComponent();

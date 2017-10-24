@@ -3,20 +3,24 @@
 
 import 'dart:async';
 import 'package:angular/angular.dart';
+import 'package:angular/security.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import '../../pipes/phrase_pipe.dart';
+import '../fo_modal_component/fo_modal_component.dart';
 
 @Component(
     selector: 'fo-sidebar',
     styleUrls: const ['fo_sidebar_component.scss.css'],
     templateUrl: 'fo_sidebar_component.html',
-    directives: const [CORE_DIRECTIVES, materialDirectives, ROUTER_DIRECTIVES],
-    pipes: const [PhrasePipe]
+    directives: const [CORE_DIRECTIVES, FoModalComponent, materialDirectives, ROUTER_DIRECTIVES],
+    providers: const [],
+    pipes: const [PhrasePipe],
+    visibility: Visibility.none
 )
 class FoSidebarComponent implements OnInit, OnDestroy
 {
-  FoSidebarComponent(this._router);
+  FoSidebarComponent(this._router, this._domSanitizationService);
 
   void ngOnInit()
   {
@@ -51,6 +55,7 @@ class FoSidebarComponent implements OnInit, OnDestroy
         {
           pageIcon = item.icon;
           pageHeader = item.label;
+          instructionsUrl = item.instructionsUrl == null ? null : _domSanitizationService.bypassSecurityTrustResourceUrl(item.instructionsUrl);
         }
       }
     }
@@ -58,12 +63,13 @@ class FoSidebarComponent implements OnInit, OnDestroy
 
   String get sidebarWidth => (expanded) ? "${width}px" : "${miniWidth}px";
 
-  //String get pageHeader => (_router.currentInstruction == null) ? "" : _router.currentInstruction.path;
-
   final Router _router;
+  final DomSanitizationService _domSanitizationService;
   bool animating = false;
   String pageHeader = "";
   String pageIcon = "";
+  SafeResourceUrl instructionsUrl;
+  bool instructionsModalVisible = false;
   final StreamController<bool> _onExpandedChangeController = new StreamController();
   StreamSubscription<String> _onStartNavigationListener;
   final int miniWidth = 40;
@@ -100,10 +106,11 @@ class FoSidebarCategory
 
 class FoSidebarItem
 {
-  FoSidebarItem(this.url, this.label, this.routerLink, this.icon);
+  FoSidebarItem(this.url, this.label, this.routerLink, this.icon, [this.instructionsUrl = null]);
 
   final String url;
   final String label;
   final String routerLink;
   final String icon;
+  final String instructionsUrl;
 }
