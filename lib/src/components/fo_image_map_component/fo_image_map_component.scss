@@ -18,15 +18,16 @@
     position: absolute;
     top: 0;
     left: 0;
-    opacity: 0.6;
+    opacity: 0.3;
 
     .shape
     {
       visibility: hidden;
-      stroke: $color1;
-      stroke-width: 2;
+      stroke: white;
+      stroke-width: 2px;
+      stroke-dasharray: 2;
       stroke-linejoin: round;
-      fill: $color1;
+      fill: $colorAlert;
     }
 
     .shape.visible
