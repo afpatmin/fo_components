@@ -1,12 +1,12 @@
 <label>{{label | phrase}}</label>
 <div>
-    <span>{{leadingText | phrase}}</span>
-    <material-button clear-size [disabled]="value <= min" (trigger)="onAdd(-1)">
+    <span>{{leadingText | phrase}}&nbsp;</span>
+    <material-button raised clear-size [disabled]="value <= min" (trigger)="onAdd(-1)">
         <material-icon icon="remove" size="medium"></material-icon>
     </material-button>
     <span>&nbsp;{{value}}&nbsp;</span>
-    <material-button clear-size [disabled]="value >= max" (trigger)="onAdd(1)">
+    <material-button raised clear-size [disabled]="value >= max" (trigger)="onAdd(1)">
         <material-icon icon="add" size="medium"></material-icon>
     </material-button>
-    <span>{{trailingText | phrase:false}}</span>
+    <span>&nbsp;{{trailingText | phrase:false}}</span>
 </div>
