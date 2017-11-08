@@ -1,7 +1,7 @@
 // Copyright (c) 2017, Patrick Minogue. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'dart:async' show Stream, StreamController;
+import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import '../../pipes/phrase_pipe.dart';
@@ -23,13 +23,43 @@ class FoNumberInputComponent implements OnDestroy
     _onValueChangeController.close();
   }
 
-  void onAdd(int count)
+  void onMouseDown(int count)
   {
-    value += count;
-    _onValueChangeController.add(value);
+    add(count);
+
+    autoAddTimer?.cancel();
+    addStepTimer?.cancel();
+    addStepTimer = null;
+
+    autoAddTimer = new Timer(const Duration(milliseconds: 600), ()
+    {
+      autoAddTimer = null;
+      addStepTimer?.cancel();
+      addStepTimer = new Timer.periodic(const Duration(milliseconds: 20), (_) => add(count));
+    });
+  }
+
+  void onMouseUp()
+  {
+    autoAddTimer?.cancel();
+    addStepTimer?.cancel();
+    autoAddTimer = null;
+    addStepTimer = null;
+  }
+
+  void add(int count)
+  {
+    if (value + count >= min && value + count <= max)
+    {
+      value += count;
+      _onValueChangeController.add(value);
+    }
   }
 
   final StreamController<int> _onValueChangeController = new StreamController();
+
+  @Input('disabled')
+  bool disabled = false;
 
   @Input('label')
   String label = "value";
@@ -51,4 +81,7 @@ class FoNumberInputComponent implements OnDestroy
 
   @Output('valueChange')
   Stream<int> get onValueChangeOutput => _onValueChangeController.stream;
+
+  Timer autoAddTimer;
+  Timer addStepTimer;
 }
