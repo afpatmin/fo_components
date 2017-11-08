@@ -104,8 +104,6 @@ class FoLoginComponent implements OnDestroy
     errorMessage = null;
   }
 
-  String username = "";
-  String password = "";
   String token = "";
 
   String state = "login";
@@ -114,6 +112,12 @@ class FoLoginComponent implements OnDestroy
   bool visible = true;
 
   final StreamController<Map<String, String>> _onLoginController = new StreamController();
+
+  @Input('username')
+  String username = "";
+
+  @Input('password')
+  String password = "";
 
   @Input('client')
   ViAuthClient client;

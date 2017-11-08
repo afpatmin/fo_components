@@ -44,9 +44,6 @@ class FoModalComponent implements OnDestroy
   @Input('fixedHeight')
   bool fixedHeight = false;
 
-  @Input('headerBackgroundColor')
-  String headerBackgroundColor = "#616161";
-
   @Input('showCloseButton')
   bool showCloseButton = true;
 
