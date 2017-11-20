@@ -15,9 +15,16 @@
 </material-dropdown-select>
 
 
-<reorder-list *ngIf="selectionModel.isNotEmpty" (reorder)="onReorder($event)" class="selected-values">
-    <span *ngFor="let value of selectionModel.selectedValues" reorderItem>
+<div *ngIf="allowReorder">
+    <reorder-list *ngIf="selectionModel.isNotEmpty" (reorder)="onReorder($event)" class="selected-values">
+        <span *ngFor="let value of selectionModel.selectedValues" reorderItem>
+        {{value.toString()}}
+        </span>
+    </reorder-list>
+</div>
+<div *ngIf="!allowReorder">
+    <span *ngFor="let value of selectionModel.selectedValues">
         {{value.toString()}}
     </span>
-</reorder-list>
+</div>
 <div *ngIf="selectionModel.isEmpty" class="selected-values">{{nullSelectionButtonText | phrase}}</div>

@@ -30,6 +30,11 @@ class FoSelectComponent implements OnChanges, OnDestroy
     else if (changes.containsKey("selectedId"))
     {
       selectedModel = (selectedId == null) ? null : options.optionsList.firstWhere((m) => m.id == selectedId, orElse: () => null);
+
+      /*print(selectedModel);
+
+      selectionModel.select(selectedModel);
+      */
     }
   }
 

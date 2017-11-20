@@ -79,6 +79,9 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
   final StreamController<List<String>> _onSelectedIdsChangeController = new StreamController();
   StreamSubscription<List<SelectionChangeRecord<FoModel>>> _selectionChangeListener;
 
+  @Input('allowReorder')
+  bool allowReorder = false;
+
   @Input('disabled')
   bool disabled = false;
 

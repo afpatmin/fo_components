@@ -3,46 +3,49 @@
 
 material-dialog
 {
-  min-width: 15rem;
-  max-width: 90vw;
-  max-height: 95vh;
-  text-align: left;
+    min-width: 15rem;
+    max-width: 90vw;
+    max-height: 95vh;
+    text-align: left;
 }
 
 material-dialog > ::ng-deep header
 {
-  padding: 0 !important;
+    padding: 0 !important;
 
-  div.modal-header
-  {
-    padding: 16px;
-    color: white;
-    h3
+    div.modal-header
     {
-      line-height: 160%;
-
-      material-button
-      {
-        margin-left: 1rem;
-      }
+        padding: 16px;
+        color: white;
+        h3
+        {
+            line-height: 160%;
+            material-button
+            {
+                margin-left: 1rem;
+            }
+        }
     }
-  }
 }
 
 material-dialog
 {
-  div.modal-content
-  {
-    padding-bottom: 0.5rem;
-  }
+    ::ng-deep main
+    {
+        -webkit-overflow-scrolling: touch; // Smooth scrolling on tablets/phones
+        div.modal-content
+        {
+            padding-bottom: 0.5rem;
+        }
+    }
 }
 
 material-dialog.fixed-height
 {
-  height: 95vh;
+    height: 95vh;
 
-  div.modal-content
-  {
+    div.modal-content
+    {
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
@@ -50,11 +53,11 @@ material-dialog.fixed-height
 
 material-dialog.fixed-width
 {
-  width: 90vw;
-  max-width: 1250px;
+    width: 90vw;
+    max-width: 1250px;
 }
 
 .float-right
 {
-  float: right;
+    float: right;
 }

@@ -41,8 +41,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     {
       if (data == null) data = new Map();
       selectedRowOption = rowOptions.optionsList.firstWhere((r) => r.count == rows, orElse: () => rowOptions.optionsList.first);
-
-      //_filteredKeys = data.keys;
       onSearch();
       setIndices(0);
     }
