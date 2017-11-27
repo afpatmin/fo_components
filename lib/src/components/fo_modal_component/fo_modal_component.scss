@@ -1,5 +1,6 @@
 @import 'package:grid/grid';
 @import 'package:grid/theme';
+@import 'package:angular_components/material_dialog/mixins';
 
 material-dialog
 {
@@ -9,16 +10,16 @@ material-dialog
     text-align: left;
 }
 
-material-dialog > ::ng-deep header
+material-dialog
 {
-    padding: 0 !important;
+    @include material-dialog-header-color(#fff);
 
-    div.modal-header
+    [header]
     {
-        padding: 16px;
-        color: white;
         h3
         {
+            margin-left: 16px;
+            color: #333;
             line-height: 160%;
             material-button
             {

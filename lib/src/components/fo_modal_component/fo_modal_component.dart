@@ -2,6 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async' show Stream, StreamController;
+//import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import '../../pipes/phrase_pipe.dart';
@@ -43,6 +44,9 @@ class FoModalComponent implements OnDestroy
 
   @Input('fixedHeight')
   bool fixedHeight = false;
+
+  @Input('headerBackgroundColor')
+  String headerBackgroundColor = "#333";
 
   @Input('showCloseButton')
   bool showCloseButton = true;
