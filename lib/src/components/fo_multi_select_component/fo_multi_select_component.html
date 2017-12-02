@@ -1,11 +1,13 @@
+<span class="label">{{label | phrase}}</span>
 <material-dropdown-select
         [class.full-width]="fullWidth"
         [disabled]="disabled || options == null || selectionModel == null"
-        [buttonText]="label | phrase"
+        buttonText="{{buttonText | phrase}}..."
         [popupMatchInputWidth]="false"
         [options]="options"
         [selection]="selectionModel"
-        [(visible)]="visible">
+        [(visible)]="visible"
+        id="select">
     <div *ngIf="showSearch" header>
         <material-select-searchbox
                 [label]="'search' | phrase"
@@ -14,17 +16,18 @@
     </div>
 </material-dropdown-select>
 
-
-<div *ngIf="allowReorder">
+<div *ngIf="allowReorder" class="selectedValues">
     <reorder-list *ngIf="selectionModel.isNotEmpty" (reorder)="onReorder($event)" class="selected-values">
-        <span *ngFor="let value of selectionModel.selectedValues" reorderItem>
-        {{value.toString()}}
-        </span>
+        <div *ngFor="let value of selectionModel.selectedValues" reorderItem>
+        {{value}}
+        </div>
     </reorder-list>
 </div>
-<div *ngIf="!allowReorder">
-    <span *ngFor="let value of selectionModel.selectedValues">
-        {{value.toString()}}
-    </span>
-</div>
-<div *ngIf="selectionModel.isEmpty" class="selected-values">{{nullSelectionButtonText | phrase}}</div>
+<material-chips *ngIf="!allowReorder" class="selectedValues">
+    <material-chip
+            *ngFor="let value of selectionModel.selectedValues"
+            (remove)="selectionModel.deselect(value)">
+        {{value}}
+    </material-chip>
+</material-chips>
+<div *ngIf="selectionModel.isEmpty" class="selectedValues">{{nullSelectionButtonText | phrase}}</div>

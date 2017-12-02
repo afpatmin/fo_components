@@ -14,12 +14,16 @@ class FoModel
   @override
   int get hashCode => id.hashCode;
 
-  Map<String, String> toTableRow() => label == null ? {"id":id} : {"id":id, "label":ps.get(label)};
+  List<String> get tableColumns => [];
+
+  String getProperty(String property) => (data.containsKey(property)) ? data[property].toString() : null;
 
   static PhraseService ps = new PhraseService();
 
   String id;
   String label;
+  Map<String, dynamic> data;
+
 
   @override
   String toString() => label == null ? id : ps.get(label);

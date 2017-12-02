@@ -3,16 +3,20 @@
 
 p.label
 {
-  text-align: center;
-  margin: 0;
-  font-size: 0.9em;
-  position: absolute;
-  left: 0;
-  right: 0;
+    color: #888;
+    margin: 0.5em auto;
+    text-align: center;
+    font-size: 0.75em;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
 }
 
 div#canvas
 {
+  background-color: white;
   margin: 0 auto;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -26,13 +30,17 @@ div#canvas
   -ms-user-select: none;
   user-select: none;
   position: relative;
-  width: 6rem;
-  height: 6rem;
-  border-radius: 0.5rem;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  padding: 0.5rem;
+  @include box-shadow();
 
-  div.dial, div.number
+  div.number
   {
-    color: $color1;
+    color: #666;
     position: absolute;
   }
 
@@ -45,61 +53,54 @@ div#canvas
     transform: translate(-50%, -50%);
     text-align: center;
     display: inline;
-    border-radius: 0.2rem;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
     cursor: pointer;
-    padding: 0.1rem 0.125rem;
+    padding: 0.3rem;
   }
   div.number:hover
   {
-    background-color: $color2;
-    color: $color3;
+    background-color: $color1;
+    color: white;
   }
 
   div.hour
   {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 
   div.minute
   {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 
   h1.output
   {
     color: $color1;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     text-align: center;
     width: 100%;
   }
+}
 
-  div.midnight-toggle
-  {
-    position: absolute;
-    bottom: 0.2rem;
+.midnight-toggle
+{
     cursor: pointer;
-    font-size: 0.7rem;
-    padding: 0.3rem 0.4rem;
-    border-radius: 0.2rem;
-  }
-  div.midnight-toggle:hover
-  {
+    font-size: 0.9rem;
+    padding: 0.2rem 0.3rem;
+    border-radius: 0.1rem;
+}
+
+.midnight-toggle:hover
+{
     background-color: $color2;
-    color: $colorWhite;
-  }
-  div.midnight-toggle.active
-  {
+    color: $color1;
+}
+
+.midnight-toggle.active
+{
     background-color: $color1;
     color: $colorWhite;
-  }
-
-  div#am
-  {
-    left: 1rem;
-  }
-  div#pm
-  {
-    right: 1rem;
-  }
 }

@@ -82,6 +82,9 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
   @Input('allowReorder')
   bool allowReorder = false;
 
+  @Input('buttonText')
+  String buttonText = 'select';
+
   @Input('disabled')
   bool disabled = false;
 

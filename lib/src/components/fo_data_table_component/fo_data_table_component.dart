@@ -32,14 +32,14 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     firstIndex = 0;
     lastIndex = selectedRowOption.count;
 
-    if (data == null) data = new Map();
+    if (modelRegistry == null) modelRegistry = new Map();
   }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
     if (changes.containsKey("rows") || changes.containsKey("data"))
     {
-      if (data == null) data = new Map();
+      if (modelRegistry == null) modelRegistry = new Map();
       selectedRowOption = rowOptions.optionsList.firstWhere((r) => r.count == rows, orElse: () => rowOptions.optionsList.first);
       onSearch();
       setIndices(0);
@@ -60,6 +60,12 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     setIndices(firstIndex + (steps * selectedRowOption.count));
   }
 
+  void onSearchKeyUp(dom.KeyboardEvent e)
+  {
+    if (modelRegistry.length < 500) onSearch();
+    else if (e.keyCode == dom.KeyCode.ENTER || e.keyCode == dom.KeyCode.MAC_ENTER) onSearch();
+  }
+
   void onSearch()
   {
     sortColumn = null;
@@ -68,12 +74,24 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     {
       bool find(FoModel model, List<String> keywords)
       {
-        return (model.toTableRow().values.firstWhere((value) => (keywords.firstWhere((keyword) =>
-            value.toString().toLowerCase().contains(keyword), orElse: () => null) != null), orElse: () => null) != null);
+        bool allKeywords;
+        for (String keyword in keywords)
+        {
+          allKeywords = false;
+          for (String col in model.tableColumns)
+          {
+            if (model.getProperty(col).contains(keyword))
+            {
+              allKeywords = true;
+              break;
+            }
+          }
+          if (allKeywords == false) return false;
+        }
+        return true;
       }
-
       List<String> keywords = searchPhrase.toLowerCase().split(" ");
-      _filteredKeys = data.values.where((model) => find(model, keywords)).map((value) => data.keys.firstWhere((key) => data[key] == value));
+      _filteredKeys = modelRegistry.values.where((model) => find(model, keywords)).map((value) => modelRegistry.keys.firstWhere((key) => modelRegistry[key] == value));
     }
     else _filteredKeys = null;
 
@@ -89,16 +107,16 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
       if (sortOrder != null && sortColumn != null && sortColumn.isNotEmpty)
       {
-        int sort(Map<String, String> a, Map<String, String> b)
+        int sort(String a, String b)
         {
-          if (a[sortColumn] == null) a[sortColumn] = "-";
-          if (b[sortColumn] == null) b[sortColumn] = "-";
+          if (a == null) a = "-";
+          if (b == null) b = "-";
 
           try
           {
             // Number comparison
-            num numA = num.parse(a[sortColumn]);
-            num numB = num.parse(b[sortColumn]);
+            num numA = num.parse(a);
+            num numB = num.parse(b);
             return (sortOrder == "ASC") ? (numA - numB).toInt() : (numB - numA).toInt();
           }
           on FormatException
@@ -106,23 +124,23 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
             try
             {
               // Date comparison
-              DateTime dateA = DateTime.parse(a[sortColumn]);
-              DateTime dateB = DateTime.parse(b[sortColumn]);
+              DateTime dateA = DateTime.parse(a);
+              DateTime dateB = DateTime.parse(b);
               return (sortOrder == "ASC") ? (dateA.difference(dateB)).inMinutes : (dateB.difference(dateA)).inMinutes;
             }
             on FormatException
             {
               // Default String comparison
-              String colA = a[sortColumn].toString().toLowerCase();
-              String colB = b[sortColumn].toString().toLowerCase();
+              String colA = a.toLowerCase();
+              String colB = b.toLowerCase();
 
               return (sortOrder == "ASC") ? colA.compareTo(colB) : colB.compareTo(colA);
             }
           }
         }
 
-        List<FoModel> values = filteredKeys.map((key) => data[key]).toList(growable: false);
-        values.sort((FoModel a, FoModel b) => sort(a.toTableRow(), b.toTableRow()));
+        List<FoModel> values = filteredKeys.map((key) => modelRegistry[key]).toList(growable: false);
+        values.sort((FoModel a, FoModel b) => sort(a.getProperty(sortColumn), b.getProperty(sortColumn)));
 
         _filteredKeys = values.map((model) => model.id);
       }
@@ -131,31 +149,33 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   void onDownloadDataCSV()
   {
-    if (data.isNotEmpty)
+    if (modelRegistry.isNotEmpty)
     {
       /**
        * Generate CSV string (Property1;Property2;Property3;Property4;Property5\n)
        */
       StringBuffer sb = new StringBuffer();
 
-      String columns = data.values.first.toTableRow().keys.map(_phraseService.get).join(";");
+      String columns = modelRegistry.values.first.tableColumns.map(_phraseService.get).join(";");
       sb.writeln(columns);
 
       for (String key in filteredKeys)
       {
-        Map<String, String> dataRow = data[key].toTableRow();
+        FoModel model = modelRegistry[key];
+
+        List<String> properties = model.tableColumns.map(model.getProperty).toList(growable: false);
 
         /// Add "'"-character if ¨the cell has a leading '0'-character. This will stop Excel from skipping leading 0
-        for (String key in dataRow.keys)
+        for (String property in properties)
         {
           try
           {
-            num.parse(dataRow[key]);
-            if (dataRow[key].startsWith("0")) dataRow[key] = '="' + dataRow[key] + '"';
+            num.parse(property);
+            if (property.startsWith("0")) property = '="' + property + '"';
           }
           catch (e) { /* Not a number, continue */ }
         }
-        sb.writeln(dataRow.values.join(";"));
+        sb.writeln(properties.join(";"));
       }
 
       String csv = Uri.encodeComponent(sb.toString());
@@ -168,7 +188,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   void setIndices(int first_index)
   {
-    if (first_index < 0 || first_index >= data.length) return;
+    if (first_index < 0 || first_index >= modelRegistry.length) return;
 
     int rowCount = selectedRowOption.count;
 
@@ -176,10 +196,10 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     if (searchPhrase != null && searchPhrase.isNotEmpty) firstIndex = max(0, min(firstIndex, filteredKeys.length - rowCount));
     lastIndex = firstIndex + rowCount;
 
-    currentPage = (data.isEmpty) ? 0 : (firstIndex.toDouble() / rowCount).ceil() + 1;
+    currentPage = (modelRegistry.isEmpty) ? 0 : (firstIndex.toDouble() / rowCount).ceil() + 1;
   }
 
-  Iterable<String> get col => data.isEmpty ? [] : data.values.first.toTableRow().keys;
+  Iterable<String> get col => modelRegistry.isEmpty ? [] : modelRegistry.values.first.tableColumns;
 
   int get totalPages => (filteredKeys.length.toDouble() / selectedRowOption.count).ceil();
 
@@ -198,8 +218,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   {
     if (state) selectedRows.add(id);
     else selectedRows.remove(id);
-
-
     onSelectedRowsController.add(selectedRows);
   }
 
@@ -209,7 +227,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     else selectedRows.clear();
   }
 
-  Iterable<String> get filteredKeys => _filteredKeys == null ? data.keys : _filteredKeys;
+  Iterable<String> get filteredKeys => _filteredKeys == null ? modelRegistry.keys : _filteredKeys;
 
   RowOption selectedRowOption;
 
@@ -240,7 +258,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   List<String> mediumHiddenCol = [];
 
   @Input('models')
-  Map<String, FoModel> data = new Map();
+  Map<String, FoModel> modelRegistry = new Map();
 
   @Input('showCheckboxes')
   bool showCheckboxes = false;

@@ -20,7 +20,7 @@
                 label="{{'filter' | phrase}}"
                 trailingGlyph="search"
                 [(ngModel)]="searchPhrase"
-                (keyup)="onSearch()">
+                (keyup)="onSearchKeyUp($event)">
         </material-input>
     </div>
 </div>
@@ -28,7 +28,7 @@
 <div class="row">
     <div class="s12 col">
         <table [class.faded]="disabled" class="output color-black box-shadow margin-bottom-x-small">
-            <thead *ngIf="data.isNotEmpty">
+            <thead *ngIf="modelRegistry.isNotEmpty">
             <tr>
                 <td *ngIf="showCheckboxes">
                     <material-checkbox (checkedChange)="onAllCheckedChange($event)"></material-checkbox>
@@ -59,11 +59,16 @@
                         [class.hide-for-small]="smallHiddenCol.contains(cell)"
                         [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                         [class.hide-for-large]="largeHiddenCol.contains(cell)"
-                        (click)="onCellClickController.add(data[key].toTableRow()[cell])">
-                    {{data[key].toTableRow()[cell]}}
+                        (click)="onCellClickController.add(modelRegistry[key].getProperty(cell))">
+                    {{modelRegistry[key].getProperty(cell) | phrase:false}}
                 </td>
                 <td *ngIf="showDeleteButtons" class="text-center">
-                    <material-icon class="clickable color-alert" icon="delete_forever" size="x-large" (click)="deleteBufferId = key; $event.stopPropagation()"></material-icon>
+                    <material-icon
+                            class="clickable color-alert"
+                            icon="delete_forever"
+                            size="x-large"
+                            (click)="deleteBufferId = key; $event.stopPropagation()">
+                    </material-icon>
                 </td>
             </tr>
             <tr *ngIf="filteredKeys.isEmpty">
@@ -80,7 +85,7 @@
                 class="margin-bottom-small"
                 clear-size
                 raised
-                [disabled]="disabled || data.isEmpty"
+                [disabled]="disabled || modelRegistry.isEmpty"
                 [materialTooltip]="'download_csv' | phrase"
                 (click)="onDownloadDataCSV()">
             <material-icon class="color-black" size="medium" icon="file_download"></material-icon>

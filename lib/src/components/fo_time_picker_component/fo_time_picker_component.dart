@@ -4,28 +4,25 @@
 import 'dart:async' show Stream, StreamController;
 import 'dart:math';
 import 'package:angular/angular.dart';
+import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-time-picker',
     styleUrls: const ['fo_time_picker_component.scss.css'],
     templateUrl: 'fo_time_picker_component.html',
     directives: const [CORE_DIRECTIVES],
+    pipes: const [PhrasePipe],
     changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.none
 )
 
-class FoTimePickerComponent implements OnDestroy, AfterViewInit
+class FoTimePickerComponent implements OnDestroy
 {
   FoTimePickerComponent();
 
   void ngOnDestroy()
   {
     _onTimeChangeController.close();
-  }
-
-  void ngAfterViewInit()
-  {
-
   }
 
   String calcHourLeft(String hour)

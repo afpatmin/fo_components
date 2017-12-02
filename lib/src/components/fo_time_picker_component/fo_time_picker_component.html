@@ -1,4 +1,4 @@
-<p class="label color-1" *ngIf="strHour != null && strMinute != null" (click)="strHour = null; strMinute = null">{{label}}</p>
+<p class="label" (click)="strHour = null; strMinute = null">{{label | phrase}}</p>
 <div id="canvas">
     <div *ngIf="strHour == null">
         <div
@@ -25,8 +25,8 @@
         (click)="strHour = null; strMinute = null">
         {{strHour}}:{{strMinute}}
     </h1>
-    <div *ngIf="strHour != null && strMinute != null">
-        <div class="midnight-toggle" [class.active]="amMode" id="am" (click)="amMode = true">AM</div>
-        <div class="midnight-toggle" [class.active]="!amMode" id="pm" (click)="amMode = false">PM</div>
-    </div>
+</div>
+<div class="margin-top-medium text-center">
+    <span class="midnight-toggle" [class.active]="amMode" id="am" (click)="amMode = true">{{'AM' | phrase}}</span>
+    <span class="midnight-toggle" [class.active]="!amMode" id="pm" (click)="amMode = false">{{'PM' | phrase}}</span>
 </div>
