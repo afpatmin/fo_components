@@ -5,7 +5,6 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import '../fo_multi_select_component/fo_multi_select_component.dart';
-import '../../models/fo_model.dart';
 import '../../pipes/phrase_pipe.dart';
 
 @Component(
@@ -86,9 +85,9 @@ class FoImageMapComponent implements OnChanges, OnDestroy
   Stream<List<String>> get onSelectedIdsChangeOutput => _onSelectedIdsChangeController.stream;
 }
 
-class FoZoneModel extends FoModel
+class FoZoneModel
 {
-  FoZoneModel(this._shapes, String id, String label) : super(id, label);
+  FoZoneModel(this._shapes, this.id, String label);
   List<FoShape> get shapes => _shapes;
 
   Iterable<FoShape> get ellipses => _shapes.where((s) => s.type == "ellipse");
@@ -96,7 +95,9 @@ class FoZoneModel extends FoModel
   Iterable<FoShape> get polygons => _shapes.where((s) => s.type == "polygon");
 
   final List<FoShape> _shapes;
+  final String id;
   bool marked = false;
+
 }
 
 abstract class FoShape

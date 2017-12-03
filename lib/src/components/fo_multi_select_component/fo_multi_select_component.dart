@@ -4,7 +4,6 @@
 import 'dart:async' show Stream, StreamController, StreamSubscription;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import '../../models/fo_model.dart';
 import '../../pipes/phrase_pipe.dart';
 
 @Component(
@@ -20,9 +19,9 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
 {
   FoMultiSelectComponent()
   {
-    _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<FoModel>> e)
+    _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<Map>> e)
     {
-      _onSelectedIdsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.map((model) => model.id).toList());
+      _onSelectedIdsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.map((model) => model['id']).toList());
     });
   }
 
@@ -35,7 +34,7 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
       selectionModel.clear();
       selectedIds.clear();
       selectedModels.forEach(selectionModel.select);
-      selectedIds = selectedModels.map((model) => model.id).toList();
+      selectedIds = selectedModels.map((model) => model['id']).toList();
     }
     else if (changes.containsKey("selectedIds"))
     {
@@ -45,7 +44,7 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
       selectedModels.clear();
       for (String id in selectedIds)
       {
-        FoModel model = options.optionsList.firstWhere((m) => m.id == id, orElse: () => null);
+        Map model = options.optionsList.firstWhere((m) => m['id'] == id, orElse: () => null);
         if (model != null)
         {
           selectionModel.select(model);
@@ -64,20 +63,20 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
 
   void onReorder(ReorderEvent event)
   {
-    FoModel sourceModel = selectedModels.elementAt(event.sourceIndex);
+    Map sourceModel = selectedModels.elementAt(event.sourceIndex);
     selectedModels.removeAt(event.sourceIndex);
     selectedModels.insert(event.destIndex, sourceModel);
-    selectedIds = selectedModels.map((model) => model.id).toList();
+    selectedIds = selectedModels.map((model) => model['id']).toList();
 
     selectionModel.clear();
     selectedModels.forEach(selectionModel.select);
   }
 
-  SelectionModel<FoModel> selectionModel = new SelectionModel.withList(allowMulti: true);
-  List<FoModel> selectedModels = new List();
+  SelectionModel<Map> selectionModel = new SelectionModel.withList(allowMulti: true);
+  List<Map> selectedModels = new List();
   final StreamController<bool> _onVisibleChangeController = new StreamController();
   final StreamController<List<String>> _onSelectedIdsChangeController = new StreamController();
-  StreamSubscription<List<SelectionChangeRecord<FoModel>>> _selectionChangeListener;
+  StreamSubscription<List<SelectionChangeRecord<Map>>> _selectionChangeListener;
 
   @Input('allowReorder')
   bool allowReorder = false;
@@ -98,7 +97,7 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
   String nullSelectionButtonText = "-";
 
   @Input('options')
-  StringSelectionOptions<FoModel> options = new StringSelectionOptions([]);
+  StringSelectionOptions<Map> options = new StringSelectionOptions([]);
 
   @Input('selectedIds')
   List<String> selectedIds = new List();

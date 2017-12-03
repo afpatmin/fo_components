@@ -5,7 +5,6 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import '../fo_modal_component/fo_modal_component.dart';
-import '../../models/fo_model.dart';
 import '../../pipes/phrase_pipe.dart';
 
 @Component(
@@ -26,15 +25,9 @@ class FoSelectComponent implements OnChanges, OnDestroy
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-    if (changes.containsKey("selectedModel")) selectedId = selectedModel?.id;
-    else if (changes.containsKey("selectedId"))
+    if (changes.containsKey("selectedId"))
     {
-      selectedModel = (selectedId == null) ? null : options.optionsList.firstWhere((m) => m.id == selectedId, orElse: () => null);
-
-      /*print(selectedModel);
-
-      selectionModel.select(selectedModel);
-      */
+      selectedModel = (selectedId == null) ? null : options.optionsList.firstWhere((m) => m['id'] == selectedId, orElse: () => null);
     }
   }
 
@@ -42,7 +35,6 @@ class FoSelectComponent implements OnChanges, OnDestroy
   {
     _onVisibleChangeController.close();
     _onSelectedIdChangeController.close();
-    _onSelectedModelChangeController.close();
     onActionButtonTriggerController.close();
     _selectionChangeListener.cancel();
   }
@@ -52,16 +44,15 @@ class FoSelectComponent implements OnChanges, OnDestroy
     if (!disabled) visible = flag;
   }
 
-  void _onSelectionChanges(List<SelectionChangeRecord<FoModel>> e)
+  void _onSelectionChanges(List<SelectionChangeRecord<Map>> e)
   {
     if (e.isEmpty) return;
     if (e.first.added.isNotEmpty)
     {
       selectedModel = e.first.added.first;
-      selectedId = selectedModel.id;
+      selectedId = selectedModel['id'];
     }
-    _onSelectedIdChangeController.add(selectedModel?.id);
-    _onSelectedModelChangeController.add(selectedModel);
+    _onSelectedIdChangeController.add(selectedModel == null ? null : selectedModel['id']);
   }
 
   void clearSelection()
@@ -69,16 +60,14 @@ class FoSelectComponent implements OnChanges, OnDestroy
     selectionModel.clear();
     selectedModel = null;
     selectedId = null;
-    _onSelectedModelChangeController.add(null);
     _onSelectedIdChangeController.add(null);
   }
 
-  SelectionModel<FoModel> selectionModel = new SelectionModel.withList(allowMulti: false);
-  StreamSubscription<List<SelectionChangeRecord<FoModel>>> _selectionChangeListener;
+  SelectionModel<Map> selectionModel = new SelectionModel.withList(allowMulti: false);
+  StreamSubscription<List<SelectionChangeRecord<Map>>> _selectionChangeListener;
   final StreamController<bool> _onVisibleChangeController = new StreamController();
   final StreamController<String> _onSelectedIdChangeController = new StreamController();
-  final StreamController<FoModel> _onSelectedModelChangeController = new StreamController();
-  final StreamController<FoModel> onActionButtonTriggerController = new StreamController();
+  final StreamController<Map> onActionButtonTriggerController = new StreamController();
 
   bool tooltipModalVisible = false;
 
@@ -101,13 +90,13 @@ class FoSelectComponent implements OnChanges, OnDestroy
   bool fullWidth = false;
 
   @Input('options')
-  StringSelectionOptions<FoModel> options = new StringSelectionOptions<FoModel>([]);
+  StringSelectionOptions<Map> options = new StringSelectionOptions<Map>([]);
 
   @Input('selectedId')
   String selectedId;
 
-  @Input('selectedModel')
-  FoModel selectedModel;
+  //@Input('selectedModel')
+  Map selectedModel;
 
   @Input('showActionButton')
   bool showActionButton = false;
@@ -124,22 +113,9 @@ class FoSelectComponent implements OnChanges, OnDestroy
   @Output('selectedIdChange')
   Stream<String> get onSelectedIdChangeOutput => _onSelectedIdChangeController.stream;
 
-  @Output('selectedModelChange')
-  Stream<FoModel> get onSelectedModelChangeOutput => _onSelectedModelChangeController.stream;
-
   @Output('actionButtonTrigger')
-  Stream<FoModel> get onActionButtonTriggerOutput => onActionButtonTriggerController.stream;
+  Stream<Map> get onActionButtonTriggerOutput => onActionButtonTriggerController.stream;
 
   @Output('visibleChange')
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
-}
-
-class NullSelection extends FoModel
-{
-  NullSelection([this._label = "-"]) : super(null);
-
-  @override
-  String toString() => _label;
-
-  final String _label;
 }

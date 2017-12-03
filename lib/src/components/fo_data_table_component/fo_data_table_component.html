@@ -28,7 +28,7 @@
 <div class="row">
     <div class="s12 col">
         <table [class.faded]="disabled" class="output color-black box-shadow margin-bottom-x-small">
-            <thead *ngIf="modelRegistry.isNotEmpty">
+            <thead *ngIf="data.isNotEmpty">
             <tr>
                 <td *ngIf="showCheckboxes">
                     <material-checkbox (checkedChange)="onAllCheckedChange($event)"></material-checkbox>
@@ -59,8 +59,8 @@
                         [class.hide-for-small]="smallHiddenCol.contains(cell)"
                         [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                         [class.hide-for-large]="largeHiddenCol.contains(cell)"
-                        (click)="onCellClickController.add(modelRegistry[key].getProperty(cell))">
-                    {{modelRegistry[key].getProperty(cell) | phrase:false}}
+                        (click)="onCellClickController.add(data[key][cell])">
+                    {{data[key][cell] | phrase:false}}
                 </td>
                 <td *ngIf="showDeleteButtons" class="text-center">
                     <material-icon
