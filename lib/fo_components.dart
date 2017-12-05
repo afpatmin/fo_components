@@ -19,3 +19,5 @@ export 'src/components/fo_time_picker_component/fo_time_picker_component.dart';
 export 'src/pipes/phrase_pipe.dart';
 export 'src/services/phrase_service.dart';
 export 'src/validators/fo_validators.dart';
+
+export 'src/model/fo_model.dart';

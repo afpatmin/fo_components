@@ -33,7 +33,7 @@
                 <td *ngIf="showCheckboxes">
                     <material-checkbox (checkedChange)="onAllCheckedChange($event)"></material-checkbox>
                 </td>
-                <td *ngFor="let cell of col"
+                <td *ngFor="let cell of columns"
                     [class.hide-for-small]="smallHiddenCol.contains(cell)"
                     [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                     [class.hide-for-large]="largeHiddenCol.contains(cell)"
@@ -55,12 +55,12 @@
                     </material-checkbox>
                 </td>
                 <td
-                        *ngFor="let cell of col"
+                        *ngFor="let cell of columns"
                         [class.hide-for-small]="smallHiddenCol.contains(cell)"
                         [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                         [class.hide-for-large]="largeHiddenCol.contains(cell)"
                         (click)="onCellClickController.add(data[key][cell])">
-                    {{data[key][cell] | phrase:false}}
+                    {{data[key][cell]?.toString() | phrase:false}}
                 </td>
                 <td *ngIf="showDeleteButtons" class="text-center">
                     <material-icon
@@ -72,7 +72,7 @@
                 </td>
             </tr>
             <tr *ngIf="filteredKeys.isEmpty">
-                <td attr.colspan="{{col.length}}" class="empty-info color-alert"><h4><material-icon size="x-large" icon="error"></material-icon>&nbsp;{{'no_results' | phrase}}</h4></td>
+                <td attr.colspan="{{columns.length}}" class="empty-info color-alert"><h4><material-icon size="x-large" icon="error"></material-icon>&nbsp;{{'no_results' | phrase}}</h4></td>
             </tr>
             </tbody>
         </table>
@@ -85,7 +85,7 @@
                 class="margin-bottom-small"
                 clear-size
                 raised
-                [disabled]="disabled || modelRegistry.isEmpty"
+                [disabled]="disabled || data.isEmpty"
                 [materialTooltip]="'download_csv' | phrase"
                 (click)="onDownloadDataCSV()">
             <material-icon class="color-black" size="medium" icon="file_download"></material-icon>
@@ -113,8 +113,8 @@
                 <fo-select
                         class="display-inline-block"
                         [options]="rowOptions"
-                        [selectedModel]="selectedRowOption"
-                        (selectedModelChange)="selectedRowOption = $event; setIndices(0);">
+                        [selectedId]="selectedRowOptionId"
+                        (selectedIdChange)="selectedRowOptionId = $event; setIndices(0);">
                 </fo-select>
             </div>
         </div>

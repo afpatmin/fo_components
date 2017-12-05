@@ -6,6 +6,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import '../fo_modal_component/fo_modal_component.dart';
 import '../../pipes/phrase_pipe.dart';
+import '../../model/fo_model.dart';
 
 @Component(
     selector: 'fo-select',
@@ -44,7 +45,7 @@ class FoSelectComponent implements OnChanges, OnDestroy
     if (!disabled) visible = flag;
   }
 
-  void _onSelectionChanges(List<SelectionChangeRecord<Map>> e)
+  void _onSelectionChanges(List<SelectionChangeRecord<FoModel>> e)
   {
     if (e.isEmpty) return;
     if (e.first.added.isNotEmpty)
@@ -63,8 +64,8 @@ class FoSelectComponent implements OnChanges, OnDestroy
     _onSelectedIdChangeController.add(null);
   }
 
-  SelectionModel<Map> selectionModel = new SelectionModel.withList(allowMulti: false);
-  StreamSubscription<List<SelectionChangeRecord<Map>>> _selectionChangeListener;
+  SelectionModel<FoModel> selectionModel = new SelectionModel.withList(allowMulti: false);
+  StreamSubscription<List<SelectionChangeRecord<FoModel>>> _selectionChangeListener;
   final StreamController<bool> _onVisibleChangeController = new StreamController();
   final StreamController<String> _onSelectedIdChangeController = new StreamController();
   final StreamController<Map> onActionButtonTriggerController = new StreamController();
@@ -90,13 +91,12 @@ class FoSelectComponent implements OnChanges, OnDestroy
   bool fullWidth = false;
 
   @Input('options')
-  StringSelectionOptions<Map> options = new StringSelectionOptions<Map>([]);
+  StringSelectionOptions<FoModel> options = new StringSelectionOptions<FoModel>([]);
 
   @Input('selectedId')
   String selectedId;
 
-  //@Input('selectedModel')
-  Map selectedModel;
+  FoModel selectedModel;
 
   @Input('showActionButton')
   bool showActionButton = false;

@@ -8,6 +8,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import '../fo_modal_component/fo_modal_component.dart';
 import '../fo_select_component/fo_select_component.dart';
+import '../../model/fo_model.dart';
 import '../../pipes/phrase_pipe.dart';
 import '../../pipes/range_pipe.dart';
 
@@ -26,9 +27,9 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   void ngOnInit()
   {
-    selectedRowOption = rowOptions.optionsList.firstWhere((r) => r.count == rows, orElse: () => rowOptions.optionsList.first);
+    selectedRowOptionId = rowOptions.optionsList.firstWhere((r) => r.count == rows, orElse: () => rowOptions.optionsList.first).count.toString();
     firstIndex = 0;
-    lastIndex = selectedRowOption.count;
+    lastIndex = _selectedRowOption.count;
 
     if (data == null) data = new Map();
   }
@@ -38,7 +39,11 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     if (changes.containsKey("rows") || changes.containsKey("data"))
     {
       if (data == null) data = new Map();
-      selectedRowOption = rowOptions.optionsList.firstWhere((r) => r.count == rows, orElse: () => rowOptions.optionsList.first);
+      //selectedRowOptionId = rowOptions.optionsList.firstWhere((r) => r.count == rows, orElse: () => rowOptions.optionsList.first).count.toString();
+
+      _selectedRowOption = rowOptions.optionsList.firstWhere((r) => r.count == rows, orElse: () => rowOptions.optionsList.first);
+      _selectedRowOptionId = _selectedRowOption['id'];
+
       onSearch();
       setIndices(0);
     }
@@ -55,7 +60,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   void step(int steps)
   {
-    setIndices(firstIndex + (steps * selectedRowOption.count));
+    setIndices(firstIndex + (steps * _selectedRowOption.count));
   }
 
   void onSearchKeyUp(dom.KeyboardEvent e)
@@ -70,15 +75,15 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
     if (searchPhrase != null && searchPhrase.isNotEmpty)
     {
-      bool find(Map<String, dynamic> model, List<String> keywords)
+      bool find(FoModel model, List<String> keywords)
       {
         bool allKeywords;
         for (String keyword in keywords)
         {
           allKeywords = false;
-          for (String col in model.keys)
+          for (String col in columns)
           {
-            if (model[col].contains(keyword))
+            if (model[col].toString().contains(keyword))
             {
               allKeywords = true;
               break;
@@ -137,10 +142,10 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
           }
         }
 
-        List<Map<String, dynamic>> values = data.keys.where(filteredKeys.contains).map((key) => data[key]).toList();
+        List<FoModel> values = data.keys.where(filteredKeys.contains).map((key) => data[key]).toList();
         if (values != null)
         {
-          values.sort((Map<String, dynamic> a, Map<String, dynamic> b) => sort(a[sortColumn], b[sortColumn]));
+          values.sort((FoModel a, FoModel b) => sort(a[sortColumn].toString(), b[sortColumn].toString()));
           _filteredKeys = values.map((model) => model["id"]);
         }
       }
@@ -156,12 +161,11 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
        */
       StringBuffer sb = new StringBuffer();
 
-      //String columns = data.first.tableColumns.map(_phraseService.get).join(";");
       sb.writeln(columns);
 
       for (String key in filteredKeys)
       {
-        Map<String, dynamic> model = data[key];
+        FoModel model = data[key];
         if (model == null) continue;
 
         List<String> properties = columns.map((col) => model[col].toString()).toList(growable: false);
@@ -191,28 +195,24 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   {
     if (first_index < 0 || first_index >= data.length) return;
 
-    int rowCount = selectedRowOption.count;
-
     firstIndex = first_index;
-    if (searchPhrase != null && searchPhrase.isNotEmpty) firstIndex = max(0, min(firstIndex, filteredKeys.length - rowCount));
-    lastIndex = firstIndex + rowCount;
+    if (searchPhrase != null && searchPhrase.isNotEmpty) firstIndex = max(0, min(firstIndex, filteredKeys.length - _selectedRowOption.count));
+    lastIndex = firstIndex + _selectedRowOption.count;
 
-    currentPage = (data.isEmpty) ? 0 : (firstIndex.toDouble() / rowCount).ceil() + 1;
+    currentPage = (data.isEmpty) ? 0 : (firstIndex.toDouble() / _selectedRowOption.count).ceil() + 1;
   }
 
-  //Iterable<String> get col => data.isEmpty ? [] : data.values.first.tableColumns;
-
-  int get totalPages => (filteredKeys.length.toDouble() / selectedRowOption.count).ceil();
+  int get totalPages => (filteredKeys.length.toDouble() / _selectedRowOption.count).ceil();
 
   final StringSelectionOptions<RowOption> rowOptions = new StringSelectionOptions(
   [
-    new RowOption(5, "5"),
-    new RowOption(10, "10"),
-    new RowOption(15, "15"),
-    new RowOption(20, "20"),
-    new RowOption(25, "25"),
-    new RowOption(50, "50"),
-    new RowOption(100, "100"),
+    new RowOption(5),
+    new RowOption(10),
+    new RowOption(15),
+    new RowOption(20),
+    new RowOption(25),
+    new RowOption(50),
+    new RowOption(100),
   ]);
 
   void onCheckedChange(String id, bool state)
@@ -230,7 +230,14 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   Iterable<String> get filteredKeys => _filteredKeys == null ? data.keys : _filteredKeys;
 
-  RowOption selectedRowOption;
+  String _selectedRowOptionId;
+  RowOption _selectedRowOption;
+
+  String get selectedRowOptionId => _selectedRowOptionId;
+  void set selectedRowOptionId(String value)
+  {
+    _selectedRowOption = rowOptions.optionsList.firstWhere((row) => row['id'] == value, orElse: () => rowOptions.optionsList.first);
+  }
 
   String deleteBufferId;
   int firstIndex = 0;
@@ -258,7 +265,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   List<String> mediumHiddenCol = [];
 
   @Input('data')
-  Map<String, Map> data = new Map();
+  Map<String, FoModel> data = new Map();
 
   @Input('columns')
   List<String> columns = new List();
@@ -303,9 +310,22 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   Stream<Map<String, String>> get onSortOutput => _onSortController.stream;
 }
 
-class RowOption
+class RowOption extends FoModel
 {
-  RowOption(this.count, this.id);
+  RowOption(this.count);
+
   final int count;
-  final String id;
+
+  @override
+  dynamic operator[](Object key)
+  {
+    if (key == 'count') return count;
+    else if (key == 'id') return count.toString();
+    else return null;
+  }
+
+  Iterable<String> get keys => ['id', 'count'];
+
+  @override
+  String toString() => count.toString();
 }
