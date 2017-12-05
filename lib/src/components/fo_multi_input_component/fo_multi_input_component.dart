@@ -48,6 +48,9 @@ class FoMultiInputComponent implements OnDestroy
   @Input('label')
   String label;
 
+  @Input('leadingText')
+  String leadingText = "";
+
   @Input('maxLength')
   String maxLength;
 

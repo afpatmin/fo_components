@@ -1,5 +1,7 @@
 <material-input
         label="{{label | phrase}}" floatingLabel
+        [leadingText]="leadingText"
+        [fullWidth]="true"
         [displayBottomPanel]="false"
         (keyup)="onKeyUp($event)"
         [(ngModel)]="inputValue">
