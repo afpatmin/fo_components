@@ -310,22 +310,35 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   Stream<Map<String, String>> get onSortOutput => _onSortController.stream;
 }
 
-class RowOption extends FoModel
+class RowOption implements FoModel
 {
   RowOption(this.count);
 
-  final int count;
+  @override
+  RowOption.fromMap(Map<dynamic, dynamic> map);
 
   @override
-  dynamic operator[](Object key)
-  {
-    if (key == 'count') return count;
-    else if (key == 'id') return count.toString();
-    else return null;
-  }
+  dynamic operator[](Object key) => null;
 
-  Iterable<String> get keys => ['id', 'count'];
+  @override operator[]=(Object key, dynamic value) {}
 
   @override
   String toString() => count.toString();
+
+  @override
+  Map<dynamic, dynamic> toMap()
+  {
+    return null;
+  }
+
+  int count;
+
+  @override
+  DateTime created = new DateTime.now();
+  @override
+  String id;
+  @override
+  String added_by = "system";
+  @override
+  String status = "active";
 }

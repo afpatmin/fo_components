@@ -1,4 +1,4 @@
-// Copyright (c) 2017, Patrick Minogue. All rights reserved. Use of this source code
+N// Copyright (c) 2017, Patrick Minogue. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async' show Stream, StreamController;
@@ -44,6 +44,9 @@ class FoModalComponent implements OnDestroy
 
   @Input('fixedHeight')
   bool fixedHeight = false;
+
+  @Input('maxWidth')
+  String maxWidth = "1280px";
 
   @Input('headerBackgroundColor')
   String headerBackgroundColor = "#333";
