@@ -17,19 +17,11 @@ import '../../model/fo_model.dart';
     changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.none
 )
-class FoSelectComponent implements OnChanges, OnDestroy
+class FoSelectComponent implements OnDestroy
 {
   FoSelectComponent()
   {
     _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
-  }
-
-  void ngOnChanges(Map<String, SimpleChange> changes)
-  {
-    if (changes.containsKey("selectedId"))
-    {
-      selectedModel = (selectedId == null) ? null : options.optionsList.firstWhere((m) => m['id'] == selectedId, orElse: () => null);
-    }
   }
 
   void ngOnDestroy()
@@ -40,29 +32,15 @@ class FoSelectComponent implements OnChanges, OnDestroy
     _selectionChangeListener.cancel();
   }
 
-  void setVisible(bool flag)
-  {
-    if (!disabled) visible = flag;
-  }
+  void setVisible(bool flag) => visible = (disabled) ? visible : flag;
 
   void _onSelectionChanges(List<SelectionChangeRecord<FoModel>> e)
   {
-    if (e.isEmpty) return;
-    if (e.first.added.isNotEmpty)
-    {
-      selectedModel = e.first.added.first;
-      selectedId = selectedModel['id'];
-    }
-    _onSelectedIdChangeController.add(selectedModel == null ? null : selectedModel['id']);
+    String id = selectionModel.selectedValues.isEmpty ? null : selectionModel.selectedValues.first.id;
+    _onSelectedIdChangeController.add(id);
   }
 
-  void clearSelection()
-  {
-    selectionModel.clear();
-    selectedModel = null;
-    selectedId = null;
-    _onSelectedIdChangeController.add(null);
-  }
+  FoModel get selectedModel => selectionModel.selectedValues.isEmpty ? null : selectionModel.selectedValues.first;
 
   SelectionModel<FoModel> selectionModel = new SelectionModel.withList(allowMulti: false);
   StreamSubscription<List<SelectionChangeRecord<FoModel>>> _selectionChangeListener;
@@ -94,9 +72,16 @@ class FoSelectComponent implements OnChanges, OnDestroy
   StringSelectionOptions<FoModel> options = new StringSelectionOptions<FoModel>([]);
 
   @Input('selectedId')
-  String selectedId;
+  void set selectedId(String value)
+  {
+    _selectionChangeListener.cancel();
 
-  FoModel selectedModel;
+    FoModel model = options.optionsList.firstWhere(((model) => model.id == value), orElse: () => null);
+    if (model == null) selectionModel.clear();
+    else selectionModel.select(model);
+
+    _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+  }
 
   @Input('showActionButton')
   bool showActionButton = false;

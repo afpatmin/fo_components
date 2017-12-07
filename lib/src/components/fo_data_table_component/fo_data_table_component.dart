@@ -1,7 +1,7 @@
 // Copyright (c) 2017, Muienog AB. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'dart:async' show Stream, StreamController;
+import 'dart:async';
 import 'dart:html' as dom;
 import 'dart:math';
 import 'package:angular/angular.dart';
@@ -27,7 +27,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   void ngOnInit()
   {
-    selectedRowOptionId = rowOptions.optionsList.firstWhere((r) => r.count == rows, orElse: () => rowOptions.optionsList.first).count.toString();
+    selectedRowOptionId = rowOptions.optionsList.firstWhere((r) => r.count == rows, orElse: () => rowOptions.optionsList.first).id;
     firstIndex = 0;
     lastIndex = _selectedRowOption.count;
 
@@ -39,10 +39,8 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     if (changes.containsKey("rows") || changes.containsKey("data"))
     {
       if (data == null) data = new Map();
-      //selectedRowOptionId = rowOptions.optionsList.firstWhere((r) => r.count == rows, orElse: () => rowOptions.optionsList.first).count.toString();
 
-      _selectedRowOption = rowOptions.optionsList.firstWhere((r) => r.count == rows, orElse: () => rowOptions.optionsList.first);
-      _selectedRowOptionId = _selectedRowOption['id'];
+      selectedRowOptionId = rowOptions.optionsList.firstWhere((r) => r.count == rows, orElse: () => rowOptions.optionsList.first).id;
 
       onSearch();
       setIndices(0);
@@ -206,13 +204,13 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   final StringSelectionOptions<RowOption> rowOptions = new StringSelectionOptions(
   [
-    new RowOption(5),
-    new RowOption(10),
-    new RowOption(15),
-    new RowOption(20),
-    new RowOption(25),
-    new RowOption(50),
-    new RowOption(100),
+    new RowOption("5", 5),
+    new RowOption("10", 10),
+    new RowOption("15", 15),
+    new RowOption("20", 20),
+    new RowOption("25", 25),
+    new RowOption("50", 50),
+    new RowOption("100", 100),
   ]);
 
   void onCheckedChange(String id, bool state)
@@ -230,13 +228,12 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   Iterable<String> get filteredKeys => _filteredKeys == null ? data.keys : _filteredKeys;
 
-  String _selectedRowOptionId;
   RowOption _selectedRowOption;
 
-  String get selectedRowOptionId => _selectedRowOptionId;
+  String get selectedRowOptionId => _selectedRowOption?.id;
   void set selectedRowOptionId(String value)
   {
-    _selectedRowOption = rowOptions.optionsList.firstWhere((row) => row['id'] == value, orElse: () => rowOptions.optionsList.first);
+    _selectedRowOption = rowOptions.optionsList.firstWhere((row) => row.id == value, orElse: () => rowOptions.optionsList.first);
   }
 
   String deleteBufferId;
@@ -312,33 +309,26 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
 class RowOption implements FoModel
 {
-  RowOption(this.count);
+  RowOption(this.id, this.count);
 
   @override
   RowOption.fromMap(Map<dynamic, dynamic> map);
 
   @override
-  dynamic operator[](Object key) => null;
+  dynamic operator[](Object key) => throw new UnsupportedError("Operator [] is not supported for RowOption");
 
-  @override operator[]=(Object key, dynamic value) {}
+  @override operator[]=(Object key, dynamic value) => throw new UnsupportedError("Operator []= is not supported for RowOption");
 
   @override
   String toString() => count.toString();
 
   @override
-  Map<dynamic, dynamic> toMap()
-  {
-    return null;
-  }
+  Map<dynamic, dynamic> toMap() => throw new UnsupportedError("toMap() is not supported for RowOption");
 
   int count;
 
-  @override
-  DateTime created = new DateTime.now();
-  @override
-  String id;
-  @override
-  String added_by = "system";
-  @override
-  String status = "active";
+  @override DateTime created = new DateTime.now();
+  @override String id;
+  @override String added_by = "system";
+  @override String status = "active";
 }

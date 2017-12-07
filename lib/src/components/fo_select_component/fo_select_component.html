@@ -11,14 +11,14 @@
             class="clickable color-alert"
             icon="cancel"
             size="medium"
-            (click)="clearSelection(); $event.stopPropagation();">
+            (click)="selectionModel.clear(); $event.stopPropagation();">
     </material-icon>
 </label>
 <div class="flex-container">
     <material-dropdown-select
             [class.full-width]="fullWidth"
             [disabled]="disabled || options == null || selectionModel == null"
-            [buttonText]="selectedModel == null ? nullSelectionButtonText : selectedModel.toString() | phrase"
+            [buttonText]="selectedModel == null ? nullSelectionButtonText : selectedModel.toString()"
             [popupMatchInputWidth]="false"
             [options]="options"
             [selection]="selectionModel"
@@ -37,7 +37,6 @@
             (trigger)="onActionButtonTriggerController.add(selectedModel)">
         <material-icon [icon]="actionButtonIcon" size="x-large"></material-icon>
     </material-button>
-
 </div>
 
 <fo-modal

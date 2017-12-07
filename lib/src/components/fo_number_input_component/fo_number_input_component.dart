@@ -23,7 +23,7 @@ class FoNumberInputComponent implements OnDestroy
     _onValueChangeController.close();
   }
 
-  void onMouseDown(int count)
+  void onMouseDown(num count)
   {
     add(count);
 
@@ -47,7 +47,7 @@ class FoNumberInputComponent implements OnDestroy
     addStepTimer = null;
   }
 
-  void add(int count)
+  void add(num count)
   {
     if (value + count >= min && value + count <= max)
     {
@@ -56,7 +56,7 @@ class FoNumberInputComponent implements OnDestroy
     }
   }
 
-  final StreamController<int> _onValueChangeController = new StreamController();
+  final StreamController<num> _onValueChangeController = new StreamController();
 
   @Input('disabled')
   bool disabled = false;
@@ -68,19 +68,22 @@ class FoNumberInputComponent implements OnDestroy
   String leadingText = "";
 
   @Input('max')
-  int max = 9999;
+  num max = 9999;
 
   @Input('min')
-  int min = 0;
+  num min = 0;
+
+  @Input('step')
+  num step = 1;
 
   @Input('trailingText')
   String trailingText = "";
 
   @Input('value')
-  int value = 0;
+  num value = 0;
 
   @Output('valueChange')
-  Stream<int> get onValueChangeOutput => _onValueChangeController.stream;
+  Stream<num> get onValueChangeOutput => _onValueChangeController.stream;
 
   Timer autoAddTimer;
   Timer addStepTimer;
