@@ -81,7 +81,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
           allKeywords = false;
           for (String col in columns)
           {
-            if (model[col].toString().contains(keyword))
+            if (model[col].toString().toLowerCase().contains(keyword))
             {
               allKeywords = true;
               break;
@@ -92,6 +92,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
         return true;
       }
       List<String> keywords = searchPhrase.toLowerCase().split(" ");
+      print(keywords);
       _filteredKeys = data.keys.where((key) => find(data[key], keywords));
     }
     else _filteredKeys = null;
