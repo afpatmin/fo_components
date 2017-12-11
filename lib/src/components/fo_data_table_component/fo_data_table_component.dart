@@ -327,9 +327,5 @@ class RowOption implements FoModel
   Map<dynamic, dynamic> toMap() => throw new UnsupportedError("toMap() is not supported for RowOption");
 
   int count;
-
-  @override DateTime created = new DateTime.now();
   @override String id;
-  @override String added_by = "system";
-  @override String status = "active";
 }
