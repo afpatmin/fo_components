@@ -86,6 +86,19 @@ class FoValidators
     else return null;
   }
 
+  static Map<String, String> lowercase(AbstractControl control)
+  {
+    if ((required())(control) != null) return null;
+
+    String value = control.value;
+    if (value == value.toLowerCase()) return null;
+    else
+    {
+      final PhraseService ps = new PhraseService();
+      return {"error":ps.get("lowercase_letters_only")};
+    }
+  }
+
   static ValidatorFn minLength(num minLength)
   {
     return /* Map < String , dynamic > */ (AbstractControl control)

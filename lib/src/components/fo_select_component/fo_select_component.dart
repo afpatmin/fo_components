@@ -36,6 +36,13 @@ class FoSelectComponent implements OnDestroy
 
   void _onSelectionChanges(List<SelectionChangeRecord<FoModel>> e)
   {
+    // User deselected, skip this
+    if (e.isNotEmpty && e.first.removed.isNotEmpty && e.first.added.isEmpty)
+    {
+      selectionModel.select(e.first.removed.first);
+      return;
+    }
+
     String id = selectionModel.selectedValues.isEmpty ? null : selectionModel.selectedValues.first.id;
     _onSelectedIdChangeController.add(id);
   }
