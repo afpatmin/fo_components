@@ -56,6 +56,9 @@ class FoSelectComponent implements OnDestroy
   @Input('allowNullSelection')
   bool allowNullSelection = false;
 
+  @Input('componentRenderer')
+  ComponentRenderer componentRenderer;
+
   @Input('nullSelectionButtonText')
   String nullSelectionButtonText = "-";
 
