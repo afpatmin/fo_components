@@ -2,6 +2,8 @@ import 'dart:convert' show JSON;
 
 abstract class FoModel
 {
+  FoModel(this.id);
+
   FoModel.fromMap(Map<dynamic, dynamic> map);
 
   dynamic operator[](Object key)
