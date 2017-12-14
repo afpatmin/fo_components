@@ -1,6 +1,6 @@
 @import 'package:grid/grid';
 @import 'package:grid/theme';
-@import 'package:angular_components/material_dialog/mixins';
+//@import 'package:angular_components/material_dialog/mixins';
 
 material-dialog
 {
@@ -12,14 +12,14 @@ material-dialog
 
 material-dialog
 {
-    @include material-dialog-header-color(#fff);
+    //@include material-dialog-header-color(#fff);
 
     [header]
     {
         h3
         {
             margin-left: 5px;
-            color: #333;
+            //color: #333;
             line-height: 160%;
             material-button
             {

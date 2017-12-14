@@ -12,7 +12,6 @@
                         *ngIf="showCloseButton"
                         class="float-right"
                         raised
-                        icon
                         clear-size
                         (trigger)="close()">
                     <material-icon icon="close" size="medium"></material-icon>
@@ -21,6 +20,9 @@
         </div>
         <div class="modal-content" *ngIf="visible">
             <ng-content></ng-content>
+        </div>
+        <div class="padding-top-small" footer>
+            <ng-content select="[footer]"></ng-content>
         </div>
     </material-dialog>
 </modal>

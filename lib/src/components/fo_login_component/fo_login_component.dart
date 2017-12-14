@@ -2,7 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:html' as dom;
+import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:vi_auth_client/vi_auth_client.dart';
@@ -17,9 +17,17 @@ import '../../pipes/phrase_pipe.dart';
     pipes: const [PhrasePipe],
     visibility: Visibility.none
 )
-class FoLoginComponent implements OnDestroy
+class FoLoginComponent implements OnChanges, OnDestroy
 {
   FoLoginComponent();
+
+  void ngOnChanges(Map<String, SimpleChange> changes)
+  {
+    if (changes.containsKey("client") && Uri.base.queryParameters.containsKey("token"))
+    {
+      _tryLoginToken(Uri.base.queryParameters["token"]);
+    }
+  }
 
   void ngOnDestroy()
   {
@@ -41,18 +49,18 @@ class FoLoginComponent implements OnDestroy
     }
   }
 
-  void onKeyUp(dom.KeyboardEvent e)
+  void onKeyUp(html.KeyboardEvent e)
   {
     if (username.isNotEmpty && password.isNotEmpty
-        && (e.keyCode == dom.KeyCode.ENTER || e.keyCode == dom.KeyCode.MAC_ENTER))
+        && (e.keyCode == html.KeyCode.ENTER || e.keyCode == html.KeyCode.MAC_ENTER))
     {
       onLogin();
     }
   }
 
-  void onRecoverPasswordKeyUp(dom.KeyboardEvent e)
+  void onRecoverPasswordKeyUp(html.KeyboardEvent e)
   {
-    if (e.keyCode == dom.KeyCode.ENTER || e.keyCode == dom.KeyCode.MAC_ENTER)
+    if (e.keyCode == html.KeyCode.ENTER || e.keyCode == html.KeyCode.MAC_ENTER)
     {
       onRecoverPassword();
     }
@@ -102,6 +110,21 @@ class FoLoginComponent implements OnDestroy
     state = new_state;
     recoverPasswordSent = false;
     errorMessage = null;
+  }
+
+  Future _tryLoginToken(String token) async
+  {
+    try
+    {
+      visible = false;
+      String newToken = await client.loginWithToken(token);
+      _onLoginController.add({"username":username, "token":newToken});
+    }
+    catch(e)
+    {
+      print(e.toString());
+      visible = true;
+    }
   }
 
   String token = "";

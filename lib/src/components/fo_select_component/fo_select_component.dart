@@ -36,8 +36,8 @@ class FoSelectComponent implements OnDestroy
 
   void _onSelectionChanges(List<SelectionChangeRecord<FoModel>> e)
   {
-    // User deselected, skip this
-    if (e.isNotEmpty && e.first.removed.isNotEmpty && e.first.added.isEmpty)
+    // User deselected, skip this unless allowNullSelection
+    if (e.isNotEmpty && e.first.removed.isNotEmpty && e.first.added.isEmpty && !allowNullSelection)
     {
       selectionModel.select(e.first.removed.first);
       return;
@@ -86,9 +86,13 @@ class FoSelectComponent implements OnDestroy
   {
     _selectionChangeListener.cancel();
 
-    FoModel model = options.optionsList.firstWhere(((model) => model.id == value), orElse: () => null);
-    if (model == null) selectionModel.clear();
-    else selectionModel.select(model);
+    if (value == null) selectionModel.clear();
+    else if (options != null)
+    {
+      FoModel model = options.optionsList.firstWhere(((model) => model.id == value), orElse: () => null);
+      if (model == null) selectionModel.clear();
+      else selectionModel.select(model);
+    }
 
     _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
   }

@@ -92,7 +92,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
         return true;
       }
       List<String> keywords = searchPhrase.toLowerCase().split(" ");
-      print(keywords);
       _filteredKeys = data.keys.where((key) => find(data[key], keywords));
     }
     else _filteredKeys = null;
