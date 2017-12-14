@@ -66,7 +66,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   void onSearchKeyUp(dom.KeyboardEvent e)
   {
-    if (data.length < 500) onSearch();
+    if (data.length < liveSearchThreshold) onSearch();
     else if (e.keyCode == dom.KeyCode.ENTER || e.keyCode == dom.KeyCode.MAC_ENTER) onSearch();
   }
 
@@ -245,6 +245,8 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     else selectedRows.clear();
   }
 
+  String get filterLabel => (data == null || data.length < liveSearchThreshold) ? "filter" : "filter_enter";
+
   Iterable<String> get filteredKeys => _filteredKeys == null ? data.keys : _filteredKeys;
 
   RowOption _selectedRowOption;
@@ -265,6 +267,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   Iterable<String> _filteredKeys;
   bool infoModalOpen = false;
 
+  final int liveSearchThreshold = 500;
   final StreamController<String> onCellClickController = new StreamController();
   final StreamController<List<String>> onSelectedRowsController = new StreamController();
   final StreamController<String> onDeleteController = new StreamController();
