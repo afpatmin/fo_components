@@ -13,7 +13,7 @@ import '../../pipes/phrase_pipe.dart';
 import '../../pipes/range_pipe.dart';
 
 
-typedef String EvaluateColumnFn(dynamic value);
+typedef String EvaluateColumnFn(FoModel model);
 
 @Component(
     selector: 'fo-data-table',
