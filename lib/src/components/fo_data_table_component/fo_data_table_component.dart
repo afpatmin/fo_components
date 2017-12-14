@@ -90,6 +90,13 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
               break;
             }
           }
+          for (String col in evaluatedColumns.keys)
+          {
+            if (evaluatedColumns[col](model).toLowerCase().contains(keyword))
+            {
+              allKeywords = true;
+            }
+          }
           if (allKeywords == false) return false;
         }
         return true;
@@ -146,7 +153,8 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
         List<FoModel> values = data.keys.where(filteredKeys.contains).map((key) => data[key]).toList();
         if (values != null)
         {
-          values.sort((FoModel a, FoModel b) => sort(a[sortColumn].toString(), b[sortColumn].toString()));
+          if (columns.contains(sortColumn)) values.sort((FoModel a, FoModel b) => sort(a[sortColumn].toString(), b[sortColumn].toString()));
+          else if (evaluatedColumns.containsKey(sortColumn)) values.sort((FoModel a, FoModel b) => sort(evaluatedColumns[sortColumn](a), evaluatedColumns[sortColumn](b)));
           _filteredKeys = values.map((model) => model["id"]);
         }
       }
