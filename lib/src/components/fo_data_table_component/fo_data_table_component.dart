@@ -12,6 +12,9 @@ import '../../model/fo_model.dart';
 import '../../pipes/phrase_pipe.dart';
 import '../../pipes/range_pipe.dart';
 
+
+typedef String EvaluateColumnFn(dynamic value);
+
 @Component(
     selector: 'fo-data-table',
     styleUrls: const ['fo_data_table_component.scss.css'],
@@ -189,6 +192,14 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     }
   }
 
+  int get numColumns
+  {
+    int output = columns.length + evaluatedColumns.length;
+    if (showCheckboxes == true) output++;
+    if (showDeleteButtons == true) output++;
+    return output;
+  }
+
   void setIndices(int first_index)
   {
     if (first_index < 0 || first_index >= data.length) return;
@@ -266,6 +277,9 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   @Input('columns')
   List<String> columns = new List();
+
+  @Input('evaluatedColumns')
+  Map<String, EvaluateColumnFn> evaluatedColumns = new Map();
 
   @Input('showCheckboxes')
   bool showCheckboxes = false;

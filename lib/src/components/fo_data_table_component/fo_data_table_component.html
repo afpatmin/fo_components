@@ -42,6 +42,15 @@
                     <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
                     <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></material-icon>
                 </td>
+                <td *ngFor="let cell of evaluatedColumns.keys"
+                    [class.hide-for-small]="smallHiddenCol.contains(cell)"
+                    [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
+                    [class.hide-for-large]="largeHiddenCol.contains(cell)"
+                    (click)="onSort(cell)">
+                    {{evaluatedColumns[cell]() | phrase}}
+                    <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
+                    <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></material-icon>
+                </td>
                 <td *ngIf="showDeleteButtons" class="buttonCell"></td>
             </tr>
             </thead>
@@ -72,7 +81,7 @@
                 </td>
             </tr>
             <tr *ngIf="filteredKeys.isEmpty">
-                <td attr.colspan="{{columns.length}}" class="empty-info color-alert"><h4><material-icon size="x-large" icon="error"></material-icon>&nbsp;{{'no_results' | phrase}}</h4></td>
+                <td attr.colspan="{{numColumns}}" class="empty-info color-alert"><h4><material-icon size="x-large" icon="error"></material-icon>&nbsp;{{'no_results' | phrase}}</h4></td>
             </tr>
             </tbody>
         </table>
