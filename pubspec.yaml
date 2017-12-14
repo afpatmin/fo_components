@@ -11,9 +11,9 @@ dependencies:
   angular_components: "^0.8.0"
   angular_router: "^1.0.2"
   grid:
-    path: ../Grid
+    git: git://github.com/afpatmin/Grid
   vi_auth_client:
-    path: ../ViAuthClient
+    git: git://github.com/afpatmin/ViAuthClient
   sass_builder: ^1.0.1
 
 transformers:
