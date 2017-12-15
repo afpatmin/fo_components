@@ -88,7 +88,7 @@
                 </td>
             </tr>
             <tr *ngIf="filteredKeys.isEmpty">
-                <td *ngIf="disabled" attr.colspan="{{numColumns}}"><h4><material-spinner></material-spinner></h4></td>
+                <td *ngIf="disabled" attr.colspan="{{numColumns}}"><h4 class="text-center"><material-spinner></material-spinner></h4></td>
                 <td *ngIf="!disabled" attr.colspan="{{numColumns}}" class="empty-info color-alert"><h4><material-icon size="x-large" icon="error"></material-icon>&nbsp;{{'no_results' | phrase}}</h4></td>
             </tr>
             </tbody>
