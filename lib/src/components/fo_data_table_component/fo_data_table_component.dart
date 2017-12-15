@@ -84,7 +84,8 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
           allKeywords = false;
           for (String col in columns)
           {
-            if (model[col].toString().toLowerCase().contains(keyword))
+            String data = model[col];
+            if (data != null && data.toString().toLowerCase().contains(keyword))
             {
               allKeywords = true;
               break;
@@ -92,9 +93,11 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
           }
           for (String col in evaluatedColumns.keys)
           {
-            if (evaluatedColumns[col](model).toLowerCase().contains(keyword))
+            String data = evaluatedColumns[col](model);
+            if (data != null && data.toLowerCase().contains(keyword))
             {
               allKeywords = true;
+              break;
             }
           }
           if (allKeywords == false) return false;
