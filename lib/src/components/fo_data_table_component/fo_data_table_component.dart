@@ -84,8 +84,8 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
           allKeywords = false;
           for (String col in columns)
           {
-            String data = model[col];
-            if (data != null && data.toString().toLowerCase().contains(keyword))
+            String data = model[col]?.toString();
+            if (data != null && data.toLowerCase().contains(keyword))
             {
               allKeywords = true;
               break;
