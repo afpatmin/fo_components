@@ -21,7 +21,7 @@ typedef String EvaluateColumnFn(FoModel model);
     templateUrl: 'fo_data_table_component.html',
     directives: const [CORE_DIRECTIVES, FoModalComponent, FoSelectComponent, materialDirectives, MaterialIconComponent],
     pipes: const [PhrasePipe, RangePipe],
-    changeDetection: ChangeDetectionStrategy.Default,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.none)
 
 class DataTableComponent implements OnChanges, OnInit, OnDestroy
