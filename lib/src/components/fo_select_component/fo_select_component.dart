@@ -84,8 +84,6 @@ class FoSelectComponent implements OnDestroy
   @Input('selectedId')
   void set selectedId(String value)
   {
-
-    print("selectedId:$value");
     _selectionChangeListener.cancel();
 
     if (value == null) selectionModel.clear();
