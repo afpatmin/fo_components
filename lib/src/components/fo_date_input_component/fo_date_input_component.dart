@@ -14,20 +14,27 @@ import '../../pipes/phrase_pipe.dart';
     pipes: const [PhrasePipe],
     changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.none)
-class FoDateInputComponent implements OnDestroy, AfterViewInit
+class FoDateInputComponent implements OnDestroy, OnChanges
 {
   FoDateInputComponent()
   {
   }
 
-  void ngAfterViewInit()
+  void ngOnChanges(Map<String, SimpleChange> changes)
   {
     _inputElement = inputRef.nativeElement;
+    if (value != null) _inputElement.valueAsDate = value;
   }
 
   void ngOnDestroy()
   {
     onValueChangeController.close();
+  }
+
+  void onValueChange(DateTime dt)
+  {
+    value = dt;
+    onValueChangeController.add(value);
   }
 
   final StreamController<DateTime> onValueChangeController = new StreamController();
@@ -40,11 +47,7 @@ class FoDateInputComponent implements OnDestroy, AfterViewInit
   String label = "date";
 
   @Input('value')
-  void set value(DateTime dt)
-  {
-    if (_inputElement == null) new Future.delayed(const Duration(milliseconds: 3000)).then((_) => _inputElement.valueAsDate = dt);
-    else _inputElement.valueAsDate = dt;
-  }
+  DateTime value;
 
   @Output('valueChange')
   Stream<DateTime> get onValueChangeOutput => onValueChangeController.stream;
