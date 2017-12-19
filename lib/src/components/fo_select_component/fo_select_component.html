@@ -18,7 +18,7 @@
     <material-dropdown-select
             [class.full-width]="fullWidth"
             [disabled]="disabled || options == null || selectionModel == null"
-            [buttonText]="selectedId == null ? nullSelectionButtonText : selectedModel?.toString()"
+            [buttonText]="selectionModel.isEmpty() ? nullSelectionButtonText : selectedModel?.toString()"
             [popupMatchInputWidth]="false"
             [options]="options"
             [componentRenderer]="componentRenderer"
