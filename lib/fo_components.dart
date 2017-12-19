@@ -4,6 +4,7 @@
 library fo_components;
 
 export 'src/components/fo_data_table_component/fo_data_table_component.dart';
+export 'src/components/fo_date_input_component/fo_date_input_component.dart';
 export 'src/components/fo_file_upload_component/fo_file_upload_component.dart';
 export 'src/components/fo_modal_component/fo_modal_component.dart';
 export 'src/components/fo_image_file_component/fo_image_file_component.dart';
