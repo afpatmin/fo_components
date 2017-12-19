@@ -15,9 +15,9 @@ import '../../pipes/phrase_pipe.dart';
     pipes: const [PhrasePipe],
     visibility: Visibility.none,
     changeDetection: ChangeDetectionStrategy.OnPush)
-class DateInputComponent implements OnDestroy
+class FoDateInputComponent implements OnDestroy
 {
-  DateInputComponent()
+  FoDateInputComponent()
   {
     strDate = formatter.format(new DateTime.now());
   }
@@ -43,6 +43,9 @@ class DateInputComponent implements OnDestroy
   String strDate;
   final StreamController<DateTime> onValueChangeController = new StreamController();
   final DateFormat formatter = new DateFormat("Y-m-d");
+
+  @Input('disabled')
+  bool disabled = false;
 
   @Input('label')
   String label = "date";
