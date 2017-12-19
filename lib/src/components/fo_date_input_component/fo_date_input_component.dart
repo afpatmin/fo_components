@@ -4,14 +4,14 @@
 import 'dart:async';
 import 'package:intl/intl.dart';
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
+import 'package:angular_forms/angular_forms.dart';
 import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-date-input',
     templateUrl: 'fo_date_input_component.html',
     styleUrls: const ['fo_date_input_component.scss.css'],
-    directives: const [CORE_DIRECTIVES, materialDirectives],
+    directives: const [CORE_DIRECTIVES, formDirectives],
     pipes: const [PhrasePipe],
     visibility: Visibility.none,
     changeDetection: ChangeDetectionStrategy.OnPush)
