@@ -1,4 +1,4 @@
 <label>
     <div>{{label | phrase}}*</div>
-    <input type="date" [ngModel]="strDate" (ngModelChange)="onValueChange($event)" [disabled]="disabled" />
+    <input type="date" [value]="strDate" (change)="onValueChange($event)" [disabled]="disabled" />
 </label>
