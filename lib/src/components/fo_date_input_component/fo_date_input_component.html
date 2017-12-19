@@ -1,4 +1,4 @@
 <label>
     <div>{{label | phrase}}*</div>
-    <input type="date" [value]="strDate" (change)="onValueChange($event)" [disabled]="disabled" />
+    <input type="date" [value]="strDate" [disabled]="disabled" (change)="onValueChangeController.add(input.valueAsDate)" id="input" />
 </label>

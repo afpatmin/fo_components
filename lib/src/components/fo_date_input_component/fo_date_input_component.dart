@@ -2,7 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
-import 'package:intl/intl.dart';
+import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import '../../pipes/phrase_pipe.dart';
 
@@ -12,13 +12,13 @@ import '../../pipes/phrase_pipe.dart';
     styleUrls: const ['fo_date_input_component.scss.css'],
     directives: const [CORE_DIRECTIVES],
     pipes: const [PhrasePipe],
-    visibility: Visibility.none,
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    visibility: Visibility.none)
 class FoDateInputComponent implements OnDestroy
 {
-  FoDateInputComponent()
+  FoDateInputComponent(html.Element host)
   {
-    strDate = formatter.format(new DateTime.now());
+    input = host.querySelector("#input");
   }
 
   void ngOnDestroy()
@@ -26,22 +26,8 @@ class FoDateInputComponent implements OnDestroy
     onValueChangeController.close();
   }
 
-  void onValueChange(String date)
-  {
-    try
-    {
-      onValueChangeController.add(DateTime.parse(date));
-    }
-    catch (e)
-    {
-      print(e);
-      onValueChangeController.add(null);
-    }
-  }
-
-  String strDate;
   final StreamController<DateTime> onValueChangeController = new StreamController();
-  final DateFormat formatter = new DateFormat("Y-m-d");
+  html.DateInputElement input;
 
   @Input('disabled')
   bool disabled = false;
@@ -50,18 +36,7 @@ class FoDateInputComponent implements OnDestroy
   String label = "date";
 
   @Input('value')
-  void set value(DateTime dt)
-  {
-    try
-    {
-      strDate = formatter.format(dt);
-    }
-    on FormatException catch (e)
-    {
-      print(e);
-      strDate = null;
-    }
-  }
+  void set value(DateTime dt) => input.valueAsDate = dt;
 
   @Output('valueChange')
   Stream<DateTime> get onValueChangeOutput => onValueChangeController.stream;
