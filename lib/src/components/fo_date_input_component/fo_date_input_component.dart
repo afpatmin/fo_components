@@ -40,7 +40,11 @@ class FoDateInputComponent implements OnDestroy, AfterViewInit
   String label = "date";
 
   @Input('value')
-  void set value(DateTime dt) => _inputElement.valueAsDate = dt;
+  void set value(DateTime dt)
+  {
+    if (_inputElement == null) new Future.delayed(const Duration(milliseconds: 500)).then((_) => _inputElement.valueAsDate = dt);
+    else _inputElement.valueAsDate = dt;
+  }
 
   @Output('valueChange')
   Stream<DateTime> get onValueChangeOutput => onValueChangeController.stream;
