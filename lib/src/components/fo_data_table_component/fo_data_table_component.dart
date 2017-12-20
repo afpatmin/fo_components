@@ -114,7 +114,10 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   void onSort(String column)
   {
-    if (!disabled && data.length < liveSearchThreshold)
+
+
+
+    if (!disabled) // && data.length < liveSearchThreshold)
     {
       sortColumn = column;
       sortOrder = (sortOrder == "ASC") ? "DESC" : "ASC";
