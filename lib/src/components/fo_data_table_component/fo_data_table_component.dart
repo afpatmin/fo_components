@@ -113,58 +113,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     setIndices(0);
   }
 
-  void onSort(String column)
-  {
-    if (!disabled) // && data.length < liveSearchThreshold)
-    {
-      sortColumn = column;
-      sortOrder = (sortOrder == "ASC") ? "DESC" : "ASC";
-
-      if (sortOrder != null && sortColumn != null && sortColumn.isNotEmpty)
-      {
-        int sort(String a, String b)
-        {
-          if (a == null) a = "-";
-          if (b == null) b = "-";
-
-          try
-          {
-            // Number comparison
-            num numA = num.parse(a);
-            num numB = num.parse(b);
-            return (sortOrder == "ASC") ? (numA - numB).toInt() : (numB - numA).toInt();
-          }
-          on FormatException
-          {
-            try
-            {
-              // Date comparison
-              DateTime dateA = DateTime.parse(a);
-              DateTime dateB = DateTime.parse(b);
-              return (sortOrder == "ASC") ? (dateA.difference(dateB)).inMinutes : (dateB.difference(dateA)).inMinutes;
-            }
-            on FormatException
-            {
-              // Default String comparison
-              String colA = a.toLowerCase();
-              String colB = b.toLowerCase();
-
-              return (sortOrder == "ASC") ? colA.compareTo(colB) : colB.compareTo(colA);
-            }
-          }
-        }
-
-        List<FoModel> values = data.keys.where(filteredKeys.contains).map((key) => data[key]).toList();
-        if (values != null)
-        {
-          if (columns.contains(sortColumn)) values.sort((FoModel a, FoModel b) => sort(a[sortColumn].toString(), b[sortColumn].toString()));
-          else if (evaluatedColumns.containsKey(sortColumn)) values.sort((FoModel a, FoModel b) => sort(evaluatedColumns[sortColumn](a), evaluatedColumns[sortColumn](b)));
-          _filteredKeys = values.map((model) => model["id"]);
-        }
-      }
-    }
-  }
-
   void onDownloadDataCSV()
   {
     if (data.isNotEmpty)
@@ -261,25 +209,85 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   Future onSortAsync(String column) async
   {
-    disabled = true;
-    final response = new ReceivePort();
-    await Isolate.spawn(_isolateSort, response.sendPort);
-    final sendPort = await response.first as SendPort;
-    final answer = new ReceivePort();
-    sendPort.send([column, answer.sendPort]);
-    disabled = false;
+    if (!disabled) // && data.length < liveSearchThreshold)
+    {
+      sortColumn = column;
+      sortOrder = (sortOrder == "ASC") ? "DESC" : "ASC";
+
+      if (sortOrder != null && sortColumn != null && sortColumn.isNotEmpty)
+      {
+        disabled = true;
+        final response = new ReceivePort();
+        await Isolate.spawn(isolateSort, response.sendPort);
+        final SendPort sendPort = await response.first as SendPort;
+        final ReceivePort answer = new ReceivePort();
+        sendPort.send([column, sortOrder, _filteredKeys, data, columns, evaluatedColumns, answer.sendPort]);
+        _filteredKeys = await answer.first;
+        disabled = false;
+      }
+    }
   }
 
-  void _isolateSort(SendPort initialReplyTo)
+  static void isolateSort(SendPort initialReplyTo)
   {
     final ReceivePort receivePort = new ReceivePort();
     initialReplyTo.send(receivePort.sendPort);
     receivePort.listen((message)
     {
-      final data = message[0] as String;
-      final sendPort = message[1] as SendPort;
-      sendPort.send(onSort(data));
+      final String column = message[0] as String;
+      final String sortOrder = message[1] as String;
+      final List<String> filteredKeys = message[2] as List<String>;
+      final Map<String, FoModel> data = message[3] as Map<String, FoModel>;
+      final List<String> columns = message[4] as List<String>;
+      final Map<String, EvaluateColumnFn> evaluatedColumns = message[5] as Map<String, EvaluateColumnFn>;
+
+      final sendPort = message[6] as SendPort;
+      sendPort.send(sort(column, sortOrder, filteredKeys, data, columns, evaluatedColumns));
     });
+  }
+
+  static Iterable<String> sort(String column, String sortOrder, List<String> filteredKeys, Map<String, FoModel> data, List<String> columns, Map<String, EvaluateColumnFn> evaluatedColumns)
+  {
+    int compare(String a, String b)
+    {
+      if (a == null) a = "-";
+      if (b == null) b = "-";
+
+      try
+      {
+        // Number comparison
+        num numA = num.parse(a);
+        num numB = num.parse(b);
+        return (sortOrder == "ASC") ? (numA - numB).toInt() : (numB - numA).toInt();
+      }
+      on FormatException
+      {
+        try
+        {
+          // Date comparison
+          DateTime dateA = DateTime.parse(a);
+          DateTime dateB = DateTime.parse(b);
+          return (sortOrder == "ASC") ? (dateA.difference(dateB)).inMinutes : (dateB.difference(dateA)).inMinutes;
+        }
+        on FormatException
+        {
+          // Default String comparison
+          String colA = a.toLowerCase();
+          String colB = b.toLowerCase();
+
+          return (sortOrder == "ASC") ? colA.compareTo(colB) : colB.compareTo(colA);
+        }
+      }
+    }
+
+    List<FoModel> values = data.keys.where(filteredKeys.contains).map((key) => data[key]).toList();
+    if (values != null)
+    {
+      if (columns.contains(column)) values.sort((FoModel a, FoModel b) => compare(a[column].toString(), b[column].toString()));
+      else if (evaluatedColumns.containsKey(column)) values.sort((FoModel a, FoModel b) => compare(evaluatedColumns[column](a), evaluatedColumns[column](b)));
+      return values.map((model) => model["id"]);
+    }
+    else return null;
   }
 
   RowOption _selectedRowOption;
