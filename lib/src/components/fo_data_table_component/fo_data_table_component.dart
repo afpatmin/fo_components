@@ -3,6 +3,7 @@
 
 import 'dart:async';
 import 'dart:html' as dom;
+import 'dart:isolate';
 import 'dart:math';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
@@ -114,9 +115,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   void onSort(String column)
   {
-
-
-
     if (!disabled) // && data.length < liveSearchThreshold)
     {
       sortColumn = column;
@@ -255,14 +253,36 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   Iterable<String> get filteredKeys => _filteredKeys == null ? data.keys : _filteredKeys;
 
-  RowOption _selectedRowOption;
-
   String get selectedRowOptionId => _selectedRowOption?.id;
   void set selectedRowOptionId(String value)
   {
     _selectedRowOption = rowOptions.optionsList.firstWhere((row) => row.id == value, orElse: () => rowOptions.optionsList.first);
   }
 
+  Future onSortAsync(String column) async
+  {
+    disabled = true;
+    final response = new ReceivePort();
+    await Isolate.spawn(_isolateSort, response.sendPort);
+    final sendPort = await response.first as SendPort;
+    final answer = new ReceivePort();
+    sendPort.send([column, answer.sendPort]);
+    disabled = false;
+  }
+
+  void _isolateSort(SendPort initialReplyTo)
+  {
+    final ReceivePort receivePort = new ReceivePort();
+    initialReplyTo.send(receivePort.sendPort);
+    receivePort.listen((message)
+    {
+      final data = message[0] as String;
+      final sendPort = message[1] as SendPort;
+      sendPort.send(onSort(data));
+    });
+  }
+
+  RowOption _selectedRowOption;
   String deleteBufferId;
   int firstIndex = 0;
   int lastIndex = 1;
