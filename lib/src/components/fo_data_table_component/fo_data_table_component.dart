@@ -217,8 +217,9 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
       if (sortOrder != null && sortColumn != null && sortColumn.isNotEmpty)
       {
         disabled = true;
-        final response = new ReceivePort();
+        final ReceivePort response = new ReceivePort();
         await Isolate.spawn(isolateSort, response.sendPort);
+
         final SendPort sendPort = await response.first as SendPort;
         final ReceivePort answer = new ReceivePort();
         sendPort.send([column, sortOrder, _filteredKeys, data, columns, evaluatedColumns, answer.sendPort]);

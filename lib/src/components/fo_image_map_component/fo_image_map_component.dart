@@ -6,6 +6,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import '../fo_multi_select_component/fo_multi_select_component.dart';
 import '../../pipes/phrase_pipe.dart';
+import '../../model/fo_model.dart';
 
 @Component(
     selector: 'fo-image-map',
@@ -25,7 +26,7 @@ class FoImageMapComponent implements OnChanges, OnDestroy
   {
     if (changes.containsKey("zones"))
     {
-      zoneOptions = new StringSelectionOptions(zones);
+      zoneOptions = new StringSelectionOptions<FoModel>(zones);
     }
     if (changes.containsKey("selectedIds"))
     {
@@ -62,7 +63,7 @@ class FoImageMapComponent implements OnChanges, OnDestroy
     _onSelectedIdsChangeController.add(selectedIds);
   }
 
-  StringSelectionOptions<FoZoneModel> zoneOptions;
+  StringSelectionOptions<FoModel> zoneOptions;
 
   final StreamController<List<String>> _onSelectedIdsChangeController = new StreamController();
 
@@ -85,9 +86,9 @@ class FoImageMapComponent implements OnChanges, OnDestroy
   Stream<List<String>> get onSelectedIdsChangeOutput => _onSelectedIdsChangeController.stream;
 }
 
-class FoZoneModel
+class FoZoneModel extends FoModel
 {
-  FoZoneModel(this._shapes, this.id, String label);
+  FoZoneModel(this._shapes, String id, String label) : super(id);
   List<FoShape> get shapes => _shapes;
 
   Iterable<FoShape> get ellipses => _shapes.where((s) => s.type == "ellipse");
@@ -95,7 +96,6 @@ class FoZoneModel
   Iterable<FoShape> get polygons => _shapes.where((s) => s.type == "polygon");
 
   final List<FoShape> _shapes;
-  final String id;
   bool marked = false;
 
 }
