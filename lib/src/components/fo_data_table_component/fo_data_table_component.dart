@@ -54,6 +54,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     onRowClickController.close();
     onSelectedRowsController.close();
     _onSortController.close();
+    _onSearchController.close();
   }
 
   void step(int steps)
@@ -63,15 +64,13 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   void onSearchKeyUp(dom.KeyboardEvent e)
   {
-    if (data.length < liveSearchThreshold) onSearch();
+    if (data.length < liveSearchThreshold && internalFilters) onSearch();
     else if (e.keyCode == dom.KeyCode.ENTER || e.keyCode == dom.KeyCode.MAC_ENTER) onSearch();
   }
 
   void onSearch()
   {
-    //sortColumn = null;
-
-    if (searchPhrase != null && searchPhrase.isNotEmpty)
+    if (searchPhrase != null && searchPhrase.isNotEmpty && internalFilters)
     {
       bool find(FoModel model, List<String> keywords)
       {
@@ -106,58 +105,64 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     }
     else _filteredKeys = null;
 
+    _onSearchController.add(searchPhrase);
+
     setIndices(0);
   }
 
   void onSort(String column)
   {
-    if (!disabled) // && data.length < liveSearchThreshold)
+    if (!disabled)
     {
       sortColumn = column;
       sortOrder = (sortOrder == "ASC") ? "DESC" : "ASC";
 
-      if (sortOrder != null && sortColumn != null && sortColumn.isNotEmpty)
+      if (internalFilters)
       {
-        int sort(String a, String b)
+        if (sortOrder != null && sortColumn != null && sortColumn.isNotEmpty)
         {
-          if (a == null) a = "-";
-          if (b == null) b = "-";
+          int sort(String a, String b)
+          {
+            if (a == null) a = "-";
+            if (b == null) b = "-";
 
-          try
-          {
-            // Number comparison
-            num numA = num.parse(a);
-            num numB = num.parse(b);
-            return (sortOrder == "ASC") ? (numA - numB).toInt() : (numB - numA).toInt();
-          }
-          on FormatException
-          {
             try
             {
-              // Date comparison
-              DateTime dateA = DateTime.parse(a);
-              DateTime dateB = DateTime.parse(b);
-              return (sortOrder == "ASC") ? (dateA.difference(dateB)).inMinutes : (dateB.difference(dateA)).inMinutes;
+              // Number comparison
+              num numA = num.parse(a);
+              num numB = num.parse(b);
+              return (sortOrder == "ASC") ? (numA - numB).toInt() : (numB - numA).toInt();
             }
             on FormatException
             {
-              // Default String comparison
-              String colA = a.toLowerCase();
-              String colB = b.toLowerCase();
+              try
+              {
+                // Date comparison
+                DateTime dateA = DateTime.parse(a);
+                DateTime dateB = DateTime.parse(b);
+                return (sortOrder == "ASC") ? (dateA.difference(dateB)).inMinutes : (dateB.difference(dateA)).inMinutes;
+              }
+              on FormatException
+              {
+                // Default String comparison
+                String colA = a.toLowerCase();
+                String colB = b.toLowerCase();
 
-              return (sortOrder == "ASC") ? colA.compareTo(colB) : colB.compareTo(colA);
+                return (sortOrder == "ASC") ? colA.compareTo(colB) : colB.compareTo(colA);
+              }
             }
           }
-        }
 
-        List<FoModel> values = data.keys.where(filteredKeys.contains).map((key) => data[key]).toList();
-        if (values != null)
-        {
-          if (columns.contains(sortColumn)) values.sort((FoModel a, FoModel b) => sort(a[sortColumn].toString(), b[sortColumn].toString()));
-          else if (evaluatedColumns.containsKey(sortColumn)) values.sort((FoModel a, FoModel b) => sort(evaluatedColumns[sortColumn](a), evaluatedColumns[sortColumn](b)));
-          _filteredKeys = values.map((model) => model["id"]);
+          List<FoModel> values = data.keys.where(filteredKeys.contains).map((key) => data[key]).toList();
+          if (values != null)
+          {
+            if (columns.contains(sortColumn)) values.sort((FoModel a, FoModel b) => sort(a[sortColumn].toString(), b[sortColumn].toString()));
+            else if (evaluatedColumns.containsKey(sortColumn)) values.sort((FoModel a, FoModel b) => sort(evaluatedColumns[sortColumn](a), evaluatedColumns[sortColumn](b)));
+            _filteredKeys = values.map((model) => model["id"]);
+          }
         }
       }
+      _onSortController.add({"column":sortColumn, "order":sortOrder});
     }
   }
 
@@ -210,9 +215,9 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   void setIndices(int first_index)
   {
-    if (first_index < 0 || first_index >= data.length) return;
+    if (first_index <= -_selectedRowOption.count || first_index >= data.length) return;
 
-    firstIndex = first_index;
+    firstIndex = max(0, first_index);
     if (searchPhrase != null && searchPhrase.isNotEmpty) firstIndex = max(0, min(firstIndex, filteredKeys.length - _selectedRowOption.count));
     lastIndex = firstIndex + _selectedRowOption.count;
 
@@ -245,7 +250,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     else selectedRows.clear();
   }
 
-  String get filterLabel => (data == null || data.length < liveSearchThreshold) ? "filter" : "filter_enter";
+  String get filterLabel => (data == null || (data.length < liveSearchThreshold && internalFilters == true)) ? "filter" : "filter_enter";
 
   Iterable<String> get filteredKeys => _filteredKeys == null ? data.keys : _filteredKeys;
 
@@ -271,6 +276,10 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   final StreamController<String> onDeleteController = new StreamController();
   final StreamController<String> onRowClickController = new StreamController();
   final StreamController<Map<String, String>> _onSortController = new StreamController();
+  final StreamController<String> _onSearchController = new StreamController();
+
+  @Input('internalFilters')
+  bool internalFilters = true;
 
   @Input('large-hidden-col')
   List<String> largeHiddenCol = [];
@@ -331,6 +340,9 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   @Output('selectedRowsChange')
   Stream<List<String>> get selectedRowsChange => onSelectedRowsController.stream;
+
+  @Output('search')
+  Stream<String> get onSearchOutput => _onSearchController.stream;
 
   @Output('sort')
   Stream<Map<String, String>> get onSortOutput => _onSortController.stream;

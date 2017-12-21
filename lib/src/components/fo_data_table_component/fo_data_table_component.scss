@@ -126,3 +126,9 @@ material-input
 { 
   width: 100%;
 }
+
+.clickable
+{
+    user-select: none;
+    -webkit-user-select: none;
+}
