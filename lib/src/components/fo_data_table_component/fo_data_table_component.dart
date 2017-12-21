@@ -33,18 +33,15 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     selectedRowOptionId = rowOptions.optionsList.firstWhere((r) => (r as RowOption).count == rows, orElse: () => rowOptions.optionsList.first).id;
     firstIndex = 0;
     lastIndex = _selectedRowOption.count;
-
     if (data == null) data = new Map();
   }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-    if (changes.containsKey("rows") || changes.containsKey("data"))
+    if (changes.containsKey("rows") || changes.containsKey("data") || changes.containsKey("sortColumn") || changes.containsKey("sortOrder"))
     {
       if (data == null) data = new Map();
-
       selectedRowOptionId = rowOptions.optionsList.firstWhere((r) => (r as RowOption).count == rows, orElse: () => rowOptions.optionsList.first).id;
-
       onSearch();
       setIndices(0);
     }
@@ -114,9 +111,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   void onSort(String column)
   {
-
-
-
     if (!disabled) // && data.length < liveSearchThreshold)
     {
       sortColumn = column;
@@ -267,8 +261,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   int firstIndex = 0;
   int lastIndex = 1;
   int currentPage = 1;
-  String sortColumn = "";
-  String sortOrder = "DESC";
   String searchPhrase = "";
   Iterable<String> _filteredKeys;
   bool infoModalOpen = false;
@@ -288,6 +280,12 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   @Input('medium-hidden-col')
   List<String> mediumHiddenCol = [];
+
+  @Input('sortColumn')
+  String sortColumn = "";
+
+  @Input('sortOrder')
+  String sortOrder = "DESC";
 
   @Input('data')
   Map<String, FoModel> data = new Map();
