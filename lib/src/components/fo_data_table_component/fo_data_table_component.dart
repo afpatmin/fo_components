@@ -38,7 +38,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-    if (changes.containsKey("rows") || changes.containsKey("data") || changes.containsKey("sortColumn") || changes.containsKey("sortOrder"))
+    if (changes.containsKey("rows") || changes.containsKey("data"))
     {
       if (data == null) data = new Map();
       selectedRowOptionId = rowOptions.optionsList.firstWhere((r) => (r as RowOption).count == rows, orElse: () => rowOptions.optionsList.first).id;
