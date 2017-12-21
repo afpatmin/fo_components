@@ -45,10 +45,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
       onSearch();
       setIndices(0);
     }
-    if (changes.containsKey("sortColumn"))
-    {
-      sortColumn = changes["sortColumn"].currentValue;
-    }
   }
 
   void ngOnDestroy()
@@ -73,7 +69,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   void onSearch()
   {
-    sortColumn = null;
+    //sortColumn = null;
 
     if (searchPhrase != null && searchPhrase.isNotEmpty)
     {
