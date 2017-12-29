@@ -140,8 +140,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
                 // Date comparison
                 DateTime dateA = DateTime.parse(a);
                 DateTime dateB = DateTime.parse(b);
-                print("DATE COMPARISON");
-                return (sortOrder == "ASC") ? dateA.difference(dateB).inMinutes : dateB.difference(dateA).inMinutes;
+                return (sortOrder == "ASC") ? dateA.difference(dateB).inMilliseconds : dateB.difference(dateA).inMilliseconds;
               }
               on FormatException
               {
