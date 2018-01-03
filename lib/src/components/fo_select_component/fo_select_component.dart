@@ -60,6 +60,9 @@ class FoSelectComponent implements OnDestroy
   @Input('actionButtonIcon')
   String actionButtonIcon = "add";
 
+  @Input('actionButtonText')
+  String actionButtonText;
+
   @Input('allowNullSelection')
   bool allowNullSelection = false;
 

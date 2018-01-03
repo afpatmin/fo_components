@@ -36,7 +36,8 @@
             *ngIf="showActionButton"
             raised
             (trigger)="onActionButtonTriggerController.add(selectedModel)">
-        <material-icon [icon]="actionButtonIcon" size="x-large"></material-icon>
+        <span *ngIf="actionButtonText != null">{{actionButtonText | phrase}}</span>
+        <material-icon *ngIf="actionButtonIcon != null" [icon]="actionButtonIcon" size="x-large"></material-icon>
     </material-button>
 </div>
 
