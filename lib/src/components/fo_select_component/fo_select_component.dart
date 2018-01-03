@@ -58,7 +58,7 @@ class FoSelectComponent implements OnDestroy
   bool tooltipModalVisible = false;
 
   @Input('actionButtonIcon')
-  String actionButtonIcon = "add";
+  String actionButtonIcon;
 
   @Input('actionButtonText')
   String actionButtonText;

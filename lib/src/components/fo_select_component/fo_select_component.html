@@ -32,7 +32,7 @@
         </div>
     </material-dropdown-select>
     <material-button
-            [disabled]="selectedModel == null"
+            [disabled]="disabled || options == null || selectedModel == null"
             *ngIf="showActionButton"
             raised
             (trigger)="onActionButtonTriggerController.add(selectedModel)">
