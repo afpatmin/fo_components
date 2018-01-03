@@ -31,12 +31,21 @@
             </material-select-searchbox>
         </div>
     </material-dropdown-select>
+
     <material-button
             [disabled]="disabled || options == null || selectedModel == null"
-            *ngIf="showActionButton"
+            *ngIf="showActionButton && actionButtonText != null && actionButtonIcon == null"
             raised
             (trigger)="onActionButtonTriggerController.add(selectedModel)">
-        <span *ngIf="actionButtonText != null">{{actionButtonText | phrase}}</span>
+        {{actionButtonText | phrase}}
+    </material-button>
+
+    <!-- Icon has precedence over text -->
+    <material-button
+            [disabled]="disabled || options == null || selectedModel == null"
+            *ngIf="showActionButton && actionButtonIcon != null"
+            raised
+            (trigger)="onActionButtonTriggerController.add(selectedModel)">
         <material-icon *ngIf="actionButtonIcon != null" [icon]="actionButtonIcon" size="x-large"></material-icon>
     </material-button>
 </div>
