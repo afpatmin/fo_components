@@ -56,7 +56,11 @@ table.output
         cursor: pointer;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size: 0.7rem;
+        font-size: 0.8rem;
+      }
+      td.underline
+      {
+        text-decoration: underline;
       }
 
       td.buttonCell

@@ -37,6 +37,7 @@
                     [class.hide-for-small]="smallHiddenCol.contains(cell)"
                     [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                     [class.hide-for-large]="largeHiddenCol.contains(cell)"
+                    [class.underline]="sortColumn == cell"
                     (click)="onSort(cell)">
                     {{cell | phrase}}
                     <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
@@ -46,6 +47,7 @@
                     [class.hide-for-small]="smallHiddenCol.contains(cell)"
                     [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                     [class.hide-for-large]="largeHiddenCol.contains(cell)"
+                    [class.underline]="sortColumn == cell"
                     (click)="onSort(cell)">
                     {{cell | phrase}}
                     <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
