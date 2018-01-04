@@ -47,7 +47,7 @@
                     [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                     [class.hide-for-large]="largeHiddenCol.contains(cell)"
                     (click)="onSort(cell)">
-                    {{cell}}
+                    {{cell | phrase}}
                     <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
                     <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></material-icon>
                 </td>
@@ -69,14 +69,14 @@
                         [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                         [class.hide-for-large]="largeHiddenCol.contains(cell)"
                         (click)="onCellClickController.add(data[key][cell])">
-                    {{data[key][cell]?.toString() | phrase:false}}
+                    {{data[key][cell]?.toString()}}
                 </td>
                 <td *ngFor="let cell of evaluatedColumns.keys"
                     [class.hide-for-small]="smallHiddenCol.contains(cell)"
                     [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                     [class.hide-for-large]="largeHiddenCol.contains(cell)"
                     (click)="onCellClickController.add(evaluatedColumns[cell](data[key]))">
-                    {{evaluatedColumns[cell](data[key]) | phrase:false}}
+                    {{evaluatedColumns[cell](data[key])}}
                 </td>
                 <td *ngIf="showDeleteButtons" class="text-center">
                     <material-icon

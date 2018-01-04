@@ -115,6 +115,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
       sortColumn = column;
       sortOrder = (sortOrder == "ASC") ? "DESC" : "ASC";
 
+      searchPhrase = null;
       _filteredKeys = null;
 
       if (internalSort || evaluatedColumns.containsKey(column)) /// Evaluated columns are always sorted internally
@@ -162,11 +163,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
           }
         }
       }
-      else
-      {
-        searchPhrase = "";
-        _onSortController.add({"column":sortColumn, "order":sortOrder});
-      }
+      else _onSortController.add({"column":sortColumn, "order":sortOrder});
     }
   }
 
