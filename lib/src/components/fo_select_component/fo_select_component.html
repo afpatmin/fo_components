@@ -1,6 +1,8 @@
 <label (click)="setVisible(true)" *ngIf="label.isNotEmpty">
     {{label | phrase}}
-    <material-icon  *ngIf="tooltip != null"
+    <material-icon
+            *ngIf="tooltip != null"
+            baseline
             class="clickable"
             (click)="tooltipModalVisible = true; $event.stopPropagation();"
             icon="help_outline"
@@ -8,6 +10,7 @@
     </material-icon>
     <material-icon
             *ngIf="allowNullSelection && selectedModel != null"
+            baseline
             class="clickable color-alert"
             icon="cancel"
             size="medium"

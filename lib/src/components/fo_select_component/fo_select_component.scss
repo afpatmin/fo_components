@@ -2,7 +2,6 @@
 
 :host
 {
-    //margin-bottom: 1rem;
     display: block;
 
     label
@@ -12,11 +11,6 @@
         display: inline-block;
         font-size: 0.75em;
         color: #888;
-    }
-
-    material-icon
-    {
-        vertical-align: text-top;
     }
 
     div.flex-container
@@ -30,6 +24,11 @@
         {
             flex: auto;
             width: 100%;
+        }
+
+        material-button
+        {
+            margin-left: 0.5rem;
         }
     }
 }
