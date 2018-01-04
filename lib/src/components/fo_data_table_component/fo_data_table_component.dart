@@ -306,8 +306,17 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   @Input('evaluatedColumns')
   Map<String, EvaluateColumnFn> evaluatedColumns = new Map();
 
+  @Input('showAddButton')
+  bool showAddButton = false;
+
   @Input('showCheckboxes')
   bool showCheckboxes = false;
+
+  @Input('showDeleteButtons')
+  bool showDeleteButtons = false;
+
+  @Input('showDownloadButton')
+  bool showDownloadButton = true;
 
   @Input('title')
   String title = "";
@@ -323,15 +332,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   @Input('disabled')
   bool disabled = false;
-
-  @Input('showAddButton')
-  bool showAddButton = false;
-
-  @Input('showDeleteButtons')
-  bool showDeleteButtons = false;
-
-  @Input('showDownloadButton')
-  bool showDownloadButton = true;
 
   @Output('add')
   Stream<String> get onAddOutput => onAddController.stream;

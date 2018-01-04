@@ -54,16 +54,22 @@ table.output
       {
         overflow: hidden;
         text-overflow: ellipsis;
+        cursor: pointer;
+
         span
         {
-            max-width: 85%;
             font-weight: bold;
-            cursor: pointer;
             font-size: 0.8rem;
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            -webkit-text-decoration-color: transparent;
+            -moz-text-decoration-color: transparent;
         }
         span.underline
         {
-            text-decoration: underline;
+            text-decoration-color: #333;
+            -webkit-text-decoration-color: #333;
+            -moz-text-decoration-color: #333;
         }
       }
 
