@@ -245,6 +245,12 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     onSelectedRowsController.add(selectedRows);
   }
 
+  void onBatchOperationTrigger(FoModel model)
+  {
+    print(model.id);
+    print(selectedRows);
+  }
+
   void onAllCheckedChange(bool state)
   {
     if (state == true) selectedRows = filteredKeys.toList();
@@ -311,6 +317,9 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   @Input('showCheckboxes')
   bool showCheckboxes = false;
+
+  @Input('batchOperationOptions')
+  StringSelectionOptions<FoModel> batchOperationOptions;
 
   @Input('showDeleteButtons')
   bool showDeleteButtons = false;

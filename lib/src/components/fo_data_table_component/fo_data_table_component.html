@@ -147,6 +147,16 @@
         </div>
     </div>
 </div>
+<div class="row" *ngIf="showCheckboxes && batchOperationOptions != null">
+    <div class="l6 m4 col">
+        <fo-select
+                label="with_selected"
+                [showActionButton]="true"
+                [options]="batchOperationOptions"
+                (actionButtonTrigger)="onBatchOperationTrigger($event)">
+        </fo-select>
+    </div>
+</div>
 
 <fo-modal
         title="{{'confirm' | phrase}}"
