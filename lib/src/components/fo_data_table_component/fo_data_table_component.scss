@@ -58,7 +58,7 @@ table.output
         text-overflow: ellipsis;
         font-size: 0.8rem;
       }
-      td.underline
+      td.underline:not(material-icon)
       {
         text-decoration: underline;
       }
