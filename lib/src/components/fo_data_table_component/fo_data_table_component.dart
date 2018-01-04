@@ -115,6 +115,8 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
       sortColumn = column;
       sortOrder = (sortOrder == "ASC") ? "DESC" : "ASC";
 
+      _filteredKeys = null;
+
       if (internalSort || evaluatedColumns.containsKey(column)) /// Evaluated columns are always sorted internally
       {
         if (sortOrder != null && sortColumn != null && sortColumn.isNotEmpty)
