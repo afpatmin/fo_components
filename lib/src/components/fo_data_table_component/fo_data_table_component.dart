@@ -1,4 +1,4 @@
-// Copyright (c) 2017, Muienog AB. All rights reserved. Use of this source code
+// Copyright (c) 2017, Minoch AB. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
@@ -55,7 +55,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     onRowClickController.close();
     onSelectedRowsController.close();
     _onSortController.close();
-    _onSearchController.close();
   }
 
   void step(int steps)
@@ -65,13 +64,13 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   void onSearchKeyUp(dom.KeyboardEvent e)
   {
-    if (data.length < liveSearchThreshold && internalFilters) onSearch();
+    if (data.length < liveSearchThreshold) onSearch();
     else if (e.keyCode == dom.KeyCode.ENTER || e.keyCode == dom.KeyCode.MAC_ENTER) onSearch();
   }
 
   void onSearch()
   {
-    if (searchPhrase != null && searchPhrase.isNotEmpty && internalFilters)
+    if (searchPhrase != null && searchPhrase.isNotEmpty)
     {
       bool find(FoModel model, List<String> keywords)
       {
@@ -106,8 +105,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     }
     else _filteredKeys = null;
 
-    _onSearchController.add(searchPhrase);
-
     setIndices(0);
   }
 
@@ -118,7 +115,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
       sortColumn = column;
       sortOrder = (sortOrder == "ASC") ? "DESC" : "ASC";
 
-      if (internalFilters)
+      if (internalSort)
       {
         if (sortOrder != null && sortColumn != null && sortColumn.isNotEmpty)
         {
@@ -251,7 +248,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     else selectedRows.clear();
   }
 
-  String get filterLabel => (data == null || (data.length < liveSearchThreshold && internalFilters == true)) ? "filter" : "filter_enter";
+  String get filterLabel => (data == null || (data.length < liveSearchThreshold)) ? "filter" : "filter_enter";
 
   Iterable<String> get filteredKeys => _filteredKeys == null ? data.keys : _filteredKeys;
 
@@ -278,10 +275,9 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   final StreamController<String> onDeleteController = new StreamController();
   final StreamController<String> onRowClickController = new StreamController();
   final StreamController<Map<String, String>> _onSortController = new StreamController();
-  final StreamController<String> _onSearchController = new StreamController();
 
-  @Input('internalFilters')
-  bool internalFilters = true;
+  @Input('internalSort')
+  bool internalSort = true;
 
   @Input('large-hidden-col')
   List<String> largeHiddenCol = [];
@@ -348,9 +344,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   @Output('selectedRowsChange')
   Stream<List<String>> get selectedRowsChange => onSelectedRowsController.stream;
-
-  @Output('search')
-  Stream<String> get onSearchOutput => _onSearchController.stream;
 
   @Output('sort')
   Stream<Map<String, String>> get onSortOutput => _onSortController.stream;
