@@ -398,8 +398,8 @@ class RowOption implements FoModel
 
 class BatchOperationEvent
 {
-  BatchOperationEvent(this.event, this.selectedRows);
+  BatchOperationEvent(this.operation, this.selectedIds);
 
-  final String event;
-  final Set<String> selectedRows;
+  final String operation;
+  final Set<String> selectedIds;
 }
