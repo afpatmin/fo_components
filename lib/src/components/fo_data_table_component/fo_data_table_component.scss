@@ -52,12 +52,13 @@ table.output
       background-color: #eee;
       td
       {
+        overflow: hidden;
+        text-overflow: ellipsis;
         span
         {
+            max-width: 85%;
             font-weight: bold;
             cursor: pointer;
-            overflow: hidden;
-            text-overflow: ellipsis;
             font-size: 0.8rem;
         }
         span.underline
