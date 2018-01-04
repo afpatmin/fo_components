@@ -104,8 +104,18 @@
                 raised
                 [disabled]="disabled || data.isEmpty"
                 [materialTooltip]="'download_csv' | phrase"
-                (click)="onDownloadDataCSV()">
+                (trigger)="onDownloadDataCSV()">
             <material-icon class="color-black" size="medium" icon="file_download"></material-icon>
+        </material-button>
+        <material-button
+                *ngIf="showAddButton"
+                class="margin-bottom-small"
+                clear-size
+                raised
+                [disabled]="disabled"
+                [materialTooltip]="'add' | phrase"
+                (trigger)="onAddController.add('')">
+            <material-icon class="color-black" size="medium" icon="add"></material-icon>
         </material-button>
     </div>
     <div class="s9 m10 col text-right">
