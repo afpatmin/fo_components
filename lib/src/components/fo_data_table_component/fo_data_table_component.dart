@@ -45,6 +45,13 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
       onSearch();
       setIndices(0);
     }
+
+    if (changes.containsKey("batchOperations"))
+    {
+      if (batchOperations == null) batchOperationOptions = null;
+      else batchOperationOptions = new StringSelectionOptions(batchOperations);
+      print(batchOperationOptions);
+    }
   }
 
   void ngOnDestroy()
@@ -277,6 +284,8 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   Iterable<String> _filteredKeys;
   bool infoModalOpen = false;
 
+  StringSelectionOptions<FoModel> batchOperationOptions;
+
   final int liveSearchThreshold = 500;
   final StreamController<String> onAddController = new StreamController();
   final StreamController<String> onCellClickController = new StreamController();
@@ -318,8 +327,8 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   @Input('showCheckboxes')
   bool showCheckboxes = false;
 
-  @Input('batchOperationOptions')
-  StringSelectionOptions<FoModel> batchOperationOptions;
+  @Input('batchOperations')
+  List<FoModel> batchOperations;
 
   @Input('showDeleteButtons')
   bool showDeleteButtons = false;
