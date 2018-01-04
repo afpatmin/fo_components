@@ -155,7 +155,7 @@
                 actionButtonIcon="play_arrow"
                 [disabled]="selectedRows == null || selectedRows.isEmpty"
                 [options]="batchOperationOptions"
-                (actionButtonTrigger)="onBatchOperationTrigger($event)">
+                (actionButtonTrigger)="onBatchOperationTrigger($event.id)">
         </fo-select>
     </div>
 </div>

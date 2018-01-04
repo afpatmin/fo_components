@@ -62,6 +62,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     onRowClickController.close();
     onSelectedRowsController.close();
     _onSortController.close();
+    _onBatchOperationController.close();
   }
 
   void step(int steps)
@@ -252,10 +253,9 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     onSelectedRowsController.add(selectedRows);
   }
 
-  void onBatchOperationTrigger(FoModel model)
+  void onBatchOperationTrigger(String event)
   {
-    print(model.id);
-    print(selectedRows);
+    _onBatchOperationController.add(new BatchOperationEvent(event, selectedRows));
   }
 
   void onAllCheckedChange(bool state)
@@ -293,6 +293,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   final StreamController<String> onDeleteController = new StreamController();
   final StreamController<String> onRowClickController = new StreamController();
   final StreamController<Map<String, String>> _onSortController = new StreamController();
+  final StreamController<BatchOperationEvent> _onBatchOperationController = new StreamController();
 
   @Input('internalSort')
   bool internalSort = true;
@@ -368,6 +369,9 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   @Output('sort')
   Stream<Map<String, String>> get onSortOutput => _onSortController.stream;
+
+  @Output('batchOperation')
+  Stream<BatchOperationEvent> get onBatchOperationOutput => _onBatchOperationController.stream;
 }
 
 class RowOption implements FoModel
@@ -390,4 +394,12 @@ class RowOption implements FoModel
 
   int count;
   @override String id;
+}
+
+class BatchOperationEvent
+{
+  BatchOperationEvent(this.event, this.selectedRows);
+
+  final String event;
+  final Set<String> selectedRows;
 }
