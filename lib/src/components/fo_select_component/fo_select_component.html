@@ -36,6 +36,7 @@
     </material-dropdown-select>
 
     <material-button
+            class="button"
             clear-size
             [disabled]="disabled || options == null || selectedModel == null"
             *ngIf="showActionButton && actionButtonText != null && actionButtonIcon == null"
@@ -46,6 +47,7 @@
 
     <!-- Icon has precedence over text -->
     <material-button
+            class="button"
             clear-size
             [disabled]="disabled || options == null || selectedModel == null"
             *ngIf="showActionButton && actionButtonIcon != null"
