@@ -48,8 +48,8 @@
                     [class.hide-for-large]="largeHiddenCol.contains(cell)"
                     (click)="onSort(cell)">
                     <span [class.underline]="sortColumn == cell">{{cell | phrase}}</span>
-                    <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
-                    <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></material-icon>
+                    <material-icon baseline size="small" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
+                    <material-icon baseline size="small" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></material-icon>
                 </td>
                 <td *ngIf="showDeleteButtons" class="buttonCell"></td>
             </tr>
