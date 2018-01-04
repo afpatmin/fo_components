@@ -152,7 +152,7 @@
         <fo-select
                 label="with_selected"
                 [showActionButton]="true"
-                [actionButtonIcon]="play_arrow"
+                actionButtonIcon="play_arrow"
                 [disabled]="selectedRows == null || selectedRows.isEmpty"
                 [options]="batchOperationOptions"
                 (actionButtonTrigger)="onBatchOperationTrigger($event)">
