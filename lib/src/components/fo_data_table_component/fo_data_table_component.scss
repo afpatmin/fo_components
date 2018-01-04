@@ -52,15 +52,18 @@ table.output
       background-color: #eee;
       td
       {
-        font-weight: bold;
-        cursor: pointer;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 0.8rem;
-      }
-      td.underline:not(material-icon)
-      {
-        text-decoration: underline;
+        span
+        {
+            font-weight: bold;
+            cursor: pointer;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 0.8rem;
+        }
+        span.underline
+        {
+            text-decoration: underline;
+        }
       }
 
       td.buttonCell
