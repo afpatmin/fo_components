@@ -260,7 +260,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   void onAllCheckedChange(bool state)
   {
-    if (state == true) selectedRows = filteredKeys.toList();
+    if (state == true) selectedRows = filteredKeys.toSet();
     else selectedRows.clear();
   }
 
@@ -289,7 +289,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   final int liveSearchThreshold = 500;
   final StreamController<String> onAddController = new StreamController();
   final StreamController<String> onCellClickController = new StreamController();
-  final StreamController<List<String>> onSelectedRowsController = new StreamController();
+  final StreamController<Set<String>> onSelectedRowsController = new StreamController();
   final StreamController<String> onDeleteController = new StreamController();
   final StreamController<String> onRowClickController = new StreamController();
   final StreamController<Map<String, String>> _onSortController = new StreamController();
@@ -343,7 +343,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   String description;
 
   @Input('selectedRows')
-  List<String> selectedRows = new List();
+  Set<String> selectedRows = new Set();
 
   @Input('rows')
   int rows = 10;
@@ -364,7 +364,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   Stream<String> get onRowClickOutput => onRowClickController.stream;
 
   @Output('selectedRowsChange')
-  Stream<List<String>> get selectedRowsChange => onSelectedRowsController.stream;
+  Stream<Set<String>> get selectedRowsChange => onSelectedRowsController.stream;
 
   @Output('sort')
   Stream<Map<String, String>> get onSortOutput => _onSortController.stream;
