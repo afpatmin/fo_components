@@ -30,7 +30,7 @@
         <div class="table-container box-shadow">
             <table [class.faded]="disabled" class="output color-black margin-bottom-x-small">
                 <thead>
-                <tr #headRow>
+                <tr>
                     <td *ngIf="showCheckboxes">
                         <material-checkbox (checkedChange)="onAllCheckedChange($event)"></material-checkbox>
                     </td>
@@ -55,7 +55,7 @@
                     <td *ngIf="showDeleteButtons" class="buttonCell"></td>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody *ngIf="filteredKeys.isNotEmpty">
                 <tr *ngFor="let key of filteredKeys | range:firstIndex:lastIndex" (click)="onRowClickController.add(key)">
                     <td *ngIf="showCheckboxes">
                         <material-checkbox
@@ -88,13 +88,20 @@
                         </material-icon>
                     </td>
                 </tr>
-                <tr *ngIf="filteredKeys.isEmpty">
-                    <td *ngIf="disabled" attr.colspan="{{numColumns}}"><h4 class="text-center"><material-spinner></material-spinner></h4></td>
-                    <td *ngIf="!disabled" attr.colspan="{{numColumns}}" class="empty-info color-alert"><h4><material-icon size="x-large" icon="error"></material-icon>&nbsp;{{'no_results' | phrase}}</h4></td>
-                </tr>
                 </tbody>
             </table>
-            <div class="row expand">
+            <div class="row expand" *ngIf="filteredKeys.isEmpty">
+                <div class="col" *ngIf="disabled">
+                    <p class="text-center"><material-spinner></material-spinner></p>
+                </div>
+                <div class="col color-alert text-center" *ngIf="!disabled">
+                    <p>
+                        <material-icon size="x-large" icon="error"></material-icon>
+                        {{'no_results' | phrase}}
+                    </p>
+                </div>
+            </div>
+            <div class="row expand" *ngIf="filteredKeys.isNotEmpty">
                 <div class="s2 col">
                     <div *ngIf="showDownloadButton || showAddButton">
                         <material-button
