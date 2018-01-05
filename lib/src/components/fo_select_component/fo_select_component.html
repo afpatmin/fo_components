@@ -38,6 +38,7 @@
     <material-button
             class="button"
             clear-size
+            dense
             [disabled]="disabled || options == null || selectedModel == null"
             *ngIf="showActionButton && actionButtonText != null && actionButtonIcon == null"
             raised
@@ -49,11 +50,12 @@
     <material-button
             class="button"
             clear-size
+            dense
             [disabled]="disabled || options == null || selectedModel == null"
             *ngIf="showActionButton && actionButtonIcon != null"
             raised
             (trigger)="onActionButtonTriggerController.add(selectedModel)">
-        <material-icon *ngIf="actionButtonIcon != null" [icon]="actionButtonIcon" size="x-large"></material-icon>
+        <material-icon *ngIf="actionButtonIcon != null" [icon]="actionButtonIcon" size="small"></material-icon>
     </material-button>
 </div>
 

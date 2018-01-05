@@ -37,6 +37,8 @@ material-input
 
 div.table-container
 {
+    position: relative;
+    z-index: 1;
     min-width: 285px;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -137,4 +139,22 @@ div.table-container
         opacity: 0.3;
       }
     }
+}
+
+div.batch-operations-container
+{
+    -webkit-transition: margin 0.3s;
+    -moz-transition: margin 0.3s;
+    -o-transition: margin 0.3s;
+    transition: margin 0.3s;
+
+    background-color: white;
+    padding: 0.5rem 1rem;
+    z-index: 0;
+    margin-top: -8rem;
+}
+
+div.batch-operations-container.expanded
+{
+    margin-top: -0.5rem;
 }
