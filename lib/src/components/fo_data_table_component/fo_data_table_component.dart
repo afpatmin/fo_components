@@ -37,7 +37,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     selectedRowOptionId = rowOptions.optionsList.firstWhere((r) => (r as RowOption).count == rows, orElse: () => rowOptions.optionsList.first).id;
     firstIndex = 0;
     lastIndex = _selectedRowOption.count;
-    if (data == null) data = new Map();
   }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
@@ -225,8 +224,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
     return headRowElement.querySelectorAll("td").where((dom.Element e) => e.getBoundingClientRect().width > 0).length;
   }
-
-  int get footerColSpan => (showAddButton || showDownloadButton) ? numColumns - 1 : numColumns;
 
   void setIndices(int first_index)
   {
