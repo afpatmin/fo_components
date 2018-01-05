@@ -26,7 +26,11 @@ typedef String EvaluateColumnFn(FoModel model);
 
 class DataTableComponent implements OnChanges, OnInit, OnDestroy
 {
-  DataTableComponent();
+  DataTableComponent(ChangeDetectorRef change_detector_ref)
+  {
+    /// Make sure change detection happens on window resize, to make sure column
+    _onWindowResizeListener = dom.window.onResize.listen((_) => change_detector_ref.markForCheck());
+  }
 
   void ngOnInit()
   {
@@ -34,6 +38,8 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     firstIndex = 0;
     lastIndex = _selectedRowOption.count;
     if (data == null) data = new Map();
+
+
   }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
@@ -50,7 +56,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     {
       if (batchOperations == null) batchOperationOptions = null;
       else batchOperationOptions = new StringSelectionOptions(batchOperations);
-      print(batchOperationOptions);
     }
   }
 
@@ -63,6 +68,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     onSelectedRowsController.close();
     _onSortController.close();
     _onBatchOperationController.close();
+    _onWindowResizeListener.cancel();
   }
 
   void step(int steps)
@@ -216,11 +222,11 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   int get numColumns
   {
-    int output = columns.length + evaluatedColumns.length;
-    if (showCheckboxes == true) output++;
-    if (showDeleteButtons == true) output++;
-    return output;
+    dom.TableRowElement headRowElement = headRow.nativeElement;
+    return headRowElement.querySelectorAll("td").where((dom.Element e) => e.getBoundingClientRect().width > 0).length;
   }
+
+  int get footerColSpan => (showAddButton || showDownloadButton) ? numColumns - 1 : numColumns;
 
   void setIndices(int first_index)
   {
@@ -287,6 +293,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   StringSelectionOptions<FoModel> batchOperationOptions;
 
   final int liveSearchThreshold = 500;
+  StreamSubscription<dom.Event> _onWindowResizeListener;
   final StreamController<String> onAddController = new StreamController();
   final StreamController<String> onCellClickController = new StreamController();
   final StreamController<Set<String>> onSelectedRowsController = new StreamController();
@@ -294,6 +301,9 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   final StreamController<String> onRowClickController = new StreamController();
   final StreamController<Map<String, String>> _onSortController = new StreamController();
   final StreamController<BatchOperationEvent> _onBatchOperationController = new StreamController();
+
+  @ViewChild('headRow')
+  ElementRef headRow;
 
   @Input('internalSort')
   bool internalSort = true;

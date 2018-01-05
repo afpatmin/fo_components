@@ -1,35 +1,36 @@
-<div class="row">
-    <div class="s12 m7 l8 col">
-        <h3 class="color-black margin-bottom-none">
-            {{title | phrase}}
-            <material-icon
-                    baseline
-                    *ngIf="description != null"
-                    size="x-large"
-                    icon="help_outline"
-                    (click)="infoModalOpen = true"
-                    class="clickable">
-            </material-icon>
-        </h3>
-    </div>
-    <div class="s12 m5 l4 col text-right">
-        <material-input
-                class="text-left"
-                [displayBottomPanel]="false"
-                [disabled]="disabled"
-                label="{{filterLabel | phrase}}"
-                trailingGlyph="search"
-                [(ngModel)]="searchPhrase" 
-                (keyup)="onSearchKeyUp($event)">
-        </material-input>
-    </div>
-</div>
-
-<div class="row">
+<div class="row expand">
     <div class="s12 col">
         <table [class.faded]="disabled" class="output color-black box-shadow margin-bottom-x-small">
+            <caption>
+                <div class="row expand">
+                    <div class="s12 m7 l8 col">
+                        <h3 class="color-black margin-bottom-none">
+                            {{title | phrase}}
+                            <material-icon
+                                    baseline
+                                    *ngIf="description != null"
+                                    size="x-large"
+                                    icon="help_outline"
+                                    (click)="infoModalOpen = true"
+                                    class="clickable">
+                            </material-icon>
+                        </h3>
+                    </div>
+                    <div class="s12 m5 l4 col text-right">
+                        <material-input
+                                class="text-left"
+                                [displayBottomPanel]="false"
+                                [disabled]="disabled"
+                                label="{{filterLabel | phrase}}"
+                                trailingGlyph="search"
+                                [(ngModel)]="searchPhrase"
+                                (keyup)="onSearchKeyUp($event)">
+                        </material-input>
+                    </div>
+                </div>
+            </caption>
             <thead *ngIf="data.isNotEmpty">
-            <tr>
+            <tr #headRow>
                 <td *ngIf="showCheckboxes">
                     <material-checkbox (checkedChange)="onAllCheckedChange($event)"></material-checkbox>
                 </td>
@@ -92,68 +93,75 @@
                 <td *ngIf="!disabled" attr.colspan="{{numColumns}}" class="empty-info color-alert"><h4><material-icon size="x-large" icon="error"></material-icon>&nbsp;{{'no_results' | phrase}}</h4></td>
             </tr>
             </tbody>
+            <tfoot>
+            <tr>
+                <td *ngIf="showDownloadButton || showAddButton">
+                    <material-button
+                            class="float-left"
+                            *ngIf="showDownloadButton"
+                            clear-size
+                            raised
+                            dense
+                            [disabled]="disabled || data.isEmpty"
+                            [materialTooltip]="'download_csv' | phrase"
+                            (trigger)="onDownloadDataCSV()">
+                        <material-icon class="color-black" size="medium" icon="file_download"></material-icon>
+                    </material-button>
+                    <material-button
+                            class="float-left"
+                            *ngIf="showAddButton"
+                            clear-size
+                            raised
+                            dense
+                            [disabled]="disabled"
+                            [materialTooltip]="'add' | phrase"
+                            (trigger)="onAddController.add('')">
+                        <material-icon class="color-black" size="medium" icon="add"></material-icon>
+                    </material-button>
+                </td>
+                <td attr.colspan="{{footerColSpan}}">
+                    <div id="select-step">
+                        <div class="float-right" id="rows-per-page">
+                            <span>{{'rows' | phrase}}/{{'page' | phrase:false}}:</span>
+                            <fo-select
+                                    class="display-inline-block"
+                                    [disabled]="disabled"
+                                    [options]="rowOptions"
+                                    [selectedId]="selectedRowOptionId"
+                                    (selectedIdChange)="selectedRowOptionId = $event; setIndices(0);">
+                            </fo-select>
+                        </div>
+                        <div class="float-right">
+                            <material-icon
+                                    class="clickable vertical-align-middle"
+                                    [class.disabled]="firstIndex <= 0"
+                                    icon="navigate_before"
+                                    (click)="step(-1)">
+                            </material-icon>
+                            {{'page' | phrase}} {{currentPage}}/{{totalPages}} ({{filteredKeys.length}} {{'rows' | phrase:false}})
+                            <material-icon
+                                    class="clickable vertical-align-middle"
+                                    [class.disabled]="lastIndex >= filteredKeys.length"
+                                    icon="navigate_next"
+                                    (click)="step(1)">
+                            </material-icon>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            </tfoot>
         </table>
     </div>
 </div>
-<div class="row">
-    <div class="s4 m2 col">
-        <material-button
-                *ngIf="showDownloadButton"
-                class="margin-bottom-small"
-                clear-size
-                raised
-                [disabled]="disabled || data.isEmpty"
-                [materialTooltip]="'download_csv' | phrase"
-                (trigger)="onDownloadDataCSV()">
-            <material-icon class="color-black" size="medium" icon="file_download"></material-icon>
-        </material-button>
-        <material-button
-                *ngIf="showAddButton"
-                class="margin-bottom-small"
-                clear-size
-                raised
-                [disabled]="disabled"
-                [materialTooltip]="'add' | phrase"
-                (trigger)="onAddController.add('')">
-            <material-icon class="color-black" size="medium" icon="add"></material-icon>
-        </material-button>
-    </div>
-    <div class="s8 m10 col text-right">
-        <div class="text-right" id="select-step">
-            <div class="display-inline-block nowrap">
-                <material-icon
-                        class="clickable vertical-align-middle"
-                        [class.disabled]="firstIndex <= 0"
-                        icon="navigate_before"
-                        (click)="step(-1)">
-                </material-icon>
-                {{'page' | phrase}} {{currentPage}}/{{totalPages}} ({{filteredKeys.length}} {{'rows' | phrase:false}})
-                <material-icon
-                        class="clickable vertical-align-middle"
-                        [class.disabled]="lastIndex >= filteredKeys.length"
-                        icon="navigate_next"
-                        (click)="step(1)">
-                </material-icon>
-            </div>
-            <div class="display-inline-block nowrap">
-                <span>{{'rows' | phrase}}/{{'page' | phrase:false}}:</span>
-                <fo-select
-                        class="display-inline-block"
-                        [options]="rowOptions"
-                        [selectedId]="selectedRowOptionId"
-                        (selectedIdChange)="selectedRowOptionId = $event; setIndices(0);">
-                </fo-select>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="row" *ngIf="showCheckboxes == true && batchOperationOptions != null">
     <div class="l4 m6 col">
         <fo-select
                 label="with_selected"
                 [showActionButton]="true"
                 actionButtonIcon="play_arrow"
-                [disabled]="selectedRows == null || selectedRows.isEmpty"
+                [disabled]="disabled || selectedRows == null || selectedRows.isEmpty"
                 [options]="batchOperationOptions"
                 (actionButtonTrigger)="onBatchOperationTrigger($event.id)">
         </fo-select>

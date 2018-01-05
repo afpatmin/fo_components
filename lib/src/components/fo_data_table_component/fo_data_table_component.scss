@@ -111,18 +111,23 @@ table.output
     {
       background-color: #eee;
     }
+    border-bottom: 1px solid #ddd;
+  }
+
+  tfoot
+  {
   }
 }
 
 #select-step
 {
+  #rows-per-page
+  {
+    margin-top: 0.15rem;
+  }
+
   font-size: 0.9rem;
   color: #888;
-
-  span
-  {
-    margin-left: 0.5rem;
-  }
 
   material-icon.disabled
   {
