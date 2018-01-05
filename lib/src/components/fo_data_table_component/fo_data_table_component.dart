@@ -24,17 +24,12 @@ typedef String EvaluateColumnFn(FoModel model);
     changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.none)
 
-class DataTableComponent implements AfterViewInit, OnChanges, OnInit, OnDestroy
+class DataTableComponent implements OnChanges, OnInit, OnDestroy
 {
   DataTableComponent(this._changeDetectorRef)
   {
     /// Make sure change detection happens on window resize, to make sure column
     _onWindowResizeListener = dom.window.onResize.listen((_) => _changeDetectorRef.markForCheck());
-  }
-
-  void ngAfterViewInit()
-  {
-    _changeDetectorRef.markForCheck();
   }
 
   void ngOnInit()
