@@ -222,7 +222,9 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   int get numColumns
   {
-    dom.TableRowElement headRowElement = headRow.nativeElement;
+    dom.TableRowElement headRowElement = headRow?.nativeElement;
+    if (headRowElement == null) return 0;
+
     return headRowElement.querySelectorAll("td").where((dom.Element e) => e.getBoundingClientRect().width > 0).length;
   }
 
