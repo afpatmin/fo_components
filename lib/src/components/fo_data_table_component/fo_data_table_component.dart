@@ -24,12 +24,17 @@ typedef String EvaluateColumnFn(FoModel model);
     changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.none)
 
-class DataTableComponent implements OnChanges, OnInit, OnDestroy
+class DataTableComponent implements AfterViewInit, OnChanges, OnInit, OnDestroy
 {
-  DataTableComponent(ChangeDetectorRef change_detector_ref)
+  DataTableComponent(this._changeDetectorRef)
   {
     /// Make sure change detection happens on window resize, to make sure column
-    _onWindowResizeListener = dom.window.onResize.listen((_) => change_detector_ref.markForCheck());
+    _onWindowResizeListener = dom.window.onResize.listen((_) => _changeDetectorRef.markForCheck());
+  }
+
+  void ngAfterViewInit()
+  {
+    _changeDetectorRef.markForCheck();
   }
 
   void ngOnInit()
@@ -38,8 +43,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     firstIndex = 0;
     lastIndex = _selectedRowOption.count;
     if (data == null) data = new Map();
-
-
   }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
@@ -296,6 +299,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   final int liveSearchThreshold = 500;
   StreamSubscription<dom.Event> _onWindowResizeListener;
+  final ChangeDetectorRef _changeDetectorRef;
   final StreamController<String> onAddController = new StreamController();
   final StreamController<String> onCellClickController = new StreamController();
   final StreamController<Set<String>> onSelectedRowsController = new StreamController();
