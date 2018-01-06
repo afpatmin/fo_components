@@ -56,11 +56,10 @@ div.table-container
       border-collapse: collapse;
       border:2px solid #eee;
       font-size: 0.7rem;
-      table-layout: fixed;
 
       td
       {
-        padding: 0.5em;
+        padding: 0.5em 0.5em 0.5em 0;
         white-space: nowrap;
       }
 
@@ -75,10 +74,11 @@ div.table-container
             text-overflow: ellipsis;
             cursor: pointer;
 
+
             span
             {
                 font-size: 0.9rem;
-                font-stretch: ultra-condensed
+                font-stretch: ultra-condensed;
             }
             span.underline
             {
@@ -120,6 +120,11 @@ div.table-container
         }
         border-bottom: 1px solid #ddd;
       }
+    }
+
+    table.output.fixed-layout
+    {
+        table-layout: fixed;
     }
 
     #select-step

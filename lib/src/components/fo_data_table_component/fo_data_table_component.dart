@@ -24,7 +24,7 @@ typedef String EvaluateColumnFn(FoModel model);
     changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.none)
 
-class DataTableComponent implements OnChanges, OnInit, OnDestroy
+class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
 {
   DataTableComponent();
 
@@ -33,6 +33,13 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     selectedRowOptionId = rowOptions.optionsList.firstWhere((r) => (r as RowOption).count == rows, orElse: () => rowOptions.optionsList.first).id;
     firstIndex = 0;
     lastIndex = _selectedRowOption.count;
+
+    _onWindowResizeListener = dom.window.onResize.listen((_) => _evaluateLayout());
+  }
+
+  void ngAfterViewInit()
+  {
+    _evaluateLayout();
   }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
@@ -50,6 +57,8 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
       if (batchOperations == null) batchOperationOptions = null;
       else batchOperationOptions = new StringSelectionOptions(batchOperations);
     }
+
+    _evaluateLayout();
   }
 
   void ngOnDestroy()
@@ -61,6 +70,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     onSelectedRowsController.close();
     _onSortController.close();
     _onBatchOperationController.close();
+    _onWindowResizeListener.cancel();
   }
 
   void step(int steps)
@@ -254,18 +264,28 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     else selectedRows.clear();
   }
 
+  void _evaluateLayout()
+  {
+    dom.DivElement container = tableContainer.nativeElement;
+    dom.TableElement table = container.querySelector("table");
+
+    table.classes.remove("fixed-layout");
+    if (container.getBoundingClientRect().width < table.getBoundingClientRect().width)
+    {
+      table.classes.add("fixed-layout");
+    }
+  }
+
+
   String get filterLabel => (data == null || (data.length < liveSearchThreshold)) ? "filter" : "filter_enter";
-
   Iterable<String> get filteredKeys => _filteredKeys == null ? data.keys : _filteredKeys;
-
-  RowOption _selectedRowOption;
-
   String get selectedRowOptionId => _selectedRowOption?.id;
   void set selectedRowOptionId(String value)
   {
     _selectedRowOption = rowOptions.optionsList.firstWhere((row) => row.id == value, orElse: () => rowOptions.optionsList.first);
   }
 
+  RowOption _selectedRowOption;
   String deleteBufferId;
   int firstIndex = 0;
   int lastIndex = 1;
@@ -276,6 +296,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   StringSelectionOptions<FoModel> batchOperationOptions;
 
+  StreamSubscription _onWindowResizeListener;
   final int liveSearchThreshold = 500;
   final StreamController<String> onAddController = new StreamController();
   final StreamController<String> onCellClickController = new StreamController();
@@ -284,6 +305,9 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   final StreamController<String> onRowClickController = new StreamController();
   final StreamController<Map<String, String>> _onSortController = new StreamController();
   final StreamController<BatchOperationEvent> _onBatchOperationController = new StreamController();
+
+  @ViewChild('tableContainer')
+  ElementRef tableContainer;
 
   @Input('internalSort')
   bool internalSort = true;
