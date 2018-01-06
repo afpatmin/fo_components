@@ -63,6 +63,11 @@ div.table-container
         white-space: nowrap;
       }
 
+        td:first-child
+        {
+            padding-left: 0.5em;
+        }
+
       thead
       {
         tr
