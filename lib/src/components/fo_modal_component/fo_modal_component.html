@@ -21,7 +21,7 @@
         <div class="modal-content" *ngIf="visible">
             <ng-content></ng-content>
         </div>
-        <div class="padding-top-small" footer>
+        <div class="padding-top-small" footer *ngIf="visible">
             <ng-content select="[footer]"></ng-content>
         </div>
     </material-dialog>

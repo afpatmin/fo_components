@@ -1,4 +1,4 @@
-// Copyright (c) 2017, Muienog AB. All rights reserved. Use of this source code
+// Copyright (c) 2017, Minoch AB. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
@@ -24,7 +24,7 @@ typedef String EvaluateColumnFn(FoModel model);
     changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.none)
 
-class DataTableComponent implements OnChanges, OnInit, OnDestroy
+class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
 {
   DataTableComponent();
 
@@ -33,7 +33,13 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     selectedRowOptionId = rowOptions.optionsList.firstWhere((r) => (r as RowOption).count == rows, orElse: () => rowOptions.optionsList.first).id;
     firstIndex = 0;
     lastIndex = _selectedRowOption.count;
-    if (data == null) data = new Map();
+
+    _onWindowResizeListener = dom.window.onResize.listen((_) => _evaluateLayout());
+  }
+
+  void ngAfterViewInit()
+  {
+    _evaluateLayout();
   }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
@@ -45,16 +51,26 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
       onSearch();
       setIndices(0);
     }
+
+    if (changes.containsKey("batchOperations"))
+    {
+      if (batchOperations == null) batchOperationOptions = null;
+      else batchOperationOptions = new StringSelectionOptions(batchOperations);
+    }
+
+    _evaluateLayout();
   }
 
   void ngOnDestroy()
   {
+    onAddController.close();
     onCellClickController.close();
     onDeleteController.close();
     onRowClickController.close();
     onSelectedRowsController.close();
     _onSortController.close();
-    _onSearchController.close();
+    _onBatchOperationController.close();
+    _onWindowResizeListener.cancel();
   }
 
   void step(int steps)
@@ -64,13 +80,13 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
 
   void onSearchKeyUp(dom.KeyboardEvent e)
   {
-    if (data.length < liveSearchThreshold && internalFilters) onSearch();
+    if (data.length < liveSearchThreshold) onSearch();
     else if (e.keyCode == dom.KeyCode.ENTER || e.keyCode == dom.KeyCode.MAC_ENTER) onSearch();
   }
 
   void onSearch()
   {
-    if (searchPhrase != null && searchPhrase.isNotEmpty && internalFilters)
+    if (searchPhrase != null && searchPhrase.isNotEmpty)
     {
       bool find(FoModel model, List<String> keywords)
       {
@@ -105,8 +121,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     }
     else _filteredKeys = null;
 
-    _onSearchController.add(searchPhrase);
-
     setIndices(0);
   }
 
@@ -117,7 +131,10 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
       sortColumn = column;
       sortOrder = (sortOrder == "ASC") ? "DESC" : "ASC";
 
-      if (internalFilters)
+      searchPhrase = null;
+      _filteredKeys = null;
+
+      if (internalSort || evaluatedColumns.containsKey(column)) /// Evaluated columns are always sorted internally
       {
         if (sortOrder != null && sortColumn != null && sortColumn.isNotEmpty)
         {
@@ -162,7 +179,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
           }
         }
       }
-      _onSortController.add({"column":sortColumn, "order":sortOrder});
+      else _onSortController.add({"column":sortColumn, "order":sortOrder});
     }
   }
 
@@ -205,14 +222,6 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     }
   }
 
-  int get numColumns
-  {
-    int output = columns.length + evaluatedColumns.length;
-    if (showCheckboxes == true) output++;
-    if (showDeleteButtons == true) output++;
-    return output;
-  }
-
   void setIndices(int first_index)
   {
     if (first_index <= -_selectedRowOption.count || first_index >= data.length) return;
@@ -244,24 +253,39 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
     onSelectedRowsController.add(selectedRows);
   }
 
+  void onBatchOperationTrigger(String event)
+  {
+    _onBatchOperationController.add(new BatchOperationEvent(event, selectedRows));
+  }
+
   void onAllCheckedChange(bool state)
   {
-    if (state == true) selectedRows = filteredKeys.toList();
+    if (state == true) selectedRows = filteredKeys.toSet();
     else selectedRows.clear();
   }
 
-  String get filterLabel => (data == null || (data.length < liveSearchThreshold && internalFilters == true)) ? "filter" : "filter_enter";
+  void _evaluateLayout()
+  {
+    dom.DivElement container = tableContainer.nativeElement;
+    dom.TableElement table = container.querySelector("table");
 
+    table.classes.remove("fixed-layout");
+    if (container.getBoundingClientRect().width < table.getBoundingClientRect().width)
+    {
+      table.classes.add("fixed-layout");
+    }
+  }
+
+
+  String get filterLabel => (data == null || (data.length < liveSearchThreshold)) ? "filter" : "filter_enter";
   Iterable<String> get filteredKeys => _filteredKeys == null ? data.keys : _filteredKeys;
-
-  RowOption _selectedRowOption;
-
   String get selectedRowOptionId => _selectedRowOption?.id;
   void set selectedRowOptionId(String value)
   {
     _selectedRowOption = rowOptions.optionsList.firstWhere((row) => row.id == value, orElse: () => rowOptions.optionsList.first);
   }
 
+  RowOption _selectedRowOption;
   String deleteBufferId;
   int firstIndex = 0;
   int lastIndex = 1;
@@ -270,16 +294,23 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   Iterable<String> _filteredKeys;
   bool infoModalOpen = false;
 
+  StringSelectionOptions<FoModel> batchOperationOptions;
+
+  StreamSubscription _onWindowResizeListener;
   final int liveSearchThreshold = 500;
+  final StreamController<String> onAddController = new StreamController();
   final StreamController<String> onCellClickController = new StreamController();
-  final StreamController<List<String>> onSelectedRowsController = new StreamController();
+  final StreamController<Set<String>> onSelectedRowsController = new StreamController();
   final StreamController<String> onDeleteController = new StreamController();
   final StreamController<String> onRowClickController = new StreamController();
   final StreamController<Map<String, String>> _onSortController = new StreamController();
-  final StreamController<String> _onSearchController = new StreamController();
+  final StreamController<BatchOperationEvent> _onBatchOperationController = new StreamController();
 
-  @Input('internalFilters')
-  bool internalFilters = true;
+  @ViewChild('tableContainer')
+  ElementRef tableContainer;
+
+  @Input('internalSort')
+  bool internalSort = true;
 
   @Input('large-hidden-col')
   List<String> largeHiddenCol = [];
@@ -305,8 +336,20 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   @Input('evaluatedColumns')
   Map<String, EvaluateColumnFn> evaluatedColumns = new Map();
 
+  @Input('showAddButton')
+  bool showAddButton = false;
+
   @Input('showCheckboxes')
   bool showCheckboxes = false;
+
+  @Input('batchOperations')
+  List<FoModel> batchOperations;
+
+  @Input('showDeleteButtons')
+  bool showDeleteButtons = false;
+
+  @Input('showDownloadButton')
+  bool showDownloadButton = true;
 
   @Input('title')
   String title = "";
@@ -315,7 +358,7 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   String description;
 
   @Input('selectedRows')
-  List<String> selectedRows = new List();
+  Set<String> selectedRows = new Set();
 
   @Input('rows')
   int rows = 10;
@@ -323,11 +366,8 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   @Input('disabled')
   bool disabled = false;
 
-  @Input('showDeleteButtons')
-  bool showDeleteButtons = false;
-
-  @Input('showDownloadButton')
-  bool showDownloadButton = true;
+  @Output('add')
+  Stream<String> get onAddOutput => onAddController.stream;
 
   @Output('cellclick')
   Stream<String> get onCellClickOutput => onCellClickController.stream;
@@ -339,13 +379,13 @@ class DataTableComponent implements OnChanges, OnInit, OnDestroy
   Stream<String> get onRowClickOutput => onRowClickController.stream;
 
   @Output('selectedRowsChange')
-  Stream<List<String>> get selectedRowsChange => onSelectedRowsController.stream;
-
-  @Output('search')
-  Stream<String> get onSearchOutput => _onSearchController.stream;
+  Stream<Set<String>> get selectedRowsChange => onSelectedRowsController.stream;
 
   @Output('sort')
   Stream<Map<String, String>> get onSortOutput => _onSortController.stream;
+
+  @Output('batchOperation')
+  Stream<BatchOperationEvent> get onBatchOperationOutput => _onBatchOperationController.stream;
 }
 
 class RowOption implements FoModel
@@ -368,4 +408,12 @@ class RowOption implements FoModel
 
   int count;
   @override String id;
+}
+
+class BatchOperationEvent
+{
+  BatchOperationEvent(this.operation, this.selectedIds);
+
+  final String operation;
+  final Set<String> selectedIds;
 }

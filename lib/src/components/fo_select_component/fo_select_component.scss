@@ -2,7 +2,6 @@
 
 :host
 {
-    //margin-bottom: 1rem;
     display: block;
 
     label
@@ -14,11 +13,6 @@
         color: #888;
     }
 
-    material-icon
-    {
-        vertical-align: text-top;
-    }
-
     div.flex-container
     {
         display: flex;
@@ -26,14 +20,15 @@
         {
             flex: auto;
         }
-        material-button
-        {
-            flex: auto;
-        }
         material-dropdown-select.full-width
         {
             flex: auto;
             width: 100%;
+        }
+
+        .button
+        {
+            margin-left: 0.5rem;
         }
     }
 }

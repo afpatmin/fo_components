@@ -22,108 +22,9 @@ fieldset
   opacity: 0.6;
 }
 
-table.output
-{
-  -webkit-transition: opacity 0.2s;
-  -moz-transition: opacity 0.2s;
-  -o-transition: opacity 0.2s;
-  transition: opacity 0.2s;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  width: 100%;
-  min-width: 240px;
-  border-collapse: collapse;
-  border:2px solid #eee;
-  font-size: 0.7rem;
-  table-layout: fixed;
-
-  td
-  {
-    padding: 0.5em;
-    white-space: nowrap;
-  }
-
-  thead
-  {
-    tr
-    {
-      background-color: #eee;
-      td
-      {
-        font-weight: bold;
-        cursor: pointer;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 0.8rem;
-      }
-
-      td.buttonCell
-      {
-        width: 1rem;
-      }
-    }
-    border-bottom: 2px solid #ddd;
-  }
-
-  tbody
-  {
-    tr
-    {
-      cursor: pointer;
-      td
-      {
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      td.empty-info
-      {
-        h4
-        {
-          margin: 0.4rem;
-          padding: 0.2rem;
-          line-height: 100%;
-          font-size: 1.2rem;
-          text-align: center;
-        }
-      }
-
-    }
-    tr:nth-child(even)
-    {
-      background-color: #f5f5f5;
-    }
-    tr:nth-child(odd)
-    {
-      background-color: #fff;
-    }
-    tr:hover
-    {
-      background-color: #eee;
-    }
-  }
-}
-
-#select-step
-{
-  font-size: 0.9rem;
-  color: #888;
-
-  span
-  {
-    margin-left: 0.5rem;
-  }
-
-  material-icon.disabled
-  {
-    opacity: 0.3;
-  }
-}
 
 material-input
-{ 
+{
   width: 100%;
 }
 
@@ -131,4 +32,139 @@ material-input
 {
     user-select: none;
     -webkit-user-select: none;
+}
+
+
+div.table-container
+{
+    position: relative;
+    z-index: 1;
+    min-width: 285px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: white;
+
+    table.output
+    {
+      -webkit-transition: opacity 0.2s;
+      -moz-transition: opacity 0.2s;
+      -o-transition: opacity 0.2s;
+      transition: opacity 0.2s;
+      width: 100%;
+      border-collapse: collapse;
+      border:2px solid #eee;
+      font-size: 0.7rem;
+
+      td
+      {
+        padding: 0.5em 0.5em 0.5em 0;
+        white-space: nowrap;
+      }
+
+        td:first-child
+        {
+            padding-left: 0.5em;
+        }
+
+      thead
+      {
+        tr
+        {
+          background-color: #eee;
+          td
+          {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+
+
+            span
+            {
+                font-size: 0.9rem;
+                font-stretch: ultra-condensed;
+            }
+            span.underline
+            {
+                text-decoration: underline;
+            }
+          }
+
+          td.buttonCell
+          {
+            width: 1rem;
+          }
+        }
+        border-bottom: 2px solid #ddd;
+      }
+
+      tbody
+      {
+        tr
+        {
+          cursor: pointer;
+          td
+          {
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+        }
+        tr:nth-child(even)
+        {
+          background-color: #f5f5f5;
+        }
+        tr:nth-child(odd)
+        {
+          background-color: #fff;
+        }
+        tr:hover
+        {
+          background-color: #eee;
+        }
+        border-bottom: 1px solid #ddd;
+      }
+    }
+
+    table.output.fixed-layout
+    {
+        table-layout: fixed;
+    }
+
+    #select-step
+    {
+      margin-top: 0.2rem;
+      #rows-per-page
+      {
+        margin-top: 0.15rem;
+        margin-left: 0.2rem;
+      }
+
+      font-size: 0.9rem;
+      color: #888;
+
+      material-icon.disabled
+      {
+        opacity: 0.3;
+      }
+    }
+}
+
+div.batch-operations-container
+{
+    -webkit-transition: margin 0.3s;
+    -moz-transition: margin 0.3s;
+    -o-transition: margin 0.3s;
+    transition: margin 0.3s;
+
+    background-color: white;
+    padding: 0.5rem 1rem;
+    z-index: 0;
+    margin-top: -8rem;
+}
+
+div.batch-operations-container.expanded
+{
+    margin-top: -0.5rem;
 }

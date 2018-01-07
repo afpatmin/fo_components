@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row expand">
     <div class="s12 m7 l8 col">
         <h3 class="color-black margin-bottom-none">
             {{title | phrase}}
@@ -19,128 +19,165 @@
                 [disabled]="disabled"
                 label="{{filterLabel | phrase}}"
                 trailingGlyph="search"
-                [(ngModel)]="searchPhrase" 
+                [(ngModel)]="searchPhrase"
                 (keyup)="onSearchKeyUp($event)">
         </material-input>
     </div>
 </div>
 
-<div class="row">
-    <div class="s12 col">
-        <table [class.faded]="disabled" class="output color-black box-shadow margin-bottom-x-small">
-            <thead *ngIf="data.isNotEmpty">
-            <tr>
-                <td *ngIf="showCheckboxes">
-                    <material-checkbox (checkedChange)="onAllCheckedChange($event)"></material-checkbox>
-                </td>
-                <td *ngFor="let cell of columns"
+
+<div class="table-container box-shadow" #tableContainer>
+    <table [class.faded]="disabled" class="output color-black margin-bottom-x-small">
+        <thead>
+        <tr>
+            <td *ngIf="showCheckboxes">
+                <material-checkbox (checkedChange)="onAllCheckedChange($event)"></material-checkbox>
+            </td>
+            <td *ngFor="let cell of columns"
+                [class.hide-for-small]="smallHiddenCol.contains(cell)"
+                [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
+                [class.hide-for-large]="largeHiddenCol.contains(cell)"
+                (click)="onSort(cell)">
+                <span [class.underline]="sortColumn == cell">{{cell | phrase}}</span>
+                <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
+                <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></material-icon>
+            </td>
+            <td *ngFor="let cell of evaluatedColumns.keys"
+                [class.hide-for-small]="smallHiddenCol.contains(cell)"
+                [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
+                [class.hide-for-large]="largeHiddenCol.contains(cell)"
+                (click)="onSort(cell)">
+                <span [class.underline]="sortColumn == cell">{{cell | phrase}}</span>
+                <material-icon baseline size="small" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
+                <material-icon baseline size="small" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></material-icon>
+            </td>
+            <td *ngIf="showDeleteButtons" class="buttonCell"></td>
+        </tr>
+        </thead>
+        <tbody *ngIf="filteredKeys.isNotEmpty">
+        <tr *ngFor="let key of filteredKeys | range:firstIndex:lastIndex" (click)="onRowClickController.add(key)">
+            <td *ngIf="showCheckboxes">
+                <material-checkbox
+                        [checked]="selectedRows.contains(key)"
+                        (checkedChange)="onCheckedChange(key, $event)"
+                        (click)="$event.stopPropagation()">
+                </material-checkbox>
+            </td>
+            <td
+                    *ngFor="let cell of columns"
                     [class.hide-for-small]="smallHiddenCol.contains(cell)"
                     [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                     [class.hide-for-large]="largeHiddenCol.contains(cell)"
-                    (click)="onSort(cell)">
-                    {{cell | phrase}}
-                    <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
-                    <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></material-icon>
-                </td>
-                <td *ngFor="let cell of evaluatedColumns.keys"
-                    [class.hide-for-small]="smallHiddenCol.contains(cell)"
-                    [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
-                    [class.hide-for-large]="largeHiddenCol.contains(cell)"
-                    (click)="onSort(cell)">
-                    {{cell | phrase}}
-                    <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
-                    <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></material-icon>
-                </td>
-                <td *ngIf="showDeleteButtons" class="buttonCell"></td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let key of filteredKeys | range:firstIndex:lastIndex" (click)="onRowClickController.add(key)">
-                <td *ngIf="showCheckboxes">
-                    <material-checkbox
-                            [checked]="selectedRows.contains(key)"
-                            (checkedChange)="onCheckedChange(key, $event)"
-                            (click)="$event.stopPropagation()">
-                    </material-checkbox>
-                </td>
-                <td
-                        *ngFor="let cell of columns"
-                        [class.hide-for-small]="smallHiddenCol.contains(cell)"
-                        [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
-                        [class.hide-for-large]="largeHiddenCol.contains(cell)"
-                        (click)="onCellClickController.add(data[key][cell])">
-                    {{data[key][cell]?.toString() | phrase:false}}
-                </td>
-                <td *ngFor="let cell of evaluatedColumns.keys"
-                    [class.hide-for-small]="smallHiddenCol.contains(cell)"
-                    [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
-                    [class.hide-for-large]="largeHiddenCol.contains(cell)"
-                    (click)="onCellClickController.add(evaluatedColumns[cell](data[key]))">
-                    {{evaluatedColumns[cell](data[key]) | phrase:false}}
-                </td>
-                <td *ngIf="showDeleteButtons" class="text-center">
-                    <material-icon
-                            class="clickable color-alert"
-                            icon="delete_forever"
-                            size="x-large"
-                            (click)="deleteBufferId = key; $event.stopPropagation()">
-                    </material-icon>
-                </td>
-            </tr>
-            <tr *ngIf="filteredKeys.isEmpty">
-                <td *ngIf="disabled" attr.colspan="{{numColumns}}"><h4 class="text-center"><material-spinner></material-spinner></h4></td>
-                <td *ngIf="!disabled" attr.colspan="{{numColumns}}" class="empty-info color-alert"><h4><material-icon size="x-large" icon="error"></material-icon>&nbsp;{{'no_results' | phrase}}</h4></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<div class="row">
-    <div class="s3 m2 col">
-        <material-button
-                *ngIf="showDownloadButton"
-                class="margin-bottom-small"
-                clear-size
-                raised
-                [disabled]="disabled || data.isEmpty"
-                [materialTooltip]="'download_csv' | phrase"
-                (click)="onDownloadDataCSV()">
-            <material-icon class="color-black" size="medium" icon="file_download"></material-icon>
-        </material-button>
-    </div>
-    <div class="s9 m10 col text-right">
-        <div class="text-right" id="select-step">
-            <div class="display-inline-block nowrap">
+                    (click)="onCellClickController.add(data[key][cell])">
+                {{data[key][cell]?.toString()}}
+            </td>
+            <td *ngFor="let cell of evaluatedColumns.keys"
+                [class.hide-for-small]="smallHiddenCol.contains(cell)"
+                [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
+                [class.hide-for-large]="largeHiddenCol.contains(cell)"
+                (click)="onCellClickController.add(evaluatedColumns[cell](data[key]))">
+                {{evaluatedColumns[cell](data[key])}}
+            </td>
+            <td *ngIf="showDeleteButtons" class="text-center">
                 <material-icon
-                        class="clickable vertical-align-middle"
-                        [class.disabled]="firstIndex <= 0"
-                        icon="navigate_before"
-                        (click)="step(-1)">
+                        class="clickable color-alert"
+                        icon="delete_forever"
+                        size="x-large"
+                        (click)="deleteBufferId = key; $event.stopPropagation()">
                 </material-icon>
-                {{'page' | phrase}} {{currentPage}}/{{totalPages}} ({{filteredKeys.length}} {{'rows' | phrase:false}})
-                <material-icon
-                        class="clickable vertical-align-middle"
-                        [class.disabled]="lastIndex >= filteredKeys.length"
-                        icon="navigate_next"
-                        (click)="step(1)">
-                </material-icon>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="row expand" *ngIf="filteredKeys.isEmpty">
+        <div class="col" *ngIf="disabled">
+            <p class="text-center"><material-spinner></material-spinner></p>
+        </div>
+        <div class="col color-alert text-center" *ngIf="!disabled">
+            <p>
+                <material-icon size="x-large" icon="error"></material-icon>
+                {{'no_results' | phrase}}
+            </p>
+        </div>
+    </div>
+    <div class="row expand" *ngIf="filteredKeys.isNotEmpty">
+        <div class="s2 col">
+            <div *ngIf="showDownloadButton || showAddButton">
+                <material-button
+                        class="float-left"
+                        *ngIf="showDownloadButton"
+                        clear-size
+                        raised
+                        dense
+                        [disabled]="disabled || data.isEmpty"
+                        [materialTooltip]="'download_csv' | phrase"
+                        (trigger)="onDownloadDataCSV()">
+                    <material-icon class="color-black" size="medium" icon="file_download"></material-icon>
+                </material-button>
+                <material-button
+                        class="float-left"
+                        *ngIf="showAddButton"
+                        clear-size
+                        raised
+                        dense
+                        [disabled]="disabled"
+                        [materialTooltip]="'add' | phrase"
+                        (trigger)="onAddController.add('')">
+                    <material-icon class="color-black" size="medium" icon="add"></material-icon>
+                </material-button>
             </div>
-            <div class="display-inline-block nowrap">
-                <span>{{'rows' | phrase}}/{{'page' | phrase:false}}:</span>
-                <fo-select
-                        class="display-inline-block"
-                        [options]="rowOptions"
-                        [selectedId]="selectedRowOptionId"
-                        (selectedIdChange)="selectedRowOptionId = $event; setIndices(0);">
-                </fo-select>
+        </div>
+        <div class="s10 col">
+            <div id="select-step">
+                <div class="float-right" id="rows-per-page">
+                    <span>{{'rows' | phrase}}/{{'page' | phrase:false}}:</span>
+                    <fo-select
+                            class="display-inline-block"
+                            [disabled]="disabled"
+                            [options]="rowOptions"
+                            [selectedId]="selectedRowOptionId"
+                            (selectedIdChange)="selectedRowOptionId = $event; setIndices(0);">
+                    </fo-select>
+                </div>
+                <div class="float-right">
+                    <material-icon
+                            class="clickable vertical-align-middle"
+                            [class.disabled]="firstIndex <= 0"
+                            icon="navigate_before"
+                            (click)="step(-1)">
+                    </material-icon>
+                    {{'page' | phrase}} {{currentPage}}/{{totalPages}} ({{filteredKeys.length}} {{'rows' | phrase:false}})
+                    <material-icon
+                            class="clickable vertical-align-middle"
+                            [class.disabled]="lastIndex >= filteredKeys.length"
+                            icon="navigate_next"
+                            (click)="step(1)">
+                    </material-icon>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<div class="row expand" *ngIf="batchOperations != null && batchOperations.isNotEmpty && showCheckboxes == true">
+    <div class="l8 m6 s0 col"></div>
+    <div class="l4 m6 col">
+        <div class="batch-operations-container box-shadow" [class.expanded]="selectedRows.isNotEmpty">
+            <fo-select
+                    label="with_selected"
+                    [showActionButton]="true"
+                    actionButtonIcon="play_arrow"
+                    [disabled]="disabled || selectedRows == null || selectedRows.isEmpty"
+                    [options]="batchOperationOptions"
+                    [selectedId]="batchOperations.first.id"
+                    (actionButtonTrigger)="onBatchOperationTrigger($event.id)">
+            </fo-select>
+        </div>
+    </div>
+</div>
+
 <fo-modal
-        title="{{'confirm' | phrase}}"
-        [visible]="deleteBufferId != null"
+        title="{{'confirm' | phrase}}" [visible]="deleteBufferId != null"
         (visibleChange)="deleteBufferId = null"
         [showCloseButton]="false">
     <p>{{'are_you_sure_delete_this_resource' | phrase}}</p>

@@ -1,6 +1,8 @@
 <label (click)="setVisible(true)" *ngIf="label.isNotEmpty">
     {{label | phrase}}
-    <material-icon  *ngIf="tooltip != null"
+    <material-icon
+            *ngIf="tooltip != null"
+            baseline
             class="clickable"
             (click)="tooltipModalVisible = true; $event.stopPropagation();"
             icon="help_outline"
@@ -8,6 +10,7 @@
     </material-icon>
     <material-icon
             *ngIf="allowNullSelection && selectedModel != null"
+            baseline
             class="clickable color-alert"
             icon="cancel"
             size="medium"
@@ -33,6 +36,9 @@
     </material-dropdown-select>
 
     <material-button
+            class="button"
+            clear-size
+            dense
             [disabled]="disabled || options == null || selectedModel == null"
             *ngIf="showActionButton && actionButtonText != null && actionButtonIcon == null"
             raised
@@ -42,11 +48,14 @@
 
     <!-- Icon has precedence over text -->
     <material-button
+            class="button"
+            clear-size
+            dense
             [disabled]="disabled || options == null || selectedModel == null"
             *ngIf="showActionButton && actionButtonIcon != null"
             raised
             (trigger)="onActionButtonTriggerController.add(selectedModel)">
-        <material-icon *ngIf="actionButtonIcon != null" [icon]="actionButtonIcon" size="x-large"></material-icon>
+        <material-icon *ngIf="actionButtonIcon != null" [icon]="actionButtonIcon" size="small"></material-icon>
     </material-button>
 </div>
 
