@@ -18,10 +18,10 @@
                 </material-button>
             </h3>
         </div>
-        <div class="modal-content" *ngIf="visible">
+        <div class="modal-content">
             <ng-content></ng-content>
         </div>
-        <div class="padding-top-small" footer *ngIf="visible">
+        <div class="padding-top-small" footer>
             <ng-content select="[footer]"></ng-content>
         </div>
     </material-dialog>
