@@ -8,10 +8,8 @@ material-dialog
     max-width: 90vw;
     max-height: 95vh;
     text-align: left;
-}
+    max-width: 95%;
 
-material-dialog
-{
     //@include material-dialog-header-color(#fff);
 
     [header]
@@ -19,7 +17,6 @@ material-dialog
         h3
         {
             margin-left: 5px;
-            //color: #333;
             line-height: 160%;
             material-button
             {
@@ -27,10 +24,7 @@ material-dialog
             }
         }
     }
-}
 
-material-dialog
-{
     ::ng-deep main
     {
         -webkit-overflow-scrolling: touch; // Smooth scrolling on tablets/phones
@@ -55,7 +49,6 @@ material-dialog.fixed-height
 material-dialog.fixed-width
 {
     width: 90vw;
-//    max-width: 1250px;
 }
 
 .float-right
