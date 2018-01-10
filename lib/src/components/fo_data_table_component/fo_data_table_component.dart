@@ -64,7 +64,6 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
   void ngOnDestroy()
   {
     onAddController.close();
-    onCellClickController.close();
     onDeleteController.close();
     onRowClickController.close();
     onSelectedRowsController.close();
@@ -299,7 +298,6 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
   StreamSubscription _onWindowResizeListener;
   final int liveSearchThreshold = 500;
   final StreamController<String> onAddController = new StreamController();
-  final StreamController<String> onCellClickController = new StreamController();
   final StreamController<Set<String>> onSelectedRowsController = new StreamController();
   final StreamController<String> onDeleteController = new StreamController();
   final StreamController<String> onRowClickController = new StreamController();
@@ -368,9 +366,6 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
 
   @Output('add')
   Stream<String> get onAddOutput => onAddController.stream;
-
-  @Output('cellclick')
-  Stream<String> get onCellClickOutput => onCellClickController.stream;
 
   @Output('delete')
   Stream<String> get onDeleteOutput => onDeleteController.stream;

@@ -25,7 +25,6 @@
     </div>
 </div>
 
-
 <div class="table-container box-shadow" #tableContainer>
     <table [class.faded]="disabled" class="output color-black margin-bottom-x-small">
         <thead>
@@ -67,15 +66,13 @@
                     *ngFor="let cell of columns"
                     [class.hide-for-small]="smallHiddenCol.contains(cell)"
                     [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
-                    [class.hide-for-large]="largeHiddenCol.contains(cell)"
-                    (click)="onCellClickController.add(data[key][cell])">
+                    [class.hide-for-large]="largeHiddenCol.contains(cell)">
                 {{data[key][cell]?.toString()}}
             </td>
             <td *ngFor="let cell of evaluatedColumns.keys"
                 [class.hide-for-small]="smallHiddenCol.contains(cell)"
                 [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
-                [class.hide-for-large]="largeHiddenCol.contains(cell)"
-                (click)="onCellClickController.add(evaluatedColumns[cell](data[key]))">
+                [class.hide-for-large]="largeHiddenCol.contains(cell)">
                 {{evaluatedColumns[cell](data[key])}}
             </td>
             <td *ngIf="showDeleteButtons" class="text-center">
