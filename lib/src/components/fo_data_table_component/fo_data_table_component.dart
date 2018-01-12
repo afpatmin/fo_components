@@ -178,7 +178,8 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
           }
         }
       }
-      else _onSortController.add({"column":sortColumn, "order":sortOrder});
+
+      _onSortController.add({"column":sortColumn, "order":sortOrder});
     }
   }
 
