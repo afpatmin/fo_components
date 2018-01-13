@@ -91,16 +91,17 @@
             <p class="text-center"><material-spinner></material-spinner></p>
         </div>
         <div class="col color-alert text-center" *ngIf="!disabled">
-            <p>
+            <p class="margin-bottom-none">
                 <material-icon size="x-large" icon="error"></material-icon>
                 {{'no_results' | phrase}}
             </p>
         </div>
     </div>
-    <div class="row expand" *ngIf="filteredKeys.isNotEmpty">
+    <div class="row expand">
         <div class="s2 col">
             <div *ngIf="showDownloadButton || showAddButton">
                 <material-button
+                        *ngIf="filteredKeys.isNotEmpty"
                         class="float-left"
                         *ngIf="showDownloadButton"
                         clear-size
@@ -124,7 +125,7 @@
                 </material-button>
             </div>
         </div>
-        <div class="s10 col">
+        <div *ngIf="filteredKeys.isNotEmpty" class="s10 col">
             <div id="select-step">
                 <div class="float-right" id="rows-per-page">
                     <span>{{'rows' | phrase}}/{{'page' | phrase:false}}:</span>
