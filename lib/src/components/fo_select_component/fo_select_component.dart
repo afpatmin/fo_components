@@ -19,28 +19,44 @@ import '../../services/phrase_service.dart';
     changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.none
 )
-class FoSelectComponent implements OnChanges, OnDestroy, OnInit
+class FoSelectComponent implements OnInit, OnChanges, OnDestroy
 {
-  FoSelectComponent(this._phraseService)
-  {
-    _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
-  }
+  FoSelectComponent(this._phraseService);
 
   void ngOnInit()
   {
-    /***
-     * Convert Input('options') List to StringSelectionOptions, and translate label
-     */
-    if (options == null) selectionOptions = new StringSelectionOptions([]);
-    else
+    if (options != null)
     {
+      /// Convert List<FoModel> to StringSelectionOptions<OptionModel>, and translate labels
       Iterable<OptionModel> models = options.map((FoModel model) => new OptionModel(model.id, _phraseService.get(model.toString())));
       selectionOptions = new StringSelectionOptions(models.toList(growable: false), shouldSort: true);
     }
+
+    /// Set initially selected model
+    if (selectedId != null)
+    {
+      OptionModel model = selectionOptions.optionsList.firstWhere(((model) => model.id == selectedId), orElse: () => null);
+      if (model != null) selectionModel.select(model);
+    }
+
+    /// Start listening for selectionChange events (non-input)
+    if (_selectionChangeListener == null) _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
   }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
+    if (changes.containsKey("selectedId"))
+    {
+      _selectionChangeListener?.cancel();
+      if (selectedId == null) selectionModel.clear();
+      else
+      {
+        OptionModel model = selectionOptions.optionsList.firstWhere(((model) => model.id == selectedId), orElse: () => null);
+        if (model == null) selectionModel.clear();
+        else selectionModel.select(model);
+      }
+      _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+    }
   }
 
   void ngOnDestroy()
@@ -102,23 +118,12 @@ class FoSelectComponent implements OnChanges, OnDestroy, OnInit
   @Input('fullWidth')
   bool fullWidth = false;
 
+  /// Warning: options cannot change during runtime
   @Input('options')
   Iterable<FoModel> options;
 
   @Input('selectedId')
-  void set selectedId(String value)
-  {
-    _selectionChangeListener.cancel();
-
-    if (value == null) selectionModel.clear();
-    else if (selectionOptions != null)
-    {
-      FoModel model = selectionOptions.optionsList.firstWhere(((model) => model.id == value), orElse: () => null);
-      if (model == null) selectionModel.clear();
-      else selectionModel.select(model);
-    }
-    _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
-  }
+  String selectedId;
 
   @Input('showActionButton')
   bool showActionButton = false;

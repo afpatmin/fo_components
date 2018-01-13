@@ -18,26 +18,29 @@ import '../../services/phrase_service.dart';
     changeDetection: ChangeDetectionStrategy.Default,
     visibility: Visibility.none
 )
-class FoMultiSelectComponent implements OnChanges, OnDestroy, OnInit
+class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
 {
-  FoMultiSelectComponent(this._phraseService)
-  {
-    _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<OptionModel>> e)
-    {
-      _onSelectedIdsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.map((model) => model['id']).toList());
-    });
-  }
+  FoMultiSelectComponent(this._phraseService);
 
   void ngOnInit()
   {
-    /***
-     * Convert Input('options') List to StringSelectionOptions, and translate label
-     */
-    if (options == null) selectionOptions = new StringSelectionOptions([]);
-    else
+    /// Convert List<FoModel> to StringSelectionOptions<OptionModel>, and translate labels
+    if (options != null)
     {
       Iterable<OptionModel> models = options.map((FoModel model) => new OptionModel(model.id, _phraseService.get(model.toString())));
       selectionOptions = new StringSelectionOptions(models.toList(growable: false), shouldSort: true);
+    }
+    if (selectedIds != null)
+    {
+      for (String id in selectedIds)
+      {
+        OptionModel model = selectionOptions.optionsList.firstWhere((m) => m.id == id, orElse: () => null);
+        if (model != null) selectionModel.select(model);
+      }
+    }
+    if (_selectionChangeListener == null)
+    {
+      _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
     }
   }
 
@@ -45,19 +48,17 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy, OnInit
   {
     if (changes.containsKey("selectedIds"))
     {
-      if (selectedIds == null || selectionModel.selectedValues.length == selectedIds.length) return;
-
+      _selectionChangeListener?.cancel();
       selectionModel.clear();
-      selectedModels.clear();
-      for (String id in selectedIds)
+      if (selectedIds != null)
       {
-        OptionModel model = selectionOptions.optionsList.firstWhere((m) => m['id'] == id, orElse: () => null);
-        if (model != null)
+        for (String id in selectedIds)
         {
-          selectionModel.select(model);
-          selectedModels.add(model);
+          OptionModel model = selectionOptions.optionsList.firstWhere((m) => m['id'] == id, orElse: () => null);
+          if (model != null) selectionModel.select(model);
         }
       }
+      _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
     }
   }
 
@@ -68,8 +69,10 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy, OnInit
     _selectionChangeListener?.cancel();
   }
 
+
   void onReorder(ReorderEvent event)
   {
+    /*
     OptionModel sourceModel = selectedModels.elementAt(event.sourceIndex);
     selectedModels.removeAt(event.sourceIndex);
     selectedModels.insert(event.destIndex, sourceModel);
@@ -77,10 +80,15 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy, OnInit
 
     selectionModel.clear();
     selectedModels.forEach(selectionModel.select);
+    */
+  }
+
+  void _onSelectionChanges(List<SelectionChangeRecord<OptionModel>> e)
+  {
+    _onSelectedIdsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.map((model) => model.id).toList());
   }
 
   SelectionModel<OptionModel> selectionModel = new SelectionModel.withList(allowMulti: true);
-  List<OptionModel> selectedModels = new List();
   StringSelectionOptions<OptionModel> selectionOptions = new StringSelectionOptions<OptionModel>([]);
   final PhraseService _phraseService;
   final StreamController<bool> _onVisibleChangeController = new StreamController();
@@ -105,6 +113,7 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy, OnInit
   @Input('nullSelectionButtonText')
   String nullSelectionButtonText = "-";
 
+  /// Warning: options cannot change during runtime
   @Input('options')
   Iterable<FoModel> options;
 
