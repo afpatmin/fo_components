@@ -166,7 +166,7 @@
                     [showActionButton]="true"
                     actionButtonText="go"
                     [disabled]="disabled || selectedRows == null || selectedRows.isEmpty"
-                    [options]="batchOperationOptions"
+                    [options]="batchOperations"
                     [selectedId]="batchOperations.first.id"
                     (actionButtonTrigger)="onBatchOperationTrigger($event)">
             </fo-select>

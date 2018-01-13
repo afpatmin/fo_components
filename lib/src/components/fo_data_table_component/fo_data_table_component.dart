@@ -30,7 +30,7 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
 
   void ngOnInit()
   {
-    selectedRowOptionId = rowOptions.optionsList.firstWhere((r) => (r as RowOption).count == rows, orElse: () => rowOptions.optionsList.first).id;
+    selectedRowOptionId = rowOptions.firstWhere((r) => (r as RowOption).count == rows, orElse: () => rowOptions.first).id;
     firstIndex = 0;
     lastIndex = _selectedRowOption.count;
 
@@ -47,15 +47,9 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
     if (changes.containsKey("rows") || changes.containsKey("data"))
     {
       if (data == null) data = new Map();
-      selectedRowOptionId = rowOptions.optionsList.firstWhere((r) => (r as RowOption).count == rows, orElse: () => rowOptions.optionsList.first).id;
+      selectedRowOptionId = rowOptions.firstWhere((r) => (r as RowOption).count == rows, orElse: () => rowOptions.first).id;
       onSearch();
       setIndices(0);
-    }
-
-    if (changes.containsKey("batchOperations"))
-    {
-      if (batchOperations == null) batchOperationOptions = null;
-      else batchOperationOptions = new StringSelectionOptions(batchOperations);
     }
 
     _evaluateLayout();
@@ -234,7 +228,7 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
 
   int get totalPages => (filteredKeys.length.toDouble() / _selectedRowOption.count).ceil();
 
-  final StringSelectionOptions<FoModel> rowOptions = new StringSelectionOptions(
+  final List<FoModel> rowOptions =
   [
     new RowOption("5", 5),
     new RowOption("10", 10),
@@ -243,7 +237,7 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
     new RowOption("25", 25),
     new RowOption("50", 50),
     new RowOption("100", 100),
-  ]);
+  ];
 
   void onCheckedChange(String id, bool state)
   {
@@ -281,7 +275,7 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
   String get selectedRowOptionId => _selectedRowOption?.id;
   void set selectedRowOptionId(String value)
   {
-    _selectedRowOption = rowOptions.optionsList.firstWhere((row) => row.id == value, orElse: () => rowOptions.optionsList.first);
+    _selectedRowOption = rowOptions.firstWhere((row) => row.id == value, orElse: () => rowOptions.first);
   }
 
   RowOption _selectedRowOption;
@@ -292,8 +286,6 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
   String searchPhrase = "";
   Iterable<String> _filteredKeys;
   bool infoModalOpen = false;
-
-  StringSelectionOptions<FoModel> batchOperationOptions;
 
   StreamSubscription _onWindowResizeListener;
   final int liveSearchThreshold = 500;

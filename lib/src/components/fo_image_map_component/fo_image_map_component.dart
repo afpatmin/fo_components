@@ -24,10 +24,6 @@ class FoImageMapComponent implements OnChanges, OnDestroy
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-    if (changes.containsKey("zones"))
-    {
-      zoneOptions = new StringSelectionOptions<FoModel>(zones);
-    }
     if (changes.containsKey("selectedIds"))
     {
       for (FoZoneModel zone in zones)
@@ -62,8 +58,6 @@ class FoImageMapComponent implements OnChanges, OnDestroy
 
     _onSelectedIdsChangeController.add(selectedIds);
   }
-
-  StringSelectionOptions<FoModel> zoneOptions;
 
   final StreamController<List<String>> _onSelectedIdsChangeController = new StreamController();
 
