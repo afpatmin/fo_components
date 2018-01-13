@@ -9,11 +9,12 @@ label
 span
 {
     color: #666;
+    white-space: nowrap;
 }
 span#valueOutput
 {
     display: inline-block;
-    min-width: 3rem;
+    min-width: 2rem;
     text-align: center;
 }
 
