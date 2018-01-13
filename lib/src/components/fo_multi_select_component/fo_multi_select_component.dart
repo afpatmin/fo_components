@@ -53,7 +53,7 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
       List<String> current = changes["selectedIds"].currentValue;
 
       /// Equal lists, skip
-      if (previous.length == current.length && previous.where(current.contains).length == current.length) return;
+      if (previous != null && current != null && previous.length == current.length && previous.where(current.contains).length == current.length) return;
 
       _selectionChangeListener?.cancel();
       selectionModel.clear();
