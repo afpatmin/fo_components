@@ -39,11 +39,7 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
       if (options == null) selectionOptions = new StringSelectionOptions([]);
       else
       {
-        List<OptionModel> models = new List();
-        for (FoModel model in options)
-        {
-          models.add(new OptionModel(model.id, _phraseService.get(model.toString())));
-        }
+        List<OptionModel> models = options.map((FoModel model) => new OptionModel(model.id, _phraseService.get(model.toString())));
         selectionOptions = new StringSelectionOptions(models, shouldSort: true);
       }
       _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<OptionModel>> e)
@@ -114,7 +110,7 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
   String nullSelectionButtonText = "-";
 
   @Input('options')
-  List<FoModel> options;
+  Iterable<FoModel> options;
 
   @Input('selectedIds')
   List<String> selectedIds = new List();

@@ -37,11 +37,7 @@ class FoSelectComponent implements OnChanges, OnDestroy
       if (options == null) selectionOptions = new StringSelectionOptions([]);
       else
       {
-        List<OptionModel> models = new List();
-        for (FoModel model in options)
-        {
-          models.add(new OptionModel(model.id, _phraseService.get(model.toString())));
-        }
+        List<OptionModel> models = options.map((FoModel model) => new OptionModel(model.id, _phraseService.get(model.toString())));
         selectionOptions = new StringSelectionOptions(models, shouldSort: true);
       }
       _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
@@ -108,7 +104,7 @@ class FoSelectComponent implements OnChanges, OnDestroy
   bool fullWidth = false;
 
   @Input('options')
-  List<FoModel> options;
+  Iterable<FoModel> options;
 
   @Input('selectedId')
   void set selectedId(String value)
