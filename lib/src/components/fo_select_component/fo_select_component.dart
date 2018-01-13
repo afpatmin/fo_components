@@ -138,11 +138,11 @@ class FoSelectComponent implements OnInit, OnChanges, OnDestroy
   bool visible = false;
 
   @Output('selectedIdChange')
-  Stream<String> get onSelectedIdChangeOutput => _onSelectedIdChangeController.stream;
+  Stream<String> get onSelectedIdChange => _onSelectedIdChangeController.stream;
 
   @Output('actionButtonTrigger')
-  Stream<String> get onActionButtonTriggerOutput => onActionButtonTriggerController.stream;
+  Stream<String> get onActionButtonTrigger => onActionButtonTriggerController.stream;
 
   @Output('visibleChange')
-  Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
+  Stream<bool> get onVisibleChange => _onVisibleChangeController.stream;
 }

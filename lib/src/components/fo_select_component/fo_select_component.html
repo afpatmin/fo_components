@@ -42,7 +42,7 @@
             [disabled]="disabled || selectionOptions == null || selectedModel == null"
             *ngIf="showActionButton && actionButtonText != null && actionButtonIcon == null"
             raised
-            (trigger)="onActionButtonTriggerController.add(selectedModel)">
+            (trigger)="onActionButtonTriggerController.add(selectedModel.id)">
         {{actionButtonText | phrase}}
     </material-button>
 
@@ -54,7 +54,7 @@
             [disabled]="disabled || selectionOptions == null || selectedModel == null"
             *ngIf="showActionButton && actionButtonIcon != null"
             raised
-            (trigger)="onActionButtonTriggerController.add(selectedModel)">
+            (trigger)="onActionButtonTriggerController.add(selectedModel.id)">
         <material-icon *ngIf="actionButtonIcon != null" [icon]="actionButtonIcon" size="small"></material-icon>
     </material-button>
 </div>
