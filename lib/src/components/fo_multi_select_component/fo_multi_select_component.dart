@@ -35,6 +35,7 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
      */
     if (changes.containsKey("options"))
     {
+      _selectionChangeListener.cancel();
       if (options == null) selectionOptions = new StringSelectionOptions([]);
       else
       {
@@ -43,8 +44,12 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
         {
           models.add(new OptionModel(model.id, _phraseService.get(model.toString())));
         }
-        selectionOptions = new StringSelectionOptions(models);
+        selectionOptions = new StringSelectionOptions(models, shouldSort: true);
       }
+      _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<OptionModel>> e)
+      {
+        _onSelectedIdsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.map((model) => model['id']).toList());
+      });
     }
     if (changes.containsKey("selectedIds"))
     {

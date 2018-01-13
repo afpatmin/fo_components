@@ -33,6 +33,7 @@ class FoSelectComponent implements OnChanges, OnDestroy
      */
     if (changes.containsKey("options"))
     {
+      _selectionChangeListener.cancel();
       if (options == null) selectionOptions = new StringSelectionOptions([]);
       else
       {
@@ -41,8 +42,9 @@ class FoSelectComponent implements OnChanges, OnDestroy
         {
           models.add(new OptionModel(model.id, _phraseService.get(model.toString())));
         }
-        selectionOptions = new StringSelectionOptions(models);
+        selectionOptions = new StringSelectionOptions(models, shouldSort: true);
       }
+      _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
     }
   }
 
