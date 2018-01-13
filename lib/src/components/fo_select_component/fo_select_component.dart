@@ -31,7 +31,7 @@ class FoSelectComponent implements OnChanges, OnDestroy
     /***
      * Convert Input('options') List to StringSelectionOptions, and translate label
      */
-    if (changes.containsKey("options"))
+    if (changes.containsKey("options") && changes["options"].currentValue != changes["options"].previousValue)
     {
       print("options $options");
       _selectionChangeListener.cancel();
