@@ -18,7 +18,7 @@ import '../../services/phrase_service.dart';
     changeDetection: ChangeDetectionStrategy.Default,
     visibility: Visibility.none
 )
-class FoMultiSelectComponent implements OnChanges, OnDestroy
+class FoMultiSelectComponent implements OnChanges, OnDestroy, OnInit
 {
   FoMultiSelectComponent(this._phraseService)
   {
@@ -28,20 +28,21 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
     });
   }
 
-  void ngOnChanges(Map<String, SimpleChange> changes)
+  void ngOnInit()
   {
     /***
      * Convert Input('options') List to StringSelectionOptions, and translate label
      */
-    if (changes.containsKey("options"))
+    if (options == null) selectionOptions = new StringSelectionOptions([]);
+    else
     {
-      if (options == null) selectionOptions = new StringSelectionOptions([]);
-      else
-      {
-        Iterable<OptionModel> models = options.map((FoModel model) => new OptionModel(model.id, _phraseService.get(model.toString())));
-        selectionOptions = new StringSelectionOptions(models.toList(growable: false), shouldSort: true);
-      }
+      Iterable<OptionModel> models = options.map((FoModel model) => new OptionModel(model.id, _phraseService.get(model.toString())));
+      selectionOptions = new StringSelectionOptions(models.toList(growable: false), shouldSort: true);
     }
+  }
+
+  void ngOnChanges(Map<String, SimpleChange> changes)
+  {
     if (changes.containsKey("selectedIds"))
     {
       if (selectedIds == null || selectionModel.selectedValues.length == selectedIds.length) return;
