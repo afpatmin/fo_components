@@ -46,15 +46,22 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
+
     if (changes.containsKey("selectedIds"))
     {
+      List<String> previous = changes["selectedIds"].previousValue;
+      List<String> current = changes["selectedIds"].currentValue;
+
+      /// Equal lists, skip
+      if (previous.length == current.length && previous.where(current.contains).length == current.length) return;
+
       _selectionChangeListener?.cancel();
       selectionModel.clear();
       if (selectedIds != null)
       {
         for (String id in selectedIds)
         {
-          OptionModel model = selectionOptions.optionsList.firstWhere((m) => m['id'] == id, orElse: () => null);
+          OptionModel model = selectionOptions.optionsList.firstWhere((m) => m.id == id, orElse: () => null);
           if (model != null) selectionModel.select(model);
         }
       }
