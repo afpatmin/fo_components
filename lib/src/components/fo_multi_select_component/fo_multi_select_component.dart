@@ -35,6 +35,8 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
      */
     if (changes.containsKey("options"))
     {
+      print("options changed");
+
       _selectionChangeListener.cancel();
       if (options == null) selectionOptions = new StringSelectionOptions([]);
       else

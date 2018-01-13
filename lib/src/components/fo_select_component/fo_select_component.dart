@@ -33,6 +33,7 @@ class FoSelectComponent implements OnChanges, OnDestroy
      */
     if (changes.containsKey("options"))
     {
+      print("options $options");
       _selectionChangeListener.cancel();
       if (options == null) selectionOptions = new StringSelectionOptions([]);
       else
