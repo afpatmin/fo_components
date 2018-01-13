@@ -1,12 +1,12 @@
 <label>{{label | phrase}}</label>
 <div>
     <span>{{leadingText | phrase}}&nbsp;</span>
-    <material-button raised clear-size dense [disabled]="disabled || value <= min" (mouseup)="onMouseUp()" (mousedown)="onMouseDown(-step)">
-        <material-icon icon="remove" size="medium"></material-icon>
+    <material-button raised clear-size dense [disabled]="disabled || value <= min" (mousedown)="onMouseDown(-step)" (touchstart)="onMouseDown(-step)">
+        <material-icon icon="keyboard_arrow_up" size="medium"></material-icon>
     </material-button>
-    <span>&nbsp;{{value}}&nbsp;</span>
-    <material-button raised clear-size dense [disabled]="disabled || value >= max" (mouseup)="onMouseUp()" (mousedown)="onMouseDown(step)">
-        <material-icon icon="add" size="medium"></material-icon>
+    <span id="valueOutput">{{formattedValue}}</span>
+    <material-button raised clear-size dense [disabled]="disabled || value >= max" (mousedown)="onMouseDown(step)" (touchstart)="onMouseDown(step)">
+        <material-icon icon="keyboard_arrow_up" size="medium"></material-icon>
     </material-button>
     <span>&nbsp;{{trailingText | phrase:false}}</span>
 </div>

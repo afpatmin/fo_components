@@ -6,6 +6,17 @@ label
     margin-bottom: 0.3rem;
 }
 
+span
+{
+    color: #666;
+}
+span#valueOutput
+{
+    display: inline-block;
+    min-width: 3rem;
+    text-align: center;
+}
+
 material-button
 {
     -webkit-user-select: none;

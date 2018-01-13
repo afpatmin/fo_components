@@ -2,6 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
+import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import '../../pipes/phrase_pipe.dart';
@@ -16,11 +17,17 @@ import '../../pipes/phrase_pipe.dart';
 )
 class FoNumberInputComponent implements OnDestroy
 {
-  FoNumberInputComponent();
+  FoNumberInputComponent()
+  {
+    _mouseUpListener = html.document.onMouseUp.listen(onMouseUp);
+    _touchEndListener = html.document.onTouchEnd.listen(onMouseUp);
+  }
 
   void ngOnDestroy()
   {
     _onValueChangeController.close();
+    _mouseUpListener.cancel();
+    _touchEndListener.cancel();
   }
 
   void onMouseDown(num count)
@@ -39,13 +46,15 @@ class FoNumberInputComponent implements OnDestroy
     });
   }
 
-  void onMouseUp()
+  void onMouseUp(html.Event e)
   {
     autoAddTimer?.cancel();
     addStepTimer?.cancel();
     autoAddTimer = null;
     addStepTimer = null;
   }
+  
+  String get formattedValue => (value is int) ? value.toString() : value.toStringAsFixed(3);
 
   void add(num count)
   {
@@ -85,6 +94,9 @@ class FoNumberInputComponent implements OnDestroy
   @Output('valueChange')
   Stream<num> get onValueChangeOutput => _onValueChangeController.stream;
 
+
+  StreamSubscription<html.MouseEvent> _mouseUpListener;
+  StreamSubscription<html.TouchEvent> _touchEndListener;
   Timer autoAddTimer;
   Timer addStepTimer;
 }

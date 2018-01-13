@@ -44,9 +44,6 @@ class FoModalComponent implements OnDestroy
   @Input('fixedHeight')
   bool fixedHeight = false;
 
-  @Input('maxWidth')
-  String maxWidth = "1280px";
-
   @Input('headerBackgroundColor')
   String headerBackgroundColor = "#333";
 
