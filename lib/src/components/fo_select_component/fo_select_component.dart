@@ -21,7 +21,10 @@ import '../../services/phrase_service.dart';
 )
 class FoSelectComponent implements OnChanges, OnDestroy, OnInit
 {
-  FoSelectComponent(this._phraseService);
+  FoSelectComponent(this._phraseService)
+  {
+    _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+  }
 
   void ngOnInit()
   {
@@ -34,7 +37,6 @@ class FoSelectComponent implements OnChanges, OnDestroy, OnInit
       Iterable<OptionModel> models = options.map((FoModel model) => new OptionModel(model.id, _phraseService.get(model.toString())));
       selectionOptions = new StringSelectionOptions(models.toList(growable: false), shouldSort: true);
     }
-    _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
   }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
