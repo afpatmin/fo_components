@@ -40,7 +40,7 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
       else
       {
         Iterable<OptionModel> models = options.map((FoModel model) => new OptionModel(model.id, _phraseService.get(model.toString())));
-        selectionOptions = new StringSelectionOptions(models, shouldSort: true);
+        selectionOptions = new StringSelectionOptions(models.toList(growable: false), shouldSort: true);
       }
       _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<OptionModel>> e)
       {
