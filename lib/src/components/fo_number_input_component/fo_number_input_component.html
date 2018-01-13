@@ -2,7 +2,7 @@
 <div>
     <span>{{leadingText | phrase}}&nbsp;</span>
     <material-button raised clear-size dense [disabled]="disabled || value <= min" (mousedown)="onMouseDown(-step)" (touchstart)="onMouseDown(-step)">
-        <material-icon icon="keyboard_arrow_up" size="medium"></material-icon>
+        <material-icon icon="keyboard_arrow_down" size="medium"></material-icon>
     </material-button>
     <span id="valueOutput">{{formattedValue}}</span>
     <material-button raised clear-size dense [disabled]="disabled || value >= max" (mousedown)="onMouseDown(step)" (touchstart)="onMouseDown(step)">
