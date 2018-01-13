@@ -20,17 +20,17 @@
 <div class="flex-container">
     <material-dropdown-select
             [class.full-width]="fullWidth"
-            [disabled]="disabled || options == null || selectionModel == null"
+            [disabled]="disabled || selectionOptions == null || selectionModel == null"
             [buttonText]="selectionModel.isEmpty ? nullSelectionButtonText : selectedModel?.toString()"
             [popupMatchInputWidth]="false"
-            [options]="options"
+            [options]="selectionOptions"
             [componentRenderer]="componentRenderer"
             [selection]="selectionModel"
             [(visible)]="visible">
         <div *ngIf="showSearch" header>
             <material-select-searchbox
                     [label]="'search' | phrase"
-                    [filterable]="options">
+                    [filterable]="selectionOptions">
             </material-select-searchbox>
         </div>
     </material-dropdown-select>
@@ -39,7 +39,7 @@
             class="button"
             clear-size
             dense
-            [disabled]="disabled || options == null || selectedModel == null"
+            [disabled]="disabled || selectionOptions == null || selectedModel == null"
             *ngIf="showActionButton && actionButtonText != null && actionButtonIcon == null"
             raised
             (trigger)="onActionButtonTriggerController.add(selectedModel)">
@@ -51,7 +51,7 @@
             class="button"
             clear-size
             dense
-            [disabled]="disabled || options == null || selectedModel == null"
+            [disabled]="disabled || selectionOptions == null || selectedModel == null"
             *ngIf="showActionButton && actionButtonIcon != null"
             raised
             (trigger)="onActionButtonTriggerController.add(selectedModel)">

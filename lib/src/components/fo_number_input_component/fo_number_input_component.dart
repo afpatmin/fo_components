@@ -54,7 +54,7 @@ class FoNumberInputComponent implements OnDestroy
     addStepTimer = null;
   }
   
-  String get formattedValue => (value is int) ? value.toString() : value.toStringAsFixed(3);
+  String get formattedValue => (value is int) ? value.toString() : value.toStringAsFixed(2);
 
   void add(num count)
   {

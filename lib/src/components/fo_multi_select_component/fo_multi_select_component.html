@@ -1,17 +1,17 @@
 <span class="label">{{label | phrase}}</span>
 <material-dropdown-select
         [class.full-width]="fullWidth"
-        [disabled]="disabled || options == null || selectionModel == null"
+        [disabled]="disabled || selectionOptions == null || selectionModel == null"
         buttonText="{{buttonText | phrase}}..."
         [popupMatchInputWidth]="false"
-        [options]="options"
+        [options]="selectionOptions"
         [selection]="selectionModel"
         [(visible)]="visible"
         id="select">
     <div *ngIf="showSearch" header>
         <material-select-searchbox
                 [label]="'search' | phrase"
-                [filterable]="options">
+                [filterable]="selectionOptions">
         </material-select-searchbox>
     </div>
 </material-dropdown-select>

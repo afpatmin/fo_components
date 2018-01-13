@@ -6,6 +6,8 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import '../../pipes/phrase_pipe.dart';
 import '../../model/fo_model.dart';
+import '../../model/option_model.dart';
+import '../../services/phrase_service.dart';
 
 @Component(
     selector: 'fo-multi-select',
@@ -18,9 +20,9 @@ import '../../model/fo_model.dart';
 )
 class FoMultiSelectComponent implements OnChanges, OnDestroy
 {
-  FoMultiSelectComponent()
+  FoMultiSelectComponent(this._phraseService)
   {
-    _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<FoModel>> e)
+    _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<OptionModel>> e)
     {
       _onSelectedIdsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.map((model) => model['id']).toList());
     });
@@ -28,16 +30,23 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-    if (changes.containsKey("selectedModels"))
+    /***
+     * Convert Input('options') List to StringSelectionOptions, and translate label
+     */
+    if (changes.containsKey("options"))
     {
-      if (selectedModels == null || selectionModel.selectedValues.length == selectedModels.length) return;
-
-      selectionModel.clear();
-      selectedIds.clear();
-      selectedModels.forEach(selectionModel.select);
-      selectedIds = selectedModels.map((model) => model['id']).toList();
+      if (options == null) selectionOptions = new StringSelectionOptions([]);
+      else
+      {
+        List<OptionModel> models = new List();
+        for (FoModel model in options)
+        {
+          models.add(new OptionModel(model.id, _phraseService.get(model.toString())));
+        }
+        selectionOptions = new StringSelectionOptions(models);
+      }
     }
-    else if (changes.containsKey("selectedIds"))
+    if (changes.containsKey("selectedIds"))
     {
       if (selectedIds == null || selectionModel.selectedValues.length == selectedIds.length) return;
 
@@ -45,7 +54,7 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
       selectedModels.clear();
       for (String id in selectedIds)
       {
-        FoModel model = options.optionsList.firstWhere((m) => m['id'] == id, orElse: () => null);
+        OptionModel model = selectionOptions.optionsList.firstWhere((m) => m['id'] == id, orElse: () => null);
         if (model != null)
         {
           selectionModel.select(model);
@@ -64,7 +73,7 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
 
   void onReorder(ReorderEvent event)
   {
-    FoModel sourceModel = selectedModels.elementAt(event.sourceIndex);
+    OptionModel sourceModel = selectedModels.elementAt(event.sourceIndex);
     selectedModels.removeAt(event.sourceIndex);
     selectedModels.insert(event.destIndex, sourceModel);
     selectedIds = selectedModels.map((model) => model['id']).toList();
@@ -73,11 +82,13 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
     selectedModels.forEach(selectionModel.select);
   }
 
-  SelectionModel<FoModel> selectionModel = new SelectionModel.withList(allowMulti: true);
-  List<FoModel> selectedModels = new List();
+  SelectionModel<OptionModel> selectionModel = new SelectionModel.withList(allowMulti: true);
+  List<OptionModel> selectedModels = new List();
+  StringSelectionOptions<OptionModel> selectionOptions = new StringSelectionOptions<OptionModel>([]);
+  final PhraseService _phraseService;
   final StreamController<bool> _onVisibleChangeController = new StreamController();
   final StreamController<List<String>> _onSelectedIdsChangeController = new StreamController();
-  StreamSubscription<List<SelectionChangeRecord<FoModel>>> _selectionChangeListener;
+  StreamSubscription<List<SelectionChangeRecord<OptionModel>>> _selectionChangeListener;
 
   @Input('allowReorder')
   bool allowReorder = false;
@@ -98,7 +109,7 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
   String nullSelectionButtonText = "-";
 
   @Input('options')
-  StringSelectionOptions<FoModel> options = new StringSelectionOptions<FoModel>([]);
+  List<FoModel> options;
 
   @Input('selectedIds')
   List<String> selectedIds = new List();

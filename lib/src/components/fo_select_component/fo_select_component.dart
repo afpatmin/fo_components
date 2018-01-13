@@ -7,6 +7,8 @@ import 'package:angular_components/angular_components.dart';
 import '../fo_modal_component/fo_modal_component.dart';
 import '../../pipes/phrase_pipe.dart';
 import '../../model/fo_model.dart';
+import '../../model/option_model.dart';
+import '../../services/phrase_service.dart';
 
 @Component(
     selector: 'fo-select',
@@ -17,11 +19,31 @@ import '../../model/fo_model.dart';
     changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.none
 )
-class FoSelectComponent implements OnDestroy
+class FoSelectComponent implements OnChanges, OnDestroy
 {
-  FoSelectComponent()
+  FoSelectComponent(this._phraseService)
   {
     _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+  }
+
+  void ngOnChanges(Map<String, SimpleChange> changes)
+  {
+    /***
+     * Convert Input('options') List to StringSelectionOptions, and translate label
+     */
+    if (changes.containsKey("options"))
+    {
+      if (options == null) selectionOptions = new StringSelectionOptions([]);
+      else
+      {
+        List<OptionModel> models = new List();
+        for (FoModel model in options)
+        {
+          models.add(new OptionModel(model.id, _phraseService.get(model.toString())));
+        }
+        selectionOptions = new StringSelectionOptions(models);
+      }
+    }
   }
 
   void ngOnDestroy()
@@ -47,13 +69,15 @@ class FoSelectComponent implements OnDestroy
     _onSelectedIdChangeController.add(id);
   }
 
-  FoModel get selectedModel => selectionModel.selectedValues.isEmpty ? null : selectionModel.selectedValues.first;
+  OptionModel get selectedModel => selectionModel.selectedValues.isEmpty ? null : selectionModel.selectedValues.first;
 
-  SelectionModel<FoModel> selectionModel = new SelectionModel.withList(allowMulti: false);
-  StreamSubscription<List<SelectionChangeRecord<FoModel>>> _selectionChangeListener;
+  StringSelectionOptions<OptionModel> selectionOptions = new StringSelectionOptions<OptionModel>([]);
+  SelectionModel<OptionModel> selectionModel = new SelectionModel.withList(allowMulti: false);
+  StreamSubscription<List<SelectionChangeRecord<OptionModel>>> _selectionChangeListener;
+  final PhraseService _phraseService;
   final StreamController<bool> _onVisibleChangeController = new StreamController();
   final StreamController<String> _onSelectedIdChangeController = new StreamController();
-  final StreamController<FoModel> onActionButtonTriggerController = new StreamController();
+  final StreamController<String> onActionButtonTriggerController = new StreamController();
 
   bool tooltipModalVisible = false;
 
@@ -82,7 +106,7 @@ class FoSelectComponent implements OnDestroy
   bool fullWidth = false;
 
   @Input('options')
-  StringSelectionOptions<FoModel> options = new StringSelectionOptions<FoModel>([]);
+  List<FoModel> options;
 
   @Input('selectedId')
   void set selectedId(String value)
@@ -90,13 +114,12 @@ class FoSelectComponent implements OnDestroy
     _selectionChangeListener.cancel();
 
     if (value == null) selectionModel.clear();
-    else if (options != null)
+    else if (selectionOptions != null)
     {
-      FoModel model = options.optionsList.firstWhere(((model) => model.id == value), orElse: () => null);
+      FoModel model = selectionOptions.optionsList.firstWhere(((model) => model.id == value), orElse: () => null);
       if (model == null) selectionModel.clear();
       else selectionModel.select(model);
     }
-
     _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
   }
 
@@ -116,7 +139,7 @@ class FoSelectComponent implements OnDestroy
   Stream<String> get onSelectedIdChangeOutput => _onSelectedIdChangeController.stream;
 
   @Output('actionButtonTrigger')
-  Stream<FoModel> get onActionButtonTriggerOutput => onActionButtonTriggerController.stream;
+  Stream<String> get onActionButtonTriggerOutput => onActionButtonTriggerController.stream;
 
   @Output('visibleChange')
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;

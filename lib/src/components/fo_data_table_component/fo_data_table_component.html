@@ -168,7 +168,7 @@
                     [disabled]="disabled || selectedRows == null || selectedRows.isEmpty"
                     [options]="batchOperationOptions"
                     [selectedId]="batchOperations.first.id"
-                    (actionButtonTrigger)="onBatchOperationTrigger($event.id)">
+                    (actionButtonTrigger)="onBatchOperationTrigger($event)">
             </fo-select>
         </div>
     </div>
