@@ -19,30 +19,26 @@ import '../../services/phrase_service.dart';
     changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.none
 )
-class FoSelectComponent implements OnChanges, OnDestroy
+class FoSelectComponent implements OnChanges, OnDestroy, OnInit
 {
-  FoSelectComponent(this._phraseService)
+  FoSelectComponent(this._phraseService);
+
+  void ngOnInit()
   {
+    /***
+     * Convert Input('options') List to StringSelectionOptions, and translate label
+     */
+    if (options == null) selectionOptions = new StringSelectionOptions([]);
+    else
+    {
+      Iterable<OptionModel> models = options.map((FoModel model) => new OptionModel(model.id, _phraseService.get(model.toString())));
+      selectionOptions = new StringSelectionOptions(models.toList(growable: false), shouldSort: true);
+    }
     _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
   }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-    /***
-     * Convert Input('options') List to StringSelectionOptions, and translate label
-     */
-    if (changes.containsKey("options") && changes["options"].currentValue != changes["options"].previousValue)
-    {
-      print("options $options");
-      _selectionChangeListener.cancel();
-      if (options == null) selectionOptions = new StringSelectionOptions([]);
-      else
-      {
-        Iterable<OptionModel> models = options.map((FoModel model) => new OptionModel(model.id, _phraseService.get(model.toString())));
-        selectionOptions = new StringSelectionOptions(models.toList(growable: false), shouldSort: true);
-      }
-      _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
-    }
   }
 
   void ngOnDestroy()

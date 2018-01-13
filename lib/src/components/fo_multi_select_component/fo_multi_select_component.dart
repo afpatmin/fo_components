@@ -33,21 +33,14 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
     /***
      * Convert Input('options') List to StringSelectionOptions, and translate label
      */
-    if (changes.containsKey("options") && changes["options"].currentValue != changes["options"].previousValue)
+    if (changes.containsKey("options"))
     {
-      print("options changed");
-
-      _selectionChangeListener.cancel();
       if (options == null) selectionOptions = new StringSelectionOptions([]);
       else
       {
         Iterable<OptionModel> models = options.map((FoModel model) => new OptionModel(model.id, _phraseService.get(model.toString())));
         selectionOptions = new StringSelectionOptions(models.toList(growable: false), shouldSort: true);
       }
-      _selectionChangeListener = selectionModel.selectionChanges.listen((List<SelectionChangeRecord<OptionModel>> e)
-      {
-        _onSelectedIdsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.map((model) => model['id']).toList());
-      });
     }
     if (changes.containsKey("selectedIds"))
     {
