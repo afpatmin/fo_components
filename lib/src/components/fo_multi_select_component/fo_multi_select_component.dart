@@ -44,7 +44,12 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
       /// List equality check, skip if equal contents
       if (prev == null || cur == null || prev.length != cur.length || prev.where(cur.contains).length != cur.length)
       {
-        _selectionChangeListener.cancel().then((_)
+        if (_selectionChangeListener == null)
+        {
+          _selectExternally();
+          _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+        }
+        else _selectionChangeListener.cancel().then((_)
         {
           _selectExternally();
           _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);

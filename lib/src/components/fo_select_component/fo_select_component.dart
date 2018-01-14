@@ -32,7 +32,7 @@ class FoSelectComponent implements OnInit, OnChanges, OnDestroy
       selectionOptions = new StringSelectionOptions(models.toList(growable: false), shouldSort: true);
     }
 
-    _selectExternally(selectedId);
+    _selectExternally();
     _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
   }
 
@@ -40,11 +40,19 @@ class FoSelectComponent implements OnInit, OnChanges, OnDestroy
   {
     if (changes.containsKey("selectedId"))
     {
-      _selectionChangeListener.cancel().then((_)
+      if (_selectionChangeListener == null)
       {
-        _selectExternally(selectedId);
+        _selectExternally();
         _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
-      });
+      }
+      else
+      {
+        _selectionChangeListener.cancel().then((_)
+        {
+          _selectExternally();
+          _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+        });
+      }
     }
   }
 
@@ -58,7 +66,7 @@ class FoSelectComponent implements OnInit, OnChanges, OnDestroy
 
   void setVisible(bool flag) => visible = (disabled) ? visible : flag;
 
-  void _selectExternally(String id)
+  void _selectExternally()
   {
     if (selectedId == null) selectionModel.clear();
     else
