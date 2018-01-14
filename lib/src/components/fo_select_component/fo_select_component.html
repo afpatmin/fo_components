@@ -9,23 +9,21 @@
             size="medium">
     </material-icon>
     <material-icon
-            *ngIf="allowNullSelection && selectedModel != null"
+            *ngIf="allowNullSelection && selectedId != null"
             baseline
             class="clickable color-alert"
             icon="cancel"
             size="medium"
-            (click)="selectionModel.clear(); $event.stopPropagation();">
+            (click)="onSelect(null); $event.stopPropagation();">
     </material-icon>
 </label>
 <div class="flex-container">
     <material-dropdown-select
             [class.full-width]="fullWidth"
-            [disabled]="disabled || selectionOptions == null || selectionModel == null"
-            [buttonText]="selectionModel.isEmpty ? nullSelectionButtonText : selectedModel?.toString()"
+            [disabled]="disabled || selectionOptions == null"
+            [buttonText]="selectedModel == null ? nullSelectionButtonText : selectedModel.toString() | phrase"
             [popupMatchInputWidth]="false"
-            [options]="selectionOptions"
             [componentRenderer]="componentRenderer"
-            [selection]="selectionModel"
             [(visible)]="visible">
         <div *ngIf="showSearch" header>
             <material-select-searchbox
@@ -33,28 +31,29 @@
                     [filterable]="selectionOptions">
             </material-select-searchbox>
         </div>
+        <material-select-dropdown-item *ngFor="let option of selectionOptions.optionsList"
+                              (trigger)="onSelect(option.id)"
+                              [selected]="option.id == selectedId">
+            {{option.toString() | phrase}}
+        </material-select-dropdown-item>
     </material-dropdown-select>
 
     <material-button
-            class="button"
-            clear-size
-            dense
-            [disabled]="disabled || selectionOptions == null || selectedModel == null"
             *ngIf="showActionButton && actionButtonText != null && actionButtonIcon == null"
-            raised
-            (trigger)="onActionButtonTriggerController.add(selectedModel.id)">
+            class="button"
+            clear-size dense raised
+            [disabled]="disabled || selectionOptions == null || selectedId == null"
+            (trigger)="onActionButtonTriggerController.add(selectedId)">
         {{actionButtonText | phrase}}
     </material-button>
 
     <!-- Icon has precedence over text -->
     <material-button
-            class="button"
-            clear-size
-            dense
-            [disabled]="disabled || selectionOptions == null || selectedModel == null"
             *ngIf="showActionButton && actionButtonIcon != null"
-            raised
-            (trigger)="onActionButtonTriggerController.add(selectedModel.id)">
+            class="button"
+            clear-size dense raised
+            [disabled]="disabled || selectionOptions == null || selectedId == null"
+            (trigger)="onActionButtonTriggerController.add(selectedId)">
         <material-icon *ngIf="actionButtonIcon != null" [icon]="actionButtonIcon" size="small"></material-icon>
     </material-button>
 </div>

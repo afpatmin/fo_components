@@ -6,8 +6,6 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import '../../pipes/phrase_pipe.dart';
 import '../../model/fo_model.dart';
-import '../../model/option_model.dart';
-import '../../services/phrase_service.dart';
 
 @Component(
     selector: 'fo-multi-select',
@@ -18,42 +16,22 @@ import '../../services/phrase_service.dart';
     changeDetection: ChangeDetectionStrategy.Default,
     visibility: Visibility.none
 )
-class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
+class FoMultiSelectComponent implements OnChanges, OnDestroy
 {
-  FoMultiSelectComponent(this._phraseService);
-
-  void ngOnInit()
-  {
-    /// Convert List<FoModel> to StringSelectionOptions<OptionModel>, and translate labels
-    if (options != null)
-    {
-      Iterable<OptionModel> models = options.map((FoModel model) => new OptionModel(model.id, _phraseService.get(model.toString())));
-      selectionOptions = new StringSelectionOptions(models.toList(growable: false), shouldSort: true);
-    }
-    _selectExternally();
-    _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
-  }
+  FoMultiSelectComponent();
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-    if (changes.containsKey("selectedIds"))
+    if (changes.containsKey("options") && options != null)
     {
-      List<String> prev = changes["selectedIds"].previousValue;
-      List<String> cur = changes["selectedIds"].currentValue;
+      var prev = changes["options"].previousValue;
+      var cur = changes["options"].currentValue;
 
       /// List equality check, skip if equal contents
       if (prev == null || cur == null || prev.length != cur.length || prev.where(cur.contains).length != cur.length)
       {
-        if (_selectionChangeListener == null)
-        {
-          _selectExternally();
-          _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
-        }
-        else _selectionChangeListener.cancel().then((_)
-        {
-          _selectExternally();
-          _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
-        });
+        /// Convert List<FoModel> to StringSelectionOptions<FoModel>
+        selectionOptions = new StringSelectionOptions(options.toList(growable: false), shouldSort: true);
       }
     }
   }
@@ -62,7 +40,6 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
   {
     _onVisibleChangeController.close();
     _onSelectedIdsChangeController.close();
-    _selectionChangeListener?.cancel();
   }
 
 
@@ -79,37 +56,19 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
     */
   }
 
-  void _selectExternally()
+  void onToggle(String id, bool status)
   {
-    selectionModel.clear();
-    if (selectedIds != null)
-    {
-      for (String id in selectedIds)
-      {
-        OptionModel model = selectionOptions.optionsList.firstWhere((m) => m.id == id, orElse: () => null);
-        if (model != null) selectionModel.select(model);
-      }
-    }
+    if (status == true) selectedIds.add(id);
+    else selectedIds.remove(id);
+
+    _onSelectedIdsChangeController.add(selectedIds);
   }
 
-  void _onSelectionChanges(List<SelectionChangeRecord<OptionModel>> e)
-  {
-    if (e.isNotEmpty)
-    {
-      print("internal multi-select change (${e.length})");
-      print("removed: ${e.first.removed}");
-      print("added: ${e.first.added}");
-      _onSelectedIdsChangeController.add((e.isEmpty)
-          ? [] : selectionModel.selectedValues.map((model) => model.id).toList());
-    }
-  }
+  FoModel getModel(String id) => selectionOptions.optionsList.firstWhere((model) => model.id == id, orElse: () => null);
 
-  SelectionModel<OptionModel> selectionModel = new SelectionModel.withList(allowMulti: true);
-  StringSelectionOptions<OptionModel> selectionOptions = new StringSelectionOptions<OptionModel>([]);
-  final PhraseService _phraseService;
+  StringSelectionOptions<FoModel> selectionOptions = new StringSelectionOptions([]);
   final StreamController<bool> _onVisibleChangeController = new StreamController();
   final StreamController<List<String>> _onSelectedIdsChangeController = new StreamController();
-  StreamSubscription<List<SelectionChangeRecord<OptionModel>>> _selectionChangeListener;
 
   @Input('allowReorder')
   bool allowReorder = false;
@@ -129,7 +88,6 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
   @Input('nullSelectionButtonText')
   String nullSelectionButtonText = "-";
 
-  /// Warning: options cannot change during runtime
   @Input('options')
   Iterable<FoModel> options;
 
