@@ -15,7 +15,7 @@ import '../../services/phrase_service.dart';
     templateUrl: 'fo_multi_select_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives],
     pipes: const [PhrasePipe],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.Default,
     visibility: Visibility.none
 )
 class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
@@ -73,7 +73,7 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
   {
     void onSelectionChanges(List<SelectionChangeRecord<OptionModel>> e)
     {
-      print("selectionChanges");
+      print("internal multi-select change");
       _onSelectedIdsChangeController.add((e.isEmpty)
           ? [] : selectionModel.selectedValues.map((model) => model.id).toList());
     }

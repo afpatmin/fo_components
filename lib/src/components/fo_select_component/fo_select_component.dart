@@ -54,7 +54,7 @@ class FoSelectComponent implements OnInit, OnChanges, OnDestroy
   {
     void onSelectionChanges(List<SelectionChangeRecord<FoModel>> e)
     {
-      print("selectionChanges");
+      print("internal selectionChanges");
       /// User attempted to deselect, skip unless allowNullSelection
       if (e.isNotEmpty && e.first.removed.isNotEmpty && e.first.added.isEmpty && !allowNullSelection)
       {
