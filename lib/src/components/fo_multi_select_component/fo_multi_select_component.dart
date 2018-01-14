@@ -15,7 +15,7 @@ import '../../services/phrase_service.dart';
     templateUrl: 'fo_multi_select_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives],
     pipes: const [PhrasePipe],
-    changeDetection: ChangeDetectionStrategy.Default,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.none
 )
 class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
@@ -30,43 +30,20 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
       Iterable<OptionModel> models = options.map((FoModel model) => new OptionModel(model.id, _phraseService.get(model.toString())));
       selectionOptions = new StringSelectionOptions(models.toList(growable: false), shouldSort: true);
     }
-    /*
-    if (selectedIds != null)
-    {
-      for (String id in selectedIds)
-      {
-        OptionModel model = selectionOptions.optionsList.firstWhere((m) => m.id == id, orElse: () => null);
-        if (model != null) selectionModel.select(model);
-      }
-    }
-    */
-    if (_selectionChangeListener == null)
-    {
-      _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
-    }
+    _setSelectedIdsExternal();
   }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
     if (changes.containsKey("selectedIds"))
     {
-      List<String> previous = changes["selectedIds"].previousValue;
-      List<String> current = changes["selectedIds"].currentValue;
+      List<String> prev = changes["selectedIds"].previousValue;
+      List<String> cur = changes["selectedIds"].currentValue;
 
       /// List equality check, skip if equal contents
-      if (previous == null || current != null || previous.length != current.length || previous.where(current.contains).length != current.length)
+      if (prev == null || cur == null || prev.length != cur.length || prev.where(cur.contains).length != cur.length)
       {
-        _selectionChangeListener?.cancel();
-        selectionModel.clear();
-        if (selectedIds != null)
-        {
-          for (String id in selectedIds)
-          {
-            OptionModel model = selectionOptions.optionsList.firstWhere((m) => m.id == id, orElse: () => null);
-            if (model != null) selectionModel.select(model);
-          }
-        }
-        _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+        _setSelectedIdsExternal();
       }
     }
   }
@@ -92,9 +69,26 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
     */
   }
 
-  void _onSelectionChanges(List<SelectionChangeRecord<OptionModel>> e)
+  void _setSelectedIdsExternal()
   {
-    _onSelectedIdsChangeController.add((e.isEmpty) ? [] : selectionModel.selectedValues.map((model) => model.id).toList());
+    void onSelectionChanges(List<SelectionChangeRecord<OptionModel>> e)
+    {
+      print("selectionChanges");
+      _onSelectedIdsChangeController.add((e.isEmpty)
+          ? [] : selectionModel.selectedValues.map((model) => model.id).toList());
+    }
+
+    _selectionChangeListener?.cancel();
+    selectionModel.clear();
+    if (selectedIds != null)
+    {
+      for (String id in selectedIds)
+      {
+        OptionModel model = selectionOptions.optionsList.firstWhere((m) => m.id == id, orElse: () => null);
+        if (model != null) selectionModel.select(model);
+      }
+    }
+    _selectionChangeListener = selectionModel.selectionChanges.listen(onSelectionChanges);
   }
 
   SelectionModel<OptionModel> selectionModel = new SelectionModel.withList(allowMulti: true);

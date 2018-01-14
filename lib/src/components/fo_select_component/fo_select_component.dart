@@ -32,33 +32,12 @@ class FoSelectComponent implements OnInit, OnChanges, OnDestroy
       selectionOptions = new StringSelectionOptions(models.toList(growable: false), shouldSort: true);
     }
 
-    /// Set initially selected model
-    /*
-    if (selectedId != null)
-    {
-      OptionModel model = selectionOptions.optionsList.firstWhere(((model) => model.id == selectedId), orElse: () => null);
-      if (model != null) selectionModel.select(model);
-    }
-    */
-
-    /// Start listening for selectionChange events (non-input)
-    if (_selectionChangeListener == null) _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+    _setSelectedIdExternal(selectedId);
   }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-    if (changes.containsKey("selectedId"))
-    {
-      _selectionChangeListener?.cancel();
-      if (selectedId == null) selectionModel.clear();
-      else
-      {
-        OptionModel model = selectionOptions.optionsList.firstWhere(((model) => model.id == selectedId), orElse: () => null);
-        if (model == null) selectionModel.clear();
-        else selectionModel.select(model);
-      }
-      _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
-    }
+    if (changes.containsKey("selectedId")) _setSelectedIdExternal(selectedId);
   }
 
   void ngOnDestroy()
@@ -71,17 +50,31 @@ class FoSelectComponent implements OnInit, OnChanges, OnDestroy
 
   void setVisible(bool flag) => visible = (disabled) ? visible : flag;
 
-  void _onSelectionChanges(List<SelectionChangeRecord<FoModel>> e)
+  void _setSelectedIdExternal(String id)
   {
-    /// User attempted to deselect, skip unless allowNullSelection
-    if (e.isNotEmpty && e.first.removed.isNotEmpty && e.first.added.isEmpty && !allowNullSelection)
+    void onSelectionChanges(List<SelectionChangeRecord<FoModel>> e)
     {
-      selectionModel.select(e.first.removed.first);
-      return;
+      print("selectionChanges");
+      /// User attempted to deselect, skip unless allowNullSelection
+      if (e.isNotEmpty && e.first.removed.isNotEmpty && e.first.added.isEmpty && !allowNullSelection)
+      {
+        selectionModel.select(e.first.removed.first);
+        return;
+      }
+
+      String id = selectionModel.selectedValues.isEmpty ? null : selectionModel.selectedValues.first.id;
+      _onSelectedIdChangeController.add(id);
     }
 
-    String id = selectionModel.selectedValues.isEmpty ? null : selectionModel.selectedValues.first.id;
-    _onSelectedIdChangeController.add(id);
+    _selectionChangeListener?.cancel();
+    if (selectedId == null) selectionModel.clear();
+    else
+    {
+      OptionModel model = selectionOptions.optionsList.firstWhere(((model) => model.id == selectedId), orElse: () => null);
+      if (model == null) selectionModel.clear();
+      else selectionModel.select(model);
+    }
+    _selectionChangeListener = selectionModel.selectionChanges.listen(onSelectionChanges);
   }
 
   OptionModel get selectedModel => selectionModel.selectedValues.isEmpty ? null : selectionModel.selectedValues.first;
