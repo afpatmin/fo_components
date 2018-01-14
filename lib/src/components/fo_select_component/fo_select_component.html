@@ -23,7 +23,6 @@
             [disabled]="disabled || selectionOptions == null"
             [buttonText]="selectedModel == null ? nullSelectionButtonText : selectedModel.toString() | phrase"
             [popupMatchInputWidth]="false"
-            [componentRenderer]="componentRenderer"
             [(visible)]="visible">
         <div *ngIf="showSearch" header>
             <material-select-searchbox
@@ -31,9 +30,11 @@
                     [filterable]="selectionOptions">
             </material-select-searchbox>
         </div>
-        <material-select-dropdown-item *ngFor="let option of selectionOptions.optionsList"
-                              (trigger)="onSelect(option.id)"
-                              [selected]="option.id == selectedId">
+        <material-select-dropdown-item
+                *ngFor="let option of selectionOptions.optionsList"
+                (trigger)="onSelect(option.id)"
+                [componentRenderer]="componentRenderer"
+                [selected]="option.id == selectedId">
             {{option.toString() | phrase}}
         </material-select-dropdown-item>
     </material-dropdown-select>
