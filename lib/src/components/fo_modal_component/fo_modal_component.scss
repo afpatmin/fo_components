@@ -6,6 +6,8 @@ material-dialog
 {
     min-width: 15rem;
     max-width: 90vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
     max-height: 95vh;
     text-align: left;
 
@@ -40,9 +42,9 @@ material-dialog.fixed-height
 
     div.modal-content
     {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
 }
 
 material-dialog.fixed-width
