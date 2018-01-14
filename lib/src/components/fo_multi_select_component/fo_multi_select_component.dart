@@ -30,6 +30,7 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
       Iterable<OptionModel> models = options.map((FoModel model) => new OptionModel(model.id, _phraseService.get(model.toString())));
       selectionOptions = new StringSelectionOptions(models.toList(growable: false), shouldSort: true);
     }
+    /*
     if (selectedIds != null)
     {
       for (String id in selectedIds)
@@ -38,6 +39,7 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
         if (model != null) selectionModel.select(model);
       }
     }
+    */
     if (_selectionChangeListener == null)
     {
       _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
@@ -46,26 +48,26 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-
     if (changes.containsKey("selectedIds"))
     {
       List<String> previous = changes["selectedIds"].previousValue;
       List<String> current = changes["selectedIds"].currentValue;
 
-      /// Equal lists, skip
-      if (previous != null && current != null && previous.length == current.length && previous.where(current.contains).length == current.length) return;
-
-      _selectionChangeListener?.cancel();
-      selectionModel.clear();
-      if (selectedIds != null)
+      /// List equality check, skip if equal contents
+      if (previous == null || current != null || previous.length != current.length || previous.where(current.contains).length != current.length)
       {
-        for (String id in selectedIds)
+        _selectionChangeListener?.cancel();
+        selectionModel.clear();
+        if (selectedIds != null)
         {
-          OptionModel model = selectionOptions.optionsList.firstWhere((m) => m.id == id, orElse: () => null);
-          if (model != null) selectionModel.select(model);
+          for (String id in selectedIds)
+          {
+            OptionModel model = selectionOptions.optionsList.firstWhere((m) => m.id == id, orElse: () => null);
+            if (model != null) selectionModel.select(model);
+          }
         }
+        _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
       }
-      _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
     }
   }
 

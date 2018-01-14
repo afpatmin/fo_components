@@ -33,11 +33,13 @@ class FoSelectComponent implements OnInit, OnChanges, OnDestroy
     }
 
     /// Set initially selected model
+    /*
     if (selectedId != null)
     {
       OptionModel model = selectionOptions.optionsList.firstWhere(((model) => model.id == selectedId), orElse: () => null);
       if (model != null) selectionModel.select(model);
     }
+    */
 
     /// Start listening for selectionChange events (non-input)
     if (_selectionChangeListener == null) _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
@@ -71,7 +73,7 @@ class FoSelectComponent implements OnInit, OnChanges, OnDestroy
 
   void _onSelectionChanges(List<SelectionChangeRecord<FoModel>> e)
   {
-    // User deselected, skip this unless allowNullSelection
+    /// User attempted to deselect, skip unless allowNullSelection
     if (e.isNotEmpty && e.first.removed.isNotEmpty && e.first.added.isEmpty && !allowNullSelection)
     {
       selectionModel.select(e.first.removed.first);
