@@ -71,18 +71,6 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
 
   void _setSelectedIdsExternal()
   {
-    void onSelectionChanges(List<SelectionChangeRecord<OptionModel>> e)
-    {
-      if (e.isNotEmpty)
-      {
-        print("internal multi-select change (${e.length})");
-        print("removed: ${e.first.removed}");
-        print("added: ${e.first.added}");
-        _onSelectedIdsChangeController.add((e.isEmpty)
-            ? [] : selectionModel.selectedValues.map((model) => model.id).toList());
-      }
-    }
-
     _selectionChangeListener?.cancel();
     selectionModel.clear();
     if (selectedIds != null)
@@ -93,7 +81,19 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
         if (model != null) selectionModel.select(model);
       }
     }
-    _selectionChangeListener = selectionModel.selectionChanges.listen(onSelectionChanges);
+    _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+  }
+
+  void _onSelectionChanges(List<SelectionChangeRecord<OptionModel>> e)
+  {
+    if (e.isNotEmpty)
+    {
+      print("internal multi-select change (${e.length})");
+      print("removed: ${e.first.removed}");
+      print("added: ${e.first.added}");
+      _onSelectedIdsChangeController.add((e.isEmpty)
+          ? [] : selectionModel.selectedValues.map((model) => model.id).toList());
+    }
   }
 
   SelectionModel<OptionModel> selectionModel = new SelectionModel.withList(allowMulti: true);

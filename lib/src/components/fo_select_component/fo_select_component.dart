@@ -52,20 +52,6 @@ class FoSelectComponent implements OnInit, OnChanges, OnDestroy
 
   void _setSelectedIdExternal(String id)
   {
-    void onSelectionChanges(List<SelectionChangeRecord<FoModel>> e)
-    {
-      print("internal selectionChanges");
-      /// User attempted to deselect, skip unless allowNullSelection
-      if (e.isNotEmpty && e.first.removed.isNotEmpty && e.first.added.isEmpty && !allowNullSelection)
-      {
-        selectionModel.select(e.first.removed.first);
-        return;
-      }
-
-      String id = selectionModel.selectedValues.isEmpty ? null : selectionModel.selectedValues.first.id;
-      _onSelectedIdChangeController.add(id);
-    }
-
     _selectionChangeListener?.cancel();
     if (selectedId == null) selectionModel.clear();
     else
@@ -74,7 +60,21 @@ class FoSelectComponent implements OnInit, OnChanges, OnDestroy
       if (model == null) selectionModel.clear();
       else selectionModel.select(model);
     }
-    _selectionChangeListener = selectionModel.selectionChanges.listen(onSelectionChanges);
+    _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+  }
+
+  void _onSelectionChanges(List<SelectionChangeRecord<FoModel>> e)
+  {
+    print("internal selectionChanges");
+    /// User attempted to deselect, skip unless allowNullSelection
+    if (e.isNotEmpty && e.first.removed.isNotEmpty && e.first.added.isEmpty && !allowNullSelection)
+    {
+      selectionModel.select(e.first.removed.first);
+      return;
+    }
+
+    String id = selectionModel.selectedValues.isEmpty ? null : selectionModel.selectedValues.first.id;
+    _onSelectedIdChangeController.add(id);
   }
 
   OptionModel get selectedModel => selectionModel.selectedValues.isEmpty ? null : selectionModel.selectedValues.first;
