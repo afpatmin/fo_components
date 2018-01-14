@@ -73,9 +73,14 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
   {
     void onSelectionChanges(List<SelectionChangeRecord<OptionModel>> e)
     {
-      print("internal multi-select change");
-      _onSelectedIdsChangeController.add((e.isEmpty)
-          ? [] : selectionModel.selectedValues.map((model) => model.id).toList());
+      if (e.isNotEmpty)
+      {
+        print("internal multi-select change (${e.length})");
+        print("removed: ${e.first.removed}");
+        print("added: ${e.first.added}");
+        _onSelectedIdsChangeController.add((e.isEmpty)
+            ? [] : selectionModel.selectedValues.map((model) => model.id).toList());
+      }
     }
 
     _selectionChangeListener?.cancel();
