@@ -32,12 +32,20 @@ class FoSelectComponent implements OnInit, OnChanges, OnDestroy
       selectionOptions = new StringSelectionOptions(models.toList(growable: false), shouldSort: true);
     }
 
-    _setSelectedIdExternal(selectedId);
+    _selectExternally(selectedId);
+    _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
   }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-    if (changes.containsKey("selectedId")) _setSelectedIdExternal(selectedId);
+    if (changes.containsKey("selectedId"))
+    {
+      _selectionChangeListener.cancel().then((_)
+      {
+        _selectExternally(selectedId);
+        _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+      });
+    }
   }
 
   void ngOnDestroy()
@@ -50,9 +58,8 @@ class FoSelectComponent implements OnInit, OnChanges, OnDestroy
 
   void setVisible(bool flag) => visible = (disabled) ? visible : flag;
 
-  void _setSelectedIdExternal(String id)
+  void _selectExternally(String id)
   {
-    _selectionChangeListener?.cancel();
     if (selectedId == null) selectionModel.clear();
     else
     {
@@ -60,7 +67,6 @@ class FoSelectComponent implements OnInit, OnChanges, OnDestroy
       if (model == null) selectionModel.clear();
       else selectionModel.select(model);
     }
-    _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
   }
 
   void _onSelectionChanges(List<SelectionChangeRecord<FoModel>> e)

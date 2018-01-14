@@ -1,7 +1,7 @@
 // Copyright (c) 2017, Patrick Minogue. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'dart:async' show Stream, StreamController, StreamSubscription;
+import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import '../../pipes/phrase_pipe.dart';
@@ -30,7 +30,8 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
       Iterable<OptionModel> models = options.map((FoModel model) => new OptionModel(model.id, _phraseService.get(model.toString())));
       selectionOptions = new StringSelectionOptions(models.toList(growable: false), shouldSort: true);
     }
-    _setSelectedIdsExternal();
+    _selectExternally();
+    _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
   }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
@@ -43,7 +44,11 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
       /// List equality check, skip if equal contents
       if (prev == null || cur == null || prev.length != cur.length || prev.where(cur.contains).length != cur.length)
       {
-        _setSelectedIdsExternal();
+        _selectionChangeListener.cancel().then((_)
+        {
+          _selectExternally();
+          _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
+        });
       }
     }
   }
@@ -69,9 +74,8 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
     */
   }
 
-  void _setSelectedIdsExternal()
+  void _selectExternally()
   {
-    _selectionChangeListener?.cancel();
     selectionModel.clear();
     if (selectedIds != null)
     {
@@ -81,7 +85,6 @@ class FoMultiSelectComponent implements OnInit, OnChanges, OnDestroy
         if (model != null) selectionModel.select(model);
       }
     }
-    _selectionChangeListener = selectionModel.selectionChanges.listen(_onSelectionChanges);
   }
 
   void _onSelectionChanges(List<SelectionChangeRecord<OptionModel>> e)
