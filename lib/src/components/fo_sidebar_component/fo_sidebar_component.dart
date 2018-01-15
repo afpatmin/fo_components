@@ -62,12 +62,12 @@ class FoSidebarComponent implements OnInit, OnDestroy
     }
   }
 
-  String calcIFrameHeight()
+  String calcIFrameWidth()
   {
     return (html.window.innerWidth * 0.9).toString();
   }
 
-  String calcIFrameWidth()
+  String calcIFrameHeight()
   {
     return ((html.window.innerWidth * 0.9) * 0.615).round().toString();
   }
