@@ -58,10 +58,24 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
 
   void onToggle(String id, bool status)
   {
-    if (status == true) selectedIds.add(id);
-    else selectedIds.remove(id);
-
-    _onSelectedIdsChangeController.add(selectedIds);
+    try
+    {
+      if (status == true)
+      {
+        selectedIds.add(id);
+      }
+      else
+      {
+        selectedIds.remove(id);
+      }
+      _onSelectedIdsChangeController.add(selectedIds);
+    }
+    on UnsupportedError catch (e)
+    {
+      print(e.toString());
+      selectedIds = new List.from(selectedIds, growable: true);
+      onToggle(id, status);
+    }
   }
 
   FoModel getModel(String id) => selectionOptions.optionsList.firstWhere((model) => model.id == id, orElse: () => null);
