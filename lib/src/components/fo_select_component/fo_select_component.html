@@ -35,7 +35,7 @@
                 class="text-left"
                 (trigger)="onSelect(option.id)"
                 [selected]="option.id == selectedId">
-            <material-icon *ngIf="icon" [icon]="option.toString()" size="large" class="icon"></material-icon>
+            <material-icon *ngIf="icon" [icon]="option.toString()" size="large"></material-icon>
             <span>{{option.toString() | phrase}}</span>
         </material-select-dropdown-item>
     </material-dropdown-select>

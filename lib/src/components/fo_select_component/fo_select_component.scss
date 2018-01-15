@@ -16,7 +16,7 @@
     div.flex-container
     {
         display: flex;
-        material-dropdown-select
+        ::ng-deep material-dropdown-select
         {
             flex: auto;
 
