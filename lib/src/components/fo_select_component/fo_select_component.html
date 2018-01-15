@@ -34,7 +34,7 @@
                 *ngFor="let option of selectionOptions.optionsList"
                 class="text-left"
                 (trigger)="onSelect(option.id)"
-                [componentRenderer]="componentRenderer"
+                [factoryRenderer]="componentRenderer"
                 [selected]="option.id == selectedId">
             <span *ngIf="componentRenderer == null">{{option.toString() | phrase}}</span>
         </material-select-dropdown-item>
