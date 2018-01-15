@@ -2,6 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
+import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular/security.dart';
 import 'package:angular_components/angular_components.dart';
@@ -63,12 +64,13 @@ class FoSidebarComponent implements OnInit, OnDestroy
 
   String calcIFrameHeight()
   {
-    return "580";
+    return (html.window.innerWidth * 0.9).toString();
   }
 
   String calcIFrameWidth()
   {
-    return "780";
+    /// 16:9 ratio
+    return ((html.window.innerWidth * 0.9) * 0.5625).round().toString();
   }
 
   String get sidebarWidth => (expanded) ? "${width}px" : "${miniWidth}px";
