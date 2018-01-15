@@ -16,18 +16,9 @@
     div.flex-container
     {
         display: flex;
-        ::ng-deep material-dropdown-select
+        material-dropdown-select
         {
             flex: auto;
-
-            material-select-dropdown-item
-            {
-                material-icon
-                {
-                    margin-right: 0.5rem;
-                }
-            }
-
         }
         material-dropdown-select.full-width
         {
@@ -39,5 +30,10 @@
         {
             margin-left: 0.5rem;
         }
+    }
+
+    ::ng-deep .marginLeft
+    {
+        margin-left: 0.5rem;
     }
 }
