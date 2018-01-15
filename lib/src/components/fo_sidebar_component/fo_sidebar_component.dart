@@ -61,6 +61,16 @@ class FoSidebarComponent implements OnInit, OnDestroy
     }
   }
 
+  String calcIFrameHeight()
+  {
+    return "580";
+  }
+
+  String calcIFrameWidth()
+  {
+    return "780";
+  }
+
   String get sidebarWidth => (expanded) ? "${width}px" : "${miniWidth}px";
 
   final Router _router;
