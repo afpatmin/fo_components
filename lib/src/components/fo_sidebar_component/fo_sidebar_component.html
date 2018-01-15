@@ -66,6 +66,8 @@
 
 <fo-modal
         title="{{'instructions' | phrase}}"
+        *ngIf="instructionsModalVisible"
         [(visible)]="instructionsModalVisible">
-    <iframe  [attr.height]="calcIFrameHeight()" [src]="instructionsUrl" frameborder="0" allowfullscreen scrolling="no"></iframe>
+    <p>hej</p>
+    <iframe [attr.width]="calcIFrameWidth()" [attr.height]="calcIFrameHeight()" [src]="instructionsUrl" frameborder="0" allowfullscreen scrolling="no"></iframe>
 </fo-modal>
