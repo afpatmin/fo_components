@@ -63,3 +63,9 @@
         </tr>
     </table>
 </div>
+
+<fo-modal
+        title="{{'instructions' | phrase}}"
+        [(visible)]="instructionsModalVisible">
+    <iframe  [attr.height]="calcIFrameHeight()" [src]="instructionsUrl" frameborder="0" allowfullscreen scrolling="no"></iframe>
+</fo-modal>
