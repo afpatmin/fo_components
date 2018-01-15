@@ -36,7 +36,7 @@
                 (trigger)="onSelect(option.id)"
                 [selected]="option.id == selectedId">
             <span *ngIf="icon">
-                <material-icon [icon]="option.toString()" size="large"></material-icon>
+                <material-icon baseline [icon]="option.toString()" size="large"></material-icon>
                 <span>&nbsp;</span>
             </span>
             <span>{{option.toString() | phrase}}</span>
