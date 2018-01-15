@@ -90,6 +90,9 @@ class FoSelectComponent implements OnChanges, OnDestroy
   @Input('fullWidth')
   bool fullWidth = false;
 
+  @Input('icon')
+  bool icon = false;
+
   @Input('options')
   Iterable<FoModel> options = [];
 

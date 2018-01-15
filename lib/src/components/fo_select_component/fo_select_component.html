@@ -34,9 +34,9 @@
                 *ngFor="let option of selectionOptions.optionsList"
                 class="text-left"
                 (trigger)="onSelect(option.id)"
-                [factoryRenderer]="componentRenderer"
                 [selected]="option.id == selectedId">
-            <span *ngIf="componentRenderer == null">{{option.toString() | phrase}}</span>
+            <material-icon *ngIf="icon" icon="option.toString()" size="large"></material-icon>
+            <span>{{option.toString() | phrase}}</span>
         </material-select-dropdown-item>
     </material-dropdown-select>
 
