@@ -69,8 +69,7 @@ class FoSidebarComponent implements OnInit, OnDestroy
 
   String calcIFrameWidth()
   {
-    /// 16:9 ratio
-    return ((html.window.innerWidth * 0.9) * 0.5625).round().toString();
+    return ((html.window.innerWidth * 0.9) * 0.615).round().toString();
   }
 
   String get sidebarWidth => (expanded) ? "${width}px" : "${miniWidth}px";
