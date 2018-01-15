@@ -50,7 +50,7 @@ class FoValidators
     if (r.stringMatch(control.value) != control.value)
     {
       final PhraseService ps = new PhraseService();
-      return {"error":ps.get("invalid_email")};
+      return {"error":ps.get("invalid_email", params: {"email":control.value})};
     }
     else return null;
   }
