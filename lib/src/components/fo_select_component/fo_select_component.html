@@ -32,10 +32,11 @@
         </div>
         <material-select-dropdown-item
                 *ngFor="let option of selectionOptions.optionsList"
+                class="text-left"
                 (trigger)="onSelect(option.id)"
                 [componentRenderer]="componentRenderer"
                 [selected]="option.id == selectedId">
-            {{option.toString() | phrase}}
+            <span *ngIf="componentRenderer == null">{{option.toString() | phrase}}</span>
         </material-select-dropdown-item>
     </material-dropdown-select>
 
