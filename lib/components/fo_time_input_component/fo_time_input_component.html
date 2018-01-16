@@ -1,0 +1,19 @@
+<div class="labelContainer">
+    <label>{{label | phrase}}</label>
+</div>
+<div class="selectContainer">
+    <fo-select
+            [disabled]="disabled"
+            [sort]="false"
+            [options]="hourOptions"
+            [(selectedId)]="selectedHour">
+    </fo-select>
+</div>
+<div class="selectContainer">
+    <fo-select
+        [disabled]="disabled"
+        [sort]="false"
+        [options]="minuteOptions"
+        [(selectedId)]="selectedMinute">
+    </fo-select>
+</div>

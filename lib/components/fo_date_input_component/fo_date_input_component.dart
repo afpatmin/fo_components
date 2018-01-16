@@ -23,7 +23,14 @@ class FoDateInputComponent implements OnDestroy, OnChanges
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
     _inputElement = inputRef.nativeElement;
-    if (value != null) _inputElement.valueAsDate = value;
+    if (value != null)
+    {
+      /**
+       * Always assume noon for consistency
+       */
+      value = new DateTime(value.year, value.month, value.day, 12);
+      _inputElement.valueAsDate = value;
+    }
   }
 
   void ngOnDestroy()

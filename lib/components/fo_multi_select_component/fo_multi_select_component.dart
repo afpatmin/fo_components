@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import '../../pipes/phrase_pipe.dart';
-import '../../model/fo_model.dart';
+import '../../models/fo_model.dart';
 
 @Component(
     selector: 'fo-multi-select',

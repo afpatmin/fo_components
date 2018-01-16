@@ -8,7 +8,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import '../fo_modal_component/fo_modal_component.dart';
 import '../fo_select_component/fo_select_component.dart';
-import '../../model/fo_model.dart';
+import '../../models/fo_model.dart';
 import '../../pipes/phrase_pipe.dart';
 import '../../pipes/range_pipe.dart';
 
