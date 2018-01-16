@@ -341,8 +341,8 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
   @Input('showDownloadButton')
   bool showDownloadButton = true;
 
-  @Input('title')
-  String title = "";
+  @Input('label')
+  String label = "";
 
   @Input('description')
   String description;

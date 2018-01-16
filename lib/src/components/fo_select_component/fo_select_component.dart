@@ -41,7 +41,7 @@ class FoSelectComponent implements OnChanges, OnDestroy
         if (prev == null || cur == null || prev.length != cur.length || prev.where(cur.contains).length != cur.length)
         {
           /// Convert List<FoModel> to StringSelectionOptions<FoModel>
-          selectionOptions = new StringSelectionOptions(options.toList(growable: false), shouldSort: true);
+          selectionOptions = new StringSelectionOptions(options.toList(growable: false), shouldSort: sort);
         }
       }
     }
@@ -104,6 +104,9 @@ class FoSelectComponent implements OnChanges, OnDestroy
 
   @Input('showSearch')
   bool showSearch = false;
+
+  @Input('sort')
+  bool sort = true;
 
   @Input('tooltip')
   String tooltip;
