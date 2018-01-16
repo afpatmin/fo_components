@@ -17,7 +17,6 @@ export 'components/fo_select_component/fo_select_component.dart';
 export 'components/fo_sidebar_component/fo_sidebar_component.dart';
 export 'components/fo_youtube_player_component/fo_youtube_player_component.dart';
 export 'components/fo_time_input_component/fo_time_input_component.dart';
-export 'components/fo_time_picker_component/fo_time_picker_component.dart';
 export 'pipes/phrase_pipe.dart';
 export 'validators/fo_validators.dart';
 
