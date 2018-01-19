@@ -82,16 +82,19 @@ class FoImageMapComponent implements OnChanges, OnDestroy
 
 class FoZoneModel extends FoModel
 {
-  FoZoneModel(this._shapes, String id, String label) : super(id);
-  List<FoShape> get shapes => _shapes;
+  FoZoneModel(this._shapes, String id, this.label) : super(id);
 
+  @override
+  String toString() => label;
+
+  List<FoShape> get shapes => _shapes;
   Iterable<FoShape> get ellipses => _shapes.where((s) => s.type == "ellipse");
   Iterable<FoShape> get rectangles => _shapes.where((s) => s.type == "rectangle");
   Iterable<FoShape> get polygons => _shapes.where((s) => s.type == "polygon");
 
-  final List<FoShape> _shapes;
   bool marked = false;
-
+  final String label;
+  final List<FoShape> _shapes;
 }
 
 abstract class FoShape
