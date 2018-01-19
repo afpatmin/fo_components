@@ -23,7 +23,7 @@ class PhraseService
     else
     {
       String phrase = (_data[_language].containsKey(key)) ? _data[_language][key] : key;
-      if (capitalize_first) phrase = phrase[0].toUpperCase() + phrase.substring(1, phrase.length);
+      if (capitalize_first && !phrase.isEmpty) phrase = phrase[0].toUpperCase() + phrase.substring(1, phrase.length);
 
       if (params != null)
       {
