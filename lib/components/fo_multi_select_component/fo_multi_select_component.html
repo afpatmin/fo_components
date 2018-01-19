@@ -4,6 +4,7 @@
         [disabled]="disabled || selectionOptions == null"
         buttonText="{{buttonText | phrase}}"
         [popupMatchInputWidth]="false"
+        [autoDismiss]="false"
         [(visible)]="visible"
         id="select">
     <div *ngIf="showSearch" header>
@@ -18,7 +19,8 @@
             (click)="onToggle(option.id, !selectedIds.contains(option.id))">
         <material-checkbox
                 label="{{option.toString() | phrase}}"
-                [checked]="selectedIds.contains(option.id)">
+                [checked]="selectedIds.contains(option.id)"
+                (click)="onToggle(option.id, !selectedIds.contains(option.id)); $event.stopPropagation();">
         </material-checkbox>
     </material-select-dropdown-item>
 </material-dropdown-select>
