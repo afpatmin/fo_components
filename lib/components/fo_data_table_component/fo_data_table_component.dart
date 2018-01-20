@@ -185,14 +185,19 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
        */
       StringBuffer sb = new StringBuffer();
 
-      sb.writeln(columns);
+      List<String> colNames = columns..addAll(evaluatedColumns.keys);
+
+      sb.writeln(colNames);
+
+
 
       for (String key in filteredKeys)
       {
         FoModel model = data[key];
         if (model == null) continue;
 
-        List<String> properties = columns.map((col) => model[col].toString()).toList(growable: false);
+        List<String> properties = columns.map((col) => model[col].toString()).toList();
+        properties.addAll(evaluatedColumns.keys.map((id) => evaluatedColumns[id](model)));
 
         /// Add "'"-character if ¨the cell has a leading '0'-character. This will stop Excel from skipping leading 0
         for (String property in properties)
@@ -204,8 +209,10 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
           }
           catch (e) { /* Not a number, continue */ }
         }
+
         sb.writeln(properties.join(";"));
       }
+
 
       String csv = Uri.encodeComponent(sb.toString());
       /* \uFEFF: UTF-8 BOM */
