@@ -22,7 +22,7 @@ import '../fo_modal_component/fo_modal_component.dart';
 )
 class FoSidebarComponent implements OnInit, OnDestroy
 {
-  FoSidebarComponent(this._changeDetector, this._router, this._domSanitationService);
+  FoSidebarComponent(this._router, this._domSanitationService);
 
   void ngOnInit()
   {
@@ -50,6 +50,12 @@ class FoSidebarComponent implements OnInit, OnDestroy
   {
     if (_router.currentInstruction != null)
     {
+      /**
+       * Trigger change detection
+       */
+      categories = new List.from(categories);
+      header = header.toString();
+
       for (FoSidebarCategory category in categories)
       {
         FoSidebarItem item = category.items.firstWhere((item) => item.url == event, orElse: () => null);
@@ -60,7 +66,6 @@ class FoSidebarComponent implements OnInit, OnDestroy
           instructionsUrl = item.instructionsUrl == null ? null : _domSanitationService.bypassSecurityTrustResourceUrl(item.instructionsUrl);
         }
       }
-      _changeDetector.detectChanges();
     }
   }
 
@@ -76,7 +81,6 @@ class FoSidebarComponent implements OnInit, OnDestroy
 
   String get sidebarWidth => (expanded) ? "${width}px" : "${miniWidth}px";
 
-  final ChangeDetectorRef _changeDetector;
   final Router _router;
   final DomSanitizationService _domSanitationService;
   bool animating = false;
