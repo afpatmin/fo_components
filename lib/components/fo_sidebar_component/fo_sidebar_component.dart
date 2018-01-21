@@ -17,8 +17,7 @@ import '../fo_modal_component/fo_modal_component.dart';
     directives: const [CORE_DIRECTIVES, FoModalComponent, materialDirectives, ROUTER_DIRECTIVES],
     providers: const [],
     pipes: const [PhrasePipe],
-    visibility: Visibility.none,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    visibility: Visibility.none
 )
 class FoSidebarComponent implements OnInit, OnDestroy
 {
