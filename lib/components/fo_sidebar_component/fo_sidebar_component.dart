@@ -17,16 +17,17 @@ import '../fo_modal_component/fo_modal_component.dart';
     directives: const [CORE_DIRECTIVES, FoModalComponent, materialDirectives, ROUTER_DIRECTIVES],
     providers: const [],
     pipes: const [PhrasePipe],
-    visibility: Visibility.none
+    visibility: Visibility.none,
+    changeDetection: ChangeDetectionStrategy.OnPush
 )
 class FoSidebarComponent implements OnInit, OnDestroy
 {
-  FoSidebarComponent(this._router, this._domSanitizationService);
+  FoSidebarComponent(this._changeDetector, this._router, this._domSanitationService);
 
   void ngOnInit()
   {
-    new Timer(const Duration(milliseconds: 500), () => _setPageHeader("index.html"));
-    _onStartNavigationListener = _router.onStartNavigation.listen(_setPageHeader);
+    new Timer(const Duration(milliseconds: 500), () => _onNavigate("index.html"));
+    _onStartNavigationListener = _router.onStartNavigation.listen(_onNavigate);
   }
 
   void ngOnDestroy()
@@ -45,7 +46,7 @@ class FoSidebarComponent implements OnInit, OnDestroy
     _onExpandedChangeController.add(expanded);
   }
 
-  void _setPageHeader(String event)
+  void _onNavigate(String event)
   {
     if (_router.currentInstruction != null)
     {
@@ -56,9 +57,10 @@ class FoSidebarComponent implements OnInit, OnDestroy
         {
           pageIcon = item.icon;
           pageHeader = item.label;
-          instructionsUrl = item.instructionsUrl == null ? null : _domSanitizationService.bypassSecurityTrustResourceUrl(item.instructionsUrl);
+          instructionsUrl = item.instructionsUrl == null ? null : _domSanitationService.bypassSecurityTrustResourceUrl(item.instructionsUrl);
         }
       }
+      _changeDetector.detectChanges();
     }
   }
 
@@ -74,8 +76,9 @@ class FoSidebarComponent implements OnInit, OnDestroy
 
   String get sidebarWidth => (expanded) ? "${width}px" : "${miniWidth}px";
 
+  final ChangeDetectorRef _changeDetector;
   final Router _router;
-  final DomSanitizationService _domSanitizationService;
+  final DomSanitizationService _domSanitationService;
   bool animating = false;
   String pageHeader = "";
   String pageIcon = "";
