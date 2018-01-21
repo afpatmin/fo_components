@@ -186,10 +186,7 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
       StringBuffer sb = new StringBuffer();
 
       List<String> colNames = columns..addAll(evaluatedColumns.keys);
-
       sb.writeln(colNames);
-
-
 
       for (String key in filteredKeys)
       {
