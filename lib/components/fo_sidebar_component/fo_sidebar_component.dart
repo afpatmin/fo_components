@@ -50,12 +50,6 @@ class FoSidebarComponent implements OnInit, OnDestroy
   {
     if (_router.currentInstruction != null)
     {
-      /**
-       * Trigger change detection
-       */
-      categories = new List.from(categories);
-      header = header.toString();
-
       for (FoSidebarCategory category in categories)
       {
         FoSidebarItem item = category.items.firstWhere((item) => item.url == event, orElse: () => null);
