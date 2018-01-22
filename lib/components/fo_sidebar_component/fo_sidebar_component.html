@@ -14,7 +14,7 @@
                                 <material-list-item
                                         *ngFor="let item of category.items"
                                         [routerLink]="[item.routerLink]">
-                                    <material-icon  [icon]="item.icon" baseline></material-icon>
+                                    <material-icon  [icon]="item.icon" baseline></material-icon>&nbsp;
                                     {{item.label | phrase}}
                                 </material-list-item>
                             </div>

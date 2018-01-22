@@ -1,7 +1,17 @@
-material-input
+div.flex-container
 {
-  width: inherit !important;
+    display: flex;
+    material-input
+    {
+        flex: auto;
+    }
+
+    material-button
+    {
+        margin-left: 0.5rem;
+    }
 }
+
 
 material-chip
 {
