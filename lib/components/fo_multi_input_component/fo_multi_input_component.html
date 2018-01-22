@@ -16,7 +16,7 @@
     </material-button>
 </div>
 <div class="margin-top-small margin-bottom-small" *ngIf="control.errors != null">
-    <span class="color-alert">{{control.errors['error'}}</span>
+    <span class="color-alert">{{control.errors['error']}}</span>
 </div>
 <div>
     <material-chip *ngFor="let item of value" (remove)="remove(item)">{{item}}</material-chip>
