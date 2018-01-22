@@ -60,6 +60,9 @@ class FoSidebarComponent implements OnInit, OnDestroy
         }
       }
     }
+
+    // Auto-close on navigate
+    if (expanded) toggleExpanded();
   }
 
   String calcIFrameWidth()
