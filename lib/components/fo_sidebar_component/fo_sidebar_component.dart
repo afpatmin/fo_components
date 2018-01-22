@@ -51,18 +51,25 @@ class FoSidebarComponent implements OnInit, OnDestroy
     {
       for (FoSidebarCategory category in categories)
       {
-        FoSidebarItem item = category.items.firstWhere((item) => item.url == event, orElse: () => null);
-        if (item != null)
+        /// Reset title reference to trigger phrase pipe update
+        category.title = new String.fromCharCodes(category.title.codeUnits);
+        for (FoSidebarItem item in category.items)
         {
-          pageIcon = item.icon;
-          pageHeader = item.label;
-          instructionsUrl = item.instructionsUrl == null ? null : _domSanitationService.bypassSecurityTrustResourceUrl(item.instructionsUrl);
+          /// Reset label reference to trigger phrase pipe update
+          item.label = new String.fromCharCodes(item.label.codeUnits);
+
+          if (item.url == event)
+          {
+            pageIcon = item.icon;
+            pageHeader = item.label;
+            instructionsUrl = item.instructionsUrl == null ? null : _domSanitationService.bypassSecurityTrustResourceUrl(item.instructionsUrl);
+          }
         }
       }
     }
 
     // Auto-close on navigate
-    if (expanded) toggleExpanded();
+    //if (expanded) toggleExpanded();
   }
 
   String calcIFrameWidth()
@@ -115,7 +122,7 @@ class FoSidebarCategory
   FoSidebarCategory(this.title, this.items);
 
   final List<FoSidebarItem> items;
-  final String title;
+  String title;
 }
 
 class FoSidebarItem
@@ -123,7 +130,7 @@ class FoSidebarItem
   FoSidebarItem(this.url, this.label, this.routerLink, this.icon, [this.instructionsUrl = null]);
 
   final String url;
-  final String label;
+  String label;
   final String routerLink;
   final String icon;
   final String instructionsUrl;
