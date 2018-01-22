@@ -20,7 +20,8 @@ class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String>
 {
   FoMultiInputComponent(@Self() @Optional() NgControl cd)
   {
-    if (cd != null) cd.valueAccessor = this;
+    control = cd;
+    if (control != null) control.valueAccessor = this;
   }
 
   @override
@@ -65,6 +66,7 @@ class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String>
   }
 
   ChangeFunction<String> _onChange;
+  NgControl control;
 
   @Input('label')
   String label;

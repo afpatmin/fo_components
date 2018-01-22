@@ -7,9 +7,16 @@
             (keyup)="onKeyUp($event)"
             [(ngModel)]="inputValue">
     </material-input>
-    <material-button [disabled]="inputValue == null || inputValue.isEmpty" raised clear-size (trigger)="add()">
+    <material-button
+            raised
+            clear-size
+            [disabled]="inputValue == null || inputValue.isEmpty || !control.valid"
+            (trigger)="add()">
         <material-icon icon="add_outline" size="small"></material-icon>
     </material-button>
+</div>
+<div *ngIf="control.errors != null">
+    <span class="color-alert">{{control.errors['error'}}</span>
 </div>
 <div>
     <material-chip *ngFor="let item of value" (remove)="remove(item)">{{item}}</material-chip>
