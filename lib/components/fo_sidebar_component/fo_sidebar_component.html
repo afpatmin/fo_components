@@ -5,21 +5,22 @@
             <td [style.width]="sidebarWidth">
                 <div id="sidebar" class="box-shadow" [style.width]="sidebarWidth">
                     <div id="sidebar-header" [style.background-color]="backgroundColor">
-                        <p *ngIf="expanded" class="fade-opacity" [style.opacity]="animating ? 0 : 1">{{header | phrase}}</p>
+                        <p *ngIf="expanded && !phraseService.loading" class="fade-opacity" [style.opacity]="animating ? 0 : 1">{{header | phrase}}</p>
                     </div>
                     <div id="sidebar-list">
-                        <material-list *ngIf="expanded" class="fade-opacity" [style.opacity]="animating ? 0 : 1">
+                        <material-list *ngIf="expanded && !phraseService.loading" class="fade-opacity" [style.opacity]="animating ? 0 : 1">
                             <div group *ngFor="let category of categories">
                                 <div label>{{category.title | phrase}}</div>
                                 <material-list-item
                                         *ngFor="let item of category.items"
                                         [routerLink]="[item.routerLink]">
-                                    <material-icon [icon]="item.icon" baseline></material-icon>&nbsp;{{item.label | phrase}}
+                                    <material-icon  [icon]="item.icon" baseline></material-icon>
+                                    {{item.label | phrase}}
                                 </material-list-item>
                             </div>
                         </material-list>
 
-                        <div *ngIf="!expanded" class="margin-top-medium fade-opacity" [style.opacity]="animating ? 0 : 1">
+                        <div *ngIf="!expanded && !phraseService.loading" class="margin-top-medium fade-opacity" [style.opacity]="animating ? 0 : 1">
                             <div *ngFor="let category of categories">
                                 <div
                                         *ngFor="let item of category.items"

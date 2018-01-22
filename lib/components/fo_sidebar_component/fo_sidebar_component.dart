@@ -8,6 +8,7 @@ import 'package:angular/security.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import '../../pipes/phrase_pipe.dart';
+import '../../services/phrase_service.dart';
 import '../fo_modal_component/fo_modal_component.dart';
 
 @Component(
@@ -21,7 +22,7 @@ import '../fo_modal_component/fo_modal_component.dart';
 )
 class FoSidebarComponent implements OnInit, OnDestroy
 {
-  FoSidebarComponent(this._router, this._domSanitationService);
+  FoSidebarComponent(this.phraseService, this._router, this._domSanitationService);
 
   void ngOnInit()
   {
@@ -51,18 +52,14 @@ class FoSidebarComponent implements OnInit, OnDestroy
     {
       for (FoSidebarCategory category in categories)
       {
-        /// Reset title reference to trigger phrase pipe update
-        category.title = new String.fromCharCodes(category.title.codeUnits);
         for (FoSidebarItem item in category.items)
         {
-          /// Reset label reference to trigger phrase pipe update
-          item.label = new String.fromCharCodes(item.label.codeUnits);
-
           if (item.url == event)
           {
             pageIcon = item.icon;
             pageHeader = item.label;
             instructionsUrl = item.instructionsUrl == null ? null : _domSanitationService.bypassSecurityTrustResourceUrl(item.instructionsUrl);
+            return;
           }
         }
       }
@@ -84,6 +81,7 @@ class FoSidebarComponent implements OnInit, OnDestroy
 
   String get sidebarWidth => (expanded) ? "${width}px" : "${miniWidth}px";
 
+  final PhraseService phraseService;
   final Router _router;
   final DomSanitizationService _domSanitationService;
   bool animating = false;
