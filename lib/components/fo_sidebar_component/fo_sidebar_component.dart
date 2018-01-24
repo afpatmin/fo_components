@@ -50,14 +50,13 @@ class FoSidebarComponent implements OnInit, OnDestroy
   {
     if (_router.currentInstruction != null)
     {
+      if (event.startsWith("#/")) event = event.substring("#/".length);
+      if (event.endsWith("/")) event = event.substring(0, event.length - 1);
+
       for (FoSidebarCategory category in categories)
       {
         for (FoSidebarItem item in category.items)
         {
-          if (event.startsWith("#/")) event = event.substring("#/".length);
-          if (event.endsWith("/")) event = event.substring(0, event.length - 1);
-
-          print(event);
           if (item.url == event)
           {
             pageIcon = item.icon;
