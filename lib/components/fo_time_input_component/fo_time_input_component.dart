@@ -29,11 +29,11 @@ class FoTimeInputComponent implements ControlValueAccessor<String>
      * onBlur really
      */
 
-    _onTouch = f;
+    //_onTouch = f;
   }
 
   ChangeFunction<String> _onChange;
-  TouchFunction _onTouch;
+  //TouchFunction _onTouch;
 
   @override
   void writeValue(String obj)
