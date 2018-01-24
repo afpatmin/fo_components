@@ -7,10 +7,11 @@
     label
     {
         width: 100%;
-        margin-bottom: 0.5rem;
         display: inline-block;
         font-size: 0.75em;
         color: #888;
+        margin-top: 4px;
+        margin-bottom: 5px;
     }
 
     div.flex-container
@@ -29,6 +30,7 @@
         .button
         {
             margin-left: 0.5rem;
+            min-width: 2rem;
         }
     }
 }

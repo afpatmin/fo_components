@@ -5,6 +5,7 @@ import 'dart:async' show Stream, StreamController;
 import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:angular_forms/angular_forms.dart';
 import '../../pipes/phrase_pipe.dart';
 
 @Component(
@@ -15,9 +16,27 @@ import '../../pipes/phrase_pipe.dart';
     pipes: const [PhrasePipe],
     visibility: Visibility.none
 )
-class FoMultiInputComponent implements OnDestroy
+class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String>
 {
-  FoMultiInputComponent();
+  FoMultiInputComponent(@Self() @Optional() NgControl cd)
+  {
+    control = cd;
+    if (control != null) control.valueAccessor = this;
+  }
+
+  @override
+  void registerOnTouched(TouchFunction f)
+  {
+  }
+
+  @override
+  void writeValue(String obj)
+  {
+    inputValue = obj;
+  }
+
+  @override
+  void registerOnChange(ChangeFunction<String> f) => _onChange = f;
 
   void ngOnDestroy()
   {
@@ -26,6 +45,7 @@ class FoMultiInputComponent implements OnDestroy
 
   void onKeyUp(html.KeyboardEvent e)
   {
+    if (_onChange != null) _onChange(inputValue);
     if (e.keyCode == html.KeyCode.ENTER || e.keyCode == html.KeyCode.MAC_ENTER) add();
   }
 
@@ -44,6 +64,9 @@ class FoMultiInputComponent implements OnDestroy
     value.remove(item);
     _onValueChangeController.add(value);
   }
+
+  ChangeFunction<String> _onChange;
+  NgControl control;
 
   @Input('label')
   String label;

@@ -48,7 +48,7 @@
             class="button"
             clear-size dense raised
             [disabled]="disabled || selectionOptions == null || selectedId == null"
-            (trigger)="onActionButtonTriggerController.add(selectedId)">
+            (trigger)="onActionButtonTriggerController.add(selectedId); onSelect(null);">
         {{actionButtonText | phrase}}
     </material-button>
 
@@ -58,7 +58,7 @@
             class="button"
             clear-size dense raised
             [disabled]="disabled || selectionOptions == null || selectedId == null"
-            (trigger)="onActionButtonTriggerController.add(selectedId)">
+            (trigger)="onActionButtonTriggerController.add(selectedId); onSelect(null);">
         <material-icon *ngIf="actionButtonIcon != null" [icon]="actionButtonIcon" size="small"></material-icon>
     </material-button>
 </div>

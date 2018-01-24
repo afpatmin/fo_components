@@ -16,9 +16,7 @@ import '../../pipes/phrase_pipe.dart';
     visibility: Visibility.none)
 class FoDateInputComponent implements OnDestroy, OnChanges
 {
-  FoDateInputComponent()
-  {
-  }
+  FoDateInputComponent();
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {

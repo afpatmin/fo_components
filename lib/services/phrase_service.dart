@@ -1,3 +1,4 @@
+import 'dart:async' show Future;
 import 'package:angular/di.dart';
 
 @Injectable()
@@ -8,11 +9,19 @@ class PhraseService
   static void set data(Map<String, Map<String, String>> value)
   {
     _data = value;
+
+    /// Fake server fetch
+    _loading = true;
+    new Future.delayed(const Duration(milliseconds: 200)).then((_) => _loading = false);
   }
 
   static void set language(String value)
   {
     _language = value;
+
+    /// Fake server fetch
+    _loading = true;
+    new Future.delayed(const Duration(milliseconds: 200)).then((_) => _loading = false);
   }
 
   String get(String key, {Map<String, String> params : null, bool capitalize_first : true})
@@ -36,6 +45,9 @@ class PhraseService
     }
   }
 
+  bool get loading => _loading;
+
+  static bool _loading = false;
   static String _language = "en";
   static Map<String, Map<String, String>> _data = new Map();
 }

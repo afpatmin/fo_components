@@ -8,6 +8,7 @@ import 'package:angular/security.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import '../../pipes/phrase_pipe.dart';
+import '../../services/phrase_service.dart';
 import '../fo_modal_component/fo_modal_component.dart';
 
 @Component(
@@ -21,7 +22,7 @@ import '../fo_modal_component/fo_modal_component.dart';
 )
 class FoSidebarComponent implements OnInit, OnDestroy
 {
-  FoSidebarComponent(this._router, this._domSanitationService);
+  FoSidebarComponent(this.phraseService, this._router, this._domSanitationService);
 
   void ngOnInit()
   {
@@ -51,15 +52,21 @@ class FoSidebarComponent implements OnInit, OnDestroy
     {
       for (FoSidebarCategory category in categories)
       {
-        FoSidebarItem item = category.items.firstWhere((item) => item.url == event, orElse: () => null);
-        if (item != null)
+        for (FoSidebarItem item in category.items)
         {
-          pageIcon = item.icon;
-          pageHeader = item.label;
-          instructionsUrl = item.instructionsUrl == null ? null : _domSanitationService.bypassSecurityTrustResourceUrl(item.instructionsUrl);
+          if (item.url == event)
+          {
+            pageIcon = item.icon;
+            pageHeader = item.label;
+            instructionsUrl = item.instructionsUrl == null ? null : _domSanitationService.bypassSecurityTrustResourceUrl(item.instructionsUrl);
+            return;
+          }
         }
       }
     }
+
+    // Auto-close on navigate
+    //if (expanded) toggleExpanded();
   }
 
   String calcIFrameWidth()
@@ -74,6 +81,7 @@ class FoSidebarComponent implements OnInit, OnDestroy
 
   String get sidebarWidth => (expanded) ? "${width}px" : "${miniWidth}px";
 
+  final PhraseService phraseService;
   final Router _router;
   final DomSanitizationService _domSanitationService;
   bool animating = false;
@@ -112,7 +120,7 @@ class FoSidebarCategory
   FoSidebarCategory(this.title, this.items);
 
   final List<FoSidebarItem> items;
-  final String title;
+  String title;
 }
 
 class FoSidebarItem
@@ -120,7 +128,7 @@ class FoSidebarItem
   FoSidebarItem(this.url, this.label, this.routerLink, this.routeParams, this.icon, [this.instructionsUrl = null]);
 
   final String url;
-  final String label;
+  String label;
   final String routerLink;
   final Map<String, String> routeParams;
   final String icon;
