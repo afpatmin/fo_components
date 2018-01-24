@@ -54,6 +54,10 @@ class FoSidebarComponent implements OnInit, OnDestroy
       {
         for (FoSidebarItem item in category.items)
         {
+          if (event.startsWith("#/")) event = event.substring("#/".length);
+          if (event.endsWith("/")) event = event.substring(0, event.length - 1);
+
+          print(event);
           if (item.url == event)
           {
             pageIcon = item.icon;
@@ -64,9 +68,6 @@ class FoSidebarComponent implements OnInit, OnDestroy
         }
       }
     }
-
-    // Auto-close on navigate
-    //if (expanded) toggleExpanded();
   }
 
   String calcIFrameWidth()
