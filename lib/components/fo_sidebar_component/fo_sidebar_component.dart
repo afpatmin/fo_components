@@ -117,11 +117,12 @@ class FoSidebarCategory
 
 class FoSidebarItem
 {
-  FoSidebarItem(this.url, this.label, this.routerLink, this.icon, [this.instructionsUrl = null]);
+  FoSidebarItem(this.url, this.label, this.routerLink, this.routeParams, this.icon, [this.instructionsUrl = null]);
 
   final String url;
   final String label;
   final String routerLink;
+  final Map<String, String> routeParams;
   final String icon;
   final String instructionsUrl;
 }

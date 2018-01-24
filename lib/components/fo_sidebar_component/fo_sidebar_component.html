@@ -13,7 +13,7 @@
                                 <div label>{{category.title | phrase}}</div>
                                 <material-list-item
                                         *ngFor="let item of category.items"
-                                        [routerLink]="[item.routerLink]">
+                                        [routerLink]="[item.routerLink, item.routeParams]">
                                     <material-icon [icon]="item.icon" baseline></material-icon>&nbsp;{{item.label | phrase}}
                                 </material-list-item>
                             </div>
@@ -23,7 +23,7 @@
                             <div *ngFor="let category of categories">
                                 <div
                                         *ngFor="let item of category.items"
-                                        [routerLink]="[item.routerLink]"
+                                        [routerLink]="[item.routerLink, item.routeParams]"
                                         class="clickable text-center padding-top-small padding-bottom-small mini-item"
                                         [materialTooltip]="item.label | phrase">
                                     <material-icon [icon]="item.icon" size="x-large" baseline></material-icon>
