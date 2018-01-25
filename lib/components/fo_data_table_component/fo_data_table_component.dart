@@ -11,6 +11,7 @@ import '../fo_select_component/fo_select_component.dart';
 import '../../models/fo_model.dart';
 import '../../pipes/phrase_pipe.dart';
 import '../../pipes/range_pipe.dart';
+import '../../services/phrase_service.dart';
 
 
 typedef String EvaluateColumnFn(FoModel model);
@@ -26,7 +27,7 @@ typedef String EvaluateColumnFn(FoModel model);
 
 class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
 {
-  DataTableComponent();
+  DataTableComponent(this.phraseService);
 
   void ngOnInit()
   {
@@ -66,6 +67,11 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
     _onWindowResizeListener.cancel();
   }
 
+  bool isBool(dynamic value)
+  {
+    return value is bool;
+  }
+
   void step(int steps)
   {
     setIndices(firstIndex + (steps * _selectedRowOption.count));
@@ -90,7 +96,8 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
           for (String col in columns)
           {
             String data = model[col]?.toString();
-            if (data != null && data.toLowerCase().contains(keyword))
+            if (data != null &&
+                phraseService.get(data).toLowerCase().contains(keyword))
             {
               allKeywords = true;
               break;
@@ -99,7 +106,7 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
           for (String col in evaluatedColumns.keys)
           {
             String data = evaluatedColumns[col](model);
-            if (data != null && data.toLowerCase().contains(keyword))
+            if (data != null && phraseService.get(data).toLowerCase().contains(keyword))
             {
               allKeywords = true;
               break;
@@ -293,6 +300,7 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
 
   StreamSubscription _onWindowResizeListener;
   final int liveSearchThreshold = 500;
+  final PhraseService phraseService;
   final StreamController<String> onAddController = new StreamController();
   final StreamController<Set<String>> onSelectedRowsController = new StreamController();
   final StreamController<String> onDeleteController = new StreamController();
