@@ -79,13 +79,7 @@
                 [class.hide-for-small]="smallHiddenCol.contains(cell)"
                 [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                 [class.hide-for-large]="largeHiddenCol.contains(cell)">
-                <span *ngIf="!isBool(evaluatedColumns[key][cell])">{{evaluatedColumns[cell](data[key]) | phrase:false}}</span>
-                <material-icon
-                        *ngIf="evaluatedColumns[key][cell] == true"
-                        baseline
-                        icon="check"
-                        size="small">
-                </material-icon>
+                <span>{{evaluatedColumns[cell](data[key]) | phrase:false}}</span>
             </td>
             <td *ngIf="showDeleteButtons" class="text-center">
                 <material-icon
