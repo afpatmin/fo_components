@@ -4,6 +4,7 @@
 import 'dart:async';
 import 'dart:html' as html;
 import 'package:angular/angular.dart';
+import 'package:angular_forms/angular_forms.dart';
 import '../../pipes/phrase_pipe.dart';
 
 @Component(
@@ -14,9 +15,13 @@ import '../../pipes/phrase_pipe.dart';
     pipes: const [PhrasePipe],
     changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.none)
-class FoDateInputComponent implements OnDestroy, OnChanges
+class FoDateInputComponent implements OnChanges, ControlValueAccessor<DateTime>
 {
-  FoDateInputComponent();
+  FoDateInputComponent(@Self() @Optional() NgControl cd)
+  {
+    control = cd;
+    if (control != null) control.valueAccessor = this;
+  }
 
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
@@ -31,18 +36,27 @@ class FoDateInputComponent implements OnDestroy, OnChanges
     }
   }
 
-  void ngOnDestroy()
-  {
-    onValueChangeController.close();
-  }
-
   void onValueChange(DateTime dt)
   {
     value = dt;
-    onValueChangeController.add(value);
+    _onChange(value);
   }
 
-  final StreamController<DateTime> onValueChangeController = new StreamController();
+  @override
+  void registerOnTouched(TouchFunction f) {}
+
+  @override
+  void writeValue(DateTime obj)
+  {
+    value = obj;
+  }
+
+  @override
+  void registerOnChange(ChangeFunction<DateTime> f) => _onChange = f;
+
+  ChangeFunction<DateTime> _onChange;
+  NgControl control;
+  DateTime value;
   html.DateInputElement _inputElement;
 
   @Input('disabled')
@@ -51,11 +65,6 @@ class FoDateInputComponent implements OnDestroy, OnChanges
   @Input('label')
   String label = "date";
 
-  @Input('value')
-  DateTime value;
-
-  @Output('valueChange')
-  Stream<DateTime> get onValueChangeOutput => onValueChangeController.stream;
 
   @ViewChild('input')
   ElementRef inputRef;

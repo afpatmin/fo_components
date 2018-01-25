@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:angular_forms/angular_forms.dart';
 import '../../pipes/phrase_pipe.dart';
 
 @Component(
@@ -15,17 +16,31 @@ import '../../pipes/phrase_pipe.dart';
     pipes: const [PhrasePipe],
     visibility: Visibility.none
 )
-class FoNumberInputComponent implements OnDestroy
+class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<num>
 {
-  FoNumberInputComponent()
+  FoNumberInputComponent(@Self() @Optional() NgControl cd)
   {
     _mouseUpListener = html.document.onMouseUp.listen(onMouseUp);
     _touchEndListener = html.document.onTouchEnd.listen(onMouseUp);
+
+    control = cd;
+    if (control != null) control.valueAccessor = this;
   }
+
+  @override
+  void registerOnTouched(TouchFunction f) {}
+
+  @override
+  void writeValue(num obj)
+  {
+    value = obj;
+  }
+
+  @override
+  void registerOnChange(ChangeFunction<num> f) => _onChange = f;
 
   void ngOnDestroy()
   {
-    _onValueChangeController.close();
     _mouseUpListener.cancel();
     _touchEndListener.cancel();
   }
@@ -61,11 +76,17 @@ class FoNumberInputComponent implements OnDestroy
     if (value + count >= min && value + count <= max)
     {
       value += count;
-      _onValueChangeController.add(value);
+      _onChange(value);
     }
   }
 
-  final StreamController<num> _onValueChangeController = new StreamController();
+  ChangeFunction<num> _onChange;
+  NgControl control;
+  num value = 0;
+  StreamSubscription<html.MouseEvent> _mouseUpListener;
+  StreamSubscription<html.TouchEvent> _touchEndListener;
+  Timer autoAddTimer;
+  Timer addStepTimer;
 
   @Input('disabled')
   bool disabled = false;
@@ -87,16 +108,4 @@ class FoNumberInputComponent implements OnDestroy
 
   @Input('trailingText')
   String trailingText = "";
-
-  @Input('value')
-  num value = 0;
-
-  @Output('valueChange')
-  Stream<num> get onValueChangeOutput => _onValueChangeController.stream;
-
-
-  StreamSubscription<html.MouseEvent> _mouseUpListener;
-  StreamSubscription<html.TouchEvent> _touchEndListener;
-  Timer autoAddTimer;
-  Timer addStepTimer;
 }
