@@ -16,7 +16,7 @@ import '../../pipes/phrase_pipe.dart';
     pipes: const [PhrasePipe],
     visibility: Visibility.none
 )
-class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<num>
+class FoNumberInputComponent implements OnChanges, OnDestroy, ControlValueAccessor<num>
 {
   FoNumberInputComponent(@Self() @Optional() NgControl cd)
   {
@@ -38,6 +38,16 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<num>
 
   @override
   void registerOnChange(ChangeFunction<num> f) => _onChange = f;
+
+  void ngOnChanges(Map<String, SimpleChange> changes)
+  {
+    if (changes.containsKey("step"))
+    {
+      String strStep = step.toString();
+      _precision = (strStep.contains(".")) ?
+        strStep.length - strStep.indexOf(".") - 1 : 0;
+    }
+  }
 
   void ngOnDestroy()
   {
@@ -69,10 +79,17 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<num>
     addStepTimer = null;
   }
   
-  String get formattedValue => (value is int) ? value.toString() : value.toStringAsFixed(2);
+  String get formattedValue
+  {
+    if (value == null) return "0";
+    else if (value is int) return value.toString();
+    else return value.toStringAsFixed(_precision);
+  }
 
   void add(num count)
   {
+    if (value == null) value = (count is double) ? 0.0 : 0;
+
     if (value + count >= min && value + count <= max)
     {
       value += count;
@@ -82,11 +99,12 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<num>
 
   ChangeFunction<num> _onChange;
   NgControl control;
-  num value = 0;
+  num value;
   StreamSubscription<html.MouseEvent> _mouseUpListener;
   StreamSubscription<html.TouchEvent> _touchEndListener;
   Timer autoAddTimer;
   Timer addStepTimer;
+  int _precision = 0;
 
   @Input('disabled')
   bool disabled = false;
