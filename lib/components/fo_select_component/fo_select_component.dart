@@ -14,7 +14,6 @@ import '../../models/fo_model.dart';
     templateUrl: 'fo_select_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives, FoModalComponent],
     pipes: const [PhrasePipe],
-    changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.none
 )
 class FoSelectComponent implements OnChanges, OnDestroy
