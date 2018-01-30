@@ -13,37 +13,34 @@ import '../../models/fo_model.dart';
     templateUrl: 'fo_multi_select_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives],
     pipes: const [PhrasePipe],
-    visibility: Visibility.none
-)
-class FoMultiSelectComponent implements OnChanges, OnDestroy
-{
+    visibility: Visibility.none)
+class FoMultiSelectComponent implements OnChanges, OnDestroy {
   FoMultiSelectComponent();
 
-  void ngOnChanges(Map<String, SimpleChange> changes)
-  {
-    if (changes.containsKey("options") && options != null)
-    {
+  void ngOnChanges(Map<String, SimpleChange> changes) {
+    if (changes.containsKey("options") && options != null) {
       var prev = changes["options"].previousValue;
       var cur = changes["options"].currentValue;
 
       /// List equality check, skip if equal contents
-      if (prev == null || cur == null || prev.length != cur.length || prev.where(cur.contains).length != cur.length)
-      {
+      if (prev == null ||
+          cur == null ||
+          prev.length != cur.length ||
+          prev.where(cur.contains).length != cur.length) {
         /// Convert List<FoModel> to StringSelectionOptions<FoModel>
-        selectionOptions = new StringSelectionOptions(options.toList(growable: false), shouldSort: true);
+        selectionOptions = new StringSelectionOptions(
+            options.toList(growable: false),
+            shouldSort: true);
       }
     }
   }
 
-  void ngOnDestroy()
-  {
+  void ngOnDestroy() {
     _onVisibleChangeController.close();
     _onSelectedIdsChangeController.close();
   }
 
-
-  void onReorder(ReorderEvent event)
-  {
+  void onReorder(ReorderEvent event) {
     /*
     OptionModel sourceModel = selectedModels.elementAt(event.sourceIndex);
     selectedModels.removeAt(event.sourceIndex);
@@ -55,33 +52,30 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
     */
   }
 
-  void onToggle(String id, bool status)
-  {
-    try
-    {
-      if (status == true)
-      {
+  void onToggle(String id, bool status) {
+    try {
+      if (status == true) {
         selectedIds.add(id);
-      }
-      else
-      {
+      } else {
         selectedIds.remove(id);
       }
       _onSelectedIdsChangeController.add(selectedIds);
-    }
-    on UnsupportedError catch (e)
-    {
+    } on UnsupportedError catch (e) {
       print(e.toString());
       selectedIds = new List.from(selectedIds, growable: true);
       onToggle(id, status);
     }
   }
 
-  FoModel getModel(String id) => selectionOptions.optionsList.firstWhere((model) => model.id == id, orElse: () => null);
+  FoModel getModel(String id) => selectionOptions.optionsList
+      .firstWhere((model) => model.id == id, orElse: () => null);
 
-  StringSelectionOptions<FoModel> selectionOptions = new StringSelectionOptions([]);
-  final StreamController<bool> _onVisibleChangeController = new StreamController();
-  final StreamController<List<String>> _onSelectedIdsChangeController = new StreamController();
+  StringSelectionOptions<FoModel> selectionOptions =
+      new StringSelectionOptions([]);
+  final StreamController<bool> _onVisibleChangeController =
+      new StreamController();
+  final StreamController<List<String>> _onSelectedIdsChangeController =
+      new StreamController();
 
   @Input('allowReorder')
   bool allowReorder = false;
@@ -117,5 +111,6 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
 
   @Output('selectedIdsChange')
-  Stream<List<String>> get onSelectedIdsChangeOutput => _onSelectedIdsChangeController.stream;
+  Stream<List<String>> get onSelectedIdsChangeOutput =>
+      _onSelectedIdsChangeController.stream;
 }
