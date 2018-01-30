@@ -136,20 +136,17 @@ class FoLoginComponent implements OnChanges, OnDestroy
 
   final StreamController<Map<String, String>> _onLoginController = new StreamController();
 
-  @Input('username')
+  @Input()
   String username = "";
 
-  @Input('password')
+  @Input()
   String password = "";
 
-  @Input('client')
+  @Input()
   ViAuthClient client;
 
-  @Input('showForgotPassword')
+  @Input()
   bool showForgotPassword = true;
-
-  @Input('title')
-  String strTitle = "Login";
 
   /**
    * This is the message which will be sent to the user by email when attempting
@@ -158,20 +155,23 @@ class FoLoginComponent implements OnChanges, OnDestroy
    * %password% placeholders are replaced by a new auto-generated password
    * %username% placeholders are replaced by the users username
    */
-  @Input('recoverPasswordMessageEmail')
+  @Input()
   String recoverPasswordMessageEmail; // = "token: %token%, username/password: %username% / %password%";
 
-  @Input('recoverPasswordSubjectEmail')
+  @Input()
   String recoverPasswordSubjectEmail = "Recover your password";
 
-  @Input('recoverPasswordFromEmail')
+  @Input()
   String recoverPasswordFromEmail;
 
-  @Input('recoverPasswordMessageSMS')
+  @Input()
   String recoverPasswordMessageSMS; // = "token: %token%, username/password: %username% / %password%";
 
-  @Input('recoverPasswordFromSMS')
+  @Input()
   String recoverPasswordFromSMS;
+
+  @Input()
+  String titleImageUrl;
 
   @Output('login')
   Stream<Map<String, String>> get onLoginOutput => _onLoginController.stream;

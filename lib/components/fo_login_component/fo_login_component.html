@@ -1,9 +1,11 @@
 <fo-modal
         *ngIf="visible && client != null"
-        title="{{strTitle | phrase}} - {{state | phrase}}"
         [visible]="true"
+        [whiteHeader]="true"
         [showCloseButton]="false"
+        [titleImageUrl]="titleImageUrl"
         [error]="errorMessage | phrase">
+    <h4>{{state | phrase}}</h4>
     <div class="login-container" *ngIf="state == 'login'">
         <material-input
                 [disabled]="client.loading"

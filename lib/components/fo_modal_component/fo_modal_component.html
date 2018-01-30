@@ -1,21 +1,23 @@
 <modal [visible]="visible">
     <material-dialog
             headered
+            [class.white-header]="whiteHeader"
             [class.fixed-height]="fixedHeight"
             [class.fixed-width]="fixedWidth"
             [error]="error | phrase">
-        <div class="header" header>
-            <h3>
-                {{title | phrase}}
-                <material-button
-                        *ngIf="showCloseButton"
-                        class="float-right"
-                        raised
-                        clear-size
-                        (trigger)="close()">
-                    <material-icon icon="close" size="medium"></material-icon>
-                </material-button>
-            </h3>
+        <div header>
+            <div class="flexContainer">
+                <img *ngIf="titleImageUrl != null" [src]="titleImageUrl" alt="title" />
+                <h3 *ngIf="titleImageUrl == null && title != null">{{title | phrase}}</h3>
+                <div id="closeButtonContainer">
+                    <material-button
+                            *ngIf="showCloseButton"
+                            raised dense clear-size
+                            (trigger)="close()">
+                        <material-icon icon="close" size="medium"></material-icon>
+                    </material-button>
+                </div>
+            </div>
         </div>
         <div class="modal-content">
             <ng-content></ng-content>

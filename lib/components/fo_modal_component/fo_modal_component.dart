@@ -29,28 +29,31 @@ class FoModalComponent implements OnDestroy
     visible = false;
   }
 
-  @Input('visible')
+  @Input()
   bool visible = false;
 
-  @Input('title')
-  String title = "";
+  @Input()
+  String title;
 
-  @Input('error')
+  @Input()
+  String titleImageUrl;
+
+  @Input()
   String error;
 
-  @Input('fixedWidth')
+  @Input()
   bool fixedWidth = false;
 
-  @Input('fixedHeight')
+  @Input()
   bool fixedHeight = false;
 
-  @Input('headerBackgroundColor')
-  String headerBackgroundColor = "#333";
+  @Input()
+  bool whiteHeader = false;
 
-  @Input('showCloseButton')
+  @Input()
   bool showCloseButton = true;
 
-  @Output('visibleChange')
+  @Output()
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
 
   final StreamController<bool> _onVisibleChangeController = new StreamController();

@@ -1,6 +1,19 @@
 @import 'package:grid/grid';
 @import 'package:grid/theme';
-//@import 'package:angular_components/material_dialog/mixins';
+@import 'package:angular_components/material_dialog/mixins';
+
+material-dialog.white-header
+{
+    @include material-dialog-header-color(#fff);
+
+    [header]
+    {
+        h3
+        {
+            color: #333;
+        }
+    }
+}
 
 material-dialog
 {
@@ -11,17 +24,29 @@ material-dialog
     max-height: 95vh;
     text-align: left;
 
-    //@include material-dialog-header-color(#fff);
-
     [header]
     {
-        h3
+        div.flexContainer
         {
-            margin-left: 5px;
-            line-height: 160%;
-            material-button
+            display: flex;
+
+            img
             {
-                margin-left: 1rem;
+                width: 50%;
+                align-self: flex-start;
+            }
+
+            h3
+            {
+                align-self: center;
+            }
+
+            div#closeButtonContainer
+            {
+                flex: auto;
+                align-self: flex-start;
+                //justify-content: flex-end;
+                text-align: right;
             }
         }
     }
