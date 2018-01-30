@@ -45,7 +45,6 @@ material-dialog
             {
                 flex: auto;
                 align-self: flex-start;
-                //justify-content: flex-end;
                 text-align: right;
             }
         }
@@ -76,9 +75,4 @@ material-dialog.fixed-width
 {
     width: 90vw;
     max-width: $maxWidth;
-}
-
-.float-right
-{
-    float: right;
 }
