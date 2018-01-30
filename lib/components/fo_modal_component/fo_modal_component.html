@@ -9,9 +9,8 @@
             <div class="flexContainer">
                 <img *ngIf="titleImageUrl != null" [src]="titleImageUrl" alt="title" />
                 <h3 *ngIf="titleImageUrl == null && title != null">{{title | phrase}}</h3>
-                <div id="closeButtonContainer">
+                <div *ngIf="showCloseButton" id="closeButtonContainer">
                     <material-button
-                            *ngIf="showCloseButton"
                             raised dense clear-size
                             (trigger)="close()">
                         <material-icon icon="close" size="medium"></material-icon>

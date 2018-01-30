@@ -5,7 +5,7 @@
         [showCloseButton]="false"
         [titleImageUrl]="titleImageUrl"
         [error]="errorMessage | phrase">
-    <h4>{{state | phrase}}</h4>
+    <h4 class="title">{{state | phrase}}</h4>
     <div class="login-container" *ngIf="state == 'login'">
         <material-input
                 [disabled]="client.loading"
