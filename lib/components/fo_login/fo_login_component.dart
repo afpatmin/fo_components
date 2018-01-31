@@ -6,7 +6,7 @@ import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:vi_auth_client/vi_auth_client.dart';
-import '../fo_modal_component/fo_modal_component.dart';
+import '../fo_modal/fo_modal_component.dart';
 import '../../pipes/phrase_pipe.dart';
 
 @Component(

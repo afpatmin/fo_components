@@ -6,8 +6,8 @@ import 'dart:html' as dom;
 import 'dart:math';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import '../fo_modal_component/fo_modal_component.dart';
-import '../fo_select_component/fo_select_component.dart';
+import '../fo_modal/fo_modal_component.dart';
+import '../fo_select/fo_select_component.dart';
 import '../../models/fo_model.dart';
 import '../../pipes/phrase_pipe.dart';
 import '../../pipes/range_pipe.dart';
@@ -219,7 +219,7 @@ class DataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
 
 
       String csv = Uri.encodeComponent(sb.toString());
-      /* \uFEFF: UTF-8 BOM */
+      /* UTF-8 BOM */
       new dom.AnchorElement(href:"data:text/csv;charset=utf-8,\uFEFF$csv")
         ..setAttribute("download", "data.csv")
         ..click();

@@ -4,7 +4,7 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import '../fo_multi_select_component/fo_multi_select_component.dart';
+import '../fo_multi_select/fo_multi_select_component.dart';
 import '../../pipes/phrase_pipe.dart';
 import '../../models/fo_model.dart';
 

@@ -9,7 +9,7 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 import '../../pipes/phrase_pipe.dart';
 import '../../services/phrase_service.dart';
-import '../fo_modal_component/fo_modal_component.dart';
+import '../fo_modal/fo_modal_component.dart';
 
 @Component(
     selector: 'fo-sidebar',

@@ -4,7 +4,7 @@
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular/angular.dart';
 import '../../pipes/phrase_pipe.dart';
-import '../fo_select_component/fo_select_component.dart';
+import '../fo_select/fo_select_component.dart';
 import '../../models/fo_model.dart';
 
 @Component(
