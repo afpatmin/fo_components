@@ -1,0 +1,59 @@
+<h1>FoComponents Demo</h1>
+
+<h2>Data Table</h2>
+<fo-data-table
+        label="Title"
+        [columns]="['id', 'name', 'email', 'phone', 'start', 'active', 'nullValue']"
+        [evaluatedColumns]="evaluatedColumns"
+        [data]="modelService.data"
+        [disabled]="false"
+        [small-hidden-col]="['start']"
+        [batchOperations]="batchOperations"
+        [showAddButton]="true"
+        [showCheckboxes]="false"
+        [showDeleteButtons]="false"
+        [showDownloadButton]="true">
+</fo-data-table>
+
+
+<div>
+    <h2>Date</h2>
+    <fo-date-input
+            label="today"
+            [(ngModel)]="date">
+    </fo-date-input>
+    <p>{{date}}</p>
+</div>
+
+<div>
+    <h2>Time</h2>
+    <fo-time-input
+            label="tidpunkt"
+            [(ngModel)]="time">
+    </fo-time-input>
+</div>
+
+<div>
+    <h2>Multi-select</h2>
+    <fo-multi-select
+            label="options"
+            [options]="batchOperations"
+            [selectedIds]="null">
+    </fo-multi-select>
+</div>
+
+<div>
+    <h2>Number-Input</h2>
+    <fo-number-input
+            label="name"
+            [step]="0.18"
+            [ngModel]="number"
+            (ngModelChange)="number = $event">
+    </fo-number-input>
+    <p>{{number}}</p>
+</div>
+
+<fo-login
+        [client]="authClient"
+        titleImageUrl="http://via.placeholder.com/350x150">
+</fo-login>
