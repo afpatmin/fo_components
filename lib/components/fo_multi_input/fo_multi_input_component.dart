@@ -14,13 +14,12 @@ import '../../pipes/phrase_pipe.dart';
     templateUrl: 'fo_multi_input_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives],
     pipes: const [PhrasePipe],
-    visibility: Visibility.none
+    visibility: Visibility.local
 )
 class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String>
 {
-  FoMultiInputComponent(@Self() @Optional() NgControl cd)
+  FoMultiInputComponent(@Self() @Optional() this.control)
   {
-    control = cd;
     if (control != null) control.valueAccessor = this;
   }
 
@@ -38,6 +37,7 @@ class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String>
   @override
   void registerOnChange(ChangeFunction<String> f) => _onChange = f;
 
+  @override
   void ngOnDestroy()
   {
     _onValueChangeController.close();
@@ -55,7 +55,7 @@ class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String>
     {
       value.add(inputValue);
       _onValueChangeController.add(value);
-      inputValue = "";
+      inputValue = '';
     }
   }
 
@@ -68,21 +68,21 @@ class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String>
   ChangeFunction<String> _onChange;
   NgControl control;
 
-  @Input('label')
+  @Input()
   String label;
 
-  @Input('leadingText')
-  String leadingText = "";
+  @Input()
+  String leadingText = '';
 
-  @Input('maxLength')
+  @Input()
   String maxLength;
 
-  String inputValue = "";
+  String inputValue = '';
 
   final StreamController<List<String>> _onValueChangeController = new StreamController();
 
-  @Input('value')
-  List<String> value = new List();
+  @Input()
+  List<String> value = [];
 
   @Output('valueChange')
   Stream<List<String>> get onValueChangeOutput => _onValueChangeController.stream;

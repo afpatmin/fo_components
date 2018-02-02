@@ -4,9 +4,9 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import '../fo_modal/fo_modal_component.dart';
-import '../../pipes/phrase_pipe.dart';
 import '../../models/fo_model.dart';
+import '../../pipes/phrase_pipe.dart';
+import '../fo_modal/fo_modal_component.dart';
 
 @Component(
     selector: 'fo-select',
@@ -14,40 +14,40 @@ import '../../models/fo_model.dart';
     templateUrl: 'fo_select_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives, FoModalComponent],
     pipes: const [PhrasePipe],
-    visibility: Visibility.none
-)
-class FoSelectComponent implements OnChanges, OnDestroy
-{
+    visibility: Visibility.local)
+class FoSelectComponent implements OnChanges, OnDestroy {
   FoSelectComponent();
 
-  void onSelect(String id)
-  {
+  void onSelect(String id) {
     selectedId = id;
     _onSelectedIdChangeController.add(id);
   }
 
-  void ngOnChanges(Map<String, SimpleChange> changes)
-  {
-    if (changes.containsKey("options"))
-    {
-      if (options == null) selectionOptions = new StringSelectionOptions([]);
-      else
-      {
-        var prev = changes["options"].previousValue;
-        var cur = changes["options"].currentValue;
+  @override
+  void ngOnChanges(Map<String, SimpleChange> changes) {
+    if (changes.containsKey('options')) {
+      if (options == null)
+        selectionOptions = new StringSelectionOptions([]);
+      else {
+        final prev = changes['options'].previousValue;
+        final cur = changes['options'].currentValue;
 
         /// List equality check, skip if equal contents
-        if (prev == null || cur == null || prev.length != cur.length || prev.where(cur.contains).length != cur.length)
-        {
+        if (prev == null ||
+            cur == null ||
+            prev.length != cur.length ||
+            prev.where(cur.contains).length != cur.length) {
           /// Convert List<FoModel> to StringSelectionOptions<FoModel>
-          selectionOptions = new StringSelectionOptions(options.toList(growable: false), shouldSort: sort);
+          selectionOptions = new StringSelectionOptions(
+              options.toList(growable: false),
+              shouldSort: sort);
         }
       }
     }
   }
 
-  void ngOnDestroy()
-  {
+  @override
+  void ngOnDestroy() {
     _onVisibleChangeController.close();
     _onSelectedIdChangeController.close();
     onActionButtonTriggerController.close();
@@ -55,69 +55,72 @@ class FoSelectComponent implements OnChanges, OnDestroy
 
   void setVisible(bool flag) => visible = (disabled) ? visible : flag;
 
-  FoModel get selectedModel => selectionOptions.optionsList.firstWhere((o) => o.id == selectedId, orElse: () => null);
+  FoModel get selectedModel => selectionOptions.optionsList
+      .firstWhere((o) => o.id == selectedId, orElse: () => null);
 
-  StringSelectionOptions<FoModel> selectionOptions = new StringSelectionOptions<FoModel>([]);
+  StringSelectionOptions<FoModel> selectionOptions =
+      new StringSelectionOptions<FoModel>([]);
 
-  final StreamController<bool> _onVisibleChangeController = new StreamController();
-  final StreamController<String> _onSelectedIdChangeController = new StreamController();
-  final StreamController<String> onActionButtonTriggerController = new StreamController();
+  final StreamController<bool> _onVisibleChangeController =
+      new StreamController();
+  final StreamController<String> _onSelectedIdChangeController =
+      new StreamController();
+  final StreamController<String> onActionButtonTriggerController =
+      new StreamController();
 
   bool tooltipModalVisible = false;
 
-  @Input('actionButtonIcon')
+  @Input()
   String actionButtonIcon;
 
-  @Input('actionButtonText')
+  @Input()
   String actionButtonText;
 
-  @Input('allowNullSelection')
+  @Input()
   bool allowNullSelection = false;
 
-  @Input('componentRenderer')
-  ComponentRenderer componentRenderer;
+  @Input()
+  String nullSelectionButtonText = '-';
 
-  @Input('nullSelectionButtonText')
-  String nullSelectionButtonText = "-";
+  @Input()
+  String label = '';
 
-  @Input('label')
-  String label = "";
-
-  @Input('disabled')
+  @Input()
   bool disabled = false;
 
-  @Input('fullWidth')
+  @Input()
   bool fullWidth = false;
 
-  @Input('icon')
+  @Input()
   bool icon = false;
 
-  @Input('options')
+  @Input()
   Iterable<FoModel> options = [];
 
-  @Input('selectedId')
+  @Input()
   String selectedId;
 
-  @Input('showActionButton')
+  @Input()
   bool showActionButton = false;
 
-  @Input('showSearch')
+  @Input()
   bool showSearch = false;
 
-  @Input('sort')
+  @Input()
   bool sort = true;
 
-  @Input('tooltip')
+  @Input()
   String tooltip;
 
-  @Input('visible')
+  @Input()
   bool visible = false;
 
   @Output('selectedIdChange')
   Stream<String> get onSelectedIdChange => _onSelectedIdChangeController.stream;
 
   @Output('actionButtonTrigger')
-  Stream<String> get onActionButtonTrigger => onActionButtonTriggerController.stream;
+  Stream<String> get onActionButtonTrigger =>
+      onActionButtonTriggerController.stream;
 
   @Output('visibleChange')
   Stream<bool> get onVisibleChange => _onVisibleChangeController.stream;

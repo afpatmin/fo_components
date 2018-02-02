@@ -6,8 +6,8 @@ import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:vi_auth_client/vi_auth_client.dart';
-import '../fo_modal/fo_modal_component.dart';
 import '../../pipes/phrase_pipe.dart';
+import '../fo_modal/fo_modal_component.dart';
 
 @Component(
     selector: 'fo-login',
@@ -15,20 +15,22 @@ import '../../pipes/phrase_pipe.dart';
     templateUrl: 'fo_login_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives, FoModalComponent],
     pipes: const [PhrasePipe],
-    visibility: Visibility.none
+    visibility: Visibility.local
 )
 class FoLoginComponent implements OnChanges, OnDestroy
 {
   FoLoginComponent();
 
+  @override
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-    if (changes.containsKey("client") && Uri.base.queryParameters.containsKey("token"))
+    if (changes.containsKey('client') && Uri.base.queryParameters.containsKey('token'))
     {
-      _tryLoginToken(Uri.base.queryParameters["token"]);
+      _tryLoginToken(Uri.base.queryParameters['token']);
     }
   }
 
+  @override
   void ngOnDestroy()
   {
     _onLoginController.close();
@@ -39,13 +41,13 @@ class FoLoginComponent implements OnChanges, OnDestroy
     try
     {
       errorMessage = null;
-      String token = await client.loginWithUsernamePassword(username, password);
-      _onLoginController.add({"username":username, "token":token});
+      final token = await client.loginWithUsernamePassword(username, password);
+      _onLoginController.add({'username':username, 'token':token});
       visible = false;
     }
     on Exception
     {
-      errorMessage = "invalid_details";
+      errorMessage = 'invalid_details';
     }
   }
 
@@ -82,10 +84,10 @@ class FoLoginComponent implements OnChanges, OnDestroy
             smsFrom: recoverPasswordFromSMS);
 
         recoverPasswordSent = true;
-        state = "reset_password";
+        state = 'reset_password';
       }
 
-      catch (e, s) { print(s); errorMessage = e.message; }
+      on Exception catch (e, s) { print(s); errorMessage = e.toString(); }
     }
   }
 
@@ -95,19 +97,19 @@ class FoLoginComponent implements OnChanges, OnDestroy
     {
       errorMessage = null;
       await client.updatePassword(username, password, token);
-      token = "";
-      setState("login");
+      token = '';
+      setState('login');
     }
-    catch (e, s)
+    on Exception catch (e, s)
     {
       print(s);
-      errorMessage = e.message;
+      errorMessage = e.toString();
     }
   }
 
-  void setState(String new_state)
+  void setState(String newState)
   {
-    state = new_state;
+    state = newState;
     recoverPasswordSent = false;
     errorMessage = null;
   }
@@ -117,19 +119,19 @@ class FoLoginComponent implements OnChanges, OnDestroy
     try
     {
       visible = false;
-      String newToken = await client.loginWithToken(token);
-      _onLoginController.add({"username":username, "token":newToken});
+      final newToken = await client.loginWithToken(token);
+      _onLoginController.add({'username':username, 'token':newToken});
     }
-    catch(e)
+    on Exception catch(e)
     {
       print(e.toString());
       visible = true;
     }
   }
 
-  String token = "";
+  String token = '';
 
-  String state = "login";
+  String state = 'login';
   String errorMessage;
   bool recoverPasswordSent = false;
   bool visible = true;
@@ -137,10 +139,10 @@ class FoLoginComponent implements OnChanges, OnDestroy
   final StreamController<Map<String, String>> _onLoginController = new StreamController();
 
   @Input()
-  String username = "";
+  String username = '';
 
   @Input()
-  String password = "";
+  String password = '';
 
   @Input()
   ViAuthClient client;
@@ -148,24 +150,22 @@ class FoLoginComponent implements OnChanges, OnDestroy
   @Input()
   bool showForgotPassword = true;
 
-  /**
-   * This is the message which will be sent to the user by email when attempting
-   * recover its password.
-   * %token% placeholders are replaced by a new valid token
-   * %password% placeholders are replaced by a new auto-generated password
-   * %username% placeholders are replaced by the users username
-   */
+  /// This is the message which will be sent to the user by email when attempting
+  /// recover its password.
+  /// %token% placeholders are replaced by a new valid token
+  /// %password% placeholders are replaced by a new auto-generated password
+  /// %username% placeholders are replaced by the users username
   @Input()
-  String recoverPasswordMessageEmail; // = "token: %token%, username/password: %username% / %password%";
+  String recoverPasswordMessageEmail; // = 'token: %token%, username/password: %username% / %password%';
 
   @Input()
-  String recoverPasswordSubjectEmail = "Recover your password";
+  String recoverPasswordSubjectEmail = 'Recover your password';
 
   @Input()
   String recoverPasswordFromEmail;
 
   @Input()
-  String recoverPasswordMessageSMS; // = "token: %token%, username/password: %username% / %password%";
+  String recoverPasswordMessageSMS; // = 'token: %token%, username/password: %username% / %password%';
 
   @Input()
   String recoverPasswordFromSMS;

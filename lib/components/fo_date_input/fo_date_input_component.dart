@@ -6,6 +6,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import '../../pipes/phrase_pipe.dart';
 
+/// DateInputComponent is exactly what it name says it is
 @Component(
     selector: 'fo-date-input',
     templateUrl: 'fo_date_input_component.html',
@@ -13,15 +14,17 @@ import '../../pipes/phrase_pipe.dart';
     directives: const [CORE_DIRECTIVES],
     pipes: const [PhrasePipe],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    visibility: Visibility.none)
+    visibility: Visibility.local)
 class FoDateInputComponent implements OnChanges, ControlValueAccessor<DateTime>
 {
-  FoDateInputComponent(@Self() @Optional() NgControl cd)
+  /// Constructor
+  FoDateInputComponent(@Self() @Optional() this.control)
   {
-    control = cd;
-    if (control != null) control.valueAccessor = this;
+    if (control != null)
+      control.valueAccessor = this;
   }
 
+  @override
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
     _inputElement = inputRef.nativeElement;
@@ -58,11 +61,11 @@ class FoDateInputComponent implements OnChanges, ControlValueAccessor<DateTime>
   DateTime value;
   html.DateInputElement _inputElement;
 
-  @Input('disabled')
+  @Input()
   bool disabled = false;
 
-  @Input('label')
-  String label = "date";
+  @Input()
+  String label = 'date';
 
 
   @ViewChild('input')

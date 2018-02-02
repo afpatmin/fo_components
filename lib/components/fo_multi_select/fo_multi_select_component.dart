@@ -4,8 +4,8 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import '../../pipes/phrase_pipe.dart';
 import '../../models/fo_model.dart';
+import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-multi-select',
@@ -13,14 +13,15 @@ import '../../models/fo_model.dart';
     templateUrl: 'fo_multi_select_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives],
     pipes: const [PhrasePipe],
-    visibility: Visibility.none)
+    visibility: Visibility.local)
 class FoMultiSelectComponent implements OnChanges, OnDestroy {
   FoMultiSelectComponent();
 
+  @override
   void ngOnChanges(Map<String, SimpleChange> changes) {
-    if (changes.containsKey("options") && options != null) {
-      var prev = changes["options"].previousValue;
-      var cur = changes["options"].currentValue;
+    if (changes.containsKey('options') && options != null) {
+      final prev = changes['options'].previousValue;
+      final cur = changes['options'].currentValue;
 
       /// List equality check, skip if equal contents
       if (prev == null ||
@@ -35,6 +36,7 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy {
     }
   }
 
+  @override
   void ngOnDestroy() {
     _onVisibleChangeController.close();
     _onSelectedIdsChangeController.close();
@@ -53,18 +55,12 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy {
   }
 
   void onToggle(String id, bool status) {
-    try {
-      if (status == true) {
-        selectedIds.add(id);
-      } else {
-        selectedIds.remove(id);
-      }
-      _onSelectedIdsChangeController.add(selectedIds);
-    } on UnsupportedError catch (e) {
-      print(e.toString());
-      selectedIds = new List.from(selectedIds, growable: true);
-      onToggle(id, status);
+    if (status == true) {
+      selectedIds.add(id);
+    } else {
+      selectedIds.remove(id);
     }
+    _onSelectedIdsChangeController.add(selectedIds);
   }
 
   FoModel getModel(String id) => selectionOptions.optionsList
@@ -77,34 +73,34 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy {
   final StreamController<List<String>> _onSelectedIdsChangeController =
       new StreamController();
 
-  @Input('allowReorder')
+  @Input()
   bool allowReorder = false;
 
-  @Input('buttonText')
+  @Input()
   String buttonText = 'select';
 
-  @Input('disabled')
+  @Input()
   bool disabled = false;
 
-  @Input('fullWidth')
+  @Input()
   bool fullWidth = false;
 
-  @Input('label')
-  String label = "";
+  @Input()
+  String label = '';
 
-  @Input('nullSelectionButtonText')
-  String nullSelectionButtonText = "-";
+  @Input()
+  String nullSelectionButtonText = '-';
 
-  @Input('options')
+  @Input()
   Iterable<FoModel> options;
 
-  @Input('selectedIds')
-  List<String> selectedIds = new List();
+  @Input()
+  List<String> selectedIds = [];
 
-  @Input('showSearch')
+  @Input()
   bool showSearch = false;
 
-  @Input('visible')
+  @Input()
   bool visible = false;
 
   @Output('visibleChange')

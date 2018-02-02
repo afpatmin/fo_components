@@ -10,14 +10,15 @@ import '../../pipes/phrase_pipe.dart';
 @Component(
     selector: 'fo-file-upload',
     templateUrl: 'fo_file_upload_component.html',
-    styleUrls: const ['fo_file_upload_component.scss.css'],
-    directives: const [CORE_DIRECTIVES, materialDirectives],
-    pipes: const [PhrasePipe],
-    visibility: Visibility.none)
+    styleUrls: const <String> ['fo_file_upload_component.scss.css'],
+    directives: const <dynamic> [CORE_DIRECTIVES, materialDirectives],
+    pipes: const <Type> [PhrasePipe],
+    visibility: Visibility.local)
 class FileUploadComponent implements OnDestroy
 {
   FileUploadComponent();
 
+  @override
   void ngOnDestroy()
   {
     onUploadController.close();
@@ -26,11 +27,11 @@ class FileUploadComponent implements OnDestroy
   void onDrop(dom.MouseEvent event)
   {
     event.preventDefault();
-    dom.DataTransfer dt = event.dataTransfer;
+    final dt = event.dataTransfer;
     file = (dt.files.isEmpty) ? null : file = dt.files.last;
   }
 
-  void onFileChange(dynamic event)
+  void onFileChange(dom.Event event)
   {
     _fileInput = event.target;
     file = (_fileInput.files.isNotEmpty) ? _fileInput.files.last : null;
@@ -39,7 +40,7 @@ class FileUploadComponent implements OnDestroy
   void clearSelection()
   {
     file = null;
-    _fileInput?.value = "";
+    _fileInput?.value = '';
   }
 
   void upload()
@@ -53,16 +54,16 @@ class FileUploadComponent implements OnDestroy
   dom.FileUploadInputElement _fileInput;
   dom.File file;
 
-  @Input('accept')
-  String accept = "image/*,.pdf";
+  @Input()
+  String accept = 'image/*,.pdf';
 
-  @Input('disabled')
+  @Input()
   bool disabled = false;
 
-  @Input('label')
-  String label = "File";
+  @Input()
+  String label = 'File';
 
-  @Input('maxByteSize')
+  @Input()
   int maxByteSize = 1048576;
 
   @Output('upload')

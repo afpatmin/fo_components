@@ -12,12 +12,13 @@ import '../../pipes/phrase_pipe.dart';
     templateUrl: 'fo_modal_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives],
     pipes: const [PhrasePipe],
-    visibility: Visibility.none
+    visibility: Visibility.local
 )
 class FoModalComponent implements OnDestroy
 {
   FoModalComponent();
 
+  @override
   void ngOnDestroy()
   {
     _onVisibleChangeController.close();

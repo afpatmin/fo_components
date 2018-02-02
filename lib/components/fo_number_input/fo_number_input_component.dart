@@ -14,84 +14,79 @@ import '../../pipes/phrase_pipe.dart';
     templateUrl: 'fo_number_input_component.html',
     directives: const [CORE_DIRECTIVES, materialDirectives],
     pipes: const [PhrasePipe],
-    visibility: Visibility.none
-)
-class FoNumberInputComponent implements OnChanges, OnDestroy, ControlValueAccessor<num>
-{
-  FoNumberInputComponent(@Self() @Optional() NgControl cd)
-  {
+    visibility: Visibility.local)
+class FoNumberInputComponent
+    implements OnChanges, OnDestroy, ControlValueAccessor<num> {
+  FoNumberInputComponent(@Self() @Optional() this.control) {
     _mouseUpListener = html.document.onMouseUp.listen(onMouseUp);
     _touchEndListener = html.document.onTouchEnd.listen(onMouseUp);
 
-    control = cd;
-    if (control != null) control.valueAccessor = this;
+    if (control != null)
+      control.valueAccessor = this;
   }
 
   @override
   void registerOnTouched(TouchFunction f) {}
 
   @override
-  void writeValue(num obj)
-  {
+  void writeValue(num obj) {
     value = obj;
   }
 
   @override
   void registerOnChange(ChangeFunction<num> f) => _onChange = f;
 
-  void ngOnChanges(Map<String, SimpleChange> changes)
-  {
-    if (changes.containsKey("step"))
-    {
-      String strStep = step.toString();
-      _precision = (strStep.contains(".")) ?
-        strStep.length - strStep.indexOf(".") - 1 : 0;
+  @override
+  void ngOnChanges(Map<String, SimpleChange> changes) {
+    if (changes.containsKey('step')) {
+      final strStep = step.toString();
+      _precision = (strStep.contains('.'))
+          ? strStep.length - strStep.indexOf('.') - 1
+          : 0;
     }
   }
 
-  void ngOnDestroy()
-  {
+  @override
+  void ngOnDestroy() {
     _mouseUpListener.cancel();
     _touchEndListener.cancel();
   }
 
-  void onMouseDown(num count)
-  {
+  void onMouseDown(num count) {
     add(count);
 
     autoAddTimer?.cancel();
     addStepTimer?.cancel();
     addStepTimer = null;
 
-    autoAddTimer = new Timer(const Duration(milliseconds: 600), ()
-    {
+    autoAddTimer = new Timer(const Duration(milliseconds: 600), () {
       autoAddTimer = null;
       addStepTimer?.cancel();
-      addStepTimer = new Timer.periodic(const Duration(milliseconds: 20), (_) => add(count));
+      addStepTimer = new Timer.periodic(
+          const Duration(milliseconds: 20), (_) => add(count));
     });
   }
 
-  void onMouseUp(html.Event e)
-  {
+  void onMouseUp(html.Event e) {
     autoAddTimer?.cancel();
     addStepTimer?.cancel();
     autoAddTimer = null;
     addStepTimer = null;
   }
-  
-  String get formattedValue
-  {
-    if (value == null) return "0";
-    else if (value is int) return value.toString();
-    else return value.toStringAsFixed(_precision);
+
+  String get formattedValue {
+    if (value == null)
+      return '0';
+    else if (value is int)
+      return value.toString();
+    else
+      return value.toStringAsFixed(_precision);
   }
 
-  void add(num count)
-  {
-    if (value == null) value = (count is double) ? 0.0 : 0;
+  void add(num count) {
+    value ??= (count is double) ? 0.0 : 0;
 
-    if (value + count >= min && value + count <= max)
-    {
+    if (value + count >= min && value + count <= max) {
       value += count;
       _onChange(value);
     }
@@ -106,24 +101,24 @@ class FoNumberInputComponent implements OnChanges, OnDestroy, ControlValueAccess
   Timer addStepTimer;
   int _precision = 0;
 
-  @Input('disabled')
+  @Input()
   bool disabled = false;
 
-  @Input('label')
-  String label = "value";
+  @Input()
+  String label = 'value';
 
-  @Input('leadingText')
-  String leadingText = "";
+  @Input()
+  String leadingText = '';
 
-  @Input('max')
+  @Input()
   num max = 9999;
 
-  @Input('min')
+  @Input()
   num min = 0;
 
-  @Input('step')
+  @Input()
   num step = 1;
 
-  @Input('trailingText')
-  String trailingText = "";
+  @Input()
+  String trailingText = '';
 }

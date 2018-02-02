@@ -4,42 +4,40 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import '../fo_multi_select/fo_multi_select_component.dart';
-import '../../pipes/phrase_pipe.dart';
 import '../../models/fo_model.dart';
+import '../../pipes/phrase_pipe.dart';
+import '../fo_multi_select/fo_multi_select_component.dart';
 
 @Component(
     selector: 'fo-image-map',
     styleUrls: const ['fo_image_map_component.scss.css'],
     templateUrl: 'fo_image_map_component.html',
-    directives: const [CORE_DIRECTIVES, materialDirectives, FoMultiSelectComponent],
+    directives: const [
+      CORE_DIRECTIVES,
+      materialDirectives,
+      FoMultiSelectComponent
+    ],
     pipes: const [PhrasePipe],
-    visibility: Visibility.none,
-    changeDetection: ChangeDetectionStrategy.OnPush
-)
-
-class FoImageMapComponent implements OnChanges, OnDestroy
-{
+    visibility: Visibility.local,
+    changeDetection: ChangeDetectionStrategy.OnPush)
+class FoImageMapComponent implements OnChanges, OnDestroy {
   FoImageMapComponent();
 
-  void ngOnChanges(Map<String, SimpleChange> changes)
-  {
-    if (changes.containsKey("selectedIds"))
-    {
-      for (FoZoneModel zone in zones)
-      {
+  @override
+  void ngOnChanges(Map<String, SimpleChange> changes) {
+    if (changes.containsKey('selectedIds')) {
+      for (final zone in zones) {
         zone.marked = selectedIds.contains(zone.id);
       }
     }
   }
 
-  void ngOnDestroy()
-  {
+  @override
+  void ngOnDestroy() {
     _onSelectedIdsChangeController.close();
   }
 
-  void onClick(FoZoneModel zone)
-  {
+  void onClick(FoZoneModel zone) {
     /*
     zone.marked = !zone.marked;
     selectedIds = zones.where((z) => z.marked).map((model) => model.id).toList(growable: false);
@@ -47,62 +45,61 @@ class FoImageMapComponent implements OnChanges, OnDestroy
     */
   }
 
-  void onSelectionChange(List<String> selected_ids)
-  {
-    selectedIds = selected_ids;
+  void onSelectionChange(List<String> selectedIds) {
+    this.selectedIds = selectedIds;
 
-    for (FoZoneModel shape in zones)
-    {
+    for (final shape in zones) {
       shape.marked = selectedIds.contains(shape.id);
     }
 
     _onSelectedIdsChangeController.add(selectedIds);
   }
 
-  final StreamController<List<String>> _onSelectedIdsChangeController = new StreamController();
+  final StreamController<List<String>> _onSelectedIdsChangeController =
+      new StreamController();
 
-  @Input('label')
-  String label = "select";
+  @Input()
+  String label = 'select';
 
-  @Input('zones')
-  List<FoZoneModel> zones = new List();
+  @Input()
+  List<FoZoneModel> zones = [];
 
-  @Input('src')
-  String src = "";
+  @Input()
+  String src = '';
 
-  @Input('selectedIds')
+  @Input()
   List<String> selectedIds = [];
 
-  @Input('showSelector')
+  @Input()
   bool showSelector = true;
 
-  @Output('selectedIdsChange')
-  Stream<List<String>> get onSelectedIdsChangeOutput => _onSelectedIdsChangeController.stream;
+  @Output()
+  Stream<List<String>> get onSelectedIdsChangeOutput =>
+      _onSelectedIdsChangeController.stream;
 }
 
-class FoZoneModel extends FoModel
-{
+class FoZoneModel extends FoModel {
   FoZoneModel(this._shapes, String id, this.label) : super(id);
 
   @override
   String toString() => label;
 
   List<FoShape> get shapes => _shapes;
-  Iterable<FoShape> get ellipses => _shapes.where((s) => s.type == "ellipse");
-  Iterable<FoShape> get rectangles => _shapes.where((s) => s.type == "rectangle");
-  Iterable<FoShape> get polygons => _shapes.where((s) => s.type == "polygon");
+  Iterable<FoShape> get ellipses => _shapes.where((s) => s.type == 'ellipse');
+  Iterable<FoShape> get rectangles =>
+      _shapes.where((s) => s.type == 'rectangle');
+  Iterable<FoShape> get polygons => _shapes.where((s) => s.type == 'polygon');
 
   bool marked = false;
   final String label;
   final List<FoShape> _shapes;
 }
 
-abstract class FoShape
-{
+abstract class FoShape {
   FoShape(this._x, this._y, this.type, this.roundedCorners, this.transform);
 
-  String get x => "$_x";
-  String get y => "$_y";
+  String get x => '$_x';
+  String get y => '$_y';
 
   final int _x;
   final int _y;
@@ -112,43 +109,44 @@ abstract class FoShape
   final String transform;
 }
 
-class FoShapeEllipse extends FoShape
-{
-  FoShapeEllipse(int x, int y, this._rx, this._ry) : super(x, y, "ellipse", false, "");
+class FoShapeEllipse extends FoShape {
+  FoShapeEllipse(int x, int y, this._rx, this._ry)
+      : super(x, y, 'ellipse', false, '');
 
-  String get rx => "$_rx";
-  String get ry => "$_ry";
+  String get rx => '$_rx';
+  String get ry => '$_ry';
 
   final int _rx;
   final int _ry;
 }
 
-class FoShapePolygon extends FoShape
-{
-  FoShapePolygon(this._points, {bool rounded_corners = true, String transform = ""}) : super(null, null, "polygon", rounded_corners, transform);
+class FoShapePolygon extends FoShape {
+  FoShapePolygon(this._points,
+      {bool roundedCorners = true, String transform = ''})
+      : super(null, null, 'polygon', roundedCorners, transform);
 
-  String get points => _points.map((point) => point.toString()).join(" ");
+  String get points => _points.map((point) => point.toString()).join(' ');
 
   final List<FoShapePoint> _points;
 }
 
-class FoShapePoint
-{
+class FoShapePoint {
   FoShapePoint(this.x, this.y);
 
   @override
-  String toString() => "$x,$y";
+  String toString() => '$x,$y';
 
   final int x;
   final int y;
 }
 
-class FoShapeRectangle extends FoShape
-{
-  FoShapeRectangle(int x, int y, this._width, this._height, {bool rounded_corners = true, String transform = ""}) : super(x, y, "rectangle", rounded_corners, transform);
+class FoShapeRectangle extends FoShape {
+  FoShapeRectangle(int x, int y, this._width, this._height,
+      {bool roundedCorners = true, String transform = ''})
+      : super(x, y, 'rectangle', roundedCorners, transform);
 
-  String get width => "$_width";
-  String get height => "$_height";
+  String get width => '$_width';
+  String get height => '$_height';
 
   final int _width;
   final int _height;

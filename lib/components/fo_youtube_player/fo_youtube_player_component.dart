@@ -3,7 +3,7 @@ import 'dart:html';
 import 'dart:js';
 import 'package:angular/angular.dart';
 
-typedef void YoutubeCallback(dynamic event);
+typedef void YoutubeCallback(JsObject event);
 
 @Component(
     selector: 'fo-youtube-player',
@@ -14,23 +14,26 @@ class FoYouTubePlayerComponent implements AfterContentInit, OnChanges, OnDestroy
 {
   FoYouTubePlayerComponent();
 
+  @override
   void ngAfterContentInit()
   {
-    if (apiLoaded) throw new StateError("Only one fo-youtube-player can be created per app");
+    if (apiLoaded) throw new StateError('Only one fo-youtube-player can be created per app');
 
-    document.head.children.add(new ScriptElement()..src = "https://www.youtube.com/iframe_api");
+    document.head.children.add(new ScriptElement()..src = 'https://www.youtube.com/iframe_api');
     context['onYouTubeIframeAPIReady'] = _onAPIReady;
     apiLoaded = true;
   }
 
+  @override
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-    if (changes.containsKey("videoId") && _player != null)
+    if (changes.containsKey('videoId') && _player != null)
     {
-      _player.callMethod("cueVideoById", [videoId]);
+      _player.callMethod('cueVideoById', [videoId]);
     }
   }
 
+  @override
   void ngOnDestroy()
   {
     _onStateChangeController.close();
@@ -53,23 +56,23 @@ class FoYouTubePlayerComponent implements AfterContentInit, OnChanges, OnDestroy
     switch (event['data'])
     {
       case -1:
-        _onStateChangeController.add("Start");
+        _onStateChangeController.add('Start');
         break;
 
       case 0:
-        _onStateChangeController.add("End");
+        _onStateChangeController.add('End');
         break;
 
       case 1:
-        _onStateChangeController.add("Play");
+        _onStateChangeController.add('Play');
         break;
 
       case 2:
-        _onStateChangeController.add("Pause");
+        _onStateChangeController.add('Pause');
         break;
 
       case 3:
-        _onStateChangeController.add("Navigate");
+        _onStateChangeController.add('Navigate');
         break;
 
       default:
@@ -79,21 +82,21 @@ class FoYouTubePlayerComponent implements AfterContentInit, OnChanges, OnDestroy
 
   JsObject get params
   {
-    Map<String, String> vars = new Map();
-    vars["fs"] = "1";
-    vars["rel"] = "0";                // Show related videos at the end of playback
-    vars["modestbranding"] = "0";     // Show minimal youtube branding
-    vars["showinfo"] = "1";
-    vars["origin"] = Uri.base.origin;
-    vars["enablejsapi"] = "1";
-    vars["autoplay"] = autoplay ? "1" : "0";
-    Map<String, YoutubeCallback> events = new Map();
-    events["onReady"] = _onReady;
-    events["onStateChange"] = _onStateChange;
-    Map<String, dynamic> params = new Map();
-    params["videoId"] = videoId;
-    params["playerVars"] = vars;
-    params["events"] = events;
+    final vars = <String, String>{};
+    vars['fs'] = '1';
+    vars['rel'] = '0';                // Show related videos at the end of playback
+    vars['modestbranding'] = '0';     // Show minimal youtube branding
+    vars['showinfo'] = '1';
+    vars['origin'] = Uri.base.origin;
+    vars['enablejsapi'] = '1';
+    vars['autoplay'] = autoplay ? '1' : '0';
+    final events = <String, YoutubeCallback>{};
+    events['onReady'] = _onReady;
+    events['onStateChange'] = _onStateChange;
+    final params = <String, dynamic>{};
+    params['videoId'] = videoId;
+    params['playerVars'] = vars;
+    params['events'] = events;
 
     return new JsObject.jsify(params);
   }
@@ -102,12 +105,12 @@ class FoYouTubePlayerComponent implements AfterContentInit, OnChanges, OnDestroy
 
   JsObject _player;
 
-  final String elementId = "youtube-player-container";
+  final String elementId = 'youtube-player-container';
 
-  @Input('videoId')
+  @Input()
   String videoId;
 
-  @Input('autoplay')
+  @Input()
   bool autoplay = false;
 
   @Output('stateChange')

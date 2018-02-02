@@ -91,11 +91,6 @@
                 material-list-item.router-link-active
                 {
                   background-color: #ddd;
-
-                  material-icon
-                  {
-                    //color: white;
-                  }
                 }
               }
             }
@@ -129,8 +124,6 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
-           // position:absolute;
-            //bottom: 0;
             left: 0;
             width: 100%;
             cursor: pointer;
@@ -163,9 +156,6 @@
             {
               margin-bottom: 2rem;
               margin-left: 0.5em;
-              //padding: 1rem;
-              //border: 1px solid #ccc;
-              //border-top: 0;
               overflow-x: auto;
             }
           }
