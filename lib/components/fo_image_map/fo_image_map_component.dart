@@ -79,7 +79,12 @@ class FoImageMapComponent implements OnChanges, OnDestroy {
 }
 
 class FoZoneModel extends FoModel {
-  FoZoneModel(this._shapes, String id, this.label) : super(id);
+  FoZoneModel(this._shapes, String id, this.label)
+  {
+    super.id = id;
+  }
+
+  @override Map<String, dynamic> toJson() => {'id':id, 'label':label, 'shapes':_shapes.length};
 
   @override
   String toString() => label;

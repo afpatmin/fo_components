@@ -3,6 +3,7 @@
 
 library fo_components;
 
+export 'components/fo_app_layout/fo_app_layout_component.dart';
 export 'components/fo_data_table/fo_data_table_component.dart';
 export 'components/fo_date_input/fo_date_input_component.dart';
 export 'components/fo_file_upload/fo_file_upload_component.dart';

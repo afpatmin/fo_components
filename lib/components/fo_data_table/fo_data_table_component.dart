@@ -33,8 +33,8 @@ typedef String EvaluateColumnFn(FoModel model);
 
 /// A data table component displaying FoModels. Has built in filters, sort
 /// pagination and many other features. class FoDataTableComponent
-class FoDataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy
-{
+class FoDataTableComponent
+    implements OnChanges, OnInit, AfterViewInit, OnDestroy {
   FoDataTableComponent(this.phraseService);
 
   @override
@@ -141,76 +141,68 @@ class FoDataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestro
 
       if (internalSort || evaluatedColumns.containsKey(column))
 
-        /// Evaluated columns are always sorted internally {
-        if (sortOrder != null && sortColumn != null && sortColumn.isNotEmpty) {
-          int sort(String a, String b) {
-            final vA = a == null ? '-' : a;
-            final vB = b == null ? '-' : b;
+      /// Evaluated columns are always sorted internally {
+      if (sortOrder != null && sortColumn != null && sortColumn.isNotEmpty) {
+        int sort(String a, String b) {
+          final vA = a == null ? '-' : a;
+          final vB = b == null ? '-' : b;
 
+          try {
+            // Number comparison
+            final numA = num.parse(vA);
+            final numB = num.parse(vB);
+            return (sortOrder == 'ASC')
+                ? (numA - numB).toInt()
+                : (numB - numA).toInt();
+          } on FormatException {
             try {
-              // Number comparison
-              final numA = num.parse(vA);
-              final numB = num.parse(vB);
+              // Date comparison
+              final dateA = DateTime.parse(vA);
+              final dateB = DateTime.parse(vB);
               return (sortOrder == 'ASC')
-                  ? (numA - numB).toInt()
-                  : (numB - numA).toInt();
+                  ? dateA.difference(dateB).inMilliseconds
+                  : dateB.difference(dateA).inMilliseconds;
             } on FormatException {
-              try {
-                // Date comparison
-                final dateA = DateTime.parse(vA);
-                final dateB = DateTime.parse(vB);
-                return (sortOrder == 'ASC')
-                    ? dateA
-                    .difference(dateB)
-                    .inMilliseconds
-                    : dateB
-                    .difference(dateA)
-                    .inMilliseconds;
-              } on FormatException {
-                // Default String comparison
-                final colA = a.toLowerCase();
-                final colB = b.toLowerCase();
+              // Default String comparison
+              final colA = a.toLowerCase();
+              final colB = b.toLowerCase();
 
-                return (sortOrder == 'ASC')
-                    ? colA.compareTo(colB)
-                    : colB.compareTo(colA);
-              }
+              return (sortOrder == 'ASC')
+                  ? colA.compareTo(colB)
+                  : colB.compareTo(colA);
             }
           }
-
-          final values = data.keys
-              .where(filteredKeys.contains)
-              .map((key) => data[key])
-              .toList();
-          if (values != null) {
-            if (columns.contains(sortColumn))
-              values.sort((a, b) =>
-                  sort(a[sortColumn].toString(), b[sortColumn].toString()));
-            else if (evaluatedColumns.containsKey(sortColumn))
-              values.sort((a, b) =>
-                  sort(evaluatedColumns[sortColumn](a),
-                      evaluatedColumns[sortColumn](b)));
-            _filteredKeys = values.map((model) => model['id']);
-          }
         }
-      } else
-        _onSortController.add({'column': sortColumn, 'order': sortOrder});
-    }
 
+        final values = data.keys
+            .where(filteredKeys.contains)
+            .map((key) => data[key])
+            .toList();
+        if (values != null) {
+          if (columns.contains(sortColumn))
+            values.sort((a, b) =>
+                sort(a[sortColumn].toString(), b[sortColumn].toString()));
+          else if (evaluatedColumns.containsKey(sortColumn))
+            values.sort((a, b) => sort(evaluatedColumns[sortColumn](a),
+                evaluatedColumns[sortColumn](b)));
+          _filteredKeys = values.map((model) => model['id']);
+        }
+      }
+    } else
+      _onSortController.add({'column': sortColumn, 'order': sortOrder});
+  }
 
   void onDownloadDataCSV() {
     if (data.isNotEmpty) {
       /// Generate CSV string (Property1;Property2;Property3;Property4;Property5\n)
       final sb = new StringBuffer();
 
-      final colNames = new List.from(columns)
-        ..addAll(evaluatedColumns.keys);
+      final colNames = new List.from(columns)..addAll(evaluatedColumns.keys);
       sb.writeln(colNames);
 
       for (final key in filteredKeys) {
         final model = data[key];
-        if (model == null)
-          continue;
+        if (model == null) continue;
 
         final properties = columns.map((col) => model[col].toString()).toList()
           ..addAll(
@@ -242,8 +234,7 @@ class FoDataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestro
 
   void setIndices(int inFirstIndex) {
     if (inFirstIndex <= -_selectedRowOption.count ||
-        inFirstIndex >= data.length)
-      return;
+        inFirstIndex >= data.length) return;
 
     firstIndex = max(0, inFirstIndex);
     if (searchPhrase != null && searchPhrase.isNotEmpty)
@@ -259,7 +250,7 @@ class FoDataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestro
   int get totalPages =>
       (filteredKeys.length.toDouble() / _selectedRowOption.count).ceil();
 
-  final List<FoModel> rowOptions = [
+  final List<RowOption> rowOptions = [
     new RowOption('5', 5),
     new RowOption('10', 10),
     new RowOption('15', 15),
@@ -294,12 +285,8 @@ class FoDataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestro
     final dom.TableElement table = container.querySelector('table');
 
     table.classes.remove('fixed-layout');
-    if (container
-        .getBoundingClientRect()
-        .width <
-        table
-            .getBoundingClientRect()
-            .width) {
+    if (container.getBoundingClientRect().width <
+        table.getBoundingClientRect().width) {
       table.classes.add('fixed-layout');
     }
   }
@@ -333,13 +320,13 @@ class FoDataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestro
   final PhraseService phraseService;
   final StreamController<String> onAddController = new StreamController();
   final StreamController<Set<String>> onSelectedRowsController =
-  new StreamController();
+      new StreamController();
   final StreamController<String> onDeleteController = new StreamController();
   final StreamController<String> onRowClickController = new StreamController();
   final StreamController<Map<String, String>> _onSortController =
-  new StreamController();
+      new StreamController();
   final StreamController<BatchOperationEvent> _onBatchOperationController =
-  new StreamController();
+      new StreamController();
 
   @ViewChild('tableContainer')
   ElementRef tableContainer;
@@ -422,44 +409,21 @@ class FoDataTableComponent implements OnChanges, OnInit, AfterViewInit, OnDestro
 }
 
 /// RowOption is a model used in the FoDataTable to represent how many rows should be displayed at once
-class RowOption implements FoModel {
+class RowOption extends FoModel {
   /// Default constructor
-  RowOption(this.id, this.count);
-
-  @override
-  Object operator [](Object key) {
-    switch (key) {
-      case 'id':
-        return id;
-        break;
-
-      case 'count':
-        return count;
-        break;
-
-      default:
-        break;
-    }
-    return null;
+  RowOption(String id, this.count)
+  {
+    super.id = id;
   }
 
-  //throw new UnsupportedError('Operator [] is not supported for RowOption');
-
   @override
-  void operator []=(Object key, int value) =>
-      throw new UnsupportedError('Operator []= is not supported for RowOption');
+  Map<String, dynamic> toJson() => {'id': id, 'count': count};
 
   @override
   String toString() => count.toString();
 
-  @override
-  Map<dynamic, dynamic> toMap() =>
-      throw new UnsupportedError('toMap() is not supported for RowOption');
-
   /// The number of rows to display
-  int count;
-  @override
-  String id;
+  final int count;
 }
 
 /// Batch Operation Event, spawned as output whenever the user performs a batch action on the table

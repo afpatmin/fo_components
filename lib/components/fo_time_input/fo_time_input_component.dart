@@ -181,7 +181,13 @@ class FoTimeInputComponent implements ControlValueAccessor<String>
 
 class TimeOptionModel extends FoModel
 {
-  TimeOptionModel(String id) : super(id);
+  TimeOptionModel(String id)
+  {
+    super.id = id;
+  }
+
+  @override
+  Map<String, dynamic> toJson() => {'id':id};
 
   @override
   String toString() => id;
