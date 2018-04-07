@@ -14,5 +14,5 @@ dependencies:
     git: https://github.com/afpatmin/fo_model.git
   grid:
     git: https://github.com/afpatmin/grid.git
-  vi_auth_client: ^0.1.0
+  vi_auth_client: ^0.1.1
   sass_builder: ^1.1.5
