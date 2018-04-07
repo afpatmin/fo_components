@@ -2,7 +2,7 @@
     <material-input
             label="{{label | phrase}}" floatingLabel
             [leadingText]="leadingText"
-            [fullWidth]="true"
+            [disabled]="disabled"
             [displayBottomPanel]="false"
             (keyup)="onKeyUp($event)"
             [(ngModel)]="inputValue">
@@ -10,7 +10,7 @@
     <material-button
             raised
             clear-size
-            [disabled]="inputValue == null || inputValue.isEmpty || !control.valid"
+            [disabled]="disabled || inputValue == null || inputValue.isEmpty || control?.valid == false"
             (trigger)="add()">
         <material-icon icon="add_outline" size="small"></material-icon>
     </material-button>

@@ -22,6 +22,17 @@ class FoValidators {
       return null;
   }
 
+  static Map<String, String> alphaEn(AbstractControl control) {
+    if ((required())(control) != null) return null;
+
+    if (new RegExp(r'[a-zA-Z ]').allMatches(control.value).length !=
+        control.value.length) {
+      final ps = new PhraseService();
+      return {'error': ps.get('enter_alphabet_characters_only')};
+    } else
+      return null;
+  }
+
   static Map<String, String> alphaNumeric(AbstractControl control) {
     if ((required())(control) != null) return null;
 
@@ -48,9 +59,11 @@ class FoValidators {
   }
 
   static Map<String, String> integer(AbstractControl control) {
-    if ((required())(control) != null) return null;
-
-    if (control.value is int)
+    if ((required())(control) != null)
+      return null;
+    else if (control.value == null)
+      return null;
+    else if (control.value is int)
       return null;
     else {
       try {
@@ -133,7 +146,7 @@ class FoValidators {
   static Map<String, String> phoneNumber(AbstractControl control) {
     if ((required())(control) != null) return null;
 
-    if (new RegExp(r'[+]{0,1}[0-9\- ]{7,32}').stringMatch(control.value) !=
+    if (new RegExp(r'[+][0-9]{2}[1-9][0-9\- ]{6,32}').stringMatch(control.value) !=
         control.value) {
       final ps = new PhraseService();
       return {'error': ps.get('enter_valid_phone')};
@@ -142,7 +155,7 @@ class FoValidators {
   }
 
   static Map<String, String> swedishCellphoneNumber(AbstractControl control) {
-    if ((required())(control) != null) return null;
+    if (required()(control) != null) return null;
     if (new RegExp('07[0-9]{8}').stringMatch(control.value) != control.value) {
       final ps = new PhraseService();
       return {'error': ps.get('enter_valid_swedish_cellphone_without_spaces')};

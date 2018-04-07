@@ -4,14 +4,14 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import '../../models/fo_model.dart';
+import 'package:fo_model/fo_model.dart';
 import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-multi-select',
-    styleUrls: const ['fo_multi_select_component.scss.css'],
+    styleUrls: const ['fo_multi_select_component.css'],
     templateUrl: 'fo_multi_select_component.html',
-    directives: const [CORE_DIRECTIVES, materialDirectives],
+    directives: const [coreDirectives, materialDirectives],
     pipes: const [PhrasePipe],
     visibility: Visibility.local)
 class FoMultiSelectComponent implements OnChanges, OnDestroy {
@@ -19,19 +19,15 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy {
 
   @override
   void ngOnChanges(Map<String, SimpleChange> changes) {
-    if (changes.containsKey('options') && options != null) {
-      final prev = changes['options'].previousValue;
-      final cur = changes['options'].currentValue;
+    if (changes.containsKey('options')) {
 
-      /// List equality check, skip if equal contents
-      if (prev == null ||
-          cur == null ||
-          prev.length != cur.length ||
-          prev.where(cur.contains).length != cur.length) {
-        /// Convert List<FoModel> to StringSelectionOptions<FoModel>
+      if (options == null)
+        selectionOptions = new StringSelectionOptions([]);
+
+      else if (selectionOptions.optionsList.length != options.length) {
         selectionOptions = new StringSelectionOptions(
             options.toList(growable: false),
-            shouldSort: true);
+            shouldSort: sort);
       }
     }
   }
@@ -54,7 +50,7 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy {
     */
   }
 
-  void onToggle(String id, bool status) {
+  void onToggle(Object id, bool status) {
     if (status == true) {
       selectedIds.add(id);
     } else {
@@ -63,14 +59,14 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy {
     _onSelectedIdsChangeController.add(selectedIds);
   }
 
-  FoModel getModel(String id) => selectionOptions.optionsList
+  FoModel getModel(Object id) => selectionOptions.optionsList
       .firstWhere((model) => model.id == id, orElse: () => null);
 
   StringSelectionOptions<FoModel> selectionOptions =
       new StringSelectionOptions([]);
   final StreamController<bool> _onVisibleChangeController =
       new StreamController();
-  final StreamController<List<String>> _onSelectedIdsChangeController =
+  final StreamController<List<Object>> _onSelectedIdsChangeController =
       new StreamController();
 
   @Input()
@@ -95,7 +91,10 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy {
   Iterable<FoModel> options;
 
   @Input()
-  List<String> selectedIds = [];
+  List<Object> selectedIds = [];
+
+  @Input()
+  bool sort = true;
 
   @Input()
   bool showSearch = false;
@@ -107,6 +106,6 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy {
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
 
   @Output('selectedIdsChange')
-  Stream<List<String>> get onSelectedIdsChangeOutput =>
+  Stream<List<Object>> get onSelectedIdsChangeOutput =>
       _onSelectedIdsChangeController.stream;
 }

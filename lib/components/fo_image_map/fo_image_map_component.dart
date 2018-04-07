@@ -4,16 +4,16 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import '../../models/fo_model.dart';
+import 'package:fo_model/fo_model.dart';
 import '../../pipes/phrase_pipe.dart';
 import '../fo_multi_select/fo_multi_select_component.dart';
 
 @Component(
     selector: 'fo-image-map',
-    styleUrls: const ['fo_image_map_component.scss.css'],
+    styleUrls: const ['fo_image_map_component.css'],
     templateUrl: 'fo_image_map_component.html',
     directives: const [
-      CORE_DIRECTIVES,
+      coreDirectives,
       materialDirectives,
       FoMultiSelectComponent
     ],
@@ -62,7 +62,7 @@ class FoImageMapComponent implements OnChanges, OnDestroy {
   String label = 'select';
 
   @Input()
-  List<FoZoneModel> zones = [];
+  Iterable<FoZoneModel> zones = [];
 
   @Input()
   String src = '';
@@ -73,14 +73,13 @@ class FoImageMapComponent implements OnChanges, OnDestroy {
   @Input()
   bool showSelector = true;
 
-  @Output()
+  @Output('selectedIdsChange')
   Stream<List<String>> get onSelectedIdsChangeOutput =>
       _onSelectedIdsChangeController.stream;
 }
 
 class FoZoneModel extends FoModel {
-  FoZoneModel(this._shapes, String id, this.label)
-  {
+  FoZoneModel(this._shapes, String id, this.label) {
     super.id = id;
   }
 
@@ -89,15 +88,15 @@ class FoZoneModel extends FoModel {
   @override
   String toString() => label;
 
-  List<FoShape> get shapes => _shapes;
-  Iterable<FoShape> get ellipses => _shapes.where((s) => s.type == 'ellipse');
-  Iterable<FoShape> get rectangles =>
+  List<dynamic> get shapes => _shapes;
+  Iterable<FoShapeEllipse> get ellipses => _shapes.where((s) => s.type == 'ellipse');
+  Iterable<FoShapeRectangle> get rectangles =>
       _shapes.where((s) => s.type == 'rectangle');
-  Iterable<FoShape> get polygons => _shapes.where((s) => s.type == 'polygon');
+  Iterable<FoShapePolygon> get polygons => _shapes.where((s) => s.type == 'polygon');
 
   bool marked = false;
   final String label;
-  final List<FoShape> _shapes;
+  final List<dynamic> _shapes;
 }
 
 abstract class FoShape {

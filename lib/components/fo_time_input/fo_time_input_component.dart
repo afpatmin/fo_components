@@ -3,29 +3,24 @@
 
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular/angular.dart';
-import '../../models/fo_model.dart';
+import 'package:fo_model/fo_model.dart';
 import '../../pipes/phrase_pipe.dart';
 import '../fo_select/fo_select_component.dart';
 
 @Component(
     selector: 'fo-time-input',
-    styleUrls: const ['fo_time_input_component.scss.css'],
+    styleUrls: const ['fo_time_input_component.css'],
     templateUrl: 'fo_time_input_component.html',
-    directives: const [CORE_DIRECTIVES, FoSelectComponent],
+    directives: const [coreDirectives, FoSelectComponent],
     pipes: const [PhrasePipe],
-    visibility: Visibility.local
-)
-class FoTimeInputComponent implements ControlValueAccessor<String>
-{
-  FoTimeInputComponent(@Self() @Optional() NgControl cd)
-  {
-    if (cd != null)
-      cd.valueAccessor = this;
+    visibility: Visibility.local)
+class FoTimeInputComponent implements ControlValueAccessor<String> {
+  FoTimeInputComponent(@Self() @Optional() NgControl cd) {
+    if (cd != null) cd.valueAccessor = this;
   }
 
   @override
-  void registerOnTouched(TouchFunction f)
-  {
+  void registerOnTouched(TouchFunction f) {
     /**
      * onBlur really
      */
@@ -37,15 +32,11 @@ class FoTimeInputComponent implements ControlValueAccessor<String>
   //TouchFunction _onTouch;
 
   @override
-  void writeValue(String obj)
-  {
-    if (obj == null)
-    {
+  void writeValue(String obj) {
+    if (obj == null) {
       _hour = '00';
       _minute = '00';
-    }
-    else
-    {
+    } else {
       final regexp = new RegExp(r'([01]\d|2[0-3]):?([0-5]\d)');
 
       if (regexp.allMatches(obj).length != 1)
@@ -63,18 +54,14 @@ class FoTimeInputComponent implements ControlValueAccessor<String>
   String get selectedHour => _hour;
   String get selectedMinute => _minute;
 
-  set selectedHour(String hour)
-  {
+  set selectedHour(String hour) {
     _hour = hour;
-    if (_onChange != null)
-      _onChange('$_hour:$_minute');
+    if (_onChange != null) _onChange('$_hour:$_minute');
   }
 
-  set selectedMinute(String minute)
-  {
+  set selectedMinute(String minute) {
     _minute = minute;
-    if (_onChange != null)
-      _onChange('$_hour:$_minute');
+    if (_onChange != null) _onChange('$_hour:$_minute');
   }
 
   String _hour = '00';
@@ -86,109 +73,93 @@ class FoTimeInputComponent implements ControlValueAccessor<String>
   @Input()
   String label = 'time';
 
-  final List<FoModel> hourOptions =
-  [
-    new TimeOptionModel('00'),
-    new TimeOptionModel('01'),
-    new TimeOptionModel('02'),
-    new TimeOptionModel('03'),
-    new TimeOptionModel('04'),
-    new TimeOptionModel('05'),
-    new TimeOptionModel('06'),
-    new TimeOptionModel('07'),
-    new TimeOptionModel('08'),
-    new TimeOptionModel('09'),
-    new TimeOptionModel('10'),
-    new TimeOptionModel('11'),
-    new TimeOptionModel('12'),
-    new TimeOptionModel('13'),
-    new TimeOptionModel('14'),
-    new TimeOptionModel('15'),
-    new TimeOptionModel('16'),
-    new TimeOptionModel('17'),
-    new TimeOptionModel('18'),
-    new TimeOptionModel('19'),
-    new TimeOptionModel('20'),
-    new TimeOptionModel('21'),
-    new TimeOptionModel('22'),
-    new TimeOptionModel('23'),
+  final List<FoModel> hourOptions = [
+    new FoModel()..id = '00',
+    new FoModel()..id = '01',
+    new FoModel()..id = '02',
+    new FoModel()..id = '03',
+    new FoModel()..id = '04',
+    new FoModel()..id = '05',
+    new FoModel()..id = '06',
+    new FoModel()..id = '07',
+    new FoModel()..id = '08',
+    new FoModel()..id = '09',
+    new FoModel()..id = '10',
+    new FoModel()..id = '11',
+    new FoModel()..id = '12',
+    new FoModel()..id = '13',
+    new FoModel()..id = '14',
+    new FoModel()..id = '15',
+    new FoModel()..id = '16',
+    new FoModel()..id = '17',
+    new FoModel()..id = '18',
+    new FoModel()..id = '19',
+    new FoModel()..id = '20',
+    new FoModel()..id = '21',
+    new FoModel()..id = '22',
+    new FoModel()..id = '23'
   ];
 
-  final List<FoModel> minuteOptions =
-  [
-    new TimeOptionModel('00'),
-    new TimeOptionModel('01'),
-    new TimeOptionModel('02'),
-    new TimeOptionModel('03'),
-    new TimeOptionModel('04'),
-    new TimeOptionModel('05'),
-    new TimeOptionModel('06'),
-    new TimeOptionModel('07'),
-    new TimeOptionModel('08'),
-    new TimeOptionModel('09'),
-    new TimeOptionModel('10'),
-    new TimeOptionModel('11'),
-    new TimeOptionModel('12'),
-    new TimeOptionModel('13'),
-    new TimeOptionModel('14'),
-    new TimeOptionModel('15'),
-    new TimeOptionModel('16'),
-    new TimeOptionModel('17'),
-    new TimeOptionModel('18'),
-    new TimeOptionModel('19'),
-    new TimeOptionModel('20'),
-    new TimeOptionModel('21'),
-    new TimeOptionModel('22'),
-    new TimeOptionModel('23'),
-    new TimeOptionModel('24'),
-    new TimeOptionModel('25'),
-    new TimeOptionModel('26'),
-    new TimeOptionModel('27'),
-    new TimeOptionModel('28'),
-    new TimeOptionModel('29'),
-    new TimeOptionModel('30'),
-    new TimeOptionModel('31'),
-    new TimeOptionModel('32'),
-    new TimeOptionModel('33'),
-    new TimeOptionModel('34'),
-    new TimeOptionModel('35'),
-    new TimeOptionModel('36'),
-    new TimeOptionModel('37'),
-    new TimeOptionModel('38'),
-    new TimeOptionModel('39'),
-    new TimeOptionModel('40'),
-    new TimeOptionModel('41'),
-    new TimeOptionModel('42'),
-    new TimeOptionModel('43'),
-    new TimeOptionModel('44'),
-    new TimeOptionModel('45'),
-    new TimeOptionModel('46'),
-    new TimeOptionModel('47'),
-    new TimeOptionModel('48'),
-    new TimeOptionModel('49'),
-    new TimeOptionModel('50'),
-    new TimeOptionModel('51'),
-    new TimeOptionModel('52'),
-    new TimeOptionModel('53'),
-    new TimeOptionModel('54'),
-    new TimeOptionModel('55'),
-    new TimeOptionModel('56'),
-    new TimeOptionModel('57'),
-    new TimeOptionModel('58'),
-    new TimeOptionModel('59'),
+  final List<FoModel> minuteOptions = [
+    new FoModel()..id = '00',
+    new FoModel()..id = '01',
+    new FoModel()..id = '02',
+    new FoModel()..id = '03',
+    new FoModel()..id = '04',
+    new FoModel()..id = '05',
+    new FoModel()..id = '06',
+    new FoModel()..id = '07',
+    new FoModel()..id = '08',
+    new FoModel()..id = '09',
+    new FoModel()..id = '10',
+    new FoModel()..id = '11',
+    new FoModel()..id = '12',
+    new FoModel()..id = '13',
+    new FoModel()..id = '14',
+    new FoModel()..id = '15',
+    new FoModel()..id = '16',
+    new FoModel()..id = '17',
+    new FoModel()..id = '18',
+    new FoModel()..id = '19',
+    new FoModel()..id = '20',
+    new FoModel()..id = '21',
+    new FoModel()..id = '22',
+    new FoModel()..id = '23',
+    new FoModel()..id = '24',
+    new FoModel()..id = '25',
+    new FoModel()..id = '26',
+    new FoModel()..id = '27',
+    new FoModel()..id = '28',
+    new FoModel()..id = '29',
+    new FoModel()..id = '30',
+    new FoModel()..id = '31',
+    new FoModel()..id = '32',
+    new FoModel()..id = '33',
+    new FoModel()..id = '34',
+    new FoModel()..id = '35',
+    new FoModel()..id = '36',
+    new FoModel()..id = '37',
+    new FoModel()..id = '38',
+    new FoModel()..id = '39',
+    new FoModel()..id = '40',
+    new FoModel()..id = '41',
+    new FoModel()..id = '42',
+    new FoModel()..id = '43',
+    new FoModel()..id = '44',
+    new FoModel()..id = '45',
+    new FoModel()..id = '46',
+    new FoModel()..id = '47',
+    new FoModel()..id = '48',
+    new FoModel()..id = '49',
+    new FoModel()..id = '50',
+    new FoModel()..id = '51',
+    new FoModel()..id = '52',
+    new FoModel()..id = '53',
+    new FoModel()..id = '54',
+    new FoModel()..id = '55',
+    new FoModel()..id = '56',
+    new FoModel()..id = '57',
+    new FoModel()..id = '58',
+    new FoModel()..id = '59'
   ];
-}
-
-class TimeOptionModel extends FoModel
-{
-  TimeOptionModel(String id)
-  {
-    super.id = id;
-  }
-
-  @override
-  Map<String, dynamic> toJson() => {'id':id};
-
-  @override
-  String toString() => id;
 }

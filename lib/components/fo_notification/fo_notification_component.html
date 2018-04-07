@@ -1,0 +1,29 @@
+<div class="row collapse" *ngIf="isOpen">
+    <div class="col">
+        <div id="notificationContainer">
+            <div class="row">
+                <div class="l11 m10 s9 col">
+                    <h3 class="overflowEllipsis margin-top-medium margin-bottom-none">
+                        {{header | phrase}}
+                    </h3>
+                </div>
+                <div class="l1 m2 s3 col text-right">
+                    <material-button
+                            *ngIf="showCloseButton == true"
+                            dense clear-size
+                            (trigger)="close()">
+                        <material-icon
+                                icon="close"
+                                size="medium">
+                        </material-icon>
+                    </material-button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <ng-content></ng-content>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

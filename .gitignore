@@ -12,6 +12,7 @@ pubspec.lock
 *.js.deps
 *.js.map
 *.info.json
+.dart_tool
 
 # Directory created by dartdoc
 doc/api/

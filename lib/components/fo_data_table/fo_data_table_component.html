@@ -5,7 +5,6 @@
             <material-icon
                     baseline
                     *ngIf="description != null"
-                    size="x-large"
                     icon="help_outline"
                     (click)="infoModalOpen = true"
                     class="clickable">
@@ -25,12 +24,12 @@
     </div>
 </div>
 
-<div class="table-container box-shadow" #tableContainer>
+<div class="table-container box-shadow">
     <table [class.faded]="disabled" class="output color-black margin-bottom-x-small">
         <thead>
         <tr>
             <td *ngIf="showCheckboxes">
-                <material-checkbox (checkedChange)="onAllCheckedChange($event)"></material-checkbox>
+                <material-checkbox [(checked)]="allChecked"></material-checkbox>
             </td>
             <td *ngFor="let cell of columns"
                 [class.hide-for-small]="smallHiddenCol.contains(cell)"
@@ -67,9 +66,9 @@
                     [class.hide-for-small]="smallHiddenCol.contains(cell)"
                     [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                     [class.hide-for-large]="largeHiddenCol.contains(cell)">
-                <span *ngIf="!isBool(data[key][cell])">{{data[key][cell]?.toString() | phrase:false}}</span>
+                <span *ngIf="!isBool(getCell(key, cell))">{{getCell(key, cell)?.toString() | phrase:false}}</span>
                 <material-icon
-                        *ngIf="data[key][cell] == true"
+                        *ngIf="getCell(key, cell) == true"
                         baseline
                         icon="check"
                         size="medium">
@@ -107,9 +106,8 @@
         <div class="s2 col">
             <div *ngIf="showDownloadButton || showAddButton">
                 <material-button
-                        *ngIf="filteredKeys.isNotEmpty"
+                        *ngIf="filteredKeys.isNotEmpty && showDownloadButton"
                         class="float-left"
-                        *ngIf="showDownloadButton"
                         clear-size
                         raised
                         dense
@@ -182,9 +180,11 @@
 </div>
 
 <fo-modal
-        title="{{'confirm' | phrase}}" [visible]="deleteBufferId != null"
+        title="{{'confirm' | phrase}}"
+        [visible]="deleteBufferId != null"
         (visibleChange)="deleteBufferId = null"
-        [showCloseButton]="false">
+        [showCloseButton]="false"
+        [whiteHeader]="true">
     <p>{{'are_you_sure_delete_this_resource' | phrase}}</p>
     <p class="text-right margin-bottom-none">
         <material-button
@@ -202,6 +202,7 @@
 
 <fo-modal
         title="{{'information' | phrase}}"
+        [whiteHeader]="true"
         [(visible)]="infoModalOpen"
         [showCloseButton]="true">
     <p>{{description | phrase}}</p>

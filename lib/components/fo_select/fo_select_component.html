@@ -65,6 +65,7 @@
 
 <fo-modal
         title="{{'information' | phrase}}"
+        [whiteHeader]="true"
         [(visible)]="tooltipModalVisible"
         [showCloseButton]="true">
     <p>{{tooltip | phrase}}</p>

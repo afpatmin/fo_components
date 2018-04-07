@@ -4,6 +4,7 @@
             [class.white-header]="whiteHeader"
             [class.fixed-height]="fixedHeight"
             [class.fixed-width]="fixedWidth"
+            [class.small-padding]="smallPadding"
             [error]="error | phrase">
         <div header>
             <div class="flexContainer">
@@ -11,9 +12,9 @@
                 <h3 *ngIf="titleImageUrl == null && title != null">{{title | phrase}}</h3>
                 <div *ngIf="showCloseButton" id="closeButtonContainer">
                     <material-button
-                            raised dense clear-size
+                            clear-size
                             (trigger)="close()">
-                        <material-icon icon="close" size="medium"></material-icon>
+                        <material-icon icon="close" size="x-large"></material-icon>
                     </material-button>
                 </div>
             </div>
@@ -21,7 +22,7 @@
         <div class="modal-content">
             <ng-content></ng-content>
         </div>
-        <div class="padding-top-small" footer>
+        <div footer>
             <ng-content select="[footer]"></ng-content>
         </div>
     </material-dialog>

@@ -10,9 +10,9 @@ import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-number-input',
-    styleUrls: const ['fo_number_input_component.scss.css'],
+    styleUrls: const ['fo_number_input_component.css'],
     templateUrl: 'fo_number_input_component.html',
-    directives: const [CORE_DIRECTIVES, materialDirectives],
+    directives: const [coreDirectives, materialDirectives],
     pipes: const [PhrasePipe],
     visibility: Visibility.local)
 class FoNumberInputComponent
@@ -53,6 +53,7 @@ class FoNumberInputComponent
   }
 
   void onMouseDown(num count) {
+    if (disabled) return;
     add(count);
 
     autoAddTimer?.cancel();

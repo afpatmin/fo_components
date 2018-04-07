@@ -3,9 +3,9 @@ import 'package:angular/di.dart' show Pipe, PipeTransform;
 @Pipe('range')
 class RangePipe implements PipeTransform
 {
-  Iterable<String> transform(Iterable<String> value, int from, int to)
+  Iterable<Object> transform(Iterable<Object> value, int from, int to)
   {
-    final filtered = <String>[];
+    final filtered = <Object>[];
     for (var i = from; i < to; i++)
     {
       if (i >= value.length) break;

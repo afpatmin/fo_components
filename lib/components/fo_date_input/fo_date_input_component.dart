@@ -6,19 +6,18 @@ import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import '../../pipes/phrase_pipe.dart';
 
-/// DateInputComponent is exactly what it name says it is
 @Component(
     selector: 'fo-date-input',
     templateUrl: 'fo_date_input_component.html',
-    styleUrls: const ['fo_date_input_component.scss.css'],
-    directives: const [CORE_DIRECTIVES],
+    styleUrls: const ['fo_date_input_component.css'],
+    directives: const [coreDirectives],
     pipes: const [PhrasePipe],
     changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.local)
 class FoDateInputComponent implements OnChanges, ControlValueAccessor<DateTime>
 {
   /// Constructor
-  FoDateInputComponent(@Self() @Optional() this.control)
+  FoDateInputComponent(@Self() @Optional() this.control, this._hostElement)
   {
     if (control != null)
       control.valueAccessor = this;
@@ -27,20 +26,27 @@ class FoDateInputComponent implements OnChanges, ControlValueAccessor<DateTime>
   @override
   void ngOnChanges(Map<String, SimpleChange> changes)
   {
-    _inputElement = inputRef.nativeElement;
+    input = _hostElement.querySelector('input');
     if (value != null)
     {
       /**
        * Always assume noon for consistency
        */
       value = new DateTime(value.year, value.month, value.day, 12);
-      _inputElement.valueAsDate = value;
+      input.valueAsDate = value;
     }
   }
 
-  void onValueChange(DateTime dt)
+  void onValueChange()
   {
-    value = dt;
+    //value = input.valueAsDate;
+    try
+    {
+      value = DateTime.parse(input.value);
+    }
+    on FormatException {
+      value = new DateTime(0, 0, 0, 12);
+    }
     _onChange(value);
   }
 
@@ -59,7 +65,7 @@ class FoDateInputComponent implements OnChanges, ControlValueAccessor<DateTime>
   ChangeFunction<DateTime> _onChange;
   NgControl control;
   DateTime value;
-  html.DateInputElement _inputElement;
+  html.DateInputElement input;
 
   @Input()
   bool disabled = false;
@@ -68,6 +74,5 @@ class FoDateInputComponent implements OnChanges, ControlValueAccessor<DateTime>
   String label = 'date';
 
 
-  @ViewChild('input')
-  ElementRef inputRef;
+  html.Element _hostElement;
 }

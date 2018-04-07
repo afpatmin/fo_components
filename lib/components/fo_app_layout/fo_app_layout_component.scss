@@ -88,10 +88,11 @@
                     color: #888;
                   }
                 }
+                /*
                 material-list-item.router-link-active
                 {
                   background-color: #ddd;
-                }
+                }*/
               }
             }
             #sidebar-list::-webkit-scrollbar
@@ -105,7 +106,7 @@
                 color: #888;
               }
             }
-            div.mini-item:hover
+            div.mini-item:hover, div.mini-item.active
             {
               background-color: #eee;
             }
@@ -155,7 +156,7 @@
             div#page-content
             {
               margin-bottom: 2rem;
-              margin-left: 0.5em;
+              //margin-left: 0.5em;
               overflow-x: auto;
             }
           }

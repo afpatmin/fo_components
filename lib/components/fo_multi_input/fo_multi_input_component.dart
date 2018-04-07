@@ -10,27 +10,21 @@ import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-multi-input',
-    styleUrls: const ['fo_multi_input_component.scss.css'],
+    styleUrls: const ['fo_multi_input_component.css'],
     templateUrl: 'fo_multi_input_component.html',
-    directives: const [CORE_DIRECTIVES, materialDirectives],
+    directives: const [coreDirectives, materialDirectives],
     pipes: const [PhrasePipe],
-    visibility: Visibility.local
-)
-class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String>
-{
-  FoMultiInputComponent(@Self() @Optional() this.control)
-  {
+    visibility: Visibility.local)
+class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
+  FoMultiInputComponent(@Self() @Optional() this.control) {
     if (control != null) control.valueAccessor = this;
   }
 
   @override
-  void registerOnTouched(TouchFunction f)
-  {
-  }
+  void registerOnTouched(TouchFunction f) {}
 
   @override
-  void writeValue(String obj)
-  {
+  void writeValue(String obj) {
     inputValue = obj;
   }
 
@@ -38,35 +32,36 @@ class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String>
   void registerOnChange(ChangeFunction<String> f) => _onChange = f;
 
   @override
-  void ngOnDestroy()
-  {
+  void ngOnDestroy() {
     _onValueChangeController.close();
   }
 
-  void onKeyUp(html.KeyboardEvent e)
-  {
+  void onKeyUp(html.KeyboardEvent e) {
     if (_onChange != null) _onChange(inputValue);
-    if (e.keyCode == html.KeyCode.ENTER || e.keyCode == html.KeyCode.MAC_ENTER) add();
+    if (e.keyCode == html.KeyCode.ENTER || e.keyCode == html.KeyCode.MAC_ENTER)
+      add();
   }
 
-  void add()
-  {
-    if (inputValue.isNotEmpty)
-    {
+  void add() {
+    if (control?.valid != false && inputValue.isNotEmpty) {
       value.add(inputValue);
       _onValueChangeController.add(value);
       inputValue = '';
     }
   }
 
-  void remove(String item)
-  {
-    value.remove(item);
-    _onValueChangeController.add(value);
+  void remove(String item) {
+    if (!disabled) {
+      value.remove(item);
+      _onValueChangeController.add(value);
+    }
   }
 
   ChangeFunction<String> _onChange;
   NgControl control;
+
+  @Input()
+  bool disabled = false;
 
   @Input()
   String label;
@@ -79,11 +74,13 @@ class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String>
 
   String inputValue = '';
 
-  final StreamController<List<String>> _onValueChangeController = new StreamController();
+  final StreamController<List<String>> _onValueChangeController =
+      new StreamController();
 
   @Input()
   List<String> value = [];
 
   @Output('valueChange')
-  Stream<List<String>> get onValueChangeOutput => _onValueChangeController.stream;
+  Stream<List<String>> get onValueChangeOutput =>
+      _onValueChangeController.stream;
 }

@@ -4,21 +4,21 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import '../../models/fo_model.dart';
+import 'package:fo_model/fo_model.dart';
 import '../../pipes/phrase_pipe.dart';
 import '../fo_modal/fo_modal_component.dart';
 
 @Component(
     selector: 'fo-select',
-    styleUrls: const ['fo_select_component.scss.css'],
+    styleUrls: const ['fo_select_component.css'],
     templateUrl: 'fo_select_component.html',
-    directives: const [CORE_DIRECTIVES, materialDirectives, FoModalComponent],
+    directives: const [coreDirectives, materialDirectives, FoModalComponent],
     pipes: const [PhrasePipe],
     visibility: Visibility.local)
 class FoSelectComponent implements OnChanges, OnDestroy {
   FoSelectComponent();
 
-  void onSelect(String id) {
+  void onSelect(Object id) {
     selectedId = id;
     _onSelectedIdChangeController.add(id);
   }
@@ -28,20 +28,10 @@ class FoSelectComponent implements OnChanges, OnDestroy {
     if (changes.containsKey('options')) {
       if (options == null)
         selectionOptions = new StringSelectionOptions([]);
-      else {
-        final prev = changes['options'].previousValue;
-        final cur = changes['options'].currentValue;
-
-        /// List equality check, skip if equal contents
-        if (prev == null ||
-            cur == null ||
-            prev.length != cur.length ||
-            prev.where(cur.contains).length != cur.length) {
-          /// Convert List<FoModel> to StringSelectionOptions<FoModel>
-          selectionOptions = new StringSelectionOptions(
-              options.toList(growable: false),
-              shouldSort: sort);
-        }
+      else if (selectionOptions.optionsList.length != options.length) {
+        selectionOptions = new StringSelectionOptions(
+            options.toList(growable: false),
+            shouldSort: sort);
       }
     }
   }
@@ -55,7 +45,7 @@ class FoSelectComponent implements OnChanges, OnDestroy {
 
   void setVisible(bool flag) => visible = (disabled) ? visible : flag;
 
-  FoModel get selectedModel => selectionOptions.optionsList
+  Object get selectedModel => selectionOptions.optionsList
       .firstWhere((o) => o.id == selectedId, orElse: () => null);
 
   StringSelectionOptions<FoModel> selectionOptions =
@@ -63,9 +53,9 @@ class FoSelectComponent implements OnChanges, OnDestroy {
 
   final StreamController<bool> _onVisibleChangeController =
       new StreamController();
-  final StreamController<String> _onSelectedIdChangeController =
+  final StreamController<Object> _onSelectedIdChangeController =
       new StreamController();
-  final StreamController<String> onActionButtonTriggerController =
+  final StreamController<Object> onActionButtonTriggerController =
       new StreamController();
 
   bool tooltipModalVisible = false;
@@ -98,7 +88,7 @@ class FoSelectComponent implements OnChanges, OnDestroy {
   Iterable<FoModel> options = [];
 
   @Input()
-  String selectedId;
+  Object selectedId;
 
   @Input()
   bool showActionButton = false;
@@ -116,10 +106,10 @@ class FoSelectComponent implements OnChanges, OnDestroy {
   bool visible = false;
 
   @Output('selectedIdChange')
-  Stream<String> get onSelectedIdChange => _onSelectedIdChangeController.stream;
+  Stream<Object> get onSelectedIdChange => _onSelectedIdChangeController.stream;
 
   @Output('actionButtonTrigger')
-  Stream<String> get onActionButtonTrigger =>
+  Stream<Object> get onActionButtonTrigger =>
       onActionButtonTriggerController.stream;
 
   @Output('visibleChange')

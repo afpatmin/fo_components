@@ -1,0 +1,32 @@
+@import 'package:grid/grid';
+@import 'package:grid/theme';
+
+:host {
+  z-index: 99;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  div#notificationContainer {
+    @include box-shadow();
+    padding: 0.5rem 1rem;
+    background-color: black;
+    color: white;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    border-radius: 0.5rem;
+    ::ng-deep a
+    {
+      color: white;
+      text-decoration: underline;
+    }
+    h3.overflowEllipsis
+    {
+      overflow: hidden;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

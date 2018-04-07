@@ -7,7 +7,7 @@ typedef void YoutubeCallback(JsObject event);
 
 @Component(
     selector: 'fo-youtube-player',
-    styleUrls: const ['fo_youtube_player_component.scss.css'],
+    styleUrls: const ['fo_youtube_player_component.css'],
     templateUrl: 'fo_youtube_player_component.html'
 )
 class FoYouTubePlayerComponent implements AfterContentInit, OnChanges, OnDestroy

@@ -4,75 +4,87 @@
 
 material-dialog.white-header
 {
-    @include material-dialog-header-color(#fff);
+  @include material-dialog-header-color(#fff);
 
-    [header]
+  [header]
+  {
+    h3
     {
-        h3
-        {
-            color: #333;
-        }
+      color: #333;
     }
+  }
+}
+
+material-dialog.small-padding
+{
+  @include material-dialog-body-padding($padding: 0.5rem);
+  @include material-dialog-header-padding($padding: 0.5rem);
+  @include material-dialog-footer-padding($padding: 0.5rem);
 }
 
 material-dialog
 {
-    min-width: 15rem;
-    max-width: 90vw;
-    margin-left: 5vw;
-    margin-right: 5vw;
-    max-height: 95vh;
-    text-align: left;
+  min-width: 15rem;
+  max-width: 90vw;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  max-height: 95vh;
+  text-align: left;
 
-    [header]
+  [header]
+  {
+    div.flexContainer
     {
-        div.flexContainer
-        {
-            display: flex;
+      display: flex;
 
-            img
-            {
-                width: 60%;
-                align-self: flex-start;
-            }
+      img
+      {
+        max-width: 90%;
+        max-height: 100px;
+        margin: 1rem auto;
+        align-self: flex-start;
+      }
 
-            h3
-            {
-                align-self: center;
-            }
+      h3
+      {
+        align-self: center;
+        margin-bottom: 0;
+      }
 
-            div#closeButtonContainer
-            {
-                flex: auto;
-                align-self: flex-start;
-                text-align: right;
-            }
-        }
+      div#closeButtonContainer
+      {
+        flex: auto;
+        align-self: flex-start;
+        text-align: right;
+      }
     }
+  }
 
-    ::ng-deep main
+  ::ng-deep main
+  {
+    -webkit-overflow-scrolling: touch; // Smooth scrolling on tablets/phones
+    div.modal-content
     {
-        -webkit-overflow-scrolling: touch; // Smooth scrolling on tablets/phones
-        div.modal-content
-        {
-            padding-bottom: 0.5rem;
-        }
+      //padding-bottom: 0.5rem;
     }
+  }
 }
 
 material-dialog.fixed-height
 {
-    height: 95vh;
+  height: 95vh;
 
-    div.modal-content
-    {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-    }
+  div.modal-content
+  {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 material-dialog.fixed-width
 {
-    width: 90vw;
-    max-width: $maxWidth;
+  width: 95vw;
+  margin-left: 2.5vw;
+  margin-right: 2.5vw;
+  max-width: $maxWidth;
 }

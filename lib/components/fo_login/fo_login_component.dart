@@ -11,72 +11,61 @@ import '../fo_modal/fo_modal_component.dart';
 
 @Component(
     selector: 'fo-login',
-    styleUrls: const ['fo_login_component.scss.css'],
+    styleUrls: const ['fo_login_component.css'],
     templateUrl: 'fo_login_component.html',
-    directives: const [CORE_DIRECTIVES, materialDirectives, FoModalComponent],
+    directives: const [coreDirectives, materialDirectives, FoModalComponent],
     pipes: const [PhrasePipe],
-    visibility: Visibility.local
-)
-class FoLoginComponent implements OnChanges, OnDestroy
-{
+    visibility: Visibility.local)
+class FoLoginComponent implements OnInit, OnDestroy {
   FoLoginComponent();
 
   @override
-  void ngOnChanges(Map<String, SimpleChange> changes)
-  {
-    if (changes.containsKey('client') && Uri.base.queryParameters.containsKey('token'))
-    {
-      _tryLoginToken(Uri.base.queryParameters['token']);
+  void ngOnInit() {
+    if (client != null &&
+        Uri.base.queryParameters.containsKey('token') &&
+        Uri.base.queryParameters.containsKey('username')) {
+      _tryLoginToken(Uri.decodeFull(Uri.base.queryParameters['username']),
+          Uri.base.queryParameters['token']);
     }
   }
 
   @override
-  void ngOnDestroy()
-  {
+  void ngOnDestroy() {
     _onLoginController.close();
   }
 
-  Future onLogin() async
-  {
-    try
-    {
+  Future onLogin() async {
+    try {
       errorMessage = null;
       final token = await client.loginWithUsernamePassword(username, password);
-      _onLoginController.add({'username':username, 'token':token});
+      _onLoginController.add({'username': username, 'token': token});
       visible = false;
-    }
-    on Exception
-    {
+    } on Exception {
       errorMessage = 'invalid_details';
     }
   }
 
-  void onKeyUp(html.KeyboardEvent e)
-  {
-    if (username.isNotEmpty && password.isNotEmpty
-        && (e.keyCode == html.KeyCode.ENTER || e.keyCode == html.KeyCode.MAC_ENTER))
-    {
+  void onKeyUp(html.KeyboardEvent e) {
+    if (username.isNotEmpty &&
+        password.isNotEmpty &&
+        (e.keyCode == html.KeyCode.ENTER ||
+            e.keyCode == html.KeyCode.MAC_ENTER)) {
       onLogin();
     }
   }
 
-  void onRecoverPasswordKeyUp(html.KeyboardEvent e)
-  {
-    if (e.keyCode == html.KeyCode.ENTER || e.keyCode == html.KeyCode.MAC_ENTER)
-    {
+  void onRecoverPasswordKeyUp(html.KeyboardEvent e) {
+    if (e.keyCode == html.KeyCode.ENTER ||
+        e.keyCode == html.KeyCode.MAC_ENTER) {
       onRecoverPassword();
     }
   }
 
-  Future onRecoverPassword() async
-  {
-    if (username.isNotEmpty)
-    {
+  Future onRecoverPassword() async {
+    if (username.isNotEmpty) {
       errorMessage = null;
-      try
-      {
-        await client.sendCredentials(
-            username,
+      try {
+        await client.sendCredentials(username,
             emailFrom: recoverPasswordFromEmail,
             emailMessage: recoverPasswordMessageEmail,
             emailSubject: recoverPasswordSubjectEmail,
@@ -85,45 +74,37 @@ class FoLoginComponent implements OnChanges, OnDestroy
 
         recoverPasswordSent = true;
         state = 'reset_password';
+      } on Exception catch (e, s) {
+        print(s);
+        errorMessage = e.toString();
       }
-
-      on Exception catch (e, s) { print(s); errorMessage = e.toString(); }
     }
   }
 
-  Future onUpdatePassword() async
-  {
-    try
-    {
+  Future onUpdatePassword() async {
+    try {
       errorMessage = null;
       await client.updatePassword(username, password, token);
       token = '';
       setState('login');
-    }
-    on Exception catch (e, s)
-    {
+    } on Exception catch (e, s) {
       print(s);
       errorMessage = e.toString();
     }
   }
 
-  void setState(String newState)
-  {
+  void setState(String newState) {
     state = newState;
     recoverPasswordSent = false;
     errorMessage = null;
   }
 
-  Future _tryLoginToken(String token) async
-  {
-    try
-    {
+  Future _tryLoginToken(String username, String token) async {
+    try {
       visible = false;
       final newToken = await client.loginWithToken(token);
-      _onLoginController.add({'username':username, 'token':newToken});
-    }
-    on Exception catch(e)
-    {
+      _onLoginController.add({'username': username, 'token': newToken});
+    } on Exception catch (e) {
       print(e.toString());
       visible = true;
     }
@@ -136,7 +117,8 @@ class FoLoginComponent implements OnChanges, OnDestroy
   bool recoverPasswordSent = false;
   bool visible = true;
 
-  final StreamController<Map<String, String>> _onLoginController = new StreamController();
+  final StreamController<Map<String, String>> _onLoginController =
+      new StreamController();
 
   @Input()
   String username = '';
@@ -155,8 +137,9 @@ class FoLoginComponent implements OnChanges, OnDestroy
   /// %token% placeholders are replaced by a new valid token
   /// %password% placeholders are replaced by a new auto-generated password
   /// %username% placeholders are replaced by the users username
+  // = 'token: %token%, username/password: %username% / %password%';
   @Input()
-  String recoverPasswordMessageEmail; // = 'token: %token%, username/password: %username% / %password%';
+  String recoverPasswordMessageEmail;
 
   @Input()
   String recoverPasswordSubjectEmail = 'Recover your password';
@@ -164,14 +147,21 @@ class FoLoginComponent implements OnChanges, OnDestroy
   @Input()
   String recoverPasswordFromEmail;
 
+  // = 'token: %token%, username/password: %username% / %password%';
   @Input()
-  String recoverPasswordMessageSMS; // = 'token: %token%, username/password: %username% / %password%';
+  String recoverPasswordMessageSMS;
 
   @Input()
   String recoverPasswordFromSMS;
 
   @Input()
   String titleImageUrl;
+
+  @Input()
+  String altUrl;
+
+  @Input()
+  String altUrlTitle;
 
   @Output('login')
   Stream<Map<String, String>> get onLoginOutput => _onLoginController.stream;

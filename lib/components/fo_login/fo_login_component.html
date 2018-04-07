@@ -5,78 +5,86 @@
         [showCloseButton]="false"
         [titleImageUrl]="titleImageUrl"
         [error]="errorMessage | phrase">
-    <h4 class="title">{{state | phrase}}</h4>
-    <div class="login-container" *ngIf="state == 'login'">
-        <material-input
-                [disabled]="client.loading"
-                [label]="'username' | phrase" floatingLabel
-                [(ngModel)]="username"
-                (keyup)="onKeyUp($event)">
-        </material-input>
-        <material-input
-                [disabled]="client.loading"
-                type="password"
-                [label]="'password' | phrase" floatingLabel
-                [displayBottomPanel]="false"
-                [(ngModel)]="password"
-                (keyup)="onKeyUp($event)">
-        </material-input>
-        <p *ngIf="showForgotPassword" class="forgot-password" (click)="setState('forgot_password')">{{'forgot_password' | phrase}}?</p>
-        <div class="button-container">
-            <material-button
-                    raised
-                    clear-size
-                    [disabled]="client.loading || username.isEmpty || password.isEmpty"
-                    (trigger)="onLogin()">
-                {{'login' | phrase}}
-            </material-button>
+    <div class="padder">
+        <h3 class="title margin-bottom-x-small margin-top-x-small">{{state | phrase}}</h3>
+        <div class="login-container" *ngIf="state == 'login'">
+            <form>
+                <material-input
+                        [disabled]="client.loading"
+                        label="{{'username' | phrase}}"
+                        [(ngModel)]="username"
+                        (keyup)="onKeyUp($event)">
+                </material-input>
+                <material-input
+                        [disabled]="client.loading"
+                        type="password"
+                        label="{{'password' | phrase}}"
+                        [displayBottomPanel]="false"
+                        [(ngModel)]="password"
+                        (keyup)="onKeyUp($event)">
+                </material-input>
+            </form>
+            <p *ngIf="showForgotPassword" class="forgot-password" (click)="setState('forgot_password')">{{'forgot_password' | phrase}}?</p>
+            <div class="button-container">
+                <material-button
+                        raised
+                        clear-size
+                        [disabled]="client.loading || username.isEmpty || password.isEmpty"
+                        (trigger)="onLogin()">
+                    {{'login' | phrase}}
+                </material-button>
+            </div>
+            <div class="row" *ngIf="altUrl != null">
+                <div class="col text-center">
+                    <p><a [href]="altUrl">{{altUrlTitle | phrase}}</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="login-container" *ngIf="state == 'forgot_password'">
+            <p>{{'forgot_password_description' | phrase}}</p>
+            <material-input
+                    [disabled]="client.loading"
+                    [label]="'username' | phrase" floatingLabel
+                    [(ngModel)]="username"
+                    (keyup)="onRecoverPasswordKeyUp($event)">
+            </material-input>
+            <div class="button-container">
+                <material-button
+                        raised
+                        clear-size
+                        (trigger)="setState('login')">
+                    {{'back' | phrase}}
+                </material-button>
+                <material-button
+                        raised
+                        clear-size
+                        [disabled]="client.loading || username.isEmpty || recoverPasswordSent"
+                        (trigger)="onRecoverPassword()">
+                    {{'send' | phrase}}
+                </material-button>
+            </div>
+        </div>
+        <div class="login-container" *ngIf="state == 'reset_password'">
+            <p>{{'reset_password_description' | phrase}}</p>
+            <material-input
+                    [disabled]="client.loading"
+                    [label]="'token' | phrase" floatingLabel
+                    [(ngModel)]="token">
+            </material-input>
+            <material-input
+                    [disabled]="client.loading"
+                    [label]="'new_password' | phrase" floatingLabel
+                    [(ngModel)]="password">
+            </material-input>
+            <div class="button-container">
+                <material-button
+                        raised
+                        clear-size
+                        [disabled]="client.loading || password.isEmpty || token.isEmpty"
+                        (trigger)="onUpdatePassword()">
+                    {{'save' | phrase}}
+                </material-button>
+            </div>
         </div>
     </div>
-    <div class="login-container" *ngIf="state == 'forgot_password'">
-        <p>{{'forgot_password_description' | phrase}}</p>
-        <material-input
-                [disabled]="client.loading"
-                [label]="'username' | phrase" floatingLabel
-                [(ngModel)]="username"
-                (keyup)="onRecoverPasswordKeyUp($event)">
-        </material-input>
-        <div class="button-container">
-            <material-button
-                    raised
-                    clear-size
-                    (trigger)="setState('login')">
-                {{'back' | phrase}}
-            </material-button>
-            <material-button
-                    raised
-                    clear-size
-                    [disabled]="client.loading || username.isEmpty || recoverPasswordSent"
-                    (trigger)="onRecoverPassword()">
-                {{'send' | phrase}}
-            </material-button>
-        </div>
-    </div>
-    <div class="login-container" *ngIf="state == 'reset_password'">
-        <p>{{'reset_password_description' | phrase}}</p>
-        <material-input
-                [disabled]="client.loading"
-                [label]="'token' | phrase" floatingLabel
-                [(ngModel)]="token">
-        </material-input>
-        <material-input
-                [disabled]="client.loading"
-                [label]="'new_password' | phrase" floatingLabel
-                [(ngModel)]="password">
-        </material-input>
-        <div class="button-container">
-            <material-button
-                    raised
-                    clear-size
-                    [disabled]="client.loading || password.isEmpty || token.isEmpty"
-                    (trigger)="onUpdatePassword()">
-                {{'save' | phrase}}
-            </material-button>
-        </div>
-    </div>
-
 </fo-modal>

@@ -5,6 +5,7 @@
   padding-top: 0;
   height: 0;
   overflow: hidden;
+  font-size: 0;
 
   iframe
   {
@@ -13,5 +14,9 @@
     left: 0;
     width: 100%;
     height: 100%;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    display: block;
   }
 }

@@ -6,7 +6,7 @@ class PhraseService {
   PhraseService();
 
   // ignore: avoid_setters_without_getters
-  static set data(Map<String, Map<String, String>> value) {
+  static set data(Object value) {
     _data = value;
 
     /// Fake server fetch
@@ -15,7 +15,6 @@ class PhraseService {
         .then((_) => _loading = false);
   }
 
-  // ignore: avoid_setters_without_getters
   static set language(String value) {
     _language = value;
 
@@ -25,17 +24,20 @@ class PhraseService {
         .then((_) => _loading = false);
   }
 
+  static String get language => _language;
+
   String get(String key,
       {Map<String, String> params, bool capitalizeFirst: true}) {
     if (key == null)
       return null;
     else if (key.isEmpty)
       return '';
-    else if (!_data.containsKey(_language))
+    else if (!_data.containsKey(key))
+      return key;
+    else if (!_data[key].containsKey(_language))
       return key;
     else {
-      var phrase =
-          (_data[_language].containsKey(key)) ? _data[_language][key] : key;
+      var phrase = _data[key][_language];
       if (capitalizeFirst && phrase.isNotEmpty)
         phrase = phrase[0].toUpperCase() + phrase.substring(1, phrase.length);
 
@@ -52,5 +54,5 @@ class PhraseService {
 
   static bool _loading = false;
   static String _language = 'en';
-  static Map<String, Map<String, String>> _data = {};
+  static var _data = {};
 }

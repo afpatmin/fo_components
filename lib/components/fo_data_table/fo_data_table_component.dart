@@ -2,11 +2,12 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:html' as dom;
 import 'dart:math';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import '../../models/fo_model.dart';
+import 'package:fo_model/fo_model.dart';
 import '../../pipes/phrase_pipe.dart';
 import '../../pipes/range_pipe.dart';
 import '../../services/phrase_service.dart';
@@ -14,14 +15,14 @@ import '../fo_modal/fo_modal_component.dart';
 import '../fo_select/fo_select_component.dart';
 
 /// Callback function for evaluated columns
-typedef String EvaluateColumnFn(FoModel model);
+typedef Object EvaluateColumnFn(Object model);
 
 @Component(
     selector: 'fo-data-table',
-    styleUrls: const <String>['fo_data_table_component.scss.css'],
+    styleUrls: const ['fo_data_table_component.css'],
     templateUrl: 'fo_data_table_component.html',
     directives: const <dynamic>[
-      CORE_DIRECTIVES,
+      coreDirectives,
       FoModalComponent,
       FoSelectComponent,
       materialDirectives,
@@ -30,20 +31,17 @@ typedef String EvaluateColumnFn(FoModel model);
     pipes: const <Type>[PhrasePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.local)
-
-/// A data table component displaying FoModels. Has built in filters, sort
-/// pagination and many other features. class FoDataTableComponent
 class FoDataTableComponent
     implements OnChanges, OnInit, AfterViewInit, OnDestroy {
-  FoDataTableComponent(this.phraseService);
+  FoDataTableComponent(this.host, this.phraseService);
 
   @override
   void ngOnInit() {
     selectedRowOptionId = rowOptions
-        .firstWhere((r) => r['count'] == rows, orElse: () => rowOptions.first)
+        .firstWhere((r) => r.id == rows, orElse: () => rowOptions.first)
         .id;
     firstIndex = 0;
-    lastIndex = _selectedRowOption.count;
+    lastIndex = _selectedRowOption.id;
 
     _onWindowResizeListener =
         dom.window.onResize.listen((_) => _evaluateLayout());
@@ -59,7 +57,7 @@ class FoDataTableComponent
     if (changes.containsKey('rows') || changes.containsKey('data')) {
       data ??= {};
       selectedRowOptionId = rowOptions
-          .firstWhere((r) => r['count'] == rows, orElse: () => rowOptions.first)
+          .firstWhere((r) => r.id == rows, orElse: () => rowOptions.first)
           .id;
       onSearch();
       setIndices(0);
@@ -74,19 +72,23 @@ class FoDataTableComponent
     onDeleteController.close();
     onRowClickController.close();
     onSelectedRowsController.close();
+    _onFilterController.close();
     _onSortController.close();
     _onBatchOperationController.close();
     _onWindowResizeListener.cancel();
   }
 
+  dynamic getCell(Object id, String column) =>
+      (data[id] as FoModel).toJson()[column];
+
   bool isBool(Object value) => value is bool;
 
   void step(int steps) {
-    setIndices(firstIndex + (steps * _selectedRowOption.count));
+    setIndices(firstIndex + (steps * _selectedRowOption.id));
   }
 
   void onSearchKeyUp(dom.KeyboardEvent e) {
-    if (data.length < liveSearchThreshold) {
+    if (!lazyFilter) {
       onSearch();
     } else if (e.keyCode == dom.KeyCode.ENTER ||
         e.keyCode == dom.KeyCode.MAC_ENTER) {
@@ -95,13 +97,14 @@ class FoDataTableComponent
   }
 
   void onSearch() {
-    if (searchPhrase != null && searchPhrase.isNotEmpty) {
-      bool find(FoModel model, List<String> keywords) {
+    if (internalFilter && searchPhrase != null && searchPhrase.isNotEmpty) {
+      bool find(Object model, List<String> keywords) {
         bool allKeywords;
+        final row = json.decode(json.encode(model));
         for (final keyword in keywords) {
           allKeywords = false;
           for (final col in columns) {
-            final data = model[col]?.toString();
+            final data = row[col]?.toString();
             if (data != null &&
                 phraseService.get(data).toLowerCase().contains(keyword)) {
               allKeywords = true;
@@ -128,25 +131,24 @@ class FoDataTableComponent
     } else
       _filteredKeys = null;
 
+    _onFilterController.add(searchPhrase);
     setIndices(0);
   }
 
-  void onSort(String column) {
-    if (!disabled) {
+  void onSort(Object column) {
+    if (!disabled && column != null) {
       sortColumn = column;
       sortOrder = (sortOrder == 'ASC') ? 'DESC' : 'ASC';
+      _onSortController.add({'column': sortColumn, 'order': sortOrder});
 
       searchPhrase = null;
       _filteredKeys = null;
 
-      if (internalSort || evaluatedColumns.containsKey(column))
-
-      /// Evaluated columns are always sorted internally {
-      if (sortOrder != null && sortColumn != null && sortColumn.isNotEmpty) {
+      /// Evaluated columns are always sorted internally
+      if (internalSort || evaluatedColumns.containsKey(column)) {
         int sort(String a, String b) {
           final vA = a == null ? '-' : a;
           final vB = b == null ? '-' : b;
-
           try {
             // Number comparison
             final numA = num.parse(vA);
@@ -178,18 +180,21 @@ class FoDataTableComponent
             .where(filteredKeys.contains)
             .map((key) => data[key])
             .toList();
+
         if (values != null) {
           if (columns.contains(sortColumn))
-            values.sort((a, b) =>
-                sort(a[sortColumn].toString(), b[sortColumn].toString()));
+            values.sort((a, b) => sort(
+                json.decode(json.encode(a))[sortColumn].toString(),
+                json.decode(json.encode(b))[sortColumn].toString()));
           else if (evaluatedColumns.containsKey(sortColumn))
             values.sort((a, b) => sort(evaluatedColumns[sortColumn](a),
                 evaluatedColumns[sortColumn](b)));
-          _filteredKeys = values.map((model) => model['id']);
+
+          _filteredKeys =
+              values.map((model) => json.decode(json.encode(model))['id']);
         }
       }
-    } else
-      _onSortController.add({'column': sortColumn, 'order': sortOrder});
+    }
   }
 
   void onDownloadDataCSV() {
@@ -204,7 +209,9 @@ class FoDataTableComponent
         final model = data[key];
         if (model == null) continue;
 
-        final properties = columns.map((col) => model[col].toString()).toList()
+        final row = json.decode(json.encode(model));
+
+        final properties = columns.map((col) => row[col]).toList()
           ..addAll(
               evaluatedColumns.keys.map((id) => evaluatedColumns[id](model)));
 
@@ -233,34 +240,37 @@ class FoDataTableComponent
   }
 
   void setIndices(int inFirstIndex) {
-    if (inFirstIndex <= -_selectedRowOption.count ||
+    if (inFirstIndex <= -(_selectedRowOption.id as int)||
         inFirstIndex >= data.length) return;
 
     firstIndex = max(0, inFirstIndex);
     if (searchPhrase != null && searchPhrase.isNotEmpty)
       firstIndex = max(
-          0, min(firstIndex, filteredKeys.length - _selectedRowOption.count));
-    lastIndex = firstIndex + _selectedRowOption.count;
+          0, min(firstIndex, filteredKeys.length - _selectedRowOption.id));
+    lastIndex = firstIndex + _selectedRowOption.id;
 
     currentPage = (data.isEmpty)
         ? 0
-        : (firstIndex.toDouble() / _selectedRowOption.count).ceil() + 1;
+        : (firstIndex.toDouble() / _selectedRowOption.id).ceil() + 1;
   }
 
   int get totalPages =>
-      (filteredKeys.length.toDouble() / _selectedRowOption.count).ceil();
+      (filteredKeys.length.toDouble() / _selectedRowOption.id).ceil();
 
-  final List<RowOption> rowOptions = [
-    new RowOption('5', 5),
-    new RowOption('10', 10),
-    new RowOption('15', 15),
-    new RowOption('20', 20),
-    new RowOption('25', 25),
-    new RowOption('50', 50),
-    new RowOption('100', 100),
+  bool get lazyFilter =>
+      data == null || !internalFilter || data.length < liveSearchThreshold;
+
+  final List<FoModel> rowOptions = [
+    new FoModel()..id = 5,
+    new FoModel()..id = 10,
+    new FoModel()..id = 15,
+    new FoModel()..id = 20,
+    new FoModel()..id = 25,
+    new FoModel()..id = 50,
+    new FoModel()..id = 100,
   ];
 
-  void onCheckedChange(String id, bool state) {
+  void onCheckedChange(Object id, bool state) {
     if (state)
       selectedRows.add(id);
     else
@@ -271,17 +281,22 @@ class FoDataTableComponent
   void onBatchOperationTrigger(String event) {
     _onBatchOperationController
         .add(new BatchOperationEvent(event, selectedRows));
+
+    allChecked = false;
   }
 
-  void onAllCheckedChange(bool state) {
-    if (state == true)
+  bool get allChecked => _allChecked;
+
+  set allChecked(bool state) {
+    _allChecked = state;
+    if (_allChecked)
       selectedRows = filteredKeys.toSet();
     else
       selectedRows.clear();
   }
 
   void _evaluateLayout() {
-    final dom.DivElement container = tableContainer.nativeElement;
+    final dom.DivElement container = host.querySelector('.table-container');
     final dom.TableElement table = container.querySelector('table');
 
     table.classes.remove('fixed-layout');
@@ -291,72 +306,72 @@ class FoDataTableComponent
     }
   }
 
-  String get filterLabel =>
-      (data == null || (data.length < liveSearchThreshold))
-          ? 'filter'
-          : 'filter_enter';
+  String get filterLabel => lazyFilter ? 'filter_enter' : 'filter';
 
-  Iterable<String> get filteredKeys =>
+  Iterable<Object> get filteredKeys =>
       _filteredKeys == null ? data.keys : _filteredKeys;
 
-  String get selectedRowOptionId => _selectedRowOption?.id;
+  int get selectedRowOptionId => _selectedRowOption?.id;
 
-  set selectedRowOptionId(String value) {
+  set selectedRowOptionId(int value) {
     _selectedRowOption = rowOptions.firstWhere((row) => row.id == value,
         orElse: () => rowOptions.first);
   }
 
-  RowOption _selectedRowOption;
-  String deleteBufferId;
+  FoModel _selectedRowOption;
+  Object deleteBufferId;
   int firstIndex = 0;
   int lastIndex = 1;
   int currentPage = 1;
   String searchPhrase = '';
-  Iterable<String> _filteredKeys;
+  Iterable<Object> _filteredKeys;
   bool infoModalOpen = false;
+  bool _allChecked;
 
   StreamSubscription _onWindowResizeListener;
+  final dom.Element host;
   final int liveSearchThreshold = 500;
   final PhraseService phraseService;
   final StreamController<String> onAddController = new StreamController();
-  final StreamController<Set<String>> onSelectedRowsController =
+  final StreamController<Set<Object>> onSelectedRowsController =
       new StreamController();
-  final StreamController<String> onDeleteController = new StreamController();
-  final StreamController<String> onRowClickController = new StreamController();
-  final StreamController<Map<String, String>> _onSortController =
+  final StreamController<Object> onDeleteController = new StreamController();
+  final StreamController<String> _onFilterController = new StreamController();
+  final StreamController<Object> onRowClickController = new StreamController();
+  final StreamController<Map<String, dynamic>> _onSortController =
       new StreamController();
   final StreamController<BatchOperationEvent> _onBatchOperationController =
       new StreamController();
 
-  @ViewChild('tableContainer')
-  ElementRef tableContainer;
-
   @Input()
   bool internalSort = true;
 
+  @Input()
+  bool internalFilter = true;
+
   @Input('large-hidden-col')
-  List<String> largeHiddenCol = [];
+  Iterable<Object> largeHiddenCol = [];
 
   @Input('small-hidden-col')
-  List<String> smallHiddenCol = [];
+  Iterable<Object> smallHiddenCol = [];
 
   @Input('medium-hidden-col')
-  List<String> mediumHiddenCol = [];
+  Iterable<Object> mediumHiddenCol = [];
 
   @Input()
-  String sortColumn = '';
+  Object sortColumn = '';
 
   @Input()
   String sortOrder = 'DESC';
 
   @Input()
-  Map<String, FoModel> data = {};
+  Map<Object, Object> data = {};
 
   @Input()
-  List<String> columns = [];
+  Iterable<Object> columns = [];
 
   @Input()
-  Map<String, EvaluateColumnFn> evaluatedColumns = {};
+  Map<Object, EvaluateColumnFn> evaluatedColumns = {};
 
   @Input()
   bool showAddButton = false;
@@ -380,7 +395,7 @@ class FoDataTableComponent
   String description;
 
   @Input()
-  Set<String> selectedRows = new Set();
+  Set<Object> selectedRows = new Set();
 
   @Input()
   int rows = 10;
@@ -392,38 +407,23 @@ class FoDataTableComponent
   Stream<String> get onAddOutput => onAddController.stream;
 
   @Output('delete')
-  Stream<String> get onDeleteOutput => onDeleteController.stream;
+  Stream<Object> get onDeleteOutput => onDeleteController.stream;
+
+  @Output('filter')
+  Stream<String> get onFilterOutput => _onFilterController.stream;
 
   @Output('rowclick')
-  Stream<String> get onRowClickOutput => onRowClickController.stream;
+  Stream<Object> get onRowClickOutput => onRowClickController.stream;
 
   @Output('selectedRowsChange')
-  Stream<Set<String>> get selectedRowsChange => onSelectedRowsController.stream;
+  Stream<Set<Object>> get selectedRowsChange => onSelectedRowsController.stream;
 
   @Output('sort')
-  Stream<Map<String, String>> get onSortOutput => _onSortController.stream;
+  Stream<Map<String, dynamic>> get onSortOutput => _onSortController.stream;
 
   @Output('batchOperation')
   Stream<BatchOperationEvent> get onBatchOperationOutput =>
       _onBatchOperationController.stream;
-}
-
-/// RowOption is a model used in the FoDataTable to represent how many rows should be displayed at once
-class RowOption extends FoModel {
-  /// Default constructor
-  RowOption(String id, this.count)
-  {
-    super.id = id;
-  }
-
-  @override
-  Map<String, dynamic> toJson() => {'id': id, 'count': count};
-
-  @override
-  String toString() => count.toString();
-
-  /// The number of rows to display
-  final int count;
 }
 
 /// Batch Operation Event, spawned as output whenever the user performs a batch action on the table
@@ -435,5 +435,5 @@ class BatchOperationEvent {
   final String operation;
 
   /// Selected ids whenever the user invoked batch operation
-  final Set<String> selectedIds;
+  final Set<Object> selectedIds;
 }

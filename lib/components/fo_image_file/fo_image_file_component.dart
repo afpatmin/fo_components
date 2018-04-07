@@ -2,9 +2,9 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async' show Stream, StreamController;
-import 'dart:convert' show ASCII, BASE64;
+import 'dart:convert';
 import 'dart:html' as dom;
-import 'dart:typed_data' show ByteData, Endianness, Uint8List;
+import 'dart:typed_data';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import '../../pipes/phrase_pipe.dart';
@@ -12,9 +12,9 @@ import '../../pipes/phrase_pipe.dart';
 @Component(
     selector: 'fo-image-file',
     templateUrl: 'fo_image_file_component.html',
-    styleUrls: const ['fo_image_file_component.scss.css'],
+    styleUrls: const ['fo_image_file_component.css'],
     directives: const [
-      CORE_DIRECTIVES,
+      coreDirectives,
       MaterialIconComponent,
       MaterialButtonComponent
     ],
@@ -127,13 +127,13 @@ class FoImageFileComponent implements OnDestroy {
 
       /// 0xE1 - Exif Marker
       {
-        final exifIdentifier = [
+        final exifIdentifier = <int>[
           byteData.getUint8(byteOffset),
           byteData.getUint8(byteOffset + 1),
           byteData.getUint8(byteOffset + 2),
           byteData.getUint8(byteOffset + 3)
         ];
-        final strExifIdentifier = ASCII.decode(exifIdentifier);
+        final strExifIdentifier = ascii.decode(exifIdentifier);
         if (strExifIdentifier == 'Exif') {
           /// 'Exif\0\0'
           byteOffset += 6;
@@ -142,13 +142,13 @@ class FoImageFileComponent implements OnDestroy {
            * TIFF HEADER
            * Endianess
            */
-          final strEndian = (ASCII.decode([
+          final strEndian = (ascii.decode([
             byteData.getUint8(byteOffset),
             byteData.getUint8(byteOffset + 1)
           ]));
           final endian = (strEndian == 'II')
-              ? Endianness.LITTLE_ENDIAN
-              : Endianness.BIG_ENDIAN;
+              ? Endian.little
+              : Endian.big;
           byteOffset += 2;
 
           /// Next two bytes are Always 0x2a00 (or 0x002a for big endian)
@@ -259,7 +259,7 @@ class FoImageFileComponent implements OnDestroy {
 
         if (source.contains('data:${_file.type};base64,')) {
           _base64Data = source.substring('data:${_file.type};base64,'.length);
-          _byteSize = BASE64.decode(_base64Data).length;
+          _byteSize = base64.decode(_base64Data).length;
         } else
           print('invalid src: $source');
       }
