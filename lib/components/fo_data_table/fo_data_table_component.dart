@@ -280,7 +280,7 @@ class FoDataTableComponent
 
   void onBatchOperationTrigger(String event) {
     _onBatchOperationController
-        .add(new BatchOperationEvent(event, selectedRows));
+        .add(new BatchOperationEvent(event, new Set.from(selectedRows)));
 
     allChecked = false;
   }
