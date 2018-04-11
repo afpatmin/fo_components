@@ -24,3 +24,5 @@ doc/api/
 
 *.css
 *.css.map
+
+.dart_tool
