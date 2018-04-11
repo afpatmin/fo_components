@@ -83,4 +83,8 @@ class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
   @Output('valueChange')
   Stream<List<String>> get onValueChangeOutput =>
       _onValueChangeController.stream;
+
+  @override
+  void onDisabledChanged(bool isDisabled) {
+  }
 }

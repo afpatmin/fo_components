@@ -75,4 +75,8 @@ class FoDateInputComponent implements OnChanges, ControlValueAccessor<DateTime>
 
 
   html.Element _hostElement;
+
+  @override
+  void onDisabledChanged(bool isDisabled) {
+  }
 }

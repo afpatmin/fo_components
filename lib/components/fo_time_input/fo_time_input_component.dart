@@ -162,4 +162,9 @@ class FoTimeInputComponent implements ControlValueAccessor<String> {
     new FoModel()..id = '58',
     new FoModel()..id = '59'
   ];
+
+  @override
+  void onDisabledChanged(bool isDisabled) {
+    // TODO: implement onDisabledChanged
+  }
 }
