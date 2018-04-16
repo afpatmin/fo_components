@@ -166,8 +166,8 @@ class FoDataTableComponent
                   : dateB.difference(dateA).inMilliseconds;
             } on FormatException {
               // Default String comparison
-              final colA = a.toLowerCase();
-              final colB = b.toLowerCase();
+              final colA = a.toString().toLowerCase();
+              final colB = b.toString().toLowerCase();
 
               return (sortOrder == 'ASC')
                   ? colA.compareTo(colB)
