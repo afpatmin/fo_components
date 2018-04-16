@@ -31,6 +31,7 @@
             <td *ngIf="showCheckboxes">
                 <material-checkbox [(checked)]="allChecked"></material-checkbox>
             </td>
+            <td *ngIf="errorFunction != null"></td>
             <td *ngFor="let cell of columns"
                 [class.hide-for-small]="smallHiddenCol.contains(cell)"
                 [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
@@ -56,10 +57,14 @@
         <tr *ngFor="let key of filteredKeys | range:firstIndex:lastIndex" (click)="onRowClickController.add(key)">
             <td *ngIf="showCheckboxes">
                 <material-checkbox
+                        [disabled]="errorFunction != null && errorFunction(data[key])"
                         [checked]="selectedRows.contains(key)"
                         (checkedChange)="onCheckedChange(key, $event)"
                         (click)="$event.stopPropagation()">
                 </material-checkbox>
+            </td>
+            <td *ngIf="errorFunction != null">
+                <material-icon *ngIf="errorFunction(data[key])" icon="warning" size="medium"></material-icon>
             </td>
             <td
                     *ngFor="let cell of columns"

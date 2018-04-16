@@ -17,6 +17,8 @@ import '../fo_select/fo_select_component.dart';
 /// Callback function for evaluated columns
 typedef Object EvaluateColumnFn(Object model);
 
+typedef bool errorFn(Object model);
+
 @Component(
     selector: 'fo-data-table',
     styleUrls: const ['fo_data_table_component.css'],
@@ -218,7 +220,7 @@ class FoDataTableComponent
         /// Add "'"-character if ¨the cell has a leading '0'-character. This will stop Excel from skipping leading 0
         for (var property in properties) {
           try {
-            num.parse(property);
+            num.parse(property.toString());
             if (property.startsWith('0')) {
               property = '="$property"';
             }
@@ -240,13 +242,13 @@ class FoDataTableComponent
   }
 
   void setIndices(int inFirstIndex) {
-    if (inFirstIndex <= -(_selectedRowOption.id as int)||
+    if (inFirstIndex <= -(_selectedRowOption.id as int) ||
         inFirstIndex >= data.length) return;
 
     firstIndex = max(0, inFirstIndex);
     if (searchPhrase != null && searchPhrase.isNotEmpty)
-      firstIndex = max(
-          0, min(firstIndex, filteredKeys.length - _selectedRowOption.id));
+      firstIndex =
+          max(0, min(firstIndex, filteredKeys.length - _selectedRowOption.id));
     lastIndex = firstIndex + _selectedRowOption.id;
 
     currentPage = (data.isEmpty)
@@ -290,7 +292,9 @@ class FoDataTableComponent
   set allChecked(bool state) {
     _allChecked = state;
     if (_allChecked)
-      selectedRows = filteredKeys.toSet();
+      selectedRows = filteredKeys
+          .where((o) => errorFunction == null || !errorFunction(data[o]))
+          .toSet();
     else
       selectedRows.clear();
   }
@@ -372,6 +376,9 @@ class FoDataTableComponent
 
   @Input()
   Map<Object, EvaluateColumnFn> evaluatedColumns = {};
+
+  @Input()
+  errorFn errorFunction = ((model) => false);
 
   @Input()
   bool showAddButton = false;
