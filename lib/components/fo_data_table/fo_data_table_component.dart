@@ -120,9 +120,8 @@ class FoDataTableComponent
               break;
             }
           }
-          for (final col in evaluatedColumns.keys) {
-            final data = _evaluatedColumnsBuffer[row['id']]
-                [col]; //evaluatedColumns[col](model);
+          for (final col in allEvaluatedColumns) {            
+            final data = _evaluatedColumnsBuffer[row['id']][col];
             if (data != null &&
                 phraseService.get(data).toLowerCase().contains(keyword)) {
               allKeywords = true;
@@ -374,7 +373,6 @@ class FoDataTableComponent
         asyncEvaluatedColumns[col](data[row]).then((v) {
           _evaluatedColumnsBuffer[row][col] = v;
           _changeDetector.markForCheck();
-          //_changeDetector.detectChanges();
         });
       }
     }
