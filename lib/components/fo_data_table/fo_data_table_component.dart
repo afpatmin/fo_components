@@ -352,8 +352,20 @@ class FoDataTableComponent
       new StreamController();
   final StreamController<BatchOperationEvent> _onBatchOperationController =
       new StreamController();
+
+  final Map<Object, Map<String, Object>> _evalutedColumnsBuffer = {};
   final Map<Object, Map<String, Future<Object>>> _asyncEvaluatedColumnsBuffer =
       {};
+
+  Object getEvaluatedColumn(Object row, String col) {
+    if (_evalutedColumnsBuffer[row] == null) {
+      _evalutedColumnsBuffer[row] = {};
+    }
+    if (!_evalutedColumnsBuffer[row].containsKey(col)) {
+      _evalutedColumnsBuffer[row][col] = evaluatedColumns[col](data[row]);
+    }
+    return _evalutedColumnsBuffer[row][col];
+  }
 
   Future<Object> getAsyncEvaluatedColumn(Object row, String col) {
     if (_asyncEvaluatedColumnsBuffer[row] == null) {

@@ -81,7 +81,7 @@
                     [class.hide-for-small]="smallHiddenCol.contains(cell)"
                     [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                     [class.hide-for-large]="largeHiddenCol.contains(cell)">
-                <span *ngIf="!isBool(getCell(key, cell))">{{getCell(key, cell)?.toString() | phrase:false}}</span>
+                <span *ngIf="!isBool(getCell(key, cell))">{{getCell(key, cell) | phrase:false}}</span>
                 <material-icon
                         *ngIf="getCell(key, cell) == true"
                         baseline
@@ -93,12 +93,25 @@
                 [class.hide-for-small]="smallHiddenCol.contains(cell)"
                 [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                 [class.hide-for-large]="largeHiddenCol.contains(cell)">
-                <span>{{evaluatedColumns[cell](data[key]) | phrase:false}}</span>
+                <span *ngIf="!isBool(getEvaluatedColumn(key, cell))">{{getEvaluatedColumn(key, cell) | phrase:false}}</span>
+                <material-icon
+                        *ngIf="getEvaluatedColumn(key, cell) == true"
+                        baseline
+                        icon="check"
+                        size="medium">
+                </material-icon>
             </td>
             <td *ngFor="let cell of asyncEvaluatedColumns.keys"
                 [class.hide-for-small]="smallHiddenCol.contains(cell)"
                 [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                 [class.hide-for-large]="largeHiddenCol.contains(cell)">
+                <span *ngIf="!isBool(getAsyncEvaluatedColumn(key, cell) | async)">{{getAsyncEvaluatedColumn(key, cell) | async | phrase:false}}</span>
+                <material-icon
+                        *ngIf="getAsyncEvaluatedColumn(key, cell) | async == true"
+                        baseline
+                        icon="check"
+                        size="medium">
+                </material-icon>
                 <span>{{getAsyncEvaluatedColumn(key, cell) | async | phrase:false}}</span>                
             </td>
             <td *ngIf="showDeleteButtons" class="text-center">
