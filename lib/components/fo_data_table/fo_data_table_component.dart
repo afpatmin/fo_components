@@ -115,7 +115,7 @@ class FoDataTableComponent
           for (final col in columns) {
             final data = row[col]?.toString();
             if (data != null &&
-                phraseService.get(data).toString().toLowerCase().contains(keyword)) {
+                phraseService.get(data.toString()).toLowerCase().contains(keyword)) {
               allKeywords = true;
               break;
             }
@@ -123,7 +123,7 @@ class FoDataTableComponent
           for (final col in allEvaluatedColumns) {            
             final data = _evaluatedColumnsBuffer[row['id']][col];
             if (data != null &&
-                phraseService.get(data).toString().toLowerCase().contains(keyword)) {
+                phraseService.get(data.toString()).toLowerCase().contains(keyword)) {
               allKeywords = true;
               break;
             }
