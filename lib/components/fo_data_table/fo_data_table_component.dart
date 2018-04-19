@@ -64,6 +64,8 @@ class FoDataTableComponent
 
       if (asyncEvaluatedColumns.isNotEmpty) {
         for (final row in data.keys) {
+
+          asyncEvaluatedColumnsData[row] = <String, Future<Object>>{};
           for (final col in asyncEvaluatedColumns.keys) {
             asyncEvaluatedColumnsData[row][col] =
               asyncEvaluatedColumns[col](data[row]);
