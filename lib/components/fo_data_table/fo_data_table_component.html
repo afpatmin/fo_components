@@ -99,7 +99,7 @@
                 [class.hide-for-small]="smallHiddenCol.contains(cell)"
                 [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                 [class.hide-for-large]="largeHiddenCol.contains(cell)">
-                <span>{{asyncEvaluatedColumnsData[key][cell] | async | phrase:false}}</span>
+                <!--<span>{{asyncEvaluatedColumnsData[key][cell] | async | phrase:false}}</span>-->
             </td>
             <td *ngIf="showDeleteButtons" class="text-center">
                 <material-icon
