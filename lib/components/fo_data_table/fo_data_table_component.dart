@@ -16,8 +16,9 @@ import '../fo_select/fo_select_component.dart';
 
 /// Callback function for evaluated columns
 typedef Object EvaluateColumnFn(Object model);
+typedef Future<Object> AsyncEvaluateColumnFn(Object model);
 
-typedef bool errorFn(Object model);
+typedef bool ErrorFn(Object model);
 
 @Component(
     selector: 'fo-data-table',
@@ -30,7 +31,7 @@ typedef bool errorFn(Object model);
       materialDirectives,
       MaterialIconComponent
     ],
-    pipes: const <Type>[PhrasePipe, RangePipe],
+    pipes: const [AsyncPipe, PhrasePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.local)
 class FoDataTableComponent
@@ -58,9 +59,22 @@ class FoDataTableComponent
   void ngOnChanges(Map<String, SimpleChange> changes) {
     if (changes.containsKey('rows') || changes.containsKey('data')) {
       data ??= {};
+
+      asyncEvaluatedColumnsData.clear();
+
+      if (asyncEvaluatedColumns.isNotEmpty) {
+        for (final row in data.keys) {
+          for (final col in asyncEvaluatedColumns.keys) {
+            asyncEvaluatedColumnsData[row][col] =
+              asyncEvaluatedColumns[col](data[row]);
+          }
+        }
+      }
+
       selectedRowOptionId = rowOptions
           .firstWhere((r) => r.id == rows, orElse: () => rowOptions.first)
           .id;
+
       onSearch();
       setIndices(0);
     }
@@ -184,13 +198,14 @@ class FoDataTableComponent
             .toList();
 
         if (values != null) {
-          if (columns.contains(sortColumn))
+          if (columns.contains(sortColumn)) {
             values.sort((a, b) => sort(
                 json.decode(json.encode(a))[sortColumn].toString(),
                 json.decode(json.encode(b))[sortColumn].toString()));
-          else if (evaluatedColumns.containsKey(sortColumn))
+          } else if (evaluatedColumns.containsKey(sortColumn)) {
             values.sort((a, b) => sort(evaluatedColumns[sortColumn](a),
                 evaluatedColumns[sortColumn](b)));
+          }
 
           _filteredKeys =
               values.map((model) => json.decode(json.encode(model))['id']);
@@ -346,6 +361,7 @@ class FoDataTableComponent
       new StreamController();
   final StreamController<BatchOperationEvent> _onBatchOperationController =
       new StreamController();
+  final Map<Object, Map<String, Future<Object>>> asyncEvaluatedColumnsData = {};
 
   @Input()
   bool internalSort = true;
@@ -375,10 +391,13 @@ class FoDataTableComponent
   Iterable<Object> columns = [];
 
   @Input()
-  Map<Object, EvaluateColumnFn> evaluatedColumns = {};
+  Map<String, EvaluateColumnFn> evaluatedColumns = {};
 
   @Input()
-  errorFn errorFunction = ((model) => false);
+  Map<String, AsyncEvaluateColumnFn> asyncEvaluatedColumns = {};
+
+  @Input()
+  ErrorFn errorFunction = ((model) => false);
 
   @Input()
   bool showAddButton = false;
