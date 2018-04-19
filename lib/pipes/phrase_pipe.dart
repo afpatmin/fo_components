@@ -6,10 +6,10 @@ class PhrasePipe implements PipeTransform
 {
   PhrasePipe(this._phraseService);
 
-  String transform(String value, [bool capitalizeFirst = true])
+  String transform(Object value, [bool capitalizeFirst = true])
   {
     if (value == null) return null;
-    return _phraseService.get(value, capitalizeFirst: capitalizeFirst);
+    return _phraseService.get(value.toString(), capitalizeFirst: capitalizeFirst);
   }
 
   final PhraseService _phraseService;
