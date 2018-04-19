@@ -31,12 +31,12 @@ typedef bool ErrorFn(Object model);
       materialDirectives,
       MaterialIconComponent
     ],
-    pipes: const [AsyncPipe, PhrasePipe, RangePipe],
+    pipes: const [PhrasePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush,
     visibility: Visibility.local)
 class FoDataTableComponent
     implements OnChanges, OnInit, AfterViewInit, OnDestroy {
-  FoDataTableComponent(this.host, this.phraseService);
+  FoDataTableComponent(this.host, this.phraseService, this._changeDetector);
 
   @override
   void ngOnInit() {
@@ -57,13 +57,12 @@ class FoDataTableComponent
 
   @override
   void ngOnChanges(Map<String, SimpleChange> changes) {
-
     _evaluatedColumnsBuffer.clear();
-      allEvaluatedColumns = evaluatedColumns.keys.toList()
-        ..addAll(asyncEvaluatedColumns.keys);
+    allEvaluatedColumns = evaluatedColumns.keys.toList()
+      ..addAll(asyncEvaluatedColumns.keys);
 
     if (changes.containsKey('rows') || changes.containsKey('data')) {
-      data ??= {};    
+      data ??= {};
 
       selectedRowOptionId = rowOptions
           .firstWhere((r) => r.id == rows, orElse: () => rowOptions.first)
@@ -357,12 +356,11 @@ class FoDataTableComponent
   final StreamController<BatchOperationEvent> _onBatchOperationController =
       new StreamController();
 
+  final ChangeDetectorRef _changeDetector;
+
   Iterable<String> allEvaluatedColumns = [];
   final Map<Object, Map<String, Object>> _evaluatedColumnsBuffer = {};
-  /*
-  final Map<Object, Map<String, Future<Object>>> _asyncEvaluatedColumnsBuffer =
-      {};
-*/
+
   Object getEvaluatedColumn(Object row, String col) {
     if (_evaluatedColumnsBuffer[row] == null) {
       _evaluatedColumnsBuffer[row] = {};
@@ -373,25 +371,16 @@ class FoDataTableComponent
         _evaluatedColumnsBuffer[row][col] = evaluatedColumns[col](data[row]);
       } else {
         _evaluatedColumnsBuffer[row][col] = null;
-        asyncEvaluatedColumns[col](data[row])
-            .then((v) => _evaluatedColumnsBuffer[row][col] = v);
+        asyncEvaluatedColumns[col](data[row]).then((v) {
+          _evaluatedColumnsBuffer[row][col] = v;
+          _changeDetector.markForCheck();
+          //_changeDetector.detectChanges();
+        });
       }
     }
     return _evaluatedColumnsBuffer[row][col];
   }
 
-/*
-  Future<Object> getAsyncEvaluatedColumn(Object row, String col) {
-    if (_asyncEvaluatedColumnsBuffer[row] == null) {
-      _asyncEvaluatedColumnsBuffer[row] = {};
-    }
-    if (!_asyncEvaluatedColumnsBuffer[row].containsKey(col)) {
-      _asyncEvaluatedColumnsBuffer[row][col] =
-          asyncEvaluatedColumns[col](data[row]);
-    }
-    return _asyncEvaluatedColumnsBuffer[row][col];
-  }
-  */
   @Input()
   bool internalSort = true;
 
