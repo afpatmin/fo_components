@@ -60,18 +60,7 @@ class FoDataTableComponent
     if (changes.containsKey('rows') || changes.containsKey('data')) {
       data ??= {};
 
-      asyncEvaluatedColumnsData.clear();
-
-      if (asyncEvaluatedColumns.isNotEmpty) {
-        for (final row in data.keys) {
-
-          asyncEvaluatedColumnsData[row] = <String, Future<Object>>{};
-          for (final col in asyncEvaluatedColumns.keys) {
-            asyncEvaluatedColumnsData[row][col] =
-              asyncEvaluatedColumns[col](data[row]);
-          }
-        }
-      }
+      _asyncEvaluatedColumnsBuffer.clear();
 
       selectedRowOptionId = rowOptions
           .firstWhere((r) => r.id == rows, orElse: () => rowOptions.first)
@@ -363,7 +352,19 @@ class FoDataTableComponent
       new StreamController();
   final StreamController<BatchOperationEvent> _onBatchOperationController =
       new StreamController();
-  final Map<Object, Map<String, Future<Object>>> asyncEvaluatedColumnsData = {};
+  final Map<Object, Map<String, Future<Object>>> _asyncEvaluatedColumnsBuffer =
+      {};
+
+  Future<Object> getAsyncEvaluatedColumn(Object row, String col) {
+    if (_asyncEvaluatedColumnsBuffer[row] == null) {
+      _asyncEvaluatedColumnsBuffer[row] = {};
+    }
+    if (!_asyncEvaluatedColumnsBuffer[row].containsKey(col)) {
+      _asyncEvaluatedColumnsBuffer[row][col] =
+          asyncEvaluatedColumns[col](data[row]);
+    }
+    return _asyncEvaluatedColumnsBuffer[row][col];
+  }
 
   @Input()
   bool internalSort = true;
