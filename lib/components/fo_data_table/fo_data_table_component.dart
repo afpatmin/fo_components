@@ -57,10 +57,13 @@ class FoDataTableComponent
 
   @override
   void ngOnChanges(Map<String, SimpleChange> changes) {
-    if (changes.containsKey('rows') || changes.containsKey('data')) {
-      data ??= {};
 
-      _asyncEvaluatedColumnsBuffer.clear();
+    _evaluatedColumnsBuffer.clear();
+      allEvaluatedColumns = evaluatedColumns.keys.toList()
+        ..addAll(asyncEvaluatedColumns.keys);
+
+    if (changes.containsKey('rows') || changes.containsKey('data')) {
+      data ??= {};    
 
       selectedRowOptionId = rowOptions
           .firstWhere((r) => r.id == rows, orElse: () => rowOptions.first)
@@ -119,7 +122,8 @@ class FoDataTableComponent
             }
           }
           for (final col in evaluatedColumns.keys) {
-            final data = evaluatedColumns[col](model);
+            final data = _evaluatedColumnsBuffer[row['id']]
+                [col]; //evaluatedColumns[col](model);
             if (data != null &&
                 phraseService.get(data).toLowerCase().contains(keyword)) {
               allKeywords = true;
@@ -353,20 +357,30 @@ class FoDataTableComponent
   final StreamController<BatchOperationEvent> _onBatchOperationController =
       new StreamController();
 
-  final Map<Object, Map<String, Object>> _evalutedColumnsBuffer = {};
+  Iterable<String> allEvaluatedColumns = [];
+  final Map<Object, Map<String, Object>> _evaluatedColumnsBuffer = {};
+  /*
   final Map<Object, Map<String, Future<Object>>> _asyncEvaluatedColumnsBuffer =
       {};
-
+*/
   Object getEvaluatedColumn(Object row, String col) {
-    if (_evalutedColumnsBuffer[row] == null) {
-      _evalutedColumnsBuffer[row] = {};
+    if (_evaluatedColumnsBuffer[row] == null) {
+      _evaluatedColumnsBuffer[row] = {};
     }
-    if (!_evalutedColumnsBuffer[row].containsKey(col)) {
-      _evalutedColumnsBuffer[row][col] = evaluatedColumns[col](data[row]);
+
+    if (!_evaluatedColumnsBuffer[row].containsKey(col)) {
+      if (evaluatedColumns.containsKey(col)) {
+        _evaluatedColumnsBuffer[row][col] = evaluatedColumns[col](data[row]);
+      } else {
+        _evaluatedColumnsBuffer[row][col] = null;
+        asyncEvaluatedColumns[col](data[row])
+            .then((v) => _evaluatedColumnsBuffer[row][col] = v);
+      }
     }
-    return _evalutedColumnsBuffer[row][col];
+    return _evaluatedColumnsBuffer[row][col];
   }
 
+/*
   Future<Object> getAsyncEvaluatedColumn(Object row, String col) {
     if (_asyncEvaluatedColumnsBuffer[row] == null) {
       _asyncEvaluatedColumnsBuffer[row] = {};
@@ -377,7 +391,7 @@ class FoDataTableComponent
     }
     return _asyncEvaluatedColumnsBuffer[row][col];
   }
-
+  */
   @Input()
   bool internalSort = true;
 
