@@ -87,8 +87,7 @@ class FoDataTableComponent
     _onWindowResizeListener.cancel();
   }
 
-  dynamic getCell(Object id, String column) =>
-      (data[id] as FoModel).toJson()[column];
+  dynamic getCell(Object id, String column) => (data[id] == null) ? null : (data[id] as FoModel).toJson()[column];
 
   bool isBool(Object value) => value is bool;
 
