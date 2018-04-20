@@ -228,9 +228,10 @@ class FoDataTableComponent
         /// Add "'"-character if ¨the cell has a leading '0'-character. This will stop Excel from skipping leading 0
         for (var property in properties) {
           try {
-            num.parse(property.toString());
-            if (property.startsWith('0')) {
-              property = '="$property"';
+            var strProperty = property.toString();
+            num.parse(strProperty);
+            if (strProperty.startsWith('0')) {
+              strProperty = '="$strProperty"';
             }
           } on FormatException {
             /* Not a number, continue */
