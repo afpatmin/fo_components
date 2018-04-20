@@ -115,15 +115,21 @@ class FoDataTableComponent
           for (final col in columns) {
             final data = row[col]?.toString();
             if (data != null &&
-                phraseService.get(data.toString()).toLowerCase().contains(keyword)) {
+                phraseService
+                    .get(data.toString())
+                    .toLowerCase()
+                    .contains(keyword)) {
               allKeywords = true;
               break;
             }
           }
-          for (final col in allEvaluatedColumns) {            
+          for (final col in allEvaluatedColumns) {
             final data = _evaluatedColumnsBuffer[row['id']][col];
             if (data != null &&
-                phraseService.get(data.toString()).toLowerCase().contains(keyword)) {
+                phraseService
+                    .get(data.toString())
+                    .toLowerCase()
+                    .contains(keyword)) {
               allKeywords = true;
               break;
             }
@@ -372,8 +378,11 @@ class FoDataTableComponent
       } else {
         _evaluatedColumnsBuffer[row][col] = null;
         asyncEvaluatedColumns[col](data[row]).then((v) {
-          _evaluatedColumnsBuffer[row][col] = v;
-          _changeDetector.markForCheck();
+          if (_evaluatedColumnsBuffer?.containsKey(row) == true &&
+              _evaluatedColumnsBuffer[row] != null) {
+            _evaluatedColumnsBuffer[row][col] = v;
+            _changeDetector.markForCheck();
+          }
         });
       }
     }
