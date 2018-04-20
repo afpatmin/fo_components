@@ -61,6 +61,8 @@ class FoDataTableComponent
     allEvaluatedColumns = evaluatedColumns.keys.toList()
       ..addAll(asyncEvaluatedColumns.keys);
 
+    _filteredKeys = new List.from(data.keys);
+
     if (changes.containsKey('rows') || changes.containsKey('data')) {
       data ??= {};
 
