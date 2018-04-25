@@ -203,6 +203,7 @@
 
 <fo-modal
         title="{{'confirm' | phrase}}"
+        [smallPadding]="false"
         [visible]="deleteBufferId != null"
         (visibleChange)="deleteBufferId = null"
         [showCloseButton]="false"
@@ -224,6 +225,7 @@
 
 <fo-modal
         title="{{'information' | phrase}}"
+        [smallPadding]="false"
         [whiteHeader]="true"
         [(visible)]="infoModalOpen"
         [showCloseButton]="true">
