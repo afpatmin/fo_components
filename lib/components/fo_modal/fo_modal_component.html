@@ -12,6 +12,7 @@
                 <h3 *ngIf="titleImageUrl == null && title != null">{{title | phrase}}</h3>
                 <div *ngIf="showCloseButton" id="closeButtonContainer">
                     <material-button
+                            [class.color-white]="!whiteHeader"
                             clear-size
                             (trigger)="close()">
                         <material-icon icon="close" size="x-large"></material-icon>
