@@ -7,6 +7,7 @@ export 'components/fo_app_layout/fo_app_layout_component.dart';
 export 'components/fo_data_table/fo_data_table_component.dart';
 export 'components/fo_date_input/fo_date_input_component.dart';
 export 'components/fo_file_upload/fo_file_upload_component.dart';
+export 'components/fo_gdpr_form/fo_gdpr_form_component.dart';
 export 'components/fo_image_file/fo_image_file_component.dart';
 export 'components/fo_image_map/fo_image_map_component.dart';
 export 'components/fo_login/fo_login_component.dart';
