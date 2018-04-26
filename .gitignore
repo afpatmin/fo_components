@@ -26,3 +26,4 @@ doc/api/
 *.css.map
 
 .dart_tool
+*.code-workspace
