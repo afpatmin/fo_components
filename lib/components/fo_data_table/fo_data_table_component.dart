@@ -286,6 +286,7 @@ class FoDataTableComponent
     new FoModel()..id = 25,
     new FoModel()..id = 50,
     new FoModel()..id = 100,
+    new FoModel()..id = 1000
   ];
 
   void onCheckedChange(Object id, bool state) {
