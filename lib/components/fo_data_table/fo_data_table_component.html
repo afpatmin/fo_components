@@ -66,7 +66,7 @@
         </thead>
         <tbody *ngIf="filteredKeys.isNotEmpty">
         <tr *ngFor="let key of filteredKeys | range:firstIndex:lastIndex" (click)="onRowClickController.add(key)">
-            <td *ngIf="showCheckboxes">
+            <td *ngIf="showCheckboxes && data != null">
                 <material-checkbox
                         [disabled]="errorFunction != null && errorFunction(data[key])"
                         [checked]="selectedRows.contains(key)"
@@ -74,7 +74,7 @@
                         (click)="$event.stopPropagation()">
                 </material-checkbox>
             </td>
-            <td *ngIf="errorFunction != null">
+            <td *ngIf="errorFunction != null && data != null">
                 <material-icon *ngIf="errorFunction(data[key])" icon="warning" size="medium"></material-icon>
             </td>
             <td
