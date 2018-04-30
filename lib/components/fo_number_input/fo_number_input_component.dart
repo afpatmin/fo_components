@@ -124,7 +124,5 @@ class FoNumberInputComponent
   String trailingText = '';
 
   @override
-  void onDisabledChanged(bool isDisabled) {
-    // TODO: implement onDisabledChanged
-  }
+  void onDisabledChanged(bool isDisabled) {}
 }

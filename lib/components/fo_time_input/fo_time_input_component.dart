@@ -164,7 +164,5 @@ class FoTimeInputComponent implements ControlValueAccessor<String> {
   ];
 
   @override
-  void onDisabledChanged(bool isDisabled) {
-    // TODO: implement onDisabledChanged
-  }
+  void onDisabledChanged(bool isDisabled) {}
 }
