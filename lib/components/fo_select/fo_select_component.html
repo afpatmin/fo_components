@@ -6,14 +6,14 @@
             class="clickable"
             (click)="tooltipModalVisible = true; $event.stopPropagation();"
             icon="help_outline"
-            size="medium">
+            size="small">
     </material-icon>
     <material-icon
             *ngIf="allowNullSelection && selectedId != null"
             baseline
             class="clickable color-alert"
             icon="cancel"
-            size="medium"
+            size="small"
             (click)="onSelect(null); $event.stopPropagation();">
     </material-icon>
 </label>
