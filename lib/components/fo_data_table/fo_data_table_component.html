@@ -113,7 +113,7 @@
         </tr>
         </tbody>
     </table>
-    <div class="row expand" *ngIf="filteredKeys.isEmpty">
+    <div class="row expand" *ngIf="filteredKeys?.isEmpty == true">
         <div class="col" *ngIf="disabled">
             <p class="text-center"><material-spinner></material-spinner></p>
         </div>
@@ -132,8 +132,8 @@
                         class="float-left"
                         clear-size
                         raised
-                        dense
-                        [disabled]="disabled || data.isEmpty"
+                        dense 
+                        [disabled]="disabled || data?.isEmpty == true"
                         [materialTooltip]="'download_csv' | phrase"
                         (trigger)="onDownloadDataCSV()">
                     <material-icon class="color-black" size="medium" icon="file_download"></material-icon>
