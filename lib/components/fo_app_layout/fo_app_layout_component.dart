@@ -58,7 +58,7 @@ class FoAppLayoutComponent implements OnDestroy {
   String get pageHeader => _activeItem?.label;
   String get pageIcon => _activeItem?.icon;
   security.SafeResourceUrl get instructionsUrl =>
-      _activeItem.instructionsUrl == null
+      _activeItem?.instructionsUrl == null
           ? null
           : _domSanitizationService
               .bypassSecurityTrustResourceUrl(_activeItem.instructionsUrl);
