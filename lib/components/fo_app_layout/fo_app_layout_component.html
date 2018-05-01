@@ -14,7 +14,7 @@
                                 <material-list-item
                                         *ngFor="let item of category.items"
                                         [active]="isActive(item)"
-                                        (click)="onNavigate(item)">
+                                        (click)="router.navigate(item.url)">
                                     <material-icon [icon]="item.icon" baseline></material-icon>&nbsp;{{item.label | phrase}}
                                 </material-list-item>
                             </div>
@@ -27,7 +27,7 @@
                                         class="clickable text-center padding-top-small padding-bottom-small mini-item"
                                         [class.active]="isActive(item)"
                                         [materialTooltip]="item.label | phrase"
-                                        (click)="onNavigate(item)">
+                                        (click)="router.navigate(item.url)">
                                     <material-icon [icon]="item.icon" size="x-large" baseline></material-icon>
                                 </div>
                                 <hr />
@@ -70,7 +70,6 @@
         title="{{'instructions' | phrase}}"
         *ngIf="instructionsModalVisible"
         [whiteHeader]="true"
-        [visible]="instructionsModalVisible"
-        (visibleChange)="onInstructionsModalVisibleChange($event)">
+        [(visible)]="instructionsModalVisible">
     <iframe [attr.width]="calcIFrameWidth()" [attr.height]="calcIFrameHeight()" [src]="instructionsUrl" frameborder="0" allowfullscreen scrolling="no"></iframe>
 </fo-modal>
