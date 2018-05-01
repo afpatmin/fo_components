@@ -22,8 +22,8 @@ import 'package:fo_model/fo_model.dart';
     pipes: [
       PhrasePipe
     ])
-class GdprFormComponent implements OnDestroy {
-  GdprFormComponent();
+class FoGdprFormComponent implements OnDestroy {
+  FoGdprFormComponent();
 
   @override
   void ngOnDestroy() {
