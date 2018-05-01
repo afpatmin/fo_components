@@ -6,8 +6,8 @@
                 <div class="col">
                     <form [ngFormModel]="form">
                         <div class="row">
-                            <div class="m6 col">
-                                <p class="margin-top-none margin-bottom-small" [innerHtml]="'gdpr_form_info' | phrase"></p>
+                            <div class="col">
+                                <p class="margin-top-none margin-bottom-small text-small" [innerHtml]="'gdpr_form_info' | phrase"></p>
                                 <p class="margin-top-small text-small" *ngIf="readMoreLink != null">
                                     <a href="{{readMoreLink}}" target="_blank">{{'read_more' | phrase}}</a>
                                 </p> 
