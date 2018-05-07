@@ -26,13 +26,11 @@ class FoAppLayoutComponent implements OnDestroy {
 
       for (final category in categories) {
 
-        print('path: ${state.path}');
-        print('itemUrl: ${category.items.first.url}');
+        final path = state.path.replaceAll('/', '').replaceAll('#', '');
 
         _activeItem = category.items
-            .firstWhere((i) => i.url == state.path, orElse: () => null);       
-
-        print(_activeItem?.label);
+            .firstWhere((i) => i.url == path, orElse: () => null);       
+            
         if (_activeItem != null) break;
       }
     });
