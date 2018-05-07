@@ -35,11 +35,12 @@ class FoAppLayoutComponent implements OnDestroy {
           instructionsUrl = _activeItem?.instructionsUrl == null
               ? null
               : _domSanitizationService
-                  .bypassSecurityTrustResourceUrl(_activeItem.instructionsUrl);
-
+                  .bypassSecurityTrustResourceUrl(_activeItem.instructionsUrl);                          
           break;
         }
       }
+
+      print('instructionsUrl: $instructionsUrl');
     });
   }
 
