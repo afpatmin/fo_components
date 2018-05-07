@@ -20,23 +20,22 @@ import '../fo_modal/fo_modal_component.dart';
 class FoAppLayoutComponent implements OnDestroy {
   FoAppLayoutComponent(
       this.router, this.phraseService, this._domSanitizationService) {
-    
-    router.onRouteActivated.listen((state) { 
+    router.onRouteActivated.listen((state) {
       _activeItem = null;
-      instructionsUrl = null;
 
       for (final category in categories) {
-
         final path = state.path.replaceAll('/', '').replaceAll('#', '');
 
-        _activeItem = category.items
-            .firstWhere((i) => i.url == path, orElse: () => null);       
+        _activeItem =
+            category.items.firstWhere((i) => i.url == path, orElse: () => null);
 
-        if (_activeItem != null) {
+        if (_activeItem == null) {
+          instructionsUrl = null;
+        } else {
           instructionsUrl = _activeItem?.instructionsUrl == null
-          ? null
-          : _domSanitizationService
-              .bypassSecurityTrustResourceUrl(_activeItem.instructionsUrl);
+              ? null
+              : _domSanitizationService
+                  .bypassSecurityTrustResourceUrl(_activeItem.instructionsUrl);
 
           break;
         }
@@ -46,7 +45,7 @@ class FoAppLayoutComponent implements OnDestroy {
 
   @override
   void ngOnDestroy() {
-    _onExpandedChangeController.close();    
+    _onExpandedChangeController.close();
   }
 
   void toggleExpanded() {
@@ -76,7 +75,7 @@ class FoAppLayoutComponent implements OnDestroy {
   final security.DomSanitizationService _domSanitizationService;
   final Router router;
   final StreamController<bool> _onExpandedChangeController =
-      new StreamController();  
+      new StreamController();
   final int miniWidth = 40;
   FoSidebarItem _activeItem;
 
