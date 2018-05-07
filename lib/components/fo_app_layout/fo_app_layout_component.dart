@@ -20,12 +20,14 @@ import '../fo_modal/fo_modal_component.dart';
 class FoAppLayoutComponent implements OnDestroy {
   FoAppLayoutComponent(
       this.router, this.phraseService, this._domSanitizationService) {
-    router.onRouteActivated.listen((state) {
+    router.onRouteActivated.listen((state) {      
       _activeItem = null;
 
-      for (final category in categories) {
-        final path = state.path.replaceAll('/', '').replaceAll('#', '');
+      final path = state.path.replaceAll('/', '').replaceAll('#', '');
+      print('path: $path');
 
+      for (final category in categories) {
+      
         _activeItem =
             category.items.firstWhere((i) => i.url == path, orElse: () => null);
 
