@@ -69,18 +69,10 @@ class FoAppLayoutComponent implements OnDestroy {
 
   String get pageHeader => _activeItem?.label;
   String get pageIcon => _activeItem?.icon;
-  
-  /*
-  security.SafeResourceUrl get instructionsUrl =>
-      _activeItem?.instructionsUrl == null
-          ? null
-          : _domSanitizationService
-              .bypassSecurityTrustResourceUrl(_activeItem.instructionsUrl);
-*/
+
   final PhraseService phraseService;
   bool animating = false;
 
-  bool instructionsModalVisible = false;
   final security.DomSanitizationService _domSanitizationService;
   final Router router;
   final StreamController<bool> _onExpandedChangeController =
@@ -108,6 +100,9 @@ class FoAppLayoutComponent implements OnDestroy {
 
   @Input()
   security.SafeResourceUrl instructionsUrl;
+
+  @Input()
+  bool instructionsModalVisible = false;
 
   @Output('expandedChange')
   Stream<bool> get onExpandedChangeOutput => _onExpandedChangeController.stream;
