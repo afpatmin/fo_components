@@ -18,7 +18,7 @@ import '../fo_select/fo_select_component.dart';
 typedef Object EvaluateColumnFn(Object model);
 typedef Future<Object> AsyncEvaluateColumnFn(Object model);
 
-typedef bool ErrorFn(Object model);
+typedef String ErrorFn(Object model);
 
 @Component(
     selector: 'fo-data-table',
@@ -313,7 +313,7 @@ class FoDataTableComponent
     _allChecked = state;
     if (_allChecked)
       selectedRows = filteredKeys
-          .where((o) => errorFunction == null || !errorFunction(data[o]))
+          .where((o) => errorFunction == null || errorFunction(data[o]) == null)
           .toSet();
     else
       selectedRows.clear();
@@ -428,7 +428,7 @@ class FoDataTableComponent
   Map<String, AsyncEvaluateColumnFn> asyncEvaluatedColumns = {};
 
   @Input()
-  ErrorFn errorFunction = ((model) => false);
+  ErrorFn errorFunction = ((model) => null);
 
   @Input()
   bool showAddButton = false;
