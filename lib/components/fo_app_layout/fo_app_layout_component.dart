@@ -23,10 +23,17 @@ class FoAppLayoutComponent implements OnDestroy {
     
     router.onRouteActivated.listen((state) {
       _activeItem = null;
-       
+
+      print('route activated');
+
       for (final category in categories) {
+
+        print(category.title);
+
         _activeItem = category.items
-            .firstWhere((i) => i.url == state.path, orElse: () => null);
+            .firstWhere((i) => i.url == state.path, orElse: () => null);       
+
+        print(_activeItem?.label);
         if (_activeItem != null) break;
       }
     });
