@@ -21,8 +21,9 @@ class FoAppLayoutComponent implements OnDestroy {
   FoAppLayoutComponent(
       this.router, this.phraseService, this._domSanitizationService) {
     
-    router.onRouteActivated.listen((state) {
+    router.onRouteActivated.listen((state) { 
       _activeItem = null;
+      instructionsUrl = null;
 
       for (final category in categories) {
 
@@ -30,8 +31,15 @@ class FoAppLayoutComponent implements OnDestroy {
 
         _activeItem = category.items
             .firstWhere((i) => i.url == path, orElse: () => null);       
-            
-        if (_activeItem != null) break;
+
+        if (_activeItem != null) {
+          instructionsUrl = _activeItem?.instructionsUrl == null
+          ? null
+          : _domSanitizationService
+              .bypassSecurityTrustResourceUrl(_activeItem.instructionsUrl);
+
+          break;
+        }
       }
     });
   }
@@ -61,12 +69,14 @@ class FoAppLayoutComponent implements OnDestroy {
 
   String get pageHeader => _activeItem?.label;
   String get pageIcon => _activeItem?.icon;
+  
+  /*
   security.SafeResourceUrl get instructionsUrl =>
       _activeItem?.instructionsUrl == null
           ? null
           : _domSanitizationService
               .bypassSecurityTrustResourceUrl(_activeItem.instructionsUrl);
-
+*/
   final PhraseService phraseService;
   bool animating = false;
 
@@ -95,6 +105,9 @@ class FoAppLayoutComponent implements OnDestroy {
 
   @Input()
   List<FoSidebarCategory> categories = <FoSidebarCategory>[];
+
+  @Input()
+  security.SafeResourceUrl instructionsUrl;
 
   @Output('expandedChange')
   Stream<bool> get onExpandedChangeOutput => _onExpandedChangeController.stream;
