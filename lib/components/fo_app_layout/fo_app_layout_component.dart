@@ -24,7 +24,7 @@ class FoAppLayoutComponent implements OnDestroy {
       _activeItem = null;
 
       final path = state.path.replaceAll('/', '').replaceAll('#', '');
-      print('path: $path');
+      if (path == null || path.isEmpty) return; 
 
       for (final category in categories) {
       
@@ -41,8 +41,6 @@ class FoAppLayoutComponent implements OnDestroy {
           break;
         }
       }
-
-      print('instructionsUrl: $instructionsUrl');
     });
   }
 
