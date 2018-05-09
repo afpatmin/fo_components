@@ -21,19 +21,15 @@
     <material-dropdown-select
             [class.full-width]="fullWidth"
             [disabled]="disabled || selectionOptions == null"
-            [options]="selectionOptions"
-            [selection]="selectionModel"
-            [itemRenderer]="itemRenderer"
             [buttonText]="selectedModel == null ? nullSelectionButtonText : selectedModel.toString() | phrase"
             [popupMatchInputWidth]="false"
             [(visible)]="visible">
         <div *ngIf="showSearch" header>
             <material-select-searchbox
                     [label]="'search' | phrase"
-                    [filterable]="selectionOptions"> 
+                    [filterable]="selectionOptions">
             </material-select-searchbox>
         </div>
-        <!--
         <material-select-dropdown-item
                 *ngFor="let option of selectionOptions.optionsList"
                 class="text-left"
@@ -45,7 +41,6 @@
             </span>
             <span>{{option.toString() | phrase}}</span>
         </material-select-dropdown-item>
-        -->
     </material-dropdown-select>
 
     <material-button

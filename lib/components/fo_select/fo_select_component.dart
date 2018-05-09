@@ -13,7 +13,8 @@ import '../fo_modal/fo_modal_component.dart';
     styleUrls: const ['fo_select_component.css'],
     templateUrl: 'fo_select_component.html',
     directives: const [coreDirectives, materialDirectives, FoModalComponent],
-    pipes: const [PhrasePipe])
+    pipes: const [PhrasePipe],
+    visibility: Visibility.local)
 class FoSelectComponent implements OnChanges, OnDestroy {
   FoSelectComponent();
 
@@ -56,10 +57,6 @@ class FoSelectComponent implements OnChanges, OnDestroy {
       new StreamController();
   final StreamController<Object> onActionButtonTriggerController =
       new StreamController();
-
-  final SelectionModel selectionModel = new SingleSelectionModel();
-  
-  ItemRenderer<FoModel> itemRenderer = (FoModel model) => model.id?.toString();
 
   bool tooltipModalVisible = false;
 
