@@ -59,7 +59,7 @@ class FoSelectComponent implements OnChanges, OnDestroy {
 
   final SelectionModel selectionModel = new SingleSelectionModel();
   
-  ItemRenderer<FoModel> itemRenderer = (FoModel model) => model.id?.toString();
+  ItemRenderer<FoModel> itemRenderer = (FoModel model) => model?.toString();
 
   bool tooltipModalVisible = false;
 
