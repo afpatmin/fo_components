@@ -30,7 +30,7 @@ class FoSelectComponent implements OnChanges, OnDestroy {
         selectionOptions = new StringSelectionOptions([]);
       else if (selectionOptions.optionsList.length != options.length) {
         selectionOptions = new StringSelectionOptions(
-            options.toList(growable: false),
+            options.toList(),
             shouldSort: sort);
       }
     }
