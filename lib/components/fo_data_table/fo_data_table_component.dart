@@ -130,7 +130,7 @@ class FoDataTableComponent
           for (final col in allEvaluatedColumns) {
 
             final r = _evaluatedColumnsBuffer[row['id']];
-            final data = (r.containsKey(col)) ? r[col] : null;
+            final data = (r?.containsKey(col) == true) ? r[col] : null;
             if (data != null &&
                 phraseService
                     .get(data.toString())
