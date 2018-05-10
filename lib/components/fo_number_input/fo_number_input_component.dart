@@ -3,26 +3,31 @@
 
 import 'dart:async';
 import 'dart:html' as html;
+import 'dart:math' as math;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';
 import '../../pipes/phrase_pipe.dart';
+import '../fo_modal/fo_modal_component.dart';
 
 @Component(
     selector: 'fo-number-input',
     styleUrls: const ['fo_number_input_component.css'],
     templateUrl: 'fo_number_input_component.html',
-    directives: const [coreDirectives, materialDirectives],
-    pipes: const [PhrasePipe],
-    visibility: Visibility.local)
+    directives: const [coreDirectives, formDirectives, FoModalComponent, materialDirectives],
+    providers: const [FORM_PROVIDERS],
+    pipes: const [PhrasePipe])
 class FoNumberInputComponent
-    implements OnChanges, OnDestroy, ControlValueAccessor<num> {
+    implements OnInit, OnChanges, OnDestroy, ControlValueAccessor<num> {
   FoNumberInputComponent(@Self() @Optional() this.control) {
     _mouseUpListener = html.document.onMouseUp.listen(onMouseUp);
     _touchEndListener = html.document.onTouchEnd.listen(onMouseUp);
 
-    if (control != null)
-      control.valueAccessor = this;
+    if (control != null) control.valueAccessor = this;
+  }
+
+  void setValueClamped(num v) {
+    value = v == null ? 0 : math.max(min, math.min(max, v));    
   }
 
   @override
@@ -37,6 +42,16 @@ class FoNumberInputComponent
   void registerOnChange(ChangeFunction<num> f) => _onChange = f;
 
   @override
+  void ngOnInit() {
+    numberInputControl = new Control(null, (c) {
+      if (c.value == null) return null;
+      if (c.value > max) return {'error': 'max: $max'};
+      if (c. value < min) return {'error': 'min: $min'};
+      return null;      
+    });
+  }
+
+  @override
   void ngOnChanges(Map<String, SimpleChange> changes) {
     if (changes.containsKey('step')) {
       final strStep = step.toString();
@@ -44,6 +59,9 @@ class FoNumberInputComponent
           ? strStep.length - strStep.indexOf('.') - 1
           : 0;
     }
+
+  
+    
   }
 
   @override
@@ -64,7 +82,7 @@ class FoNumberInputComponent
       autoAddTimer = null;
       addStepTimer?.cancel();
       addStepTimer = new Timer.periodic(
-          const Duration(milliseconds: 20), (_) => add(count));
+          const Duration(milliseconds: 10), (_) => add(count));
     });
   }
 
@@ -96,11 +114,15 @@ class FoNumberInputComponent
   ChangeFunction<num> _onChange;
   NgControl control;
   num value;
+  
   StreamSubscription<html.MouseEvent> _mouseUpListener;
   StreamSubscription<html.TouchEvent> _touchEndListener;
   Timer autoAddTimer;
   Timer addStepTimer;
   int _precision = 0;
+  bool modalVisible = false;
+
+  Control numberInputControl;
 
   @Input()
   bool disabled = false;

@@ -1,20 +1,20 @@
 <label>{{label | phrase}}</label>
 <div>
     <span>{{leadingText | phrase}}&nbsp;</span>
-    <material-button
-            raised clear-size dense
-            [disabled]="disabled || (value != null && value <= min)"
-            (mousedown)="onMouseDown(-step)"
-            (touchstart)="onMouseDown(-step)">
+    <material-button clear-size dense [disabled]="disabled || (value != null && value <= min)" (mousedown)="onMouseDown(-step)"
+        (touchstart)="onMouseDown(-step)">
         <material-icon icon="keyboard_arrow_down" size="medium"></material-icon>
     </material-button>
-    <span id="valueOutput">{{formattedValue}}</span>
-    <material-button
-            raised clear-size dense
-            [disabled]="disabled || (value != null && value >= max)"
-            (mousedown)="onMouseDown(step)"
-            (touchstart)="onMouseDown(step)">
+    <span class="clickable" id="valueOutput" (click)="modalVisible = true">{{formattedValue}}</span>
+    <material-button clear-size dense [disabled]="disabled || (value != null && value >= max)" (mousedown)="onMouseDown(step)"
+        (touchstart)="onMouseDown(step)">
         <material-icon icon="keyboard_arrow_up" size="medium"></material-icon>
     </material-button>
     <span>&nbsp;{{trailingText | phrase:false}}</span>
-</div>
+</div> 
+
+<fo-modal title="enter_value" [whiteHeader]="true" [smallPadding]="false" [(visible)]="modalVisible">
+    <div>        
+        <material-input type="number" [ngFormControl]="numberInputControl" label="{{'value' | phrase}}" floatingLabel [ngModel]="value" (ngModelChange)="setValueClamped($event)"></material-input>        
+    </div>
+</fo-modal>
