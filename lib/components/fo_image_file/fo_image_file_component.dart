@@ -99,6 +99,9 @@ class FoImageFileComponent implements OnDestroy {
   @Input()
   int maxByteSize = 1024000;
 
+  @Input()
+  int brightness = 100;
+
   @Output('sourceChange')
   Stream<String> get onSourceChange => _onSourceChangeController.stream;
 
@@ -323,6 +326,8 @@ class FoImageFileComponent implements OnDestroy {
         break;
     }
   }
+
+  String get brightnessFilter => 'brightness($brightness%)';
 
   String _base64Data = '';
   bool invalidFile = false;

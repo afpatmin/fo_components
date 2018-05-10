@@ -1,7 +1,7 @@
 <label>{{label | phrase}}</label>
 <div class="container" (dragenter)="$event.preventDefault()" (dragover)="$event.preventDefault()" (drop)="onDrop($event)">
     <div *ngIf="source != null && !source.isEmpty" class="image">
-        <img class="box-shadow" [src]="source" alt="{{alt}}" />
+        <img class="box-shadow" [src]="source" alt="{{alt}}" [style.filter]="brightnessFilter" />
         <material-button
                 class="delete"
                 clear-size
