@@ -14,7 +14,7 @@
 </div> 
 
 <fo-modal title="enter_value" [whiteHeader]="true" [smallPadding]="false" [(visible)]="modalVisible">
-    <div>        
+    <div>
         <material-input type="number" [ngFormControl]="numberInputControl" label="{{'value' | phrase}}" floatingLabel [ngModel]="value" (ngModelChange)="setValueClamped($event)"></material-input>        
     </div>
 </fo-modal>

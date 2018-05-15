@@ -27,7 +27,8 @@ class FoNumberInputComponent
   }
 
   void setValueClamped(num v) {
-    value = v == null ? 0 : math.max(min, math.min(max, v));    
+    value = v == null ? 0 : math.max(min, math.min(max, v));
+    _onChange(value);
   }
 
   @override
@@ -58,10 +59,7 @@ class FoNumberInputComponent
       _precision = (strStep.contains('.'))
           ? strStep.length - strStep.indexOf('.') - 1
           : 0;
-    }
-
-  
-    
+    }    
   }
 
   @override
