@@ -93,7 +93,7 @@ class FoNumberInputComponent
 
   String get formattedValue {
     if (value == null)
-      return '0';
+      return '-';
     else if (value is int)
       return value.toString();
     else
