@@ -5,7 +5,7 @@
         (touchstart)="onMouseDown(-step)">
         <material-icon icon="keyboard_arrow_down" size="medium"></material-icon>
     </material-button>
-    <span class="clickable" id="valueOutput" (click)="modalVisible = true">{{formattedValue}}</span>
+    <span class="clickable" id="valueOutput" (click)="popupVisible = true" popupSource #source="popupSource">{{formattedValue}}</span>
     <material-button clear-size dense [disabled]="disabled || (value != null && value >= max)" (mousedown)="onMouseDown(step)"
         (touchstart)="onMouseDown(step)">
         <material-icon icon="keyboard_arrow_up" size="medium"></material-icon>
@@ -13,8 +13,10 @@
     <span>&nbsp;{{trailingText | phrase:false}}</span>
 </div> 
 
-<fo-modal title="enter_value" [whiteHeader]="true" [smallPadding]="false" [(visible)]="modalVisible">
-    <div>
-        <material-input type="number" [ngFormControl]="numberInputControl" label="{{'value' | phrase}}" floatingLabel [ngModel]="value" (ngModelChange)="setValueClamped($event)"></material-input>        
+<material-popup [(visible)]="popupVisible" [source]="source">
+    <div class="row padding-top-small">
+        <div class="col">
+            <material-input type="number" [ngFormControl]="numberInputControl" label="{{'enter_value' | phrase}}" floatingLabel [ngModel]="value" (ngModelChange)="setValueClamped($event)"></material-input>        
+        </div>        
     </div>
-</fo-modal>
+</material-popup>

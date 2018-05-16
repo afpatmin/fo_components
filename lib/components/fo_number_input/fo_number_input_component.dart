@@ -118,7 +118,7 @@ class FoNumberInputComponent
   Timer autoAddTimer;
   Timer addStepTimer;
   int _precision = 0;
-  bool modalVisible = false;
+  bool popupVisible = false;
 
   Control numberInputControl;
 
