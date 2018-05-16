@@ -364,7 +364,7 @@ class FoDataTableComponent
   final StreamController<Object> onDeleteController = new StreamController();
   final StreamController<String> _onFilterController = new StreamController();
   final StreamController<Object> onRowClickController = new StreamController();
-  final StreamController<Map<String, dynamic>> _onSortController =
+  final StreamController<Map<String, String>> _onSortController =
       new StreamController();
   final StreamController<BatchOperationEvent> _onBatchOperationController =
       new StreamController();
@@ -478,7 +478,7 @@ class FoDataTableComponent
   Stream<Set<Object>> get selectedRowsChange => onSelectedRowsController.stream;
 
   @Output('sort')
-  Stream<Map<String, dynamic>> get onSortOutput => _onSortController.stream;
+  Stream<Map<String, String>> get onSortOutput => _onSortController.stream;
 
   @Output('batchOperation')
   Stream<BatchOperationEvent> get onBatchOperationOutput =>
