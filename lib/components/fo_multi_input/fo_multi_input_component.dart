@@ -44,6 +44,7 @@ class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
 
   void add() {
     if (control?.valid != false && inputValue.isNotEmpty) {
+      value ??= [];
       value.add(inputValue);
       _onValueChangeController.add(value);
       inputValue = '';
