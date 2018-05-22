@@ -79,24 +79,42 @@ class FoImageMapComponent implements OnChanges, OnDestroy {
 }
 
 class FoZoneModel extends FoModel {
-  FoZoneModel(this._shapes, String id, this.label) {
+  FoZoneModel(List<FoShape> shapes, String id, this.label) {
+
+
+    for (final shp in shapes) {
+      switch (shp.type) {
+        case 'ellipse':
+        ellipses.add(shp);
+        break;
+
+        case 'rectangle':
+        rectangles.add(shp);
+        break;
+
+        case 'polygon':
+        polygons.add(shp);
+        break;
+
+        default:
+        break;
+      } 
+    }
+
     super.id = id;
   }
 
-  @override Map<String, dynamic> toJson() => {'id':id, 'label':label, 'shapes':_shapes.length};
+  @override Map<String, dynamic> toJson() => {'id':id, 'label':label};
 
   @override
   String toString() => label;
 
-  List<dynamic> get shapes => _shapes;
-  Iterable<FoShapeEllipse> get ellipses => _shapes.where((s) => s.type == 'ellipse');
-  Iterable<FoShapeRectangle> get rectangles =>
-      _shapes.where((s) => s.type == 'rectangle');
-  Iterable<FoShapePolygon> get polygons => _shapes.where((s) => s.type == 'polygon');
-
   bool marked = false;
   final String label;
-  final List<dynamic> _shapes;
+
+  final List<FoShapeEllipse> ellipses = [];
+  final List<FoShapeRectangle> rectangles = [];
+  final List<FoShapePolygon> polygons = [];
 }
 
 abstract class FoShape {
