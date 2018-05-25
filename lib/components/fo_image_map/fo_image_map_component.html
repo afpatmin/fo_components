@@ -1,40 +1,41 @@
 <div>
-    <img [src]="src" alt="image" />
+        <img [src]="src"
+             alt="image" />
 
-    <svg *ngFor="let zone of zones" width="100%" height="100%" viewBox="0 0 100 100">
-        <ellipse
-                *ngFor="let ellipse of zone.ellipses"
-                class="shape"
-                [class.visible]="zone.marked"
-                [attr.cx]="ellipse.x" [attr.cy]="ellipse.y"
-                [attr.rx]="ellipse.rx" [attr.ry]="ellipse.ry"
-                [attr.transform]="ellipse.transform"
-                (click)="onClick(zone)">
-        </ellipse>
-        <rect
-                *ngFor="let rectangle of zone.rectangles"
-                class="shape"
-                [class.visible]="zone.marked"
-                [attr.x]="rectangle.x" [attr.y]="rectangle.y"
-                [attr.width]="rectangle.width" [attr.height]="rectangle.height"
-                [attr.transform]="rectangle.transform">
-                (click)="onClick(zone)">
-        </rect>
-        <polygon
-                *ngFor="let polygon of zone.polygons"
-                class="shape"
-                [class.visible]="zone.marked"
-                [attr.points]="polygon.points"
-                [attr.transform]="polygon.transform"
-                (click)="onClick(zone)">
-        </polygon>
-    </svg>
+        <svg *ngFor="let zone of zones"
+             width="100%"
+             height="100%"
+             viewBox="0 0 100 100">
+                <ellipse *ngFor="let ellipse of zone.ellipses"
+                         class="shape"
+                         [class.visible]="selectedIds.contains(zone.id)"
+                         [attr.cx]="ellipse.x"
+                         [attr.cy]="ellipse.y"
+                         [attr.rx]="ellipse.rx"
+                         [attr.ry]="ellipse.ry"
+                         [attr.transform]="ellipse.transform">
+                </ellipse>
+                <rect *ngFor="let rectangle of zone.rectangles"
+                      class="shape"
+                      [class.visible]="selectedIds.contains(zone.id)"
+                      [attr.x]="rectangle.x"
+                      [attr.y]="rectangle.y"
+                      [attr.width]="rectangle.width"
+                      [attr.height]="rectangle.height"
+                      [attr.transform]="rectangle.transform">
+                </rect>
+                <polygon *ngFor="let polygon of zone.polygons"
+                         class="shape"
+                         [class.visible]="selectedIds.contains(zone.id)"
+                         [attr.points]="polygon.points"
+                         [attr.transform]="polygon.transform">
+                </polygon>
+        </svg>
 </div>
-<fo-multi-select
-        *ngIf="showSelector"
-        [label]="label"
-        [fullWidth]="true"
-        [options]="zones"
-        [selectedIds]="selectedIds"
-        (selectedIdsChange)="onSelectionChange($event)">
+<fo-multi-select *ngIf="showSelector"
+                 [label]="label"
+                 [fullWidth]="true"
+                 [options]="zones"
+                 [selectedIds]="selectedIds"
+                 (selectedIdsChange)="onSelectionChange($event)">
 </fo-multi-select>

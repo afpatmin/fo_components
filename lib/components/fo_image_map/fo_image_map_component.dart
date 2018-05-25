@@ -18,40 +18,16 @@ import '../fo_multi_select/fo_multi_select_component.dart';
       FoMultiSelectComponent
     ],
     pipes: const [PhrasePipe],
-    visibility: Visibility.local,
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoImageMapComponent implements OnChanges, OnDestroy {
+class FoImageMapComponent implements OnDestroy {
   FoImageMapComponent();
-
-  @override
-  void ngOnChanges(Map<String, SimpleChange> changes) {
-    if (changes.containsKey('selectedIds')) {
-      for (final zone in zones) {
-        zone.marked = selectedIds.contains(zone.id);
-      }
-    }
-  }
 
   @override
   void ngOnDestroy() {
     _onSelectedIdsChangeController.close();
   }
 
-  void onClick(FoZoneModel zone) {
-    /*
-    zone.marked = !zone.marked;
-    selectedIds = zones.where((z) => z.marked).map((model) => model.id).toList(growable: false);
-    _onSelectedIdsChangeController.add(selectedIds);
-    */
-  }
-
   void onSelectionChange(List<String> selectedIds) {
-    this.selectedIds = selectedIds;
-
-    for (final shape in zones) {
-      shape.marked = selectedIds.contains(shape.id);
-    }
-
     _onSelectedIdsChangeController.add(selectedIds);
   }
 
@@ -80,36 +56,35 @@ class FoImageMapComponent implements OnChanges, OnDestroy {
 
 class FoZoneModel extends FoModel {
   FoZoneModel(List<FoShape> shapes, String id, this.label) {
-
-
     for (final shp in shapes) {
       switch (shp.type) {
         case 'ellipse':
-        ellipses.add(shp);
-        break;
+          ellipses.add(shp);
+          break;
 
         case 'rectangle':
-        rectangles.add(shp);
-        break;
+          rectangles.add(shp);
+          break;
 
         case 'polygon':
-        polygons.add(shp);
-        break;
+          polygons.add(shp);
+          break;
 
         default:
-        break;
-      } 
+          break;
+      }
     }
 
     super.id = id;
   }
 
-  @override Map<String, dynamic> toJson() => {'id':id, 'label':label};
+  @override
+  Map<String, dynamic> toJson() => {'id': id, 'label': label};
 
   @override
   String toString() => label;
 
-  bool marked = false;
+  //bool marked = false;
   final String label;
 
   final List<FoShapeEllipse> ellipses = [];
