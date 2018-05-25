@@ -154,6 +154,17 @@ class FoValidators {
       return null;
   }
 
+  static Map<String, String> phoneNumberWithoutCountryCode(AbstractControl control) {
+    if ((required())(control) != null) return null;
+
+    if (new RegExp(r'[1-9][0-9\- ]{6,32}').stringMatch(control.value) !=
+        control.value) {
+      final ps = new PhraseService();
+      return {'error': ps.get('enter_valid_phone')};
+    } else
+      return null;
+  }
+
   static Map<String, String> swedishCellphoneNumber(AbstractControl control) {
     if (required()(control) != null) return null;
     if (new RegExp('07[0-9]{8}').stringMatch(control.value) != control.value) {
