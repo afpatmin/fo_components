@@ -17,8 +17,7 @@ import '../fo_multi_select/fo_multi_select_component.dart';
       materialDirectives,
       FoMultiSelectComponent
     ],
-    pipes: const [PhrasePipe],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    pipes: const [PhrasePipe])
 class FoImageMapComponent implements OnDestroy {
   FoImageMapComponent();
 
@@ -84,7 +83,6 @@ class FoZoneModel extends FoModel {
   @override
   String toString() => label;
 
-  //bool marked = false;
   final String label;
 
   final List<FoShapeEllipse> ellipses = [];
