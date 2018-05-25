@@ -17,7 +17,9 @@ import '../fo_multi_select/fo_multi_select_component.dart';
       materialDirectives,
       FoMultiSelectComponent
     ],
-    pipes: const [PhrasePipe])
+    pipes: const [PhrasePipe],
+    visibility: Visibility.local,
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoImageMapComponent implements OnChanges, OnDestroy {
   FoImageMapComponent();
 
