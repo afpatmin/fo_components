@@ -32,8 +32,7 @@ typedef String ErrorFn(Object model);
       MaterialIconComponent
     ],
     pipes: const [PhrasePipe, RangePipe],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    visibility: Visibility.local)
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDataTableComponent
     implements OnChanges, OnInit, AfterViewInit, OnDestroy {
   FoDataTableComponent(this.host, this.phraseService, this._changeDetector);
@@ -128,7 +127,6 @@ class FoDataTableComponent
             }
           }
           for (final col in allEvaluatedColumns) {
-
             final r = _evaluatedColumnsBuffer[row['id']];
             final data = (r?.containsKey(col) == true) ? r[col] : null;
             if (data != null &&
@@ -387,7 +385,7 @@ class FoDataTableComponent
         asyncEvaluatedColumns[col](data[row]).then((v) {
           if (_evaluatedColumnsBuffer?.containsKey(row) == true &&
               _evaluatedColumnsBuffer[row] != null) {
-            _evaluatedColumnsBuffer[row][col] = v;
+            _evaluatedColumnsBuffer[row][col] = v;        
             _changeDetector.markForCheck();
           }
         });
