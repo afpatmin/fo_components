@@ -36,11 +36,14 @@ class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
   }
 
   void onKeyUp(html.KeyboardEvent e) {
-    if (e.keyCode == html.KeyCode.ENTER || e.keyCode == html.KeyCode.MAC_ENTER) {
+    if (e.keyCode == html.KeyCode.ENTER ||
+        e.keyCode == html.KeyCode.MAC_ENTER) {
       add();
-      e.stopPropagation();
-    }      
-    if (_onChange != null) _onChange(inputValue);    
+      e
+        ..stopPropagation()
+        ..preventDefault();
+    }
+    if (_onChange != null) _onChange(inputValue);
   }
 
   void add() {
@@ -87,6 +90,5 @@ class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
       _onValueChangeController.stream;
 
   @override
-  void onDisabledChanged(bool isDisabled) {
-  }
+  void onDisabledChanged(bool isDisabled) {}
 }
