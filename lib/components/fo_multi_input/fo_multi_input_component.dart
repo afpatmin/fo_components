@@ -13,8 +13,7 @@ import '../../pipes/phrase_pipe.dart';
     styleUrls: const ['fo_multi_input_component.css'],
     templateUrl: 'fo_multi_input_component.html',
     directives: const [coreDirectives, materialDirectives],
-    pipes: const [PhrasePipe],
-    visibility: Visibility.local)
+    pipes: const [PhrasePipe])
 class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
   FoMultiInputComponent(@Self() @Optional() this.control) {
     if (control != null) control.valueAccessor = this;
@@ -37,9 +36,11 @@ class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
   }
 
   void onKeyUp(html.KeyboardEvent e) {
-    if (_onChange != null) _onChange(inputValue);
-    if (e.keyCode == html.KeyCode.ENTER || e.keyCode == html.KeyCode.MAC_ENTER)
+    if (e.keyCode == html.KeyCode.ENTER || e.keyCode == html.KeyCode.MAC_ENTER) {
       add();
+      e.stopPropagation();
+    }      
+    if (_onChange != null) _onChange(inputValue);    
   }
 
   void add() {
