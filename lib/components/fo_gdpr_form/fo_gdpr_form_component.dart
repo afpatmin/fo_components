@@ -4,6 +4,7 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:fo_components/fo_components.dart';
 import 'package:fo_model/fo_model.dart';
+import '../../services/fo_messages_service.dart';
 
 @Component(
     selector: 'fo-gdpr-form',
@@ -19,11 +20,43 @@ import 'package:fo_model/fo_model.dart';
       materialDirectives
     ],
     providers: [],
-    pipes: [
-      PhrasePipe
-    ])
+    pipes: [])
 class FoGdprFormComponent implements OnDestroy {
-  FoGdprFormComponent();
+  FoGdprFormComponent(this.msg)
+      : form = ControlGroup({
+          'firstname': Control()
+            ..validator = Validators.compose([
+              FoValidators.required(msg.enter_firstname()),
+              Validators.maxLength(50)
+            ]),
+          'lastname': Control()
+            ..validator = Validators.compose([
+              FoValidators.required(msg.enter_lastname()),
+              Validators.maxLength(50)
+            ]),
+          'phone': Control()
+            ..validator = Validators.compose([
+              FoValidators.required(msg.enter_phone()),
+              FoValidators.phoneNumber,
+              Validators.maxLength(15)
+            ]),
+          'email': new Control()
+            ..validator = Validators.compose([
+              FoValidators.required(msg.enter_email()),
+              FoValidators.email,
+              Validators.maxLength(128)
+            ]),
+          'comments': new Control()
+            ..validator = Validators.compose([Validators.maxLength(1000)])
+        }),
+        options = [
+          FoModel()..id = msg.gdpr_fetch_my_info(),
+          FoModel()..id = msg.gdpr_fetch_my_info_portable(),
+          FoModel()..id = msg.gdpr_change_my_info(),
+          FoModel()..id = msg.gdpr_limit_my_data_processing(),
+          FoModel()..id = msg.gdpr_oppose_my_data_processing(),
+          FoModel()..id = msg.gdpr_erase_me()
+        ];
 
   @override
   void ngOnDestroy() {
@@ -35,48 +68,17 @@ class FoGdprFormComponent implements OnDestroy {
     sent = true;
   }
 
-  final ControlGroup form = ControlGroup({
-    'firstname': Control()
-      ..validator = Validators.compose([
-        FoValidators.required('enter_a_firstname'),
-        Validators.maxLength(50)
-      ]),
-    'lastname': Control()
-      ..validator = Validators.compose([
-        FoValidators.required('enter_a_lastname'),
-        Validators.maxLength(50)
-      ]),
-    'phone': Control()
-      ..validator = Validators.compose([
-        FoValidators.required('enter_a_phone'),
-        FoValidators.phoneNumber,
-        Validators.maxLength(15)
-      ]),
-    'email': new Control()
-      ..validator = Validators.compose([
-        FoValidators.required('enter_an_email'),
-        FoValidators.email,
-        Validators.maxLength(128)
-      ]),
-    'comments': new Control()
-      ..validator = Validators.compose([Validators.maxLength(1000)])
-  });
+  final ControlGroup form;
 
   bool termsChecked = false;
   bool sent = false;
   final GdprModel model = new GdprModel();
 
-  final List<FoModel> options = [
-    FoModel()..id = 'gdpr_fetch_my_info',
-    FoModel()..id = 'gdpr_fetch_my_info_portable',
-    FoModel()..id = 'gdpr_change_my_info',
-    FoModel()..id = 'gdpr_limit_my_data_processing',
-    FoModel()..id = 'gdpr_oppose_my_data_processing',
-    FoModel()..id = 'gdpr_erase_me',
-  ];
+  final List<FoModel> options;
 
   final StreamController<bool> openController = new StreamController();
   final StreamController<GdprModel> _submitController = new StreamController();
+  final FoMessagesService msg;
 
   @Input()
   bool open = false;

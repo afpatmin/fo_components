@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:fo_model/fo_model.dart';
-import '../../pipes/phrase_pipe.dart';
+import '../../services/fo_messages_service.dart';
 import '../fo_modal/fo_modal_component.dart';
 
 @Component(
@@ -13,10 +13,9 @@ import '../fo_modal/fo_modal_component.dart';
     styleUrls: const ['fo_select_component.css'],
     templateUrl: 'fo_select_component.html',
     directives: const [coreDirectives, materialDirectives, FoModalComponent],
-    pipes: const [PhrasePipe],
-    visibility: Visibility.local)
+    pipes: const [])
 class FoSelectComponent implements OnChanges, OnDestroy {
-  FoSelectComponent();
+  FoSelectComponent(this.msg);
 
   void onSelect(Object id) {
     selectedId = id;
@@ -51,6 +50,7 @@ class FoSelectComponent implements OnChanges, OnDestroy {
   StringSelectionOptions<FoModel> selectionOptions =
       new StringSelectionOptions<FoModel>([]);
 
+  final FoMessagesService msg;
   final StreamController<bool> _onVisibleChangeController =
       new StreamController();
   final StreamController<Object> _onSelectedIdChangeController =

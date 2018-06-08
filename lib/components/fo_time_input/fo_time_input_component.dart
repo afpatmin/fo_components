@@ -4,7 +4,6 @@
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular/angular.dart';
 import 'package:fo_model/fo_model.dart';
-import '../../pipes/phrase_pipe.dart';
 import '../fo_select/fo_select_component.dart';
 
 @Component(
@@ -12,24 +11,16 @@ import '../fo_select/fo_select_component.dart';
     styleUrls: const ['fo_time_input_component.css'],
     templateUrl: 'fo_time_input_component.html',
     directives: const [coreDirectives, FoSelectComponent],
-    pipes: const [PhrasePipe],
-    visibility: Visibility.local)
+    pipes: const [])
 class FoTimeInputComponent implements ControlValueAccessor<String> {
   FoTimeInputComponent(@Self() @Optional() NgControl cd) {
     if (cd != null) cd.valueAccessor = this;
   }
 
   @override
-  void registerOnTouched(TouchFunction f) {
-    /**
-     * onBlur really
-     */
-
-    //_onTouch = f;
-  }
+  void registerOnTouched(TouchFunction f) {}
 
   ChangeFunction<String> _onChange;
-  //TouchFunction _onTouch;
 
   @override
   void writeValue(String obj) {

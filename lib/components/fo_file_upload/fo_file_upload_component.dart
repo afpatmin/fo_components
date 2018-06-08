@@ -5,18 +5,17 @@ import 'dart:async';
 import 'dart:html' as dom;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import '../../pipes/phrase_pipe.dart';
+import '../../services/fo_messages_service.dart';
 
 @Component(
     selector: 'fo-file-upload',
     templateUrl: 'fo_file_upload_component.html',
-    styleUrls: const <String> ['fo_file_upload_component.css'],
-    directives: const <dynamic> [coreDirectives, materialDirectives],
-    pipes: const <Type> [PhrasePipe],
-    visibility: Visibility.local)
+    styleUrls: const ['fo_file_upload_component.css'],
+    directives: const [coreDirectives, materialDirectives],
+    pipes: const [])
 class FileUploadComponent implements OnDestroy
 {
-  FileUploadComponent();
+  FileUploadComponent(this.msg);
 
   @override
   void ngOnDestroy()
@@ -51,8 +50,10 @@ class FileUploadComponent implements OnDestroy
 
   bool get valid => file != null && file.size <= maxByteSize;
 
+  final StreamController<dom.File> onUploadController = new StreamController();
   dom.FileUploadInputElement _fileInput;
   dom.File file;
+  final FoMessagesService msg;
 
   @Input()
   String accept = 'image/*,.pdf';
@@ -69,5 +70,5 @@ class FileUploadComponent implements OnDestroy
   @Output('upload')
   Stream<dom.File> get onUploadOutput => onUploadController.stream;
 
-  StreamController<dom.File> onUploadController = new StreamController();
+
 }

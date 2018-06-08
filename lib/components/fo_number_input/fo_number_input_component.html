@@ -1,6 +1,6 @@
-<label>{{label | phrase}}</label>
+<label>{{label}}</label>
 <div>
-    <span>{{leadingText | phrase}}&nbsp;</span>
+    <span>{{leadingText}}&nbsp;</span>
     <material-button clear-size dense [disabled]="disabled || (value != null && value <= min)" (mousedown)="onMouseDown(-step)"
         (touchstart)="onMouseDown(-step)">
         <material-icon icon="keyboard_arrow_down" size="medium"></material-icon>
@@ -10,13 +10,13 @@
         (touchstart)="onMouseDown(step)">
         <material-icon icon="keyboard_arrow_up" size="medium"></material-icon>
     </material-button>
-    <span>&nbsp;{{trailingText | phrase:false}}</span>
+    <span>&nbsp;{{trailingText}}</span>
 </div> 
 
 <material-popup [(visible)]="popupVisible" [source]="source">
     <div class="row padding-top-small">
         <div class="col">
-            <material-input type="number" [ngFormControl]="numberInputControl" label="{{'enter_value' | phrase}}" floatingLabel [ngModel]="value" (ngModelChange)="setValueClamped($event)"></material-input>        
+            <material-input type="number" [ngFormControl]="numberInputControl" [label]="msg.enter_value()" floatingLabel [ngModel]="value" (ngModelChange)="setValueClamped($event)"></material-input>        
         </div>        
     </div>
 </material-popup>

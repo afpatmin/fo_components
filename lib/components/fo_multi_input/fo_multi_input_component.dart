@@ -6,14 +6,13 @@ import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';
-import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-multi-input',
     styleUrls: const ['fo_multi_input_component.css'],
     templateUrl: 'fo_multi_input_component.html',
     directives: const [coreDirectives, materialDirectives],
-    pipes: const [PhrasePipe])
+    pipes: const [])
 class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
   FoMultiInputComponent(@Self() @Optional() this.control) {
     if (control != null) control.valueAccessor = this;

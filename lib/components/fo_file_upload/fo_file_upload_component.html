@@ -1,4 +1,4 @@
-<label>{{label | phrase}}</label>
+<label>{{label}}</label>
 <div class="container" (dragenter)="$event.preventDefault()" (dragover)="$event.preventDefault()" (drop)="onDrop($event)">
     <input #input type="file" (change)="onFileChange($event)" [accept]="accept" />
     <p *ngIf="!valid" class="margin-top-small margin-bottom-small">
@@ -13,6 +13,6 @@
         <material-icon *ngIf="file != null" icon="cancel" size="small" class="color-alert clickable" (click)="clearSelection()"></material-icon>
     </p>
     <p class="color-alert" *ngIf="file != null && file.size > maxByteSize">
-        {{'max_filesize_exceeded' | phrase}} ({{((maxByteSize/1024)/1024).ceil()}}mb)
+        {{msg.max_filesize_exceeded()}} ({{((maxByteSize/1024)/1024).ceil()}}mb)
     </p>
 </div>

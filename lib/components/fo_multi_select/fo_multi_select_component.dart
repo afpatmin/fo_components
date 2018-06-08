@@ -5,17 +5,18 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:fo_model/fo_model.dart';
-import '../../pipes/phrase_pipe.dart';
+import '../../services/fo_messages_service.dart';
 
 @Component(
     selector: 'fo-multi-select',
     styleUrls: const ['fo_multi_select_component.css'],
     templateUrl: 'fo_multi_select_component.html',
     directives: const [coreDirectives, materialDirectives],
-    pipes: const [PhrasePipe],
-    visibility: Visibility.local)
+    pipes: const [])
 class FoMultiSelectComponent implements OnChanges, OnDestroy {
-  FoMultiSelectComponent();
+  FoMultiSelectComponent(this.msg) {
+    buttonText = msg.select();
+  }
 
   @override
   void ngOnChanges(Map<String, SimpleChange> changes) {
@@ -69,11 +70,13 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy {
   final StreamController<List<Object>> _onSelectedIdsChangeController =
       new StreamController();
 
+  final FoMessagesService msg;
+
   @Input()
   bool allowReorder = false;
 
   @Input()
-  String buttonText = 'select';
+  String buttonText;
 
   @Input()
   bool disabled = false;

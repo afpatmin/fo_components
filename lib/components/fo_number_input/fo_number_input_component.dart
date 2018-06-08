@@ -7,7 +7,7 @@ import 'dart:math' as math;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';
-import '../../pipes/phrase_pipe.dart';
+import '../../services/fo_messages_service.dart';
 import '../fo_modal/fo_modal_component.dart';
 
 @Component(
@@ -16,10 +16,10 @@ import '../fo_modal/fo_modal_component.dart';
     templateUrl: 'fo_number_input_component.html',
     directives: const [coreDirectives, formDirectives, FoModalComponent, materialDirectives],
     providers: const [FORM_PROVIDERS],
-    pipes: const [PhrasePipe])
+    pipes: const [])
 class FoNumberInputComponent
     implements OnInit, OnChanges, OnDestroy, ControlValueAccessor<num> {
-  FoNumberInputComponent(@Self() @Optional() this.control) {
+  FoNumberInputComponent(@Self() @Optional() this.control, this.msg) {
     _mouseUpListener = html.document.onMouseUp.listen(onMouseUp);
     _touchEndListener = html.document.onTouchEnd.listen(onMouseUp);
 
@@ -113,6 +113,7 @@ class FoNumberInputComponent
   NgControl control;
   num value;
   
+  final FoMessagesService msg;
   StreamSubscription<html.MouseEvent> _mouseUpListener;
   StreamSubscription<html.TouchEvent> _touchEndListener;
   Timer autoAddTimer;

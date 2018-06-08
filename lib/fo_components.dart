@@ -3,9 +3,10 @@
 
 library fo_components;
 
+import 'services/fo_messages_service.dart';
+
 export 'components/fo_app_layout/fo_app_layout_component.dart';
 export 'components/fo_data_table/fo_data_table_component.dart';
-export 'components/fo_date_input/fo_date_input_component.dart';
 export 'components/fo_file_upload/fo_file_upload_component.dart';
 export 'components/fo_gdpr_form/fo_gdpr_form_component.dart';
 export 'components/fo_image_file/fo_image_file_component.dart';
@@ -19,6 +20,8 @@ export 'components/fo_number_input/fo_number_input_component.dart';
 export 'components/fo_select/fo_select_component.dart';
 export 'components/fo_time_input/fo_time_input_component.dart';
 export 'components/fo_youtube_player/fo_youtube_player_component.dart';
-export 'pipes/phrase_pipe.dart';
-export 'services/phrase_service.dart';
 export 'validators/fo_validators.dart';
+
+const List<dynamic> foProviders = const [
+  FoMessagesService,
+];

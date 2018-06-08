@@ -1,7 +1,7 @@
 <div class="row expand">
     <div class="s12 m7 l8 col">
         <h3 class="color-black margin-bottom-none">
-            {{label | phrase}}
+            {{label}}
             <material-icon
                     baseline
                     size="large"
@@ -17,7 +17,7 @@
                 class="text-left"
                 [displayBottomPanel]="false"
                 [disabled]="disabled"
-                label="{{filterLabel | phrase}}"
+                label="{{filterLabel}}"
                 trailingGlyph="search"
                 [(ngModel)]="searchPhrase"
                 (keyup)="onSearchKeyUp($event)">
@@ -38,7 +38,7 @@
                 [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                 [class.hide-for-large]="largeHiddenCol.contains(cell)"
                 (click)="onSort(cell)">
-                <span [class.underline]="sortColumn == cell">{{cell | phrase}}</span>
+                <span [class.underline]="sortColumn == cell">{{cell}}</span>
                 <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
                 <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></material-icon>
             </td>
@@ -47,7 +47,7 @@
                 [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                 [class.hide-for-large]="largeHiddenCol.contains(cell)"
                 (click)="onSort(cell)">
-                <span [class.underline]="sortColumn == cell">{{cell | phrase}}</span>
+                <span [class.underline]="sortColumn == cell">{{cell}}</span>
                 <material-icon baseline size="small" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
                 <material-icon baseline size="small" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></material-icon>
             </td>
@@ -57,7 +57,7 @@
                 [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                 [class.hide-for-large]="largeHiddenCol.contains(cell)"
                 (click)="onSort(cell)">
-                <span [class.underline]="sortColumn == cell">{{cell | phrase}}</span>
+                <span [class.underline]="sortColumn == cell">{{cell}}</span>
                 <material-icon baseline size="small" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
                 <material-icon baseline size="small" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></material-icon>
             </td>
@@ -82,7 +82,7 @@
                     [class.hide-for-small]="smallHiddenCol.contains(cell)"
                     [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                     [class.hide-for-large]="largeHiddenCol.contains(cell)">
-                <span *ngIf="!isBool(getCell(key, cell))">{{getCell(key, cell) | phrase:false}}</span>
+                <span *ngIf="!isBool(getCell(key, cell))">{{getCell(key, cell)}}</span>
                 <material-icon
                         *ngIf="getCell(key, cell) == true"
                         baseline
@@ -94,7 +94,7 @@
                 [class.hide-for-small]="smallHiddenCol.contains(cell)"
                 [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                 [class.hide-for-large]="largeHiddenCol.contains(cell)">
-                <span *ngIf="!isBool(getEvaluatedColumn(key, cell))">{{getEvaluatedColumn(key, cell) | phrase:false}}</span>
+                <span *ngIf="!isBool(getEvaluatedColumn(key, cell))">{{getEvaluatedColumn(key, cell)}}</span>
                 <material-icon
                         *ngIf="getEvaluatedColumn(key, cell) == true"
                         baseline
@@ -120,7 +120,7 @@
         <div class="col color-alert text-center" *ngIf="!disabled">
             <p class="margin-bottom-none">
                 <material-icon size="x-large" icon="error"></material-icon>
-                {{'no_results' | phrase}}
+                {{msg.no_results_found()}}
             </p>
         </div>
     </div>
@@ -134,7 +134,7 @@
                         raised
                         dense 
                         [disabled]="disabled || data?.isEmpty == true"
-                        [materialTooltip]="'download_csv' | phrase"
+                        [materialTooltip]="msg.download_csv()"
                         (trigger)="onDownloadDataCSV()">
                     <material-icon class="color-black" size="medium" icon="file_download"></material-icon>
                 </material-button>
@@ -145,7 +145,7 @@
                         raised
                         dense
                         [disabled]="disabled"
-                        [materialTooltip]="'add' | phrase"
+                        [materialTooltip]="msg.add()"
                         (trigger)="onAddController.add('')">
                     <material-icon class="color-black" size="medium" icon="add"></material-icon>
                 </material-button>
@@ -154,7 +154,7 @@
         <div *ngIf="filteredKeys.isNotEmpty" class="s10 col">
             <div id="select-step">
                 <div class="float-right" id="rows-per-page">
-                    <span>{{'rows' | phrase}}/{{'page' | phrase:false}}:</span>
+                    <span>{{msg.row(2)}}/{{msg.page()}}:</span>
                     <fo-select
                             class="display-inline-block"
                             [disabled]="disabled"
@@ -171,7 +171,7 @@
                             icon="navigate_before"
                             (click)="step(-1)">
                     </material-icon>
-                    {{'page' | phrase}} {{currentPage}}/{{totalPages}} ({{filteredKeys.length}} {{'rows' | phrase:false}})
+                    {{msg.page()}} {{currentPage}}/{{totalPages}} ({{filteredKeys.length}} {{msg.row(2)}})
                     <material-icon
                             class="clickable vertical-align-middle"
                             [class.disabled]="lastIndex >= filteredKeys.length"
@@ -203,32 +203,32 @@
 </div>
 
 <fo-modal
-        title="{{'confirm' | phrase}}"
+        title="{{msg.confirm()}}"
         [smallPadding]="false"
         [visible]="deleteBufferId != null"
         (visibleChange)="deleteBufferId = null"
         [showCloseButton]="false"
         [whiteHeader]="true">
-    <p>{{'are_you_sure_delete_this_resource' | phrase}}</p>
+    <p>{{msg.confirm_delete_resource()}}</p>
     <p class="text-right margin-bottom-none" footer>
         <material-button
                 raised
                 (trigger)="deleteBufferId = null">
-            {{'cancel' | phrase}}
+            {{msg.cancel()}}
         </material-button>
         <material-button
                 raised
                 (trigger)="onDeleteController.add(deleteBufferId); deleteBufferId = null;">
-            {{'ok' | phrase}}
+            {{msg.ok()}}
         </material-button>
     </p>
 </fo-modal>
 
 <fo-modal
-        title="{{'information' | phrase}}"
+        [title]="msg.information()"
         [smallPadding]="false"
         [whiteHeader]="true"
         [(visible)]="infoModalOpen"
         [showCloseButton]="true">
-    <p>{{description | phrase}}</p>
+    <p>{{msg.description()}}</p>
 </fo-modal>

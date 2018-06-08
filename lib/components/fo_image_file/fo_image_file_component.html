@@ -1,4 +1,4 @@
-<label>{{label | phrase}}</label>
+<label>{{label}}</label>
 <div class="container" (dragenter)="$event.preventDefault()" (dragover)="$event.preventDefault()" (drop)="onDrop($event)">
     <div *ngIf="source != null && !source.isEmpty" class="image">
         <img class="box-shadow" [src]="source" alt="{{alt}}" [style.filter]="brightnessFilter" />
@@ -20,5 +20,5 @@
         <material-icon icon="add_a_photo" size="x-large"></material-icon>
     </material-button>
     <input type="file" #fileInput (change)="onFileChange($event)" accept="image/jpg,image/jpeg,image/png,image/gif" />
-    <p *ngIf="invalidFile" class="error-output">{{'invalid_file' | phrase}}</p>
+    <p *ngIf="invalidFile" class="error-output">{{msg.invalid_file()}}</p>
 </div>

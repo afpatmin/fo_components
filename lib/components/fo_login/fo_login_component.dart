@@ -6,7 +6,7 @@ import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:vi_auth_client/vi_auth_client.dart';
-import '../../pipes/phrase_pipe.dart';
+import '../../services/fo_messages_service.dart';
 import '../fo_modal/fo_modal_component.dart';
 
 @Component(
@@ -14,10 +14,12 @@ import '../fo_modal/fo_modal_component.dart';
     styleUrls: const ['fo_login_component.css'],
     templateUrl: 'fo_login_component.html',
     directives: const [coreDirectives, materialDirectives, FoModalComponent],
-    pipes: const [PhrasePipe],
-    visibility: Visibility.local)
+    pipes: const []
+    )
 class FoLoginComponent implements OnInit, OnDestroy {
-  FoLoginComponent();
+  FoLoginComponent(this.msg) {
+     state = msg.login();
+  }
 
   @override
   void ngOnInit() {
@@ -73,7 +75,7 @@ class FoLoginComponent implements OnInit, OnDestroy {
             smsFrom: recoverPasswordFromSMS);
 
         recoverPasswordSent = true;
-        state = 'reset_password';
+        state = msg.reset_password();
       } on Exception catch (e, s) {
         print(s);
         errorMessage = e.toString();
@@ -86,7 +88,7 @@ class FoLoginComponent implements OnInit, OnDestroy {
       errorMessage = null;
       await client.updatePassword(username, password, token);
       token = '';
-      setState('login');
+      setState(msg.login());
     } on Exception catch (e, s) {
       print(s);
       errorMessage = e.toString();
@@ -112,11 +114,11 @@ class FoLoginComponent implements OnInit, OnDestroy {
 
   String token = '';
 
-  String state = 'login';
+  String state;
   String errorMessage;
   bool recoverPasswordSent = false;
   bool visible = true;
-
+  final FoMessagesService msg;
   final StreamController<Map<String, String>> _onLoginController =
       new StreamController();
 

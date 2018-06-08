@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:fo_components/fo_components.dart' show PhrasePipe;
 
 /// A notification popup located at the bottom of the screen
 /// that can be set to close after a specified duration.
@@ -12,8 +11,7 @@ import 'package:fo_components/fo_components.dart' show PhrasePipe;
     styleUrls: const ['fo_notification_component.css'],
     directives: const [MaterialButtonComponent, MaterialIconComponent, NgIf],
     providers: const [],
-    pipes: const [PhrasePipe],
-    visibility: Visibility.local)
+    pipes: const [])
 class FoNotificationComponent implements OnInit, OnDestroy {
   FoNotificationComponent();
 

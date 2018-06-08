@@ -8,9 +8,8 @@ import 'dart:math';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:fo_model/fo_model.dart';
-import '../../pipes/phrase_pipe.dart';
 import '../../pipes/range_pipe.dart';
-import '../../services/phrase_service.dart';
+import '../../services/fo_messages_service.dart';
 import '../fo_modal/fo_modal_component.dart';
 import '../fo_select/fo_select_component.dart';
 
@@ -31,11 +30,11 @@ typedef String ErrorFn(Object model);
       materialDirectives,
       MaterialIconComponent
     ],
-    pipes: const [PhrasePipe, RangePipe],
+    pipes: const [RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDataTableComponent
     implements OnChanges, OnInit, AfterViewInit, OnDestroy {
-  FoDataTableComponent(this.host, this.phraseService, this._changeDetector);
+  FoDataTableComponent(this.host, this._changeDetector, this.msg);
 
   @override
   void ngOnInit() {
@@ -118,10 +117,7 @@ class FoDataTableComponent
           for (final col in columns) {
             final data = row[col]?.toString();
             if (data != null &&
-                phraseService
-                    .get(data.toString())
-                    .toLowerCase()
-                    .contains(keyword)) {
+                data.toString().toLowerCase().contains(keyword)) {
               allKeywords = true;
               break;
             }
@@ -130,10 +126,7 @@ class FoDataTableComponent
             final r = _evaluatedColumnsBuffer[row['id']];
             final data = (r?.containsKey(col) == true) ? r[col] : null;
             if (data != null &&
-                phraseService
-                    .get(data.toString())
-                    .toLowerCase()
-                    .contains(keyword)) {
+                data.toString().toLowerCase().contains(keyword)) {
               allKeywords = true;
               break;
             }
@@ -330,7 +323,7 @@ class FoDataTableComponent
     }
   }
 
-  String get filterLabel => lazyFilter ? 'filter_enter' : 'filter';
+  String get filterLabel => lazyFilter ? msg.filter_enter() : msg.filter();
 
   Iterable<Object> get filteredKeys =>
       _filteredKeys == null ? data.keys : _filteredKeys;
@@ -355,7 +348,6 @@ class FoDataTableComponent
   StreamSubscription _onWindowResizeListener;
   final dom.Element host;
   final int liveSearchThreshold = 500;
-  final PhraseService phraseService;
   final StreamController<String> onAddController = new StreamController();
   final StreamController<Set<Object>> onSelectedRowsController =
       new StreamController();
@@ -385,7 +377,7 @@ class FoDataTableComponent
         asyncEvaluatedColumns[col](data[row]).then((v) {
           if (_evaluatedColumnsBuffer?.containsKey(row) == true &&
               _evaluatedColumnsBuffer[row] != null) {
-            _evaluatedColumnsBuffer[row][col] = v;        
+            _evaluatedColumnsBuffer[row][col] = v;
             _changeDetector.markForCheck();
           }
         });
@@ -393,6 +385,8 @@ class FoDataTableComponent
     }
     return _evaluatedColumnsBuffer[row][col];
   }
+
+  final FoMessagesService msg;
 
   @Input()
   bool internalSort = true;

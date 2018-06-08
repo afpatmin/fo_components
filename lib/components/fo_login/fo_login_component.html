@@ -4,47 +4,47 @@
         [whiteHeader]="true"
         [showCloseButton]="false"
         [titleImageUrl]="titleImageUrl"
-        [error]="errorMessage | phrase">
+        [error]="errorMessage">
     <div class="padder">
-        <h3 class="title margin-bottom-x-small margin-top-x-small">{{state | phrase}}</h3>
-        <div class="login-container" *ngIf="state == 'login'">
+        <h3 class="title margin-bottom-x-small margin-top-x-small">{{state}}</h3>
+        <div class="login-container" *ngIf="state == msg.login()">
             <form>
                 <material-input
                         [disabled]="client.loading"
-                        label="{{'username' | phrase}}"
+                        [label]="msg.username()"
                         [(ngModel)]="username"
                         (keyup)="onKeyUp($event)">
                 </material-input>
                 <material-input
                         [disabled]="client.loading"
                         type="password"
-                        label="{{'password' | phrase}}"
+                        [label]="msg.password()"
                         [displayBottomPanel]="false"
                         [(ngModel)]="password"
                         (keyup)="onKeyUp($event)">
                 </material-input>
             </form>
-            <p *ngIf="showForgotPassword" class="forgot-password" (click)="setState('forgot_password')">{{'forgot_password' | phrase}}?</p>
+            <p *ngIf="showForgotPassword" class="forgot-password" (click)="setState(msg.forgot_password())">{{msg.forgot_password()}}?</p>
             <div class="button-container">
                 <material-button
                         raised
                         clear-size
                         [disabled]="client.loading || username.isEmpty || password.isEmpty"
                         (trigger)="onLogin()">
-                    {{'login' | phrase}}
+                    {{msg.login()}}
                 </material-button>
             </div>
             <div class="row" *ngIf="altUrl != null">
                 <div class="col text-center">
-                    <p><a [href]="altUrl">{{altUrlTitle | phrase}}</a></p>
+                    <p><a [href]="altUrl">{{altUrlTitle}}</a></p>
                 </div>
             </div>
         </div>
-        <div class="login-container" *ngIf="state == 'forgot_password'">
-            <p>{{'forgot_password_description' | phrase}}</p>
+        <div class="login-container" *ngIf="state == msg.forgot_password()">
+            <p>{{msg.forgot_password_description()}}</p>
             <material-input
                     [disabled]="client.loading"
-                    [label]="'username' | phrase" floatingLabel
+                    [label]="msg.username()" floatingLabel
                     [(ngModel)]="username"
                     (keyup)="onRecoverPasswordKeyUp($event)">
             </material-input>
@@ -52,28 +52,28 @@
                 <material-button
                         raised
                         clear-size
-                        (trigger)="setState('login')">
-                    {{'back' | phrase}}
+                        (trigger)="setState(msg.login())">
+                    {{msg.back()}}
                 </material-button>
                 <material-button
                         raised
                         clear-size
                         [disabled]="client.loading || username.isEmpty || recoverPasswordSent"
                         (trigger)="onRecoverPassword()">
-                    {{'send' | phrase}}
+                    {{msg.send()}}
                 </material-button>
             </div>
         </div>
-        <div class="login-container" *ngIf="state == 'reset_password'">
-            <p>{{'reset_password_description' | phrase}}</p>
+        <div class="login-container" *ngIf="state == msg.reset_password()">
+            <p>{{msg.reset_password_description()}}</p>
             <material-input
                     [disabled]="client.loading"
-                    [label]="'token' | phrase" floatingLabel
+                    [label]="token" floatingLabel
                     [(ngModel)]="token">
             </material-input>
             <material-input
                     [disabled]="client.loading"
-                    [label]="'new_password' | phrase" floatingLabel
+                    [label]="msg.new_password()" floatingLabel
                     [(ngModel)]="password">
             </material-input>
             <div class="button-container">
@@ -82,7 +82,7 @@
                         clear-size
                         [disabled]="client.loading || password.isEmpty || token.isEmpty"
                         (trigger)="onUpdatePassword()">
-                    {{'save' | phrase}}
+                    {{msg.save()}}
                 </material-button>
             </div>
         </div>

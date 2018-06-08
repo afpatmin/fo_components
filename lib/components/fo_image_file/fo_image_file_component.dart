@@ -7,7 +7,7 @@ import 'dart:html' as dom;
 import 'dart:typed_data';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import '../../pipes/phrase_pipe.dart';
+import '../../services/fo_messages_service.dart';
 
 @Component(
     selector: 'fo-image-file',
@@ -18,10 +18,9 @@ import '../../pipes/phrase_pipe.dart';
       MaterialIconComponent,
       MaterialButtonComponent
     ],
-    pipes: const [PhrasePipe],
-    visibility: Visibility.local)
+    pipes: const [])
 class FoImageFileComponent implements OnDestroy {
-  FoImageFileComponent() {
+  FoImageFileComponent(this.msg) {
     _metaReader.onLoad.listen(_extractExifOrientationAndLoadImage);
     _reader.onLoad.listen(_generateScaledImage);
   }
@@ -335,6 +334,7 @@ class FoImageFileComponent implements OnDestroy {
   int _orientation = 0;
   final dom.FileReader _metaReader = new dom.FileReader();
   final dom.FileReader _reader = new dom.FileReader();
+  final FoMessagesService msg;
   final StreamController<String> _onSourceChangeController =
       new StreamController();
   dom.FileUploadInputElement _fileInput;

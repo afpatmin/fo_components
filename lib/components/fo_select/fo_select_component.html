@@ -1,5 +1,5 @@
 <label (click)="setVisible(true)" *ngIf="label.isNotEmpty">
-    {{label | phrase}}
+    {{label}}
     <material-icon
             *ngIf="tooltip != null"
             baseline
@@ -21,12 +21,12 @@
     <material-dropdown-select
             [class.full-width]="fullWidth"
             [disabled]="disabled || selectionOptions == null"
-            [buttonText]="selectedModel == null ? nullSelectionButtonText : selectedModel.toString() | phrase"
+            [buttonText]="selectedModel == null ? nullSelectionButtonText : selectedModel.toString()"
             [popupMatchInputWidth]="false"
             [(visible)]="visible">
         <div *ngIf="showSearch" header>
             <material-select-searchbox
-                    [label]="'search' | phrase"
+                    [label]="msg.search()"
                     [filterable]="selectionOptions">
             </material-select-searchbox>
         </div>
@@ -39,7 +39,7 @@
                 <material-icon baseline [icon]="option.toString()" size="large"></material-icon>
                 <span>&nbsp;</span>
             </span>
-            <span>{{option.toString() | phrase}}</span>
+            <span>{{option.toString()}}</span>
         </material-select-dropdown-item>
     </material-dropdown-select>
 
@@ -49,7 +49,7 @@
             clear-size dense raised
             [disabled]="disabled || selectionOptions == null || selectedId == null"
             (trigger)="onActionButtonTriggerController.add(selectedId); onSelect(null);">
-        {{actionButtonText | phrase}}
+        {{actionButtonText}}
     </material-button>
 
     <!-- Icon has precedence over text -->
@@ -64,9 +64,9 @@
 </div>
 
 <fo-modal
-        title="{{'information' | phrase}}"
+        title="{{msg.information()}}"
         [whiteHeader]="true"
         [(visible)]="tooltipModalVisible"
         [showCloseButton]="true">
-    <p>{{tooltip | phrase}}</p>
+    <p>{{tooltip}}</p>
 </fo-modal>

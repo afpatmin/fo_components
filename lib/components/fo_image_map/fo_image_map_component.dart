@@ -5,7 +5,6 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:fo_model/fo_model.dart';
-import '../../pipes/phrase_pipe.dart';
 import '../fo_multi_select/fo_multi_select_component.dart';
 
 @Component(
@@ -17,7 +16,7 @@ import '../fo_multi_select/fo_multi_select_component.dart';
       materialDirectives,
       FoMultiSelectComponent
     ],
-    pipes: const [PhrasePipe])
+    pipes: const [])
 class FoImageMapComponent implements OnDestroy {
   FoImageMapComponent();
 
