@@ -16,6 +16,7 @@ import '../fo_modal/fo_modal_component.dart';
     styleUrls: ['fo_app_layout_component.css'],
     templateUrl: 'fo_app_layout_component.html',
     directives: [coreDirectives, FoModalComponent, materialDirectives],
+    providers: [PhraseService],
     pipes: [PhrasePipe])
 class FoAppLayoutComponent implements OnDestroy {
   FoAppLayoutComponent(
