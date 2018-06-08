@@ -5,11 +5,11 @@
             [class.fixed-height]="fixedHeight"
             [class.fixed-width]="fixedWidth"
             [class.small-padding]="smallPadding"
-            [error]="error | phrase">
+            [error]="error">
         <div header>
             <div class="flexContainer">
                 <img *ngIf="titleImageUrl != null" [src]="titleImageUrl" alt="title" />
-                <h3 *ngIf="titleImageUrl == null && title != null">{{title | phrase}}</h3>
+                <h3 *ngIf="titleImageUrl == null && title != null">{{title}}</h3>
                 <div *ngIf="showCloseButton" id="closeButtonContainer">
                     <material-button
                             [class.color-white]="!whiteHeader"

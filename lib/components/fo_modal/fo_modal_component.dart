@@ -4,15 +4,13 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import '../../pipes/phrase_pipe.dart';
 
 @Component(
     selector: 'fo-modal',
     styleUrls: const ['fo_modal_component.css'],
     templateUrl: 'fo_modal_component.html',
     directives: const [coreDirectives, materialDirectives],
-    pipes: const [PhrasePipe],
-    visibility: Visibility.local
+    pipes: const []
 )
 class FoModalComponent implements OnDestroy
 {
