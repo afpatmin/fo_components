@@ -7,8 +7,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:angular/security.dart' as security;
 import 'package:angular_components/angular_components.dart';
-import '../../pipes/phrase_pipe.dart';
-import '../../services/phrase_service.dart';
+import 'package:intl/intl.dart';
 import '../fo_modal/fo_modal_component.dart';
 
 @Component(
@@ -16,11 +15,11 @@ import '../fo_modal/fo_modal_component.dart';
     styleUrls: ['fo_app_layout_component.css'],
     templateUrl: 'fo_app_layout_component.html',
     directives: [coreDirectives, FoModalComponent, materialDirectives],
-    providers: [PhraseService],
-    pipes: [PhrasePipe])
+    providers: [],
+    pipes: [])  
 class FoAppLayoutComponent implements OnDestroy {
   FoAppLayoutComponent(
-      this.router, this.phraseService, this._domSanitizationService) {
+      this.router, this._domSanitizationService) {
     router.onRouteActivated.listen((state) {      
       _activeItem = null;
 
@@ -59,6 +58,8 @@ class FoAppLayoutComponent implements OnDestroy {
     _onExpandedChangeController.add(expanded);
   }
 
+  String instructions() => Intl.message('Instruktioner');
+
   bool isActive(FoSidebarItem item) => item == _activeItem;
 
   String calcIFrameWidth() => (html.window.innerWidth * 0.6).toString();
@@ -71,7 +72,6 @@ class FoAppLayoutComponent implements OnDestroy {
   String get pageHeader => _activeItem?.label;
   String get pageIcon => _activeItem?.icon;
 
-  final PhraseService phraseService;
   bool animating = false;
 
   final security.DomSanitizationService _domSanitizationService;

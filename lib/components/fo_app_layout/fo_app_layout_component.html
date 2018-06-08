@@ -5,17 +5,17 @@
             <td [style.width]="sidebarWidth">
                 <div id="sidebar" class="box-shadow" [style.width]="sidebarWidth">
                     <div id="sidebar-header" [style.background-color]="backgroundColor">
-                        <p *ngIf="expanded" class="fade-opacity" [style.opacity]="animating ? 0 : 1">{{header | phrase}}</p>
+                        <p *ngIf="expanded" class="fade-opacity" [style.opacity]="animating ? 0 : 1">{{header}}</p>
                     </div>
                     <div id="sidebar-list">
                         <material-list *ngIf="expanded" class="fade-opacity" [style.opacity]="animating ? 0 : 1">
                             <div group *ngFor="let category of categories">
-                                <div label>{{category.title | phrase}}</div>
+                                <div label>{{category.title}}</div>
                                 <material-list-item
                                         *ngFor="let item of category.items"
                                         [active]="isActive(item)"
                                         (click)="router.navigate(item.url)">
-                                    <material-icon [icon]="item.icon" baseline></material-icon>&nbsp;{{item.label | phrase}}
+                                    <material-icon [icon]="item.icon" baseline></material-icon>&nbsp;{{item.label}}
                                 </material-list-item>
                             </div>
                         </material-list>
@@ -26,7 +26,7 @@
                                         *ngFor="let item of category.items"
                                         class="clickable text-center padding-top-small padding-bottom-small mini-item"
                                         [class.active]="isActive(item)"
-                                        [materialTooltip]="item.label | phrase"
+                                        [materialTooltip]="item.label"
                                         (click)="router.navigate(item.url)">
                                     <material-icon [icon]="item.icon" size="x-large" baseline></material-icon>
                                 </div>
@@ -46,14 +46,14 @@
                     <div class="col">
                         <h3 id="page-header">
                             <material-icon [style.color]="backgroundColor" baseline [icon]="pageIcon"></material-icon>
-                            {{pageHeader | phrase}}
+                            {{pageHeader}}
                             <material-button
                                     *ngIf="instructionsUrl != null"
                                     raised
                                     clear-size
                                     class="float-right"
                                     (trigger)="instructionsModalVisible = true">
-                                {{'instructions' | phrase}}
+                                {{instructions()}}
                             </material-button>
                         </h3>
                         <div id="page-content">
@@ -67,7 +67,7 @@
 </div>
 
 <fo-modal
-        title="{{'instructions' | phrase}}"
+        [title]="instructions()"
         *ngIf="instructionsModalVisible"
         [whiteHeader]="true"
         [(visible)]="instructionsModalVisible">
