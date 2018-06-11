@@ -8,6 +8,7 @@ import 'dart:math';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:fo_model/fo_model.dart';
+import '../../pipes/fo_name_pipe.dart';
 import '../../pipes/range_pipe.dart';
 import '../../services/fo_messages_service.dart';
 import '../fo_modal/fo_modal_component.dart';
@@ -30,7 +31,7 @@ typedef String ErrorFn(Object model);
       materialDirectives,
       MaterialIconComponent
     ],
-    pipes: const [RangePipe],
+    pipes: const [NamePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDataTableComponent
     implements OnChanges, OnInit, AfterViewInit, OnDestroy {
@@ -215,7 +216,8 @@ class FoDataTableComponent
       /// Generate CSV string (Property1;Property2;Property3;Property4;Property5\n)
       final sb = new StringBuffer();
 
-      final colNames = new List.from(columns.keys)..addAll(evaluatedColumns.keys);
+      final colNames = new List.from(columns.keys)
+        ..addAll(evaluatedColumns.keys);
       sb.writeln(colNames);
 
       for (final key in filteredKeys) {
@@ -422,7 +424,7 @@ class FoDataTableComponent
   Map<String, AsyncEvaluateColumnFn> asyncEvaluatedColumns = {};
 
   @Input()
-  ErrorFn errorFunction;// = ((model) => null);
+  ErrorFn errorFunction; // = ((model) => null);
 
   @Input()
   bool showAddButton = false;
