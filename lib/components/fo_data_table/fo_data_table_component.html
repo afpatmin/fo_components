@@ -2,124 +2,147 @@
     <div class="s12 m7 l8 col">
         <h3 class="color-black margin-bottom-none">
             {{label}}
-            <material-icon
-                    baseline
-                    size="large"
-                    *ngIf="description != null"
-                    icon="help_outline"
-                    (click)="infoModalOpen = true"
-                    class="clickable">
+            <material-icon baseline
+                           size="large"
+                           *ngIf="description != null"
+                           icon="help_outline"
+                           (click)="infoModalOpen = true"
+                           class="clickable">
             </material-icon>
         </h3>
     </div>
     <div class="s12 m5 l4 col text-right">
-        <material-input
-                class="text-left"
-                [displayBottomPanel]="false"
-                [disabled]="disabled"
-                label="{{filterLabel}}"
-                trailingGlyph="search"
-                [(ngModel)]="searchPhrase"
-                (keyup)="onSearchKeyUp($event)">
+        <material-input class="text-left"
+                        [displayBottomPanel]="false"
+                        [disabled]="disabled"
+                        label="{{filterLabel}}"
+                        trailingGlyph="search"
+                        [(ngModel)]="searchPhrase"
+                        (keyup)="onSearchKeyUp($event)">
         </material-input>
     </div>
 </div>
 
 <div class="table-container box-shadow">
-    <table [class.faded]="disabled" class="output color-black margin-bottom-x-small">
+    <table [class.faded]="disabled"
+           class="output color-black margin-bottom-x-small">
         <thead>
-        <tr>
-            <td *ngIf="showCheckboxes">
-                <material-checkbox [(checked)]="allChecked"></material-checkbox>
-            </td>
-            <td *ngIf="errorFunction != null"></td>
-            <td *ngFor="let cell of columns"
-                [class.hide-for-small]="smallHiddenCol.contains(cell)"
-                [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
-                [class.hide-for-large]="largeHiddenCol.contains(cell)"
-                (click)="onSort(cell)">
-                <span [class.underline]="sortColumn == cell">{{cell}}</span>
-                <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
-                <material-icon size="medium" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></material-icon>
-            </td>
-            <td *ngFor="let cell of evaluatedColumns.keys"
-                [class.hide-for-small]="smallHiddenCol.contains(cell)"
-                [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
-                [class.hide-for-large]="largeHiddenCol.contains(cell)"
-                (click)="onSort(cell)">
-                <span [class.underline]="sortColumn == cell">{{cell}}</span>
-                <material-icon baseline size="small" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
-                <material-icon baseline size="small" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></material-icon>
-            </td>
-            
-            <td *ngFor="let cell of asyncEvaluatedColumns.keys"
-                [class.hide-for-small]="smallHiddenCol.contains(cell)"
-                [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
-                [class.hide-for-large]="largeHiddenCol.contains(cell)"
-                (click)="onSort(cell)">
-                <span [class.underline]="sortColumn == cell">{{cell}}</span>
-                <material-icon baseline size="small" [class.hidden]="sortColumn != cell || sortOrder == 'DESC'" icon="keyboard_arrow_up"></material-icon>
-                <material-icon baseline size="small" [class.hidden]="sortColumn != cell || sortOrder == 'ASC'" icon="keyboard_arrow_down"></material-icon>
-            </td>
-            <td *ngIf="showDeleteButtons" class="buttonCell"></td>
-        </tr>
+            <tr>
+                <td *ngIf="showCheckboxes">
+                    <material-checkbox [(checked)]="allChecked"></material-checkbox>
+                </td>
+                <td *ngIf="errorFunction != null"></td>
+                <td *ngFor="let cell of columns.keys"
+                    [class.hide-for-small]="smallHiddenCol.contains(cell)"
+                    [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
+                    [class.hide-for-large]="largeHiddenCol.contains(cell)"
+                    (click)="onSort(cell)">
+                    <span>{{columns[cell]}}</span>
+                    <material-icon baseline
+                                   size="small"
+                                   [class.hidden]="sortColumn != cell || sortOrder == 'DESC'"
+                                   icon="keyboard_arrow_up"></material-icon>
+                    <material-icon baseline
+                                   size="small"
+                                   [class.hidden]="sortColumn != cell || sortOrder == 'ASC'"
+                                   icon="keyboard_arrow_down"></material-icon>                                
+                </td>
+                <td *ngFor="let cell of evaluatedColumns.keys"
+                    [class.hide-for-small]="smallHiddenCol.contains(cell)"
+                    [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
+                    [class.hide-for-large]="largeHiddenCol.contains(cell)"
+                    (click)="onSort(cell)">
+                    <span>{{cell}}</span>
+                    <material-icon baseline
+                                   size="small"
+                                   [class.hidden]="sortColumn != cell || sortOrder == 'DESC'"
+                                   icon="keyboard_arrow_up"></material-icon>
+                    <material-icon baseline
+                                   size="small"
+                                   [class.hidden]="sortColumn != cell || sortOrder == 'ASC'"
+                                   icon="keyboard_arrow_down"></material-icon>
+                </td>
+                <td *ngFor="let cell of asyncEvaluatedColumns.keys"
+                    [class.hide-for-small]="smallHiddenCol.contains(cell)"
+                    [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
+                    [class.hide-for-large]="largeHiddenCol.contains(cell)"
+                    (click)="onSort(cell)">
+                    <span>{{cell}}</span>
+                    <material-icon baseline
+                                   size="small"
+                                   [class.hidden]="sortColumn != cell || sortOrder == 'DESC'"
+                                   icon="keyboard_arrow_up"></material-icon>
+                    <material-icon baseline
+                                   size="small"
+                                   [class.hidden]="sortColumn != cell || sortOrder == 'ASC'"
+                                   icon="keyboard_arrow_down"></material-icon>
+                </td>
+                <td *ngIf="showDeleteButtons"
+                    class="buttonCell"></td>
+            </tr>
         </thead>
         <tbody *ngIf="filteredKeys.isNotEmpty">
-        <tr *ngFor="let key of filteredKeys | range:firstIndex:lastIndex" (click)="onRowClickController.add(key)">
-            <td *ngIf="showCheckboxes && data != null">
-                <material-checkbox
-                        [disabled]="errorFunction != null && errorFunction(data[key]) != null"
-                        [checked]="selectedRows.contains(key)"
-                        (checkedChange)="onCheckedChange(key, $event)"
-                        (click)="$event.stopPropagation()">
-                </material-checkbox>
-            </td>
-            <td *ngIf="errorFunction != null && data != null">
-                <material-icon *ngIf="errorFunction(data[key]) != null" icon="warning" size="medium"></material-icon>
-            </td>
-            <td
-                    *ngFor="let cell of columns"
+            <tr *ngFor="let key of filteredKeys | range:firstIndex:lastIndex"
+                (click)="onRowClickController.add(key)">
+                <td *ngIf="showCheckboxes && data != null">
+                    <material-checkbox [disabled]="errorFunction != null && errorFunction(data[key]) != null"
+                                       [checked]="selectedRows.contains(key)"
+                                       (checkedChange)="onCheckedChange(key, $event)"
+                                       (click)="$event.stopPropagation()">
+                    </material-checkbox>
+                </td>
+                <td *ngIf="errorFunction != null && data != null">
+                    <material-icon *ngIf="errorFunction(data[key]) != null"
+                                   icon="warning"
+                                   size="medium"></material-icon>
+                </td>
+                <td *ngFor="let cell of columns.keys"
                     [class.hide-for-small]="smallHiddenCol.contains(cell)"
                     [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
                     [class.hide-for-large]="largeHiddenCol.contains(cell)">
-                <span *ngIf="!isBool(getCell(key, cell))">{{getCell(key, cell)}}</span>
-                <material-icon
-                        *ngIf="getCell(key, cell) == true"
-                        baseline
-                        icon="check"
-                        size="medium">
-                </material-icon>
-            </td>
-            <td *ngFor="let cell of allEvaluatedColumns"
-                [class.hide-for-small]="smallHiddenCol.contains(cell)"
-                [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
-                [class.hide-for-large]="largeHiddenCol.contains(cell)">
-                <span *ngIf="!isBool(getEvaluatedColumn(key, cell))">{{getEvaluatedColumn(key, cell)}}</span>
-                <material-icon
-                        *ngIf="getEvaluatedColumn(key, cell) == true"
-                        baseline
-                        icon="check"
-                        size="medium">
-                </material-icon>
-            </td>                        
-            <td *ngIf="showDeleteButtons" class="text-center">
-                <material-icon
-                        class="clickable color-alert"
-                        icon="delete_forever"
-                        size="x-large"
-                        (click)="deleteBufferId = key; $event.stopPropagation()">
-                </material-icon>
-            </td>
-        </tr>
+                    <span *ngIf="!isBool(getCell(key, cell))">{{getCell(key, cell)}}</span>
+                    <material-icon *ngIf="getCell(key, cell) == true"
+                                   baseline
+                                   icon="check"
+                                   size="x-small">
+                    </material-icon>
+                </td>
+                <td *ngFor="let cell of allEvaluatedColumns"
+                    [class.hide-for-small]="smallHiddenCol.contains(cell)"
+                    [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
+                    [class.hide-for-large]="largeHiddenCol.contains(cell)">
+                    <span *ngIf="!isBool(getEvaluatedColumn(key, cell))">{{getEvaluatedColumn(key, cell)}}</span>
+                    <material-icon *ngIf="getEvaluatedColumn(key, cell) == true"
+                                   baseline
+                                   icon="check"
+                                   size="medium">
+                    </material-icon>
+                </td>
+                <td *ngIf="showDeleteButtons"
+                    class="text-center">
+                    <material-icon class="clickable color-alert"
+                                   icon="delete_forever"
+                                   size="x-large"
+                                   (click)="deleteBufferId = key; $event.stopPropagation()">
+                    </material-icon>
+                </td>
+            </tr>
         </tbody>
     </table>
-    <div class="row expand" *ngIf="filteredKeys?.isEmpty == true">
-        <div class="col" *ngIf="disabled">
-            <p class="text-center"><material-spinner></material-spinner></p>
+    <div class="row expand"
+         *ngIf="filteredKeys?.isEmpty == true">
+        <div class="col"
+             *ngIf="disabled">
+            <p class="text-center">
+                <material-spinner></material-spinner>
+            </p>
         </div>
-        <div class="col color-alert text-center" *ngIf="!disabled">
+        <div class="col color-alert text-center"
+             *ngIf="!disabled">
             <p class="margin-bottom-none">
-                <material-icon size="x-large" icon="error"></material-icon>
+                <material-icon baseline
+                               size="x-large"
+                               icon="error"></material-icon>
                 {{msg.no_results_found()}}
             </p>
         </div>
@@ -127,56 +150,57 @@
     <div class="row expand">
         <div class="s2 col">
             <div *ngIf="showDownloadButton || showAddButton">
-                <material-button
-                        *ngIf="filteredKeys.isNotEmpty && showDownloadButton"
-                        class="float-left"
-                        clear-size
-                        raised
-                        dense 
-                        [disabled]="disabled || data?.isEmpty == true"
-                        [materialTooltip]="msg.download_csv()"
-                        (trigger)="onDownloadDataCSV()">
-                    <material-icon class="color-black" size="medium" icon="file_download"></material-icon>
+                <material-button *ngIf="filteredKeys.isNotEmpty && showDownloadButton"
+                                 class="float-left"
+                                 clear-size
+                                 raised
+                                 dense
+                                 [disabled]="disabled || data?.isEmpty == true"
+                                 [materialTooltip]="msg.download_csv()"
+                                 (trigger)="onDownloadDataCSV()">
+                    <material-icon class="color-black"
+                                   size="medium"
+                                   icon="file_download"></material-icon>
                 </material-button>
-                <material-button
-                        class="float-left"
-                        *ngIf="showAddButton"
-                        clear-size
-                        raised
-                        dense
-                        [disabled]="disabled"
-                        [materialTooltip]="msg.add()"
-                        (trigger)="onAddController.add('')">
-                    <material-icon class="color-black" size="medium" icon="add"></material-icon>
+                <material-button class="float-left"
+                                 *ngIf="showAddButton"
+                                 clear-size
+                                 raised
+                                 dense
+                                 [disabled]="disabled"
+                                 [materialTooltip]="msg.add()"
+                                 (trigger)="onAddController.add('')">
+                    <material-icon class="color-black"
+                                   size="medium"
+                                   icon="add"></material-icon>
                 </material-button>
             </div>
         </div>
-        <div *ngIf="filteredKeys.isNotEmpty" class="s10 col">
+        <div *ngIf="filteredKeys.isNotEmpty"
+             class="s10 col">
             <div id="select-step">
-                <div class="float-right" id="rows-per-page">
-                    <span>{{msg.row(2)}}/{{msg.page()}}:</span>
-                    <fo-select
-                            class="display-inline-block"
-                            [disabled]="disabled"
-                            [options]="rowOptions"
-                            [sort]="false"
-                            [selectedId]="selectedRowOptionId"
-                            (selectedIdChange)="selectedRowOptionId = $event; setIndices(0);">
+                <div class="float-right"
+                     id="rows-per-page">
+                    <span>{{msg.row(2)}}/{{msg.page()}}:&nbsp;</span>
+                    <fo-select class="display-inline-block"
+                               [disabled]="disabled"
+                               [options]="rowOptions"
+                               [sort]="false"
+                               [selectedId]="selectedRowOptionId"
+                               (selectedIdChange)="selectedRowOptionId = $event; setIndices(0);">
                     </fo-select>
                 </div>
                 <div class="float-right">
-                    <material-icon
-                            class="clickable vertical-align-middle"
-                            [class.disabled]="firstIndex <= 0"
-                            icon="navigate_before"
-                            (click)="step(-1)">
+                    <material-icon class="clickable vertical-align-middle"
+                                   [class.disabled]="firstIndex <= 0"
+                                   icon="navigate_before"
+                                   (click)="step(-1)">
                     </material-icon>
                     {{msg.page()}} {{currentPage}}/{{totalPages}} ({{filteredKeys.length}} {{msg.row(2)}})
-                    <material-icon
-                            class="clickable vertical-align-middle"
-                            [class.disabled]="lastIndex >= filteredKeys.length"
-                            icon="navigate_next"
-                            (click)="step(1)">
+                    <material-icon class="clickable vertical-align-middle"
+                                   [class.disabled]="lastIndex >= filteredKeys.length"
+                                   icon="navigate_next"
+                                   (click)="step(1)">
                     </material-icon>
                 </div>
             </div>
@@ -184,51 +208,49 @@
     </div>
 </div>
 
-<div class="row expand" *ngIf="batchOperations != null && batchOperations.isNotEmpty && showCheckboxes == true">
+<div class="row expand"
+     *ngIf="batchOperations != null && batchOperations.isNotEmpty && showCheckboxes == true">
     <div class="l8 m6 s0 col"></div>
     <div class="l4 m6 col">
-        <div class="batch-operations-container box-shadow" [class.expanded]="selectedRows.isNotEmpty">
-            <fo-select
-                    label="with_selected"
-                    [showActionButton]="true"
-                    actionButtonText="go"
-                    [disabled]="disabled || selectedRows == null || selectedRows.isEmpty"
-                    [options]="batchOperations"
-                    [selectedId]="batchOperations.first.id"
-                    [sort]="false"
-                    (actionButtonTrigger)="onBatchOperationTrigger($event)">
+        <div class="batch-operations-container box-shadow"
+             [class.expanded]="selectedRows.isNotEmpty">
+            <fo-select label="with_selected"
+                       [showActionButton]="true"
+                       actionButtonText="go"
+                       [disabled]="disabled || selectedRows == null || selectedRows.isEmpty"
+                       [options]="batchOperations"
+                       [selectedId]="batchOperations.first.id"
+                       [sort]="false"
+                       (actionButtonTrigger)="onBatchOperationTrigger($event)">
             </fo-select>
         </div>
     </div>
 </div>
 
-<fo-modal
-        title="{{msg.confirm()}}"
-        [smallPadding]="false"
-        [visible]="deleteBufferId != null"
-        (visibleChange)="deleteBufferId = null"
-        [showCloseButton]="false"
-        [whiteHeader]="true">
+<fo-modal title="{{msg.confirm()}}"
+          [smallPadding]="false"
+          [visible]="deleteBufferId != null"
+          (visibleChange)="deleteBufferId = null"
+          [showCloseButton]="false"
+          [whiteHeader]="true">
     <p>{{msg.confirm_delete_resource()}}</p>
-    <p class="text-right margin-bottom-none" footer>
-        <material-button
-                raised
-                (trigger)="deleteBufferId = null">
+    <p class="text-right margin-bottom-none"
+       footer>
+        <material-button raised
+                         (trigger)="deleteBufferId = null">
             {{msg.cancel()}}
         </material-button>
-        <material-button
-                raised
-                (trigger)="onDeleteController.add(deleteBufferId); deleteBufferId = null;">
+        <material-button raised
+                         (trigger)="onDeleteController.add(deleteBufferId); deleteBufferId = null;">
             {{msg.ok()}}
         </material-button>
     </p>
 </fo-modal>
 
-<fo-modal
-        [title]="msg.information()"
-        [smallPadding]="false"
-        [whiteHeader]="true"
-        [(visible)]="infoModalOpen"
-        [showCloseButton]="true">
+<fo-modal [title]="msg.information()"
+          [smallPadding]="false"
+          [whiteHeader]="true"
+          [(visible)]="infoModalOpen"
+          [showCloseButton]="true">
     <p>{{msg.description()}}</p>
 </fo-modal>

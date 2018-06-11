@@ -114,7 +114,7 @@ class FoDataTableComponent
         final row = json.decode(json.encode(model));
         for (final keyword in keywords) {
           allKeywords = false;
-          for (final col in columns) {
+          for (final col in columns.keys) {
             final data = row[col]?.toString();
             if (data != null &&
                 data.toString().toLowerCase().contains(keyword)) {
@@ -194,7 +194,7 @@ class FoDataTableComponent
             .toList();
 
         if (values != null) {
-          if (columns.contains(sortColumn)) {
+          if (columns.keys.contains(sortColumn)) {
             values.sort((a, b) => sort(
                 json.decode(json.encode(a))[sortColumn].toString(),
                 json.decode(json.encode(b))[sortColumn].toString()));
@@ -215,7 +215,7 @@ class FoDataTableComponent
       /// Generate CSV string (Property1;Property2;Property3;Property4;Property5\n)
       final sb = new StringBuffer();
 
-      final colNames = new List.from(columns)..addAll(evaluatedColumns.keys);
+      final colNames = new List.from(columns.keys)..addAll(evaluatedColumns.keys);
       sb.writeln(colNames);
 
       for (final key in filteredKeys) {
@@ -224,7 +224,7 @@ class FoDataTableComponent
 
         final row = json.decode(json.encode(model));
 
-        final properties = columns.map((col) => row[col]).toList()
+        final properties = columns.keys.map((col) => row[col]).toList()
           ..addAll(
               evaluatedColumns.keys.map((id) => evaluatedColumns[id](model)));
 
@@ -413,7 +413,7 @@ class FoDataTableComponent
   Map<Object, Object> data = {};
 
   @Input()
-  Iterable<Object> columns = [];
+  Map<String, String> columns = {};
 
   @Input()
   Map<String, EvaluateColumnFn> evaluatedColumns = {};
@@ -422,7 +422,7 @@ class FoDataTableComponent
   Map<String, AsyncEvaluateColumnFn> asyncEvaluatedColumns = {};
 
   @Input()
-  ErrorFn errorFunction = ((model) => null);
+  ErrorFn errorFunction;// = ((model) => null);
 
   @Input()
   bool showAddButton = false;
