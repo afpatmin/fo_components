@@ -5,17 +5,17 @@
             <td [style.width]="sidebarWidth">
                 <div id="sidebar" class="box-shadow" [style.width]="sidebarWidth">
                     <div id="sidebar-header" [style.background-color]="backgroundColor">
-                        <p *ngIf="expanded" class="fade-opacity" [style.opacity]="animating ? 0 : 1">{{header}}</p>
+                        <p *ngIf="expanded" class="fade-opacity" [style.opacity]="animating ? 0 : 1">{{header | name}}</p>
                     </div>
                     <div id="sidebar-list">
                         <material-list *ngIf="expanded" class="fade-opacity" [style.opacity]="animating ? 0 : 1">
                             <div group *ngFor="let category of categories">
-                                <div label>{{category.title}}</div>
+                                <div label>{{category.title | name}}</div>
                                 <material-list-item
                                         *ngFor="let item of category.items"
                                         [active]="isActive(item)"
                                         (click)="router.navigate(item.url)">
-                                    <material-icon [icon]="item.icon" baseline></material-icon>&nbsp;{{item.label}}
+                                    <material-icon [icon]="item.icon" baseline></material-icon>&nbsp;{{item.label | name}}
                                 </material-list-item>
                             </div>
                         </material-list>
@@ -46,7 +46,7 @@
                     <div class="col">
                         <h3 id="page-header">
                             <material-icon [style.color]="backgroundColor" baseline [icon]="pageIcon"></material-icon>
-                            {{pageHeader}}
+                            {{pageHeader | name}}
                             <material-button
                                     *ngIf="instructionsUrl != null"
                                     raised

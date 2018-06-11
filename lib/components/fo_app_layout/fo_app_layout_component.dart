@@ -9,14 +9,14 @@ import 'package:angular/security.dart' as security;
 import 'package:angular_components/angular_components.dart';
 import 'package:intl/intl.dart';
 import '../fo_modal/fo_modal_component.dart';
+import '../../pipes/fo_name_pipe.dart';
 
 @Component(
     selector: 'fo-app-layout',
     styleUrls: ['fo_app_layout_component.css'],
     templateUrl: 'fo_app_layout_component.html',
-    directives: [coreDirectives, FoModalComponent, materialDirectives],
-    providers: [],
-    pipes: [])  
+    directives: [coreDirectives, FoModalComponent, materialDirectives],    
+    pipes: [NamePipe])  
 class FoAppLayoutComponent implements OnDestroy {
   FoAppLayoutComponent(
       this.router, this._domSanitizationService) {
