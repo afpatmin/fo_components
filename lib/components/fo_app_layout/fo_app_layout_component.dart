@@ -8,8 +8,8 @@ import 'package:angular_router/angular_router.dart';
 import 'package:angular/security.dart' as security;
 import 'package:angular_components/angular_components.dart';
 import 'package:intl/intl.dart';
-import '../fo_modal/fo_modal_component.dart';
 import '../../pipes/fo_name_pipe.dart';
+import '../fo_modal/fo_modal_component.dart';
 
 @Component(
     selector: 'fo-app-layout',

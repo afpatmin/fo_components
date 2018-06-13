@@ -46,9 +46,10 @@ div.table-container {
             table-layout: auto;
             td {
                 white-space: nowrap;
+                padding-left: 0.4rem;
             }
             td:first-child {
-                padding-left: 0.5em;
+                padding-left: 0.5rem;
             }
             thead {
                 tr {
