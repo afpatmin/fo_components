@@ -158,7 +158,9 @@ class FoDataTableComponent
       _filteredKeys = null;
 
       /// Evaluated columns are always sorted internally
-      if (internalSort || evaluatedColumns.containsKey(column)) {
+      if (internalSort ||
+          evaluatedColumns.containsKey(column) ||
+          asyncEvaluatedColumns.containsKey(column)) {
         int sort(Object a, Object b) {
           final vA = a == null ? '-' : a.toString();
           final vB = b == null ? '-' : b.toString();
