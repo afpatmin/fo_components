@@ -201,9 +201,12 @@ class FoDataTableComponent
             values.sort((a, b) => sort(
                 json.decode(json.encode(a))[sortColumn].toString(),
                 json.decode(json.encode(b))[sortColumn].toString()));
-          } else if (evaluatedColumns.containsKey(sortColumn) || asyncEvaluatedColumns.containsKey(sortColumn)) {
+          } else if (evaluatedColumns.containsKey(sortColumn)) {
             values.sort((a, b) => sort(evaluatedColumns[sortColumn](a),
                 evaluatedColumns[sortColumn](b)));
+          } else if (asyncEvaluatedColumns.containsKey(sortColumn)) {
+            values.sort((a, b) => sort(asyncEvaluatedColumns[sortColumn](a),
+                asyncEvaluatedColumns[sortColumn](b)));
           }
 
           _filteredKeys =
