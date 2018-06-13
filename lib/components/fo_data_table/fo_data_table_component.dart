@@ -152,7 +152,7 @@ class FoDataTableComponent
     if (!disabled && column != null) {
       sortColumn = column;
       sortOrder = (sortOrder == 'ASC') ? 'DESC' : 'ASC';
-      _onSortController.add({'column': sortColumn, 'order': sortOrder});
+      _onSortController.add({'column': sortColumn, 'order': sortOrder, 'internal':internalSort || evaluatedColumns.containsKey(column) || asyncEvaluatedColumns.containsKey(column)});
 
       searchPhrase = null;
       _filteredKeys = null;
@@ -201,7 +201,7 @@ class FoDataTableComponent
             values.sort((a, b) => sort(
                 json.decode(json.encode(a))[sortColumn].toString(),
                 json.decode(json.encode(b))[sortColumn].toString()));
-          } else if (evaluatedColumns.containsKey(sortColumn)) {
+          } else if (evaluatedColumns.containsKey(sortColumn) || asyncEvaluatedColumns.containsKey(sortColumn)) {
             values.sort((a, b) => sort(evaluatedColumns[sortColumn](a),
                 evaluatedColumns[sortColumn](b)));
           }
@@ -358,7 +358,7 @@ class FoDataTableComponent
   final StreamController<Object> onDeleteController = new StreamController();
   final StreamController<String> _onFilterController = new StreamController();
   final StreamController<Object> onRowClickController = new StreamController();
-  final StreamController<Map<String, String>> _onSortController =
+  final StreamController<Map<String, dynamic>> _onSortController =
       new StreamController();
   final StreamController<BatchOperationEvent> _onBatchOperationController =
       new StreamController();
@@ -474,7 +474,7 @@ class FoDataTableComponent
   Stream<Set<Object>> get selectedRowsChange => onSelectedRowsController.stream;
 
   @Output('sort')
-  Stream<Map<String, String>> get onSortOutput => _onSortController.stream;
+  Stream<Map<String, dynamic>> get onSortOutput => _onSortController.stream;
 
   @Output('batchOperation')
   Stream<BatchOperationEvent> get onBatchOperationOutput =>
