@@ -1,22 +1,41 @@
 <label>{{label}}</label>
 <div>
     <span>{{leadingText}}&nbsp;</span>
-    <material-button clear-size dense [disabled]="disabled || (value != null && value <= min)" (mousedown)="onMouseDown(-step)"
-        (touchstart)="onMouseDown(-step)">
-        <material-icon icon="keyboard_arrow_down" size="medium"></material-icon>
+    <material-button clear-size
+                     dense
+                     [disabled]="disabled || (value != null && value <= min)"
+                     (mousedown)="onMouseDown(-step)"
+                     (touchstart)="onMouseDown(-step)">
+        <material-icon icon="keyboard_arrow_down"
+                       size="medium"></material-icon>
     </material-button>
-    <span class="clickable" id="valueOutput" (click)="popupVisible = true" popupSource #source="popupSource">{{formattedValue}}</span>
-    <material-button clear-size dense [disabled]="disabled || (value != null && value >= max)" (mousedown)="onMouseDown(step)"
-        (touchstart)="onMouseDown(step)">
-        <material-icon icon="keyboard_arrow_up" size="medium"></material-icon>
+    <span class="clickable"
+          id="valueOutput"
+          (click)="popupVisible = !disabled"
+          popupSource
+          #source="popupSource">{{formattedValue}}</span>
+    <material-button clear-size
+                     dense
+                     [disabled]="disabled || (value != null && value >= max)"
+                     (mousedown)="onMouseDown(step)"
+                     (touchstart)="onMouseDown(step)">
+        <material-icon icon="keyboard_arrow_up"
+                       size="medium"></material-icon>
     </material-button>
     <span>&nbsp;{{trailingText}}</span>
-</div> 
+</div>
 
-<material-popup [(visible)]="popupVisible" [source]="source">
+<material-popup [(visible)]="popupVisible"
+                [source]="source">
     <div class="row padding-top-small">
         <div class="col">
-            <material-input type="number" [ngFormControl]="numberInputControl" [label]="msg.enter_value()" floatingLabel [ngModel]="value" (ngModelChange)="setValueClamped($event)"></material-input>        
-        </div>        
+            <material-input type="number"
+                            [ngFormControl]="numberInputControl"
+                            [label]="msg.enter_value()"
+                            [disabled]="disabled"
+                            floatingLabel
+                            [ngModel]="value"
+                            (ngModelChange)="setValueClamped($event)"></material-input>
+        </div>
     </div>
 </material-popup>
