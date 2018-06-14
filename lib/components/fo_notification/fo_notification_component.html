@@ -1,4 +1,5 @@
-<div class="row collapse" *ngIf="isOpen">
+<div class="row collapse"
+     *ngIf="isOpen">
     <div class="col">
         <div id="notificationContainer">
             <div class="row">
@@ -8,13 +9,12 @@
                     </h3>
                 </div>
                 <div class="l1 m2 s3 col text-right">
-                    <material-button
-                            *ngIf="showCloseButton == true"
-                            dense clear-size
-                            (trigger)="close()">
-                        <material-icon
-                                icon="close"
-                                size="medium">
+                    <material-button *ngIf="showCloseButton == true"
+                                     dense
+                                     clear-size
+                                     (trigger)="close()">
+                        <material-icon icon="close"
+                                       size="medium">
                         </material-icon>
                     </material-button>
                 </div>

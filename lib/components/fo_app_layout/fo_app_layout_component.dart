@@ -15,19 +15,17 @@ import '../fo_modal/fo_modal_component.dart';
     selector: 'fo-app-layout',
     styleUrls: ['fo_app_layout_component.css'],
     templateUrl: 'fo_app_layout_component.html',
-    directives: [coreDirectives, FoModalComponent, materialDirectives],    
-    pipes: [NamePipe])  
+    directives: [coreDirectives, FoModalComponent, materialDirectives],
+    pipes: [NamePipe])
 class FoAppLayoutComponent implements OnDestroy {
-  FoAppLayoutComponent(
-      this.router, this._domSanitizationService) {
-    router.onRouteActivated.listen((state) {      
+  FoAppLayoutComponent(this.router, this._domSanitizationService) {
+    router.onRouteActivated.listen((state) {
       _activeItem = null;
 
       final path = state.path.replaceAll('/', '').replaceAll('#', '');
-      if (path == null || path.isEmpty) return; 
+      if (path == null || path.isEmpty) return;
 
       for (final category in categories) {
-      
         _activeItem =
             category.items.firstWhere((i) => i.url == path, orElse: () => null);
 
@@ -37,7 +35,7 @@ class FoAppLayoutComponent implements OnDestroy {
           instructionsUrl = _activeItem?.instructionsUrl == null
               ? null
               : _domSanitizationService
-                  .bypassSecurityTrustResourceUrl(_activeItem.instructionsUrl);                          
+                  .bypassSecurityTrustResourceUrl(_activeItem.instructionsUrl);
           break;
         }
       }

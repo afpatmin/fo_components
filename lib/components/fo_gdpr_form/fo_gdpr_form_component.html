@@ -1,5 +1,9 @@
-<fo-modal title="GDPR" [fixedWidth]="false" [visible]="open" (visibleChange)="open = $event; openController.add($event);"
-    [whiteHeader]="false" [smallPadding]="false">
+<fo-modal title="GDPR"
+          [fixedWidth]="false"
+          [visible]="open"
+          (visibleChange)="open = $event; openController.add($event);"
+          [whiteHeader]="false"
+          [smallPadding]="false">
     <div *ngIf="open">
         <div *ngIf="!sent">
             <div class="row collapse">
@@ -7,48 +11,76 @@
                     <form [ngFormModel]="form">
                         <div class="row">
                             <div class="col">
-                                <p class="margin-top-none margin-bottom-small text-small" [innerHtml]="msg.gdpr_form_info()"></p>
-                                <p class="margin-top-small text-small" *ngIf="readMoreLink != null">
-                                    <a href="{{readMoreLink}}" target="_blank">{{msg.read_more()}}</a>
-                                </p> 
+                                <p class="margin-top-none margin-bottom-small text-small"
+                                   [innerHtml]="msg.gdpr_form_info()"></p>
+                                <p class="margin-top-small text-small"
+                                   *ngIf="readMoreLink != null">
+                                    <a href="{{readMoreLink}}"
+                                       target="_blank">{{msg.read_more()}}</a>
+                                </p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="m6 col">
-                                <material-input label="{{msg.firstname()}}*" floatingLabel ngControl="firstname" [(ngModel)]="model.firstname" [maxCount]="50">
+                                <material-input label="{{msg.firstname()}}*"
+                                                floatingLabel
+                                                ngControl="firstname"
+                                                [(ngModel)]="model.firstname"
+                                                [maxCount]="50">
                                 </material-input>
                             </div>
                             <div class="m6 col">
-                                <material-input label="{{msg.lastname()}}*" floatingLabel ngControl="lastname" [(ngModel)]="model.lastname" [maxCount]="50">
+                                <material-input label="{{msg.lastname()}}*"
+                                                floatingLabel
+                                                ngControl="lastname"
+                                                [(ngModel)]="model.lastname"
+                                                [maxCount]="50">
                                 </material-input>
                             </div>
                         </div>
                         <div class="row">
                             <div class="m6 col">
-                                <material-input label="{{msg.phone()}}*" floatingLabel ngControl="phone" [(ngModel)]="model.phone" [maxCount]="15">
+                                <material-input label="{{msg.phone()}}*"
+                                                floatingLabel
+                                                ngControl="phone"
+                                                [(ngModel)]="model.phone"
+                                                [maxCount]="15">
                                 </material-input>
                             </div>
                             <div class="m6 col">
-                                <material-input label="{{msg.email()}}*" floatingLabel ngControl="email" [(ngModel)]="model.email" [maxCount]="128">
+                                <material-input label="{{msg.email()}}*"
+                                                floatingLabel
+                                                ngControl="email"
+                                                [(ngModel)]="model.email"
+                                                [maxCount]="128">
                                 </material-input>
                             </div>
                         </div>
                         <div class="row">
                             <div class="m6 col">
-                                <fo-select label="{{msg.issue()}}*" [sort]="false" [(selectedId)]="model.selected_issue" [options]="options">
+                                <fo-select label="{{msg.issue()}}*"
+                                           [sort]="false"
+                                           [(selectedId)]="model.selected_issue"
+                                           [options]="options">
                                 </fo-select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <material-input [label]="msg.comment(2)" floatingLabel ngControl="comments" [(ngModel)]="model.comments" [maxCount]="1000"
-                                    multiline rows="5">
+                                <material-input [label]="msg.comment(2)"
+                                                floatingLabel
+                                                ngControl="comments"
+                                                [(ngModel)]="model.comments"
+                                                [maxCount]="1000"
+                                                multiline
+                                                rows="5">
                                 </material-input>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col text-right">
-                                <material-checkbox [label]="msg.gdpr_form_accept()" [(checked)]="termsChecked">
+                                <material-checkbox [label]="msg.gdpr_form_accept()"
+                                                   [(checked)]="termsChecked">
                                 </material-checkbox>
                             </div>
                         </div>
@@ -56,9 +88,12 @@
                     </form>
                 </div>
             </div>
-            <div class="row" footer>
+            <div class="row"
+                 footer>
                 <div class="col text-right">
-                    <material-button raised (trigger)="submit()" [disabled]="!form.valid || !termsChecked">
+                    <material-button raised
+                                     (trigger)="submit()"
+                                     [disabled]="!form.valid || !termsChecked">
                         {{msg.send()}}
                     </material-button>
                 </div>

@@ -12,7 +12,9 @@ import '../../services/fo_messages_service.dart';
 @Component(
     selector: 'fo-image-file',
     templateUrl: 'fo_image_file_component.html',
-    styleUrls: const ['fo_image_file_component.css'],
+    styleUrls: const [
+      'fo_image_file_component.css'
+    ],
     directives: const [
       coreDirectives,
       MaterialIconComponent,
@@ -148,9 +150,7 @@ class FoImageFileComponent implements OnDestroy {
             byteData.getUint8(byteOffset),
             byteData.getUint8(byteOffset + 1)
           ]));
-          final endian = (strEndian == 'II')
-              ? Endian.little
-              : Endian.big;
+          final endian = (strEndian == 'II') ? Endian.little : Endian.big;
           byteOffset += 2;
 
           /// Next two bytes are Always 0x2a00 (or 0x002a for big endian)

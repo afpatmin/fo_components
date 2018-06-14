@@ -14,7 +14,12 @@ import '../fo_modal/fo_modal_component.dart';
     selector: 'fo-number-input',
     styleUrls: const ['fo_number_input_component.css'],
     templateUrl: 'fo_number_input_component.html',
-    directives: const [coreDirectives, formDirectives, FoModalComponent, materialDirectives],
+    directives: const [
+      coreDirectives,
+      formDirectives,
+      FoModalComponent,
+      materialDirectives
+    ],
     providers: const [FORM_PROVIDERS],
     pipes: const [])
 class FoNumberInputComponent
@@ -47,8 +52,8 @@ class FoNumberInputComponent
     numberInputControl = new Control(null, (c) {
       if (c.value == null) return null;
       if (c.value > max) return {'error': 'max: $max'};
-      if (c. value < min) return {'error': 'min: $min'};
-      return null;      
+      if (c.value < min) return {'error': 'min: $min'};
+      return null;
     });
   }
 
@@ -59,7 +64,7 @@ class FoNumberInputComponent
       _precision = (strStep.contains('.'))
           ? strStep.length - strStep.indexOf('.') - 1
           : 0;
-    }    
+    }
   }
 
   @override
@@ -112,7 +117,7 @@ class FoNumberInputComponent
   ChangeFunction<num> _onChange;
   NgControl control;
   num value;
-  
+
   final FoMessagesService msg;
   StreamSubscription<html.MouseEvent> _mouseUpListener;
   StreamSubscription<html.TouchEvent> _touchEndListener;

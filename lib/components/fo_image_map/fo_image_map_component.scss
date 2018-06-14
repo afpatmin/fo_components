@@ -1,38 +1,25 @@
 @import 'package:grid/colors';
-
-:host > div
-{
-  position: relative;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-  img
-  {
-
-  }
-
-  svg
-  {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0.3;
-
-    .shape
-    {
-      visibility: hidden;
-      stroke: white;
-      stroke-width: 1;
-      stroke-dasharray: 2;
-      stroke-linejoin: round;
-      fill: $colorAlert;
+:host>div {
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.3;
+        .shape {
+            visibility: hidden;
+            stroke: white;
+            stroke-width: 1;
+            stroke-dasharray: 2;
+            stroke-linejoin: round;
+            fill: $colorAlert;
+        }
+        .shape.visible {
+            visibility: visible;
+        }
     }
-
-    .shape.visible
-    {
-      visibility: visible;
-    }
-  }
 }

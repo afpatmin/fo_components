@@ -1,34 +1,26 @@
 div.padder {
-  padding: 0 1rem;
-  div.login-container
-  {
-    max-width: 100%;
-    min-width: 200px;
-
-    material-input
-    {
-      display: block;
-      width: 100%;
+    padding: 0 1rem;
+    div.login-container {
+        max-width: 100%;
+        min-width: 200px;
+        material-input {
+            display: block;
+            width: 100%;
+        }
+        a {
+            font-size: 0.9em;
+            text-decoration: none;
+            color: #333;
+        }
+        p.forgot-password {
+            text-align: right;
+            margin: 0;
+            font-size: 0.8em;
+            cursor: pointer;
+        }
+        div.button-container {
+            margin-top: 1.5em;
+            text-align: right;
+        }
     }
-
-    a
-    {
-      font-size: 0.9em;
-      text-decoration: none;
-      color: #333;
-    }
-
-    p.forgot-password
-    {
-      text-align: right;
-      margin: 0;
-      font-size: 0.8em;
-      cursor: pointer;
-    }
-    div.button-container
-    {
-      margin-top: 1.5em;
-      text-align: right;
-    }
-  }
 }

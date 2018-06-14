@@ -14,11 +14,10 @@ import '../fo_modal/fo_modal_component.dart';
     styleUrls: const ['fo_login_component.css'],
     templateUrl: 'fo_login_component.html',
     directives: const [coreDirectives, materialDirectives, FoModalComponent],
-    pipes: const []
-    )
+    pipes: const [])
 class FoLoginComponent implements OnInit, OnDestroy {
   FoLoginComponent(this.msg) {
-     state = msg.login();
+    state = msg.login();
   }
 
   @override

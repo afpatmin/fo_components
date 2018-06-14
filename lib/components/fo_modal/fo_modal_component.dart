@@ -10,20 +10,16 @@ import 'package:angular_components/angular_components.dart';
     styleUrls: const ['fo_modal_component.css'],
     templateUrl: 'fo_modal_component.html',
     directives: const [coreDirectives, materialDirectives],
-    pipes: const []
-)
-class FoModalComponent implements OnDestroy
-{
+    pipes: const [])
+class FoModalComponent implements OnDestroy {
   FoModalComponent();
 
   @override
-  void ngOnDestroy()
-  {
+  void ngOnDestroy() {
     _onVisibleChangeController.close();
   }
 
-  void close()
-  {
+  void close() {
     _onVisibleChangeController.add(false);
     visible = false;
   }
@@ -58,5 +54,6 @@ class FoModalComponent implements OnDestroy
   @Output('visibleChange')
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
 
-  final StreamController<bool> _onVisibleChangeController = new StreamController();
+  final StreamController<bool> _onVisibleChangeController =
+      new StreamController();
 }

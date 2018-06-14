@@ -152,7 +152,13 @@ class FoDataTableComponent
     if (!disabled && column != null) {
       sortColumn = column;
       sortOrder = (sortOrder == 'ASC') ? 'DESC' : 'ASC';
-      _onSortController.add({'column': sortColumn, 'order': sortOrder, 'internal':internalSort || evaluatedColumns.containsKey(column) || asyncEvaluatedColumns.containsKey(column)});
+      _onSortController.add({
+        'column': sortColumn,
+        'order': sortOrder,
+        'internal': internalSort ||
+            evaluatedColumns.containsKey(column) ||
+            asyncEvaluatedColumns.containsKey(column)
+      });
 
       searchPhrase = null;
       _filteredKeys = null;

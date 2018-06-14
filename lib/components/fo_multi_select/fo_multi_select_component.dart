@@ -21,10 +21,8 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy {
   @override
   void ngOnChanges(Map<String, SimpleChange> changes) {
     if (changes.containsKey('options')) {
-
       if (options == null)
         selectionOptions = new StringSelectionOptions([]);
-
       else if (selectionOptions.optionsList.length != options.length) {
         selectionOptions = new StringSelectionOptions(
             options.toList(growable: false),
@@ -39,20 +37,8 @@ class FoMultiSelectComponent implements OnChanges, OnDestroy {
     _onSelectedIdsChangeController.close();
   }
 
-  void onReorder(ReorderEvent event) {
-    /*
-    OptionModel sourceModel = selectedModels.elementAt(event.sourceIndex);
-    selectedModels.removeAt(event.sourceIndex);
-    selectedModels.insert(event.destIndex, sourceModel);
-    selectedIds = selectedModels.map((model) => model['id']).toList();
-
-    selectionModel.clear();
-    selectedModels.forEach(selectionModel.select);
-    */
-  }
-
   void onToggle(Object id, bool status) {
-    if (id == null) return;  
+    if (id == null) return;
     if (status == true) {
       selectedIds.add(id);
     } else {

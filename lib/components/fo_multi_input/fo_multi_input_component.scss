@@ -1,25 +1,19 @@
-div.flex-container
-{
+div.flex-container {
     display: flex;
     align-items: baseline;
-    material-input
-    {
+    material-input {
         flex: auto;
     }
-
-    material-button
-    {
+    material-button {
         margin-left: 0.5rem;
         min-width: 2rem;
     }
 }
 
-span.error
-{
+span.error {
     font-size: 0.9em;
 }
 
-material-chip
-{
-  display: inline-flex;
+material-chip {
+    display: inline-flex;
 }

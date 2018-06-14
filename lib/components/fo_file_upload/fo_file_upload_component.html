@@ -1,18 +1,38 @@
 <label>{{label}}</label>
-<div class="container" (dragenter)="$event.preventDefault()" (dragover)="$event.preventDefault()" (drop)="onDrop($event)">
-    <input #input type="file" (change)="onFileChange($event)" [accept]="accept" />
-    <p *ngIf="!valid" class="margin-top-small margin-bottom-small">
-        <material-button raised (trigger)="input.click()"><material-icon icon="folder_open"></material-icon></material-button>
+<div class="container"
+     (dragenter)="$event.preventDefault()"
+     (dragover)="$event.preventDefault()"
+     (drop)="onDrop($event)">
+    <input #input
+           type="file"
+           (change)="onFileChange($event)"
+           [accept]="accept" />
+    <p *ngIf="!valid"
+       class="margin-top-small margin-bottom-small">
+        <material-button raised
+                         (trigger)="input.click()">
+            <material-icon icon="folder_open"></material-icon>
+        </material-button>
     </p>
-    <p *ngIf="valid" class="margin-top-small margin-bottom-small">
-        <material-button raised [disabled]="disabled || !valid" (trigger)="upload()"><material-icon icon="file_upload"></material-icon></material-button>
+    <p *ngIf="valid"
+       class="margin-top-small margin-bottom-small">
+        <material-button raised
+                         [disabled]="disabled || !valid"
+                         (trigger)="upload()">
+            <material-icon icon="file_upload"></material-icon>
+        </material-button>
     </p>
     <p>
         <span *ngIf="file == null">...</span>
         <span *ngIf="file != null">{{file.name}} ({{(file.size / 1024).round()}}kb)</span>
-        <material-icon *ngIf="file != null" icon="cancel" size="small" class="color-alert clickable" (click)="clearSelection()"></material-icon>
+        <material-icon *ngIf="file != null"
+                       icon="cancel"
+                       size="small"
+                       class="color-alert clickable"
+                       (click)="clearSelection()"></material-icon>
     </p>
-    <p class="color-alert" *ngIf="file != null && file.size > maxByteSize">
+    <p class="color-alert"
+       *ngIf="file != null && file.size > maxByteSize">
         {{msg.max_filesize_exceeded()}} ({{((maxByteSize/1024)/1024).ceil()}}mb)
     </p>
 </div>

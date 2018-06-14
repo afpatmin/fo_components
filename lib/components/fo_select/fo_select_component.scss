@@ -1,11 +1,7 @@
 @import 'package:grid/theme';
-
-:host
-{
+:host {
     display: block;
-
-    label
-    {
+    label {
         width: 100%;
         display: inline-block;
         font-size: 0.75em;
@@ -13,22 +9,16 @@
         margin-top: 4px;
         margin-bottom: 5px;
     }
-
-    div.flex-container
-    {
+    div.flex-container {
         display: flex;
-        material-dropdown-select
-        {
+        material-dropdown-select {
             flex: auto;
         }
-        material-dropdown-select.full-width
-        {
+        material-dropdown-select.full-width {
             flex: auto;
             width: 100%;
         }
-
-        .button
-        {
+        .button {
             margin-left: 0.5rem;
             min-width: 2rem;
         }

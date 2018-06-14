@@ -13,37 +13,31 @@ import '../../services/fo_messages_service.dart';
     styleUrls: const ['fo_file_upload_component.css'],
     directives: const [coreDirectives, materialDirectives],
     pipes: const [])
-class FileUploadComponent implements OnDestroy
-{
+class FileUploadComponent implements OnDestroy {
   FileUploadComponent(this.msg);
 
   @override
-  void ngOnDestroy()
-  {
+  void ngOnDestroy() {
     onUploadController.close();
   }
 
-  void onDrop(dom.MouseEvent event)
-  {
+  void onDrop(dom.MouseEvent event) {
     event.preventDefault();
     final dt = event.dataTransfer;
     file = (dt.files.isEmpty) ? null : file = dt.files.last;
   }
 
-  void onFileChange(dom.Event event)
-  {
+  void onFileChange(dom.Event event) {
     _fileInput = event.target;
     file = (_fileInput.files.isNotEmpty) ? _fileInput.files.last : null;
   }
 
-  void clearSelection()
-  {
+  void clearSelection() {
     file = null;
     _fileInput?.value = '';
   }
 
-  void upload()
-  {
+  void upload() {
     onUploadController.add(file);
     clearSelection();
   }
@@ -69,6 +63,4 @@ class FileUploadComponent implements OnDestroy
 
   @Output('upload')
   Stream<dom.File> get onUploadOutput => onUploadController.stream;
-
-
 }

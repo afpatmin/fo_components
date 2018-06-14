@@ -1,39 +1,40 @@
 <span class="label">{{label}}</span>
-<material-dropdown-select
-        [class.full-width]="fullWidth"
-        [disabled]="disabled || selectionOptions == null"
-        [buttonText]="buttonText"
-        [popupMatchInputWidth]="false"
-        [(visible)]="visible"
-        id="select">
-    <div *ngIf="showSearch" header>
-        <material-select-searchbox
-                [label]="msg.search()"
-                [filterable]="selectionOptions">
+<material-dropdown-select [class.full-width]="fullWidth"
+                          [disabled]="disabled || selectionOptions == null"
+                          [buttonText]="buttonText"
+                          [popupMatchInputWidth]="false"
+                          [(visible)]="visible"
+                          id="select">
+    <div *ngIf="showSearch"
+         header>
+        <material-select-searchbox [label]="msg.search()"
+                                   [filterable]="selectionOptions">
         </material-select-searchbox>
     </div>
-    <material-select-dropdown-item
-            *ngFor="let option of selectionOptions.optionsList"
-            class="text-left"
-            (click)="onToggle(option.id, !selectedIds.contains(option.id))">
-        <material-checkbox
-                label="{{option.toString()}}"
-                [checked]="selectedIds.contains(option.id)"
-                (click)="onToggle(option.id, !selectedIds.contains(option.id)); $event.stopPropagation();">
+    <material-select-dropdown-item *ngFor="let option of selectionOptions.optionsList"
+                                   class="text-left"
+                                   (click)="onToggle(option.id, !selectedIds.contains(option.id))">
+        <material-checkbox label="{{option.toString()}}"
+                           [checked]="selectedIds.contains(option.id)"
+                           (click)="onToggle(option.id, !selectedIds.contains(option.id)); $event.stopPropagation();">
         </material-checkbox>
     </material-select-dropdown-item>
 </material-dropdown-select>
 
-<material-chips *ngIf="allowReorder" class="selectedValues">
-    <reorder-list *ngIf="selectionOptions.isNotEmpty" (reorder)="onReorder($event)" class="selected-values">
-        <material-chip *ngFor="let id of selectedIds" (remove)="onToggle(id, false)" reorderItem>
-            {{getModel(id)?.toString()}}
-        </material-chip>
-    </reorder-list>
+<material-chips *ngIf="allowReorder"
+                class="selectedValues">    
+    <material-chip *ngFor="let id of selectedIds"
+                    (remove)="onToggle(id, false)"
+                    reorderItem>
+        {{getModel(id)?.toString()}}
+    </material-chip>    
 </material-chips>
-<material-chips *ngIf="!allowReorder" class="selectedValues">
-    <material-chip *ngFor="let id of selectedIds" (remove)="onToggle(id, false)">
+<material-chips *ngIf="!allowReorder"
+                class="selectedValues">
+    <material-chip *ngFor="let id of selectedIds"
+                   (remove)="onToggle(id, false)">
         {{getModel(id)?.toString()}}
     </material-chip>
 </material-chips>
-<div *ngIf="!selectionOptions.isNotEmpty" class="selectedValues">{{nullSelectionButtonText}}</div>
+<div *ngIf="!selectionOptions.isNotEmpty"
+     class="selectedValues">{{nullSelectionButtonText}}</div>
