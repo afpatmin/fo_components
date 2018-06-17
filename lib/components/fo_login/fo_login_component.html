@@ -69,7 +69,7 @@
              *ngIf="state == msg.reset_password()">
             <p>{{msg.reset_password_description()}}</p>
             <material-input [disabled]="client.loading"
-                            [label]="token"
+                            [label]="msg.token()"
                             floatingLabel
                             [(ngModel)]="token">
             </material-input>
