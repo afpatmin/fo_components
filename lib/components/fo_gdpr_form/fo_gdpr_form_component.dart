@@ -5,6 +5,7 @@ import 'package:angular_forms/angular_forms.dart';
 import 'package:fo_components/fo_components.dart';
 import 'package:fo_model/fo_model.dart';
 import '../../services/fo_messages_service.dart';
+import 'package:intl/intl.dart';
 
 @Component(
     selector: 'fo-gdpr-form',
