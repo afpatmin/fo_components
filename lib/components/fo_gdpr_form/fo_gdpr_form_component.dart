@@ -69,7 +69,7 @@ class FoGdprFormComponent implements OnDestroy {
     sent = true;
   }
 
-  String firstname() => Intl.message('firstname');
+  final String firstname = Intl.message('firstname', name: 'firstname');
 
   final ControlGroup form;
 
