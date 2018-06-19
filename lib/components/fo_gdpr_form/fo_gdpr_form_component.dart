@@ -4,8 +4,8 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:fo_components/fo_components.dart';
 import 'package:fo_model/fo_model.dart';
-import '../../services/fo_messages_service.dart';
 import 'package:intl/intl.dart';
+import '../../services/fo_messages_service.dart';
 
 @Component(
     selector: 'fo-gdpr-form',
@@ -69,7 +69,7 @@ class FoGdprFormComponent implements OnDestroy {
     sent = true;
   }
 
-  String get firstname => Intl.message('firstname');
+  String firstname() => Intl.message('firstname');
 
   final ControlGroup form;
 
