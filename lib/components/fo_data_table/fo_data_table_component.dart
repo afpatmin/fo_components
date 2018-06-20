@@ -74,8 +74,7 @@ class FoDataTableComponent
     onSelectedRowsController.close();
     _onFilterController.close();
     _onSortController.close();
-    _onBatchOperationController.close();
-    _onWindowResizeListener.cancel();
+    _onBatchOperationController.close();    
   }
 
   dynamic getCell(Object id, String column) =>
@@ -337,7 +336,6 @@ class FoDataTableComponent
   bool infoModalOpen = false;
   bool _allChecked;
 
-  StreamSubscription _onWindowResizeListener;
   final dom.Element host;
   final int liveSearchThreshold = 500;
   final StreamController<String> onAddController = new StreamController();
