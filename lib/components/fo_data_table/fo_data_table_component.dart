@@ -34,7 +34,7 @@ typedef String ErrorFn(Object model);
     pipes: const [NamePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDataTableComponent
-    implements OnChanges, OnInit, AfterViewInit, OnDestroy {
+    implements OnChanges, OnInit, OnDestroy {
   FoDataTableComponent(this.host, this._changeDetector, this.msg);
 
   @override
@@ -43,15 +43,7 @@ class FoDataTableComponent
         .firstWhere((r) => r.id == rows, orElse: () => rowOptions.first)
         .id;
     firstIndex = 0;
-    lastIndex = _selectedRowOption.id;
-
-    _onWindowResizeListener =
-        dom.window.onResize.listen((_) => _evaluateLayout());
-  }
-
-  @override
-  void ngAfterViewInit() {
-    _evaluateLayout();
+    lastIndex = _selectedRowOption.id;    
   }
 
   @override
@@ -72,8 +64,6 @@ class FoDataTableComponent
       onSearch();
       setIndices(0);
     }
-
-    _evaluateLayout();
   }
 
   @override
@@ -323,17 +313,6 @@ class FoDataTableComponent
           .toSet();
     else
       selectedRows.clear();
-  }
-
-  void _evaluateLayout() {
-    final dom.DivElement container = host.querySelector('.table-container');
-    final dom.TableElement table = container.querySelector('table');
-
-    table.classes.remove('fixed-layout');
-    if (container.getBoundingClientRect().width <
-        table.getBoundingClientRect().width) {
-      table.classes.add('fixed-layout');
-    }
   }
 
   String get filterLabel => lazyFilter ? msg.filter_enter() : msg.filter();
