@@ -22,7 +22,7 @@
                         </div>
                         <div class="row">
                             <div class="m6 col">
-                                <material-input label="{{firstname}}*"
+                                <material-input label="{{msg.firstname}}*"
                                                 floatingLabel
                                                 ngControl="firstname"
                                                 [(ngModel)]="model.firstname"
@@ -67,7 +67,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <material-input [label]="msg.comment(2)"
+                                <material-input [label]="msg.comments(2)"
                                                 floatingLabel
                                                 ngControl="comments"
                                                 [(ngModel)]="model.comments"
