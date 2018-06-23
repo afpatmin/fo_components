@@ -360,15 +360,14 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
 
     if (!_evaluatedColumnsBuffer[row].containsKey(col)) {
       if (evaluatedColumns.containsKey(col)) {
-        _evaluatedColumnsBuffer[row][col] = evaluatedColumns[col](data[row]);
-        //_changeDetector.markForCheck();
+        _evaluatedColumnsBuffer[row][col] = evaluatedColumns[col](data[row]);        
       } else {
         _evaluatedColumnsBuffer[row][col] = null;
         asyncEvaluatedColumns[col](data[row]).then((v) {
           if (_evaluatedColumnsBuffer?.containsKey(row) == true &&
               _evaluatedColumnsBuffer[row] != null) {
             _evaluatedColumnsBuffer[row][col] = v;
-            //_changeDetector.markForCheck();
+            _changeDetector.detectChanges();
           }
         });
       }
