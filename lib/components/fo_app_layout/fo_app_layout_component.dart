@@ -18,28 +18,9 @@ import '../fo_modal/fo_modal_component.dart';
     directives: [coreDirectives, FoModalComponent, materialDirectives],
     pipes: [NamePipe])
 class FoAppLayoutComponent implements OnDestroy {
-  FoAppLayoutComponent(this.router, this._domSanitizationService) {
-    router.onRouteActivated.listen((state) {
-      _activeItem = null;
-
-      final path = state.path.replaceAll('/', '').replaceAll('#', '');
-      if (path == null || path.isEmpty) return;
-
-      for (final category in categories) {
-        _activeItem =
-            category.items.firstWhere((i) => i.url == path, orElse: () => null);
-
-        if (_activeItem == null) {
-          instructionsUrl = null;
-        } else {
-          instructionsUrl = _activeItem?.instructionsUrl == null
-              ? null
-              : _domSanitizationService
-                  .bypassSecurityTrustResourceUrl(_activeItem.instructionsUrl);
-          break;
-        }
-      }
-    });
+  FoAppLayoutComponent(
+      this.router, this._domSanitizationService) {
+    router.onRouteActivated.listen(_onRouteActivated);
   }
 
   @override
@@ -64,6 +45,28 @@ class FoAppLayoutComponent implements OnDestroy {
 
   String calcIFrameHeight() =>
       ((html.window.innerWidth * 0.6) * 0.615).round().toString();
+
+  void _onRouteActivated(RouterState state) {
+    _activeItem = null;
+
+    final path = state.path.replaceAll('/', '').replaceAll('#', '');
+    if (path == null || path.isEmpty) return;
+
+    for (final category in categories) {
+      _activeItem =
+          category.items.firstWhere((i) => i.url == path, orElse: () => null);
+
+      if (_activeItem == null) {
+        instructionsUrl = null;
+      } else {
+        instructionsUrl = _activeItem?.instructionsUrl == null
+            ? null
+            : _domSanitizationService
+                .bypassSecurityTrustResourceUrl(_activeItem.instructionsUrl);
+        break;
+      }
+    }  
+  }
 
   String get sidebarWidth => (expanded) ? '${width}px' : '${miniWidth}px';
 
