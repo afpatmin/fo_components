@@ -33,8 +33,7 @@ typedef String ErrorFn(Object model);
     ],
     pipes: const [NamePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoDataTableComponent
-    implements OnChanges, OnInit, OnDestroy {
+class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
   FoDataTableComponent(this.host, this._changeDetector, this.msg);
 
   @override
@@ -43,7 +42,7 @@ class FoDataTableComponent
         .firstWhere((r) => r.id == rows, orElse: () => rowOptions.first)
         .id;
     firstIndex = 0;
-    lastIndex = _selectedRowOption.id;    
+    lastIndex = _selectedRowOption.id;
   }
 
   @override
@@ -74,7 +73,7 @@ class FoDataTableComponent
     onSelectedRowsController.close();
     _onFilterController.close();
     _onSortController.close();
-    _onBatchOperationController.close();    
+    _onBatchOperationController.close();
   }
 
   dynamic getCell(Object id, String column) =>
@@ -362,13 +361,14 @@ class FoDataTableComponent
     if (!_evaluatedColumnsBuffer[row].containsKey(col)) {
       if (evaluatedColumns.containsKey(col)) {
         _evaluatedColumnsBuffer[row][col] = evaluatedColumns[col](data[row]);
+        //_changeDetector.markForCheck();
       } else {
         _evaluatedColumnsBuffer[row][col] = null;
         asyncEvaluatedColumns[col](data[row]).then((v) {
           if (_evaluatedColumnsBuffer?.containsKey(row) == true &&
               _evaluatedColumnsBuffer[row] != null) {
             _evaluatedColumnsBuffer[row][col] = v;
-            _changeDetector.markForCheck();
+            //_changeDetector.markForCheck();
           }
         });
       }
