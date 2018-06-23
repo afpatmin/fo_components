@@ -137,7 +137,7 @@ class FoDataTableComponent
     setIndices(0);
   }
 
-  void onSort(Object column) {
+  void onSort(String column) {
     if (!disabled && column != null) {
       sortColumn = column;
       sortOrder = (sortOrder == 'ASC') ? 'DESC' : 'ASC';
@@ -394,7 +394,7 @@ class FoDataTableComponent
   Iterable<Object> mediumHiddenCol = [];
 
   @Input()
-  Object sortColumn = '';
+  String sortColumn = '';
 
   @Input()
   String sortOrder = 'DESC';
