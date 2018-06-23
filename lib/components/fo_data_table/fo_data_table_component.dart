@@ -34,7 +34,7 @@ typedef String ErrorFn(Object model);
     pipes: const [NamePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
-  FoDataTableComponent(this.host, this.msg);
+  FoDataTableComponent(this.host, this._changeDetector, this.msg);
 
   @override
   void ngOnInit() {
@@ -347,7 +347,8 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
       new StreamController();
   final StreamController<BatchOperationEvent> _onBatchOperationController =
       new StreamController();
-  
+
+  final ChangeDetectorRef _changeDetector;
 
   Iterable<String> allEvaluatedColumns = [];
   final Map<Object, Map<String, Object>> _evaluatedColumnsBuffer = {};
@@ -359,13 +360,15 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
 
     if (!_evaluatedColumnsBuffer[row].containsKey(col)) {
       if (evaluatedColumns.containsKey(col)) {
-        _evaluatedColumnsBuffer[row][col] = evaluatedColumns[col](data[row]);        
+        _evaluatedColumnsBuffer[row][col] = evaluatedColumns[col](data[row]);
+        //_changeDetector.markForCheck();
       } else {
         _evaluatedColumnsBuffer[row][col] = null;
         asyncEvaluatedColumns[col](data[row]).then((v) {
           if (_evaluatedColumnsBuffer?.containsKey(row) == true &&
               _evaluatedColumnsBuffer[row] != null) {
-            _evaluatedColumnsBuffer[row][col] = v;            
+            _evaluatedColumnsBuffer[row][col] = v;
+            //_changeDetector.markForCheck();
           }
         });
       }
