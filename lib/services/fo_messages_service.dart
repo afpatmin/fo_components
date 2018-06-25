@@ -9,7 +9,7 @@ class FoMessagesService {
 
   String cancel() => Intl.message('cancel', name: 'cancel');
 
-  String comments([int howMany = 1]) =>
+  String comments(int howMany) =>
       Intl.plural(howMany, one: 'comment', other: 'comments', name: 'comments');
 
   String confirm() => Intl.message('confirm', name: 'confirm');
@@ -85,7 +85,7 @@ class FoMessagesService {
 
   String invalid_file() => Intl.message('invalid file', name: 'invalid_file');
 
-  String issue([int howMany = 1]) =>
+  String issue(int howMany) =>
       Intl.plural(howMany, one: 'issue', other: 'issues', name: 'issue');
 
   String lastname() => Intl.message('lastname', name: 'lastname');
@@ -100,7 +100,7 @@ class FoMessagesService {
 
   String ok() => Intl.message('ok', name: 'ok');
 
-  String page([int howMany = 1]) =>
+  String page(int howMany) =>
       Intl.plural(howMany, one: 'page', other: 'pages', name: 'page');
 
   String password() => Intl.message('password', name: 'password');
@@ -116,7 +116,7 @@ class FoMessagesService {
       name: 'reset_password_description',
       desc: 'Displayed to the user have he has requested a new password');
 
-  String row([int howMany = 1]) =>
+  String row(int howMany) =>
       Intl.plural(howMany, one: 'row', other: 'rows', name: 'row');
 
   String save() => Intl.message('save', name: 'save');

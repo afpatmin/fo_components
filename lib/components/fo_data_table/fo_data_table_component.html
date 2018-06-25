@@ -183,7 +183,7 @@
             <div id="select-step">
                 <div class="float-right"
                      id="rows-per-page">
-                    <span>{{msg.row(2)}}/{{msg.page()}}:&nbsp;</span>
+                    <span>{{msg.row(2)}}/{{msg.page(1)}}:&nbsp;</span>
                     <fo-select class="display-inline-block"
                                [disabled]="disabled"
                                [options]="rowOptions"
@@ -198,7 +198,7 @@
                                    icon="navigate_before"
                                    (click)="step(-1)">
                     </material-icon>
-                    {{msg.page()}} {{currentPage}}/{{totalPages}} ({{filteredKeys.length}} {{msg.row(2)}})
+                    {{msg.page(1)}} {{currentPage}}/{{totalPages}} ({{filteredKeys.length}} {{msg.row(2)}})
                     <material-icon class="clickable vertical-align-middle"
                                    [class.disabled]="lastIndex >= filteredKeys.length"
                                    icon="navigate_next"
