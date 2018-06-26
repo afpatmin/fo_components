@@ -1,0 +1,74 @@
+@import 'package:angular_components/css/material/material';
+@import 'package:angular_components/material_button/mixins';
+@import 'package:grid/grid';
+.arrow {
+    position: absolute;
+    top: auto;
+    bottom: 50%;
+    -webkit-transform: translateY(50%);
+    -moz-transform: translateY(50%);
+    -ms-transform: translateY(50%);
+    -o-transform: translateY(50%);
+    transform: translateY(50%);
+    -webkit-transition: opacity 200ms;
+    -moz-transition: opacity 200ms;
+    -ms-transition: opacity 200ms;
+    -o-transition: opacity 200ms;
+    transition: opacity 200ms;
+    material-button {
+        @include button-background-color('[raised]', #fff);
+        background-color: #fff;
+        ::ng-deep material-icon {
+            i {
+                font-size: 3em;
+            }
+        }
+    }
+}
+
+.arrow.faded {
+    visibility: hidden;
+}
+
+#arrow-left {
+    left: 0.5em;
+    right: auto;
+}
+
+#arrow-right {
+    left: auto;
+    right: 0.5em;
+}
+
+#slide-container {
+    position: relative;
+    overflow: hidden;
+    #slide-transformer {
+        -webkit-transition: -webkit-transform 700ms;
+        -moz-transition: -moz-transform 300ms;
+        -ms-transition: -ms-transform 300ms;
+        -o-transition: -o-transform 300ms;
+        transition: transform 700ms;
+        white-space: nowrap; //font-size: 0;
+    }
+}
+
+@media screen and (max-width: $medium-width-threshold) {
+    .arrow {
+        top: -16px;
+        bottom: auto;
+        material-button {
+            ::ng-deep material-icon {
+                i {
+                    font-size: 1.3em;
+                }
+            }
+        }
+    }
+    #arrow-left {
+        left: 2px;
+    }
+    #arrow-right {
+        right: 2px;
+    }
+}

@@ -6,6 +6,8 @@ library fo_components;
 import 'services/fo_messages_service.dart';
 
 export 'components/fo_app_layout/fo_app_layout_component.dart';
+export 'components/fo_carousel/fo_carousel_component.dart';
+export 'components/fo_carousel/fo_carousel_slide_component.dart';
 export 'components/fo_data_table/fo_data_table_component.dart';
 export 'components/fo_file_upload/fo_file_upload_component.dart';
 export 'components/fo_gdpr_form/fo_gdpr_form_component.dart';
