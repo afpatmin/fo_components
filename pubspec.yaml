@@ -17,4 +17,4 @@ dependencies:
     git: https://github.com/afpatmin/grid.git
   intl: ^0.15.6  
   vi_auth_client: ^0.1.2
-  sass_builder: ^2.0.2
+  sass_builder: ^2.0.3
