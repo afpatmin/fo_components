@@ -1,0 +1,20 @@
+@import 'package:angular_components/css/material/material';
+@import 'package:angular_components/material_button/mixins';
+
+@mixin colorize($selector, $color) {
+    $raised: $selector + '[raised]';
+    @include button-background-color($raised, $color);
+    @include button-color($raised, $mat-white);
+  
+    $not-raised: $selector + ':not([raised])';
+    @include button-color($not-raised, $color);
+  }
+
+:host {
+    material-button {
+        float: right;
+    }
+    @include colorize("material-button.selected", $mat-blue);
+    
+    
+} 

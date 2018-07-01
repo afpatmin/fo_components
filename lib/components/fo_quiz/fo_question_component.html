@@ -1,0 +1,36 @@
+<div class="flex-container">
+    <div class="flex-left"
+         [class.transition]="transition"
+         [class.is-hidden]="leftHidden">
+        <p class="question margin-bottom-none">{{model.label}}</p>
+    </div>
+    <div class="flex-right"
+         [class.transition]="transition"
+         [class.is-hidden]="rightHidden">
+        <div class="answer">
+            <fo-option *ngFor="let option of model.options.reversed"
+                       [model]="option"
+                       [disabled]="disabled"
+                       (trigger)="onOptionTrigger($event)"></fo-option>
+        </div>
+    </div>
+</div>
+
+<fo-quiz *ngIf="currentChildQuiz != null"
+         [disabled]="disabled"
+         [model]="currentChildQuiz"
+         (done)="onChildQuizDone($event)">
+</fo-quiz>
+
+<div class="row"
+     *ngIf="model.multiSelect && currentChildQuiz == null">
+    <div class="col text-center">
+        <material-button raised
+                         clear-size
+                         [disabled]="selectedOptions.isEmpty"
+                         (trigger)="onNextTrigger()">
+            <material-icon icon="keyboard_arrow_down">
+            </material-icon>
+        </material-button>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+//@import 'package:angular_components/material_input/mixins';
+//@include material-input-theme(#555);
+:host {
+    display: block;
+    div.flex-container {
+        padding: 0 2rem;
+        display: flex;
+        flex-direction: column;
+        div.transition {
+            transition: all 500ms ease;
+            -webkit-transition: all 500ms ease;
+        }
+        div.flex-left {
+            align-self: flex-start;
+            p.question {
+                background-color: #888;
+                color: white;
+                padding: 1rem;
+                border-radius: 1rem;
+                -webkit-border-radius: 1rem;
+            }
+            transform: none;
+            opacity: 1;
+        }
+        div.flex-left.is-hidden {
+            transform: translateX(-2rem);
+            opacity: 0;
+        }
+        div.flex-right {
+            align-self: flex-end;
+            width: 100%;
+            opacity: 1;
+            div.answer {                
+                padding: 1rem;
+            }
+        }
+        div.flex-right.is-hidden {
+            transform: translateX(2rem);
+            opacity: 0;
+        }
+    }
+}

@@ -19,9 +19,11 @@ export 'components/fo_multi_input/fo_multi_input_component.dart';
 export 'components/fo_multi_select/fo_multi_select_component.dart';
 export 'components/fo_notification/fo_notification_component.dart';
 export 'components/fo_number_input/fo_number_input_component.dart';
+export 'components/fo_quiz/fo_quiz_component.dart';
 export 'components/fo_select/fo_select_component.dart';
 export 'components/fo_time_input/fo_time_input_component.dart';
 export 'components/fo_youtube_player/fo_youtube_player_component.dart';
+export 'models/fo_quiz_model.dart';
 export 'pipes/fo_name_pipe.dart';
 export 'validators/fo_validators.dart';
 

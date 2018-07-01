@@ -2,6 +2,7 @@ analyzer:
   strong-mode: true
   exclude:
     - .dart_tool
+    - lib/models/*.g.dart
   plugins:
     angular:
       enabled: true
