@@ -30,6 +30,9 @@ class FoOptionComponent implements OnDestroy {
   @Input()
   bool disabled = false;
 
+  @Input()
+  String buttonColor;
+
   @Output('trigger')
   Stream<FoOptionModel> get onTrigger => _triggerController.stream;
 }

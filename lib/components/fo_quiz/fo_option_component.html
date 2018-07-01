@@ -1,5 +1,6 @@
 <material-button raised
-                 [class.selected]="model.selected"
+                 [class.unSelected]="!model.selected"
+                 [style.background-color]="buttonColor"
                  (trigger)="onSelect()"
                  [disabled]="disabled">
     {{model.label}}

@@ -105,6 +105,9 @@ void onChildQuizDone(FoQuizDoneEvent event) {
   @Input()
   bool disabled = false;
 
+  @Input()
+  String buttonColor;
+
   @Output('done')
   Stream<FoQuestionModel> get onDone => doneController.stream;
 }

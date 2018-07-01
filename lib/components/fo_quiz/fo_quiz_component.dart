@@ -87,6 +87,9 @@ class FoQuizComponent implements OnInit, OnDestroy {
   @Input()
   bool disabled = false;
 
+  @Input()
+  String buttonColor = '#666';
+
   @Output('done')
   Stream<FoQuizDoneEvent> get onDone => _doneController.stream;
 }

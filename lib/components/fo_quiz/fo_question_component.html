@@ -11,6 +11,7 @@
             <fo-option *ngFor="let option of model.options.reversed"
                        [model]="option"
                        [disabled]="disabled"
+                       [buttonColor]="buttonColor"
                        (trigger)="onOptionTrigger($event)"></fo-option>
         </div>
     </div>
