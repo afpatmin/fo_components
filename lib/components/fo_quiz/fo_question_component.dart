@@ -74,11 +74,11 @@ class FoQuestionComponent implements OnChanges, OnDestroy {
     }
   }
 
-  void onChildQuizDone(FoQuizModel quiz) {
+void onChildQuizDone(FoQuizDoneEvent event) {
     /// See if there is another selected option with a child quiz after this one
     /// If there is one, show that, otherwise emit done
     final index = model.options
-        .indexOf(model.options.firstWhere((option) => option.child == quiz));
+        .indexOf(model.options.firstWhere((option) => option.child == currentChildQuiz));
     final nextOptionWithChildQuiz = model.options.skip(index + 1).firstWhere(
         (option) => option.child != null && option.selected,
         orElse: () => null);
