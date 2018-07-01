@@ -23,11 +23,10 @@
          (done)="onChildQuizDone($event)">
 </fo-quiz>
 
-<div class="row margin-top-small"
+<div class="row margin-top-medium"
      *ngIf="model.multiSelect == true && currentChildQuiz == null">
     <div class="col text-center">
-        <material-button raised
-                         clear-size
+        <material-button clear-size
                          [disabled]="selectedOptions.isEmpty"
                          (trigger)="onNextTrigger()">
             <material-icon icon="keyboard_arrow_down">
