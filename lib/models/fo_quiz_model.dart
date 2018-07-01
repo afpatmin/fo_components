@@ -51,7 +51,7 @@ class FoOptionModel extends Object with _$FoOptionModelSerializerMixin {
 
   @JsonKey(nullable: false)
   @override
-  final int score;
+  int score;
 
   @JsonKey(nullable: false)
   @override
