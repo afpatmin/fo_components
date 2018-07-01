@@ -30,7 +30,7 @@ class FoQuestionModel extends Object with _$FoQuestionModelSerializerMixin {
 
   @JsonKey(nullable: false)
   @override
-  final bool multiSelect;
+  bool multiSelect;
 }
 
 @JsonSerializable()
