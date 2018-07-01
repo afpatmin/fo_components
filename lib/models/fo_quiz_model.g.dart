@@ -7,18 +7,14 @@ part of 'fo_quiz_model.dart';
 // **************************************************************************
 
 FoQuizModel _$FoQuizModelFromJson(Map<String, dynamic> json) {
-  return new FoQuizModel(
-      json['name'] as String,
-      (json['questions'] as List)
-          .map((e) => new FoQuestionModel.fromJson(e as Map<String, dynamic>))
-          .toList());
+  return new FoQuizModel((json['questions'] as List)
+      .map((e) => new FoQuestionModel.fromJson(e as Map<String, dynamic>))
+      .toList());
 }
 
 abstract class _$FoQuizModelSerializerMixin {
-  String get name;
   List<FoQuestionModel> get questions;
-  Map<String, dynamic> toJson() =>
-      <String, dynamic>{'name': name, 'questions': questions};
+  Map<String, dynamic> toJson() => <String, dynamic>{'questions': questions};
 }
 
 FoQuestionModel _$FoQuestionModelFromJson(Map<String, dynamic> json) {
@@ -44,7 +40,6 @@ abstract class _$FoQuestionModelSerializerMixin {
 FoOptionModel _$FoOptionModelFromJson(Map<String, dynamic> json) {
   return new FoOptionModel(json['value'] as String, json['label'] as String,
       selected: json['selected'] as bool,
-      valid: json['valid'] as bool,
       score: json['score'] as int,
       child: json['child'] == null
           ? null
@@ -54,14 +49,12 @@ FoOptionModel _$FoOptionModelFromJson(Map<String, dynamic> json) {
 abstract class _$FoOptionModelSerializerMixin {
   String get value;
   String get label;
-  bool get valid;
   int get score;
   bool get selected;
   FoQuizModel get child;
   Map<String, dynamic> toJson() => <String, dynamic>{
         'value': value,
         'label': label,
-        'valid': valid,
         'score': score,
         'selected': selected,
         'child': child

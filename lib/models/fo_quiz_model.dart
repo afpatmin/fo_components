@@ -3,14 +3,10 @@ part 'fo_quiz_model.g.dart';
 
 @JsonSerializable()
 class FoQuizModel extends Object with _$FoQuizModelSerializerMixin {
-  FoQuizModel(this.name, this.questions);
+  FoQuizModel(this.questions);
 
   factory FoQuizModel.fromJson(Map<String, dynamic> json) =>
       _$FoQuizModelFromJson(json);
-
-  @JsonKey(nullable: false)
-  @override
-  final String name;
 
   @JsonKey(nullable: false)
   @override
@@ -40,7 +36,7 @@ class FoQuestionModel extends Object with _$FoQuestionModelSerializerMixin {
 @JsonSerializable()
 class FoOptionModel extends Object with _$FoOptionModelSerializerMixin {
   FoOptionModel(this.value, this.label,
-      {this.selected = false, this.valid = false, this.score = 0, this.child});
+      {this.selected = false, this.score = 0, this.child});
 
   factory FoOptionModel.fromJson(Map<String, dynamic> json) =>
       _$FoOptionModelFromJson(json);
@@ -52,10 +48,6 @@ class FoOptionModel extends Object with _$FoOptionModelSerializerMixin {
   @JsonKey(nullable: false)
   @override
   final String label;
-
-  @JsonKey(nullable: false)
-  @override
-  final bool valid;
 
   @JsonKey(nullable: false)
   @override
