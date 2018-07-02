@@ -44,11 +44,11 @@
     position: relative;
     overflow: hidden;
     #slide-transformer {
-        -webkit-transition: -webkit-transform 700ms;
-        -moz-transition: -moz-transform 300ms;
-        -ms-transition: -ms-transform 300ms;
-        -o-transition: -o-transform 300ms;
-        transition: transform 700ms;
+        -webkit-transition: -webkit-transform 500ms;
+        -moz-transition: -moz-transform 500ms;
+        -ms-transition: -ms-transform 500ms;
+        -o-transition: -o-transform 500ms;
+        transition: transform 500ms;
         white-space: nowrap; //font-size: 0;
     }
 }
