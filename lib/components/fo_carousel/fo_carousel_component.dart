@@ -11,7 +11,8 @@ import 'fo_carousel_slide_component.dart';
     selector: 'fo-carousel',
     styleUrls: const ['fo_carousel_component.css'],
     templateUrl: 'fo_carousel_component.html',
-    directives: const [MaterialButtonComponent, MaterialIconComponent, FoCarouselSlideComponent]    
+    directives: const [MaterialButtonComponent, MaterialIconComponent, FoCarouselSlideComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush
 )
 class FoCarouselComponent implements OnDestroy
 {
@@ -28,7 +29,7 @@ class FoCarouselComponent implements OnDestroy
     _onStepController.add(step);
   }
 
-  String get transform => 'translateX(${-step * 100}%)';
+  String get transform => 'translate3d(${-step * 100}%, 0, 0)';
 
   final StreamController<int> _onStepController = new StreamController();
 
