@@ -1,0 +1,12 @@
+<div id="tabStrip">
+    <div *ngFor="let tab of tabs"
+         class="tabButton"
+         [style.color]="color(tab)"
+         [style.background-color]="backgroundColor(tab)"
+         (click)="onTabClick(tab)">
+        {{tab.label}}
+    </div>
+</div>
+
+<ng-content>
+</ng-content>
