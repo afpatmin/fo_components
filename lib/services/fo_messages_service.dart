@@ -112,7 +112,7 @@ class FoMessagesService {
   String reset_password() => Intl.message('reset password', name: 'reset_password');
 
   String reset_password_description() => Intl.message(
-      'We have sent an ${email()} with a reset key to you. Paste it below to update your password.',
+      'We have sent an email with a reset key to you. Paste it below to update your password.',
       name: 'reset_password_description',
       desc: 'Displayed to the user have he has requested a new password');
 
