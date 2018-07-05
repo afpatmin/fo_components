@@ -10,7 +10,7 @@ class FoMessagesService {
   String cancel() => Intl.message('cancel', name: 'cancel');
 
   String comments(int howMany) =>
-      Intl.plural(howMany, one: 'comment', other: 'comments', name: 'comments');
+      Intl.plural(howMany, one: 'comment', other: 'comments', args: [howMany], name: 'comments');
 
   String confirm() => Intl.message('confirm', name: 'confirm');
 
@@ -86,7 +86,7 @@ class FoMessagesService {
   String invalid_file() => Intl.message('invalid file', name: 'invalid_file');
 
   String issue(int howMany) =>
-      Intl.plural(howMany, one: 'issue', other: 'issues', name: 'issue');
+      Intl.plural(howMany, one: 'issue', other: 'issues', args: [howMany], name: 'issue');
 
   String lastname() => Intl.message('lastname', name: 'lastname');
 
@@ -101,7 +101,7 @@ class FoMessagesService {
   String ok() => Intl.message('ok', name: 'ok');
 
   String page(int howMany) =>
-      Intl.plural(howMany, one: 'page', other: 'pages', name: 'page');
+      Intl.plural(howMany, one: 'page', other: 'pages', args: [howMany], name: 'page');
 
   String password() => Intl.message('password', name: 'password');
 
@@ -117,7 +117,7 @@ class FoMessagesService {
       desc: 'Displayed to the user have he has requested a new password');
 
   String row(int howMany) =>
-      Intl.plural(howMany, one: 'row', other: 'rows', name: 'row');
+      Intl.plural(howMany, one: 'row', other: 'rows', args: [howMany], name: 'row');
 
   String save() => Intl.message('save', name: 'save');
 
