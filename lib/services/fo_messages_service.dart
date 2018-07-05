@@ -19,7 +19,7 @@ class FoMessagesService {
 
   String description() => Intl.message('description', name: 'description');
 
-  String download_csv() => Intl.message('download .CSV file', name: 'donwload_csv');
+  String download_csv() => Intl.message('download .CSV file', name: 'download_csv');
 
   String email() => Intl.message('email', name: 'email');
 
