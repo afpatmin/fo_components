@@ -167,7 +167,15 @@ class FoMessagesService {
 
   String send() => Intl.message('send', name: 'FoMessagesService_send');
 
+  String ssn() => Intl.message('social number', name: 'FoMessagesService_ssn');
+
   String token() => Intl.message('token', name: 'FoMessagesService_token');
+
+  String year(int howMany) => Intl.plural(howMany, one: 'year', other: 'years', args: [howMany], name: 'FoMessagesService_year');
+
+  String month(int howMany) => Intl.plural(howMany, one: 'month', other: 'months', args: [howMany], name: 'FoMessagesService_month');
+
+  String day(int howMany) => Intl.plural(howMany, one: 'day', other: 'days', args: [howMany], name: 'FoMessagesService_day');
 
   String username() =>
       Intl.message('username', name: 'FoMessagesService_username');

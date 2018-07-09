@@ -1,0 +1,37 @@
+<label>
+    {{msg.ssn()}}
+    <div class="row">
+        <div class="l1 m2 s4 col">
+            <fo-select [label]="msg.year(1)"
+                       [options]="yearOptions"
+                       [sort]="false"
+                       [selectedId]="selectedYear"
+                       (selectedIdChange)="onBirthYearChange($event)">
+            </fo-select>
+        </div>
+        <div class="l1 m2 s4 col">
+            <fo-select [label]="msg.month(1)"
+                       [options]="monthOptions"
+                       [selectedId]="selectedMonth"
+                       (selectedIdChange)="onBirthMonthChange($event)">
+            </fo-select>
+        </div>
+        <div class="l1 m2 s4 col">
+            <fo-select [label]="msg.day(1)"
+                       [options]="dayOptions"
+                       [selectedId]="selectedDay"
+                       (selectedIdChange)="onBirthDayChange($event)">
+            </fo-select>
+        </div>
+
+        <div class="l1 m2 col">
+            <material-input label="xxxx"
+                            class="margin-top-medium"
+                            [disabled]="selectedYear == null || selectedMonth == null || selectedDay == null"                            
+                            [ngFormControl]="digitsControl"                                                    
+                            [ngModel]="socialNumberDigits"
+                            (ngModelChange)="onSocialNumberDigitsChange($event)">
+            </material-input>
+        </div>
+    </div>
+</label>
