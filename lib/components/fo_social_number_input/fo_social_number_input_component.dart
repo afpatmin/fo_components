@@ -5,6 +5,7 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:fo_model/fo_model.dart';
 import '../../services/fo_messages_service.dart';
+import '../../validators/fo_validators.dart';
 import '../fo_select/fo_select_component.dart';
 
 @Component(
@@ -22,8 +23,8 @@ class FoSocialNumberInputComponent implements OnInit, OnDestroy {
   void ngOnInit() {
     digitsControl = (required)
         ? new Control('',
-            Validators.compose([Validators.required, Validators.maxLength(4)]))
-        : new Control('', Validators.compose([Validators.maxLength(4)]));
+            Validators.compose([Validators.required, Validators.maxLength(4), FoValidators.numeric]))
+        : new Control('', Validators.compose([Validators.maxLength(4), FoValidators.numeric]));
   }
 
   @override
