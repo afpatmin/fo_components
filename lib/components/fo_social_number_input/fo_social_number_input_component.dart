@@ -22,9 +22,17 @@ class FoSocialNumberInputComponent implements OnInit, OnDestroy {
   @override
   void ngOnInit() {
     digitsControl = (required)
-        ? new Control('',
-            Validators.compose([Validators.required, Validators.maxLength(4), FoValidators.numeric]))
-        : new Control('', Validators.compose([Validators.maxLength(4), FoValidators.numeric]));
+        ? new Control(
+            '',
+            Validators.compose([
+              Validators.required,
+              Validators.maxLength(4),
+              FoValidators.numeric
+            ]))
+        : new Control(
+            '',
+            Validators.compose(
+                [Validators.maxLength(4), FoValidators.numeric]));
   }
 
   @override
@@ -35,53 +43,44 @@ class FoSocialNumberInputComponent implements OnInit, OnDestroy {
   void onBirthYearChange(String year) {
     selectedYear = year;
     if (selectedDay != null && selectedMonth != null) {
-      final birthdate = new DateTime(int.parse(selectedYear),
-          int.parse(selectedMonth), int.parse(selectedDay));
-
-      _value = socialNumberDigits?.length == 4
-          ? '${ssnFormat.format(birthdate)}$socialNumberDigits'
-          : '${ssnFormat.format(birthdate)}0000';
-
-      _socialNumberOutputController.add(_value);
+      _evalValue();
     }
   }
 
   void onBirthMonthChange(String month) {
     selectedMonth = month;
     if (selectedDay != null && selectedYear != null) {
-      final birthdate = new DateTime(int.parse(selectedYear),
-          int.parse(selectedMonth), int.parse(selectedDay));
-      _value = socialNumberDigits?.length == 4
-          ? '${ssnFormat.format(birthdate)}$socialNumberDigits'
-          : '${ssnFormat.format(birthdate)}0000';
-
-      _socialNumberOutputController.add(_value);
+      _evalValue();
     }
   }
 
   void onBirthDayChange(String day) {
     selectedDay = day;
     if (selectedYear != null && selectedMonth != null) {
-      final birthdate = new DateTime(int.parse(selectedYear),
-          int.parse(selectedMonth), int.parse(selectedDay));
-
-      _value = socialNumberDigits?.length == 4
-          ? '${ssnFormat.format(birthdate)}$socialNumberDigits'
-          : '${ssnFormat.format(birthdate)}0000';
-
-      _socialNumberOutputController.add(_value);
+      _evalValue();
     }
   }
 
   void onSocialNumberDigitsChange(String digits) {
     socialNumberDigits = digits;
+    if (socialNumberDigits.length > 4) {
+      socialNumberDigits = socialNumberDigits.substring(0, 4);
+    }
+    _evalValue();
+  }
+
+  void _evalValue() {
     final birthdate = new DateTime(int.parse(selectedYear),
         int.parse(selectedMonth), int.parse(selectedDay));
-      _value = socialNumberDigits?.length == 4
-          ? '${ssnFormat.format(birthdate)}$socialNumberDigits'
-          : '${ssnFormat.format(birthdate)}0000';
-
-      _socialNumberOutputController.add(_value);
+    final digiLen = socialNumberDigits.length;
+    final buffer = new StringBuffer();
+    for (var i = 0; i < 4 - digiLen; i++) {
+      buffer.write('x');
+    }
+    trailingText = buffer.toString();
+    _value =
+        '${ssnFormat.format(birthdate)}$socialNumberDigits${buffer.toString()}';
+    _socialNumberOutputController.add(_value);
   }
 
   final FoMessagesService msg;
@@ -107,32 +106,49 @@ class FoSocialNumberInputComponent implements OnInit, OnDestroy {
   String selectedYear;
   String selectedMonth;
   String selectedDay;
-  String socialNumberDigits;
+  String socialNumberDigits = '';
   String _value;
 
+  void selectAll() {
+    Timer.run(digitsInput.selectAll);
+  }
+
   String get value => _value;
+  String trailingText;
 
   @Input()
   set value(String v) {
     _value = v;
-    if (_value?.length == 12) {
+    if (_value.length >= 12) {
+      _value = _value.substring(0, 12);
       selectedYear = _value.substring(0, 4);
       selectedMonth = _value.substring(4, 6);
       selectedDay = _value.substring(6, 8);
-      socialNumberDigits = _value.substring(8, 12);
+      final digitsPart = value.substring(8, 12);
+      final xIndex = digitsPart.indexOf('x');
+      if (xIndex >= 0)
+        socialNumberDigits = digitsPart.substring(0, xIndex);
+      else
+        socialNumberDigits = digitsPart;
     } else {
       selectedYear = null;
       selectedMonth = null;
       selectedDay = null;
-      socialNumberDigits = null;
+      socialNumberDigits = '';
     }
   }
+
+  @Input()
+  bool disabled = false;
 
   @Input()
   bool required = false;
 
   @Output('valueChange')
   Stream<String> get socialNumberChange => _socialNumberOutputController.stream;
+
+  @ViewChild('digitsInput')
+  MaterialInputComponent digitsInput;
 
   Control digitsControl;
 }
