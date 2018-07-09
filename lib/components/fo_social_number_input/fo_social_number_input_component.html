@@ -1,7 +1,7 @@
 <label>
     {{msg.ssn()}}
     <div class="row">
-        <div class="l1 m2 s4 col">
+        <div class="s3 col">
             <fo-select [label]="msg.year(1)"
                        [options]="yearOptions"
                        [sort]="false"
@@ -9,14 +9,14 @@
                        (selectedIdChange)="onBirthYearChange($event)">
             </fo-select>
         </div>
-        <div class="l1 m2 s4 col">
+        <div class="s3 col">
             <fo-select [label]="msg.month(1)"
                        [options]="monthOptions"
                        [selectedId]="selectedMonth"
                        (selectedIdChange)="onBirthMonthChange($event)">
             </fo-select>
         </div>
-        <div class="l1 m2 s4 col">
+        <div class="s3 col">
             <fo-select [label]="msg.day(1)"
                        [options]="dayOptions"
                        [selectedId]="selectedDay"
@@ -24,7 +24,7 @@
             </fo-select>
         </div>
 
-        <div class="l1 m2 col">
+        <div class="s3 col">
             <material-input label="xxxx"
                             class="margin-top-medium"
                             [disabled]="selectedYear == null || selectedMonth == null || selectedDay == null"                            
