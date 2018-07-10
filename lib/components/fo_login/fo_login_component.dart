@@ -13,7 +13,7 @@ import '../fo_modal/fo_modal_component.dart';
     selector: 'fo-login',
     styleUrls: const ['fo_login_component.css'],
     templateUrl: 'fo_login_component.html',
-    directives: const [coreDirectives, materialDirectives, FoModalComponent],
+    directives: const [NgIf, materialInputDirectives, MaterialButtonComponent, FoModalComponent],
     pipes: const [])
 class FoLoginComponent implements OnInit, OnDestroy {
   FoLoginComponent(this.msg) {

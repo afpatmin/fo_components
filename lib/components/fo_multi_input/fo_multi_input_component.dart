@@ -11,7 +11,14 @@ import 'package:angular_forms/angular_forms.dart';
     selector: 'fo-multi-input',
     styleUrls: const ['fo_multi_input_component.css'],
     templateUrl: 'fo_multi_input_component.html',
-    directives: const [coreDirectives, materialDirectives],
+    directives: const [
+      MaterialButtonComponent,
+      MaterialChipComponent,
+      MaterialIconComponent,
+      materialInputDirectives,
+      NgFor,
+      NgIf
+    ],
     pipes: const [])
 class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
   FoMultiInputComponent(@Self() @Optional() this.control) {

@@ -16,9 +16,17 @@ import '../fo_modal/fo_modal_component.dart';
     templateUrl: 'fo_number_input_component.html',
     directives: const [
       coreDirectives,
-      formDirectives,
       FoModalComponent,
-      materialDirectives
+      formDirectives,
+      materialInputDirectives,
+      materialNumberInputDirectives,
+      AutoFocusDirective,
+      MaterialButtonComponent,
+      MaterialIconComponent,
+      MaterialInputComponent,
+      MaterialPopupComponent,
+
+      PopupSourceDirective      
     ],
     providers: const [FORM_PROVIDERS],
     pipes: const [])

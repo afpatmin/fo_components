@@ -10,8 +10,14 @@ import '../../services/fo_messages_service.dart';
 @Component(
     selector: 'fo-file-upload',
     templateUrl: 'fo_file_upload_component.html',
-    styleUrls: const ['fo_file_upload_component.css'],
-    directives: const [coreDirectives, materialDirectives],
+    styleUrls: const [
+      'fo_file_upload_component.css'
+    ],
+    directives: const [
+      NgIf,
+      MaterialButtonComponent,
+      MaterialIconComponent
+    ],
     pipes: const [])
 class FileUploadComponent implements OnDestroy {
   FileUploadComponent(this.msg);

@@ -15,11 +15,18 @@ import '../fo_modal/fo_modal_component.dart';
     selector: 'fo-app-layout',
     styleUrls: ['fo_app_layout_component.css'],
     templateUrl: 'fo_app_layout_component.html',
-    directives: [coreDirectives, FoModalComponent, materialDirectives],
+    directives: [
+      coreDirectives,
+      FoModalComponent,
+      MaterialIconComponent,
+      MaterialListComponent,
+      MaterialListItemComponent,
+      MaterialTooltipDirective,
+      routerDirectives
+    ],
     pipes: [NamePipe])
 class FoAppLayoutComponent implements OnDestroy {
-  FoAppLayoutComponent(
-      this.router, this._domSanitizationService) {
+  FoAppLayoutComponent(this.router, this._domSanitizationService) {
     router.onRouteActivated.listen(_onRouteActivated);
   }
 
@@ -65,7 +72,7 @@ class FoAppLayoutComponent implements OnDestroy {
                 .bypassSecurityTrustResourceUrl(_activeItem.instructionsUrl);
         break;
       }
-    }  
+    }
   }
 
   String get sidebarWidth => (expanded) ? '${width}px' : '${miniWidth}px';

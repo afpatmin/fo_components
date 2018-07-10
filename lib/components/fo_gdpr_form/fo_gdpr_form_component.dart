@@ -13,13 +13,14 @@ import '../../services/fo_messages_service.dart';
       'fo_gdpr_form_component.css'
     ],
     directives: [
-      coreDirectives,
-      formDirectives,
       FoModalComponent,
+      formDirectives,
       FoSelectComponent,
-      materialDirectives
+      MaterialButtonComponent,
+      MaterialCheckboxComponent,
+      materialInputDirectives,
+      NgIf
     ],
-    providers: [],
     pipes: [])
 class FoGdprFormComponent implements OnDestroy {
   FoGdprFormComponent(this.msg)

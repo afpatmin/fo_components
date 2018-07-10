@@ -9,7 +9,13 @@ import 'package:angular_components/angular_components.dart';
     selector: 'fo-modal',
     styleUrls: const ['fo_modal_component.css'],
     templateUrl: 'fo_modal_component.html',
-    directives: const [coreDirectives, materialDirectives],
+    directives: const [
+      coreDirectives,
+      MaterialButtonComponent,
+      MaterialDialogComponent,
+      MaterialIconComponent,
+      ModalComponent,
+    ],
     pipes: const [])
 class FoModalComponent implements OnDestroy {
   FoModalComponent();

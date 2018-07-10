@@ -11,7 +11,15 @@ import '../../services/fo_messages_service.dart';
     selector: 'fo-multi-select',
     styleUrls: const ['fo_multi_select_component.css'],
     templateUrl: 'fo_multi_select_component.html',
-    directives: const [coreDirectives, materialDirectives],
+    directives: const [
+      coreDirectives,
+      MaterialCheckboxComponent,
+      MaterialChipComponent,
+      MaterialChipsComponent,
+      MaterialDropdownSelectComponent,
+      MaterialSelectDropdownItemComponent,
+      MaterialSelectSearchboxComponent
+    ],
     pipes: const [])
 class FoMultiSelectComponent implements OnChanges, OnDestroy {
   FoMultiSelectComponent(this.msg) {

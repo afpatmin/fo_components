@@ -27,9 +27,12 @@ typedef String ErrorFn(Object model);
     directives: const <dynamic>[
       coreDirectives,
       FoModalComponent,
-      FoSelectComponent,
-      materialDirectives,
-      MaterialIconComponent
+      FoSelectComponent,      
+      MaterialButtonComponent,
+      MaterialIconComponent,
+      MaterialCheckboxComponent,
+      materialInputDirectives,
+      MaterialSpinnerComponent,         
     ],
     pipes: const [NamePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)

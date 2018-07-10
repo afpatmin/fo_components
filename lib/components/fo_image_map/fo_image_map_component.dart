@@ -3,7 +3,6 @@
 
 import 'dart:async';
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
 import 'package:fo_model/fo_model.dart';
 import '../fo_multi_select/fo_multi_select_component.dart';
 
@@ -12,8 +11,8 @@ import '../fo_multi_select/fo_multi_select_component.dart';
     styleUrls: const ['fo_image_map_component.css'],
     templateUrl: 'fo_image_map_component.html',
     directives: const [
-      coreDirectives,
-      materialDirectives,
+      NgFor,
+      NgIf,            
       FoMultiSelectComponent
     ],
     pipes: const [])

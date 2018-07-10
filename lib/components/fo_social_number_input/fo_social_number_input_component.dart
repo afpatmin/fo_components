@@ -12,8 +12,11 @@ import '../fo_select/fo_select_component.dart';
     selector: 'fo-social-number-input',
     templateUrl: 'fo_social_number_input_component.html',
     styleUrls: const ['fo_social_number_input_component.css'],
-    directives: const [FoSelectComponent, materialDirectives, formDirectives],
-    providers: const [],
+    directives: const [
+      formDirectives,
+      FoSelectComponent,
+      materialInputDirectives
+    ],    
     pipes: const [],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoSocialNumberInputComponent implements OnInit, OnDestroy {
