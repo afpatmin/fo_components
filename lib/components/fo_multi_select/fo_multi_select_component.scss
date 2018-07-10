@@ -2,7 +2,8 @@
     span.label {
         width: 100%;
         display: inline-block;
-        font-size: 0.75em;
+        white-space: nowrap;
+        font-size: 0.75em;    
         color: #888;
     }
     .selectedValues {
