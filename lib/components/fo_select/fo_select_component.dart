@@ -12,7 +12,15 @@ import '../fo_modal/fo_modal_component.dart';
     selector: 'fo-select',
     styleUrls: const ['fo_select_component.css'],
     templateUrl: 'fo_select_component.html',
-    directives: const [coreDirectives, materialDirectives, FoModalComponent],
+    directives: const [
+      coreDirectives,
+      FoModalComponent,
+      MaterialButtonComponent,
+      MaterialDropdownSelectComponent,
+      MaterialIconComponent,
+      MaterialSelectDropdownItemComponent,      
+      MaterialSelectSearchboxComponent,
+    ],
     pipes: const [])
 class FoSelectComponent implements OnChanges, OnDestroy {
   FoSelectComponent(this.msg);
