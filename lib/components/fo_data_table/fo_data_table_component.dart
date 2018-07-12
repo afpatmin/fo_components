@@ -8,6 +8,7 @@ import 'dart:math';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:fo_model/fo_model.dart';
+import 'package:intl/intl.dart';
 import '../../pipes/fo_name_pipe.dart';
 import '../../pipes/range_pipe.dart';
 import '../../services/fo_messages_service.dart';
@@ -27,12 +28,12 @@ typedef String ErrorFn(Object model);
     directives: const <dynamic>[
       coreDirectives,
       FoModalComponent,
-      FoSelectComponent,      
+      FoSelectComponent,
       MaterialButtonComponent,
       MaterialIconComponent,
       MaterialCheckboxComponent,
       materialInputDirectives,
-      MaterialSpinnerComponent,         
+      MaterialSpinnerComponent,
     ],
     pipes: const [NamePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
@@ -79,10 +80,27 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
     _onBatchOperationController.close();
   }
 
-  dynamic getCell(Object id, String column) =>
-      (data == null || data[id] == null)
-          ? null
-          : (data[id] as FoModel).toJson()[column];
+  dynamic getCell(Object id, String column) {
+    if (data == null || data[id] == null) return null;
+    else {
+      final FoModel model = data[id];
+      final json = model.toJson();
+      final cell = json[column];
+      try {
+        return dateFormat.format(DateTime.parse(cell));        
+      }
+      on FormatException {
+        return cell;
+      }
+      
+      
+    }
+
+
+    return (data == null || data[id] == null)
+        ? null
+        : (data[id] as FoModel).toJson()[column];
+  }
 
   bool isBool(Object value) => value is bool;
 
@@ -363,7 +381,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
 
     if (!_evaluatedColumnsBuffer[row].containsKey(col)) {
       if (evaluatedColumns.containsKey(col)) {
-        _evaluatedColumnsBuffer[row][col] = evaluatedColumns[col](data[row]);        
+        _evaluatedColumnsBuffer[row][col] = evaluatedColumns[col](data[row]);
       } else {
         _evaluatedColumnsBuffer[row][col] = null;
         asyncEvaluatedColumns[col](data[row]).then((v) {
@@ -377,6 +395,8 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
     }
     return _evaluatedColumnsBuffer[row][col];
   }
+  
+  final DateFormat dateFormat = new DateFormat('yyyy-MM-dd HH:mm:ss');
 
   final FoMessagesService msg;
 
