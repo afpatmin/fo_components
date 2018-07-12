@@ -34,9 +34,6 @@
                     </td>
                     <td *ngIf="errorFunction != null"></td>
                     <td *ngFor="let cell of columns.keys"
-                        [class.hide-for-small]="smallHiddenCol.contains(cell)"
-                        [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
-                        [class.hide-for-large]="largeHiddenCol.contains(cell)"
                         (click)="onSort(cell)">
                         <span>{{columns[cell]}}</span>
                         <material-icon baseline
@@ -49,24 +46,6 @@
                                        icon="keyboard_arrow_down"></material-icon>
                     </td>
                     <td *ngFor="let cell of evaluatedColumns.keys"
-                        [class.hide-for-small]="smallHiddenCol.contains(cell)"
-                        [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
-                        [class.hide-for-large]="largeHiddenCol.contains(cell)"
-                        (click)="onSort(cell)">
-                        <span>{{cell}}</span>
-                        <material-icon baseline
-                                       size="small"
-                                       [class.hidden]="sortColumn != cell || sortOrder == 'DESC'"
-                                       icon="keyboard_arrow_up"></material-icon>
-                        <material-icon baseline
-                                       size="small"
-                                       [class.hidden]="sortColumn != cell || sortOrder == 'ASC'"
-                                       icon="keyboard_arrow_down"></material-icon>
-                    </td>
-                    <td *ngFor="let cell of asyncEvaluatedColumns.keys"
-                        [class.hide-for-small]="smallHiddenCol.contains(cell)"
-                        [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
-                        [class.hide-for-large]="largeHiddenCol.contains(cell)"
                         (click)="onSort(cell)">
                         <span>{{cell}}</span>
                         <material-icon baseline
@@ -97,10 +76,7 @@
                                        icon="warning"
                                        size="medium"></material-icon>
                     </td>
-                    <td *ngFor="let cell of columns.keys"
-                        [class.hide-for-small]="smallHiddenCol.contains(cell)"
-                        [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
-                        [class.hide-for-large]="largeHiddenCol.contains(cell)">
+                    <td *ngFor="let cell of columns.keys">
                         <span *ngIf="!isBool(getCell(key, cell))">{{getCell(key, cell)}}</span>
                         <material-icon *ngIf="getCell(key, cell) == true"
                                        baseline
@@ -108,10 +84,7 @@
                                        size="x-small">
                         </material-icon>
                     </td>
-                    <td *ngFor="let cell of allEvaluatedColumns"
-                        [class.hide-for-small]="smallHiddenCol.contains(cell)"
-                        [class.hide-for-medium]="mediumHiddenCol.contains(cell)"
-                        [class.hide-for-large]="largeHiddenCol.contains(cell)">
+                    <td *ngFor="let cell of evaluatedColumns.keys">
                         <span *ngIf="!isBool(getEvaluatedColumn(key, cell))">{{getEvaluatedColumn(key, cell)}}</span>
                         <material-icon *ngIf="getEvaluatedColumn(key, cell) == true"
                                        baseline

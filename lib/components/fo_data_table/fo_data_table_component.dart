@@ -19,7 +19,7 @@ import '../fo_select/fo_select_component.dart';
 typedef Object EvaluateColumnFn(Object model);
 typedef Future<Object> AsyncEvaluateColumnFn(Object model);
 
-typedef String ErrorFn(Object model);
+typedef String ErrorFn(Object model); 
 
 @Component(
     selector: 'fo-data-table',
@@ -38,7 +38,7 @@ typedef String ErrorFn(Object model);
     pipes: const [NamePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
-  FoDataTableComponent(this.host, this._changeDetector, this.msg);
+  FoDataTableComponent(this.host, this.msg);
 
   @override
   void ngOnInit() {
@@ -51,9 +51,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
 
   @override
   void ngOnChanges(Map<String, SimpleChange> changes) {
-    _evaluatedColumnsBuffer.clear();
-    allEvaluatedColumns = evaluatedColumns.keys.toList()
-      ..addAll(asyncEvaluatedColumns.keys);
+    _evaluatedColumnsBuffer.clear();    
 
     _filteredKeys = new List.from(data.keys);
 
@@ -81,17 +79,20 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   dynamic getCell(Object id, String column) {
-    if (data == null || data[id] == null) return null;
+    if (data == null || data[id] == null)
+      return null;
     else {
       final FoModel model = data[id];
       final json = model.toJson();
       final cell = json[column];
+      if (cell == null) return null;
       try {
-        return (cell == null) ? null : dateFormat.format(DateTime.parse(cell));        
-      }
-      on FormatException {
+        return (cell is String)
+            ? dateFormat.format(DateTime.parse(cell))
+            : cell;
+      } on FormatException {
         return cell;
-      }       
+      }
     }
   }
 
@@ -125,7 +126,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
               break;
             }
           }
-          for (final col in allEvaluatedColumns) {
+          for (final col in evaluatedColumns.keys) {
             final r = _evaluatedColumnsBuffer[row['id']];
             final data = (r?.containsKey(col) == true) ? r[col] : null;
             if (data != null &&
@@ -157,18 +158,14 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
       _onSortController.add({
         'column': sortColumn,
         'order': sortOrder,
-        'internal': internalSort ||
-            evaluatedColumns.containsKey(column) ||
-            asyncEvaluatedColumns.containsKey(column)
+        'internal': internalSort || evaluatedColumns.containsKey(column)
       });
 
       searchPhrase = null;
       _filteredKeys = null;
 
       /// Evaluated columns are always sorted internally
-      if (internalSort ||
-          evaluatedColumns.containsKey(column) ||
-          asyncEvaluatedColumns.containsKey(column)) {
+      if (internalSort || evaluatedColumns.containsKey(column)) {
         int sort(Object a, Object b) {
           final vA = a == null ? '-' : a.toString();
           final vB = b == null ? '-' : b.toString();
@@ -212,9 +209,6 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
           } else if (evaluatedColumns.containsKey(sortColumn)) {
             values.sort((a, b) => sort(evaluatedColumns[sortColumn](a),
                 evaluatedColumns[sortColumn](b)));
-          } else if (asyncEvaluatedColumns.containsKey(sortColumn)) {
-            values.sort((a, b) => sort(asyncEvaluatedColumns[sortColumn](a),
-                asyncEvaluatedColumns[sortColumn](b)));
           }
 
           _filteredKeys =
@@ -362,12 +356,10 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
   final StreamController<BatchOperationEvent> _onBatchOperationController =
       new StreamController();
 
-  final ChangeDetectorRef _changeDetector;
-
-  Iterable<String> allEvaluatedColumns = [];
   final Map<Object, Map<String, Object>> _evaluatedColumnsBuffer = {};
 
   Object getEvaluatedColumn(Object row, String col) {
+
     if (_evaluatedColumnsBuffer[row] == null) {
       _evaluatedColumnsBuffer[row] = {};
     }
@@ -376,19 +368,12 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
       if (evaluatedColumns.containsKey(col)) {
         _evaluatedColumnsBuffer[row][col] = evaluatedColumns[col](data[row]);
       } else {
-        _evaluatedColumnsBuffer[row][col] = null;
-        asyncEvaluatedColumns[col](data[row]).then((v) {
-          if (_evaluatedColumnsBuffer?.containsKey(row) == true &&
-              _evaluatedColumnsBuffer[row] != null) {
-            _evaluatedColumnsBuffer[row][col] = v;
-            _changeDetector.detectChanges();
-          }
-        });
+        _evaluatedColumnsBuffer[row][col] = null;        
       }
     }
     return _evaluatedColumnsBuffer[row][col];
   }
-  
+
   final DateFormat dateFormat = new DateFormat('yyyy-MM-dd HH:mm:ss');
 
   final FoMessagesService msg;
@@ -398,15 +383,6 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
 
   @Input()
   bool internalFilter = true;
-
-  @Input('large-hidden-col')
-  Iterable<Object> largeHiddenCol = [];
-
-  @Input('small-hidden-col')
-  Iterable<Object> smallHiddenCol = [];
-
-  @Input('medium-hidden-col')
-  Iterable<Object> mediumHiddenCol = [];
 
   @Input()
   String sortColumn = '';
@@ -422,9 +398,6 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
 
   @Input()
   Map<String, EvaluateColumnFn> evaluatedColumns = {};
-
-  @Input()
-  Map<String, AsyncEvaluateColumnFn> asyncEvaluatedColumns = {};
 
   @Input()
   ErrorFn errorFunction; // = ((model) => null);
