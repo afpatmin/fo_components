@@ -89,17 +89,10 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
       try {
         return dateFormat.format(DateTime.parse(cell));        
       }
-      on FormatException {
+      on Exception {
         return cell;
-      }
-      
-      
+      }       
     }
-
-
-    return (data == null || data[id] == null)
-        ? null
-        : (data[id] as FoModel).toJson()[column];
   }
 
   bool isBool(Object value) => value is bool;
