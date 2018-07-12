@@ -87,9 +87,9 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
       final json = model.toJson();
       final cell = json[column];
       try {
-        return dateFormat.format(DateTime.parse(cell));        
+        return (cell == null) ? null : dateFormat.format(DateTime.parse(cell));        
       }
-      on Exception {
+      on FormatException {
         return cell;
       }       
     }
