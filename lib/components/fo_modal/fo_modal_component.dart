@@ -19,7 +19,9 @@ import 'package:angular_components/angular_components.dart';
     ],
     pipes: const [])
 class FoModalComponent implements OnDestroy {
-  FoModalComponent();
+  FoModalComponent(this.host) {
+    contentContainer = host.querySelector('.modal-content');
+  }
 
   @override
   void ngOnDestroy() {
@@ -61,7 +63,7 @@ class FoModalComponent implements OnDestroy {
   @Output('visibleChange')
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
 
-  @ViewChild('contentContainer', read: html.DivElement)
+  final html.Element host;
   html.DivElement contentContainer;
   
   final StreamController<bool> _onVisibleChangeController =
