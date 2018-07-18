@@ -14,6 +14,7 @@ import '../fo_modal/fo_modal_component.dart';
     templateUrl: 'fo_select_component.html',
     directives: const [
       coreDirectives,
+      DarkThemeDirective,
       FoModalComponent,
       MaterialButtonComponent,
       MaterialDropdownSelectComponent,
@@ -105,6 +106,9 @@ class FoSelectComponent implements OnChanges, OnDestroy {
 
   @Input()
   bool sort = true;
+
+  @Input()
+  bool darkTheme = false;
 
   @Input()
   String tooltip;
