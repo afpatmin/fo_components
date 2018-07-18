@@ -2,6 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
+import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 
@@ -60,6 +61,9 @@ class FoModalComponent implements OnDestroy {
   @Output('visibleChange')
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
 
+  @ViewChild('contentContainer', read: html.DivElement)
+  html.DivElement contentContainer;
+  
   final StreamController<bool> _onVisibleChangeController =
       new StreamController();
 }
