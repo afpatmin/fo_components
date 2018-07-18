@@ -18,6 +18,7 @@ import '../fo_modal/fo_modal_component.dart';
     directives: [
       coreDirectives,
       FoModalComponent,
+      MaterialButtonComponent,
       MaterialIconComponent,
       MaterialListComponent,
       MaterialListItemComponent,
