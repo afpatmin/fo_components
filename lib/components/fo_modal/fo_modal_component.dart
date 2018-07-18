@@ -2,7 +2,6 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 
@@ -18,15 +17,8 @@ import 'package:angular_components/angular_components.dart';
       ModalComponent,
     ],
     pipes: const [])
-class FoModalComponent implements OnChanges, OnDestroy {
-  FoModalComponent(this.host);
-
-  @override
-  void ngOnChanges(Map<String, SimpleChange> changes) {
-    if (visible) {      
-      contentContainer = host.querySelector('.modal-content');
-    }
-  }
+class FoModalComponent implements OnDestroy {
+  FoModalComponent();
 
   @override
   void ngOnDestroy() {
@@ -67,9 +59,6 @@ class FoModalComponent implements OnChanges, OnDestroy {
 
   @Output('visibleChange')
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
-
-  final html.Element host;
-  html.DivElement contentContainer;
   
   final StreamController<bool> _onVisibleChangeController =
       new StreamController();
