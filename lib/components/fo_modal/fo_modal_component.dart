@@ -18,8 +18,11 @@ import 'package:angular_components/angular_components.dart';
       ModalComponent,
     ],
     pipes: const [])
-class FoModalComponent implements OnDestroy {
-  FoModalComponent(this.host) {
+class FoModalComponent implements AfterViewInit, OnDestroy {
+  FoModalComponent(this.host);
+
+  @override
+  void ngAfterViewInit() {
     contentContainer = host.querySelector('.modal-content');
   }
 
