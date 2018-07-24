@@ -21,21 +21,19 @@ import '../../services/fo_messages_service.dart';
       MaterialSelectSearchboxComponent
     ],
     pipes: const [])
-class FoMultiSelectComponent implements OnChanges, OnDestroy {
+class FoMultiSelectComponent implements OnInit, OnDestroy {
   FoMultiSelectComponent(this.msg) {
     buttonText = msg.select();
   }
 
   @override
-  void ngOnChanges(Map<String, SimpleChange> changes) {
-    if (changes.containsKey('options')) {
-      if (options == null)
-        selectionOptions = new StringSelectionOptions([]);
-      else if (selectionOptions.optionsList.length != options.length) {
-        selectionOptions = new StringSelectionOptions(
-            options.toList(growable: false),
-            shouldSort: sort);
-      }
+  void ngOnInit() {
+    if (options == null) {
+      selectionOptions = new StringSelectionOptions([]);
+    } else if (selectionOptions.optionsList.length != options.length) {
+      selectionOptions = new StringSelectionOptions(
+          options.toList(growable: false),
+          shouldSort: sort);
     }
   }
 

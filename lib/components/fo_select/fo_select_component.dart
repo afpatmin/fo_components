@@ -19,12 +19,13 @@ import '../fo_modal/fo_modal_component.dart';
       MaterialButtonComponent,
       MaterialDropdownSelectComponent,
       MaterialIconComponent,
-      MaterialSelectDropdownItemComponent,      
+      MaterialSelectDropdownItemComponent,
       MaterialSelectSearchboxComponent,
     ],
-    pipes: const [])
-class FoSelectComponent implements OnChanges, OnDestroy {
-  FoSelectComponent(this.msg);
+    pipes: const [],
+    changeDetection: ChangeDetectionStrategy.OnPush)
+class FoSelectComponent implements OnInit, OnDestroy {
+  FoSelectComponent(this.msg); 
 
   void onSelect(Object id) {
     selectedId = id;
@@ -32,14 +33,12 @@ class FoSelectComponent implements OnChanges, OnDestroy {
   }
 
   @override
-  void ngOnChanges(Map<String, SimpleChange> changes) {
-    if (changes.containsKey('options')) {
-      if (options == null)
-        selectionOptions = new StringSelectionOptions([]);
-      else if (selectionOptions.optionsList.length != options.length) {
-        selectionOptions =
-            new StringSelectionOptions(options.toList(), shouldSort: sort);
-      }
+  void ngOnInit() {
+    if (options == null)
+      selectionOptions = new StringSelectionOptions([]);
+    else if (selectionOptions.optionsList.length != options.length) {
+      selectionOptions =
+          new StringSelectionOptions(options.toList(), shouldSort: sort);
     }
   }
 
