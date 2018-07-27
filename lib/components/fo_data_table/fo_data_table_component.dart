@@ -17,7 +17,6 @@ import '../fo_select/fo_select_component.dart';
 
 /// Callback function for evaluated columns
 typedef Object EvaluateColumnFn(Object model);
-typedef Future<Object> AsyncEvaluateColumnFn(Object model);
 
 typedef String ErrorFn(Object model); 
 
@@ -62,7 +61,9 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
           .firstWhere((r) => r.id == rows, orElse: () => rowOptions.first)
           .id;
 
-      onSearch();
+      if (internalFilter) {
+        onSearch();
+      }
       setIndices(0);
     }
   }
