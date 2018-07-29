@@ -61,7 +61,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
           .firstWhere((r) => r.id == rows, orElse: () => rowOptions.first)
           .id;
 
-      if (internalFilter) {
+      if (!lazyFilter) {
         onSearch();
       }
       setIndices(0);

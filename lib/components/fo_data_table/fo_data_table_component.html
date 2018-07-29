@@ -189,7 +189,7 @@
     <div class="l4 m6 col">
         <div class="batch-operations-container box-shadow"
              [class.expanded]="selectedRows.isNotEmpty">
-            <fo-select label="with_selected"
+            <fo-select [label]="msg.with_selected()"
                        [showActionButton]="true"
                        actionButtonText="go"
                        [disabled]="disabled || selectedRows == null || selectedRows.isEmpty"

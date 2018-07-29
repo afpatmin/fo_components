@@ -179,4 +179,6 @@ class FoMessagesService {
 
   String username() =>
       Intl.message('username', name: 'FoMessagesService_username');
+
+  String with_selected() => Intl.message('with selected', name: 'with_selected');
 }
