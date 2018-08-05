@@ -19,7 +19,8 @@ import 'package:angular_forms/angular_forms.dart';
       NgFor,
       NgIf
     ],
-    pipes: const [])
+    pipes: const [],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
   FoMultiInputComponent(@Self() @Optional() this.control) {
     if (control != null) control.valueAccessor = this;

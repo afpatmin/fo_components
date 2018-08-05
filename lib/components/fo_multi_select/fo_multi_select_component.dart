@@ -21,7 +21,8 @@ import '../../services/fo_messages_service.dart';
       MaterialSelectDropdownItemComponent,
       MaterialSelectSearchboxComponent
     ],
-    pipes: const [NamePipe])
+    pipes: const [NamePipe],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoMultiSelectComponent implements OnInit, OnDestroy {
   FoMultiSelectComponent(this.msg) {
     buttonText = msg.select();

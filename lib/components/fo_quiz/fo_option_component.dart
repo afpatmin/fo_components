@@ -8,7 +8,8 @@ import '../../models/fo_quiz_model.dart';
   selector: 'fo-option',
   templateUrl: 'fo_option_component.html',
   styleUrls: const ['fo_option_component.css'],
-  directives: const [NgIf, MaterialButtonComponent]
+  directives: const [NgIf, MaterialButtonComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush
 )
 class FoOptionComponent implements OnDestroy {
 

@@ -14,7 +14,8 @@ class FoQuizDoneEvent {
     selector: 'fo-quiz',
     templateUrl: 'fo_quiz_component.html',
     styleUrls: const ['fo_quiz_component.css'],
-    directives: const [FoQuestionComponent, NgFor])
+    directives: const [FoQuestionComponent, NgFor],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoQuizComponent implements OnInit, OnDestroy {
   @override
   void ngOnInit() {

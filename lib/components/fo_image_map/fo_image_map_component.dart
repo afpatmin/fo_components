@@ -15,7 +15,8 @@ import '../fo_multi_select/fo_multi_select_component.dart';
       NgIf,            
       FoMultiSelectComponent
     ],
-    pipes: const [])
+    pipes: const [],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoImageMapComponent implements OnDestroy {
   FoImageMapComponent();
 

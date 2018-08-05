@@ -11,7 +11,8 @@ import 'package:angular_components/angular_components.dart';
     styleUrls: const ['fo_notification_component.css'],
     directives: const [MaterialButtonComponent, MaterialIconComponent, NgIf],
     providers: const [],
-    pipes: const [])
+    pipes: const [],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoNotificationComponent implements OnInit, OnDestroy {
   FoNotificationComponent();
 

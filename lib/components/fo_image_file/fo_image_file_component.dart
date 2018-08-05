@@ -20,9 +20,10 @@ import '../../services/fo_messages_service.dart';
       MaterialIconComponent,
       MaterialButtonComponent
     ],
-    pipes: const [])
+    pipes: const [],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoImageFileComponent implements OnDestroy {
-  FoImageFileComponent(this.msg) {
+  FoImageFileComponent(this._changeDetectorRef, this.msg) {
     _metaReader.onLoad.listen(_extractExifOrientationAndLoadImage);
     _reader.onLoad.listen(_generateScaledImage);
   }
@@ -264,8 +265,9 @@ class FoImageFileComponent implements OnDestroy {
           _byteSize = base64.decode(_base64Data).length;
         } else
           print('invalid src: $source');
-      }
+      }      
       _onSourceChangeController.add(source);
+      _changeDetectorRef.markForCheck();
     });
   }
 
@@ -334,6 +336,7 @@ class FoImageFileComponent implements OnDestroy {
   int _orientation = 0;
   final dom.FileReader _metaReader = new dom.FileReader();
   final dom.FileReader _reader = new dom.FileReader();
+  final ChangeDetectorRef _changeDetectorRef;
   final FoMessagesService msg;
   final StreamController<String> _onSourceChangeController =
       new StreamController();

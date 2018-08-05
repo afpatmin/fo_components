@@ -16,7 +16,8 @@ import 'package:angular_components/angular_components.dart';
       MaterialIconComponent,
       ModalComponent,
     ],
-    pipes: const [])
+    pipes: const [],
+    changeDetection: ChangeDetectionStrategy.Default)
 class FoModalComponent implements OnDestroy {
   FoModalComponent();
 

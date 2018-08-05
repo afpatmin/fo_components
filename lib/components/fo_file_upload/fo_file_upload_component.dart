@@ -18,7 +18,8 @@ import '../../services/fo_messages_service.dart';
       MaterialButtonComponent,
       MaterialIconComponent
     ],
-    pipes: const [])
+    pipes: const [],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FileUploadComponent implements OnDestroy {
   FileUploadComponent(this.msg);
 
@@ -40,7 +41,7 @@ class FileUploadComponent implements OnDestroy {
 
   void clearSelection() {
     file = null;
-    _fileInput?.value = '';
+    _fileInput?.value = '';    
   }
 
   void upload() {
@@ -53,7 +54,7 @@ class FileUploadComponent implements OnDestroy {
   final StreamController<dom.File> onUploadController = new StreamController();
   dom.FileUploadInputElement _fileInput;
   dom.File file;
-  final FoMessagesService msg;
+  final FoMessagesService msg;  
 
   @Input()
   String accept = 'image/*,.pdf';

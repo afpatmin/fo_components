@@ -11,7 +11,8 @@ import '../fo_select/fo_select_component.dart';
     styleUrls: const ['fo_time_input_component.css'],
     templateUrl: 'fo_time_input_component.html',
     directives: const [coreDirectives, FoSelectComponent],
-    pipes: const [])
+    pipes: const [],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoTimeInputComponent implements ControlValueAccessor<String> {
   FoTimeInputComponent(@Self() @Optional() NgControl cd) {
     if (cd != null) cd.valueAccessor = this;
