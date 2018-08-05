@@ -6,6 +6,6 @@ fo_components:
         ✔ Fix issue with empty chip showing when empty @done (8/5/2018, 1:06:43 PM)
         ✔ Should not automatically split on spaces @done (8/5/2018, 1:06:45 PM)
     FoSelect/FoMultiSelect:
-        ✔ Make options use Name pipe @done (8/5/2018, 1:06:33 PM)
+        ✘ Make options use Name pipe @cancelled (8/5/2018, 7:18:51 PM)
     FoSocialNumber:
         ✔ Align last 4 with selectors @done (8/5/2018, 1:05:05 PM)
