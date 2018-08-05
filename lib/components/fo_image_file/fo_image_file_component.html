@@ -9,7 +9,7 @@
              [src]="source"
              alt="{{alt}}"
              [style.filter]="brightnessFilter" />
-        <material-button class="delete"
+        <material-button class="delete alert"
                          clear-size
                          raised
                          [disabled]="disabled"
@@ -31,5 +31,5 @@
            (change)="onFileChange($event)"
            accept="image/jpg,image/jpeg,image/png,image/gif" />
     <p *ngIf="invalidFile"
-       class="error-output">{{msg.invalid_file()}}</p>
+       class="error-output background-color-alert-light">{{msg.invalid_file()}}</p>
 </div>

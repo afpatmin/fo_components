@@ -5,11 +5,13 @@
                      dense
                      [disabled]="disabled || (value != null && value <= min)"
                      (mousedown)="onMouseDown(-step)"
-                     (touchstart)="onMouseDown(-step)">
-        <material-icon icon="keyboard_arrow_down"
+                     (touchstart)="onMouseDown(-step)"
+                     (keydown)="onKeyDown($event, -step)">
+        <material-icon icon="remove"
                        size="medium"></material-icon>
     </material-button>
     <span class="clickable"
+          [class.disabled]="disabled"
           id="valueOutput"
           (click)="popupVisible = !disabled"
           popupSource
@@ -18,8 +20,9 @@
                      dense
                      [disabled]="disabled || (value != null && value >= max)"
                      (mousedown)="onMouseDown(step)"
-                     (touchstart)="onMouseDown(step)">
-        <material-icon icon="keyboard_arrow_up"
+                     (touchstart)="onMouseDown(step)"
+                     (keydown)="onKeyDown($event, step)">
+        <material-icon icon="add"
                        size="medium"></material-icon>
     </material-button>
     <span>&nbsp;{{trailingText}}</span>
@@ -31,7 +34,7 @@
         <div class="col">
             <material-input type="number"
                             [ngFormControl]="numberInputControl"
-                            [label]="msg.enter_value()"
+                            [label]="msg.enter_value() | name"
                             [disabled]="disabled"
                             floatingLabel
                             [ngModel]="value"

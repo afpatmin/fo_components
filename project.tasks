@@ -1,0 +1,11 @@
+fo_components:
+    FoNumberInputComponent:
+        ✔ Add/remove buttons should respond to keyboard enter/space @done (8/5/2018, 1:14:59 PM)
+        ✔ Make the value gray and no hover effect when disabled @done (8/5/2018, 1:15:03 PM)
+    FoMultiInputComponent:
+        ✔ Fix issue with empty chip showing when empty @done (8/5/2018, 1:06:43 PM)
+        ✔ Should not automatically split on spaces @done (8/5/2018, 1:06:45 PM)
+    FoSelect/FoMultiSelect:
+        ✔ Make options use Name pipe @done (8/5/2018, 1:06:33 PM)
+    FoSocialNumber:
+        ✔ Align last 4 with selectors @done (8/5/2018, 1:05:05 PM)

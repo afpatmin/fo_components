@@ -1,7 +1,8 @@
-@import 'package:grid/colors';
-@import 'package:grid/theme';
-@import 'package:grid/grid';
+@import '../../mixins';
 :host {
+    .box-shadow {
+        @include boxShadow();
+    }
     div.transformer {
         position: relative;
         height: 100%;
@@ -111,7 +112,7 @@
                         min-width: 315px;
                         #page-header {
                             margin: 1rem 0;
-                            border-bottom: 2px solid $colorBlack;
+                            border-bottom: 2px solid #555;
                             material-icon {
                                 ::ng-deep i {
                                     font-size: 3rem;

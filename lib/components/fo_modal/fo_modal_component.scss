@@ -1,6 +1,6 @@
-@import 'package:grid/grid';
-@import 'package:grid/theme';
 @import 'package:angular_components/material_dialog/mixins';
+@import 'package:grid/constants';
+
 material-dialog.white-header {
     @include material-dialog-header-color(#fff);
     [header] {
@@ -44,10 +44,7 @@ material-dialog {
         }
     }
     ::ng-deep main {
-        -webkit-overflow-scrolling: touch; // Smooth scrolling on tablets/phones
-        div.modal-content {
-            //padding-bottom: 0.5rem;
-        }
+        -webkit-overflow-scrolling: touch; // Smooth scrolling on tablets/phones        
     }
 }
 
@@ -63,5 +60,5 @@ material-dialog.fixed-width {
     width: 95vw;
     margin-left: 2.5vw;
     margin-right: 2.5vw;
-    max-width: $maxWidth;
+    max-width: $max-width;
 }

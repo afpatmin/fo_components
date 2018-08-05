@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:fo_model/fo_model.dart';
+import '../../pipes/fo_name_pipe.dart';
 import '../../services/fo_messages_service.dart';
 
 @Component(
@@ -20,7 +21,7 @@ import '../../services/fo_messages_service.dart';
       MaterialSelectDropdownItemComponent,
       MaterialSelectSearchboxComponent
     ],
-    pipes: const [])
+    pipes: const [NamePipe])
 class FoMultiSelectComponent implements OnInit, OnDestroy {
   FoMultiSelectComponent(this.msg) {
     buttonText = msg.select();

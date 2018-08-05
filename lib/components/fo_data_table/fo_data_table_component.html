@@ -1,5 +1,5 @@
 <div class="row expand">
-    <div class="s12 m7 l8 col">
+    <div class="m7 l8 col">
         <h3 class="color-black margin-bottom-none">
             {{label | name}}
             <material-icon baseline
@@ -11,7 +11,7 @@
             </material-icon>
         </h3>
     </div>
-    <div class="s12 m5 l4 col text-right">
+    <div class="m5 l4 col text-right">
         <material-input class="text-left"
                         [displayBottomPanel]="false"
                         [disabled]="disabled"
@@ -118,7 +118,7 @@
                 <material-icon baseline
                                size="x-large"
                                icon="error"></material-icon>
-                {{msg.no_results_found()}}
+                {{msg.no_results_found() | name}}
             </p>
         </div>
     </div>

@@ -1,30 +1,30 @@
-@import 'package:grid/theme';
-div.container {
-    border: 1px dashed #ccc;
-    padding: 0.5rem;
-    text-align: center;
-    div.image {
-        position: relative;
-        img {
-            width: 100%;
-            height: auto;
-            margin: 0 auto;
-        }
-        material-button.delete {
-            background-color: $colorAlert;
-            position: absolute;
-            top: 0.25em;
-            right: 0.25em;
-            color: $colorWhite;
-        }
-    }
-    input[type=file] {
-        display: none !important;
-    }
-    p.error-output {
-        background-color: $colorAlertBright;
-        color: white;
+@import '../../mixins';
+:host {    
+    div.container {
+        border: 1px dashed #ccc;
         padding: 0.5rem;
-        margin: 0.5rem 0 0 0;
+        text-align: center;
+        div.image {
+            @include boxShadow();        
+            position: relative;
+            img {
+                width: 100%;
+                height: auto;
+                margin: 0 auto;
+            }
+            material-button.delete {            
+                position: absolute;
+                top: 0.25em;
+                right: 0.25em;
+            }
+        }
+        input[type=file] {
+            display: none !important;
+        }
+        p.error-output {        
+            color: white;
+            padding: 0.5rem;
+            margin: 0.5rem 0 0 0;
+        }
     }
 }

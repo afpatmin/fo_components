@@ -7,6 +7,7 @@ import 'dart:math' as math;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';
+import '../../pipes/fo_name_pipe.dart';
 import '../../services/fo_messages_service.dart';
 import '../fo_modal/fo_modal_component.dart';
 
@@ -25,16 +26,18 @@ import '../fo_modal/fo_modal_component.dart';
       MaterialIconComponent,
       MaterialInputComponent,
       MaterialPopupComponent,
-
-      PopupSourceDirective      
+      PopupSourceDirective
     ],
     providers: const [FORM_PROVIDERS],
-    pipes: const [])
+    pipes: const [NamePipe],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoNumberInputComponent
     implements OnInit, OnChanges, OnDestroy, ControlValueAccessor<num> {
-  FoNumberInputComponent(@Self() @Optional() this.control, this.msg) {
+  FoNumberInputComponent(
+      @Self() @Optional() this.control, this._changeDetectorRef, this.msg) {
     _mouseUpListener = html.document.onMouseUp.listen(onMouseUp);
     _touchEndListener = html.document.onTouchEnd.listen(onMouseUp);
+    _keyUpListener = html.document.onKeyUp.listen(onMouseUp);
 
     if (control != null) control.valueAccessor = this;
   }
@@ -79,6 +82,15 @@ class FoNumberInputComponent
   void ngOnDestroy() {
     _mouseUpListener.cancel();
     _touchEndListener.cancel();
+    _keyUpListener.cancel();
+  }
+
+  void onKeyDown(html.KeyboardEvent event, num count) {
+    if (event.keyCode == html.KeyCode.ENTER ||
+        event.keyCode == html.KeyCode.MAC_ENTER ||
+        event.keyCode == html.KeyCode.SPACE) {
+      onMouseDown(count);
+    }
   }
 
   void onMouseDown(num count) {
@@ -119,6 +131,7 @@ class FoNumberInputComponent
     if (value + count >= min && value + count <= max) {
       value += count;
       _onChange(value);
+      _changeDetectorRef.markForCheck();
     }
   }
 
@@ -127,13 +140,14 @@ class FoNumberInputComponent
   num value;
 
   final FoMessagesService msg;
+  StreamSubscription<html.KeyboardEvent> _keyUpListener;
   StreamSubscription<html.MouseEvent> _mouseUpListener;
   StreamSubscription<html.TouchEvent> _touchEndListener;
+  final ChangeDetectorRef _changeDetectorRef;
   Timer autoAddTimer;
   Timer addStepTimer;
   int _precision = 0;
   bool popupVisible = false;
-
   Control numberInputControl;
 
   @Input()

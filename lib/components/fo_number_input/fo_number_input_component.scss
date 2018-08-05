@@ -17,10 +17,17 @@ span#valueOutput
     min-width: 2rem;
     text-align: center;
     margin: 0 0.2rem;
+    transform: translateY(-0.2rem);
+    
+}
+span#valueOutput.disabled {
+    color: #aaa;
+    
 }
 
 material-button
 {
+    
     -webkit-user-select: none;
     -moz-user-select: none;-ms-user-select: none;
     user-select: none;

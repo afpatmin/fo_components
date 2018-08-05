@@ -1,7 +1,20 @@
 @import 'package:grid/grid';
-@import 'package:grid/theme';
+@import '../../mixins.scss';
 :host {
     width: 100%;
+    color: #555;
+    .display-inline-block {
+        display: inline-block;
+    }
+    .float-right {
+        float: right;
+    }
+    .vertical-align-middle {
+        vertical-align: middle;
+    }
+    .box-shadow {
+        @include boxShadow();
+    }
 }
 
 fieldset {

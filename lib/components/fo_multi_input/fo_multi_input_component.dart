@@ -53,8 +53,8 @@ class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
   }
 
   void add() {
-    if (control?.valid != false && inputValue.isNotEmpty) {
-      value ??= [];
+    value ??= [];
+    if (control?.valid != false && inputValue.isNotEmpty) {      
       value.add(inputValue);
       _onValueChangeController.add(value);
       inputValue = '';
@@ -81,7 +81,7 @@ class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
   String leadingText = '';
 
   @Input()
-  String maxLength;
+  int maxCount;
 
   String inputValue = '';
 

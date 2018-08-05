@@ -1,5 +1,6 @@
 @import 'package:grid/grid';
-@import 'package:grid/theme';
+@import '../../mixins';
+
 :host {
     z-index: 99;
     position: fixed;
@@ -8,7 +9,7 @@
     width: 100%;
     text-align: center;
     div#notificationContainer {
-        @include box-shadow();
+        @include boxShadow();        
         padding: 0.5rem 1rem;
         background-color: black;
         color: white;

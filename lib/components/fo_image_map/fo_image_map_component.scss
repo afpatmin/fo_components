@@ -1,4 +1,4 @@
-@import 'package:grid/colors';
+
 :host>div {
     position: relative;
     -webkit-user-select: none;
@@ -15,8 +15,7 @@
             stroke: white;
             stroke-width: 1;
             stroke-dasharray: 2;
-            stroke-linejoin: round;
-            fill: $colorAlert;
+            stroke-linejoin: round;            
         }
         .shape.visible {
             visibility: visible;

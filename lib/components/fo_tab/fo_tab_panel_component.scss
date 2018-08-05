@@ -1,3 +1,5 @@
+@import '../../mixins';
+
 :host {
     display: block;
 
@@ -12,7 +14,7 @@
             white-space: nowrap;
             cursor: pointer;
             padding: 1rem 0.5rem;                        
-            box-shadow: 1px 1px 5px #ccc;
+            @include boxShadow();
             transition: color, background-color 300ms ease;
         }        
     }
