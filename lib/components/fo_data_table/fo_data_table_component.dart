@@ -33,6 +33,7 @@ typedef String ErrorFn(Object model);
       MaterialCheckboxComponent,
       materialInputDirectives,
       MaterialSpinnerComponent,
+      MaterialTooltipDirective
     ],
     pipes: const [NamePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)

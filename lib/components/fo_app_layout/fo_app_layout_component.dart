@@ -23,7 +23,8 @@ import '../fo_modal/fo_modal_component.dart';
       MaterialListComponent,
       MaterialListItemComponent,
       MaterialTooltipDirective,
-      routerDirectives
+      routerDirectives,
+      
     ],
     pipes: [NamePipe])
 class FoAppLayoutComponent implements OnDestroy {
