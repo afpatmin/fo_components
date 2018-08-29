@@ -5,7 +5,7 @@ import 'fo_tab_component.dart';
   selector: 'fo-tab-panel',
   templateUrl: 'fo_tab_panel_component.html',
   styleUrls: const ['fo_tab_panel_component.css'],
-  directives: const [FoTabComponent, NgFor],
+  directives: const [FoTabComponent, NgFor, NgIf],
 )
 class FoTabPanelComponent {  
   FoTabPanelComponent();

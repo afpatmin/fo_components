@@ -4,7 +4,12 @@
          [style.color]="color(tab)"
          [style.background-color]="backgroundColor(tab)"
          (click)="onTabClick(tab)">
-        {{tab.label}}
+         <h1 *ngIf="tab.icon != null">
+
+         </h1>
+         <p class="margin-top-none margin-bottom-none">
+             {{tab.label}}
+         </p>
     </div>
 </div>
 
