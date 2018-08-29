@@ -1,5 +1,4 @@
 import 'package:angular/angular.dart';
-
 @Component(
   selector: 'fo-tab',
   templateUrl: 'fo_tab_component.html',
@@ -14,6 +13,9 @@ class FoTabComponent {
 
   @Input()
   String label;
+
+  @Input()
+  String icon;
 
   @Input()
   String labelColor = '#333';

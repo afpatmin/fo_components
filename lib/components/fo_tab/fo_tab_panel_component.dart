@@ -1,11 +1,12 @@
 import 'package:angular/angular.dart';
+import '../fo_icon/fo_icon_component.dart';
 import 'fo_tab_component.dart';
 
 @Component(
   selector: 'fo-tab-panel',
   templateUrl: 'fo_tab_panel_component.html',
   styleUrls: const ['fo_tab_panel_component.css'],
-  directives: const [FoTabComponent, NgFor, NgIf],
+  directives: const [FoIconComponent, FoTabComponent, NgFor, NgIf],
 )
 class FoTabPanelComponent {  
   FoTabPanelComponent();
