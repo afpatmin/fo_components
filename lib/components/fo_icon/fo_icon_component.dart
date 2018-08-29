@@ -20,7 +20,7 @@ import 'package:angular/angular.dart';
   directives: const [NgStyle],
   changeDetection: ChangeDetectionStrategy.OnPush
 )
-class IconComponent {
+class FoIconComponent {
 
   String get iconClass => 'icon-$icon';
 
