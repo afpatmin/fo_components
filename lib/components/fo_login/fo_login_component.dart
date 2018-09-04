@@ -42,7 +42,7 @@ class FoLoginComponent implements OnInit, OnDestroy {
       _onLoginController.add({'username': username, 'token': token});
       visible = false;
     } on Exception {
-      errorMessage = 'invalid_details';
+      errorMessage = msg.invalid_details();
     }
   }
 

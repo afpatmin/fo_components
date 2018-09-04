@@ -22,6 +22,12 @@ class FoMessagesService {
       Intl.message('Are you sure you want to delete this resource?',
           name: 'FoMessagesService_confirm_delete_resource');
 
+  String day(int howMany) => Intl.plural(howMany,
+      one: 'day',
+      other: 'days',
+      args: [howMany],
+      name: 'FoMessagesService_day');
+
   String description() =>
       Intl.message('description', name: 'FoMessagesService_description');
 
@@ -105,6 +111,9 @@ class FoMessagesService {
   String information() =>
       Intl.message('information', name: 'FoMessagesService_information');
 
+  String invalid_details() =>
+      Intl.message('invalid username/password', name: 'invalid_details');
+
   String invalid_file() =>
       Intl.message('invalid file', name: 'FoMessagesService_invalid_file');
 
@@ -121,6 +130,12 @@ class FoMessagesService {
 
   String max_filesize_exceeded() => Intl.message('max filesize exceeded',
       name: 'FoMessagesService_max_filesize_exceeded');
+
+  String month(int howMany) => Intl.plural(howMany,
+      one: 'month',
+      other: 'months',
+      args: [howMany],
+      name: 'FoMessagesService_month');
 
   String new_password() =>
       Intl.message('new password', name: 'FoMessagesService_new_password');
@@ -171,14 +186,15 @@ class FoMessagesService {
 
   String token() => Intl.message('token', name: 'FoMessagesService_token');
 
-  String year(int howMany) => Intl.plural(howMany, one: 'year', other: 'years', args: [howMany], name: 'FoMessagesService_year');
-
-  String month(int howMany) => Intl.plural(howMany, one: 'month', other: 'months', args: [howMany], name: 'FoMessagesService_month');
-
-  String day(int howMany) => Intl.plural(howMany, one: 'day', other: 'days', args: [howMany], name: 'FoMessagesService_day');
-
   String username() =>
       Intl.message('username', name: 'FoMessagesService_username');
 
-  String with_selected() => Intl.message('with selected', name: 'with_selected');
+  String with_selected() =>
+      Intl.message('with selected', name: 'with_selected');
+
+  String year(int howMany) => Intl.plural(howMany,
+      one: 'year',
+      other: 'years',
+      args: [howMany],
+      name: 'FoMessagesService_year');
 }
