@@ -1,4 +1,6 @@
 @import '../../mixins';
+@import '../../colors';
+
 :host {    
     div.container {
         border: 1px dashed #ccc;
@@ -21,7 +23,9 @@
         input[type=file] {
             display: none !important;
         }
-        p.error-output {        
+        p.error-output {
+            background-color: lighten($foColorAlert, 20%);
+
             color: white;
             padding: 0.5rem;
             margin: 0.5rem 0 0 0;

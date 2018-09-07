@@ -1,0 +1,10 @@
+@import '../../colors';
+@mixin image-map-shape-color($color) {
+    ::ng-deep fo-image-map>div {
+        svg {
+            shape {
+                fill: $color;
+            }
+        }
+    }
+}

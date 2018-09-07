@@ -8,25 +8,28 @@ import 'fo_tab_component.dart';
   styleUrls: const ['fo_tab_panel_component.css'],
   directives: const [FoIconComponent, FoTabComponent, NgFor, NgIf],
 )
-class FoTabPanelComponent {  
+class FoTabPanelComponent {
   FoTabPanelComponent();
 
   void onTabClick(FoTabComponent tab) {
     for (final t in tabs) {
       t.active = false;
     }
-    tab.active = true;    
+    tab.active = true;
   }
 
-  String backgroundColor(FoTabComponent tab) => tab.active ? tab.backgroundColor : 'white';
-  String color(FoTabComponent tab) => tab.active ? 'white': tab.labelColor;
+  String backgroundColor(FoTabComponent tab) =>
+      tab.active ? tab.backgroundColor : 'white';
+  String color(FoTabComponent tab) => tab.active ? 'white' : tab.labelColor;
 
   List<FoTabComponent> get tabs => _tabs;
 
   @ContentChildren(FoTabComponent)
   set tabs(List<FoTabComponent> value) {
     _tabs = value;
-    _tabs.first.active = true;
+    if (_tabs != null && _tabs.isNotEmpty) {
+      _tabs.first.active = true;
+    }
   }
 
   List<FoTabComponent> _tabs;

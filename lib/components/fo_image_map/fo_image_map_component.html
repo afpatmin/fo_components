@@ -7,7 +7,7 @@
              height="100%"
              viewBox="0 0 100 100">
                 <ellipse *ngFor="let ellipse of zone.ellipses"
-                         class="shape background-color-alert"
+                         class="shape"
                          [class.visible]="selectedIds.contains(zone.id)"
                          [attr.cx]="ellipse.x"
                          [attr.cy]="ellipse.y"
@@ -16,7 +16,7 @@
                          [attr.transform]="ellipse.transform">
                 </ellipse>
                 <rect *ngFor="let rectangle of zone.rectangles"
-                      class="shape background-color-alert"
+                      class="shape"
                       [class.visible]="selectedIds.contains(zone.id)"
                       [attr.x]="rectangle.x"
                       [attr.y]="rectangle.y"
@@ -25,7 +25,7 @@
                       [attr.transform]="rectangle.transform">
                 </rect>
                 <polygon *ngFor="let polygon of zone.polygons"
-                         class="shape background-color-alert"
+                         class="shape"
                          [class.visible]="selectedIds.contains(zone.id)"
                          [attr.points]="polygon.points"
                          [attr.transform]="polygon.transform">

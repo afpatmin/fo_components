@@ -1,4 +1,6 @@
 
+@import '../../colors';
+
 :host>div {
     position: relative;
     -webkit-user-select: none;
@@ -11,6 +13,7 @@
         left: 0;
         opacity: 0.3;
         .shape {
+            fill: $foColorAlert; 
             visibility: hidden;
             stroke: white;
             stroke-width: 1;
