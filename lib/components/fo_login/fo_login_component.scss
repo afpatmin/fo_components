@@ -1,23 +1,9 @@
 @import 'package:fo_components/mixins';
 @import 'package:angular_components/material_dialog/mixins';
 
-::ng-deep material-dialog.themeable {
-    @include material-dialog-header-color(white !important);
-    div.wrapper>header {
-        div.flexContainer {
-            h3.themeable {
-                color: $foColorPrimary !important;
-            }
-            div#closeButtonContainer {
-                material-button.themeable {
-                    color: $foColorPrimary !important;
-                }
-            }
-        }
-    }
-}
 
-div.padder {    
+
+div.padder {
     padding: 0 1rem;
     div.login-container {
         max-width: 100%;
