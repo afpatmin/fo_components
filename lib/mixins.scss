@@ -1,17 +1,12 @@
 @import 'package:angular_components/material_dialog/mixins';
-$foColorAlert: #f55;
-$foColorPrimary: #555;
-$foColorSecondary: beige;
-
-@mixin boxShadow() {
-    -webkit-box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.5);
-    box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.5);
-}
+@import 'colors';
 
 @mixin fo-colors($primaryColor, $secondaryColor, $alertColor) {
+    
     $foColorPrimary: $primaryColor;
     $foColorSecondary: $secondaryColor;
     $foColorAlert: $alertColor;
+    
     ::ng-deep material-dialog.themeable {
         @include material-dialog-header-color($foColorPrimary !important);
         div.wrapper>header {
@@ -23,12 +18,12 @@ $foColorSecondary: beige;
                     material-button.themeable {
                         color: white !important;
                     }
-                }
+                } 
             }
         }
     }
     ::ng-deep .color-alert {
-        color: $foColorAlert;
+        color: $foColorAlert !important;
     }
 
     ::ng-deep fo-image-file {

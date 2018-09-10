@@ -1,4 +1,4 @@
-@import '../../mixins';
+@import '../../colors';
 :host {
     .box-shadow {
         @include boxShadow();

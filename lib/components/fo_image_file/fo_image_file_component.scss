@@ -1,5 +1,4 @@
-@import '../../mixins';
-@import '../../mixins';
+@import '../../colors';
 
 :host {    
     div.container {
@@ -14,10 +13,11 @@
                 height: auto;
                 margin: 0 auto;
             }
-            material-button.delete {            
+            material-button.delete {
                 position: absolute;
                 top: 0.25em;
-                right: 0.25em;
+                right: 0.25em;     
+                color: $foColorAlert;           
             }
         }
         input[type=file] {
