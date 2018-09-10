@@ -1,6 +1,6 @@
 <div class="row expand">
     <div class="m7 l8 col">
-        <h3 class="color-black margin-bottom-none">
+        <h3 class="margin-bottom-none">
             {{label | name}}
             <material-icon baseline
                            size="large"
@@ -26,7 +26,7 @@
 <div class="table-container box-shadow">
     <div class="output-container">
         <table [class.faded]="disabled"
-               class="output color-black margin-bottom-x-small">
+               class="output margin-bottom-x-small">
             <thead>
                 <tr>
                     <td *ngIf="showCheckboxes">
@@ -206,8 +206,7 @@
           [smallPadding]="false"
           [visible]="deleteBufferId != null"
           (visibleChange)="deleteBufferId = null"
-          [showCloseButton]="false"
-          [whiteHeader]="true">
+          [showCloseButton]="false">
     <p>{{msg.confirm_delete_resource()}}</p>
     <p class="text-right margin-bottom-none"
        footer>
@@ -223,8 +222,7 @@
 </fo-modal>
 
 <fo-modal [title]="msg.information()"
-          [smallPadding]="false"
-          [whiteHeader]="true"
+          [smallPadding]="false"          
           [(visible)]="infoModalOpen"
           [showCloseButton]="true">
     <p>{{description}}</p>

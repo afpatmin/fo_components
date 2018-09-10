@@ -50,9 +50,6 @@ class FoModalComponent implements OnDestroy {
   bool fixedHeight = false;
 
   @Input()
-  bool whiteHeader = true;
-
-  @Input()
   bool smallPadding = true;
 
   @Input()

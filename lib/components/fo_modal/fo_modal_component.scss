@@ -1,22 +1,14 @@
 @import 'package:angular_components/material_dialog/mixins';
 @import 'package:grid/constants';
-
-material-dialog.white-header {
-    @include material-dialog-header-color(#fff);
-    [header] {
-        h3 {
-            color: #333;
-        }
-    }
-}
-
+@import 'package:fo_components/mixins';
 material-dialog.small-padding {
-    @include material-dialog-body-padding($padding: 0.5rem);
-    @include material-dialog-header-padding($padding: 0.5rem);
-    @include material-dialog-footer-padding($padding: 0.5rem);
+    @include material-dialog-body-padding($padding: $small);
+    @include material-dialog-header-padding($padding: $small);
+    @include material-dialog-footer-padding($padding: $small);
 }
 
 material-dialog {
+    @include material-dialog-header-color($foColorPrimary);
     min-width: 15rem;
     max-width: 90vw;
     margin-left: 5vw;
@@ -35,11 +27,15 @@ material-dialog {
             h3 {
                 align-self: center;
                 margin-bottom: 0;
+                color: #fff;
             }
             div#closeButtonContainer {
                 flex: auto;
                 align-self: flex-start;
                 text-align: right;
+                material-button {
+                    color: #fff;
+                }
             }
         }
     }
@@ -61,8 +57,4 @@ material-dialog.fixed-width {
     margin-left: 2.5vw;
     margin-right: 2.5vw;
     max-width: $max-width;
-}
-
-.color-white {
-    color: white;
 }

@@ -1,8 +1,7 @@
 <fo-modal title="GDPR"
           [fixedWidth]="false"
           [visible]="open"
-          (visibleChange)="open = $event; openController.add($event);"
-          [whiteHeader]="false"
+          (visibleChange)="open = $event; openController.add($event);"          
           [smallPadding]="false">
     <div *ngIf="open">
         <div *ngIf="!sent">

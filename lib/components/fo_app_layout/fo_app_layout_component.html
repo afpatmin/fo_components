@@ -84,8 +84,7 @@
 </div>
 
 <fo-modal [title]="instructions()"
-          *ngIf="instructionsModalVisible"
-          [whiteHeader]="true"
+          *ngIf="instructionsModalVisible"          
           [(visible)]="instructionsModalVisible">
     <iframe [attr.width]="calcIFrameWidth()"
             [attr.height]="calcIFrameHeight()"
