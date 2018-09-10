@@ -1,3 +1,6 @@
+@import 'package:fo_components/mixins';
+@include fo-colors(white, black, blue);
+
 div.padder {
     padding: 0 1rem;
     div.login-container {

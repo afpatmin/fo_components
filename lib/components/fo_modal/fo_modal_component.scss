@@ -27,14 +27,14 @@ material-dialog {
             h3 {
                 align-self: center;
                 margin-bottom: 0;
-                color: #fff;
+                color: $foColorSecondary;
             }
             div#closeButtonContainer {
                 flex: auto;
                 align-self: flex-start;
                 text-align: right;
                 material-button {
-                    color: #fff;
+                    color: $foColorSecondary;
                 }
             }
         }
