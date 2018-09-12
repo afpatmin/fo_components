@@ -25,14 +25,14 @@
     ::ng-deep fo-image-file {
         div.container {
             p.error-output {
-                background-color: $foColorAlert;
+                background-color: $foColorAlert !important;
             }
         }
     }
     ::ng-deep fo-image-map > div {
         svg {
             .shape {
-                fill: $foColorAlert;
+                fill: $foColorAlert !important;
             }
         }
     }

@@ -27,7 +27,7 @@ class FoImageMapComponent implements OnDestroy {
 
   void onSelectionChange(List<String> selectedIds) {
     _onSelectedIdsChangeController.add(selectedIds);
-    _changeDetector.detectChanges();
+    _changeDetector.markForCheck();
   }
 
   final StreamController<List<String>> _onSelectedIdsChangeController =
