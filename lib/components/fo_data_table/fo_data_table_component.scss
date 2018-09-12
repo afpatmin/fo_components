@@ -1,6 +1,7 @@
 @import 'package:grid/grid';
 @import '../../colors.scss';
 :host {
+    display: block;
     width: 100%;
     color: #555;
     .display-inline-block {
