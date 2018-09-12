@@ -1,12 +1,9 @@
 @import 'package:angular_components/material_dialog/mixins';
 @import 'colors';
-
 @mixin fo-colors($primaryColor, $secondaryColor, $alertColor) {
-    
     $foColorPrimary: $primaryColor;
     $foColorSecondary: $secondaryColor;
     $foColorAlert: $alertColor;
-    
     ::ng-deep material-dialog.themeable {
         @include material-dialog-header-color($foColorPrimary !important);
         div.wrapper>header {
@@ -18,14 +15,13 @@
                     material-button.themeable {
                         color: white !important;
                     }
-                } 
+                }
             }
         }
     }
     ::ng-deep .color-alert {
         color: $foColorAlert !important;
     }
-
     ::ng-deep fo-image-file {
         div.container {
             p.error-output {
@@ -33,9 +29,9 @@
             }
         }
     }
-    ::ng-deep fo-image-map>div {
+    ::ng-deep fo-image-map > div {
         svg {
-            shape {
+            .shape {
                 fill: $foColorAlert;
             }
         }
