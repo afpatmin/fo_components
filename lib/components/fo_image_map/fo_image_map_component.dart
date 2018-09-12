@@ -16,9 +16,9 @@ import '../fo_multi_select/fo_multi_select_component.dart';
       FoMultiSelectComponent
     ],
     pipes: const [],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.Default)
 class FoImageMapComponent implements OnDestroy {
-  FoImageMapComponent(this._changeDetector);
+  FoImageMapComponent();
 
   @override
   void ngOnDestroy() {
@@ -26,8 +26,7 @@ class FoImageMapComponent implements OnDestroy {
   }
 
   void onSelectionChange(List<String> selectedIds) {
-    _onSelectedIdsChangeController.add(selectedIds);
-    _changeDetector.markForCheck();
+    _onSelectedIdsChangeController.add(selectedIds);    
   }
 
   final StreamController<List<String>> _onSelectedIdsChangeController =
@@ -51,8 +50,6 @@ class FoImageMapComponent implements OnDestroy {
   @Output('selectedIdsChange')
   Stream<List<String>> get onSelectedIdsChangeOutput =>
       _onSelectedIdsChangeController.stream;
-
-  final ChangeDetectorRef _changeDetector;
 }
 
 class FoZoneModel extends FoModel {
