@@ -43,9 +43,18 @@ class FoNumberInputComponent
     if (control != null) control.valueAccessor = this;
   }
 
-  void setValueClamped(num v) {
-    value = v == null ? 0 : math.max(min, math.min(max, v));    
-    _onChange(value);        
+  void setValueClamped(String v) {
+    if (v == null)
+      value = 0;
+    else {
+      try {
+        value = v == null ? 0 : math.max(min, math.min(max, num.parse(v)));
+      } on FormatException {
+        value = 0;
+      }
+    }
+
+    _onChange(value);
   }
 
   @override
@@ -78,7 +87,7 @@ class FoNumberInputComponent
           : 0;
     }
   }
-  
+
   @override
   void ngOnDestroy() {
     _mouseUpListener.cancel();
@@ -87,7 +96,9 @@ class FoNumberInputComponent
   }
 
   void openPopup() {
-    popupVisible = !disabled;    
+    if (!disabled) {
+      popupVisible = true;
+    }
   }
 
   void onKeyDown(html.KeyboardEvent event, num count) {
@@ -178,4 +189,7 @@ class FoNumberInputComponent
 
   @override
   void onDisabledChanged(bool isDisabled) {}
+
+  @ViewChild(MaterialInputComponent)
+  MaterialInputComponent input;
 }
