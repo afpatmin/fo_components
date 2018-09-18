@@ -16,6 +16,7 @@ import '../fo_modal/fo_modal_component.dart';
     styleUrls: const ['fo_number_input_component.css'],
     templateUrl: 'fo_number_input_component.html',
     directives: const [
+      AutoFocusDirective,
       coreDirectives,
       FoModalComponent,
       formDirectives,
@@ -77,12 +78,16 @@ class FoNumberInputComponent
           : 0;
     }
   }
-
+  
   @override
   void ngOnDestroy() {
     _mouseUpListener.cancel();
     _touchEndListener.cancel();
     _keyUpListener.cancel();
+  }
+
+  void openPopup() {
+    popupVisible = !disabled;    
   }
 
   void onKeyDown(html.KeyboardEvent event, num count) {
