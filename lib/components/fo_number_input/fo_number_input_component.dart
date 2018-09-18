@@ -44,8 +44,8 @@ class FoNumberInputComponent
   }
 
   void setValueClamped(num v) {
-    value = v == null ? 0 : math.max(min, math.min(max, v));
-    _onChange(value);
+    value = v == null ? 0 : math.max(min, math.min(max, v));    
+    _onChange(value);        
   }
 
   @override

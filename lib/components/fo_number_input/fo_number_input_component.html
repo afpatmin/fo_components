@@ -29,7 +29,7 @@
 </div>
 <material-popup [(visible)]="popupVisible"
                 [source]="source">
-    <div class="row padding-top-small" *ngIf="popupVisible">
+    <div class="row padding-top-small">
         <div class="col">
             <material-input autoFocus
                             type="number"
@@ -37,7 +37,8 @@
                             [label]="msg.enter_value() | name"
                             [disabled]="disabled"
                             floatingLabel
-                            [ngModel]="value"
+                            (change)="popupVisible = false"
+                            [ngModel]="value"                            
                             (ngModelChange)="setValueClamped($event)"></material-input>
         </div>
     </div>
