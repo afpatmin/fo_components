@@ -22,6 +22,9 @@ class FoTabPanelComponent {
       tab.active ? tab.backgroundColor : 'white';
   String color(FoTabComponent tab) => tab.active ? 'white' : tab.labelColor;
 
+  bool hideIcons(String size) => hideIconsOn == null ? false : hideIconsOn.contains(size);
+  bool hideLabels(String size) => hideLabelsOn == null ? false : hideLabelsOn.contains(size);
+
   List<FoTabComponent> get tabs => _tabs;
 
   @ContentChildren(FoTabComponent)
@@ -35,8 +38,8 @@ class FoTabPanelComponent {
   List<FoTabComponent> _tabs;
 
   @Input()
-  bool hideIconsOnSmall = false;
+  List<String> hideIconsOn = [];
 
   @Input()
-  bool hideLabelsOnSmall = false;
+  List<String> hideLabelsOn = [];
 }
