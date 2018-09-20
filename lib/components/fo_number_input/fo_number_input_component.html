@@ -34,7 +34,7 @@
 <material-popup [(visible)]="popupVisible"
                 [source]="source"
                 [autoDismiss]="true"
-                [constrainToViewport]="false"
+                [constrainToViewport]="true"
                 [preferredPositions]="position"
                 [enforceSpaceConstraints]="true">
     <div class="row padding-top-small"
@@ -42,8 +42,8 @@
         <div class="col">
             <material-input [label]="msg.enter_value() | name"
                             floatingLabel
-                            type="text"
-                            pattern="[-]?[0-9]*"
+                            type="tel"
+                            pattern="[-]?\d*"
                             autoFocus
                             [disabled]="disabled"
                             (change)="setValueClamped($event); popupVisible = false;"
