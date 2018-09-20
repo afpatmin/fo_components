@@ -6,7 +6,7 @@ import 'fo_tab_component.dart';
   selector: 'fo-tab-panel',
   templateUrl: 'fo_tab_panel_component.html',
   styleUrls: const ['fo_tab_panel_component.css'],
-  directives: const [FoIconComponent, FoTabComponent, NgFor, NgIf],
+  directives: const [FoIconComponent, FoTabComponent, NgClass, NgFor, NgIf],
 )
 class FoTabPanelComponent {
   FoTabPanelComponent();
@@ -33,4 +33,10 @@ class FoTabPanelComponent {
   }
 
   List<FoTabComponent> _tabs;
+
+  @Input()
+  bool hideIconsOnSmall = false;
+
+  @Input()
+  bool hideLabelsOnSmall = false;
 }

@@ -4,10 +4,10 @@
          [style.color]="color(tab)"
          [style.background-color]="backgroundColor(tab)"
          (click)="onTabClick(tab)">
-         <h1 *ngIf="tab.icon != null" class="margin-top-small margin-bottom-small">
+         <h1 *ngIf="tab.icon != null" class="margin-top-small margin-bottom-small" [class.hide-for-small]="hideIconsOnSmall">
              <fo-icon [icon]="tab.icon"></fo-icon>
          </h1>
-         <p class="margin-top-none margin-bottom-none hide-for-small">
+         <p class="margin-top-none margin-bottom-none" [class.hide-for-small]="hideLabelsOnSmall">
              {{tab.label}}
          </p>
     </div>
