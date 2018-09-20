@@ -2,6 +2,7 @@
 <div>
     <span>{{leadingText}}&nbsp;</span>
     <material-button clear-size
+                     tabindex="-1"
                      dense
                      [disabled]="disabled || (value != null && value <= min)"
                      (mousedown)="onMouseDown(-step)"
@@ -11,12 +12,15 @@
                        size="medium"></material-icon>
     </material-button>
     <span class="clickable"
+          tabindex="{{tabIndex}}"
+          (focus)="openPopup()"      
+          (click)="openPopup()"          
           [class.disabled]="disabled"
-          id="valueOutput"
-          (click)="openPopup()"
+          id="valueOutput"          
           popupSource
           #source="popupSource">{{formattedValue}}</span>
     <material-button clear-size
+                     tabindex="-1"
                      dense
                      [disabled]="disabled || (value != null && value >= max)"
                      (mousedown)="onMouseDown(step)"
@@ -28,18 +32,22 @@
     <span>&nbsp;{{trailingText}}</span>
 </div>
 <material-popup [(visible)]="popupVisible"
-                [source]="source">
-    <div class="row padding-top-small" *ngIf="popupVisible">
+                [source]="source"
+                [autoDismiss]="true"
+                [constrainToViewport]="false"
+                [preferredPositions]="position"
+                [enforceSpaceConstraints]="true">
+    <div class="row padding-top-small"
+         *ngIf="popupVisible">
         <div class="col">
-            <material-input #input
-                            autoFocus
-                            type="number"
-                            [ngFormControl]="numberInputControl"
-                            [label]="msg.enter_value() | name"
-                            [disabled]="disabled"
+            <material-input [label]="msg.enter_value() | name"
                             floatingLabel
+                            type="text"
+                            pattern="[-]?[0-9]*"
+                            autoFocus
+                            [disabled]="disabled"
                             (change)="setValueClamped($event); popupVisible = false;"
-                            [ngModel]="value"></material-input>
+                            [ngModel]="value?.toString()"></material-input>
         </div>
     </div>
 </material-popup>

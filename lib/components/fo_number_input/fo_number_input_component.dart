@@ -27,15 +27,15 @@ import '../fo_modal/fo_modal_component.dart';
       MaterialIconComponent,
       MaterialInputComponent,
       MaterialPopupComponent,
-      PopupSourceDirective
+    PopupSourceDirective  
     ],
     providers: const [FORM_PROVIDERS],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoNumberInputComponent
-    implements OnInit, OnChanges, OnDestroy, ControlValueAccessor<num> {
-  FoNumberInputComponent(
-      @Self() @Optional() this.control, this._changeDetectorRef, this.msg) {
+    implements OnDestroy, ControlValueAccessor<int> {
+  FoNumberInputComponent(@Self() @Optional() this.control,
+      @Attribute('tabindex') this.tabIndex, this._changeDetectorRef, this.msg) {
     _mouseUpListener = html.document.onMouseUp.listen(onMouseUp);
     _touchEndListener = html.document.onTouchEnd.listen(onMouseUp);
     _keyUpListener = html.document.onKeyUp.listen(onMouseUp);
@@ -48,7 +48,7 @@ class FoNumberInputComponent
       value = 0;
     else {
       try {
-        value = v == null ? 0 : math.max(min, math.min(max, num.parse(v)));
+        value = v == null ? 0 : math.max(min, math.min(max, int.parse(v)));
       } on FormatException {
         value = 0;
       }
@@ -61,32 +61,12 @@ class FoNumberInputComponent
   void registerOnTouched(TouchFunction f) {}
 
   @override
-  void writeValue(num obj) {
+  void writeValue(int obj) {
     value = obj;
   }
 
   @override
-  void registerOnChange(ChangeFunction<num> f) => _onChange = f;
-
-  @override
-  void ngOnInit() {
-    numberInputControl = new Control(null, (c) {
-      if (c.value == null) return null;
-      if (c.value > max) return {'error': 'max: $max'};
-      if (c.value < min) return {'error': 'min: $min'};
-      return null;
-    });
-  }
-
-  @override
-  void ngOnChanges(Map<String, SimpleChange> changes) {
-    if (changes.containsKey('step')) {
-      final strStep = step.toString();
-      _precision = (strStep.contains('.'))
-          ? strStep.length - strStep.indexOf('.') - 1
-          : 0;
-    }
-  }
+  void registerOnChange(ChangeFunction<int> f) => _onChange = f;
 
   @override
   void ngOnDestroy() {
@@ -101,7 +81,7 @@ class FoNumberInputComponent
     }
   }
 
-  void onKeyDown(html.KeyboardEvent event, num count) {
+  void onKeyDown(html.KeyboardEvent event, int count) {
     if (event.keyCode == html.KeyCode.ENTER ||
         event.keyCode == html.KeyCode.MAC_ENTER ||
         event.keyCode == html.KeyCode.SPACE) {
@@ -109,7 +89,7 @@ class FoNumberInputComponent
     }
   }
 
-  void onMouseDown(num count) {
+  void onMouseDown(int count) {
     if (disabled) return;
     add(count);
 
@@ -132,16 +112,9 @@ class FoNumberInputComponent
     addStepTimer = null;
   }
 
-  String get formattedValue {
-    if (value == null)
-      return '-';
-    else if (value is int)
-      return value.toString();
-    else
-      return value.toStringAsFixed(_precision);
-  }
+  String get formattedValue => value == null ? '-' : value.toString();
 
-  void add(num count) {
+  void add(int count) {
     value ??= (count is double) ? 0.0 : 0;
 
     if (value + count >= min && value + count <= max) {
@@ -151,9 +124,12 @@ class FoNumberInputComponent
     }
   }
 
-  ChangeFunction<num> _onChange;
+
+  final List<RelativePosition> position = [RelativePosition.AdjacentBottom];
+
+  ChangeFunction<int> _onChange;
   NgControl control;
-  num value;
+  int value;
 
   final FoMessagesService msg;
   StreamSubscription<html.KeyboardEvent> _keyUpListener;
@@ -162,9 +138,8 @@ class FoNumberInputComponent
   final ChangeDetectorRef _changeDetectorRef;
   Timer autoAddTimer;
   Timer addStepTimer;
-  int _precision = 0;
   bool popupVisible = false;
-  Control numberInputControl;
+  String tabIndex = '0';
 
   @Input()
   bool disabled = false;
@@ -176,13 +151,13 @@ class FoNumberInputComponent
   String leadingText = '';
 
   @Input()
-  num max = 9999;
+  int max = 9999;
 
   @Input()
-  num min = 0;
+  int min = 0;
 
   @Input()
-  num step = 1;
+  int step = 1;
 
   @Input()
   String trailingText = '';
