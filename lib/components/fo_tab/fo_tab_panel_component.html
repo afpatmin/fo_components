@@ -8,13 +8,13 @@
             class="margin-top-small margin-bottom-small"
             [class.hide-for-small]="hideIcons('small')"
             [class.hide-for-medium]="hideIcons('medium')"
-            [class.hide-for-small]="hideIcons('large')">
-            <fo-icon [icon]="tab.icon"></fo-icon>
+            [class.hide-for-large]="hideIcons('large')">
+            <fo-icon [icon]="tab.icon"></fo-icon> 
         </h1>
         <p class="margin-top-none margin-bottom-none"
            [class.hide-for-small]="hideLabels('small')"
            [class.hide-for-medium]="hideLabels('medium')"
-           [class.hide-for-small]="hideLabels('large')"> {{tab.label}} </p>
+           [class.hide-for-large]="hideLabels('large')"> {{tab.label}} </p>
     </div>
 </div>
 <ng-content>
