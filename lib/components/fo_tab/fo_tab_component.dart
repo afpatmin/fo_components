@@ -3,8 +3,7 @@ import 'package:angular/angular.dart';
   selector: 'fo-tab',
   templateUrl: 'fo_tab_component.html',
   styleUrls: const ['fo_tab_component.css'],
-  directives: const [NgIf],    
- // changeDetection: ChangeDetectionStrategy.OnPush
+  directives: const [NgIf]
 )
 class FoTabComponent {
   FoTabComponent();
