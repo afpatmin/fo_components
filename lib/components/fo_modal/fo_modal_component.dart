@@ -2,6 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
+import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 
@@ -24,15 +25,26 @@ class FoModalComponent implements OnDestroy {
   @override
   void ngOnDestroy() {
     _onVisibleChangeController.close();
+    html.document.body.style.overflow = '';
   }
 
   void close() {
     _onVisibleChangeController.add(false);
     visible = false;
+    html.document.body.style.overflow = '';
   }
 
+  bool get visible => _visible;
+
   @Input()
-  bool visible = false;
+  set visible(bool flag) {
+    _visible = flag;
+    if (_visible) {
+      html.document.body.style.overflow = 'hidden';
+    } else {
+      html.document.body.style.removeProperty('overflow');
+    }
+  }
 
   @Input()
   String title;
@@ -57,7 +69,9 @@ class FoModalComponent implements OnDestroy {
 
   @Output('visibleChange')
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
-  
+
   final StreamController<bool> _onVisibleChangeController =
       new StreamController();
+
+  bool _visible = false;
 }
