@@ -55,9 +55,8 @@ class FoMultiSelectComponent implements AfterChanges, OnDestroy {
     _onSelectedIdsChangeController.add(selectedIds);
   }
 
-  FoModel getModel(Object id) => (options == null)
-      ? null
-      : options.firstWhere((model) => model.id == id, orElse: () => null);
+  FoModel getModel(Object id) => selectionOptions.optionsList
+      .firstWhere((model) => model.id == id, orElse: () => null);
 
   StringSelectionOptions<FoModel> selectionOptions =
       new StringSelectionOptions([]);
