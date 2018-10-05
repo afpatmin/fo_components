@@ -25,7 +25,7 @@ import '../fo_modal/fo_modal_component.dart';
     ],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoSelectComponent implements OnInit, OnDestroy {
+class FoSelectComponent implements AfterChanges, OnDestroy {
   FoSelectComponent(this.msg); 
 
   void onSelect(Object id) {
@@ -34,7 +34,7 @@ class FoSelectComponent implements OnInit, OnDestroy {
   }
 
   @override
-  void ngOnInit() {
+  void ngAfterChanges() {
     if (options == null)
       selectionOptions = new StringSelectionOptions([]);
     else if (selectionOptions.optionsList.length != options.length) {

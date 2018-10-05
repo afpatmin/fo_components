@@ -23,13 +23,13 @@ import '../../services/fo_messages_service.dart';
     ],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoMultiSelectComponent implements OnInit, OnDestroy {
+class FoMultiSelectComponent implements AfterChanges, OnDestroy {
   FoMultiSelectComponent(this.msg) {
     buttonText = msg.select();
   }
 
   @override
-  void ngOnInit() {
+  void ngAfterChanges() {
     if (options == null) {
       selectionOptions = new StringSelectionOptions([]);
     } else if (selectionOptions.optionsList.length != options.length) {
