@@ -26,7 +26,7 @@ import '../fo_modal/fo_modal_component.dart';
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoSelectComponent implements AfterChanges, OnDestroy {
-  FoSelectComponent(this.msg); 
+  FoSelectComponent(this.msg);
 
   void onSelect(Object id) {
     selectedId = id;
@@ -35,12 +35,13 @@ class FoSelectComponent implements AfterChanges, OnDestroy {
 
   @override
   void ngAfterChanges() {
-    if (options == null)
-      selectionOptions = new StringSelectionOptions([]);
-    else if (selectionOptions.optionsList.length != options.length) {
+    if (options == null) {
+      selectionOptions = new StringSelectionOptions([]);      
+    } else if (options.length != _optionsCount) {
       selectionOptions =
-          new StringSelectionOptions(options.toList(), shouldSort: sort);
+          new StringSelectionOptions(options.toList(), shouldSort: sort);      
     }
+    _optionsCount = selectionOptions.optionsList.length;
   }
 
   @override
@@ -67,6 +68,7 @@ class FoSelectComponent implements AfterChanges, OnDestroy {
       new StreamController();
 
   bool tooltipModalVisible = false;
+  int _optionsCount = 0;
 
   @Input()
   String actionButtonIcon;

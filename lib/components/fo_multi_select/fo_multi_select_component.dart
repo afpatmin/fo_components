@@ -31,14 +31,13 @@ class FoMultiSelectComponent implements AfterChanges, OnDestroy {
   @override
   void ngAfterChanges() {
     if (options == null) {
-      selectionOptions = new StringSelectionOptions([]);      
-    } else if (selectionOptions.optionsList.length != options.length) {
+      selectionOptions = new StringSelectionOptions([]);
+    } else if (options.length != _optionsCount) {
       selectionOptions = new StringSelectionOptions(
           options.toList(growable: false),
           shouldSort: sort);
     }
-    
-    filterOptions = new StringSelectionOptions(selectionOptions.optionsList);
+    _optionsCount = selectionOptions.optionsList.length;
   }
 
   @override
@@ -57,20 +56,21 @@ class FoMultiSelectComponent implements AfterChanges, OnDestroy {
     _onSelectedIdsChangeController.add(selectedIds);
   }
 
-  FoModel getModel(Object id) => selectionOptions.optionsList
-      .firstWhere((model) => model.id == id, orElse: () => null);
+  FoModel getModel(Object id) => options == null
+      ? null
+      : options.firstWhere((model) => model.id == id, orElse: () => null);
 
   StringSelectionOptions<FoModel> selectionOptions =
       new StringSelectionOptions([]);
 
-  StringSelectionOptions<FoModel> filterOptions =
-      new StringSelectionOptions([]);
   final StreamController<bool> _onVisibleChangeController =
       new StreamController();
   final StreamController<List<Object>> _onSelectedIdsChangeController =
       new StreamController();
 
   final FoMessagesService msg;
+
+  int _optionsCount = 0;
 
   @Input()
   String buttonText;

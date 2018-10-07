@@ -8,7 +8,7 @@
   <div *ngIf="showSearch"
        header>
     <material-select-searchbox [label]="msg.search()"
-                               [filterable]="filterOptions">
+                               [filterable]="selectionOptions">
     </material-select-searchbox>
   </div>
   <material-select-dropdown-item *ngFor="let option of selectionOptions.optionsList"
