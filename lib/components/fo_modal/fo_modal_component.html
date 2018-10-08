@@ -1,13 +1,25 @@
 <modal [visible]="visible">
-    <material-dialog headered class="themeable" [class.white-header]="titleImageUrl != null" [class.fixed-height]="fixedHeight" [class.fixed-width]="fixedWidth" [class.small-padding]="smallPadding"
+    <material-dialog headered
+                     class="themeable"
+                     [class.white-header]="titleImageUrl != null"
+                     [class.fixed-height]="fixedHeight"
+                     [class.fixed-width]="fixedWidth"
+                     [class.small-padding]="smallPadding"
                      [error]="error">
         <div header>
             <div class="flexContainer">
-                <img *ngIf="titleImageUrl != null" [src]="titleImageUrl" alt="title" />
-                <h3 class="themeable" *ngIf="titleImageUrl == null && title != null">{{title}}</h3>
-                <div *ngIf="showCloseButton" id="closeButtonContainer">
-                    <material-button class="themeable" clear-size (trigger)="close()">
-                        <material-icon icon="close" size="x-large"></material-icon>
+                <img *ngIf="titleImageUrl != null"
+                     [src]="titleImageUrl"
+                     alt="title" />
+                <h3 class="themeable"
+                    *ngIf="titleImageUrl == null && title != null">{{title}}</h3>
+                <div *ngIf="showCloseButton"
+                     id="closeButtonContainer">
+                    <material-button class="themeable"
+                                     clear-size
+                                     (trigger)="close()">
+                        <material-icon icon="close"
+                                       size="x-large"></material-icon>
                     </material-button>
                 </div>
             </div>
