@@ -153,7 +153,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
     setIndices(0);
   }
 
-  void onSort(String column, Iterable<Object> keys) {
+  void onSort(String column) {
     if (!disabled && column != null) {
       sortColumn = column;
       sortOrder = (sortOrder == 'ASC') ? 'DESC' : 'ASC';
@@ -199,7 +199,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
         }
 
         final values = data.keys
-            .where(keys.contains)
+            .where(filteredKeys.contains)
             .map((key) => data[key])
             .toList();
 
