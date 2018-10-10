@@ -66,8 +66,6 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
         onSearch();
       }
 
-      
-
       if (filteredKeys.length < lastIndex) {
         setIndices(0);
       }
@@ -177,8 +175,9 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
         'internal': internalSort || evaluatedColumns.containsKey(column)
       });
 
-      //searchPhrase = null;
-      _filteredKeys = null;
+      if (searchPhrase == null) {
+        _filteredKeys = null;
+      }
 
       /// Evaluated columns are always sorted internally
       if (internalSort || evaluatedColumns.containsKey(column)) {
@@ -212,10 +211,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
           }
         }
 
-        final values = data.keys
-            .where(filteredKeys.contains)
-            .map((key) => data[key])
-            .toList();
+        final values = filteredKeys.map((key) => data[key]).toList();
 
         if (values != null) {
           if (columns.keys.contains(sortColumn)) {
