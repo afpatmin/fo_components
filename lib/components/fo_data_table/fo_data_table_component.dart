@@ -177,7 +177,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
         'internal': internalSort || evaluatedColumns.containsKey(column)
       });
 
-      searchPhrase = null;
+      //searchPhrase = null;
       _filteredKeys = null;
 
       /// Evaluated columns are always sorted internally
