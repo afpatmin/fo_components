@@ -18,7 +18,7 @@ import '../fo_select/fo_select_component.dart';
 /// Callback function for evaluated columns
 typedef Object EvaluateColumnFn(Object model);
 
-typedef String ErrorFn(Object model); 
+typedef String ErrorFn(Object model);
 
 @Component(
     selector: 'fo-data-table',
@@ -51,7 +51,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
 
   @override
   void ngOnChanges(Map<String, SimpleChange> changes) {
-    _evaluatedColumnsBuffer.clear();    
+    _evaluatedColumnsBuffer.clear();
 
     _filteredKeys = new List.from(data.keys);
 
@@ -65,7 +65,10 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
       if (!lazyFilter) {
         onSearch();
       }
-      setIndices(0);
+
+      if (_filteredKeys.length < lastIndex) {
+        setIndices(0);
+      }
     }
   }
 
@@ -145,7 +148,11 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
       }
 
       final keywords = searchPhrase.toLowerCase().split(' ');
-      _filteredKeys = data.keys.where((key) => find(data[key], keywords));
+
+      final keys = (sortColumn == null || sortOrder == null)
+          ? data.keys
+          : onSort(sortColumn, sortOrder);
+      _filteredKeys = keys.where((key) => find(data[key], keywords));
     } else
       _filteredKeys = null;
 
@@ -153,10 +160,15 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
     setIndices(0);
   }
 
-  void onSort(String column) {
+  Iterable<Object> onSort(String column, [String sort_order]) {
     if (!disabled && column != null) {
       sortColumn = column;
-      sortOrder = (sortOrder == 'ASC') ? 'DESC' : 'ASC';
+
+      if (sort_order == null)
+        sortOrder = (sortOrder == 'ASC') ? 'DESC' : 'ASC';
+      else
+        sortOrder = sort_order;
+
       _onSortController.add({
         'column': sortColumn,
         'order': sortOrder,
@@ -218,6 +230,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
         }
       }
     }
+    return _filteredKeys;
   }
 
   void onDownloadDataCSV() {
@@ -361,7 +374,6 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
   final Map<Object, Map<String, Object>> _evaluatedColumnsBuffer = {};
 
   Object getEvaluatedColumn(Object row, String col) {
-
     if (_evaluatedColumnsBuffer[row] == null) {
       _evaluatedColumnsBuffer[row] = {};
     }
@@ -370,7 +382,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
       if (evaluatedColumns.containsKey(col)) {
         _evaluatedColumnsBuffer[row][col] = evaluatedColumns[col](data[row]);
       } else {
-        _evaluatedColumnsBuffer[row][col] = null;        
+        _evaluatedColumnsBuffer[row][col] = null;
       }
     }
     return _evaluatedColumnsBuffer[row][col];
