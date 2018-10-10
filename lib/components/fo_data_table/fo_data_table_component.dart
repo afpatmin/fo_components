@@ -52,10 +52,12 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
   @override
   void ngOnChanges(Map<String, SimpleChange> changes) {
     _evaluatedColumnsBuffer.clear();
+    print('changes');
 
     _filteredKeys = new List.from(data.keys);
 
     if (changes.containsKey('rows') || changes.containsKey('data')) {
+      print(changes);
       data ??= {};
 
       selectedRowOptionId = rowOptions
