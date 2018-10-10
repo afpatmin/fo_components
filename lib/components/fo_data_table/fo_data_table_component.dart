@@ -117,7 +117,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   void onSearch() {
-    if (internalFilter && searchPhrase != null && searchPhrase.isNotEmpty) {
+    if (internalFilter && searchPhrase?.isNotEmpty == true) {
       bool find(Object model, List<String> keywords) {
         bool allKeywords;
         final row = json.decode(json.encode(model));
@@ -149,14 +149,15 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
 
       final keywords = searchPhrase.toLowerCase().split(' ');
 
-      final keys = (sortColumn == null || sortOrder == null)
-          ? data.keys
-          : onSort(sortColumn, sortOrder);
-      _filteredKeys = keys.where((key) => find(data[key], keywords));
+      sortColumn = null;
+      sortOrder = null;
+
+      _filteredKeys = data.keys.where((key) => find(data[key], keywords));
     } else
       _filteredKeys = null;
 
     _onFilterController.add(searchPhrase);
+
     setIndices(0);
   }
 
@@ -175,7 +176,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
         'internal': internalSort || evaluatedColumns.containsKey(column)
       });
 
-      if (searchPhrase == null) {
+      if (searchPhrase?.isEmpty == true) {
         _filteredKeys = null;
       }
 
