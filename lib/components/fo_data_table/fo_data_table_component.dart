@@ -55,7 +55,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
 
     _filteredKeys = new List.from(data.keys);
 
-    if (changes.containsKey('rows') || changes.containsKey('data') || changes.containsKey('disabled')) {
+    if (changes.containsKey('rows') || changes.containsKey('data')) {
       data ??= {};
 
       selectedRowOptionId = rowOptions
@@ -153,7 +153,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
     setIndices(0);
   }
 
-  void onSort(String column) {
+  void onSort(String column, Iterable<Object> keys) {
     if (!disabled && column != null) {
       sortColumn = column;
       sortOrder = (sortOrder == 'ASC') ? 'DESC' : 'ASC';
@@ -199,7 +199,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
         }
 
         final values = data.keys
-            .where(filteredKeys.contains)
+            .where(keys.contains)
             .map((key) => data[key])
             .toList();
 
