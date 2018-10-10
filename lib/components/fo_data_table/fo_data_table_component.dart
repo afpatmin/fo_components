@@ -55,7 +55,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
 
     _filteredKeys = new List.from(data.keys);
 
-    if (changes.containsKey('rows') || changes.containsKey('data')) {
+    if (changes.containsKey('rows') || changes.containsKey('data') || changes.containsKey('disabled')) {
       data ??= {};
 
       selectedRowOptionId = rowOptions
@@ -283,7 +283,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
       (filteredKeys.length.toDouble() / _selectedRowOption.id).ceil();
 
   bool get lazyFilter =>
-      data == null || !internalFilter || data.length < liveSearchThreshold;
+      data == null || !internalFilter || data.length > liveSearchThreshold;
 
   final List<FoModel> rowOptions = [
     new FoModel()..id = 5,
