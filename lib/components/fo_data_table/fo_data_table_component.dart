@@ -53,7 +53,9 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
   void ngOnChanges(Map<String, SimpleChange> changes) {
     _evaluatedColumnsBuffer.clear();
 
-    print(changes);
+    if (!internalFilter || !internalSort) {
+      _filteredKeys = new List.from(data.keys);
+    }
         
     if (changes.containsKey('rows') || changes.containsKey('data')) {
 
