@@ -66,7 +66,9 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
         onSearch();
       }
 
-      if (_filteredKeys.length < lastIndex) {
+      
+
+      if (filteredKeys.length < lastIndex) {
         setIndices(0);
       }
     }
