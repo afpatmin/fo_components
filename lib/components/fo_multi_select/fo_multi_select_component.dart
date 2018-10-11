@@ -47,7 +47,7 @@ class FoMultiSelectComponent implements AfterChanges, OnDestroy {
   }
 
   void onToggle(Object id, bool status) {
-    if (id == null) return;
+    if (id == null || disabled) return;
     if (status == true) {
       selectedIds.add(id);
     } else {
