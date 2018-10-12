@@ -20,10 +20,10 @@
     </material-checkbox>
   </material-select-dropdown-item>
 </material-dropdown-select>
-<material-chips class="selectedValues">
+<material-chips class="selectedValues" [removable]="!disabled">
   <material-chip *ngFor="let id of selectedIds"
                  (remove)="onToggle(id, false)"
-                 reorderItem> {{getModel(id)?.toString()}} </material-chip>
+                 reorderItem [removable]="!disabled"> {{getModel(id)?.toString()}} </material-chip>
 </material-chips>
 <div *ngIf="!selectionOptions.isNotEmpty"
      class="selectedValues">{{nullSelectionButtonText}}</div>
