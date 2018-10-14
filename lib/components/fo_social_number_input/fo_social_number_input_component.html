@@ -25,11 +25,11 @@
     </fo-select>
   </div>
 
-  <div class="m3 col">
+  <div class="m3 col align-bottom">
     <material-input #digitsInput
                     label="xxxx"
                     [disabled]="disabled || selectedYear == null || selectedMonth == null || selectedDay == null"
-                    [maxCount]="4"
+                    [displayBottomPanel]="false"                    
                     [ngFormControl]="digitsControl"
                     [ngModel]="socialNumberDigits"
                     [trailingText]="trailingText"
