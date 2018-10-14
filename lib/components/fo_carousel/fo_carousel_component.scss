@@ -1,6 +1,5 @@
 @import 'package:angular_components/material_button/mixins';
 @import 'package:grid/constants.scss';
-
 .arrow {
     position: absolute;
     top: auto;
@@ -46,15 +45,20 @@
     #slide-transformer {
         -webkit-transition: -webkit-transform 500ms;
         -moz-transition: -moz-transform 500ms;
-        -ms-transition: -ms-transform 500ms; 
+        -ms-transition: -ms-transform 500ms;
         -o-transition: -o-transform 500ms;
         transition: transform 500ms;
         white-space: nowrap;
     }
+    #slide-transformer {
+        ::ng-deep * {
+            white-space: initial;
+        }
+    }
 }
 
 @media screen and (max-width: $medium-width-threshold) {
-    .arrow {        
+    .arrow {
         top: -16px;
         bottom: auto;
         material-button {

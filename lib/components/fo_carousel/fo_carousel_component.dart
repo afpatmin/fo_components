@@ -11,30 +11,64 @@ import 'fo_carousel_slide_component.dart';
     selector: 'fo-carousel',
     styleUrls: const ['fo_carousel_component.css'],
     templateUrl: 'fo_carousel_component.html',
-    directives: const [MaterialButtonComponent, MaterialIconComponent, FoCarouselSlideComponent],
-    changeDetection: ChangeDetectionStrategy.OnPush
-)
-class FoCarouselComponent implements OnDestroy
-{
+    directives: const [
+      MaterialButtonComponent,
+      MaterialIconComponent,
+      FoCarouselSlideComponent,
+      NgIf,
+      MaterialRadioComponent,
+      MaterialRadioGroupComponent,
+      NgFor
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush)
+class FoCarouselComponent implements OnDestroy, OnInit {
+  FoCarouselComponent(this._changeDetectorRef);
+
   @override
-  void ngOnDestroy()
-  {
+  void ngOnDestroy() {
     _onStepController.close();
+    t?.cancel();
   }
 
-  void stepBy(int steps)
-  {
+  @override
+  void ngOnInit() {
+    if (duration != null) {
+      t = new Timer.periodic(
+          new Duration(milliseconds: duration), (_) => stepBy(1));
+    }
+  }
+
+  void stepBy(int steps) {
     step += steps;
-    step = min(max(0, step), slides.length - 1);
+    if (step >= slides.length || step < 0) {
+      step = 0;
+    }
     _onStepController.add(step);
+    _changeDetectorRef.markForCheck();
+  }
+
+  void onButtonChange(int slideNo, bool flag) {
+    if (flag) {
+      step = slideNo;
+      _onStepController.add(step);
+      _changeDetectorRef.markForCheck();
+    }
   }
 
   String get transform => 'translate3d(${-step * 100}%, 0, 0)';
 
   final StreamController<int> _onStepController = new StreamController();
+  Timer t;
+  final ChangeDetectorRef _changeDetectorRef;
 
   @Input('step')
   int step = 0;
+
+  @Input('showRadioButtons')
+  bool showRadioButtons = false;
+
+  @Input('duration')
+  int duration;
 
   @Output('stepChange')
   Stream<int> get stepOutput => _onStepController.stream;
