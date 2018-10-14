@@ -1,46 +1,42 @@
 <div class="row margin-top-none">
-    <div class="m3 s4 col">
-        <fo-select class="margin-top-medium"
-                   [label]="msg.year(1)"
-                   [options]="yearOptions"
-                   [disabled]="disabled"
-                   [sort]="false"
-                   [selectedId]="selectedYear"
-                   (selectedIdChange)="onBirthYearChange($event)">
-        </fo-select>
-    </div>
-    <div class="m3 s4 col">
-        <fo-select class="margin-top-medium"
-                   [label]="msg.month(1)"
-                   [disabled]="disabled"
-                   [options]="monthOptions"
-                   [selectedId]="selectedMonth"
-                   (selectedIdChange)="onBirthMonthChange($event)">
-        </fo-select>
-    </div>
-    <div class="m3 s4 col">
-        <fo-select class="margin-top-medium"
-                   [label]="msg.day(1)"
-                   [disabled]="disabled"
-                   [options]="dayOptions"
-                   [selectedId]="selectedDay"
-                   (selectedIdChange)="onBirthDayChange($event)">
-        </fo-select>
-    </div>
+  <div class="m3 s4 col">
+    <fo-select [label]="msg.year(1)"
+               [options]="yearOptions"
+               [disabled]="disabled"
+               [sort]="false"
+               [selectedId]="selectedYear"
+               (selectedIdChange)="onBirthYearChange($event)">
+    </fo-select>
+  </div>
+  <div class="m3 s4 col">
+    <fo-select [label]="msg.month(1)"
+               [disabled]="disabled"
+               [options]="monthOptions"
+               [selectedId]="selectedMonth"
+               (selectedIdChange)="onBirthMonthChange($event)">
+    </fo-select>
+  </div>
+  <div class="m3 s4 col">
+    <fo-select [label]="msg.day(1)"
+               [disabled]="disabled"
+               [options]="dayOptions"
+               [selectedId]="selectedDay"
+               (selectedIdChange)="onBirthDayChange($event)">
+    </fo-select>
+  </div>
 
-    <div class="m3 col">
-        <material-input #digitsInput
-                        label="xxxx"
-                        floatingLabel
-                        class="margin-top-medium"
-                        [disabled]="disabled || selectedYear == null || selectedMonth == null || selectedDay == null"
-                        [maxCount]="4"
-                        [ngFormControl]="digitsControl"
-                        [ngModel]="socialNumberDigits"
-                        [trailingText]="trailingText"
-                        (ngModelChange)="onSocialNumberDigitsChange($event)"
-                        (click)="selectAll()"
-                        (focus)="selectAll()">
-        </material-input>
-    </div>
+  <div class="m3 col">
+    <material-input #digitsInput
+                    label="xxxx"
+                    floatingLabel
+                    [disabled]="disabled || selectedYear == null || selectedMonth == null || selectedDay == null"
+                    [maxCount]="4"
+                    [ngFormControl]="digitsControl"
+                    [ngModel]="socialNumberDigits"
+                    [trailingText]="trailingText"
+                    (ngModelChange)="onSocialNumberDigitsChange($event)"
+                    (click)="selectAll()"
+                    (focus)="selectAll()">
+    </material-input>
+  </div>
 </div>
