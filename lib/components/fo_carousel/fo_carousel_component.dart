@@ -64,8 +64,8 @@ class FoCarouselComponent implements OnDestroy, OnInit {
   @Input('step')
   int step = 0;
 
-  @Input('showArrowButtons')
-  bool showArrowButtons = true;
+  @Input('showRadioButtons')
+  bool showRadioButtons = false;
 
   @Input('duration')
   int duration;

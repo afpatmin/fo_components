@@ -4,7 +4,7 @@
              [style.transform]="transform">
             <ng-content></ng-content>
         </div>
-        <ng-container *ngIf="showArrowButtons == true">
+        <ng-container>
             <div class="arrow"
                  [class.faded]="step <= 0"
                  id="arrow-left">
@@ -26,7 +26,7 @@
             </div>
         </ng-container>
         <div class="row"
-             *ngIf="showArrowButtons == false">
+             *ngIf="showRadioButtons == true">
             <div class="col text-center">
                 <material-radio-group class="no-left-margin">
                     <material-radio *ngFor="let slide of slides; let i=index"
