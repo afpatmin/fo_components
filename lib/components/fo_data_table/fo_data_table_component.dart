@@ -99,7 +99,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
         try {
           final date = DateTime.parse(cell);
           // only format date if reasonable date
-          return (date.year > 1900 && date.year > 2100)
+          return (date.year > 1900 && date.year < 2100)
               ? dateFormat.format(date)
               : cell;
         } on FormatException {
