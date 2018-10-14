@@ -56,9 +56,8 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
     if (!internalFilter || !internalSort) {
       _filteredKeys = new List.from(data.keys);
     }
-        
-    if (changes.containsKey('rows') || changes.containsKey('data')) {
 
+    if (changes.containsKey('rows') || changes.containsKey('data')) {
       data ??= {};
       _filteredKeys = new List.from(data.keys);
 
@@ -95,11 +94,18 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
       final json = model.toJson();
       final cell = json[column];
       if (cell == null) return null;
-      try {
-        return (cell is String)
-            ? dateFormat.format(DateTime.parse(cell))
-            : cell;
-      } on FormatException {
+
+      if (cell is String) {
+        try {
+          final date = DateTime.parse(cell);
+          // only format date if reasonable date
+          return (date.year > 1900 && date.year > 2100)
+              ? dateFormat.format(date)
+              : cell;
+        } on FormatException {
+          return cell;
+        }
+      } else {
         return cell;
       }
     }
