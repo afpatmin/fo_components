@@ -182,8 +182,6 @@ class FoMessagesService {
 
   String send() => Intl.message('send', name: 'FoMessagesService_send');
 
-  String ssn() => Intl.message('social number', name: 'FoMessagesService_ssn');
-
   String token() => Intl.message('token', name: 'FoMessagesService_token');
 
   String username() =>
