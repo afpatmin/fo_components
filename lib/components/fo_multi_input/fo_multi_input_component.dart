@@ -89,7 +89,6 @@ class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
         ..stopPropagation()
         ..preventDefault();
     }
-    // if (_onChange != null) _onChange(inputValue);
   }
 
   @override
