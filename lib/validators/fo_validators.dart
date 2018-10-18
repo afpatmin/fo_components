@@ -42,6 +42,17 @@ class FoValidators {
       return null;
   }
 
+  static Map<String, String> alphaNumericEn(AbstractControl control) {
+    if ((required())(control) != null) return null;
+
+    final value = control.value;
+    final r = new RegExp(r'[a-zA-Z0-9 ]');
+    if (r.allMatches(value).length != value.length) {
+      return {'error': Intl.message('Enter alphanumeric characters only')};
+    } else
+      return null;
+  }
+
   static Map<String, String> email(AbstractControl control) {
     if ((required())(control) != null) return null;
 
