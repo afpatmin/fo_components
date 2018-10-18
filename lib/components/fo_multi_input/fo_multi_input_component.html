@@ -1,26 +1,25 @@
 <div class="flex-container">
-    <material-input [label]="label"
-                    floatingLabel
-                    [maxCount]="maxCount"
-                    [leadingText]="leadingText"
-                    [disabled]="disabled"
-                    [displayBottomPanel]="true"
-                    (keyup)="onKeyUp($event)"
-                    [(ngModel)]="inputValue">
-    </material-input>
-    <material-button raised
-                     clear-size
-                     [disabled]="disabled || inputValue == null || inputValue.isEmpty || control?.valid == false"
-                     (trigger)="add()">
-        <material-icon icon="add_outline"
-                       size="small"></material-icon>
-    </material-button>
-</div>
-<div class="margin-top-none margin-bottom-small"
-     *ngIf="control?.errors != null">
-    <span class="error color-alert">{{control.errors['error']}}</span>
+  <material-input [label]="label"
+                  floatingLabel
+                  [maxCount]="maxCount"
+                  [leadingText]="leadingText"
+                  [disabled]="disabled"
+                  [displayBottomPanel]="false"
+                  (keyup)="onKeyUp($event)"
+                  [(ngModel)]="inputValue">
+  </material-input>
+  <material-button raised
+                   clear-size
+                   [disabled]="disabled || inputValue == null || inputValue.isEmpty || inputValue.length > maxCount || (control?.valid != control?.valid == false && value?.isNotEmpty == true)"
+                   (trigger)="add()">
+    <material-icon icon="add_outline"
+                   size="small"></material-icon>
+  </material-button>
 </div>
 <div>
-    <material-chip *ngFor="let item of value"
-                   (remove)="remove(item)">{{item}}</material-chip>
+  <material-chip *ngFor="let item of value"
+                 (remove)="remove(item)">{{item}}</material-chip>
+</div>
+<div class="margin-top-small margin-bottom-small error color-alert">
+    {{errorMessage}}
 </div>

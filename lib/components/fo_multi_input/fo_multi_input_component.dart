@@ -3,6 +3,7 @@
 
 import 'dart:async' show Stream, StreamController;
 import 'dart:html' as html;
+
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';
@@ -22,54 +23,8 @@ import 'package:angular_forms/angular_forms.dart';
     pipes: const [],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
-  FoMultiInputComponent(@Self() @Optional() this.control) {
-    if (control != null) control.valueAccessor = this;
-  }
-
-  @override
-  void registerOnTouched(TouchFunction f) {}
-
-  @override
-  void writeValue(String obj) {
-    inputValue = obj;
-  }
-
-  @override
-  void registerOnChange(ChangeFunction<String> f) => _onChange = f;
-
-  @override
-  void ngOnDestroy() {
-    _onValueChangeController.close();
-  }
-
-  void onKeyUp(html.KeyboardEvent e) {
-    if (e.keyCode == html.KeyCode.ENTER ||
-        e.keyCode == html.KeyCode.MAC_ENTER) {
-      add();
-      e
-        ..stopPropagation()
-        ..preventDefault();
-    }
-    if (_onChange != null) _onChange(inputValue);
-  }
-
-  void add() {
-    value ??= [];
-    if (control?.valid != false && inputValue.isNotEmpty) {      
-      value.add(inputValue);
-      _onValueChangeController.add(value);
-      inputValue = '';
-    }
-  }
-
-  void remove(String item) {
-    if (!disabled) {
-      value.remove(item);
-      _onValueChangeController.add(value);
-    }
-  }
-
   ChangeFunction<String> _onChange;
+
   NgControl control;
 
   @Input()
@@ -86,16 +41,80 @@ class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
 
   String inputValue = '';
 
+  String get errorMessage {
+    if (control == null || control.errors == null || control.errors.isEmpty)
+      return null;
+
+    return '${control.errors.keys.first}: ${control.errors.values.first.toString()}';
+  }
+
   final StreamController<List<String>> _onValueChangeController =
       new StreamController();
 
   @Input()
   List<String> value = [];
 
+  FoMultiInputComponent(@Self() @Optional() this.control) {
+    if (control != null) control.valueAccessor = this;
+  }
+
   @Output('valueChange')
   Stream<List<String>> get onValueChangeOutput =>
       _onValueChangeController.stream;
 
+  void add() {
+    value ??= [];
+    if (inputValue.isNotEmpty) {
+      value.add(inputValue);
+      if (_onChange != null) _onChange(inputValue);
+      _onValueChangeController.add(value);
+      inputValue = '';
+    }
+  }
+
+  @override
+  void ngOnDestroy() {
+    _onValueChangeController.close();
+  }
+
   @override
   void onDisabledChanged(bool isDisabled) {}
+
+  void onKeyUp(html.KeyboardEvent e) {
+    if ((e.keyCode == html.KeyCode.ENTER ||
+            e.keyCode == html.KeyCode.MAC_ENTER) &&
+        (control?.valid != false || value?.isEmpty == true)) {
+      add();
+      e
+        ..stopPropagation()
+        ..preventDefault();
+    }
+    // if (_onChange != null) _onChange(inputValue);
+  }
+
+  @override
+  void registerOnChange(ChangeFunction<String> f) => _onChange = f;
+
+  @override
+  void registerOnTouched(TouchFunction f) {}
+
+  void remove(String item) {
+    if (!disabled) {
+      final index = value.indexOf(item);
+      if (_onChange != null) {
+        if (index == 0)
+          _onChange('');
+        else
+          _onChange(value[index - 1]);
+      }
+      value.remove(item);
+
+      _onValueChangeController.add(value);
+    }
+  }
+
+  @override
+  void writeValue(String obj) {
+    inputValue = obj;
+  }
 }
