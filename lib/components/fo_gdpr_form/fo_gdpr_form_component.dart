@@ -27,23 +27,23 @@ class FoGdprFormComponent implements OnDestroy {
       : form = ControlGroup({
           'firstname': Control()
             ..validator = Validators.compose([
-              FoValidators.required(msg.enter_firstname()),
+              Validators.required,
               Validators.maxLength(50)
             ]),
           'lastname': Control()
             ..validator = Validators.compose([
-              FoValidators.required(msg.enter_lastname()),
+              Validators.required,
               Validators.maxLength(50)
             ]),
           'phone': Control()
             ..validator = Validators.compose([
-              FoValidators.required(msg.enter_phone()),
+              Validators.required,
               FoValidators.phoneNumber,
               Validators.maxLength(15)
             ]),
           'email': new Control()
             ..validator = Validators.compose([
-              FoValidators.required(msg.enter_email()),
+              Validators.required,
               FoValidators.email,
               Validators.maxLength(128)
             ]),
