@@ -10,7 +10,7 @@
   </material-input>
   <material-button raised
                    clear-size
-                   [disabled]="disabled || inputValue == null || inputValue.isEmpty || inputValue.length > maxCount || (control?.valid != control?.valid == false && value?.isNotEmpty == true)"
+                   [disabled]="disabled || inputValue == null || inputValue.isEmpty || inputValue.length > maxCount || (control?.valid == false && value?.isNotEmpty == true)"
                    (trigger)="add()">
     <material-icon icon="add_outline"
                    size="small"></material-icon>
