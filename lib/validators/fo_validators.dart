@@ -104,9 +104,9 @@ class FoValidators {
     static Map<String, String> metaDescription(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
-    final value = control.value;
+    final value = control.value;    
     final r = new RegExp(r'[a-zA-ZåäöÅÄÖ0-9,.! ]');
-    if (r.allMatches(value).length != value.length) {
+    if (value != null && value is String && r.allMatches(value).length != value.length) {
       return {
         'error': Intl.message('Enter a value without special characters',
             name: 'fo_validator_error_meta_description')
