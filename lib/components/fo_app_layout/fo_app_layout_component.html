@@ -58,22 +58,21 @@
              id="main-row"
              [style.padding-top]="paddingTop">
           <div class="col">
-            <div class="row collapse"
+            <div class="row"
                  id="page-header">
               <div class="s10 col">
-                <h3>
+                <h3 class="margin-top-none margin-bottom-x-small">
                   <material-icon [style.color]="backgroundColor"
                                  baseline
                                  [icon]="pageIcon"></material-icon> {{pageHeader | name}}
                 </h3>
               </div>
-              <div class="s2 col text-right">
-                <h3>
+              <div class="s2 col align-bottom text-right">                
                   <material-button *ngIf="instructionsUrl != null"
                                    clear-size
+                                   raised
                                    class="float-right"
-                                   (trigger)="instructionsModalVisible = true">?</material-button>
-                </h3>
+                                   (trigger)="instructionsModalVisible = true">?</material-button>                
               </div>
             </div>
             <div id="page-content">
