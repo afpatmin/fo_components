@@ -1,95 +1,97 @@
 <div class="transformer">
-    <table>
-        <tr>
-            <!-- Sidebar -->
-            <td [style.width]="sidebarWidth">
-                <div id="sidebar"
-                     class="box-shadow"
-                     [style.width]="sidebarWidth">
-                    <div id="sidebar-header"
-                         [style.background-color]="backgroundColor">
-                        <p *ngIf="expanded"
+  <table>
+    <tr>
+      <!-- Sidebar -->
+      <td [style.width]="sidebarWidth">
+        <div id="sidebar"
+             class="box-shadow"
+             [style.width]="sidebarWidth">
+          <div id="sidebar-header"
+               [style.background-color]="backgroundColor">
+            <p *ngIf="expanded"
+               class="fade-opacity"
+               [style.opacity]="animating ? 0 : 1">{{header | name}}</p>
+          </div>
+          <div id="sidebar-list">
+            <material-list *ngIf="expanded"
                            class="fade-opacity"
-                           [style.opacity]="animating ? 0 : 1">{{header | name}}</p>
-                    </div>
-                    <div id="sidebar-list">
-                        <material-list *ngIf="expanded"
-                                       class="fade-opacity"
-                                       [style.opacity]="animating ? 0 : 1">
-                            <div group
-                                 *ngFor="let category of categories">
-                                <div label>{{category.title | name}}</div>
-                                <material-list-item *ngFor="let item of category.items"
-                                                    [active]="isActive(item)"
-                                                    (click)="router.navigate(item.url)">
-                                    <material-icon [icon]="item.icon"
-                                                   baseline></material-icon>&nbsp;{{item.label | name}}
-                                </material-list-item>
-                            </div>
-                        </material-list>
-
-                        <div *ngIf="!expanded"
-                             class="margin-top-medium fade-opacity"
-                             [style.opacity]="animating ? 0 : 1">
-                            <div *ngFor="let category of categories">
-                                <div *ngFor="let item of category.items"
-                                     class="clickable text-center padding-top-small padding-bottom-small mini-item"
-                                     [class.active]="isActive(item)"
-                                     [materialTooltip]="item.label"
-                                     (click)="router.navigate(item.url)">
-                                    <material-icon [icon]="item.icon"
-                                                   size="x-large"
-                                                   baseline></material-icon>
-                                </div>
-                                <hr />
-                            </div>
-                        </div>
-                    </div>
-                    <div id="toggle"
-                         class="text-right"
-                         (click)="toggleExpanded()">
-                        <material-icon baseline
-                                       [icon]="(expanded) ? 'keyboard_arrow_left' : 'keyboard_arrow_right'"></material-icon>
-                    </div>
+                           [style.opacity]="animating ? 0 : 1">
+              <div group
+                   *ngFor="let category of categories">
+                <div label>{{category.title | name}}</div>
+                <material-list-item *ngFor="let item of category.items"
+                                    [active]="isActive(item)"
+                                    (click)="router.navigate(item.url)">
+                  <material-icon [icon]="item.icon"
+                                 baseline></material-icon>&nbsp;{{item.label | name}}
+                </material-list-item>
+              </div>
+            </material-list>
+            <div *ngIf="!expanded"
+                 class="margin-top-medium fade-opacity"
+                 [style.opacity]="animating ? 0 : 1">
+              <div *ngFor="let category of categories">
+                <div *ngFor="let item of category.items"
+                     class="clickable text-center padding-top-small padding-bottom-small mini-item"
+                     [class.active]="isActive(item)"
+                     [materialTooltip]="item.label"
+                     (click)="router.navigate(item.url)">
+                  <material-icon [icon]="item.icon"
+                                 size="x-large"
+                                 baseline></material-icon>
                 </div>
-            </td>
-
-            <!-- Page Content -->
-            <td>
-                <div class="row"
-                     id="main-row"
-                     [style.padding-top]="paddingTop">
-                    <div class="col">
-                        <h3 id="page-header">
-                            <material-icon [style.color]="backgroundColor"
-                                           baseline
-                                           [icon]="pageIcon"></material-icon>
-                            {{pageHeader | name}}
-                            <material-button *ngIf="instructionsUrl != null"
-                                             raised
-                                             clear-size
-                                             class="float-right"
-                                             (trigger)="instructionsModalVisible = true">
-                                {{instructions()}}
-                            </material-button>
-                        </h3>
-                        <div id="page-content">
-                            <ng-content></ng-content>
-                        </div>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
+                <hr />
+              </div>
+            </div>
+          </div>
+          <div id="toggle"
+               class="text-right"
+               (click)="toggleExpanded()">
+            <material-icon baseline
+                           [icon]="(expanded) ? 'keyboard_arrow_left' : 'keyboard_arrow_right'"></material-icon>
+          </div>
+        </div>
+      </td>
+      <!-- Page Content -->
+      <td>
+        <div class="row"
+             id="main-row"
+             [style.padding-top]="paddingTop">
+          <div class="col">
+            <div class="row collapse"
+                 id="page-header">
+              <div class="s10 col">
+                <h3>
+                  <material-icon [style.color]="backgroundColor"
+                                 baseline
+                                 [icon]="pageIcon"></material-icon> {{pageHeader | name}}
+                </h3>
+              </div>
+              <div class="s2 col text-right">
+                <h3>
+                  <material-button *ngIf="instructionsUrl != null"
+                                   clear-size
+                                   class="float-right"
+                                   (trigger)="instructionsModalVisible = true">?</material-button>
+                </h3>
+              </div>
+            </div>
+            <div id="page-content">
+              <ng-content></ng-content>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
 </div>
-
 <fo-modal [title]="instructions()"
-          *ngIf="instructionsModalVisible"          
+          *ngIf="instructionsModalVisible"
           [(visible)]="instructionsModalVisible">
-    <iframe [attr.width]="calcIFrameWidth()"
-            [attr.height]="calcIFrameHeight()"
-            [src]="instructionsUrl"
-            frameborder="0"
-            allowfullscreen
-            scrolling="no"></iframe>
+  <iframe [attr.width]="calcIFrameWidth()"
+          [attr.height]="calcIFrameHeight()"
+          [src]="instructionsUrl"
+          frameborder="0"
+          allowfullscreen
+          scrolling="no"></iframe>
 </fo-modal>
