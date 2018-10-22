@@ -67,12 +67,12 @@
                                  [icon]="pageIcon"></material-icon> {{pageHeader | name}}
                 </h3>
               </div>
-              <div class="s2 col align-bottom text-right">                
-                  <material-button *ngIf="instructionsUrl != null"
-                                   clear-size
-                                   raised
-                                   class="float-right"
-                                   (trigger)="instructionsModalVisible = true">?</material-button>                
+              <div class="s2 col align-bottom text-right">
+                <material-button *ngIf="instructionsUrl != null"
+                                 clear-size
+                                 raised
+                                 class="margin-bottom-small"
+                                 (trigger)="instructionsModalVisible = true">?</material-button>
               </div>
             </div>
             <div id="page-content">
