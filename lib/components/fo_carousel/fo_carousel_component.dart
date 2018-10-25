@@ -26,13 +26,13 @@ class FoCarouselComponent implements OnDestroy, OnInit {
   @override
   void ngOnDestroy() {
     _onStepController.close();
-    t?.cancel();
+    timer?.cancel();
   }
 
   @override
   void ngOnInit() {
     if (duration != null) {
-      t = new Timer.periodic(
+      timer = new Timer.periodic(
           new Duration(milliseconds: duration), (_) => stepBy(1));
     }
   }
@@ -43,10 +43,9 @@ class FoCarouselComponent implements OnDestroy, OnInit {
       step = 0;
     }
     _onStepController.add(step);
-    t?.cancel();
-    if (duration != null) {      
-      t = new Timer.periodic(
-          new Duration(milliseconds: duration), (_) => stepBy(1));
+    timer?.cancel();
+    if (duration != null) {
+      timer = new Timer(new Duration(milliseconds: duration), () => stepBy(1));
     }
     _changeDetectorRef.markForCheck();
   }
@@ -55,10 +54,11 @@ class FoCarouselComponent implements OnDestroy, OnInit {
     if (flag) {
       step = slideNo;
       _onStepController.add(step);
-      t?.cancel();
-      if (duration != null) {        
-        t = new Timer.periodic(
-            new Duration(milliseconds: duration), (_) => stepBy(1));
+
+      timer?.cancel();
+      if (duration != null) {
+        timer =
+            new Timer(new Duration(milliseconds: duration), () => stepBy(1));
       }
       _changeDetectorRef.markForCheck();
     }
@@ -67,7 +67,7 @@ class FoCarouselComponent implements OnDestroy, OnInit {
   String get transform => 'translate3d(${-step * 100}%, 0, 0)';
 
   final StreamController<int> _onStepController = new StreamController();
-  Timer t;
+  Timer timer;
   final ChangeDetectorRef _changeDetectorRef;
 
   @Input()
