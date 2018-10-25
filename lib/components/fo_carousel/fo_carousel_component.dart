@@ -43,6 +43,12 @@ class FoCarouselComponent implements OnDestroy, OnInit {
       step = 0;
     }
     _onStepController.add(step);
+
+    if (duration != null) {
+      t?.cancel();
+      t = new Timer.periodic(
+          new Duration(milliseconds: duration), (_) => stepBy(1));
+    }
     _changeDetectorRef.markForCheck();
   }
 
@@ -50,6 +56,11 @@ class FoCarouselComponent implements OnDestroy, OnInit {
     if (flag) {
       step = slideNo;
       _onStepController.add(step);
+      if (duration != null) {
+        t?.cancel();
+        t = new Timer.periodic(
+            new Duration(milliseconds: duration), (_) => stepBy(1));
+      }
       _changeDetectorRef.markForCheck();
     }
   }
@@ -60,13 +71,16 @@ class FoCarouselComponent implements OnDestroy, OnInit {
   Timer t;
   final ChangeDetectorRef _changeDetectorRef;
 
-  @Input('step')
+  @Input()
   int step = 0;
 
-  @Input('showRadioButtons')
+  @Input()
   bool showRadioButtons = false;
 
-  @Input('duration')
+  @Input()
+  bool showArrowButtons = true;
+
+  @Input()
   int duration;
 
   @Output('stepChange')

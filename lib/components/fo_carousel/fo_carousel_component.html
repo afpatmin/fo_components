@@ -1,39 +1,37 @@
-<div>
-    <div id="slide-container">
-        <div id="slide-transformer"
-             [style.transform]="transform">
-            <ng-content></ng-content>
-        </div>
-        <ng-container>
-            <div class="arrow"
-                 [class.faded]="step <= 0"
-                 id="arrow-left">
-                <material-button raised
-                                 clear-size
-                                 (click)="stepBy(-1)">
-                    <material-icon icon="keyboard_arrow_left"></material-icon>
-                </material-button>
-            </div>
-            <div class="arrow"
-                 [class.faded]="step >= slides.length - 1"
-                 id="arrow-right">
-                <material-button raised
-                                 clear-size
-                                 (click)="stepBy(1)">
-                    <material-icon class="clickable"
-                                   icon="keyboard_arrow_right"></material-icon>
-                </material-button>
-            </div>
-        </ng-container>
-        <div class="row"
-             *ngIf="showRadioButtons == true">
-            <div class="col text-center">
-                <material-radio-group class="no-left-margin">
-                    <material-radio *ngFor="let slide of slides; let i=index"
-                                    [checked]="step == i"
-                                    (checkedChange)="onButtonChange(i, $event)"></material-radio>
-                </material-radio-group>
-            </div>
-        </div>
+<div id="slide-container">
+  <div id="slide-transformer"
+       [style.transform]="transform">
+    <ng-content></ng-content>
+  </div>
+  <div class="row"
+       *ngIf="showRadioButtons == true">
+    <div class="col text-center">
+      <material-radio-group class="no-left-margin">
+        <material-radio *ngFor="let slide of slides; let i=index"
+                        [checked]="step == i"
+                        (checkedChange)="onButtonChange(i, $event)"></material-radio>
+      </material-radio-group>
     </div>
+  </div>
+  <ng-container *ngIf="showArrowButtons">
+    <div class="arrow"
+         [class.faded]="step <= 0"
+         id="arrow-left">
+      <material-button raised
+                       clear-size
+                       (click)="stepBy(-1)">
+        <material-icon icon="keyboard_arrow_left"></material-icon>
+      </material-button>
+    </div>
+    <div class="arrow"
+         [class.faded]="step >= slides.length - 1"
+         id="arrow-right">
+      <material-button raised
+                       clear-size
+                       (click)="stepBy(1)">
+        <material-icon class="clickable"
+                       icon="keyboard_arrow_right"></material-icon>
+      </material-button>
+    </div>
+  </ng-container>
 </div>
