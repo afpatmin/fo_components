@@ -43,9 +43,8 @@ class FoCarouselComponent implements OnDestroy, OnInit {
       step = 0;
     }
     _onStepController.add(step);
-
-    if (duration != null) {
-      t?.cancel();
+    t?.cancel();
+    if (duration != null) {      
       t = new Timer.periodic(
           new Duration(milliseconds: duration), (_) => stepBy(1));
     }
@@ -56,8 +55,8 @@ class FoCarouselComponent implements OnDestroy, OnInit {
     if (flag) {
       step = slideNo;
       _onStepController.add(step);
-      if (duration != null) {
-        t?.cancel();
+      t?.cancel();
+      if (duration != null) {        
         t = new Timer.periodic(
             new Duration(milliseconds: duration), (_) => stepBy(1));
       }
