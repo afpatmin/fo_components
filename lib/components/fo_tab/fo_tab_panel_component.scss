@@ -17,7 +17,10 @@
             cursor: pointer;
             padding: 1rem 0.5rem;                        
             @include boxShadow();
-            transition: color, background-color 300ms ease;
+            transition: color, background-color 300ms ease-in;
+            -webkit-transition: color, background-color 300ms ease-in;
+            -moz-transition: color, background-color 300ms ease-in;
+            -o-transition: color, background-color 300ms ease-in;        
         }        
     }
 }
