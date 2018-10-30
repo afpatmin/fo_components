@@ -1,7 +1,9 @@
 @import '../../colors';
 
 :host {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 
     div#tabStrip {
         display: flex;
