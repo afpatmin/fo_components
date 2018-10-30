@@ -1,14 +1,22 @@
+import 'dart:html' as dom;
 import 'package:angular/angular.dart';
-@Component(
-  selector: 'fo-tab',
-  templateUrl: 'fo_tab_component.html',
-  styleUrls: const ['fo_tab_component.css'],
-  directives: const [NgClass]
-)
-class FoTabComponent {
-  FoTabComponent();
 
-  bool active = false;  
+@Component(
+    selector: 'fo-tab',
+    templateUrl: 'fo_tab_component.html',
+    styleUrls: const ['fo_tab_component.css'],
+    directives: const [NgClass])
+class FoTabComponent {
+  FoTabComponent(this._host);
+
+  set active(bool value) {
+    _active = value;
+    _host.style.display = _active ? '' : 'none';
+  }
+
+  bool get active => _active;
+
+  bool _active = false;
 
   @Input()
   String label;
@@ -21,4 +29,6 @@ class FoTabComponent {
 
   @Input()
   String backgroundColor = '#888';
+
+  final dom.Element _host;
 }

@@ -6,7 +6,7 @@ import 'fo_tab_component.dart';
   selector: 'fo-tab-panel',
   templateUrl: 'fo_tab_panel_component.html',
   styleUrls: const ['fo_tab_panel_component.css'],
-  directives: const [FoIconComponent, FoTabComponent, NgClass, NgFor, NgIf],
+  directives: const [FoIconComponent, FoTabComponent, NgFor, NgIf],
 )
 class FoTabPanelComponent {
   FoTabPanelComponent();
@@ -22,8 +22,10 @@ class FoTabPanelComponent {
       tab.active ? tab.backgroundColor : 'white';
   String color(FoTabComponent tab) => tab.active ? 'white' : tab.labelColor;
 
-  bool hideIcons(String size) => hideIconsOn == null ? false : hideIconsOn.contains(size);
-  bool hideLabels(String size) => hideLabelsOn == null ? false : hideLabelsOn.contains(size);
+  bool hideIcons(String size) =>
+      hideIconsOn == null ? false : hideIconsOn.contains(size);
+  bool hideLabels(String size) =>
+      hideLabelsOn == null ? false : hideLabelsOn.contains(size);
 
   List<FoTabComponent> get tabs => _tabs;
 
@@ -31,6 +33,9 @@ class FoTabPanelComponent {
   set tabs(List<FoTabComponent> value) {
     _tabs = value;
     if (_tabs != null && _tabs.isNotEmpty) {
+      for (final tab in tabs) {
+        tab.active = false;
+      }
       _tabs.first.active = true;
     }
   }
