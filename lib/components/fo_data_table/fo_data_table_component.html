@@ -202,7 +202,7 @@
     </div>
 </div>
 
-<fo-modal title="{{msg.confirm()}}"
+<fo-modal title="{{msg.confirm() | name}}"
           [smallPadding]="false"
           [visible]="deleteBufferId != null"
           (visibleChange)="deleteBufferId = null"
