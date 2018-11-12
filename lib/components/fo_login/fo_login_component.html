@@ -4,10 +4,10 @@
         <h3 class="title margin-bottom-x-small margin-top-x-small">{{state}}</h3>
         <div class="login-container" *ngIf="state == msg.login()">
             <form>
-                <material-input [disabled]="client.loading" [label]="msg.username()" [(ngModel)]="username" (keyup)="onKeyUp($event)">
+                <material-input [disabled]="client.loading" [label]="msg.username()" [(ngModel)]="username" (keyup)="onLoginKeyUp($event)">
                 </material-input>
                 <material-input [disabled]="client.loading" type="password" [label]="msg.password()"
-                                [displayBottomPanel]="false" [(ngModel)]="password" (keyup)="onKeyUp($event)">
+                                [displayBottomPanel]="false" [(ngModel)]="password" (keyup)="onLoginKeyUp($event)">
                 </material-input>
             </form>
             <p *ngIf="showForgotPassword" class="forgot-password" (click)="setState(msg.forgot_password())">{{msg.forgot_password()}}?</p>
@@ -34,7 +34,7 @@
                 <material-button raised clear-size (trigger)="setState(msg.login())">
                     {{msg.back()}}
                 </material-button>
-                <material-button raised clear-size [disabled]="client.loading || username.isEmpty || recoverPasswordSent"
+                <material-button raised clear-size [disabled]="client.loading || username.isEmpty"
                                  (trigger)="onRecoverPassword()">
                     {{msg.send()}}
                 </material-button>
