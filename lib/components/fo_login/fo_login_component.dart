@@ -23,7 +23,7 @@ class UpdatePasswordEvent {
     selector: 'fo-login',
     styleUrls: const ['fo_login_component.css'],
     templateUrl: 'fo_login_component.html',
-    directives: const [
+    directives: const [      
       NgIf,
       materialInputDirectives,
       MaterialButtonComponent,
@@ -50,18 +50,20 @@ class FoLoginComponent implements OnDestroy {
 
   void onRecoverPassword() {
     _onRecoverPasswordController.add(username);
+    setState(msg.login());
   }
 
   void onUpdatePassword() {
     _onUpdatePasswordController.add(new UpdatePasswordEvent()
       ..username = username
       ..password = password
-      ..token = token);    
+      ..token = token);
+    setState(msg.login());
   }
 
   void onLoginKeyUp(html.KeyboardEvent e) {
-    if (username.isNotEmpty &&
-        password.isNotEmpty &&
+    if (username?.isNotEmpty == false &&
+        password?.isNotEmpty != false &&
         (e.keyCode == html.KeyCode.ENTER ||
             e.keyCode == html.KeyCode.MAC_ENTER)) {
       onLogin();
@@ -76,13 +78,13 @@ class FoLoginComponent implements OnDestroy {
   }
 
   void setState(String newState) {
-    state = newState;  
+    state = newState;
     errorMessage = null;
   }
 
   String token = '';
-  String state;  
-  
+  String state;
+
   bool visible = true;
   final FoMessagesService msg;
   final StreamController<LoginEvent> _onLoginController =
@@ -104,14 +106,20 @@ class FoLoginComponent implements OnDestroy {
   @Input()
   bool showForgotPassword = true;
 
+  @Input('label')
+  String label;
+
   @Input()
   String titleImageUrl;
 
   @Input()
   String altUrl;
-
+ 
   @Input()
   String altUrlTitle;
+
+  @Input()
+  bool loading = false;
 
   @Output('login')
   Stream<LoginEvent> get onLoginOutput => _onLoginController.stream;
