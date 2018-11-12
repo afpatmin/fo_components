@@ -50,7 +50,7 @@ class FoLoginComponent implements OnDestroy {
 
   void onRecoverPassword() {
     _onRecoverPasswordController.add(username);
-    setState(msg.login());
+    setState(msg.reset_password());
   }
 
   void onUpdatePassword() {
