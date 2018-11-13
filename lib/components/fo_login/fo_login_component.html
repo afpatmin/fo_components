@@ -7,7 +7,7 @@
   <div class="padder">
     <h3 class="title margin-bottom-x-small margin-top-x-small">{{stateLabels[state] | name}}</h3>
     <div class="login-container"
-         *ngIf="state == msg.login()">
+         *ngIf="state == 'login'">
       <form>
         <material-input [disabled]="loading"
                         [label]="msg.username()"
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="login-container"
-         *ngIf="state == msg.forgot_password()">
+         *ngIf="state == forgot_password">
       <p>{{msg.forgot_password_description() | name}}</p>
       <material-input [disabled]="loading"
                       [label]="msg.username()"
@@ -60,7 +60,7 @@
       </div>
     </div>
     <div class="login-container"
-         *ngIf="state == msg.reset_password()">
+         *ngIf="state == 'reset_password'">
       <p>{{msg.reset_password_description() | name}}</p>
       <material-input [disabled]="loading"
                       [label]="msg.token()"
