@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="login-container"
-         *ngIf="state == forgot_password">
+         *ngIf="state == 'forgot_password'">
       <p>{{msg.forgot_password_description() | name}}</p>
       <material-input [disabled]="loading"
                       [label]="msg.username()"
