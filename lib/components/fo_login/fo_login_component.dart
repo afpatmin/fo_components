@@ -32,8 +32,12 @@ class UpdatePasswordEvent {
     ],
     pipes: const [NamePipe])
 class FoLoginComponent implements OnDestroy {
-  FoLoginComponent(this.msg) {
-    state = msg.login();
+  FoLoginComponent(this.msg) : stateLabels = {
+    'forgot_password': msg.forgot_password(),
+    'login': msg.login(),
+    'reset_password': msg.reset_password(),
+    } {
+    state = 'login';    
   }
 
   @override
@@ -50,8 +54,7 @@ class FoLoginComponent implements OnDestroy {
   }
 
   void onRecoverPassword() {
-    _onRecoverPasswordController.add(username);
-    setState(msg.reset_password());
+    _onRecoverPasswordController.add(username);   
   }
 
   void onUpdatePassword() {
@@ -59,7 +62,7 @@ class FoLoginComponent implements OnDestroy {
       ..username = username
       ..password = password
       ..token = token);
-    setState(msg.login());
+    state = 'login';
   }
 
   void onLoginKeyUp(html.KeyboardEvent e) {
@@ -78,14 +81,8 @@ class FoLoginComponent implements OnDestroy {
     }
   }
 
-  void setState(String newState) {
-    state = newState;
-    errorMessage = null;
-  }
-
   String token = '';
-  String state;
-
+  
   bool visible = true;
   final FoMessagesService msg;
   final StreamController<LoginEvent> _onLoginController =
@@ -94,6 +91,8 @@ class FoLoginComponent implements OnDestroy {
       new StreamController();
   final StreamController<UpdatePasswordEvent> _onUpdatePasswordController =
       new StreamController();
+
+  final Map<String, String> stateLabels;
 
   @Input()
   String username;
@@ -107,8 +106,11 @@ class FoLoginComponent implements OnDestroy {
   @Input()
   bool showForgotPassword = true;
 
-  @Input('label')
+  @Input()
   String label;
+
+  @Input()
+  String state;
 
   @Input()
   String titleImageUrl;

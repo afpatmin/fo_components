@@ -5,11 +5,11 @@
           [titleImageUrl]="titleImageUrl"
           [error]="errorMessage">
   <div class="padder">
-    <h3 class="title margin-bottom-x-small margin-top-x-small">{{state | name}}</h3>
+    <h3 class="title margin-bottom-x-small margin-top-x-small">{{stateLabels[state] | name}}</h3>
     <div class="login-container"
          *ngIf="state == msg.login()">
       <form>
-        <material-input [disabled]="loading"                        
+        <material-input [disabled]="loading"
                         [label]="msg.username()"
                         [(ngModel)]="username"
                         (keyup)="onLoginKeyUp($event)">
@@ -24,7 +24,7 @@
       </form>
       <p *ngIf="showForgotPassword"
          class="forgot-password"
-         (click)="setState(msg.forgot_password())">{{msg.forgot_password()}}?</p>
+         (click)="state = 'forgot_password'">{{msg.forgot_password()}}?</p>
       <div class="button-container">
         <material-button raised
                          clear-size
@@ -52,7 +52,7 @@
       <div class="button-container">
         <material-button raised
                          clear-size
-                         (trigger)="setState(msg.login())"> {{msg.back()}} </material-button>
+                         (trigger)="state = 'login'"> {{msg.back()}} </material-button>
         <material-button raised
                          clear-size
                          [disabled]="loading || username?.isEmpty != false"
@@ -73,6 +73,9 @@
                       [(ngModel)]="password">
       </material-input>
       <div class="button-container">
+        <material-button raised
+                         clear-size
+                         (trigger)="state = 'login'"> {{msg.back()}} </material-button>
         <material-button raised
                          clear-size
                          [disabled]="loading || password?.isEmpty != false || token?.isEmpty != false"
