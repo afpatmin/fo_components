@@ -24,7 +24,7 @@ class UpdatePasswordEvent {
     selector: 'fo-login',
     styleUrls: const ['fo_login_component.css'],
     templateUrl: 'fo_login_component.html',
-    directives: const [      
+    directives: const [
       NgIf,
       materialInputDirectives,
       MaterialButtonComponent,
@@ -32,12 +32,13 @@ class UpdatePasswordEvent {
     ],
     pipes: const [NamePipe])
 class FoLoginComponent implements OnDestroy {
-  FoLoginComponent(this.msg) : stateLabels = {
-    'forgot_password': msg.forgot_password(),
-    'login': msg.login(),
-    'reset_password': msg.reset_password(),
-    } {
-    state = 'login';    
+  FoLoginComponent(this.msg)
+      : stateLabels = {
+          'forgot_password': msg.forgot_password(),
+          'login': msg.login(),
+          'reset_password': msg.reset_password(),
+        } {
+    setState('login');    
   }
 
   @override
@@ -45,6 +46,7 @@ class FoLoginComponent implements OnDestroy {
     _onLoginController.close();
     _onRecoverPasswordController.close();
     _onUpdatePasswordController.close();
+    onStateChangeController.close();
   }
 
   void onLogin() {
@@ -54,7 +56,7 @@ class FoLoginComponent implements OnDestroy {
   }
 
   void onRecoverPassword() {
-    _onRecoverPasswordController.add(username);   
+    _onRecoverPasswordController.add(username);
   }
 
   void onUpdatePassword() {
@@ -62,7 +64,7 @@ class FoLoginComponent implements OnDestroy {
       ..username = username
       ..password = password
       ..token = token);
-    state = 'login';
+    setState('login');    
   }
 
   void onLoginKeyUp(html.KeyboardEvent e) {
@@ -81,8 +83,13 @@ class FoLoginComponent implements OnDestroy {
     }
   }
 
+  void setState(String newState) {
+    state = newState;
+    onStateChangeController.add(state);
+  }
+
   String token = '';
-  
+
   bool visible = true;
   final FoMessagesService msg;
   final StreamController<LoginEvent> _onLoginController =
@@ -90,6 +97,8 @@ class FoLoginComponent implements OnDestroy {
   final StreamController<String> _onRecoverPasswordController =
       new StreamController();
   final StreamController<UpdatePasswordEvent> _onUpdatePasswordController =
+      new StreamController();
+  final StreamController<String> onStateChangeController =
       new StreamController();
 
   final Map<String, String> stateLabels;
@@ -117,7 +126,7 @@ class FoLoginComponent implements OnDestroy {
 
   @Input()
   String altUrl;
- 
+
   @Input()
   String altUrlTitle;
 
@@ -134,4 +143,7 @@ class FoLoginComponent implements OnDestroy {
   @Output('updatePassword')
   Stream<UpdatePasswordEvent> get onUpdatePasswordOutput =>
       _onUpdatePasswordController.stream;
+
+  @Output('stateChange')
+  Stream<String> get onStateChangeOutput => onStateChangeController.stream;
 }

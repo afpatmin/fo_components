@@ -24,7 +24,7 @@
       </form>
       <p *ngIf="showForgotPassword"
          class="forgot-password"
-         (click)="state = 'forgot_password'">{{msg.forgot_password()}}?</p>
+         (click)="setState('forgot_password'">{{msg.forgot_password()}}?</p>
       <div class="button-container">
         <material-button raised
                          clear-size
@@ -52,7 +52,7 @@
       <div class="button-container">
         <material-button raised
                          clear-size
-                         (trigger)="state = 'login'"> {{msg.back()}} </material-button>
+                         (trigger)="setState('login')"> {{msg.back()}} </material-button>
         <material-button raised
                          clear-size
                          [disabled]="loading || username?.isEmpty != false"
@@ -75,7 +75,7 @@
       <div class="button-container">
         <material-button raised
                          clear-size
-                         (trigger)="state = 'login'"> {{msg.back()}} </material-button>
+                         (trigger)="setState('login')"> {{msg.back()}} </material-button>
         <material-button raised
                          clear-size
                          [disabled]="loading || password?.isEmpty != false || token?.isEmpty != false"
