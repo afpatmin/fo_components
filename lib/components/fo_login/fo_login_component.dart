@@ -85,6 +85,7 @@ class FoLoginComponent implements OnDestroy {
 
   void setState(String newState) {
     state = newState;
+    errorMessage = null;    
     onStateChangeController.add(state);
   }
 
