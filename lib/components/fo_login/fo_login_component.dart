@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
+import '../../pipes/fo_name_pipe.dart';
 import '../../services/fo_messages_service.dart';
 import '../fo_modal/fo_modal_component.dart';
 
@@ -29,7 +30,7 @@ class UpdatePasswordEvent {
       MaterialButtonComponent,
       FoModalComponent
     ],
-    pipes: const [])
+    pipes: const [NamePipe])
 class FoLoginComponent implements OnDestroy {
   FoLoginComponent(this.msg) {
     state = msg.login();

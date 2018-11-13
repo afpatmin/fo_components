@@ -5,7 +5,7 @@
           [titleImageUrl]="titleImageUrl"
           [error]="errorMessage">
   <div class="padder">
-    <h3 class="title margin-bottom-x-small margin-top-x-small">{{state}}</h3>
+    <h3 class="title margin-bottom-x-small margin-top-x-small">{{state | name}}</h3>
     <div class="login-container"
          *ngIf="state == msg.login()">
       <form>
@@ -42,7 +42,7 @@
     </div>
     <div class="login-container"
          *ngIf="state == msg.forgot_password()">
-      <p>{{msg.forgot_password_description()}}</p>
+      <p>{{msg.forgot_password_description() | name}}</p>
       <material-input [disabled]="loading"
                       [label]="msg.username()"
                       floatingLabel
@@ -61,7 +61,7 @@
     </div>
     <div class="login-container"
          *ngIf="state == msg.reset_password()">
-      <p>{{msg.reset_password_description()}}</p>
+      <p>{{msg.reset_password_description() | name}}</p>
       <material-input [disabled]="loading"
                       [label]="msg.token()"
                       floatingLabel
