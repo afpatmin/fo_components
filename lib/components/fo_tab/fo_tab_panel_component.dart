@@ -79,7 +79,6 @@ class FoTabPanelComponent implements AfterChanges, OnDestroy {
         tabIndex = 0;
       }
       _tabs[tabIndex].active = true;
-    }    
-    print('evaluateActiveTab');
+    }        
   }
 }
