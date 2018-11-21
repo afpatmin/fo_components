@@ -120,9 +120,6 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
   void onSearchKeyUp(dom.KeyboardEvent e) {
     if (!lazyFilter) {
       onSearch();
-    } else if (e.keyCode == dom.KeyCode.ENTER ||
-        e.keyCode == dom.KeyCode.MAC_ENTER) {
-      onSearch();
     }
   }
 
@@ -345,7 +342,11 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
       selectedRows.clear();
   }
 
-  String get filterLabel => lazyFilter ? msg.filter_enter() : msg.filter();
+  void onFilterChange(String event) {
+    if (lazyFilter) {
+      onSearch();
+    }
+  }  
 
   Iterable<Object> get filteredKeys =>
       _filteredKeys == null ? data.keys : _filteredKeys;
