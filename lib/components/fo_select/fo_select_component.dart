@@ -9,6 +9,7 @@ import 'package:angular_components/material_icon/material_icon.dart';
 import 'package:angular_components/material_select/material_dropdown_select.dart';
 import 'package:angular_components/material_select/material_select_dropdown_item.dart';
 import 'package:angular_components/material_select/material_select_searchbox.dart';
+import 'package:angular_components/model/selection/string_selection_options.dart';
 import 'package:fo_model/fo_model.dart';
 import '../../pipes/fo_name_pipe.dart';
 import '../../services/fo_messages_service.dart';
