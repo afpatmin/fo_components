@@ -4,7 +4,10 @@
 import 'dart:async';
 import 'dart:html' as html;
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
+import 'package:angular_components/laminate/components/modal/modal.dart';
+import 'package:angular_components/material_button/material_button.dart';
+import 'package:angular_components/material_dialog/material_dialog.dart';
+import 'package:angular_components/material_icon/material_icon.dart';
 
 @Component(
     selector: 'fo-modal',

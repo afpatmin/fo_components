@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
+import 'package:angular_components/material_button/material_button.dart';
+import 'package:angular_components/material_icon/material_icon.dart';
 
 /// A notification popup located at the bottom of the screen
 /// that can be set to close after a specified duration.
