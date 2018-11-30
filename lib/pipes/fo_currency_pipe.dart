@@ -2,8 +2,8 @@ import 'package:angular/di.dart' show Pipe, PipeTransform;
 
 /// Add currency symbol to a value
 /// "<p>{{'100' | currency:'USD'}}</p>" evaluates to "<p>$100</p>"
-@Pipe('currency')
-class CurrencyPipe implements PipeTransform {
+@Pipe('focurrency')
+class FoCurrencyPipe implements PipeTransform {
   String transform(Object value, String currency) {
     if (value == null) return null;
     if (currency == null) return value;
