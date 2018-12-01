@@ -34,11 +34,11 @@ material-dialog {
                 align-self: flex-start;
                 text-align: right;
                 margin-left: 0.5rem;
-                material-button {
-                    color: $foColorSecondary;
-                    ._nghost-ara-9:not([disabled]):not([icon]):hover::after, ._nghost-ara-9.is-focused::after
-                    {
-                        display:none !important;
+                    material-button {
+                        color: $foColorSecondary;
+                    }      
+                    material-button:not([disabled]):not([icon]):hover::after, .is-focused::after {
+                            display:none !important;
                     }
                 }
             }
