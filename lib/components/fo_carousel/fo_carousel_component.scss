@@ -1,5 +1,6 @@
 @import 'package:angular_components/material_button/mixins';
 @import 'package:grid/constants.scss';
+@include no-button-hover('material-button.no-hover');
 :host {
   display: block;
   .arrow {
