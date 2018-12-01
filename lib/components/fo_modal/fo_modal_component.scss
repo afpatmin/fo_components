@@ -36,6 +36,10 @@ material-dialog {
                 margin-left: 0.5rem;
                 material-button {
                     color: $foColorSecondary;
+                   :not([disabled]):not([icon]):hover::after,.is-focused::after
+                    {
+                        display:none;
+                    } 
                 }
             }
         }
@@ -64,7 +68,3 @@ material-dialog.fixed-width {
     max-width: $max-width;
 }
 
-:hover::after,.is-focused::after
-{   
-    display:none;
-}
