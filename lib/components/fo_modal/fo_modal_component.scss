@@ -36,9 +36,6 @@ material-dialog {
                 margin-left: 0.5rem;
                 material-button {
                     color: $foColorSecondary;
-                    ::after{
-                        display:none;
-                    }
                 }
             }
         }
@@ -65,4 +62,9 @@ material-dialog.fixed-width {
     margin-left: 2.5vw;
     margin-right: 2.5vw;
     max-width: $max-width;
+}
+
+._nghost-geu-9:not([disabled]):not([icon]):hover::after, ._nghost-geu-9.is-focused::after
+{   
+    display:none;
 }
