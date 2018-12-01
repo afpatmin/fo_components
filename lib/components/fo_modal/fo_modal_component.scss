@@ -36,10 +36,10 @@ material-dialog {
                 margin-left: 0.5rem;
                 material-button {
                     color: $foColorSecondary;
-                   :not([disabled]):not([icon]):hover::after,.is-focused::after
+                    ._nghost-ara-9:not([disabled]):not([icon]):hover::after, ._nghost-ara-9.is-focused::after
                     {
-                        display:none;
-                    } 
+                        display:none !important;
+                    }
                 }
             }
         }
