@@ -15,10 +15,10 @@
             *ngIf="titleImageUrl == null && title != null">{{title}}</h3>
         <div *ngIf="showCloseButton"
              id="closeButtonContainer">
-          <material-button class="themeable"
+          <material-button class="themeable no-hover"
                            clear-size
                            (trigger)="close()">
-            <material-icon class="no-hover" icon="close"
+            <material-icon icon="close"
                            size="x-large"></material-icon>
           </material-button>
         </div>
