@@ -36,6 +36,9 @@ material-dialog {
                 margin-left: 0.5rem;
                 material-button {
                     color: $foColorSecondary;
+                    ::after{
+                        display:none;
+                    }
                 }
             }
         }
