@@ -1,6 +1,8 @@
 @import 'package:angular_components/material_dialog/mixins';
 @import 'package:grid/constants';
 @import 'package:fo_components/mixins';
+@import 'package:angular_components/material_button/mixins';
+@include no-button-hover('material-button.no-hover');
 material-dialog.small-padding {
     @include material-dialog-body-padding($padding: $small);
     @include material-dialog-header-padding($padding: $small);
@@ -37,9 +39,6 @@ material-dialog {
                 material-button {
                     color: $foColorSecondary;
                 }      
-                material-button:not([disabled]):not([icon]):hover::after, .is-focused::after {
-                        display:none !important;
-                }
             }
         }
     }
