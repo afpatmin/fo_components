@@ -17,7 +17,6 @@
     -o-transition: opacity 200ms;
     transition: opacity 200ms;
     material-button {
-      display:none;
       @include button-background-color('[raised]', #fff);
       background-color: #fff;
       ::ng-deep material-icon {
