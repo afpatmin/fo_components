@@ -64,7 +64,7 @@ material-dialog.fixed-width {
     max-width: $max-width;
 }
 
-._nghost-geu-9:not([disabled]):not([icon]):hover::after, ._nghost-geu-9.is-focused::after
+:hover::after,.is-focused::after
 {   
     display:none;
 }
