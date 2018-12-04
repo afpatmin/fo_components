@@ -61,17 +61,6 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
   void ngOnChanges(Map<String, SimpleChange> changes) {
     _evaluatedColumnsBuffer.clear();
 
-    if (data != null && !eq(data.keys.toList(), filteredKeys)) {
-      _filteredKeys = new List.from(data.keys);
-
-      if (internalFilter) {
-        onSearch();
-      }
-      if (internalSort) {
-        onSort(sortColumn);
-      }
-    }
-
     if (changes.containsKey('rows') || changes.containsKey('data')) {
       data ??= {};
       _filteredKeys = new List.from(data.keys);
@@ -83,10 +72,19 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
       if (!lazyFilter) {
         onSearch();
       }
+    } else if (data != null && !eq(data.keys.toList(), filteredKeys)) {
+      _filteredKeys = new List.from(data.keys);
 
-      if (filteredKeys.length < lastIndex) {
-        setIndices(0);
+      if (internalFilter) {
+        onSearch();
       }
+      if (internalSort) {
+        onSort(sortColumn);
+      }
+    }
+
+    if (filteredKeys.length < lastIndex) {
+      setIndices(0);
     }
   }
 
