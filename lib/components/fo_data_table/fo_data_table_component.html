@@ -75,7 +75,7 @@
                     <td *ngIf="errorFunction != null && data != null">
                         <material-icon *ngIf="errorFunction(data[key]) != null"
                                        icon="warning"
-                                       [materialTooltip]="errorFunction(data[key])"
+                                       [materialTooltip]="errorFunction(data[key]) | name"
                                        size="medium"></material-icon>
                     </td>
                     <td *ngFor="let cell of columns.keys">
