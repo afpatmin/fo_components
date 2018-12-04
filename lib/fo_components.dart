@@ -29,7 +29,9 @@ export 'components/fo_tab/fo_tab_panel_component.dart';
 export 'components/fo_time_input/fo_time_input_component.dart';
 export 'components/fo_youtube_player/fo_youtube_player_component.dart';
 export 'models/fo_quiz_model.dart';
+export 'pipes/fo_currency_pipe.dart';
 export 'pipes/fo_name_pipe.dart';
+export 'pipes/range_pipe.dart';
 export 'validators/fo_validators.dart';
 
 const List<dynamic> foProviders = const [

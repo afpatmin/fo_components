@@ -15,9 +15,10 @@
         <material-input class="text-left"
                         [displayBottomPanel]="false"
                         [disabled]="disabled"
-                        label="{{filterLabel}}"
+                        label="{{msg.filter()}}"
                         trailingGlyph="search"
                         [(ngModel)]="searchPhrase"
+                        (change)="onFilterChange($event)"
                         (keyup)="onSearchKeyUp($event)">
         </material-input>
     </div>

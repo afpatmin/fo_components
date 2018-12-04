@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
+import 'package:angular_components/material_button/material_button.dart';
+import 'package:angular_components/material_icon/material_icon.dart';
 import '../../models/fo_quiz_model.dart';
 import 'fo_option_component.dart';
 import 'fo_quiz_component.dart';

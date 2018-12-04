@@ -4,7 +4,8 @@
 import 'dart:async';
 import 'dart:html' as html;
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
+import 'package:angular_components/material_button/material_button.dart';
+import 'package:angular_components/material_input/material_input.dart';
 import '../../pipes/fo_name_pipe.dart';
 import '../../services/fo_messages_service.dart';
 import '../fo_modal/fo_modal_component.dart';
