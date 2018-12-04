@@ -75,11 +75,13 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
     } else if (data != null && !eq(data.keys.toList(), filteredKeys)) {
       _filteredKeys = new List.from(data.keys);
 
+      final currentSortColumn = sortColumn;
+      final currentSortOrder = sortOrder;
       if (internalFilter) {
         onSearch();
       }
       if (internalSort) {
-        onSort(sortColumn);
+        onSort(currentSortColumn, currentSortOrder);
       }
     }
 
