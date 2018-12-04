@@ -192,6 +192,8 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
       else
         sortOrder = sort_order;
 
+      print(sortOrder);
+
       _onSortController.add({
         'column': sortColumn,
         'order': sortOrder,
