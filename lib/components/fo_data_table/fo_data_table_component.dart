@@ -75,13 +75,16 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
     } else if (data != null && !eq(data.keys.toList(), filteredKeys)) {
       _filteredKeys = new List.from(data.keys);
 
-      if (internalSort) {
-        onSort(sortColumn, sortOrder);
-      }
+      // Buffer sortproperties because they are cleared onSearch()
+      final bufferSortColumn = sortColumn;
+      final bufferSortOrder = sortOrder;
+
       if (internalFilter) {
         onSearch();
       }
-      
+      if (internalSort) {
+        onSort(bufferSortColumn, bufferSortOrder);
+      }
     }
 
     if (filteredKeys.length < lastIndex) {
@@ -184,16 +187,14 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   Iterable<Object> onSort(String column, [String sort_order]) {
-    print(column);
-    if (column != null) {
+    if (column != null && (!disabled || internalSort)) {
       sortColumn = column;
 
-      if (sort_order == null)
+      if (sort_order == null) {
         sortOrder = (sortOrder == 'ASC') ? 'DESC' : 'ASC';
-      else
+      } else {
         sortOrder = sort_order;
-
-      print(sortOrder);
+      }
 
       _onSortController.add({
         'column': sortColumn,
