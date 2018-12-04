@@ -43,7 +43,7 @@ typedef String ErrorFn(Object model);
     pipes: const [NamePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
-  FoDataTableComponent(this.host, this.msg);
+  FoDataTableComponent(this._changeDetectorRef, this.msg);
 
   @override
   void ngOnInit() {
@@ -64,6 +64,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
     } else {
       /// Clean up any keys which may have been removed
       _filteredKeys?.removeWhere(((key) => !data.keys.contains(key)));
+      _changeDetectorRef.detectChanges();
     }
 
     if (changes.containsKey('rows') || changes.containsKey('data')) {
@@ -385,7 +386,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
   bool infoModalOpen = false;
   bool _allChecked;
 
-  final dom.Element host;
+  final ChangeDetectorRef _changeDetectorRef;
   final int liveSearchThreshold = 500;
   final StreamController<String> onAddController = new StreamController();
   final StreamController<Set<Object>> onSelectedRowsController =
