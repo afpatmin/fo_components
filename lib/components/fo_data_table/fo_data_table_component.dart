@@ -64,8 +64,11 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
     } else {
       /// Clean up any keys which may have been removed
       if (_filteredKeys != null) {
+        _changeDetectorRef.detach();
         _filteredKeys.removeWhere(((key) => !data.keys.contains(key)));
-        _changeDetectorRef.detectChanges();
+        _changeDetectorRef
+          ..detectChanges()
+          ..reattach();
       }
     }
 
