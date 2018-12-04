@@ -59,7 +59,11 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
     _evaluatedColumnsBuffer.clear();
 
     if (!internalFilter || !internalSort) {
+      /// Data is filtered/sorted externally, always reset filtered keys to extenral data keys
       _filteredKeys = new List.from(data.keys);
+    } else {
+      /// Clean up any keys which may have been removed
+      _filteredKeys.removeWhere(((key) => !data.keys.contains(key)));
     }
 
     if (changes.containsKey('rows') || changes.containsKey('data')) {
@@ -164,7 +168,8 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
       sortColumn = null;
       sortOrder = null;
 
-      _filteredKeys = data.keys.where((key) => find(data[key], keywords));
+      _filteredKeys =
+          data.keys.where((key) => find(data[key], keywords)).toList();
     } else
       _filteredKeys = null;
 
@@ -236,8 +241,9 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
                 evaluatedColumns[sortColumn](b)));
           }
 
-          _filteredKeys =
-              values.map((model) => json.decode(json.encode(model))['id']);
+          _filteredKeys = values
+              .map((model) => json.decode(json.encode(model))['id'])
+              .toList();
         }
       }
     }
@@ -360,7 +366,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   Iterable<Object> get filteredKeys =>
-      _filteredKeys == null ? data.keys : _filteredKeys;
+      _filteredKeys == null ? data.keys.toList() : _filteredKeys;
 
   int get selectedRowOptionId => _selectedRowOption?.id;
 
@@ -375,7 +381,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
   int lastIndex = 1;
   int currentPage = 1;
   String searchPhrase = '';
-  Iterable<Object> _filteredKeys;
+  List<Object> _filteredKeys;
   bool infoModalOpen = false;
   bool _allChecked;
 
