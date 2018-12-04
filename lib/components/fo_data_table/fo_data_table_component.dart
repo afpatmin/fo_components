@@ -12,6 +12,7 @@ import 'package:angular_components/material_icon/material_icon.dart';
 import 'package:angular_components/material_input/material_input.dart';
 import 'package:angular_components/material_spinner/material_spinner.dart';
 import 'package:angular_components/material_tooltip/material_tooltip.dart';
+import 'package:collection/collection.dart';
 import 'package:fo_model/fo_model.dart';
 import 'package:intl/intl.dart';
 import '../../pipes/fo_name_pipe.dart';
@@ -43,7 +44,9 @@ typedef String ErrorFn(Object model);
     pipes: const [NamePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
-  FoDataTableComponent(this._changeDetectorRef, this.msg);
+  FoDataTableComponent(this.msg);
+
+  final Function eq = const ListEquality().equals;
 
   @override
   void ngOnInit() {
@@ -58,17 +61,14 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
   void ngOnChanges(Map<String, SimpleChange> changes) {
     _evaluatedColumnsBuffer.clear();
 
-    if (!internalFilter || !internalSort) {
-      /// Data is filtered/sorted externally, always reset filtered keys to extenral data keys
+    if (data != null && !eq(data.keys.toList(), filteredKeys)) {
       _filteredKeys = new List.from(data.keys);
-    } else {
-      /// Clean up any keys which may have been removed
-      if (_filteredKeys != null) {
-        _changeDetectorRef.detach();
-        _filteredKeys.removeWhere(((key) => !data.keys.contains(key)));
-        _changeDetectorRef
-          ..detectChanges()
-          ..reattach();
+
+      if (internalFilter) {
+        onSearch();
+      }
+      if (internalSort) {
+        onSort(sortColumn);
       }
     }
 
@@ -371,7 +371,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
     }
   }
 
-  Iterable<Object> get filteredKeys =>
+  List<Object> get filteredKeys =>
       _filteredKeys == null ? data.keys.toList() : _filteredKeys;
 
   int get selectedRowOptionId => _selectedRowOption?.id;
@@ -391,7 +391,6 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
   bool infoModalOpen = false;
   bool _allChecked;
 
-  final ChangeDetectorRef _changeDetectorRef;
   final int liveSearchThreshold = 500;
   final StreamController<String> onAddController = new StreamController();
   final StreamController<Set<Object>> onSelectedRowsController =
