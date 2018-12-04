@@ -184,6 +184,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   Iterable<Object> onSort(String column, [String sort_order]) {
+    print(column);
     if (!disabled && column != null) {
       sortColumn = column;
 
