@@ -82,6 +82,9 @@ class FoImageFileComponent implements OnDestroy {
   }
 
   @Input()
+  String accept = 'image/jpg,image/jpeg,image/png,image/gif';
+
+  @Input()
   String source = '';
 
   @Input()

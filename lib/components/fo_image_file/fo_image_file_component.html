@@ -30,7 +30,7 @@
   <input type="file"
          #fileInput
          (change)="onFileChange($event)"
-         accept="image/jpg,image/jpeg,image/png,image/gif" />
+         [accept]="accept" />
   <p *ngIf="invalidFile"
      class="error-output">{{msg.invalid_file()}}</p>
 </div>
