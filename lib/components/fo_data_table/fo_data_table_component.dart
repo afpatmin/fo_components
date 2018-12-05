@@ -72,6 +72,9 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
       if (!lazyFilter) {
         onSearch();
       }
+      if (filteredKeys.length < lastIndex) {
+        setIndices(0);
+      }
     } else if (data != null && !eq(data.keys.toList(), filteredKeys)) {
       _filteredKeys = new List.from(data.keys);
 
@@ -85,10 +88,6 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
       if (internalSort) {
         onSort(bufferSortColumn, bufferSortOrder);
       }
-    }
-
-    if (filteredKeys.length < lastIndex) {
-      setIndices(0);
     }
   }
 
