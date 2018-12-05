@@ -181,10 +181,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
     setIndices(0);
   }
 
-  Iterable<Object> onSort(String column, [String sort_order]) {
-    print('column: $column');
-    print('disabled: $disabled');
-    print('internalSort: $internalSort');
+  Iterable<Object> onSort(String column, [String sort_order]) {    
     if (column != null && (!disabled || internalSort)) {
       sortColumn = column;
 
@@ -199,16 +196,14 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
         'order': sortOrder,
         'internal': internalSort || evaluatedColumns.containsKey(column)
       });
-
-      print('entered sort');
+      
 
       if (searchPhrase?.isEmpty == true) {
         _filteredKeys = null;
       }
 
       /// Evaluated columns are always sorted internally
-      if (internalSort || evaluatedColumns.containsKey(column)) {
-        print('sorting $sortColumn, $sortOrder');
+      if (internalSort || evaluatedColumns.containsKey(column)) {        
         int sort(Object a, Object b) {
           final vA = a == null ? '-' : a.toString();
           final vB = b == null ? '-' : b.toString();
