@@ -63,7 +63,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
 
     data ??= {};
 
-    if (changes.containsKey('rows') || changes.containsKey('data')) {
+    if (changes.containsKey('rows')) {
       //_filteredKeys = new List.from(data.keys);
 
       selectedRowOptionId = rowOptions
