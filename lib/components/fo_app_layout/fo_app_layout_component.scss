@@ -1,4 +1,5 @@
 @import '../../colors';
+
 :host {
     .box-shadow {
         @include boxShadow();
@@ -128,4 +129,19 @@
             }
         }
     }
+}
+
+@media print {
+  :host {
+    div.transform {
+      table {
+        tr {
+          td#sidebarCol {
+            // Make sure sidebar doesn't take up space on print
+            display: none;
+          }
+        }
+      }
+    }
+  }
 }

@@ -43,30 +43,24 @@ typedef String ErrorFn(Object model);
     ],
     pipes: const [NamePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
-  FoDataTableComponent(this.msg);
+class FoDataTableComponent implements OnChanges, OnDestroy {
+  FoDataTableComponent(this.msg) {
+    selectedRowOptionId = rowOptions.first.id;
+  }
 
   final Function eq = const ListEquality().equals;
 
   @override
-  void ngOnInit() {
-    selectedRowOptionId = rowOptions
-        .firstWhere((r) => r.id == rows, orElse: () => rowOptions.first)
-        .id;
-    firstIndex = 0;
-    lastIndex = _selectedRowOption.id;
-  }
-
-  @override
   void ngOnChanges(Map<String, SimpleChange> changes) {
     _evaluatedColumnsBuffer.clear();
-
     data ??= {};
 
     if (changes.containsKey('rows')) {
       selectedRowOptionId = rowOptions
           .firstWhere((r) => r.id == rows, orElse: () => rowOptions.first)
           .id;
+        firstIndex = 0;
+        lastIndex = _selectedRowOption.id;
     }
     if (_filteredKeys == null || !eq(data.keys.toList(), filteredKeys)) {
       _filteredKeys = new List.from(data.keys);
