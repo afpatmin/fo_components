@@ -131,14 +131,22 @@
     }
 }
 
+// Make sure sidebar and header doesn't take up space on print
 @media print {
   :host {
     div.transformer {
       table {
         tr {
-          td#sidebarCol {
-            // Make sure sidebar doesn't take up space on print
+          td#sidebarCol {            
             display: none;
+          }
+          td {
+            div#main-row {
+              padding-top: 0 !important;
+              div#page-header {
+                display: none;
+              }
+            }
           }
         }
       }
