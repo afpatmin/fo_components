@@ -61,21 +61,24 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
   void ngOnChanges(Map<String, SimpleChange> changes) {
     _evaluatedColumnsBuffer.clear();
 
+    data ??= {};
+
     if (changes.containsKey('rows') || changes.containsKey('data')) {
-      data ??= {};
-      _filteredKeys = new List.from(data.keys);
+      //_filteredKeys = new List.from(data.keys);
 
       selectedRowOptionId = rowOptions
           .firstWhere((r) => r.id == rows, orElse: () => rowOptions.first)
           .id;
-
+/*
       if (!lazyFilter) {
         onSearch();
       }
       if (filteredKeys.length < lastIndex) {
         setIndices(0);
       }
-    } else if (data != null && !eq(data.keys.toList(), filteredKeys)) {
+      */
+    }
+    if (_filteredKeys == null || !eq(data.keys.toList(), filteredKeys)) {
       _filteredKeys = new List.from(data.keys);
 
       // Buffer sortproperties because they are cleared onSearch()
@@ -87,6 +90,9 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
       }
       if (internalSort) {
         onSort(bufferSortColumn, bufferSortOrder);
+      }
+      if (filteredKeys.length < lastIndex) {
+        setIndices(0);
       }
     }
   }
@@ -191,7 +197,7 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
     print('internalSort: $internalSort');
     if (column != null && (!disabled || internalSort)) {
       sortColumn = column;
-      
+
       if (sort_order == null) {
         sortOrder = (sortOrder == 'ASC') ? 'DESC' : 'ASC';
       } else {
@@ -210,7 +216,6 @@ class FoDataTableComponent implements OnChanges, OnInit, OnDestroy {
         _filteredKeys = null;
       }
 
-      
       /// Evaluated columns are always sorted internally
       if (internalSort || evaluatedColumns.containsKey(column)) {
         print('sorting $sortColumn, $sortOrder');
