@@ -41,7 +41,7 @@ class FoRatingComponent implements OnChanges, OnDestroy {
       _options = max == null ? [] : new List.generate(max, (i) => i + 1);
 
       // Reset selected value to max
-      value = max == null ? null : min(value, max);
+      value = (value == null || max == null) ? null : min(value, max);
       _valueChangeController.add(value);
     }
   }
