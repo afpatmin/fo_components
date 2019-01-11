@@ -7,10 +7,10 @@ environment:
   sdk: '>=2.0.0 <3.0.0'
 
 dependencies:
-  angular: ^5.1.0
-  angular_components: ^0.10.0
-  angular_forms: ^2.1.0
-  angular_router: ^2.0.0-alpha+20
+  angular: ^5.2.0
+  angular_components: ^0.11.0
+  angular_forms: ^2.1.1
+  angular_router: ^2.0.0-alpha+21
   fo_model:
     git: https://github.com/afpatmin/fo_model
   grid:
