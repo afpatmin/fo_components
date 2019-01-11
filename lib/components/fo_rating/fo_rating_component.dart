@@ -16,6 +16,9 @@ class FoRatingComponent implements OnChanges, OnDestroy {
   int max = 5;
 
   @Input()
+  bool disabled = false;
+
+  @Input()
   int value;
 
   final StreamController<int> _valueChangeController = new StreamController();
@@ -52,7 +55,9 @@ class FoRatingComponent implements OnChanges, OnDestroy {
   }
 
   void onRatingClick(int event) {
-    value = (value == event) ? event - 1 : event;
-    _valueChangeController.add(value);
+    if (!disabled) {
+      value = (value == event) ? event - 1 : event;
+      _valueChangeController.add(value);
+    }
   }
 }
