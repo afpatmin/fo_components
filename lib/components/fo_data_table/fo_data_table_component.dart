@@ -403,7 +403,7 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
       _evaluatedColumnsBuffer[row] = {};
     }
 
-    if (!_evaluatedColumnsBuffer[row].containsKey(col)) {
+    if (_evaluatedColumnsBuffer[row][col] == null) {
       if (evaluatedColumns.containsKey(col)) {
         _evaluatedColumnsBuffer[row][col] = evaluatedColumns[col](data[row]);
       } else {
