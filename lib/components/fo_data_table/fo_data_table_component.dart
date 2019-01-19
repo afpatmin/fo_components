@@ -103,7 +103,7 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
 
       if (cell is String) {
         try {
-          final date = DateTime.parse(cell);
+          final date = DateTime.parse(cell).toLocal();
           // only format date if reasonable date
           return (date.year > 1900 && date.year < 2100)
               ? dateFormat.format(date)
