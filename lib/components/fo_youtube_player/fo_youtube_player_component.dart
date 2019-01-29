@@ -8,29 +8,30 @@ typedef void YoutubeCallback(JsObject event);
 @Component(
     selector: 'fo-youtube-player',
     styleUrls: const ['fo_youtube_player_component.css'],
-    templateUrl: 'fo_youtube_player_component.html',
-    directives: const [NgClass, NgIf],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    templateUrl: 'fo_youtube_player_component.html')
 class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
-  FoYouTubePlayerComponent(this._changeDetectorRef);
+  FoYouTubePlayerComponent();
 
-  final ChangeDetectorRef _changeDetectorRef;
+  void onTouch() {
+    if (playing) {
+      _player.callMethod('pauseVideo');
+    } else {
+      _player.callMethod('playVideo');
+    }   
+    playing = !playing;
+  }
 
   @override
   void ngOnInit() {
-    if (apiLoaded) {
+    if (apiLoaded)
       throw new StateError('Only one fo-youtube-player can be created per app');
-    }
+
+    playing = autoplay;
 
     document.head.children
         .add(new ScriptElement()..src = 'https://www.youtube.com/iframe_api');
     context['onYouTubeIframeAPIReady'] = _onAPIReady;
 
-    new Future.delayed(const Duration(milliseconds: 200)).then((_) {
-      overlayHidden = true;
-      _changeDetectorRef.markForCheck();
-    });
-    overlayHidden = false;
     apiLoaded = true;
   }
 
@@ -47,35 +48,30 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   void _onAPIReady() {
-    /**
-     * Youtube API is ready, initialize video
-     */
+    // Youtube API is ready, initialize video
     _player = new JsObject(context['YT']['Player'], [elementId, params]);
   }
-
-  bool overlayHidden = false;
 
   void _onReady(JsObject event) {}
 
   void _onStateChange(JsObject event) {
+    if (_player == null) return;
     switch (event['data']) {
       case -1:
-        _onStateChangeController.add('Start');
+        _onStateChangeController.add('Start');        
         break;
 
       case 0:
         _onStateChangeController.add('End');
-        if (loop) {
-          _player.callMethod('playVideo');
-        }
+        playing = false;
         break;
 
       case 1:
-        _onStateChangeController.add('Play');
+        _onStateChangeController.add('Play');        
         break;
 
       case 2:
-        _onStateChangeController.add('Pause');
+        _onStateChangeController.add('Pause');        
         break;
 
       case 3:
@@ -89,20 +85,18 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
 
   JsObject get params {
     final vars = <String, String>{};
-    vars['fs'] = fullscreen ? '1' : '0';
-    vars['rel'] = '0';
-    vars['modestbranding'] = '1'; // Show minimal youtube branding
+    vars['fs'] = '1';
+    vars['rel'] = '0'; // Show related videos at the end of playback
+    vars['modestbranding'] = '0'; // Show minimal youtube branding
     vars['showinfo'] = '1';
-    vars['enablejsapi'] = '1';
     vars['origin'] = Uri.base.origin;
+    vars['enablejsapi'] = '1';
     vars['autoplay'] = autoplay ? '1' : '0';
-    vars['mute'] = autoplay ? '1' : '0';
-    vars['controls'] = controls ? '1' : '0';
-    vars['color'] = color;
+    vars['controls'] = '0';
     final events = <String, YoutubeCallback>{};
     events['onReady'] = _onReady;
     events['onStateChange'] = _onStateChange;
-    final params = <String, dynamic>{};    
+    final params = <String, dynamic>{};
     params['videoId'] = videoId;
     params['playerVars'] = vars;
     params['events'] = events;
@@ -123,20 +117,9 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   bool autoplay = false;
 
-  @Input()
-  bool fullscreen = true;
-
-  @Input()
-  bool loop = false;
-
-  @Input()
-  bool controls = true;
-
-  @Input()
-  String color = 'white';
-
   @Output('stateChange')
   Stream<String> get stateChangeOutput => _onStateChangeController.stream;
 
-  static bool apiLoaded = false;
+  static bool apiLoaded = false;  
+  bool playing = false;
 }

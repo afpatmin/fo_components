@@ -1,26 +1,33 @@
-:host {
-  display: block;
+
+#youtube-player-wrapper
+{
   position: relative;
-  #youtube-player-wrapper {
-    padding-bottom: 56.25%;
-    padding-top: 0;
-    overflow: hidden;
-    iframe, .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-      margin: 0;
-      padding: 0;
-    }
-    .overlay {          
-      display: block;
-      z-index: 2;
-    }    
-    .overlay.hidden {      
-      display: none;
-    }
+  padding-bottom: 56.25%; // 16:9
+  padding-top: 0;
+  height: 0;
+  overflow: hidden;
+  font-size: 0;
+
+  iframe, .overlay
+  {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    display: block;
+  }
+  .overlay {          
+    display: block;
+    z-index: 2;
+  }      
+}
+#youtube-player-wrapper.paused {
+  iframe {
+   // display: none;
   }
 }

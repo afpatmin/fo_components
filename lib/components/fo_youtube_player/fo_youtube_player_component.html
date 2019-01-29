@@ -1,5 +1,5 @@
-<!-- This will be converted to an iframe by Youtube's internal script -->
-<div id="youtube-player-wrapper">
-  <div [id]="elementId"></div>
-  <div class="overlay" [class.hidden]="overlayHidden"></div>
+<div id="youtube-player-wrapper" (mouseup)="onTouch()" (touchend)="onTouch()" [class.paused]="!playing">
+    <!-- This will be converted to an iframe by Youtube internal script -->
+    <div [id]="elementId"></div>
+    <div class="overlay"></div>
 </div>
