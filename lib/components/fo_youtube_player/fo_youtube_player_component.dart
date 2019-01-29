@@ -2,13 +2,15 @@ import 'dart:async';
 import 'dart:html';
 import 'dart:js';
 import 'package:angular/angular.dart';
+import 'package:angular_components/material_icon/material_icon.dart';
 
 typedef void YoutubeCallback(JsObject event);
 
 @Component(
     selector: 'fo-youtube-player',
     styleUrls: const ['fo_youtube_player_component.css'],
-    templateUrl: 'fo_youtube_player_component.html')
+    templateUrl: 'fo_youtube_player_component.html',
+    directives: const [MaterialIconComponent, NgIf])
 class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
   FoYouTubePlayerComponent();
 
@@ -17,7 +19,7 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
       _player.callMethod('pauseVideo');
     } else {
       _player.callMethod('playVideo');
-    }   
+    }
     playing = !playing;
   }
 
@@ -27,6 +29,7 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
       throw new StateError('Only one fo-youtube-player can be created per app');
 
     playing = autoplay;
+    started = autoplay;
 
     document.head.children
         .add(new ScriptElement()..src = 'https://www.youtube.com/iframe_api');
@@ -58,7 +61,8 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
     if (_player == null) return;
     switch (event['data']) {
       case -1:
-        _onStateChangeController.add('Start');        
+        _onStateChangeController.add('Start');
+        started = true;
         break;
 
       case 0:
@@ -67,11 +71,11 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
         break;
 
       case 1:
-        _onStateChangeController.add('Play');        
+        _onStateChangeController.add('Play');
         break;
 
       case 2:
-        _onStateChangeController.add('Pause');        
+        _onStateChangeController.add('Pause');
         break;
 
       case 3:
@@ -120,6 +124,7 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
   @Output('stateChange')
   Stream<String> get stateChangeOutput => _onStateChangeController.stream;
 
-  static bool apiLoaded = false;  
+  static bool apiLoaded = false;
   bool playing = false;
+  bool started = false;
 }

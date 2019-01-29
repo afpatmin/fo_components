@@ -1,12 +1,13 @@
 
+@import 'package:angular_components/material_icon/mixins';
+
 #youtube-player-wrapper
 {
   position: relative;
   padding-bottom: 56.25%; // 16:9
   padding-top: 0;
   height: 0;
-  overflow: hidden;
-  font-size: 0;
+  overflow: hidden; 
 
   iframe, .overlay
   {
@@ -24,10 +25,23 @@
   .overlay {          
     display: block;
     z-index: 2;
+
+    .iconRow {
+      visibility: hidden;
+      height: 100%;
+      color: white;
+      background-color: black;
+      @include material-icon-size(4rem);
+    }
   }      
 }
 #youtube-player-wrapper.paused {
   iframe {
-   // display: none;
+   display: none;
+  }
+  .overlay {
+    .iconRow {
+      visibility: visible;
+    }
   }
 }
