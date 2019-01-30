@@ -9,7 +9,7 @@
   height: 0;
   overflow: hidden; 
 
-  iframe, .overlay
+  ::ng-deep iframe#youtube-player-container, .overlay
   {
     cursor: pointer;
     position: absolute;

@@ -12,7 +12,7 @@ typedef void YoutubeCallback(JsObject event);
     templateUrl: 'fo_youtube_player_component.html',
     directives: const [MaterialIconComponent, NgIf])
 class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
-  FoYouTubePlayerComponent();
+  FoYouTubePlayerComponent(this._host);
 
   void onTouch() {
     if (playing) {
@@ -28,14 +28,19 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
     playing = autoplay;
     started = autoplay;
 
-    // Only one youtube player can be active at a time atm
-    final ScriptElement yt = document.head.querySelector('#fo-youtube');
-    yt?.remove();
-
-    document.head.children.add(new ScriptElement()
-      ..src = 'https://www.youtube.com/iframe_api'
-      ..id = 'fo-youtube');
-    context['onYouTubeIframeAPIReady'] = _onAPIReady;
+    _host
+        .querySelector('#youtube-player-wrapper')
+        .children
+        .insert(0, new DivElement()..id = elementId);
+    
+    if (document.head.querySelector('#fo-youtube') == null) {
+      document.head.children.add(new ScriptElement()
+        ..src = 'https://www.youtube.com/iframe_api'
+        ..id = 'fo-youtube');
+      context['onYouTubeIframeAPIReady'] = _onAPIReady;
+    } else {    
+      _onAPIReady();
+    }
   }
 
   @override
@@ -47,12 +52,13 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
 
   @override
   void ngOnDestroy() {
+    _player.callMethod('destroy');
     _onStateChangeController.close();
   }
 
   void _onAPIReady() {
     // Youtube API is ready, initialize video
-    _player = new JsObject(context['YT']['Player'], [elementId, params]);
+    _player = new JsObject(context['YT']['Player'], [elementId, params]);    
   }
 
   void _onReady(JsObject event) {}
@@ -114,6 +120,7 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
   JsObject _player;
 
   final String elementId = 'youtube-player-container';
+  final Element _host;
 
   @Input()
   String videoId;
