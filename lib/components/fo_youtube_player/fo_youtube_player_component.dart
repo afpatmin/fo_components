@@ -25,17 +25,12 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
 
   @override
   void ngOnInit() {
-    if (apiLoaded)
-      throw new StateError('Only one fo-youtube-player can be created per app');
-
     playing = autoplay;
     started = autoplay;
 
     document.head.children
         .add(new ScriptElement()..src = 'https://www.youtube.com/iframe_api');
     context['onYouTubeIframeAPIReady'] = _onAPIReady;
-
-    apiLoaded = true;
   }
 
   @override
@@ -123,8 +118,7 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
 
   @Output('stateChange')
   Stream<String> get stateChangeOutput => _onStateChangeController.stream;
-
-  static bool apiLoaded = false;
+  
   bool playing = false;
   bool started = false;
 }
