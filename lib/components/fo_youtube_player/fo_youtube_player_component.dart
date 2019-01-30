@@ -28,8 +28,11 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
     playing = autoplay;
     started = autoplay;
 
+    // Only one youtube player can be active at a time atm
+    document.head.querySelector('fo-youtube')?.remove();
+
     document.head.children
-        .add(new ScriptElement()..src = 'https://www.youtube.com/iframe_api');
+        .add(new ScriptElement()..src = 'https://www.youtube.com/iframe_api'..id = 'fo-youtube');
     context['onYouTubeIframeAPIReady'] = _onAPIReady;
   }
 
