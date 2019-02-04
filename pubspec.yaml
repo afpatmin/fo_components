@@ -17,3 +17,7 @@ dependencies:
     git: https://github.com/afpatmin/grid
   intl: ^0.15.7    
   sass_builder: ^2.1.2
+
+dependency_overrides:
+  analyzer: ^0.34.0
+  build_resolvers: 1.0.1
