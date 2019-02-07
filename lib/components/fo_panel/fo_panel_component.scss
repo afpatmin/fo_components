@@ -1,0 +1,21 @@
+@import 'package:fo_components/colors';
+@import 'package:grid/constants';
+:host {
+  div#foPanel {
+    @include boxShadow();
+    overflow: hidden;
+    display: block;
+    padding: 0 $medium $small $medium;
+    background-color: white;
+    div#panelHeader {
+      display: flex;
+      align-items: center;
+      h3 {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}

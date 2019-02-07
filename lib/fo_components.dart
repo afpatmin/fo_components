@@ -5,7 +5,6 @@ library fo_components;
 
 import 'services/fo_messages_service.dart';
 
-
 export 'components/fo_app_layout/fo_app_layout_component.dart';
 export 'components/fo_carousel/fo_carousel_component.dart';
 export 'components/fo_carousel/fo_carousel_slide_component.dart';
@@ -21,6 +20,7 @@ export 'components/fo_multi_input/fo_multi_input_component.dart';
 export 'components/fo_multi_select/fo_multi_select_component.dart';
 export 'components/fo_notification/fo_notification_component.dart';
 export 'components/fo_number_input/fo_number_input_component.dart';
+export 'components/fo_panel/fo_panel_component.dart';
 export 'components/fo_quiz/fo_quiz_component.dart';
 export 'components/fo_select/fo_select_component.dart';
 export 'components/fo_social_number_input/fo_social_number_input_component.dart';
