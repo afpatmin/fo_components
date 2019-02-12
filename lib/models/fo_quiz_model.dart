@@ -13,7 +13,7 @@ class FoQuizModel {
   @JsonKey(nullable: false)  
   final List<FoQuestionModel> questions;
   
-  int passScore;
+  int passScore = 0;
 }
 
 @JsonSerializable()
