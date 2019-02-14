@@ -1,8 +1,10 @@
 <div>
   <material-icon *ngFor="let option of filled"
+                 class="color-primary"
                  icon="star"
                  (click)="onRatingClick(option)"></material-icon>
   <material-icon *ngFor="let option of unfilled"
                  icon="star_border"
+                 class="color-primary"
                  (click)="onRatingClick(option)"></material-icon>
 </div>
