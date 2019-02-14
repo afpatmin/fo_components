@@ -1,31 +1,57 @@
-@import 'package:grid/constants';
-
+@import'package:grid/constants';
+@import '../../mixins.scss';
+$transitionSpeed: 0.3s ease;
 :host {
   display: block;
-  div#labelContainer {    
+  div#labelContainer {
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: nowrap;    
     cursor: pointer;
+    span {
+      transition: color $transitionSpeed;
+      margin-right: $x-small;
+    }
   }
   div#flexContainer {
     display: flex;
-    align-items: flex-start;
-    div#flexContainerLeft {
-      flex: auto;
-      input {
-        width: 100%;
-        box-sizing: border-box;
-        outline: none;
-        line-height: $large;
-      }
-      input.leftPadding {
-        padding-left: 1rem;
-      }
-      material-icon {
-        position: absolute;
-        left: 0;
-      }
+    align-items: center;
+    border-radius: $x-small;
+    transition: box-shadow $transitionSpeed;
+    material-icon {
+      width: 0;
+      z-index: 2;
+      transform: translateX($medium);
     }
+    input {
+      transition: border-color $transitionSpeed;
+      flex: auto;
+      width: 100%;
+      box-sizing: border-box;
+      outline: none;
+      line-height: $x-large;
+      font-size: $medium;
+      border-width: 1px 0;
+      border-style: solid;
+      padding: 0 $medium;
+      min-width: 7rem;
+      color: #555;
+    }
+    input.leftPadding {
+      padding-left: $x-large;
+    }
+    input.leftBorder {
+      border-top-left-radius: $x-small;
+      border-bottom-left-radius: $x-small;
+      border-left-width: 1px;
+    }
+    input.rightBorder {
+      border-top-right-radius: $x-small;
+      border-bottom-right-radius: $x-small;
+      border-right-width: 1px;
+    }
+  }
+  div#flexContainer:focus-within {
+    @include boxShadow();
   }
 }

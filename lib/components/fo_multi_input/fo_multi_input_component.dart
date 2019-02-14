@@ -16,6 +16,7 @@ import 'package:angular_forms/angular_forms.dart';
     styleUrls: const ['fo_multi_input_component.css'],
     templateUrl: 'fo_multi_input_component.html',
     directives: const [
+      formDirectives, 
       MaterialButtonComponent,
       MaterialChipComponent,
       MaterialIconComponent,

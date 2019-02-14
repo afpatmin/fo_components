@@ -3,6 +3,21 @@ import 'package:intl/intl.dart';
 
 @Injectable()
 class FoMessagesService {
+  String error_invalid_email() =>
+      Intl.message('invalid email address', name: 'error_invalid email');
+
+  String error_required() =>
+      Intl.message('this field is required', name: 'error_required');
+
+  String error_min_length(int minValue) =>
+      Intl.message('enter at least $minValue letters', args: [minValue], name: 'error_min_length');
+
+  String error_max_length(int maxValue) =>
+      Intl.message('enter no more than $maxValue letters', args: [maxValue], name: 'error_max_length');
+
+  String error_invalid_pattern(String pattern) =>
+      Intl.message('invalid pattern, required pattern: $pattern', args: [pattern], name: 'error_invalid_pattern');
+
   String add() => Intl.message('add', name: 'add');
 
   String back() => Intl.message('back', name: 'back');
@@ -57,7 +72,7 @@ class FoMessagesService {
       name: 'forgot_password_description',
       desc:
           'Direction on steps to take if the user wishes to restore his password, shown in FoLoginComponent under forgot password section');
-          
+
   String gdpr_change_my_info() =>
       Intl.message('I wish to change/update my information',
           name: 'gdpr_change_my_info');

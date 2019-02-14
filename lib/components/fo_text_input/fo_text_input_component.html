@@ -1,12 +1,34 @@
 <label>
-  <div id="labelContainer" class="color-secondary">{{label}}</div>
+  <div id="labelContainer"
+       class="gray-color"
+       [class.color-alert]="!control.valid">
+    <span>{{label}}</span>
+    <material-icon *ngIf="!control.valid"
+                   size="medium"
+                   icon="error"
+                   baseline></material-icon>
+  </div>
   <div id="flexContainer">
-    <div id="flexContainerLeft">
-      <input [class.leftPadding]="leadingIcon != null"
-             type="text">
-      <material-icon *ngIf="leadingIcon != null"
-                     [icon]="leadingIcon"></material-icon>
-    </div>
-    <button>yaaaay</button>
+    <material-icon *ngIf="leadingIcon != null"
+                   class="gray-color"
+                   [icon]="leadingIcon"></material-icon>
+    <input class="roundLeft border-color"
+           [disabled]="disabled == true"
+           [placeholder]="placeholder"
+           [class.leftBorder]="true"
+           [class.rightBorder]="actionButtonLabel == null"
+           [class.leftPadding]="leadingIcon != null"
+           [class.color-alert]="!control.valid"
+           [ngModel]="value"
+           (ngModelChange)="onValueChange($event)"
+           type="text">
+    <fo-button *ngIf="actionButtonLabel != null"
+               [label]="actionButtonLabel"
+               [leftBorder]="false"
+               [disabled]="disabled || !control.valid"
+               (trigger)="onActionButtonTrigger($event)"></fo-button>
+  </div>
+  <div *ngIf="!control.valid">
+    <p>{{errorMessage | name}}</p>
   </div>
 </label>
