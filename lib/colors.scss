@@ -1,8 +1,0 @@
-$foColorAlert: #f55;
-$foColorPrimary: #555;
-$foColorSecondary: beige; 
-
-@mixin boxShadow() {
-    -webkit-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.4);
-    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.4);
-}

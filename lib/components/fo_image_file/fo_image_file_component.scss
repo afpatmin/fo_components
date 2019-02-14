@@ -1,4 +1,4 @@
-@import '../../colors';
+@import '../../mixins.scss';
 
 :host {    
     div.container {
@@ -16,16 +16,13 @@
             material-button.delete {
                 position: absolute;
                 top: 0.25em;
-                right: 0.25em;     
-                color: $foColorAlert;           
+                right: 0.25em;                        
             }
         }
         input[type=file] {
             display: none !important;
         }
         p.error-output {
-            background-color: lighten($foColorAlert, 20%);
-
             color: white;
             padding: 0.5rem;
             margin: 0.5rem 0 0 0;

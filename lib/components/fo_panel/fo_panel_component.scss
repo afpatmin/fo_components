@@ -1,5 +1,6 @@
-@import 'package:fo_components/colors';
 @import 'package:grid/constants';
+@import '../../mixins.scss';
+
 :host {
   div#foPanel {
     @include boxShadow();

@@ -1,0 +1,12 @@
+<label>
+  <div id="labelContainer" class="color-secondary">{{label}}</div>
+  <div id="flexContainer">
+    <div id="flexContainerLeft">
+      <input [class.leftPadding]="leadingIcon != null"
+             type="text">
+      <material-icon *ngIf="leadingIcon != null"
+                     [icon]="leadingIcon"></material-icon>
+    </div>
+    <button>yaaaay</button>
+  </div>
+</label>

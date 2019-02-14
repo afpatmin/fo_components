@@ -1,0 +1,31 @@
+@import 'package:grid/constants';
+
+:host {
+  display: block;
+  div#labelContainer {    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  div#flexContainer {
+    display: flex;
+    align-items: flex-start;
+    div#flexContainerLeft {
+      flex: auto;
+      input {
+        width: 100%;
+        box-sizing: border-box;
+        outline: none;
+        line-height: $large;
+      }
+      input.leftPadding {
+        padding-left: 1rem;
+      }
+      material-icon {
+        position: absolute;
+        left: 0;
+      }
+    }
+  }
+}

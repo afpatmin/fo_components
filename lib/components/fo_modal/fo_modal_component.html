@@ -11,11 +11,11 @@
         <img *ngIf="titleImageUrl != null"
              [src]="titleImageUrl"
              alt="title" />
-        <h3 class="themeable"
+        <h3 class="themeable color-secondary"
             *ngIf="titleImageUrl == null && title != null">{{title}}</h3>
         <div *ngIf="showCloseButton"
              id="closeButtonContainer">
-          <material-button class="themeable"
+          <material-button class="themeable color-secondary"
                            clear-size
                            (trigger)="close()">
             <material-icon icon="close"
@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <div class="modal-content">      
+    <div class="modal-content">
       <ng-content></ng-content>
     </div>
     <div footer>

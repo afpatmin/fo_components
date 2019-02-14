@@ -7,8 +7,7 @@ material-dialog.small-padding {
     @include material-dialog-footer-padding($padding: $small);
 }
 
-material-dialog {
-    @include material-dialog-header-color($foColorPrimary);
+material-dialog {    
     min-width: 15rem;
     max-width: 90vw;
     margin-left: 5vw;
@@ -26,17 +25,13 @@ material-dialog {
             }
             h3 {
                 align-self: center;
-                margin-bottom: 0;
-                color: $foColorSecondary;
+                margin-bottom: 0;                
             }
             div#closeButtonContainer {
                 flex: auto;
                 align-self: flex-start;
                 text-align: right;
-                margin-left: 0.5rem;
-                material-button {
-                    color: $foColorSecondary;
-                }
+                margin-left: 0.5rem;                
             }
         }
     }

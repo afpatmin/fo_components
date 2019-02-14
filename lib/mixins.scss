@@ -1,11 +1,8 @@
 @import 'package:angular_components/material_dialog/mixins';
-@import 'colors';
-@mixin fo-colors($primaryColor, $secondaryColor, $alertColor) {
-    $foColorPrimary: $primaryColor;
-    $foColorSecondary: $secondaryColor;
-    $foColorAlert: $alertColor;
+
+@mixin fo-colors($primaryColor, $secondaryColor, $alertColor) {    
     ::ng-deep material-dialog.themeable {
-        @include material-dialog-header-color($foColorPrimary !important);
+        @include material-dialog-header-color($primaryColor !important);
         div.wrapper>header {
             div.flexContainer {
                 h3.themeable {
@@ -19,21 +16,51 @@
             }
         }
     }
+    ::ng-deep .color-primary {
+      color: $primaryColor;
+    }
+    ::ng-deep .background-color-primary {
+      background-color: $primaryColor;
+      fill: $primaryColor;
+    }
+    ::ng-deep .color-primary-bright {
+      color: lighten($primaryColor, 20%);
+    }
+    ::ng-deep .background-color-primary-bright {
+      background-color: lighten($primaryColor, 20%);
+      fill: lighten($primaryColor, 20%);
+    }
+    ::ng-deep .color-secondary {
+      color: $secondaryColor;
+    }    
+    ::ng-deep .background-color-secondary {
+      background-color: $secondaryColor;
+      fill: $secondaryColor;
+    }
+    ::ng-deep .color-secondary-bright {
+      color: lighten($secondaryColor, 20%);
+    }
+    ::ng-deep .background-color-secondary-bright {
+      background-color: lighten($secondaryColor, 20%);
+      fill: lighten($secondaryColor, 20%);
+    }
     ::ng-deep .color-alert {
-        color: $foColorAlert !important;
+        color: $alertColor !important;
     }
-    ::ng-deep fo-image-file {
-        div.container {
-            p.error-output {
-                background-color: $foColorAlert !important;
-            }
-        }
+    ::ng-deep .color-alert-bright {
+      color: lighten($alertColor, 20%);
     }
-    ::ng-deep fo-image-map > div {
-        svg {
-            .shape {
-                fill: $foColorAlert !important;
-            }
-        }
+    ::ng-deep .background-color-alert {
+      background-color: $alertColor;
+      fill: $alertColor;
+    }
+    ::ng-deep .background-color-alert-bright {
+      background-color: lighten($alertColor, 20%);
+      fill: lighten($alertColor, 20%);
     }
 }
+
+@mixin boxShadow() {
+  -webkit-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.4);
+} 
