@@ -3,10 +3,11 @@
 $transitionSpeed: 0.3s ease;
 :host {
   display: block;
+  position: relative;
   div#labelContainer {
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;    
+    white-space: nowrap;
     cursor: pointer;
     span {
       transition: color $transitionSpeed;
@@ -24,7 +25,7 @@ $transitionSpeed: 0.3s ease;
       transform: translateX($medium);
     }
     input {
-      transition: border-color $transitionSpeed;
+      transition: gray-color-bright $transitionSpeed;
       flex: auto;
       width: 100%;
       box-sizing: border-box;
@@ -53,5 +54,36 @@ $transitionSpeed: 0.3s ease;
   }
   div#flexContainer:focus-within {
     @include boxShadow();
+  }
+  div#errorOutput {
+    position: absolute;
+    width: 100%;
+    z-index: 99;
+    margin: $small 0;
+    background-color: white;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: $x-small;
+    div#arrow {
+      position: absolute;
+      top: -6px;
+      left: 20px;
+      background-color: white;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      border-style: solid;
+      border-left-width: 1px;
+      border-top-width: 1px;
+      border-right-width: 0;
+      border-bottom-width: 0;      
+      width: 10px;
+      height: 10px;
+    }
+    div#message {
+      padding: $medium;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 }
