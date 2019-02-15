@@ -18,7 +18,6 @@
   $secondaryColorBright: lighten($secondaryColor, $lightstep);
   $alertColorDark: darken($alertColor, $lightstep);
   $alertColorBright: lighten($alertColor, $lightstep);
-  
   ::ng-deep material-dialog.themeable {
     @include material-dialog-header-color($primaryColor !important);
     div.wrapper>header {
@@ -40,6 +39,9 @@
   ::ng-deep fo-button>button:disabled {
     background-color: $grayColor;
     border-color: $grayColor;
+  }
+  ::ng-deep fo-dropdown-option:hover {
+    background-color: $primaryColor;    
   }
   ::ng-deep input::placeholder {
     color: $grayColorBright;

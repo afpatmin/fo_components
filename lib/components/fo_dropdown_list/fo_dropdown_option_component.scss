@@ -1,0 +1,27 @@
+@import 'package:grid/constants';
+
+:host {
+  cursor: pointer;
+  display: block;
+  padding: $small 0;
+  display: flex;
+  align-items: center;
+
+  div:nth-child(1) {
+    text-align: center;
+    width: $x-large;
+  }
+  div:nth-child(2), div:nth-child(3) {
+    flex: auto;
+  }
+  div:nth-child(3) {
+    text-align: right;
+    font-weight: bold;    
+    margin-right: $x-large;
+  }   
+}
+:host:hover {
+  div {
+    color: white !important;
+  }
+}

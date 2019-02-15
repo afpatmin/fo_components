@@ -1,5 +1,8 @@
 class FoDropdownOption {
   Object id;
+  String icon;
   String label;
-  String thumbnail;
+  String secondaryLabel;
+  String info;
+  
 }

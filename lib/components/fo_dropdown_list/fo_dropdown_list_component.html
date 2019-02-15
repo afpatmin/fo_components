@@ -3,10 +3,12 @@
      class="gray-color-bright"
      [style.width]="elementWidth"
      [style.maxHeight]="elementMaxHeight">
-  <div *ngFor="let category of options.keys">
-    <h3>{{category}}</h3>
-    <fo-dropdown-option *ngFor="let option of options[category]"
-                        [model]="option">
-    </fo-dropdown-option>
+  <div *ngFor="let category of filteredOptions.keys">    
+    <div class="black-color category"><strong>{{category}}</strong></div>
+    <fo-dropdown-option *ngFor="let option of filteredOptions[category]"
+                        [model]="option"
+                        (click)="selectController.add(option)">
+    </fo-dropdown-option>    
+    <hr *ngIf="category != filteredOptions.keys.last" class="gray-color-bright">    
   </div>
 </div>

@@ -4,7 +4,7 @@
        [class.color-alert]="!control.valid">
     <span>{{label}}</span>
     <material-icon *ngIf="!control.valid"
-                   size="medium"
+                   size="small"
                    icon="error"
                    baseline></material-icon>
   </div>
@@ -37,9 +37,11 @@
     <div id="message"
          class="black-color">{{errorMessage | name}}</div>
   </div>
-  <fo-dropdown-list *ngIf="control.valid && options != null"
+  <fo-dropdown-list *ngIf="options != null && value?.isEmpty == false"
                     [options]="options"
+                    [filter]="value"
                     [width]="input.getBoundingClientRect().width"
+                    (select)="onFilterSelect($event)"
                     [(visible)]="dropdownVisible">
   </fo-dropdown-list>
 </label>

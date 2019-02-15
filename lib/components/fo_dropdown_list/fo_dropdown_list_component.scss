@@ -2,12 +2,21 @@
 :host {
   position: fixed;  
   background-color: white;
-  margin-top: $x-small;
+  margin-top: $small;
   z-index: 99;
   div#dropdownContent {
+    padding-bottom: $medium;
     border-width: 1px;
     border-style: solid;
     border-radius: $x-small;
     overflow-y: auto;
+    div.category {
+      margin: $large $x-large $small $x-large;
+      text-transform: uppercase;
+    }
+    hr {
+      border-top: 0;
+      border-style: solid;
+    }    
   }
 }

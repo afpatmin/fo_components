@@ -51,7 +51,7 @@ class FoTextInputComponent implements ControlValueAccessor<String> {
     if (control != null) control.valueAccessor = this;
   }
 
-  String get errorMessage {    
+  String get errorMessage {
     if (control.errors.containsKey('required')) {
       return msg.error_required();
     }
@@ -74,11 +74,20 @@ class FoTextInputComponent implements ControlValueAccessor<String> {
     print(event);
   }
 
-  void onValueChange(String event) {
+  void onFilterSelect(FoDropdownOption event) {
+    value = event.label;
+    dropdownVisible = false;
     if (_onChange != null) {
-      _onChange(event);  
-      dropdownVisible = true;
-    }    
+      _onChange(value);
+    }
+  }
+
+  void onValueChange(String event) {
+    value = event;
+    dropdownVisible = true;
+    if (_onChange != null) {
+      _onChange(value);
+    }
   }
 
   @override
@@ -98,6 +107,6 @@ class FoTextInputComponent implements ControlValueAccessor<String> {
 
   @override
   void writeValue(String obj) {
-    value = obj;    
+    value = obj;
   }
 }

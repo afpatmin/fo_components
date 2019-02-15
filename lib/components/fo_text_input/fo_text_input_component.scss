@@ -1,4 +1,5 @@
 @import'package:grid/constants';
+@import '../../constants.scss';
 @import '../../mixins.scss';
 $transitionSpeed: 0.3s ease;
 :host {
@@ -30,13 +31,13 @@ $transitionSpeed: 0.3s ease;
       width: 100%;
       box-sizing: border-box;
       outline: none;
-      line-height: $x-large;
-      font-size: $medium;
+      line-height: $font-size-5;
+      font-size: $font-size-3;
       border-width: 1px 0;
       border-style: solid;
-      padding: 0 $medium;
+      padding: $small $small;
       min-width: 7rem;
-      color: #555;
+      color: #555;      
     }
     input.leftPadding {
       padding-left: $x-large;
@@ -59,7 +60,7 @@ $transitionSpeed: 0.3s ease;
     position: absolute;
     width: 100%;
     z-index: 99;
-    margin: $small 0;
+    margin: $medium 0;
     background-color: white;
     border-width: 1px;
     border-style: solid;

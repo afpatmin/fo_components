@@ -1,5 +1,5 @@
-@import'package:grid/constants';
-
+@import 'package:grid/constants';
+@import '../../constants.scss';
 :host {  
   display: block;  
   button {
@@ -7,14 +7,14 @@
     -webkit-user-select: none;
     transition: background-color 0.3s ease;
     cursor: pointer;
-    padding: 0 $large;
+    padding: $small $large;
     outline: none;    
     border-width: 1px 0;
     border-style: solid;    
-    line-height: $x-large;
+    line-height: $font-size-5;
     box-sizing: border-box; 
     color: white;
-    font-weight: bold;
+    font-size: $font-size-3;    
   }   
   button.leftBorder {
     border-top-left-radius: $x-small;
