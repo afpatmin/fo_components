@@ -1,0 +1,13 @@
+@import 'package:grid/constants';
+:host {
+  position: fixed;  
+  background-color: white;
+  margin-top: $x-small;
+  z-index: 99;
+  div#dropdownContent {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: $x-small;
+    overflow-y: auto;
+  }
+}

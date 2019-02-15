@@ -1,0 +1,12 @@
+<div *ngIf="visible && options != null"
+     id="dropdownContent"
+     class="gray-color-bright"
+     [style.width]="elementWidth"
+     [style.maxHeight]="elementMaxHeight">
+  <div *ngFor="let category of options.keys">
+    <h3>{{category}}</h3>
+    <fo-dropdown-option *ngFor="let option of options[category]"
+                        [model]="option">
+    </fo-dropdown-option>
+  </div>
+</div>

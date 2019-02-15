@@ -5,6 +5,8 @@ import '../../pipes/fo_name_pipe.dart';
 import '../../services/fo_messages_service.dart';
 import '../fo_button/fo_button_component.dart';
 import '../fo_button/fo_button_event.dart';
+import '../fo_dropdown_list/fo_dropdown_list_component.dart';
+import '../fo_dropdown_list/fo_dropdown_option.dart';
 
 @Component(
     selector: 'fo-text-input',
@@ -12,6 +14,7 @@ import '../fo_button/fo_button_event.dart';
     styleUrls: const ['fo_text_input_component.css'],
     directives: const [
       FoButtonComponent,
+      FoDropdownListComponent,
       formDirectives,
       MaterialIconComponent,
       NgClass,
@@ -33,19 +36,22 @@ class FoTextInputComponent implements ControlValueAccessor<String> {
   String placeholder;
 
   @Input()
+  Map<String, List<FoDropdownOption>> options;
+
+  @Input()
   bool disabled = false;
 
   String value;
   ChangeFunction<String> _onChange;
   NgControl control;
   final FoMessagesService msg;
+  bool dropdownVisible = false;
 
   FoTextInputComponent(@Self() @Optional() this.control, this.msg) {
     if (control != null) control.valueAccessor = this;
   }
 
-  String get errorMessage {
-    print(control.errors);
+  String get errorMessage {    
     if (control.errors.containsKey('required')) {
       return msg.error_required();
     }
@@ -70,9 +76,9 @@ class FoTextInputComponent implements ControlValueAccessor<String> {
 
   void onValueChange(String event) {
     if (_onChange != null) {
-      _onChange(event);
-    }
-    print(event);
+      _onChange(event);  
+      dropdownVisible = true;
+    }    
   }
 
   @override
@@ -92,6 +98,6 @@ class FoTextInputComponent implements ControlValueAccessor<String> {
 
   @override
   void writeValue(String obj) {
-    value = obj;
+    value = obj;    
   }
 }

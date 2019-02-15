@@ -13,6 +13,7 @@
                    class="gray-color"
                    [icon]="leadingIcon"></material-icon>
     <input class="roundLeft gray-color-bright"
+           #input
            [disabled]="disabled == true"
            [placeholder]="placeholder"
            [class.leftBorder]="true"
@@ -31,7 +32,14 @@
   <div *ngIf="!control.valid"
        id="errorOutput"
        class="gray-color-bright">
-    <div id="arrow" class="gray-color-bright"></div>
-    <div id="message" class="black-color">{{errorMessage | name}}</div>
+    <div id="arrow"
+         class="gray-color-bright"></div>
+    <div id="message"
+         class="black-color">{{errorMessage | name}}</div>
   </div>
+  <fo-dropdown-list *ngIf="control.valid && options != null"
+                    [options]="options"
+                    [width]="input.getBoundingClientRect().width"
+                    [(visible)]="dropdownVisible">
+  </fo-dropdown-list>
 </label>
