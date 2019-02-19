@@ -46,21 +46,20 @@ class FoTextInputComponent
 
   String value;
   ChangeFunction<String> _onChange;
-  NgControl control;
-  final ChangeDetectorRef _changeDetectorRef;
+  NgControl control;  
   final FoMessagesService msg;
   final StreamController _actionButtonController =
       StreamController<FoButtonEvent>();
   final StreamController _selectionChangeController =
       StreamController<FoDropdownOption>();
   bool dropdownVisible = false;
-  int width;
+  int dropdownWidth;
 
   @ViewChild('input')
   html.InputElement inputElement;
 
   FoTextInputComponent(
-      @Self() @Optional() this.control, this._changeDetectorRef, this.msg) {
+      @Self() @Optional() this.control, this.msg) {
     if (control != null) control.valueAccessor = this;
   }
 
@@ -106,7 +105,8 @@ class FoTextInputComponent
 
   void onValueChange(String event) {
     value = event;
-    dropdownVisible = true;
+    dropdownWidth = inputElement.getBoundingClientRect().width.toInt();
+    dropdownVisible = true;    
     if (_onChange != null) {
       _onChange(value);
     }
@@ -139,12 +139,9 @@ class FoTextInputComponent
   }
 
   @override
-  void ngAfterViewInit() {
-    width = inputElement.getBoundingClientRect().width.toInt();
-    _changeDetectorRef.detectChanges();
+  void ngAfterViewInit() {        
     html.window.onResize.forEach((_) {
-      width = inputElement.getBoundingClientRect().width.toInt();
-      _changeDetectorRef.detectChanges();
-    });
+      dropdownWidth = inputElement.getBoundingClientRect().width.toInt();    
+    });    
   }
 }

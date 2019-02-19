@@ -40,7 +40,7 @@
   <fo-dropdown-list *ngIf="options != null && value?.isEmpty == false"
                     [options]="options"
                     [filter]="value"
-                    [width]="width"
+                    [width]="dropdownWidth"
                     (select)="onFilterSelect($event)"
                     [(visible)]="dropdownVisible">
   </fo-dropdown-list>
