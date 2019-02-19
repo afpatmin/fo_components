@@ -46,8 +46,7 @@ class FoTextInputComponent
   String value;
   ChangeFunction<String> _onChange;
   NgControl control;
-  final FoMessagesService msg;
-  final ChangeDetectorRef _changeDetectorRef;
+  final FoMessagesService msg;  
   final StreamController _actionButtonController =
       StreamController<FoButtonEvent>();
   final StreamController _selectionChangeController =
@@ -58,7 +57,7 @@ class FoTextInputComponent
   html.InputElement inputElement;
 
   FoTextInputComponent(
-      @Self() @Optional() this.control, this.msg, this._changeDetectorRef) {
+      @Self() @Optional() this.control, this.msg) {
     if (control != null) control.valueAccessor = this;
   }
 
