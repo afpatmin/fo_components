@@ -35,17 +35,17 @@ class FoDropdownListComponent
 
   int _startOffsetTop;
   final html.Element host;
-  StreamSubscription<html.Event> _scrollListener;
   final StreamController _visibleController = StreamController<bool>();
   final StreamController selectController =
       StreamController<FoDropdownOption>();
-  Map<String, List<FoDropdownOption>> _filteredOptions;  
+  Map<String, List<FoDropdownOption>> _filteredOptions;
 
   FoDropdownListComponent(this.host);
 
   String get elementWidth => width == null ? 'auto' : '${width}px';
 
-  String get elementMaxHeight => '${html.window.innerHeight - host.offsetTop - 40}px';
+  String get elementMaxHeight =>
+      '${html.window.innerHeight - host.offsetTop - 40}px';
 
   Map<String, List<FoDropdownOption>> get filteredOptions => _filteredOptions;
 
@@ -77,15 +77,17 @@ class FoDropdownListComponent
   @override
   void ngOnDestroy() {
     _visibleController.close();
-    _scrollListener?.cancel();
     selectController.close();
   }
 
   @override
   void ngOnInit() {
-    _scrollListener = html.document.onScroll.listen((_) {
-      host.style.top =
-          '${_startOffsetTop - html.document.documentElement.scrollTop}px';
+    // Make sure the element stays in position when fixed
+    html.document.onScroll.forEach((_) {
+      if (visible) {
+        host.style.top =
+            '${_startOffsetTop - html.document.documentElement.scrollTop}px';
+      }
     });
   }
 

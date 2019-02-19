@@ -1,7 +1,7 @@
 @import 'package:grid/constants';
 :host {  
   background-color: white;
-  margin-top: $small;  
+  margin-top: $small;   
   position: fixed;
   z-index: 99;
 
@@ -25,8 +25,9 @@
 @media screen and (max-width: $medium-width-threshold - 1) {
   :host {        
     position: relative;    
+    top: $small !important;
     div#dropdownContent {
-      max-height: none !important;
+      max-height: none !important;      
     }
   }
 }
