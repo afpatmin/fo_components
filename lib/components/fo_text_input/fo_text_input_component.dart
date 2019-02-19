@@ -141,10 +141,10 @@ class FoTextInputComponent
   @override
   void ngAfterViewInit() {
     width = inputElement.getBoundingClientRect().width.toInt();
-    _changeDetectorRef.markForCheck();
+    _changeDetectorRef.detectChanges();
     html.window.onResize.forEach((_) {
       width = inputElement.getBoundingClientRect().width.toInt();
-      _changeDetectorRef.markForCheck();
+      _changeDetectorRef.detectChanges();
     });
   }
 }
