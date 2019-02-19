@@ -1,9 +1,9 @@
 <label>
   <div id="labelContainer"
        class="gray-color margin-bottom-x-small"
-       [class.color-alert]="!control.valid">
+       [class.color-alert]="control?.valid == false">
     <span>{{label}}</span>
-    <material-icon *ngIf="!control.valid"
+    <material-icon *ngIf="control?.valid == false"
                    size="small"
                    icon="error"
                    baseline></material-icon>
@@ -19,17 +19,17 @@
            [class.leftBorder]="true"
            [class.rightBorder]="actionButtonLabel == null"
            [class.leftPadding]="leadingIcon != null"
-           [class.color-alert]="!control.valid"           
+           [class.color-alert]="control?.valid == false"           
            [ngModel]="value"
            (ngModelChange)="onValueChange($event)"
            type="text">
     <fo-button *ngIf="actionButtonLabel != null"               
                [label]="actionButtonLabel"
                [leftBorder]="false"
-               [disabled]="disabled || !control.valid"
+               [disabled]="disabled || control?.valid == false"
                (trigger)="onActionButtonTrigger($event)"></fo-button>
   </div>
-  <div *ngIf="!control.valid && !dropdownVisible"
+  <div *ngIf="control?.valid == false && !dropdownVisible"
        id="errorOutput"
        class="gray-color-bright">
     <div id="arrow"
