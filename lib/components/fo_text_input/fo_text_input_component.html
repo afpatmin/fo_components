@@ -19,17 +19,17 @@
            [class.leftBorder]="true"
            [class.rightBorder]="actionButtonLabel == null"
            [class.leftPadding]="leadingIcon != null"
-           [class.color-alert]="!control.valid"
+           [class.color-alert]="!control.valid"           
            [ngModel]="value"
            (ngModelChange)="onValueChange($event)"
            type="text">
-    <fo-button *ngIf="actionButtonLabel != null"
+    <fo-button *ngIf="actionButtonLabel != null"               
                [label]="actionButtonLabel"
                [leftBorder]="false"
                [disabled]="disabled || !control.valid"
                (trigger)="onActionButtonTrigger($event)"></fo-button>
   </div>
-  <div *ngIf="!control.valid"
+  <div *ngIf="!control.valid && !dropdownVisible"
        id="errorOutput"
        class="gray-color-bright">
     <div id="arrow"
@@ -40,7 +40,7 @@
   <fo-dropdown-list *ngIf="options != null && value?.isEmpty == false"
                     [options]="options"
                     [filter]="value"
-                    [width]="input.getBoundingClientRect().width"
+                    [width]="dropdownWidth"
                     (select)="onFilterSelect($event)"
                     [(visible)]="dropdownVisible">
   </fo-dropdown-list>

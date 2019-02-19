@@ -51,7 +51,7 @@ $transitionSpeed: 0.3s ease;
       border-top-right-radius: $x-small;
       border-bottom-right-radius: $x-small;
       border-right-width: 1px;
-    }
+    }    
   }
   div#flexContainer:focus-within {
     @include boxShadow();

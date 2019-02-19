@@ -9,8 +9,16 @@ import 'fo_dropdown_option_component.dart';
 @Component(
     selector: 'fo-dropdown-list',
     templateUrl: 'fo_dropdown_list_component.html',
-    styleUrls: const ['fo_dropdown_list_component.css'],
-    directives: const [NgFor, NgIf, NgStyle, FoDropdownOptionComponent])
+    styleUrls: const [
+      'fo_dropdown_list_component.css'
+    ],
+    directives: const [
+      NgClass,
+      NgFor,
+      NgIf,
+      NgStyle,
+      FoDropdownOptionComponent
+    ])
 class FoDropdownListComponent
     implements OnInit, AfterViewInit, AfterChanges, OnDestroy {
   @Input()

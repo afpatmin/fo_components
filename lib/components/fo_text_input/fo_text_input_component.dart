@@ -1,3 +1,4 @@
+import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
@@ -22,9 +23,13 @@ import '../fo_dropdown_list/fo_dropdown_option.dart';
     ],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoTextInputComponent implements ControlValueAccessor<String> {
+class FoTextInputComponent
+    implements AfterViewInit, ControlValueAccessor<String> {
   @Input()
   String actionButtonLabel;
+
+  @Input()
+  bool actionButtonHideSmall = false;
 
   @Input()
   String label;
@@ -45,11 +50,17 @@ class FoTextInputComponent implements ControlValueAccessor<String> {
   ChangeFunction<String> _onChange;
   NgControl control;
   final FoMessagesService msg;
+  final ChangeDetectorRef _changeDetectorRef;
   bool dropdownVisible = false;
 
-  FoTextInputComponent(@Self() @Optional() this.control, this.msg) {
+  @ViewChild('input')
+  html.InputElement inputElement;
+
+  FoTextInputComponent(@Self() @Optional() this.control, this.msg, this._changeDetectorRef) {
     if (control != null) control.valueAccessor = this;
   }
+
+  int dropdownWidth;
 
   String get errorMessage {
     if (control.errors.containsKey('required')) {
@@ -108,5 +119,14 @@ class FoTextInputComponent implements ControlValueAccessor<String> {
   @override
   void writeValue(String obj) {
     value = obj;
+  }
+
+  @override
+  void ngAfterViewInit() {
+    dropdownWidth = inputElement.getBoundingClientRect().width.toInt();
+    html.window.onResize.forEach((_) {
+      dropdownWidth = inputElement.getBoundingClientRect().width.toInt();
+      _changeDetectorRef.markForCheck();
+    });
   }
 }
