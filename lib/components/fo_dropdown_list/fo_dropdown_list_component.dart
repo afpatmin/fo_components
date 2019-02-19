@@ -33,18 +33,19 @@ class FoDropdownListComponent
   @Input()
   String filter;
 
-  int startOffsetTop;
+  int _startOffsetTop;
   final html.Element host;
   StreamSubscription<html.Event> _scrollListener;
   final StreamController _visibleController = StreamController<bool>();
   final StreamController selectController =
       StreamController<FoDropdownOption>();
-  Map<String, List<FoDropdownOption>> _filteredOptions;
-  String elementMaxHeight;
+  Map<String, List<FoDropdownOption>> _filteredOptions;  
 
   FoDropdownListComponent(this.host);
 
   String get elementWidth => width == null ? 'auto' : '${width}px';
+
+  String get elementMaxHeight => '${html.window.innerHeight - host.offsetTop - 40}px';
 
   Map<String, List<FoDropdownOption>> get filteredOptions => _filteredOptions;
 
@@ -57,9 +58,6 @@ class FoDropdownListComponent
   @override
   void ngAfterChanges() {
     if (visible == true) {
-      elementMaxHeight =
-          '${html.document.documentElement.clientHeight - host.offsetTop}px';
-
       _filteredOptions = {};
       for (final category in options.keys) {
         _filteredOptions[category] = options[category]
@@ -87,12 +85,12 @@ class FoDropdownListComponent
   void ngOnInit() {
     _scrollListener = html.document.onScroll.listen((_) {
       host.style.top =
-          '${startOffsetTop - html.document.documentElement.scrollTop}px';
+          '${_startOffsetTop - html.document.documentElement.scrollTop}px';
     });
   }
 
   @override
   void ngAfterViewInit() {
-    startOffsetTop = host.offsetTop;
+    _startOffsetTop = host.offsetTop;
   }
 }

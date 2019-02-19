@@ -22,10 +22,9 @@ import '../fo_dropdown_list/fo_dropdown_option.dart';
       NgClass,
       NgIf
     ],
-    pipes: const [NamePipe],
-    changeDetection: ChangeDetectionStrategy.Default)
+    pipes: const [NamePipe])
 class FoTextInputComponent
-    implements AfterViewInit, ControlValueAccessor<String>, OnDestroy {
+    implements ControlValueAccessor<String>, OnDestroy {
   @Input()
   String actionButtonLabel;
 
@@ -100,7 +99,7 @@ class FoTextInputComponent
     if (_onChange != null) {
       _onChange(value);
     }
-    _selectionChangeController.add(value);
+    _selectionChangeController.add(event);
   }
 
   void onValueChange(String event) {
