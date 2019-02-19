@@ -47,6 +47,7 @@ class FoTextInputComponent
   String value;
   ChangeFunction<String> _onChange;
   NgControl control;
+  final ChangeDetectorRef _changeDetectorRef;
   final FoMessagesService msg;
   final StreamController _actionButtonController =
       StreamController<FoButtonEvent>();
@@ -58,7 +59,8 @@ class FoTextInputComponent
   @ViewChild('input')
   html.InputElement inputElement;
 
-  FoTextInputComponent(@Self() @Optional() this.control, this.msg) {
+  FoTextInputComponent(
+      @Self() @Optional() this.control, this._changeDetectorRef, this.msg) {
     if (control != null) control.valueAccessor = this;
   }
 
@@ -139,8 +141,10 @@ class FoTextInputComponent
   @override
   void ngAfterViewInit() {
     width = inputElement.getBoundingClientRect().width.toInt();
+    _changeDetectorRef.markForCheck();
     html.window.onResize.forEach((_) {
       width = inputElement.getBoundingClientRect().width.toInt();
+      _changeDetectorRef.markForCheck();
     });
   }
 }
