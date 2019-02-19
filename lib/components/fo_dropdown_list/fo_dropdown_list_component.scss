@@ -23,8 +23,10 @@
 }
 
 @media screen and (max-width: $medium-width-threshold - 1) {
-  :host {    
-    max-height: none !important;
+  :host {        
     position: relative;    
+    div#dropdownContent {
+      max-height: none !important;
+    }
   }
 }
