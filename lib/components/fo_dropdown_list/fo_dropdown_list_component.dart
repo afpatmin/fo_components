@@ -9,16 +9,15 @@ import 'fo_dropdown_option_component.dart';
 @Component(
     selector: 'fo-dropdown-list',
     templateUrl: 'fo_dropdown_list_component.html',
-    styleUrls: const [
-      'fo_dropdown_list_component.css'
-    ],
+    styleUrls: const ['fo_dropdown_list_component.css'],
     directives: const [
       NgClass,
       NgFor,
       NgIf,
       NgStyle,
       FoDropdownOptionComponent
-    ])
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDropdownListComponent
     implements OnInit, AfterViewInit, AfterChanges, OnDestroy {
   @Input()
@@ -82,7 +81,7 @@ class FoDropdownListComponent
 
   @override
   void ngOnInit() {
-    // Make sure the element stays in position when fixed
+    // Make sure the element stays in position
     html.document.onScroll.forEach((_) {
       if (visible) {
         host.style.top =

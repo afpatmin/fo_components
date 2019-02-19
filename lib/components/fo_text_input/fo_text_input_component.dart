@@ -22,9 +22,10 @@ import '../fo_dropdown_list/fo_dropdown_option.dart';
       NgClass,
       NgIf
     ],
-    pipes: const [NamePipe])
+    pipes: const [NamePipe],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoTextInputComponent
-    implements ControlValueAccessor<String>, OnDestroy {
+    implements AfterViewInit, ControlValueAccessor<String>, OnDestroy {
   @Input()
   String actionButtonLabel;
 
@@ -46,18 +47,18 @@ class FoTextInputComponent
   String value;
   ChangeFunction<String> _onChange;
   NgControl control;
-  final FoMessagesService msg;  
+  final FoMessagesService msg;
   final StreamController _actionButtonController =
       StreamController<FoButtonEvent>();
   final StreamController _selectionChangeController =
       StreamController<FoDropdownOption>();
   bool dropdownVisible = false;
+  int width;
 
   @ViewChild('input')
   html.InputElement inputElement;
 
-  FoTextInputComponent(
-      @Self() @Optional() this.control, this.msg) {
+  FoTextInputComponent(@Self() @Optional() this.control, this.msg) {
     if (control != null) control.valueAccessor = this;
   }
 
@@ -133,5 +134,13 @@ class FoTextInputComponent
   void ngOnDestroy() {
     _actionButtonController.close();
     _selectionChangeController.close();
+  }
+
+  @override
+  void ngAfterViewInit() {
+    width = inputElement.getBoundingClientRect().width.toInt();
+    html.window.onResize.forEach((_) {
+      width = inputElement.getBoundingClientRect().width.toInt();
+    });
   }
 }
