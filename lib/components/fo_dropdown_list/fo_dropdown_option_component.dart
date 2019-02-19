@@ -6,7 +6,7 @@ import 'fo_dropdown_option.dart';
   selector: 'fo-dropdown-option',
   templateUrl: 'fo_dropdown_option_component.html',
   styleUrls: const ['fo_dropdown_option_component.css'],
-  directives: const [MaterialIconComponent],
+  directives: const [MaterialIconComponent, NgIf],
 )
 class FoDropdownOptionComponent {
   @Input()

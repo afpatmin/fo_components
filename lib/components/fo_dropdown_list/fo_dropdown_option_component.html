@@ -1,5 +1,5 @@
 <div>
-  <material-icon [icon]="model.icon"></material-icon>
+  <material-icon *ngIf="model.icon != null" [icon]="model.icon" size="x-large" baseline></material-icon>
 </div>
 <div>
   <div class="black-color">{{model.label}}</div>

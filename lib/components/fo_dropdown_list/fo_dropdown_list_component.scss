@@ -12,7 +12,7 @@
     border-radius: $x-small;
     overflow-y: auto;        
     div.category {
-      margin: $large $x-large $small $x-large;
+      margin: $large $large $small $large;
       text-transform: uppercase;
     }
     hr {
@@ -25,7 +25,7 @@
 @media screen and (max-width: $medium-width-threshold - 1) {
   :host {        
     position: relative;    
-    top: $small !important;
+    top: $x-small !important;
     div#dropdownContent {
       max-height: none !important;      
     }
