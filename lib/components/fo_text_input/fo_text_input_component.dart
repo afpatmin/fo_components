@@ -29,9 +29,6 @@ class FoTextInputComponent
   String actionButtonLabel;
 
   @Input()
-  bool actionButtonHideSmall = false;
-
-  @Input()
   String label;
 
   @Input()
