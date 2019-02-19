@@ -24,5 +24,8 @@
   :host {
     position: fixed;
     z-index: 99;
+    div#dropdownContent {
+      max-height: none !important;
+    }    
   }
 }
