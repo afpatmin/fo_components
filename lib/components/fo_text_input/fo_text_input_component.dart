@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
@@ -22,9 +23,9 @@ import '../fo_dropdown_list/fo_dropdown_option.dart';
       NgIf
     ],
     pipes: const [NamePipe],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.Default)
 class FoTextInputComponent
-    implements AfterViewInit, ControlValueAccessor<String> {
+    implements AfterViewInit, ControlValueAccessor<String>, OnDestroy {
   @Input()
   String actionButtonLabel;
 
@@ -48,16 +49,19 @@ class FoTextInputComponent
   NgControl control;
   final FoMessagesService msg;
   final ChangeDetectorRef _changeDetectorRef;
+  final StreamController _actionButtonController =
+      StreamController<FoButtonEvent>();
+  final StreamController _selectionChangeController =
+      StreamController<FoDropdownOption>();
   bool dropdownVisible = false;
 
   @ViewChild('input')
   html.InputElement inputElement;
 
-  FoTextInputComponent(@Self() @Optional() this.control, this.msg, this._changeDetectorRef) {
+  FoTextInputComponent(
+      @Self() @Optional() this.control, this.msg, this._changeDetectorRef) {
     if (control != null) control.valueAccessor = this;
   }
-
-  int dropdownWidth;
 
   String get errorMessage {
     if (control.errors.containsKey('required')) {
@@ -78,8 +82,16 @@ class FoTextInputComponent
     return control.errors == null ? null : control.errors.toString();
   }
 
+  @Output('selectionChange')
+  Stream<FoDropdownOption> get selectionChange =>
+      _selectionChangeController.stream;
+
+  @Output('actionButtonTrigger')
+  Stream<FoButtonEvent> get actionButtonTrigger =>
+      _actionButtonController.stream;
+
   void onActionButtonTrigger(FoButtonEvent event) {
-    print(event);
+    _actionButtonController.add(event);
   }
 
   void onFilterSelect(FoDropdownOption event) {
@@ -88,6 +100,7 @@ class FoTextInputComponent
     if (_onChange != null) {
       _onChange(value);
     }
+    _selectionChangeController.add(value);
   }
 
   void onValueChange(String event) {
@@ -119,11 +132,8 @@ class FoTextInputComponent
   }
 
   @override
-  void ngAfterViewInit() {
-    dropdownWidth = inputElement.getBoundingClientRect().width.toInt();
-    html.window.onResize.forEach((_) {
-      dropdownWidth = inputElement.getBoundingClientRect().width.toInt();
-      _changeDetectorRef.markForCheck();
-    });
+  void ngOnDestroy() {
+    _actionButtonController.close();
+    _selectionChangeController.close();
   }
 }

@@ -2,7 +2,7 @@
      id="dropdownContent"
      class="gray-color-bright"
      [style.width]="elementWidth"
-     [style.maxHeight]="elementMaxHeight">
+     [style.max-height]="elementMaxHeight">
   <div *ngFor="let category of filteredOptions.keys">    
     <div class="black-color category"><strong>{{category}}</strong></div>
     <fo-dropdown-option *ngFor="let option of filteredOptions[category]"
