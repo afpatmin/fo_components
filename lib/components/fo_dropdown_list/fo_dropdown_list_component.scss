@@ -1,8 +1,7 @@
 @import 'package:grid/constants';
 :host {  
   background-color: white;
-  margin-top: $small;
-  z-index: 99;
+  margin-top: $small;  
 
   div#dropdownContent {
     padding-bottom: $medium;
@@ -24,5 +23,6 @@
 @media screen and (min-width: $medium-width-threshold) {
   :host {
     position: fixed;
+    z-index: 99;
   }
 }
