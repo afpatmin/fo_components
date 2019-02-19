@@ -8,7 +8,8 @@
     border-width: 1px;
     border-style: solid;
     border-radius: $x-small;
-    overflow-y: auto;
+    overflow-y: auto;    
+    max-height: none !important;    
     div.category {
       margin: $large $x-large $small $x-large;
       text-transform: uppercase;
@@ -23,9 +24,9 @@
 @media screen and (min-width: $medium-width-threshold) {
   :host {
     position: fixed;
-    z-index: 99;
+    z-index: 99;    
     div#dropdownContent {
-      max-height: none !important;
+      max-height: initial;
     }    
   }
 }
