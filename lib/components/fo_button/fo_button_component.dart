@@ -32,6 +32,7 @@ class FoButtonComponent implements OnDestroy {
 
   final StreamController _triggerController = StreamController<FoButtonEvent>();
 
+
   FoButtonComponent();
 
   @override

@@ -36,6 +36,10 @@
   ::ng-deep fo-button>button:hover {
     background-color: $secondaryColor;
   }
+  ::ng-deep fo-button[white]>button.themeable:hover {
+    background-color: $primaryColor;    
+    color: white;
+  }
   ::ng-deep fo-button>button:disabled {
     background-color: $grayColor;
     border-color: $grayColor;

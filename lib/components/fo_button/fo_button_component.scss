@@ -5,7 +5,7 @@
   button {
     user-select: none;
     -webkit-user-select: none;
-    transition: background-color 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease;
     cursor: pointer;
     padding: $small $large;
     outline: none;    
@@ -13,8 +13,8 @@
     border-style: solid;    
     line-height: $font-size-5;
     box-sizing: border-box; 
+    font-size: $font-size-3;
     color: white;
-    font-size: $font-size-3;    
   }   
   button.leftBorder {
     border-top-left-radius: $x-small;
@@ -25,5 +25,17 @@
     border-top-right-radius: $x-small;
     border-bottom-right-radius: $x-small;
     border-right-width: 1px;
+  }
+}
+:host[dense] {
+  button {
+    line-height: $font-size-4;
+    font-size: 1rem;
+  }
+}
+:host[white] {
+  button {    
+    color: inherit;
+    background-color: white;
   }
 }
