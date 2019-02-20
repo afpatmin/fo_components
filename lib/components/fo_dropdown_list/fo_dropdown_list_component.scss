@@ -1,11 +1,11 @@
 @import 'package:grid/constants';
-:host {  
-  background-color: white;
+:host {    
   margin-top: $small;   
   position: fixed;
   z-index: 99;
 
   div#dropdownContent {
+    background-color: white;
     padding-bottom: $medium;
     border-width: 1px;
     border-style: solid;
