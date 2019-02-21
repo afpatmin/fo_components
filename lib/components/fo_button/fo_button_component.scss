@@ -7,7 +7,7 @@
     -webkit-user-select: none;
     transition: color 0.3s ease, background-color 0.3s ease;
     cursor: pointer;
-    padding: $small $large;
+    padding: $small 44px;
     outline: none;    
     border-width: 1px 0;
     border-style: solid;    
@@ -29,6 +29,7 @@
 }
 :host[dense] {
   button {
+    padding: $small 31px;
     line-height: $font-size-4;
     font-size: 1rem;
   }
