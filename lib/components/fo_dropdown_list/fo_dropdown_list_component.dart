@@ -83,10 +83,8 @@ class FoDropdownListComponent
   void ngOnInit() {
     // Make sure the element stays in position
     html.document.onScroll.forEach((_) {
-      if (visible) {
-        host.style.top =
-            '${_startOffsetTop - html.document.documentElement.scrollTop}px';
-      }
+      host.style.top =
+          '${_startOffsetTop - html.document.documentElement.scrollTop}px';
     });
   }
 
