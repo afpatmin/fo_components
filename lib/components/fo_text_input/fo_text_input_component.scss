@@ -20,7 +20,7 @@ $transitionSpeed: 0.3s ease;
     align-items: center;
     border-radius: $x-small;
     transition: box-shadow $transitionSpeed;
-    material-icon {
+    material-icon.leading {
       width: 0;
       z-index: 2;
       transform: translateX($medium);
@@ -39,6 +39,12 @@ $transitionSpeed: 0.3s ease;
       min-width: 7rem;
       color: #555;      
     }
+    material-icon.clear {      
+      width: 0;
+      z-index: 2;
+      transform: translateX(-$large);
+      cursor: pointer;
+    }
     input.leftPadding {
       padding-left: $x-large;
     }
@@ -46,6 +52,9 @@ $transitionSpeed: 0.3s ease;
       border-top-left-radius: $x-small;
       border-bottom-left-radius: $x-small;
       border-left-width: 1px;
+    }
+    input.rightPadding {
+      padding-right: $x-large;
     }
     input.rightBorder {
       border-top-right-radius: $x-small;

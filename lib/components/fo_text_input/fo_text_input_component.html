@@ -9,8 +9,8 @@
                    baseline></material-icon>
   </div>
   <div id="flexContainer">
-    <material-icon *ngIf="leadingIcon != null"
-                   class="gray-color"
+    <material-icon *ngIf="leadingIcon != null"                   
+                   class="gray-color leading"
                    [icon]="leadingIcon"></material-icon>
     <input class="roundLeft gray-color-bright"
            #input
@@ -19,11 +19,18 @@
            [class.leftBorder]="true"
            [class.rightBorder]="actionButtonLabel == null"
            [class.leftPadding]="leadingIcon != null"
-           [class.color-alert]="control?.valid == false"           
+           [class.rightPadding]="clearIcon == true"
+           [class.color-alert]="control?.valid == false"
            [ngModel]="value"
            (ngModelChange)="onValueChange($event)"
+           (focus)="onFocus($event)"
            type="text">
-    <fo-button *ngIf="actionButtonLabel != null"               
+    <material-icon *ngIf="clearIcon == true"                   
+                   size="large"
+                   class="color-alert clear"
+                   icon="cancel"
+                   (click)="onClear($event)"></material-icon>
+    <fo-button *ngIf="actionButtonLabel != null"
                [label]="actionButtonLabel"
                [leftBorder]="false"
                [disabled]="disabled || control?.valid == false"
@@ -37,7 +44,7 @@
     <div id="message"
          class="black-color">{{errorMessage | name}}</div>
   </div>
-  <fo-dropdown-list *ngIf="options != null && value?.isEmpty == false"
+  <fo-dropdown-list *ngIf="options != null && value?.isEmpty == false && dropdownVisible"
                     [options]="options"
                     [filter]="value"
                     [width]="dropdownWidth"

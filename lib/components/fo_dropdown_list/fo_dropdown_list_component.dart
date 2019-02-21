@@ -32,6 +32,7 @@ class FoDropdownListComponent
   @Input()
   String filter;
 
+  
   int _startOffsetTop;
   final html.Element host;
   final StreamController _visibleController = StreamController<bool>();
@@ -69,8 +70,8 @@ class FoDropdownListComponent
       }
       if (_filteredOptions.isEmpty) {
         _visibleController.add(false);
-      }
-    }
+      }    
+    }    
   }
 
   @override

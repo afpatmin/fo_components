@@ -36,6 +36,9 @@ class FoTextInputComponent
   String leadingIcon;
 
   @Input()
+  bool clearIcon;
+
+  @Input()
   String placeholder;
 
   @Input()
@@ -46,20 +49,20 @@ class FoTextInputComponent
 
   String value;
   ChangeFunction<String> _onChange;
-  NgControl control;  
+  NgControl control;
   final FoMessagesService msg;
   final StreamController _actionButtonController =
       StreamController<FoButtonEvent>();
   final StreamController _selectionChangeController =
       StreamController<FoDropdownOption>();
+  final StreamController _focusController = StreamController<html.FocusEvent>();
   bool dropdownVisible = false;
-  int dropdownWidth;
+  int get dropdownWidth => inputElement?.getBoundingClientRect()?.width?.toInt();
 
   @ViewChild('input')
   html.InputElement inputElement;
 
-  FoTextInputComponent(
-      @Self() @Optional() this.control, this.msg) {
+  FoTextInputComponent(@Self() @Optional() this.control, this.msg) {
     if (control != null) control.valueAccessor = this;
   }
 
@@ -90,8 +93,22 @@ class FoTextInputComponent
   Stream<FoButtonEvent> get actionButtonTrigger =>
       _actionButtonController.stream;
 
+  @Output('focus')
+  Stream<html.FocusEvent> get focus => _focusController.stream;
+
   void onActionButtonTrigger(FoButtonEvent event) {
     _actionButtonController.add(event);
+  }
+
+  void onClear(html.Event event) {        
+    // Prevent the input from gaining focus
+    event.preventDefault();
+    value = '';
+    dropdownVisible = false;
+    if (_onChange != null) {
+      _onChange(value);
+    }       
+    
   }
 
   void onFilterSelect(FoDropdownOption event) {
@@ -104,12 +121,16 @@ class FoTextInputComponent
   }
 
   void onValueChange(String event) {
-    value = event;
-    dropdownWidth = inputElement.getBoundingClientRect().width.toInt();
-    dropdownVisible = true;    
+    value = event;    
     if (_onChange != null) {
       _onChange(value);
     }
+      
+    dropdownVisible = true;
+  }
+
+  void onFocus(html.FocusEvent event) {
+    _focusController.add(event);    
   }
 
   @override
@@ -136,12 +157,13 @@ class FoTextInputComponent
   void ngOnDestroy() {
     _actionButtonController.close();
     _selectionChangeController.close();
+    _focusController.close();
   }
 
   @override
-  void ngAfterViewInit() {        
-    html.window.onResize.forEach((_) {
-      dropdownWidth = inputElement.getBoundingClientRect().width.toInt();    
-    });    
-  }
+  void ngAfterViewInit() {
+    /*
+    html.window.onResize.forEach((_) {      
+    });*/
+      }
 }
