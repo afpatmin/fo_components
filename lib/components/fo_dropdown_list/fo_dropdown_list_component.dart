@@ -91,5 +91,7 @@ class FoDropdownListComponent
   @override
   void ngAfterViewInit() {
     _startOffsetTop = host.offsetTop;
+    host.style.top =
+          '${_startOffsetTop - html.document.documentElement.scrollTop}px';
   }
 }
