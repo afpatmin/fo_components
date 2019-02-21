@@ -25,7 +25,7 @@ import '../fo_dropdown_list/fo_dropdown_option.dart';
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoTextInputComponent
-    implements AfterViewInit, ControlValueAccessor<String>, OnDestroy {
+    implements ControlValueAccessor<String>, OnDestroy {
   @Input()
   String actionButtonLabel;
 
@@ -128,7 +128,7 @@ class FoTextInputComponent
     dropdownVisible = true;
   }
 
-  void onFocus(html.FocusEvent event) {
+  void onFocus(html.FocusEvent event) {    
     _focusController.add(event);    
   }
 
@@ -158,11 +158,4 @@ class FoTextInputComponent
     _selectionChangeController.close();
     _focusController.close();
   }
-
-  @override
-  void ngAfterViewInit() {
-    /*
-    html.window.onResize.forEach((_) {      
-    });*/
-      }
 }

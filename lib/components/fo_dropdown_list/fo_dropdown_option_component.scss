@@ -2,29 +2,35 @@
 :host {
   cursor: pointer;
   display: block;
-  padding: $small 0;
-  display: flex;
-  align-items: center;
-  div:nth-child(1) {
-    text-align: center;
-    width: $large;
-  }
-  div:nth-child(2) {
-    flex: auto;
-    overflow: hidden;    
-    white-space: nowrap;
-  }
-  span {
-    text-align: right;
-    font-weight: bold;
-    margin-right: $large;
-    overflow: hidden;    
-    white-space: nowrap;
-  }
+  padding: $small;  
+  table {
+    width: 100%;
+    table-layout: fixed;
+    tr {
+      td {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      td:first-child {
+        text-align: center;
+        width: $large;
+      }
+      td:last-child {
+        text-align: right;
+        font-weight: bold;
+        overflow: hidden;    
+        white-space: nowrap;
+      }
+    }
+  }  
 }
 
 :host:hover {
-  div, span {
-    color: white !important;
+  table {
+    tr {
+      td, td>div {
+        color: white;
+      }
+    }
   }
 }

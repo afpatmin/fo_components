@@ -1,10 +1,17 @@
-<div>
-  <material-icon *ngIf="model.icon != null" [icon]="model.icon" size="x-large" baseline></material-icon>
-</div>
-<div>
-  <div class="black-color">{{model.label}}</div>
-  <div class="gray-color">{{model.secondaryLabel}}</div>
-</div>
-<span class="black-color">
-  <strong>{{model.info}}</strong>
-</span>
+<table>
+  <tr>
+    <td>
+      <material-icon *ngIf="model.icon != null"
+                     [icon]="model.icon"
+                     size="x-large"
+                     baseline></material-icon>
+    </td>
+    <td>
+      <div class="black-color">{{model.label}}</div>
+      <div class="gray-color">{{model.secondaryLabel}}</div>
+    </td>
+    <td class="black-color">
+      <strong>{{model.info}}</strong>
+    </td>
+  </tr>
+</table>
