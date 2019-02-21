@@ -25,7 +25,7 @@
            (ngModelChange)="onValueChange($event)"
            (focus)="onFocus($event)"
            type="text">
-    <material-icon *ngIf="clearIcon == true"                   
+    <material-icon *ngIf="clearIcon == true && value?.isEmpty == false"                   
                    size="large"
                    class="color-alert clear"
                    icon="cancel"

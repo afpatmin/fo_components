@@ -107,8 +107,7 @@ class FoTextInputComponent
     dropdownVisible = false;
     if (_onChange != null) {
       _onChange(value);
-    }       
-    
+    }    
   }
 
   void onFilterSelect(FoDropdownOption event) {
