@@ -2,27 +2,28 @@
 :host {
   cursor: pointer;
   display: block;
-  padding: $small;  
+  padding: $small 0;  
   table {
     width: 100%;
     table-layout: fixed;
+    padding: 0 $medium;
     tr {
       td {
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      td:first-child {
+      td.leadingIcon {
         text-align: center;
         width: $large;
       }
-      td:last-child {
+      td.info {
         text-align: right;
         font-weight: bold;
         overflow: hidden;    
-        white-space: nowrap;
+        white-space: nowrap;        
       }
     }
-  }  
+  }
 }
 
 :host:hover {

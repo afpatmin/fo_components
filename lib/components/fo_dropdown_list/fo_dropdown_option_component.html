@@ -1,8 +1,7 @@
 <table>
   <tr>
-    <td>
-      <material-icon *ngIf="model.icon != null"
-                     [icon]="model.icon"
+    <td class="leadingIcon" *ngIf="model.icon?.isEmpty == false">
+      <material-icon [icon]="model.icon"
                      size="x-large"
                      baseline></material-icon>
     </td>
@@ -10,7 +9,7 @@
       <div class="black-color">{{model.label}}</div>
       <div class="gray-color">{{model.secondaryLabel}}</div>
     </td>
-    <td class="black-color">
+    <td class="black-color info" *ngIf="model.info?.isEmpty == false">
       <strong>{{model.info}}</strong>
     </td>
   </tr>

@@ -12,7 +12,7 @@
     border-radius: $x-small;
     overflow-y: auto;        
     div.category {
-      margin: $large $large $small $large;
+      margin: $large $medium $small $medium;
       text-transform: uppercase;
     }
     hr {
@@ -21,14 +21,3 @@
     }
   }
 }
-
-/*
-@media screen and (max-width: $medium-width-threshold - 1) {
-  :host {        
-    position: relative;    
-    top: $x-small !important;
-    div#dropdownContent {
-      max-height: none !important;      
-    }
-  }
-}*/
