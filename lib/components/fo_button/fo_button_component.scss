@@ -10,11 +10,10 @@
     padding: $small 44px;
     outline: none;    
     border-width: 1px 0;
-    border-style: solid;    
-    line-height: $font-size-5;
-    box-sizing: border-box; 
-    font-size: $font-size-3;
+    border-style: solid;       
+    box-sizing: border-box;    
     color: white;
+    line-height: 120%;
   }   
   button.leftBorder {
     border-top-left-radius: $x-small;

@@ -1,0 +1,11 @@
+@mixin fo-text-input-font-size($size) {
+  ::ng-deep fo-text-input {
+    label {
+      div#flexContainer {
+        input.themeable {
+          font-size: $size;
+        }
+      }
+    }
+  }
+}
