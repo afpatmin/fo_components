@@ -1,0 +1,24 @@
+@mixin fo-text-input-font-size($size) {
+  ::ng-deep fo-text-input {
+    label {
+      div#flexContainer {
+        input.themeable {
+          font-size: $size;
+        }
+      }
+    }
+  }
+}
+
+@mixin fo-text-input-padding($top, $bottom) {
+  ::ng-deep fo-text-input {
+    label {
+      div#flexContainer {
+        input.themeable {
+          padding-top: $top;
+          padding-bottom: $bottom;
+        }
+      }
+    }
+  }
+}

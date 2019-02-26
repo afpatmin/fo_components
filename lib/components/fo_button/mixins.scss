@@ -1,0 +1,16 @@
+@mixin fo-button-font-size($size) {
+  ::ng-deep fo-button {
+    button.themeable {
+      font-size: $size;
+    }
+  }
+}
+
+@mixin fo-button-padding($top, $bottom) {
+  ::ng-deep fo-button {
+    button.themeable {
+      padding-top: $top;
+      padding-bottom: $bottom;
+    }
+  }
+}
