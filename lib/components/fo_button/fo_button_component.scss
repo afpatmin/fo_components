@@ -39,3 +39,8 @@
     background-color: white;
   }
 }
+:host[fullWidth] {
+  button {
+    width: 100%;
+  }
+}
