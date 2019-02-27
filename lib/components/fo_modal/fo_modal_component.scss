@@ -44,11 +44,9 @@ material-dialog.white-header {
     @include material-dialog-header-color(#fff !important);
 }
 
-material-dialog.fixed-height {
-    height: 95vh;
+material-dialog.fixed-height {    
     div.modal-content {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
+      height: 95vh;        
     }
 }
 
