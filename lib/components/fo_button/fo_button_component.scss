@@ -1,20 +1,23 @@
 @import 'package:grid/constants';
 @import '../../constants.scss';
-:host {  
-  display: block;  
+:host {
+  display: block;
   button {
     user-select: none;
     -webkit-user-select: none;
     transition: color 0.3s ease, background-color 0.3s ease;
     cursor: pointer;
     padding: $small 44px;
-    outline: none;    
+    outline: none;
     border-width: 1px 0;
-    border-style: solid;       
-    box-sizing: border-box;    
+    border-style: solid;
+    box-sizing: border-box;
     color: white;
     line-height: 200%;
-  }   
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   button.leftBorder {
     border-top-left-radius: $x-small;
     border-bottom-left-radius: $x-small;
@@ -26,6 +29,7 @@
     border-right-width: 1px;
   }
 }
+
 :host[dense] {
   button {
     padding: $small 31px;
@@ -33,12 +37,14 @@
     font-size: 1rem;
   }
 }
+
 :host[white] {
-  button {    
+  button {
     color: inherit;
     background-color: white;
   }
 }
+
 :host[fullWidth] {
   button {
     width: 100%;
