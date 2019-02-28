@@ -1,4 +1,7 @@
+@import 'package:grid/constants';
+
 :host {
+    margin-top: $x-small;    
     material-button {
         color: white;
         float: right;        
