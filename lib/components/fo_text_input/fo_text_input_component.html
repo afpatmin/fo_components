@@ -1,5 +1,6 @@
 <label>
-  <div id="labelContainer"
+  <div *ngIf="label?.isEmpty == false"
+       id="labelContainer"
        class="gray-color margin-bottom-x-small"
        [class.color-alert]="control?.valid == false">
     <span>{{label}}</span>
@@ -9,7 +10,7 @@
                    baseline></material-icon>
   </div>
   <div id="flexContainer">
-    <material-icon *ngIf="leadingIcon != null"                   
+    <material-icon *ngIf="leadingIcon != null"
                    class="gray-color leading"
                    [icon]="leadingIcon"></material-icon>
     <input class="roundLeft gray-color-bright themeable"
@@ -25,7 +26,7 @@
            (ngModelChange)="onValueChange($event)"
            (focus)="onFocus($event)"
            type="text">
-    <material-icon *ngIf="clearIcon == true && value?.isEmpty == false"                   
+    <material-icon *ngIf="clearIcon == true && value?.isEmpty == false"
                    size="large"
                    class="color-alert clear"
                    icon="cancel"
