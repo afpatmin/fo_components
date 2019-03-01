@@ -2,6 +2,8 @@
   ::ng-deep fo-button {
     button.themeable {
       font-size: $size;
+      padding-left: $size;
+      padding-right: $size;
     }
   }
 }
