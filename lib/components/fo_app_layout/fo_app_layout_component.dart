@@ -9,7 +9,7 @@ import 'package:angular/security.dart' as security;
 import 'package:angular_components/material_button/material_button.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
 import 'package:angular_components/material_list/material_list.dart';
-import 'package:angular_components/material_select/material_select_item.dart';
+import 'package:angular_components/material_list/material_list_item.dart';
 import 'package:angular_components/material_tooltip/material_tooltip.dart';
 import 'package:intl/intl.dart';
 import '../../pipes/fo_name_pipe.dart';
@@ -25,7 +25,7 @@ import '../fo_modal/fo_modal_component.dart';
       MaterialButtonComponent,
       MaterialIconComponent,
       MaterialListComponent,
-      MaterialSelectItemComponent,
+      MaterialListItemComponent,
       MaterialTooltipDirective,
       routerDirectives,
       
