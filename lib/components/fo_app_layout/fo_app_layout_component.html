@@ -2,7 +2,8 @@
   <table>
     <tr>
       <!-- Sidebar -->
-      <td [style.width]="sidebarWidth" id="sidebarCol">
+      <td [style.width]="sidebarWidth"
+          id="sidebarCol">
         <div id="sidebar"
              class="box-shadow"
              [style.width]="sidebarWidth">
@@ -19,12 +20,11 @@
               <div group
                    *ngFor="let category of categories">
                 <div label>{{category.title | name}}</div>
-                <material-list-item *ngFor="let item of category.items"
-                                    [active]="isActive(item)"
-                                    (click)="router.navigate(item.url)">
+                <material-select-item *ngFor="let item of category.items"
+                                      (click)="router.navigate(item.url)">
                   <material-icon [icon]="item.icon"
                                  baseline></material-icon>&nbsp;{{item.label | name}}
-                </material-list-item>
+                </material-select-item>
               </div>
             </material-list>
             <div *ngIf="!expanded"
