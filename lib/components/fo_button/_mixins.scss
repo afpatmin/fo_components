@@ -1,9 +1,11 @@
+@import 'package:angular_components/material_icon/mixins';
 @mixin fo-button-font-size($size) {
   ::ng-deep fo-button {
     button.themeable {
-      font-size: $size;
+      font-size: $size !important;
       padding-left: $size;
-      padding-right: $size;
+      padding-right: $size;      
+      @include material-icon-size($size !important);
     }
   }
-}
+} 

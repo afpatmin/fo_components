@@ -2,4 +2,10 @@
         class="themeable background-color-primary color-primary"
         [class.leftBorder]="leftBorder == true"
         [class.rightBorder]="rightBorder == true"
-        (click)="onClick()"> {{label}} </button>
+        (click)="onClick()">
+  <span *ngIf="label != null">{{label}}</span>
+  <material-icon *ngIf="icon != null"
+                 [icon]="icon"                 
+                 baseline>
+  </material-icon>
+</button>

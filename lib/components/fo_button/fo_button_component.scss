@@ -1,8 +1,11 @@
+@import 'package:angular_components/material_icon/mixins';
 @import 'package:grid/constants';
 @import '../../constants.scss';
 :host {
   display: inline-block;
   button {
+    font-size: 1rem;
+    @include material-icon-size(1rem);
     user-select: none;
     -webkit-user-select: none;
     transition: color 0.3s ease, background-color 0.3s ease;
@@ -16,7 +19,7 @@
     line-height: 200%;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis;    
   }
   button.leftBorder {
     border-top-left-radius: $x-small;

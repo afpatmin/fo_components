@@ -1,18 +1,20 @@
 import 'dart:async';
-
 import 'package:angular/angular.dart';
-
+import 'package:angular_components/material_icon/material_icon.dart';
 import 'fo_button_event.dart';
 
 @Component(
     selector: 'fo-button',
     templateUrl: 'fo_button_component.html',
     styleUrls: const ['fo_button_component.css'],
-    directives: const [NgClass],
+    directives: const [MaterialIconComponent, NgClass, NgIf],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoButtonComponent implements OnDestroy {
   @Input()
   String label;
+
+  @Input()
+  String icon;
 
   @Input()
   bool leftBorder = true;
@@ -31,7 +33,6 @@ class FoButtonComponent implements OnDestroy {
   }
 
   final StreamController _triggerController = StreamController<FoButtonEvent>();
-
 
   FoButtonComponent();
 
