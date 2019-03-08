@@ -12,7 +12,7 @@ import '../fo_dropdown_list/fo_dropdown_option.dart';
     templateUrl: 'fo_dropdown_select_component.html',
     styleUrls: ['fo_dropdown_select_component.css'],
     directives: [FoDropdownListComponent, MaterialIconComponent, NgIf])
-class FoDropdownSelectComponent implements OnDestroy {
+class FoDropdownSelectComponent implements OnInit, OnDestroy {
   @Input()
   String label;
 
@@ -60,5 +60,11 @@ class FoDropdownSelectComponent implements OnDestroy {
     dropdownVisible = false;
     selectedOption = event;
     _selectedIdController.add(event.id);
+  }
+
+  @override
+  void ngOnInit() {
+    // This will select first option with id == null if it exists        
+    selectedId = selectedOption?.id;
   }
 }
