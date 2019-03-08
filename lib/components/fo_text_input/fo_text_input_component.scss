@@ -1,8 +1,13 @@
 @import'package:grid/constants';
 @import '../../constants.scss';
 @import '../../mixins.scss';
+@import '../fo_button/mixins';
+@import '../fo_dropdown_list/mixins';
 $transitionSpeed: 0.3s ease;
 :host {
+  input {
+    font-size: 1rem;
+  }
   display: block;
   position: relative;
   div#labelContainer {
@@ -31,14 +36,14 @@ $transitionSpeed: 0.3s ease;
       width: 100%;
       box-sizing: border-box;
       outline: none;
-      line-height: 200%;      
+      line-height: 200%;
       border-width: 1px 0;
       border-style: solid;
       padding: $small $small;
       min-width: 7rem;
-      color: #555;      
+      color: #555;
     }
-    material-icon.clear {      
+    material-icon.clear {
       width: 0;
       z-index: 2;
       transform: translateX(-$large);
@@ -59,7 +64,7 @@ $transitionSpeed: 0.3s ease;
       border-top-right-radius: $x-small;
       border-bottom-right-radius: $x-small;
       border-right-width: 1px;
-    }    
+    }
   }
   div#flexContainer:focus-within {
     @include boxShadow();
@@ -84,7 +89,7 @@ $transitionSpeed: 0.3s ease;
       border-left-width: 1px;
       border-top-width: 1px;
       border-right-width: 0;
-      border-bottom-width: 0;      
+      border-bottom-width: 0;
       width: 10px;
       height: 10px;
     }
@@ -95,4 +100,5 @@ $transitionSpeed: 0.3s ease;
       white-space: nowrap;
     }
   }
+  @include fo-button-font-size(1rem);  
 }

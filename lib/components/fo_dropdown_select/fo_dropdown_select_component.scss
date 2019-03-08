@@ -1,0 +1,33 @@
+@import'package:grid/constants';
+@import '../../mixins.scss';
+:host {
+  display: block;
+  position: relative;  
+  cursor: pointer;
+  div#labelContainer {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;   
+  }
+  div#selector {
+    display: flex;
+    align-items: center;
+    border-radius: $x-small;
+    border-width: 1px;
+    border-style: solid;
+    div#selectedValue {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: $small $medium;
+      line-height: 200%;
+      color: #555;
+      user-select: none;
+    }
+    material-icon.arrow {
+      margin: 0 $small;
+      color: #555;
+    }
+  }
+}

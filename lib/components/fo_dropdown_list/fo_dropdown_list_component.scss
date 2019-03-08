@@ -1,23 +1,26 @@
 @import 'package:grid/constants';
-:host {    
-  margin-top: $x-small;   
-  position: fixed;
-  z-index: 99;
-
-  div#dropdownContent {
-    background-color: white;
-    padding-bottom: $medium;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: $x-small;
-    overflow-y: auto;        
-    div.category {
-      margin: $large $medium $small $medium;
-      text-transform: uppercase;
-    }
-    hr {
-      border-top: 0;
+:host {
+  position: relative;
+  display: block;
+  div#fixer {
+    margin-top: $x-small;
+    position: fixed;
+    z-index: 99;
+    div#dropdownContent {
+      background-color: white;
+      padding-bottom: $medium;
+      border-width: 1px;
       border-style: solid;
+      border-radius: $x-small;
+      overflow-y: auto;
+      div.category {
+        margin: $large $medium $small $medium;
+        text-transform: uppercase;
+      }
+      hr {
+        border-top: 0;
+        border-style: solid;
+      }
     }
   }
 }

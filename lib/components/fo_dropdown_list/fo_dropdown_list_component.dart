@@ -19,7 +19,7 @@ import 'fo_dropdown_option_component.dart';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDropdownListComponent
-    implements OnInit, AfterViewInit, AfterChanges, OnDestroy {
+    implements AfterViewInit, AfterChanges, OnDestroy {
   @Input()
   num width;
 
@@ -32,21 +32,23 @@ class FoDropdownListComponent
   @Input()
   String filter;
 
-  
-  int _startOffsetTop;
+  final ChangeDetectorRef _changeDetectorRef;
   final html.Element host;
   final StreamController _visibleController = StreamController<bool>();
   final StreamController selectController =
       StreamController<FoDropdownOption>();
   Map<String, List<FoDropdownOption>> _filteredOptions;
 
-  FoDropdownListComponent(this.host);
+  FoDropdownListComponent(this._changeDetectorRef, this.host);
 
   String get elementWidth => width == null ? 'auto' : '${width}px';
 
-  String get elementMaxHeight =>
-      '${html.window.innerHeight - host.offsetTop - 40}px';
-
+  String elementMaxHeight = '100px';
+/*
+  String get elementMaxHeight => _startOffsetTop == null
+      ? null
+      : '${html.window.innerHeight - _startOffsetTop - 40}px';
+*/
   Map<String, List<FoDropdownOption>> get filteredOptions => _filteredOptions;
 
   @Output('visibleChange')
@@ -58,21 +60,31 @@ class FoDropdownListComponent
   @override
   void ngAfterChanges() {
     if (visible == true) {
-      _filteredOptions = {};
-      for (final category in options.keys) {
-        _filteredOptions[category] = options[category]
-            .where((option) =>
-                option.label.toLowerCase().contains(filter.toLowerCase()))
-            .toList(growable: false);
-        if (_filteredOptions[category].isEmpty) {
-          _filteredOptions.remove(category);
+      final rect = host.getBoundingClientRect();
+      top = '${rect.top}px';
+      elementMaxHeight =
+        '${html.document.body.clientHeight - rect.top - 20}px';
+      if (filter == null || filter.isEmpty) {
+        _filteredOptions = Map.from(options);
+      } else {
+        _filteredOptions = {};
+        for (final category in options.keys) {
+          _filteredOptions[category] = options[category]
+              .where((option) =>
+                  option.label.toLowerCase().contains(filter.toLowerCase()))
+              .toList(growable: false);
+          if (_filteredOptions[category].isEmpty) {
+            _filteredOptions.remove(category);
+          }
+        }
+        if (_filteredOptions.isEmpty) {
+          _visibleController.add(false);
         }
       }
-      if (_filteredOptions.isEmpty) {
-        _visibleController.add(false);
-      }    
-    }    
+    }
   }
+
+  String top;
 
   @override
   void ngOnDestroy() {
@@ -81,18 +93,10 @@ class FoDropdownListComponent
   }
 
   @override
-  void ngOnInit() {
-    // Make sure the element stays in position
-    html.document.onScroll.forEach((_) {
-      host.style.top =
-          '${_startOffsetTop - html.document.documentElement.scrollTop}px';
-    });
-  }
-
-  @override
   void ngAfterViewInit() {
-    _startOffsetTop = host.offsetTop;
-    host.style.top =
-          '${_startOffsetTop - html.document.documentElement.scrollTop}px';
+    html.document.onScroll.forEach((e) {      
+      top = '${host.getBoundingClientRect().top}px';
+      _changeDetectorRef.markForCheck();
+    });
   }
 }

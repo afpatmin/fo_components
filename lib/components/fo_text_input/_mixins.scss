@@ -1,4 +1,5 @@
 @import 'package:angular_components/material_icon/mixins';
+@import '../fo_button/mixins';
 @import '../fo_dropdown_list/mixins';
 @mixin fo-text-input-font-size($size) {
   ::ng-deep fo-text-input {
@@ -7,17 +8,19 @@
         span {
           font-size: $size;
         }
-        @include material-icon-size($size);
+        @include material-icon-size(0.8*$size);
       }
-      div#flexContainer {        
+      div#flexContainer {
         input.themeable {
           font-size: $size;
         }
-        material-icon.leading {         
+        material-icon.leading {
           transform: translateX(0.5*$size) !important;
+          @include material-icon-size($size);
         }
-        material-icon.clear {               
-          transform: translateX(-1.5*$size) !important;         
+        material-icon.clear {
+          transform: translateX(-1.5*$size) !important;
+          @include material-icon-size($size);
         }
         input.themeable.leftPadding {
           padding-left: 2*$size !important;
@@ -25,14 +28,14 @@
         input.themeable.rightPadding {
           padding-right: 2*$size !important;
         }
-        @include material-icon-size($size);
+        @include fo-button-font-size($size);        
       }
       div#errorOutput {
         div#message {
           font-size: $size;
         }
       }
+      @include dropdown-list-font-size($size);
     }
   }
-  @include dropdown-list-font-size($size);
 }

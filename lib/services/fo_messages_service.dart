@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 @Injectable()
 class FoMessagesService {
+  
   String error_invalid_email() =>
       Intl.message('invalid email address', name: 'error_invalid email');
 

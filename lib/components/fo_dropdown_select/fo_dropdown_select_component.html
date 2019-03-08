@@ -1,0 +1,18 @@
+<div (click)="dropdownVisible = !dropdownVisible">
+  <div *ngIf="label?.isEmpty == false"
+       id="labelContainer"
+       class="gray-color margin-bottom-x-small">{{label}}</div>
+  <div id="selector"
+       class="gray-color-bright">
+    <div id="selectedValue"> {{selectedOption == null ? '-' : selectedOption.label}} </div>
+    <material-icon class="arrow"
+                   baseline
+                   icon="keyboard_arrow_down"></material-icon>
+  </div>
+</div>
+<fo-dropdown-list *ngIf="options != null && dropdownVisible == true"
+                  [options]="options"
+                  [width]="dropdownWidth"
+                  (select)="onSelect($event)"
+                  [(visible)]="dropdownVisible">
+</fo-dropdown-list>

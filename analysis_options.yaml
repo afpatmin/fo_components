@@ -64,8 +64,7 @@ linter:
     - package_prefixed_library_names
     - parameter_assignments
     - prefer_adjacent_string_concatenation
-    - prefer_asserts_in_initializer_lists
-    - prefer_bool_in_asserts
+    - prefer_asserts_in_initializer_lists    
     - prefer_collection_literals
     - prefer_conditional_assignment
     - prefer_const_constructors
@@ -84,10 +83,8 @@ linter:
     - prefer_single_quotes
     - prefer_typing_uninitialized_variables
     - recursive_getters
-    - slash_for_doc_comments
-    #- sort_constructors_first
-    - sort_unnamed_constructors_first
-    - super_goes_last
+    - slash_for_doc_comments    
+    - sort_unnamed_constructors_first    
     - test_types_in_equals
     - throw_in_finally
     - type_annotate_public_apis

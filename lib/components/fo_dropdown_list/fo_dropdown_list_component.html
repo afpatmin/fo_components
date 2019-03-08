@@ -1,14 +1,19 @@
-<div *ngIf="visible && options != null"
-     id="dropdownContent"
-     class="gray-color-bright"
-     [style.width]="elementWidth"
-     [style.max-height]="elementMaxHeight">
-  <div *ngFor="let category of filteredOptions.keys">    
-    <div class="black-color category"><strong>{{category}}</strong></div>
-    <fo-dropdown-option *ngFor="let option of filteredOptions[category]"
-                        [model]="option"
-                        (click)="selectController.add(option)">
-    </fo-dropdown-option>    
-    <hr *ngIf="category != filteredOptions.keys.last" class="gray-color-bright">    
+<div id="fixer"
+     [style.top]="top"
+     *ngIf="visible && options != null">
+  <div id="dropdownContent"
+       class="gray-color-bright"
+       [style.width]="elementWidth"
+       [style.max-height]="elementMaxHeight">
+    <div *ngFor="let category of filteredOptions.keys">
+      <div *ngIf="category.isNotEmpty"
+           class="black-color category"><strong>{{category}}</strong></div>
+      <fo-dropdown-option *ngFor="let option of filteredOptions[category]"
+                          [model]="option"
+                          (click)="selectController.add(option)">
+      </fo-dropdown-option>
+      <hr *ngIf="category != filteredOptions.keys.last"
+          class="gray-color-bright">
+    </div>
   </div>
 </div>
