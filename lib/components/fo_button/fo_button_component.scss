@@ -1,7 +1,7 @@
 @import 'package:grid/constants';
 @import '../../constants.scss';
 :host {
-  display: block;
+  display: inline-block;
   button {
     user-select: none;
     -webkit-user-select: none;
