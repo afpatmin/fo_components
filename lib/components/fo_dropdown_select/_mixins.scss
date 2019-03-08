@@ -3,11 +3,11 @@
 @mixin fo-dropdown-select-font-size($size) {
   ::ng-deep fo-dropdown-select {
     div#labelContainer {
-      font-size: $size;
+      font-size: $size !important;
     }
     div#selector {
       font-size: $size;
-      @include material-icon-size($size);
+      @include material-icon-size($size !important);
     }
   }
   @include dropdown-list-font-size($size);

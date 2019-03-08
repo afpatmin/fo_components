@@ -6,9 +6,9 @@
     label {
       div#labelContainer {
         span {
-          font-size: $size;
+          font-size: $size !important;
         }
-        @include material-icon-size(0.8*$size);
+        @include material-icon-size(0.8*$size !important);
       }
       div#flexContainer {
         input.themeable {
@@ -20,7 +20,7 @@
         }
         material-icon.clear {
           transform: translateX(-1.5*$size) !important;
-          @include material-icon-size($size);
+          @include material-icon-size($size !important);
         }
         input.themeable.leftPadding {
           padding-left: 2*$size !important;

@@ -2,12 +2,12 @@
 @mixin dropdown-list-font-size($size) {
   ::ng-deep div#dropdownContent {
     div.category {
-      font-size: $size;
+      font-size: $size !important;
     }
     fo-dropdown-option {
       table {
         font-size: $size;
-        @include material-icon-size($size);
+        @include material-icon-size($size !important);
       }
     }
   }
