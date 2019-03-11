@@ -17,12 +17,13 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
   void onTouch() {
     if (playing) {
       _player.callMethod('pauseVideo');
+      playing = false;
     } else {
       _player.callMethod('playVideo');
+      Future.delayed(Duration(milliseconds: 200)).then((_) {
+        playing = true;
+      });
     }
-    Future.delayed(Duration(milliseconds: 200)).then((_) {
-      playing = !playing;
-    });
   }
 
   @override
