@@ -20,7 +20,9 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
     } else {
       _player.callMethod('playVideo');
     }
-    playing = !playing;
+    Future.delayed(Duration(milliseconds: 200)).then((_) {
+      playing = !playing;
+    });
   }
 
   @override
@@ -32,13 +34,13 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
         .querySelector('#youtube-player-wrapper')
         .children
         .insert(0, new DivElement()..id = elementId);
-    
+
     if (document.head.querySelector('#fo-youtube') == null) {
       document.head.children.add(new ScriptElement()
         ..src = 'https://www.youtube.com/iframe_api'
         ..id = 'fo-youtube');
       context['onYouTubeIframeAPIReady'] = _onAPIReady;
-    } else {    
+    } else {
       _onAPIReady();
     }
   }
@@ -58,7 +60,7 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
 
   void _onAPIReady() {
     // Youtube API is ready, initialize video
-    _player = new JsObject(context['YT']['Player'], [elementId, params]);    
+    _player = new JsObject(context['YT']['Player'], [elementId, params]);
   }
 
   void _onReady(JsObject event) {}
