@@ -10,7 +10,7 @@
            class="black-color category"><strong>{{category}}</strong></div>
       <fo-dropdown-option *ngFor="let option of filteredOptions[category]"
                           [model]="option"
-                          (click)="selectController.add(option)">
+                          (click)="onSelect($event, option)">
       </fo-dropdown-option>
       <hr *ngIf="category != filteredOptions.keys.last"
           class="gray-color-bright">

@@ -19,6 +19,12 @@ class FoDropdownSelectComponent implements OnInit, OnDestroy {
   @Input()
   Map<String, List<FoDropdownOption>> options;
 
+  @Input()
+  bool leftBorder = true;
+
+  @Input()
+  bool rightBorder = true;
+
   final StreamController<Object> _selectedIdController =
       StreamController<Object>();
   final dom.Element _host;
@@ -54,6 +60,11 @@ class FoDropdownSelectComponent implements OnInit, OnDestroy {
   @override
   void ngOnDestroy() {
     _selectedIdController.close();
+  }
+
+  void onClick(dom.Event e) {
+    dropdownVisible = !dropdownVisible;
+    e.stopPropagation();
   }
 
   void onSelect(FoDropdownOption event) {

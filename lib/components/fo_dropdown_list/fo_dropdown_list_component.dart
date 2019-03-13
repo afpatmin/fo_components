@@ -9,14 +9,8 @@ import 'fo_dropdown_option_component.dart';
 @Component(
     selector: 'fo-dropdown-list',
     templateUrl: 'fo_dropdown_list_component.html',
-    styleUrls: const ['fo_dropdown_list_component.css'],
-    directives: const [
-      NgClass,
-      NgFor,
-      NgIf,
-      NgStyle,
-      FoDropdownOptionComponent
-    ],
+    styleUrls: ['fo_dropdown_list_component.css'],
+    directives: [NgClass, NgFor, NgIf, NgStyle, FoDropdownOptionComponent],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDropdownListComponent
     implements AfterViewInit, AfterChanges, OnDestroy {
@@ -44,11 +38,7 @@ class FoDropdownListComponent
   String get elementWidth => width == null ? 'auto' : '${width}px';
 
   String elementMaxHeight = '100px';
-/*
-  String get elementMaxHeight => _startOffsetTop == null
-      ? null
-      : '${html.window.innerHeight - _startOffsetTop - 40}px';
-*/
+
   Map<String, List<FoDropdownOption>> get filteredOptions => _filteredOptions;
 
   @Output('visibleChange')
@@ -62,8 +52,7 @@ class FoDropdownListComponent
     if (visible == true) {
       final rect = host.getBoundingClientRect();
       top = '${rect.top}px';
-      elementMaxHeight =
-        '${html.document.body.clientHeight - rect.top - 20}px';
+      elementMaxHeight = '${html.document.body.clientHeight - rect.top - 20}px';
       if (filter == null || filter.isEmpty) {
         _filteredOptions = Map.from(options);
       } else {
@@ -86,6 +75,11 @@ class FoDropdownListComponent
 
   String top;
 
+  void onSelect(html.Event e, FoDropdownOption option) {
+    e.stopPropagation();
+    selectController.add(option);
+  }
+
   @override
   void ngOnDestroy() {
     _visibleController.close();
@@ -94,9 +88,15 @@ class FoDropdownListComponent
 
   @override
   void ngAfterViewInit() {
-    html.document.onScroll.forEach((e) {      
+    html.document.onScroll.forEach((e) {
       top = '${host.getBoundingClientRect().top}px';
       _changeDetectorRef.markForCheck();
+    });
+
+    html.document.onClick.forEach((_) {
+      if (visible) {
+        _visibleController.add(false);
+      }
     });
   }
 }

@@ -13,9 +13,8 @@
   div#selector {
     transition: box-shadow $transitionSpeed;
     display: flex;
-    align-items: center;
-    border-radius: $x-small;
-    border-width: 1px;
+    align-items: center;    
+    border-width: 1px 0;
     border-style: solid;
     div#selectedValue {
       flex: 1;
@@ -31,6 +30,17 @@
       margin: 0 $small;
       color: #555;
     }
+  }
+  div#selector.leftBorder {
+    border-top-left-radius: $x-small;
+    border-bottom-left-radius: $x-small;
+    border-left-width: 1px;
+  }
+  div#selector.rightBorder {
+    border-top-right-radius: $x-small;
+    border-bottom-right-radius: $x-small;
+    border-right-width: 1px;
+
   }
   div#selector.focus {
     @include boxShadow();
