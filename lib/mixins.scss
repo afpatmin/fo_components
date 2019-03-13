@@ -1,3 +1,5 @@
+$transitionSpeed: 0.3s ease;
+
 @import 'package:angular_components/material_dialog/mixins';
 @mixin foregroundColor($color) {
   color: $color;

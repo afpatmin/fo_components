@@ -3,7 +3,8 @@
        id="labelContainer"
        class="gray-color margin-bottom-x-small">{{label}}</div>
   <div id="selector"
-       class="gray-color-bright">
+       class="gray-color-bright"
+       [class.focus]="dropdownVisible">
     <div id="selectedValue"> {{selectedOption == null ? '-' : selectedOption.label}} </div>
     <material-icon class="arrow"
                    baseline

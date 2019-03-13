@@ -3,7 +3,7 @@
 @import '../../mixins.scss';
 @import '../fo_button/mixins';
 @import '../fo_dropdown_list/mixins';
-$transitionSpeed: 0.3s ease;
+
 :host {
   input {
     font-size: 1rem;
