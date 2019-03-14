@@ -37,7 +37,7 @@
                [disabled]="disabled || control?.valid == false"
                (trigger)="onActionButtonTrigger($event)"></fo-button>
   </div>
-  <div *ngIf="errorMessage != null && dropdownVisible == false"
+  <div *ngIf="errorMessage != null && control?.pristine != true && dropdownVisible == false"
        id="errorOutput"
        class="gray-color-bright">
     <div id="arrow"

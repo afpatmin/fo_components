@@ -48,7 +48,7 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
 
   String value;
   ChangeFunction<String> _onChange;
-  NgControl control;  
+  NgControl control;
   final FoMessagesService msg;
   final StreamController _actionButtonController =
       StreamController<FoButtonEvent>();
@@ -62,29 +62,28 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   @ViewChild('input')
   html.InputElement inputElement;
 
-  FoTextInputComponent(
-      @Self() @Optional() this.control, this.msg) {
+  FoTextInputComponent(@Self() @Optional() this.control, this.msg) {
     if (control != null) control.valueAccessor = this;
   }
 
   String get errorMessage {
-    if (control?.pristine != false || control?.errors == null) return null;
-
-    if (control.errors.containsKey('required')) {
-      return msg.error_required();
-    } else if (control.errors.containsKey('error')) {
-      return control.errors['error'];
-    } else if (control.errors.containsKey('minlength')) {
-      return msg
-          .error_min_length(control.errors['minlength']['requiredLength']);
-    } else if (control.errors.containsKey('maxlength')) {
-      return msg
-          .error_max_length(control.errors['maxlength']['requiredLength']);
-    } else if (control.errors.containsKey('pattern')) {
-      return msg
-          .error_invalid_pattern(control.errors['pattern']['requiredPattern']);
+    final errors = control?.errors;
+    if (errors == null) {
+      return null;
     }
-    return control.errors == null ? null : control.errors.toString();
+    else if (errors.containsKey('required')) {
+      return msg.error_required();
+    } else if (errors.containsKey('error')) {
+      return errors['error'];
+    } else if (errors.containsKey('minlength')) {
+      return msg.error_min_length(errors['minlength']['requiredLength']);
+    } else if (errors.containsKey('maxlength')) {
+      return msg.error_max_length(errors['maxlength']['requiredLength']);
+    } else if (errors.containsKey('pattern')) {
+      return msg.error_invalid_pattern(errors['pattern']['requiredPattern']);
+    } else {
+      return errors.toString();
+    }
   }
 
   @Output('selectionChange')
