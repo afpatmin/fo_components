@@ -24,8 +24,7 @@ import '../fo_dropdown_list/fo_dropdown_option.dart';
     ],
     pipes: const [NamePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoTextInputComponent
-    implements ControlValueAccessor<String>, OnDestroy {
+class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   @Input()
   String actionButtonLabel;
 
@@ -49,7 +48,7 @@ class FoTextInputComponent
 
   String value;
   ChangeFunction<String> _onChange;
-  NgControl control;
+  NgControl control;  
   final FoMessagesService msg;
   final StreamController _actionButtonController =
       StreamController<FoButtonEvent>();
@@ -57,20 +56,23 @@ class FoTextInputComponent
       StreamController<FoDropdownOption>();
   final StreamController _focusController = StreamController<html.FocusEvent>();
   bool dropdownVisible = false;
-  int get dropdownWidth => inputElement?.getBoundingClientRect()?.width?.toInt();
+  int get dropdownWidth =>
+      inputElement?.getBoundingClientRect()?.width?.toInt();
 
   @ViewChild('input')
   html.InputElement inputElement;
 
-  FoTextInputComponent(@Self() @Optional() this.control, this.msg) {
+  FoTextInputComponent(
+      @Self() @Optional() this.control, this.msg) {
     if (control != null) control.valueAccessor = this;
   }
 
   String get errorMessage {
+    if (control?.pristine != false || control?.errors == null) return null;
+
     if (control.errors.containsKey('required')) {
       return msg.error_required();
-    }
-    if (control.errors.containsKey('error')) {
+    } else if (control.errors.containsKey('error')) {
       return control.errors['error'];
     } else if (control.errors.containsKey('minlength')) {
       return msg
@@ -100,14 +102,14 @@ class FoTextInputComponent
     _actionButtonController.add(event);
   }
 
-  void onClear(html.Event event) {        
+  void onClear(html.Event event) {
     // Prevent the input from gaining focus
     event.preventDefault();
     value = '';
     dropdownVisible = false;
     if (_onChange != null) {
       _onChange(value);
-    }    
+    }
   }
 
   void onFilterSelect(FoDropdownOption event) {
@@ -120,16 +122,16 @@ class FoTextInputComponent
   }
 
   void onValueChange(String event) {
-    value = event;    
+    value = event;
     if (_onChange != null) {
       _onChange(value);
     }
-      
-    dropdownVisible = true;
+
+    dropdownVisible = value?.isEmpty == false;
   }
 
-  void onFocus(html.FocusEvent event) {    
-    _focusController.add(event);    
+  void onFocus(html.FocusEvent event) {
+    _focusController.add(event);
   }
 
   @override

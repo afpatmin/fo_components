@@ -2,9 +2,9 @@
   <div *ngIf="label?.isEmpty == false"
        id="labelContainer"
        class="gray-color margin-bottom-x-small"
-       [class.color-alert]="control?.valid == false">
+       [class.color-alert]="control?.valid == false && control?.pristine != true">
     <span>{{label}}</span>
-    <material-icon *ngIf="control?.valid == false"
+    <material-icon *ngIf="control?.valid == false && control?.pristine != true"
                    size="small"
                    icon="error"
                    baseline></material-icon>
@@ -21,7 +21,7 @@
            [class.rightBorder]="actionButtonLabel == null"
            [class.leftPadding]="leadingIcon != null"
            [class.rightPadding]="clearIcon == true"
-           [class.color-alert]="control?.valid == false"
+           [class.color-alert]="control?.valid == false && control?.pristine != true"
            [ngModel]="value"
            (ngModelChange)="onValueChange($event)"
            (focus)="onFocus($event)"
@@ -37,7 +37,7 @@
                [disabled]="disabled || control?.valid == false"
                (trigger)="onActionButtonTrigger($event)"></fo-button>
   </div>
-  <div *ngIf="control?.valid == false && !dropdownVisible"
+  <div *ngIf="errorMessage != null && dropdownVisible == false"
        id="errorOutput"
        class="gray-color-bright">
     <div id="arrow"
