@@ -126,7 +126,7 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
       _onChange(value);
     }
 
-    dropdownVisible = value?.isEmpty == false;
+    dropdownVisible = options != null && value?.isEmpty == false;
   }
 
   void onFocus(html.FocusEvent event) {
