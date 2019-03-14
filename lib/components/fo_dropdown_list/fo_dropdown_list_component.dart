@@ -29,7 +29,7 @@ class FoDropdownListComponent
   final ChangeDetectorRef _changeDetectorRef;
   final html.Element host;
   final StreamController _visibleController = StreamController<bool>();
-  final StreamController selectController =
+  final StreamController _selectController =
       StreamController<FoDropdownOption>();
   Map<String, List<FoDropdownOption>> _filteredOptions;
 
@@ -45,7 +45,7 @@ class FoDropdownListComponent
   Stream<bool> get visibleChange => _visibleController.stream;
 
   @Output('select')
-  Stream<FoDropdownOption> get select => selectController.stream;
+  Stream<FoDropdownOption> get select => _selectController.stream;
 
   @override
   void ngAfterChanges() {
@@ -77,13 +77,13 @@ class FoDropdownListComponent
 
   void onSelect(html.Event e, FoDropdownOption option) {
     e.stopPropagation();
-    selectController.add(option);
+    _selectController.add(option);
   }
 
   @override
   void ngOnDestroy() {
     _visibleController.close();
-    selectController.close();
+    _selectController.close();    
   }
 
   @override
@@ -94,7 +94,7 @@ class FoDropdownListComponent
     });
 
     html.document.onClick.forEach((_) {
-      if (visible) {
+      if (visible && !_visibleController.isClosed) {
         _visibleController.add(false);
       }
     });
