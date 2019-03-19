@@ -29,7 +29,9 @@ class FoButtonComponent implements OnDestroy {
   Stream<FoButtonEvent> get trigger => _triggerController.stream;
 
   void onClick() {
-    _triggerController.add(FoButtonEvent());
+    if (disabled != true) {
+      _triggerController.add(FoButtonEvent());
+    }
   }
 
   final StreamController _triggerController = StreamController<FoButtonEvent>();
