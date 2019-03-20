@@ -52,7 +52,8 @@ class FoDropdownListComponent
     if (visible == true) {
       final rect = host.getBoundingClientRect();
       top = '${rect.top}px';
-      elementMaxHeight = '${html.document.body.clientHeight - rect.top - 20}px';
+      
+      elementMaxHeight = '${html.document.body.clientHeight + html.window.scrollY - rect.top - 20}px';
       if (filter == null || filter.isEmpty) {
         _filteredOptions = Map.from(options);
       } else {
