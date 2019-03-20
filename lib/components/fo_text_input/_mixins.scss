@@ -1,6 +1,7 @@
 @import 'package:angular_components/material_icon/mixins';
 @import '../fo_button/mixins';
 @import '../fo_dropdown_list/mixins';
+
 @mixin fo-text-input-font-size($size) {
   ::ng-deep fo-text-input {
     label {

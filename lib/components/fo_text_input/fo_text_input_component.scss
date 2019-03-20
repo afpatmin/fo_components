@@ -7,6 +7,7 @@
 :host {
   input {
     font-size: 1rem;
+    outline: none;
   }
   display: block;
   position: relative;
@@ -47,6 +48,7 @@
       width: 0;
       z-index: 2;
       transform: translateX(-$large);
+      padding: $small $medium;
       cursor: pointer;
     }
     input.leftPadding {
