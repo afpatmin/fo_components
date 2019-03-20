@@ -1,7 +1,7 @@
 <modal [visible]="visible">
   <material-dialog headered
                    class="themeable"
-                   [class.white-header]="titleImageUrl != null"
+                   [class.white-header]="whiteHeader == true || titleImageUrl != null"
                    [class.fixed-height]="fixedHeight"
                    [class.fixed-width]="fixedWidth"
                    [class.small-padding]="smallPadding"
