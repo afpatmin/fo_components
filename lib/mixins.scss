@@ -104,6 +104,6 @@ $transitionSpeed: 0.3s ease;
 }
 
 @mixin boxShadow() {
-  -webkit-box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.4);
   box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.4);
 }

@@ -3,14 +3,14 @@
 @import '../../mixins.scss';
 @import '../fo_button/mixins';
 @import '../fo_dropdown_list/mixins';
-
 :host {
   input {
     outline: none;
     margin: 0;
   }
-  input, input:focus {    
-    font-size: 1rem;    
+  input,
+  input:focus {
+    font-size: 1rem;
   }
   display: block;
   position: relative;
@@ -29,6 +29,16 @@
     align-items: center;
     border-radius: $x-small;
     transition: box-shadow $transitionSpeed;
+    material-icon {
+      box-shadow: none;
+      -webkit-box-shadow: none;
+    }
+    material-icon.clear {
+      width: 0;
+      z-index: 2;
+      transform: translateX(-$large);
+      cursor: pointer;
+    }
     material-icon.leading {
       width: 0;
       z-index: 2;
@@ -46,12 +56,8 @@
       padding: $small $small;
       min-width: 7rem;
       color: #555;
-    }
-    material-icon.clear {
-      width: 0;
-      z-index: 2;
-      transform: translateX(-$large);      
-      cursor: pointer;
+      box-shadow: none;
+      -webkit-box-shadow: none;
     }
     input.leftPadding {
       padding-left: $x-large;
@@ -73,7 +79,7 @@
       button.themeable {
         padding-left: $large;
         padding-right: $large;
-      }      
+      }
     }
   }
   div#flexContainer:focus-within {
@@ -110,5 +116,5 @@
       white-space: nowrap;
     }
   }
-  @include fo-button-font-size(1rem);  
+  @include fo-button-font-size(1rem);
 }
