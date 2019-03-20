@@ -66,6 +66,12 @@
       border-bottom-right-radius: $x-small;
       border-right-width: 1px;
     }
+    ::ng-deep fo-button {
+      button.themeable {
+        padding-left: $large;
+        padding-right: $large;
+      }      
+    }
   }
   div#flexContainer:focus-within {
     @include boxShadow();

@@ -150,12 +150,12 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   }
 
   @override
-  void writeValue(String obj) {
-    value = obj;
-    dropdownVisible = value?.isEmpty == false;
-    _changeDetectorRef
-      ..detectChanges()
-      ..markForCheck();
+  void writeValue(String obj) {  
+    value = obj;  
+    Future.delayed(Duration(milliseconds: 100)).then((_) {
+      dropdownVisible = options != null && value?.isEmpty == false;
+      _changeDetectorRef.markForCheck();
+    });
   }
 
   @override
