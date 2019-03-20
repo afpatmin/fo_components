@@ -47,8 +47,7 @@
     material-icon.clear {
       width: 0;
       z-index: 2;
-      transform: translateX(-$large);
-      padding: $small $medium;
+      transform: translateX(-$large);      
       cursor: pointer;
     }
     input.leftPadding {

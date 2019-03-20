@@ -49,6 +49,7 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   String value;
   ChangeFunction<String> _onChange;
   NgControl control;
+  final ChangeDetectorRef _changeDetectorRef;
   final FoMessagesService msg;
   final StreamController _actionButtonController =
       StreamController<FoButtonEvent>();
@@ -62,7 +63,8 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   @ViewChild('input')
   html.InputElement inputElement;
 
-  FoTextInputComponent(@Self() @Optional() this.control, this.msg) {
+  FoTextInputComponent(
+      @Self() @Optional() this.control, this._changeDetectorRef, this.msg) {
     if (control != null) control.valueAccessor = this;
   }
 
@@ -70,8 +72,7 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
     final errors = control?.errors;
     if (errors == null) {
       return null;
-    }
-    else if (errors.containsKey('required')) {
+    } else if (errors.containsKey('required')) {
       return msg.error_required();
     } else if (errors.containsKey('error')) {
       return errors['error'];
@@ -151,6 +152,8 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   @override
   void writeValue(String obj) {
     value = obj;
+    dropdownVisible = obj != null && obj.isNotEmpty;
+    _changeDetectorRef.markForCheck();
   }
 
   @override
