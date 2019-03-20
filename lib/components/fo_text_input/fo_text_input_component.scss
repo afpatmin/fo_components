@@ -5,9 +5,12 @@
 @import '../fo_dropdown_list/mixins';
 
 :host {
-  input, input:focus {
-    font-size: 1rem;
+  input {
     outline: none;
+    margin: 0;
+  }
+  input, input:focus {    
+    font-size: 1rem;    
   }
   display: block;
   position: relative;
