@@ -53,10 +53,7 @@ class FoModalComponent implements OnDestroy {
   String title;
 
   @Input()
-  String titleImageUrl;
-
-  @Input()
-  bool whiteHeader = false;
+  String titleImageUrl;  
 
   @Input()
   String error;

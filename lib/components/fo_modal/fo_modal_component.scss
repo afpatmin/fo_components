@@ -1,58 +1,60 @@
 @import 'package:angular_components/material_dialog/mixins';
 @import 'package:grid/constants';
 @import 'package:fo_components/mixins';
+
 material-dialog.small-padding {
-    @include material-dialog-body-padding($padding: $small);
-    @include material-dialog-header-padding($padding: $small);
-    @include material-dialog-footer-padding($padding: $small);
+  @include material-dialog-body-padding($padding: $small);
+  @include material-dialog-header-padding($padding: $small);
+  @include material-dialog-footer-padding($padding: $small);
 }
 
-material-dialog {    
-    min-width: 15rem;
-    max-width: 90vw;
-    margin-left: 5vw;
-    margin-right: 5vw;
-    max-height: 95vh;
-    text-align: left;
-    [header] {
-        div.flexContainer {
-            display: flex;
-            img {
-                max-width: 90%;
-                max-height: 100px;
-                margin: 1rem auto;
-                align-self: flex-start;
-            }
-            h3 {
-                align-self: center;
-                margin-bottom: 0;                
-            }
-            div#closeButtonContainer {
-                flex: auto;
-                align-self: flex-start;
-                text-align: right;
-                margin-left: 0.5rem;                
-            }
-        }
+material-dialog {
+  @include material-dialog-header-color(white);
+  min-width: 15rem;
+  max-width: 90vw;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  max-height: 95vh;
+  text-align: left;
+  [header] {
+    div.flexContainer {
+      display: flex;
+      img {
+        max-width: 90%;
+        max-height: 100px;
+        margin: 1rem auto;
+        align-self: flex-start;
+      }
+      h3 {
+        align-self: center;
+        margin-bottom: 0;
+        color: #333;
+      }
+      material-button {
+        color: #333;
+      }
+      div#closeButtonContainer {
+        flex: auto;
+        align-self: flex-start;
+        text-align: right;
+        margin-left: 0.5rem;
+      }
     }
-    ::ng-deep main {
-        -webkit-overflow-scrolling: touch; // Smooth scrolling on tablets/phones        
-    }
+  }
+  ::ng-deep main {
+    -webkit-overflow-scrolling: touch; // Smooth scrolling on tablets/phones        
+  }
 }
 
-material-dialog.white-header {
-    @include material-dialog-header-color(#fff !important);
-}
-
-material-dialog.fixed-height {    
-    div.modal-content {
-      height: 80vh;        
-    }
+material-dialog.fixed-height {
+  div.modal-content {
+    height: 80vh;
+  }
 }
 
 material-dialog.fixed-width {
-    width: 95vw;
-    margin-left: 2.5vw;
-    margin-right: 2.5vw;
-    max-width: $max-width;
+  width: 95vw;
+  margin-left: 2.5vw;
+  margin-right: 2.5vw;
+  max-width: $max-width;
 }
