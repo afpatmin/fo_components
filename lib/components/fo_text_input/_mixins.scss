@@ -12,9 +12,10 @@
         @include material-icon-size(0.8*$size !important);
       }
       div#flexContainer {
-        input.themeable {
+        input.themeable, input.themeable:focus {
           font-size: $size;
         }
+        
         material-icon.leading {
           transform: translateX(0.5*$size) !important;
           @include material-icon-size(1.2*$size);
