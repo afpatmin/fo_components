@@ -49,6 +49,13 @@
   }
 }
 
+:host[clearSize] {
+  button {
+    padding-left: $x-small;
+    padding-right: $x-small;
+  }
+}
+
 :host[fullWidth] {
   width: 100%;  
   button {
