@@ -2,9 +2,7 @@
 @mixin fo-button-font-size($size) {
   ::ng-deep fo-button {
     button.themeable {
-      font-size: $size !important;
-      padding-left: $size;
-      padding-right: $size;      
+      font-size: $size !important;      
       @include material-icon-size($size !important);
     }
   }
