@@ -51,6 +51,8 @@
 
 :host[fullWidth] {
   width: 100%;  
-  padding-left: $small;
-  padding-right: $small;
+  button {
+    padding-left: $small;
+    padding-right: $small;
+  }
 }
