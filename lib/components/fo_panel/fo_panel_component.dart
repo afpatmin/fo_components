@@ -2,14 +2,14 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/material_button/material_button.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
-import '../../pipes/fo_name_pipe.dart';
+import '../../pipes/capitalize_pipe.dart';
 
 @Component(
     selector: 'fo-panel',
     templateUrl: 'fo_panel_component.html',
     styleUrls: ['fo_panel_component.css'],
     directives: [MaterialButtonComponent, MaterialIconComponent, NgIf],
-    pipes: const [NamePipe])
+    pipes: const [CapitalizePipe])
 class FoPanelComponent implements OnDestroy {
   final StreamController _visibleChangeController = StreamController<bool>();
 

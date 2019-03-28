@@ -15,7 +15,7 @@ import 'package:angular_components/material_tooltip/material_tooltip.dart';
 import 'package:collection/collection.dart';
 import 'package:fo_model/fo_model.dart';
 import 'package:intl/intl.dart';
-import '../../pipes/fo_name_pipe.dart';
+import '../../pipes/capitalize_pipe.dart';
 import '../../pipes/range_pipe.dart';
 import '../../services/fo_messages_service.dart';
 import '../fo_modal/fo_modal_component.dart';
@@ -41,7 +41,7 @@ typedef String ErrorFn(Object model);
       MaterialSpinnerComponent,
       MaterialTooltipDirective
     ],
-    pipes: const [NamePipe, RangePipe],
+    pipes: const [CapitalizePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDataTableComponent implements OnChanges, OnDestroy {
   FoDataTableComponent(this.msg) {

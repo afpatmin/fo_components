@@ -13,7 +13,7 @@ import 'package:angular_components/material_input/material_input.dart';
 import 'package:angular_components/material_input/material_number_accessor.dart';
 import 'package:angular_components/material_popup/material_popup.dart';
 import 'package:angular_forms/angular_forms.dart';
-import '../../pipes/fo_name_pipe.dart';
+import '../../pipes/capitalize_pipe.dart';
 import '../../services/fo_messages_service.dart';
 import '../fo_modal/fo_modal_component.dart';
 
@@ -36,7 +36,7 @@ import '../fo_modal/fo_modal_component.dart';
     PopupSourceDirective  
     ],
     providers: const [FORM_PROVIDERS],
-    pipes: const [NamePipe],
+    pipes: const [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoNumberInputComponent
     implements OnDestroy, ControlValueAccessor<int> {

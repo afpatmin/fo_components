@@ -1,7 +1,7 @@
 <div class="row expand collapse">
     <div class="m7 l8 col">
         <h3 class="margin-bottom-none">
-            {{label | name}}
+            {{label | capitalize}}
             <material-icon baseline
                            size="large"
                            *ngIf="description != null"
@@ -75,7 +75,7 @@
                     <td *ngIf="errorFunction != null && data != null">
                         <material-icon *ngIf="errorFunction(data[key]) != null"
                                        icon="warning"
-                                       [materialTooltip]="errorFunction(data[key]) | name"
+                                       [materialTooltip]="errorFunction(data[key]) | capitalize"
                                        size="medium"></material-icon>
                     </td>
                     <td *ngFor="let cell of columns.keys">
@@ -120,7 +120,7 @@
                 <material-icon baseline
                                size="x-large"
                                icon="error"></material-icon>
-                {{msg.no_results_found() | name}}
+                {{msg.no_results_found() | capitalize}}
             </p>
         </div>
     </div>
@@ -204,7 +204,7 @@
     </div>
 </div>
 
-<fo-modal title="{{msg.confirm() | name}}"
+<fo-modal title="{{msg.confirm() | capitalize}}"
           [smallPadding]="false"
           [visible]="deleteBufferId != null"
           (visibleChange)="deleteBufferId = null"

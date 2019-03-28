@@ -11,7 +11,7 @@ import 'package:angular_components/material_select/material_select_dropdown_item
 import 'package:angular_components/material_select/material_select_searchbox.dart';
 import 'package:angular_components/model/selection/string_selection_options.dart';
 import 'package:fo_model/fo_model.dart';
-import '../../pipes/fo_name_pipe.dart';
+import '../../pipes/capitalize_pipe.dart';
 import '../../services/fo_messages_service.dart';
 
 @Component(
@@ -27,7 +27,7 @@ import '../../services/fo_messages_service.dart';
       MaterialSelectDropdownItemComponent,
       MaterialSelectSearchboxComponent
     ],
-    pipes: const [NamePipe],
+    pipes: const [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoMultiSelectComponent implements AfterChanges, OnDestroy {
   FoMultiSelectComponent(this.msg) {
