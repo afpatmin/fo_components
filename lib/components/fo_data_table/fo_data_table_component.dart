@@ -463,7 +463,7 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
   String description;
 
   @Input()
-  Set<Object> selectedRows = new Set();
+  Set<Object> selectedRows = {};
 
   @Input()
   int rows = 10;

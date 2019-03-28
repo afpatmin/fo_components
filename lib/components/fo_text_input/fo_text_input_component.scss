@@ -21,6 +21,7 @@
     display: flex;
     align-items: center;    
     transition: box-shadow $transitionSpeed;
+    border-radius: $borderRadius;
     material-icon {
       box-shadow: none;
       -webkit-box-shadow: none;

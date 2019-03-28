@@ -4,9 +4,11 @@ import 'package:angular_components/material_button/material_button.dart';
 import 'package:angular_components/material_checkbox/material_checkbox.dart';
 import 'package:angular_components/material_input/material_input.dart';
 import 'package:angular_forms/angular_forms.dart';
-import 'package:fo_components/fo_components.dart';
 import 'package:fo_model/fo_model.dart';
 import '../../services/fo_messages_service.dart';
+import '../../validators/fo_validators.dart';
+import '../fo_modal/fo_modal_component.dart';
+import '../fo_select/fo_select_component.dart';
 
 @Component(
     selector: 'fo-gdpr-form',
@@ -28,15 +30,11 @@ class FoGdprFormComponent implements OnDestroy {
   FoGdprFormComponent(this.msg)
       : form = ControlGroup({
           'firstname': Control()
-            ..validator = Validators.compose([
-              Validators.required,
-              Validators.maxLength(50)
-            ]),
+            ..validator = Validators.compose(
+                [Validators.required, Validators.maxLength(50)]),
           'lastname': Control()
-            ..validator = Validators.compose([
-              Validators.required,
-              Validators.maxLength(50)
-            ]),
+            ..validator = Validators.compose(
+                [Validators.required, Validators.maxLength(50)]),
           'phone': Control()
             ..validator = Validators.compose([
               Validators.required,
