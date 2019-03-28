@@ -147,10 +147,6 @@ class FoImageFileComponent implements OnDestroy {
           /// 'Exif\0\0'
           byteOffset += 6;
 
-          /**
-           * TIFF HEADER
-           * Endianess
-           */
           final strEndian = (ascii.decode([
             byteData.getUint8(byteOffset),
             byteData.getUint8(byteOffset + 1)
@@ -161,15 +157,9 @@ class FoImageFileComponent implements OnDestroy {
           /// Next two bytes are Always 0x2a00 (or 0x002a for big endian)
           byteOffset += 2;
 
-          /**
-           * Offset to the first IDF (from exifStart)
-           */
           final offsetExifToIFD = byteData.getUint32(byteOffset, endian);
           byteOffset += offsetExifToIFD - 4;
 
-          /**
-           * Number of entries in this IFD
-           */
           final exifEntries = byteData.getUint16(byteOffset, endian);
           byteOffset += 2;
 
@@ -203,10 +193,6 @@ class FoImageFileComponent implements OnDestroy {
   }
 
   void _generateScaledImage(dom.ProgressEvent e) {
-    /**
-     * Pad the base64 encoded data to become divisible by 4 to conform with iOS standards.
-     */
-    //var base64 = _reader.result.toString();
     final b64 = new StringBuffer()..write(_reader.result.toString());
     final strB64 = b64.toString();
 
@@ -223,9 +209,6 @@ class FoImageFileComponent implements OnDestroy {
       }
     }
 
-    /**
-     * Scale down the image
-     */
     final temp = new dom.ImageElement()..src = b64.toString();
 
     temp.onLoad.listen((_) {
