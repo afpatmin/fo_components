@@ -3,7 +3,12 @@
 @import '../../mixins.scss';
 @import '../fo_button/mixins';
 @import '../fo_dropdown_list/mixins';
+@import 'shared';
+
 :host {
+  display: block;
+  position: relative;
+
   input {
     outline: none;
     margin: 0;
@@ -11,23 +16,10 @@
   input,
   input:focus {
     font-size: 1rem;
-  }
-  display: block;
-  position: relative;
-  div#labelContainer {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    cursor: pointer;
-    span {
-      transition: color $transitionSpeed;
-      margin-right: $x-small;
-    }
-  }
+  }  
   div#flexContainer {
     display: flex;
-    align-items: center;
-    border-radius: $x-small;
+    align-items: center;    
     transition: box-shadow $transitionSpeed;
     material-icon {
       box-shadow: none;
@@ -45,34 +37,24 @@
       transform: translateX($medium);
     }
     input {
-      transition: gray-color-bright $transitionSpeed;
-      flex: auto;
-      width: 100%;
-      box-sizing: border-box;
-      outline: none;
-      line-height: 200%;
-      border-width: 1px 0;
-      border-style: solid;
-      padding: $small $small;
-      min-width: 7rem;
-      color: #555;
-      box-shadow: none;
-      -webkit-box-shadow: none;
+      @include inputStyle;
+      border-left-width: 0;
+      border-right-width: 0;
     }
     input.leftPadding {
       padding-left: $x-large;
     }
     input.leftBorder {
-      border-top-left-radius: $x-small;
-      border-bottom-left-radius: $x-small;
+      border-top-left-radius: $borderRadius;
+      border-bottom-left-radius: $borderRadius;
       border-left-width: 1px;
     }
     input.rightPadding {
       padding-right: $x-large;
     }
     input.rightBorder {
-      border-top-right-radius: $x-small;
-      border-bottom-right-radius: $x-small;
+      border-top-right-radius: $borderRadius;
+      border-bottom-right-radius: $borderRadius;
       border-right-width: 1px;
     }
     ::ng-deep fo-button {
@@ -84,37 +66,6 @@
   }
   div#flexContainer:focus-within {
     @include boxShadow();
-  }
-  div#errorOutput {
-    position: absolute;
-    width: 100%;
-    z-index: 99;
-    margin: $medium 0;
-    background-color: white;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: $x-small;
-    div#arrow {
-      position: absolute;
-      top: -6px;
-      left: 20px;
-      background-color: white;
-      transform: rotate(45deg);
-      -webkit-transform: rotate(45deg);
-      border-style: solid;
-      border-left-width: 1px;
-      border-top-width: 1px;
-      border-right-width: 0;
-      border-bottom-width: 0;
-      width: 10px;
-      height: 10px;
-    }
-    div#message {
-      padding: $medium;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
   }
   @include fo-button-font-size(1rem);
 }

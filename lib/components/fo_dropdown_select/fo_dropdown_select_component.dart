@@ -6,12 +6,21 @@ import 'package:angular_components/material_icon/material_icon.dart';
 
 import '../fo_dropdown_list/fo_dropdown_list_component.dart';
 import '../fo_dropdown_list/fo_dropdown_option.dart';
+import '../fo_label/fo_label_component.dart';
 
 @Component(
     selector: 'fo-dropdown-select',
     templateUrl: 'fo_dropdown_select_component.html',
-    styleUrls: ['fo_dropdown_select_component.css'],
-    directives: [FoDropdownListComponent, MaterialIconComponent, NgClass, NgIf])
+    styleUrls: [
+      'fo_dropdown_select_component.css'
+    ],
+    directives: [
+      FoDropdownListComponent,
+      FoLabelComponent,
+      MaterialIconComponent,
+      NgClass,
+      NgIf
+    ])
 class FoDropdownSelectComponent implements OnInit, OnDestroy {
   @Input()
   String label;

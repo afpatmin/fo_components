@@ -1,43 +1,57 @@
 @import 'package:angular_components/material_icon/mixins';
 @import '../fo_button/mixins';
 @import '../fo_dropdown_list/mixins';
+@import '../fo_label/mixins';
 
 @mixin fo-text-input-font-size($size) {
   ::ng-deep fo-text-input {
-    label {
-      div#labelContainer {
-        span {
-          font-size: $size !important;
-        }
-        @include material-icon-size(0.8*$size !important);
+    @include fo-label-font-size($size);
+
+    div#flexContainer {
+
+      input,
+      input:focus {
+        font-size: $size;
       }
-      div#flexContainer {
-        input.themeable, input.themeable:focus {
-          font-size: $size;
-        }
-        
-        material-icon.leading {
-          transform: translateX(0.5*$size) !important;
-          @include material-icon-size(1.2*$size);
-        }
-        material-icon.clear {
-          transform: translateX(-1.5*$size) !important;
-          @include material-icon-size($size !important);
-        }
-        input.themeable.leftPadding {
-          padding-left: 2*$size !important;
-        }
-        input.themeable.rightPadding {
-          padding-right: 2*$size !important;
-        }
-        @include fo-button-font-size($size);        
+
+      material-icon.leading {
+        transform: translateX(0.5*$size) !important;
+        @include material-icon-size(1.2*$size);
       }
-      div#errorOutput {
-        div#message {
-          font-size: $size;
-        }
+
+      material-icon.clear {
+        transform: translateX(-1.5*$size) !important;
+        @include material-icon-size($size !important);
       }
-      @include dropdown-list-font-size($size);
+
+      input.leftPadding {
+        padding-left: 2*$size !important;
+      }
+
+      input.rightPadding {
+        padding-right: 2*$size !important;
+      }
+
+      @include fo-button-font-size($size);
+    }
+
+    @include dropdown-list-font-size($size);
+  }
+
+  ::ng-deep fo-textarea-input {
+    @include fo-label-font-size($size);
+
+    textarea,
+    textarea:focus {
+      font-size: $size !important;
+    }
+
+  }
+
+  ::ng-deep fo-error-output {
+    div#message {
+      font-size: $size;
     }
   }
+
 }

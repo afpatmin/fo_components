@@ -1,0 +1,15 @@
+@import 'package:grid/constants';
+@import '../../mixins.scss';
+
+:host {
+  div#label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    span {
+      transition: color $transitionSpeed;
+      margin-right: $x-small;
+    }
+  }  
+}

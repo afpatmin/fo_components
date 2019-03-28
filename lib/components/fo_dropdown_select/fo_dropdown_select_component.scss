@@ -3,19 +3,22 @@
 
 :host {
   display: block;
-  position: relative;  
+  position: relative;
   cursor: pointer;
+
   div#labelContainer {
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;   
+    white-space: nowrap;
   }
+
   div#selector {
     transition: box-shadow $transitionSpeed;
     display: flex;
-    align-items: center;    
+    align-items: center;
     border-width: 1px 0;
     border-style: solid;
+
     div#selectedValue {
       flex: 1;
       overflow: hidden;
@@ -26,23 +29,42 @@
       color: #555;
       user-select: none;
     }
+
     material-icon.arrow {
       margin: 0 $small;
       color: #555;
     }
   }
+
   div#selector.leftBorder {
     border-top-left-radius: $x-small;
     border-bottom-left-radius: $x-small;
     border-left-width: 1px;
   }
+
   div#selector.rightBorder {
     border-top-right-radius: $x-small;
     border-bottom-right-radius: $x-small;
     border-right-width: 1px;
 
   }
+
   div#selector.focus {
     @include boxShadow();
+  }
+}
+
+:host[centerValue] {
+  div#selector {
+    div#selectedValue {
+      text-align: center;
+    }
+    div#selectedValue::before {
+      content: '';
+      display: inline-block;
+      width: 1em;
+      margin: $small;
+      
+    }
   }
 }

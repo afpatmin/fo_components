@@ -1,7 +1,5 @@
-<div (click)="onClick($event)">
-  <div *ngIf="label?.isEmpty == false"
-       id="labelContainer"
-       class="gray-color margin-bottom-x-small">{{label}}</div>
+<fo-label [value]="label"
+          (click)="onClick($event)">
   <div id="selector"
        class="gray-color-bright"
        [class.leftBorder]="leftBorder"
@@ -12,7 +10,7 @@
                    baseline
                    icon="keyboard_arrow_down"></material-icon>
   </div>
-</div>
+</fo-label>
 <fo-dropdown-list *ngIf="options != null && dropdownVisible == true"
                   [options]="options"
                   [width]="dropdownWidth"

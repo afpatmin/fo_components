@@ -1,19 +1,10 @@
-<label>
-  <div *ngIf="label?.isEmpty == false"
-       id="labelContainer"
-       class="gray-color margin-bottom-x-small"
-       [class.color-alert]="control?.valid == false && control?.pristine != true">
-    <span>{{label}}</span>
-    <material-icon *ngIf="control?.valid == false && control?.pristine != true"
-                   size="small"
-                   icon="error"
-                   baseline></material-icon>
-  </div>
+<fo-label [value]="label"
+          [error]="control?.valid == false && control?.pristine != true">
   <div id="flexContainer">
     <material-icon *ngIf="leadingIcon != null"
                    class="gray-color leading"
                    [icon]="leadingIcon"></material-icon>
-    <input class="roundLeft gray-color-bright themeable"
+    <input class="roundLeft gray-color-bright"
            #input
            [disabled]="disabled == true"
            [placeholder]="placeholder"
@@ -25,7 +16,8 @@
            [ngModel]="value"
            (ngModelChange)="onValueChange($event)"
            (focus)="onFocus($event)"
-           type="text">
+           (blur)="hasFocus = false"
+           type="text">           
     <material-icon *ngIf="clearIcon == true && value?.isEmpty == false"
                    size="large"
                    class="color-alert clear"
@@ -37,14 +29,10 @@
                [disabled]="disabled || control?.valid == false"
                (trigger)="onActionButtonTrigger($event)"></fo-button>
   </div>
-  <div *ngIf="errorMessage != null && control?.pristine != true && dropdownVisible == false"
-       id="errorOutput"
-       class="gray-color-bright">
-    <div id="arrow"
-         class="gray-color-bright"></div>
-    <div id="message"
-         class="black-color">{{errorMessage | name}}</div>
-  </div>
+  <fo-error-output *ngIf="hasFocus == true && errorMessage != null && control?.pristine != true && dropdownVisible == false"
+                   class="gray-color-bright"
+                   [message]="errorMessage">
+  </fo-error-output>
   <fo-dropdown-list *ngIf="options != null && value?.isEmpty == false && dropdownVisible"
                     [options]="options"
                     [filter]="value"
@@ -52,4 +40,4 @@
                     (select)="onFilterSelect($event)"
                     [(visible)]="dropdownVisible">
   </fo-dropdown-list>
-</label>
+</fo-label>

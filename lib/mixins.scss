@@ -1,6 +1,7 @@
 $transitionSpeed: 0.3s ease;
 
 @import 'package:angular_components/material_dialog/mixins';
+
 @mixin foregroundColor($color) {
   color: $color;
   border-color: $color;
@@ -24,80 +25,106 @@ $transitionSpeed: 0.3s ease;
   ::ng-deep fo-button>button:hover {
     background-color: $secondaryColor;
   }
+
   ::ng-deep fo-button[white]>button.themeable:hover {
-    background-color: $primaryColor;    
+    background-color: $primaryColor;
     color: white;
   }
+
   ::ng-deep fo-button>button:disabled {
     background-color: $grayColor;
     border-color: $grayColor;
   }
+
   ::ng-deep fo-dropdown-option:hover {
-    background-color: $primaryColor;    
+    background-color: $primaryColor;
   }
-  ::ng-deep input::placeholder {
+
+  ::ng-deep input::placeholder,
+  ::ng-deep textarea::placeholder {
     color: $grayColorBright;
   }
+
   ::ng-deep .black-color {
     @include foregroundColor(#555);
   }
+
   ::ng-deep .gray-color {
     @include foregroundColor($grayColor);
   }
+
   ::ng-deep .gray-color-bright {
     @include foregroundColor($grayColorBright);
   }
+
   ::ng-deep .color-primary-dark {
     @include foregroundColor($primaryColorDark);
   }
+
   ::ng-deep .color-primary {
     @include foregroundColor($primaryColor);
   }
+
   ::ng-deep .color-primary-bright {
     @include foregroundColor($primaryColorBright);
   }
+
   ::ng-deep .background-color-primary-dark {
     @include backgroundColor($primaryColorDark);
   }
+
   ::ng-deep .background-color-primary {
     @include backgroundColor($primaryColor);
   }
+
   ::ng-deep .background-color-primary-bright {
     @include backgroundColor($primaryColorBright);
   }
+
   ::ng-deep .color-secondary-dark {
     @include foregroundColor($secondaryColorDark);
   }
+
   ::ng-deep .color-secondary {
     @include foregroundColor($secondaryColor);
   }
+
   ::ng-deep .color-secondary-bright {
     @include foregroundColor($secondaryColorBright);
   }
+
   ::ng-deep .background-color-secondary-dark {
     @include backgroundColor($secondaryColorDark);
   }
+
   ::ng-deep .background-color-secondary {
     @include backgroundColor($secondaryColor);
   }
+
   ::ng-deep .background-color-secondary-bright {
     @include backgroundColor($secondaryColorBright);
   }
+
   ::ng-deep .color-alert-dark {
     @include foregroundColor($alertColorDark);
   }
+
   ::ng-deep .color-alert {
     @include foregroundColor($alertColor);
   }
+
   ::ng-deep .color-alert-bright {
     @include foregroundColor($alertColorBright);
   }
+
   ::ng-deep .background-color-alert-dark {
     @include backgroundColor($alertColorDark);
   }
+
   ::ng-deep .background-color-alert {
     @include backgroundColor($alertColor);
   }
+
   ::ng-deep .background-color-alert-bright {
     @include backgroundColor($alertColorBright);
   }

@@ -9,6 +9,8 @@ import '../fo_button/fo_button_component.dart';
 import '../fo_button/fo_button_event.dart';
 import '../fo_dropdown_list/fo_dropdown_list_component.dart';
 import '../fo_dropdown_list/fo_dropdown_option.dart';
+import '../fo_label/fo_label_component.dart';
+import 'fo_error_output_component.dart';
 
 @Component(
     selector: 'fo-text-input',
@@ -17,6 +19,8 @@ import '../fo_dropdown_list/fo_dropdown_option.dart';
     directives: const [
       FoButtonComponent,
       FoDropdownListComponent,
+      FoErrorOutputComponent,
+      FoLabelComponent,
       formDirectives,
       MaterialIconComponent,
       NgClass,
@@ -67,6 +71,8 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
       @Self() @Optional() this.control, this._changeDetectorRef, this.msg) {
     if (control != null) control.valueAccessor = this;
   }
+
+  bool hasFocus = false;
 
   String get errorMessage {
     final errors = control?.errors;
@@ -131,6 +137,7 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   }
 
   void onFocus(html.FocusEvent event) {
+    hasFocus = true;
     _focusController.add(event);
   }
 
@@ -145,13 +152,11 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   }
 
   @override
-  void registerOnTouched(TouchFunction f) {
-    // TODO: implement registerOnTouched
-  }
+  void registerOnTouched(TouchFunction f) {}
 
   @override
-  void writeValue(String obj) {  
-    value = obj;  
+  void writeValue(String obj) {
+    value = obj;
     Future.delayed(Duration(milliseconds: 100)).then((_) {
       dropdownVisible = options != null && value?.isEmpty == false;
       _changeDetectorRef.markForCheck();
