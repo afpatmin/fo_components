@@ -27,5 +27,5 @@ class Section implements OnInit {
     if (notes != null) {
       notesHtml = _domSanitizationService.bypassSecurityTrustHtml(notes);
     }
-  }
+  }  
 }
