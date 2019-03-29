@@ -1,7 +1,5 @@
 <button [disabled]="disabled == true"
-        class="themeable background-color-primary color-primary"
-        [class.leftBorder]="leftBorder == true"
-        [class.rightBorder]="rightBorder == true"
+        class="themeable background-color-primary"        
         (click)="onClick()">
   <span *ngIf="label != null">{{label}}</span>
   <material-icon *ngIf="icon != null"

@@ -25,7 +25,7 @@
                    (click)="onClear($event)"></material-icon>
     <fo-button *ngIf="actionButtonLabel != null"
                [label]="actionButtonLabel"
-               [leftBorder]="false"
+               noLeftBorder
                [disabled]="disabled || control?.valid == false"
                (trigger)="onActionButtonTrigger($event)"></fo-button>
   </div>

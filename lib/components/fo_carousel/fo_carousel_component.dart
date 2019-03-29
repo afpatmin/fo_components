@@ -2,20 +2,20 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
+
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_button/material_button.dart';
-import 'package:angular_components/material_icon/material_icon.dart';
 import 'package:angular_components/material_radio/material_radio.dart';
 import 'package:angular_components/material_radio/material_radio_group.dart';
+import '../fo_button/fo_button_component.dart';
+
 import 'fo_carousel_slide_component.dart';
 
 @Component(
     selector: 'fo-carousel',
     styleUrls: const ['fo_carousel_component.css'],
     templateUrl: 'fo_carousel_component.html',
-    directives: const [
-      MaterialButtonComponent,
-      MaterialIconComponent,
+    directives: const [      
+      FoButtonComponent,
       FoCarouselSlideComponent,
       NgIf,
       MaterialRadioComponent,
@@ -24,7 +24,29 @@ import 'fo_carousel_slide_component.dart';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoCarouselComponent implements OnDestroy, OnInit {
+  final StreamController<int> _onStepController = new StreamController();
+  Timer timer;
+  final ChangeDetectorRef _changeDetectorRef;
+
+  @Input()
+  int step = 0;
+
+  @Input()
+  bool showRadioButtons = false;
+
+  @Input()
+  bool showArrowButtons = true;
+
+  @Input()
+  int duration;
+  @ContentChildren(FoCarouselSlideComponent)
+  List<FoCarouselSlideComponent> slides = [];
   FoCarouselComponent(this._changeDetectorRef);
+
+  @Output('stepChange')
+  Stream<int> get stepOutput => _onStepController.stream;
+
+  String get transform => 'translate3d(${-step * 100}%, 0, 0)';
 
   @override
   void ngOnDestroy() {
@@ -38,19 +60,6 @@ class FoCarouselComponent implements OnDestroy, OnInit {
       timer = new Timer.periodic(
           new Duration(milliseconds: duration), (_) => stepBy(1));
     }
-  }
-
-  void stepBy(int steps) {
-    step += steps;
-    if (step >= slides.length || step < 0) {
-      step = 0;
-    }
-    _onStepController.add(step);
-    timer?.cancel();
-    if (duration != null) {
-      timer = new Timer(new Duration(milliseconds: duration), () => stepBy(1));
-    }
-    _changeDetectorRef.markForCheck();
   }
 
   void onButtonChange(int slideNo, bool flag) {
@@ -67,27 +76,16 @@ class FoCarouselComponent implements OnDestroy, OnInit {
     }
   }
 
-  String get transform => 'translate3d(${-step * 100}%, 0, 0)';
-
-  final StreamController<int> _onStepController = new StreamController();
-  Timer timer;
-  final ChangeDetectorRef _changeDetectorRef;
-
-  @Input()
-  int step = 0;
-
-  @Input()
-  bool showRadioButtons = false;
-
-  @Input()
-  bool showArrowButtons = true;
-
-  @Input()
-  int duration;
-
-  @Output('stepChange')
-  Stream<int> get stepOutput => _onStepController.stream;
-
-  @ContentChildren(FoCarouselSlideComponent)
-  List<FoCarouselSlideComponent> slides = [];
+  void stepBy(int steps) {
+    step += steps;
+    if (step >= slides.length || step < 0) {
+      step = 0;
+    }
+    _onStepController.add(step);
+    timer?.cancel();
+    if (duration != null) {
+      timer = new Timer(new Duration(milliseconds: duration), () => stepBy(1));
+    }
+    _changeDetectorRef.markForCheck();
+  }
 }

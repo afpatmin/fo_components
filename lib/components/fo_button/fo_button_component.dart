@@ -16,11 +16,6 @@ class FoButtonComponent implements OnDestroy {
   @Input()
   String icon;
 
-  @Input()
-  bool leftBorder = true;
-
-  @Input()
-  bool rightBorder = true;
 
   @Input()
   bool disabled = false;

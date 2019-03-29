@@ -2,6 +2,9 @@
 @import 'package:grid/constants.scss';
 :host {
   display: block;
+  #radioButtons {
+    text-align: center;
+  }
   .arrow {
     position: absolute;
     top: auto;

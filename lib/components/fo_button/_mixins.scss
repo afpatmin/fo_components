@@ -3,7 +3,7 @@
   ::ng-deep fo-button {
     button.themeable {
       font-size: $size !important;      
-      @include material-icon-size($size !important);
+      @include material-icon-size($size * 1.5 !important);
     }
   }
 } 
