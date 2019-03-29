@@ -1,6 +1,6 @@
 $transitionSpeed: 0.3s ease;
 
-@import 'package:angular_components/material_dialog/mixins';
+@import 'package:angular_components/material_radio/mixins';
 
 @mixin foregroundColor($color) {
   color: $color;
@@ -22,12 +22,14 @@ $transitionSpeed: 0.3s ease;
   $alertColorDark: darken($alertColor, $lightstep);
   $alertColorBright: lighten($alertColor, $lightstep);
 
-  ::ng-deep fo-button>button:hover {
+  @include material-radio-color($primaryColor);
+
+  ::ng-deep fo-button:not([noHover])>button:not(:disabled):hover {
     background-color: $secondaryColor;
   }
 
-  ::ng-deep fo-button[white]>button.themeable:hover {
-    background-color: $primaryColor;
+  ::ng-deep fo-button[white]:not([noHover])button:not(:disabled).themeable:hover {
+    background-color: $secondaryColor;
     color: white;
   }
 
@@ -134,3 +136,5 @@ $transitionSpeed: 0.3s ease;
   box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.4);
   -webkit-box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.4);
 }
+
+@include fo-colors(#2E5266, #6E8898, #f77);
