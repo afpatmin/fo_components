@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="let route of routes"
+      [routerLink]="route.path">{{route.path | capitalize}}</li>
+</ul>
+<hr />
+<router-outlet [routes]="routes"></router-outlet>

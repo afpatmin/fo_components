@@ -1,0 +1,45 @@
+<component-info name="FoButtonComponent"
+                description="A standard button, can be styled with attributes."
+                source="https://github.com/afpatmin/fo_components/tree/master/lib/components/fo_button">
+</component-info>
+<section label="Default"
+         [html]="htmlDefault">
+  <fo-button label="Click me"
+             (trigger)="counter = counter + 1"></fo-button>
+  <p> The button has been triggered {{counter}} times </p>
+</section>
+<section label="Disabled"
+         [html]="htmlDisabled">
+  <fo-button [disabled]="true"
+             label="I'm sorry, Dave. I'm afraid I can't do that."></fo-button>
+</section>
+<section label="Attributes"
+         [html]="htmlAttributes">
+  <p>
+    <fo-button clearSize
+               label="clearSize"></fo-button>
+  </p>
+  <p>
+    <fo-button dense
+               white
+               fullWidth
+               label="dense, white, fullWidth"></fo-button>
+  </p>
+  <p>
+    <fo-button label="yes"
+               noRightBorder></fo-button>
+    <fo-button label="no"
+               noLeftBorder></fo-button>
+  </p>
+</section>
+<section label="Material Icons"
+         [html]="htmlIcons"
+         notes="Requires Material Icons, more info: <a href='https://google.github.io/material-design-icons/' target='_blank'>https://google.github.io/material-design-icons/</a>">
+  <span>
+    <fo-button icon="chat"></fo-button>
+  </span>
+  <span>
+    <fo-button label="Cancel "
+               icon="cancel"></fo-button>
+  </span>
+</section>
