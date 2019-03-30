@@ -5,10 +5,11 @@ import 'dart:async' show Stream, StreamController;
 import 'dart:convert';
 import 'dart:html' as dom;
 import 'dart:typed_data';
+
 import 'package:angular/angular.dart';
 import 'package:angular_components/material_button/material_button.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
-import '../../services/fo_messages_service.dart';
+import 'package:intl/intl.dart';
 
 @Component(
     selector: 'fo-image-file',
@@ -22,62 +23,8 @@ import '../../services/fo_messages_service.dart';
     pipes: [],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoImageFileComponent implements OnDestroy {
-  FoImageFileComponent(this._changeDetectorRef, this.msg) {
-    _metaReader.onLoad.listen(_extractExifOrientationAndLoadImage);
-    _reader.onLoad.listen(_generateScaledImage);
-  }
-
-  @override
-  void ngOnDestroy() {
-    _onSourceChangeController.close();
-  }
-
-  void onDrop(dom.MouseEvent event) {
-    event.preventDefault();
-    final dt = event.dataTransfer;
-    try {
-      if (dt.files.isNotEmpty) _processFile(dt.files.last);
-    } on Exception catch (e) {
-      invalidFile = true;
-      print(e);
-    }
-  }
-
-  void onFileChange(dom.Event event) {
-    _fileInput = event.target;
-    try {
-      if (_fileInput.files.isNotEmpty) _processFile(_fileInput.files.last);
-    } on Exception catch (e) {
-      invalidFile = true;
-      print(e);
-    }
-  }
-
-  void _processFile(dom.File file) {
-    _base64Data = source = null;
-    invalidFile = false;
-    _file = file;
-
-    /// Verify this is .jpeg/.png/.bmp/.gif
-    /// JPG file - read EXIF metadata so that we can figure out image orientation and rotate accordingly
-    if (_file.type == 'image/jpeg' || _file.type == 'image/jpg') {
-      /// EXIF specifications states metadata will always be in the first 64kb of the file, we double it just in case.
-      _metaReader.readAsArrayBuffer(_file.slice(0, 131072));
-    }
-
-    /// Any other supported format, skip metadata
-    else if (_file.type == 'image/png' ||
-        _file.type == 'image/gif' ||
-        _file.type == 'image/bmp')
-      _reader.readAsDataUrl(_file);
-    else
-      throw Exception('Invalid file');
-  }
-
-  void clearSource() {
-    source = '';
-    _onSourceChangeController.add('');
-  }
+  final String msgInvalidFile =
+      Intl.message('invalid file', name: 'invalid_file');
 
   @Input()
   String accept = 'image/jpg,image/jpeg,image/png,image/gif';
@@ -106,8 +53,64 @@ class FoImageFileComponent implements OnDestroy {
   @Input()
   int brightness = 100;
 
+  String _base64Data = '';
+
+  bool invalidFile = false;
+
+  int _byteSize;
+
+  int _orientation = 0;
+
+  final dom.FileReader _metaReader = dom.FileReader();
+
+  final dom.FileReader _reader = dom.FileReader();
+
+  final ChangeDetectorRef _changeDetectorRef;
+
+  final StreamController<String> _onSourceChangeController = StreamController();
+
+  dom.FileUploadInputElement _fileInput;
+
+  dom.File _file;
+
+  FoImageFileComponent(this._changeDetectorRef) {
+    _metaReader.onLoad.listen(_extractExifOrientationAndLoadImage);
+    _reader.onLoad.listen(_generateScaledImage);
+  }
+
+  String get brightnessFilter => 'brightness($brightness%)';
   @Output('sourceChange')
   Stream<String> get onSourceChange => _onSourceChangeController.stream;
+  void clearSource() {
+    source = '';
+    _onSourceChangeController.add('');
+  }
+
+  @override
+  void ngOnDestroy() {
+    _onSourceChangeController.close();
+  }
+
+  void onDrop(dom.MouseEvent event) {
+    event.preventDefault();
+    final dt = event.dataTransfer;
+    try {
+      if (dt.files.isNotEmpty) _processFile(dt.files.last);
+    } on Exception catch (e) {
+      invalidFile = true;
+      print(e);
+    }
+  }
+
+  void onFileChange(dom.Event event) {
+    _fileInput = event.target;
+    try {
+      if (_fileInput.files.isNotEmpty) _processFile(_fileInput.files.last);
+    } on Exception catch (e) {
+      invalidFile = true;
+      print(e);
+    }
+  }
 
   /// Loads image only after exif orientation has been extracted
   void _extractExifOrientationAndLoadImage(dom.ProgressEvent e) {
@@ -255,6 +258,27 @@ class FoImageFileComponent implements OnDestroy {
     });
   }
 
+  void _processFile(dom.File file) {
+    _base64Data = source = null;
+    invalidFile = false;
+    _file = file;
+
+    /// Verify this is .jpeg/.png/.bmp/.gif
+    /// JPG file - read EXIF metadata so that we can figure out image orientation and rotate accordingly
+    if (_file.type == 'image/jpeg' || _file.type == 'image/jpg') {
+      /// EXIF specifications states metadata will always be in the first 64kb of the file, we double it just in case.
+      _metaReader.readAsArrayBuffer(_file.slice(0, 131072));
+    }
+
+    /// Any other supported format, skip metadata
+    else if (_file.type == 'image/png' ||
+        _file.type == 'image/gif' ||
+        _file.type == 'image/bmp')
+      _reader.readAsDataUrl(_file);
+    else
+      throw Exception('Invalid file');
+  }
+
   void _transformContextExifOrientation(
       dom.CanvasElement canvas, int orientation, int width, int height) {
     canvas
@@ -311,18 +335,4 @@ class FoImageFileComponent implements OnDestroy {
         break;
     }
   }
-
-  String get brightnessFilter => 'brightness($brightness%)';
-
-  String _base64Data = '';
-  bool invalidFile = false;
-  int _byteSize;
-  int _orientation = 0;
-  final dom.FileReader _metaReader = dom.FileReader();
-  final dom.FileReader _reader = dom.FileReader();
-  final ChangeDetectorRef _changeDetectorRef;
-  final FoMessagesService msg;
-  final StreamController<String> _onSourceChangeController = StreamController();
-  dom.FileUploadInputElement _fileInput;
-  dom.File _file;
 }

@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
+import 'package:intl/intl.dart';
 import '../../pipes/capitalize_pipe.dart';
-import '../../services/fo_messages_service.dart';
 import '../fo_label/fo_label_component.dart';
 import 'fo_error_output_component.dart';
 
@@ -38,13 +38,12 @@ class FoTextAreaInputComponent
   String value;
   ChangeFunction<String> _onChange;
   NgControl control;
-  final FoMessagesService msg;
   final StreamController _focusController = StreamController<html.FocusEvent>();
 
   @ViewChild('textArea')
   html.TextAreaElement textAreaElement;
 
-  FoTextAreaInputComponent(@Self() @Optional() this.control, this.msg) {
+  FoTextAreaInputComponent(@Self() @Optional() this.control) {
     if (control != null) control.valueAccessor = this;
   }
 
@@ -53,15 +52,24 @@ class FoTextAreaInputComponent
     if (errors == null) {
       return null;
     } else if (errors.containsKey('required')) {
-      return msg.error_required();
+      return Intl.message('this field is required', name: 'error_required');
     } else if (errors.containsKey('error')) {
       return errors['error'];
     } else if (errors.containsKey('minlength')) {
-      return msg.error_min_length(errors['minlength']['requiredLength']);
+      return Intl.message(
+          'enter at least ${errors['minlength']['requiredLength']} characters',
+          args: [errors['minlength']['requiredLength']],
+          name: 'error_min_length');
     } else if (errors.containsKey('maxlength')) {
-      return msg.error_max_length(errors['maxlength']['requiredLength']);
+      return Intl.message(
+          'enter max ${errors['maxlength']['requiredLength']} characters',
+          args: [errors['maxlength']['requiredLength']],
+          name: 'error_max_length');
     } else if (errors.containsKey('pattern')) {
-      return msg.error_invalid_pattern(errors['pattern']['requiredPattern']);
+      return Intl.message(
+          'invalid pattern, required: ${errors['pattern']['requiredPattern']}',
+          args: [errors['pattern']['requiredPattern']],
+          name: 'error_invalid_pattern');
     } else {
       return errors.toString();
     }

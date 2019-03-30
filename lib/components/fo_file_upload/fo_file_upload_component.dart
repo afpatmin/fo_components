@@ -3,10 +3,11 @@
 
 import 'dart:async';
 import 'dart:html' as dom;
+
 import 'package:angular/angular.dart';
 import 'package:angular_components/material_button/material_button.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
-import '../../services/fo_messages_service.dart';
+import 'package:intl/intl.dart';
 
 @Component(
     selector: 'fo-file-upload',
@@ -16,7 +17,35 @@ import '../../services/fo_messages_service.dart';
     pipes: [],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FileUploadComponent implements OnDestroy {
-  FileUploadComponent(this.msg);
+  final StreamController<dom.File> onUploadController = StreamController();
+
+  dom.FileUploadInputElement _fileInput;
+
+  dom.File file;
+
+  final String msgMaxFilesizeExceeded =
+      Intl.message('max filesize exceeded', name: 'max_filesize_exceeded');
+
+  @Input()
+  String accept = 'image/*,.pdf';
+
+  @Input()
+  bool disabled = false;
+
+  @Input()
+  String label = 'File';
+
+  @Input()
+  int maxByteSize = 1048576;
+  FileUploadComponent();
+  @Output('upload')
+  Stream<dom.File> get onUploadOutput => onUploadController.stream;
+  bool get valid => file != null && file.size <= maxByteSize;
+
+  void clearSelection() {
+    file = null;
+    _fileInput?.value = '';
+  }
 
   @override
   void ngOnDestroy() {
@@ -34,35 +63,8 @@ class FileUploadComponent implements OnDestroy {
     file = (_fileInput.files.isNotEmpty) ? _fileInput.files.last : null;
   }
 
-  void clearSelection() {
-    file = null;
-    _fileInput?.value = '';
-  }
-
   void upload() {
     onUploadController.add(file);
     clearSelection();
   }
-
-  bool get valid => file != null && file.size <= maxByteSize;
-
-  final StreamController<dom.File> onUploadController = StreamController();
-  dom.FileUploadInputElement _fileInput;
-  dom.File file;
-  final FoMessagesService msg;
-
-  @Input()
-  String accept = 'image/*,.pdf';
-
-  @Input()
-  bool disabled = false;
-
-  @Input()
-  String label = 'File';
-
-  @Input()
-  int maxByteSize = 1048576;
-
-  @Output('upload')
-  Stream<dom.File> get onUploadOutput => onUploadController.stream;
 }

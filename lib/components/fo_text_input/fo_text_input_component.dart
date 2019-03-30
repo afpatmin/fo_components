@@ -3,8 +3,8 @@ import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
+import 'package:intl/intl.dart';
 import '../../pipes/capitalize_pipe.dart';
-import '../../services/fo_messages_service.dart';
 import '../fo_button/fo_button_component.dart';
 import '../fo_button/fo_button_event.dart';
 import '../fo_dropdown_list/fo_dropdown_list_component.dart';
@@ -54,7 +54,6 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   ChangeFunction<String> _onChange;
   NgControl control;
   final ChangeDetectorRef _changeDetectorRef;
-  final FoMessagesService msg;
   final StreamController _actionButtonController =
       StreamController<FoButtonEvent>();
   final StreamController _selectionChangeController =
@@ -68,7 +67,7 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   html.InputElement inputElement;
 
   FoTextInputComponent(
-      @Self() @Optional() this.control, this._changeDetectorRef, this.msg) {
+      @Self() @Optional() this.control, this._changeDetectorRef) {
     if (control != null) control.valueAccessor = this;
   }
 
@@ -79,15 +78,24 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
     if (errors == null) {
       return null;
     } else if (errors.containsKey('required')) {
-      return msg.error_required();
+      return Intl.message('this field is required', name: 'error_required');
     } else if (errors.containsKey('error')) {
       return errors['error'];
     } else if (errors.containsKey('minlength')) {
-      return msg.error_min_length(errors['minlength']['requiredLength']);
+      return Intl.message(
+          'enter at least ${errors['minlength']['requiredLength']} characters',
+          args: [errors['minlength']['requiredLength']],
+          name: 'error_min_length');
     } else if (errors.containsKey('maxlength')) {
-      return msg.error_max_length(errors['maxlength']['requiredLength']);
+      return Intl.message(
+          'enter max ${errors['maxlength']['requiredLength']} characters',
+          args: [errors['maxlength']['requiredLength']],
+          name: 'error_max_length');
     } else if (errors.containsKey('pattern')) {
-      return msg.error_invalid_pattern(errors['pattern']['requiredPattern']);
+      return Intl.message(
+          'invalid pattern, required: ${errors['pattern']['requiredPattern']}',
+          args: [errors['pattern']['requiredPattern']],
+          name: 'error_invalid_pattern');
     } else {
       return errors.toString();
     }
