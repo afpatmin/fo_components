@@ -8,14 +8,10 @@ import '../fo_multi_select/fo_multi_select_component.dart';
 
 @Component(
     selector: 'fo-image-map',
-    styleUrls: const ['fo_image_map_component.css'],
+    styleUrls: ['fo_image_map_component.css'],
     templateUrl: 'fo_image_map_component.html',
-    directives: const [
-      NgFor,
-      NgIf,            
-      FoMultiSelectComponent
-    ],
-    pipes: const [],
+    directives: [NgFor, NgIf, FoMultiSelectComponent],
+    pipes: [],
     changeDetection: ChangeDetectionStrategy.Default)
 class FoImageMapComponent implements OnDestroy {
   FoImageMapComponent();
@@ -26,11 +22,11 @@ class FoImageMapComponent implements OnDestroy {
   }
 
   void onSelectionChange(List<String> selectedIds) {
-    _onSelectedIdsChangeController.add(selectedIds);    
+    _onSelectedIdsChangeController.add(selectedIds);
   }
 
   final StreamController<List<String>> _onSelectedIdsChangeController =
-      new StreamController();
+      StreamController();
 
   @Input()
   String label = 'select';

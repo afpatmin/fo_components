@@ -11,16 +11,16 @@ import 'package:angular_components/material_icon/material_icon.dart';
 
 @Component(
     selector: 'fo-modal',
-    styleUrls: const ['fo_modal_component.css'],
+    styleUrls: ['fo_modal_component.css'],
     templateUrl: 'fo_modal_component.html',
-    directives: const [
+    directives: [
       coreDirectives,
       MaterialButtonComponent,
       MaterialDialogComponent,
       MaterialIconComponent,
       ModalComponent,
     ],
-    pipes: const [],
+    pipes: [],
     changeDetection: ChangeDetectionStrategy.Default)
 class FoModalComponent implements OnDestroy {
   FoModalComponent();
@@ -53,7 +53,7 @@ class FoModalComponent implements OnDestroy {
   String title;
 
   @Input()
-  String titleImageUrl;  
+  String titleImageUrl;
 
   @Input()
   String error;
@@ -73,8 +73,7 @@ class FoModalComponent implements OnDestroy {
   @Output('visibleChange')
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
 
-  final StreamController<bool> _onVisibleChangeController =
-      new StreamController();
+  final StreamController<bool> _onVisibleChangeController = StreamController();
 
   bool _visible = false;
 }

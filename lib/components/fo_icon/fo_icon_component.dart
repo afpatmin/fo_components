@@ -14,14 +14,12 @@ import 'package:angular/angular.dart';
 }
 */
 @Component(
-  selector: 'fo-icon',
-  templateUrl: 'fo_icon_component.html',
-  styleUrls: const ['fo_icon_component.css'],
-  directives: const [NgStyle],
-  changeDetection: ChangeDetectionStrategy.OnPush
-)
+    selector: 'fo-icon',
+    templateUrl: 'fo_icon_component.html',
+    styleUrls: ['fo_icon_component.css'],
+    directives: [NgStyle],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoIconComponent {
-
   String get iconClass => 'icon-$icon';
 
   @Input()

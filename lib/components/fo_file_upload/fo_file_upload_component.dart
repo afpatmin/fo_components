@@ -11,15 +11,9 @@ import '../../services/fo_messages_service.dart';
 @Component(
     selector: 'fo-file-upload',
     templateUrl: 'fo_file_upload_component.html',
-    styleUrls: const [
-      'fo_file_upload_component.css'
-    ],
-    directives: const [
-      NgIf,
-      MaterialButtonComponent,
-      MaterialIconComponent
-    ],
-    pipes: const [],
+    styleUrls: ['fo_file_upload_component.css'],
+    directives: [NgIf, MaterialButtonComponent, MaterialIconComponent],
+    pipes: [],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FileUploadComponent implements OnDestroy {
   FileUploadComponent(this.msg);
@@ -42,7 +36,7 @@ class FileUploadComponent implements OnDestroy {
 
   void clearSelection() {
     file = null;
-    _fileInput?.value = '';    
+    _fileInput?.value = '';
   }
 
   void upload() {
@@ -52,10 +46,10 @@ class FileUploadComponent implements OnDestroy {
 
   bool get valid => file != null && file.size <= maxByteSize;
 
-  final StreamController<dom.File> onUploadController = new StreamController();
+  final StreamController<dom.File> onUploadController = StreamController();
   dom.FileUploadInputElement _fileInput;
   dom.File file;
-  final FoMessagesService msg;  
+  final FoMessagesService msg;
 
   @Input()
   String accept = 'image/*,.pdf';

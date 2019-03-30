@@ -7,8 +7,8 @@ import 'package:angular_components/material_icon/material_icon.dart';
 @Component(
   selector: 'fo-rating',
   templateUrl: 'fo_rating_component.html',
-  styleUrls: const ['fo_rating_component.css'],
-  directives: const [MaterialIconComponent, NgFor],
+  styleUrls: ['fo_rating_component.css'],
+  directives: [MaterialIconComponent, NgFor],
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class FoRatingComponent implements OnChanges, OnDestroy {
@@ -21,7 +21,7 @@ class FoRatingComponent implements OnChanges, OnDestroy {
   @Input()
   int value;
 
-  final StreamController<int> _valueChangeController = new StreamController();
+  final StreamController<int> _valueChangeController = StreamController();
 
   List<int> _options = [];
 
@@ -41,7 +41,7 @@ class FoRatingComponent implements OnChanges, OnDestroy {
     /// Max value has changed, reset starlist
     if (changes.containsKey('max') &&
         changes['max'].previousValue != changes['max'].currentValue) {
-      _options = max == null ? [] : new List.generate(max, (i) => i + 1);
+      _options = max == null ? [] : List.generate(max, (i) => i + 1);
 
       // Reset selected value to max
       value = (value == null || max == null) ? null : min(value, max);

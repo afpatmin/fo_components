@@ -4,7 +4,8 @@
     <ng-content></ng-content>
   </div>
   <div class="right"> HTML
-    <pre><code [innerText]="html"></code></pre>
+
+    <code [innerText]="html"></code>
     <ng-container *ngIf="notesHtml != null">
       <div id="notes"> Notes </div>
       <div [safeInnerHtml]="notesHtml"></div>

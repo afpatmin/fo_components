@@ -4,5 +4,5 @@ class FoDropdownOption {
   String icon;
   String label;
   String secondaryLabel;
-  String info;  
+  String info;
 }

@@ -13,15 +13,13 @@ import '../../services/fo_messages_service.dart';
 @Component(
     selector: 'fo-image-file',
     templateUrl: 'fo_image_file_component.html',
-    styleUrls: const [
-      'fo_image_file_component.css'
-    ],
-    directives: const [
+    styleUrls: ['fo_image_file_component.css'],
+    directives: [
       coreDirectives,
       MaterialIconComponent,
       MaterialButtonComponent
     ],
-    pipes: const [],
+    pipes: [],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoImageFileComponent implements OnDestroy {
   FoImageFileComponent(this._changeDetectorRef, this.msg) {
@@ -73,7 +71,7 @@ class FoImageFileComponent implements OnDestroy {
         _file.type == 'image/bmp')
       _reader.readAsDataUrl(_file);
     else
-      throw new Exception('Invalid file');
+      throw Exception('Invalid file');
   }
 
   void clearSource() {
@@ -114,10 +112,10 @@ class FoImageFileComponent implements OnDestroy {
   /// Loads image only after exif orientation has been extracted
   void _extractExifOrientationAndLoadImage(dom.ProgressEvent e) {
     _orientation = 0;
-    final buffer = new Uint8List(e.loaded)
+    final buffer = Uint8List(e.loaded)
       ..setRange(0, e.loaded, _metaReader.result);
 
-    final byteData = new ByteData.view(buffer.buffer);
+    final byteData = ByteData.view(buffer.buffer);
 
     /// skip first two bytes (0xFF 0xD8) indicating this is is a jpg file
     var byteOffset = 2;
@@ -193,7 +191,7 @@ class FoImageFileComponent implements OnDestroy {
   }
 
   void _generateScaledImage(dom.ProgressEvent e) {
-    final b64 = new StringBuffer()..write(_reader.result.toString());
+    final b64 = StringBuffer()..write(_reader.result.toString());
     final strB64 = b64.toString();
 
     if (b64.toString().contains('data:image/jpeg;base64,')) {
@@ -209,7 +207,7 @@ class FoImageFileComponent implements OnDestroy {
       }
     }
 
-    final temp = new dom.ImageElement()..src = b64.toString();
+    final temp = dom.ImageElement()..src = b64.toString();
 
     temp.onLoad.listen((_) {
       dom.CanvasElement canvas;
@@ -222,8 +220,7 @@ class FoImageFileComponent implements OnDestroy {
         final scaledWidth = (temp.width * scaleFactor).toInt();
         final scaledHeight = (temp.height * scaleFactor).toInt();
 
-        canvas =
-            new dom.CanvasElement(width: scaledWidth, height: scaledHeight);
+        canvas = dom.CanvasElement(width: scaledWidth, height: scaledHeight);
         _transformContextExifOrientation(
             canvas, _orientation, scaledWidth, scaledHeight);
         canvas.context2D
@@ -231,7 +228,7 @@ class FoImageFileComponent implements OnDestroy {
           ..drawImageScaledFromSource(temp, 0, 0, temp.width, temp.height, 0, 0,
               scaledWidth, scaledHeight);
       } else {
-        canvas = new dom.CanvasElement(width: temp.width, height: temp.height);
+        canvas = dom.CanvasElement(width: temp.width, height: temp.height);
         //final context = canvas.context2D;
         _transformContextExifOrientation(
             canvas, _orientation, temp.width, temp.height);
@@ -252,7 +249,7 @@ class FoImageFileComponent implements OnDestroy {
           _byteSize = base64.decode(_base64Data).length;
         } else
           print('invalid src: $source');
-      }      
+      }
       _onSourceChangeController.add(source);
       _changeDetectorRef.markForCheck();
     });
@@ -321,12 +318,11 @@ class FoImageFileComponent implements OnDestroy {
   bool invalidFile = false;
   int _byteSize;
   int _orientation = 0;
-  final dom.FileReader _metaReader = new dom.FileReader();
-  final dom.FileReader _reader = new dom.FileReader();
+  final dom.FileReader _metaReader = dom.FileReader();
+  final dom.FileReader _reader = dom.FileReader();
   final ChangeDetectorRef _changeDetectorRef;
   final FoMessagesService msg;
-  final StreamController<String> _onSourceChangeController =
-      new StreamController();
+  final StreamController<String> _onSourceChangeController = StreamController();
   dom.FileUploadInputElement _fileInput;
   dom.File _file;
 }

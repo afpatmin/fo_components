@@ -7,7 +7,7 @@ class FoCurrencyPipe implements PipeTransform {
   String transform(Object value, String currency) {
     if (value == null) return null;
     if (currency == null) return value;
-    
+
     switch (currency.toUpperCase()) {
       case 'EUR':
         return '€$value';

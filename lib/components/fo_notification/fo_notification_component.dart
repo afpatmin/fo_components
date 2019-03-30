@@ -9,10 +9,10 @@ import 'package:angular_components/material_icon/material_icon.dart';
 @Component(
     selector: 'fo-notification',
     templateUrl: 'fo_notification_component.html',
-    styleUrls: const ['fo_notification_component.css'],
-    directives: const [MaterialButtonComponent, MaterialIconComponent, NgIf],
-    providers: const [],
-    pipes: const [],
+    styleUrls: ['fo_notification_component.css'],
+    directives: [MaterialButtonComponent, MaterialIconComponent, NgIf],
+    providers: [],
+    pipes: [],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoNotificationComponent implements OnInit, OnDestroy {
   FoNotificationComponent();
@@ -20,8 +20,7 @@ class FoNotificationComponent implements OnInit, OnDestroy {
   @override
   void ngOnInit() {
     if (visibleSeconds != null) {
-      new Future.delayed(new Duration(seconds: visibleSeconds))
-          .then((_) => close());
+      Future.delayed(Duration(seconds: visibleSeconds)).then((_) => close());
     }
   }
 
@@ -39,7 +38,7 @@ class FoNotificationComponent implements OnInit, OnDestroy {
   bool get isOpen => _isOpen;
 
   bool _isOpen = true;
-  StreamController<String> _onCloseController = new StreamController();
+  StreamController<String> _onCloseController = StreamController();
 
   @Input()
   bool showCloseButton = true;

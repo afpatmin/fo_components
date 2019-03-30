@@ -4,8 +4,8 @@ import 'package:angular/angular.dart';
 @Component(
     selector: 'fo-tab',
     templateUrl: 'fo_tab_component.html',
-    styleUrls: const ['fo_tab_component.css'],
-    directives: const [NgClass])
+    styleUrls: ['fo_tab_component.css'],
+    directives: [NgClass])
 class FoTabComponent {
   FoTabComponent(this._host);
 

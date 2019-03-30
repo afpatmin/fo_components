@@ -9,7 +9,7 @@ import '../../pipes/capitalize_pipe.dart';
     templateUrl: 'fo_panel_component.html',
     styleUrls: ['fo_panel_component.css'],
     directives: [MaterialButtonComponent, MaterialIconComponent, NgIf],
-    pipes: const [CapitalizePipe])
+    pipes: [CapitalizePipe])
 class FoPanelComponent implements OnDestroy {
   final StreamController _visibleChangeController = StreamController<bool>();
 
@@ -20,7 +20,7 @@ class FoPanelComponent implements OnDestroy {
 
   @Input()
   bool visible = true;
- 
+
   @Output('visibleChange')
   Stream<bool> get visibleChange => _visibleChangeController.stream;
 

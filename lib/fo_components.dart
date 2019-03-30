@@ -5,7 +5,6 @@ library fo_components;
 
 import 'services/fo_messages_service.dart';
 
-const List<dynamic> foProviders = const [
+const List<dynamic> foProviders = [
   FoMessagesService,
 ];
- 

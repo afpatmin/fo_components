@@ -11,15 +11,15 @@ import 'package:angular_components/material_select/material_select_dropdown_item
 import 'package:angular_components/material_select/material_select_searchbox.dart';
 import 'package:angular_components/model/selection/string_selection_options.dart';
 import 'package:fo_model/fo_model.dart';
+import 'package:intl/intl.dart';
 import '../../pipes/capitalize_pipe.dart';
-import '../../services/fo_messages_service.dart';
 import '../fo_modal/fo_modal_component.dart';
 
 @Component(
     selector: 'fo-select',
-    styleUrls: const ['fo_select_component.css'],
+    styleUrls: ['fo_select_component.css'],
     templateUrl: 'fo_select_component.html',
-    directives: const [
+    directives: [
       coreDirectives,
       DarkThemeDirective,
       FoModalComponent,
@@ -29,10 +29,14 @@ import '../fo_modal/fo_modal_component.dart';
       MaterialSelectDropdownItemComponent,
       MaterialSelectSearchboxComponent,
     ],
-    pipes: const [CapitalizePipe],
+    pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoSelectComponent implements AfterChanges, OnDestroy {
-  FoSelectComponent(this.msg);
+  FoSelectComponent();
+
+  final String msgInformation =
+      Intl.message('information', name: 'information');
+  final String msgSearch = Intl.message('search', name: 'search');
 
   void onSelect(Object id) {
     selectedId = id;
@@ -42,10 +46,10 @@ class FoSelectComponent implements AfterChanges, OnDestroy {
   @override
   void ngAfterChanges() {
     if (options == null) {
-      selectionOptions = new StringSelectionOptions([]);      
+      selectionOptions = StringSelectionOptions([]);
     } else if (options.length != _optionsCount) {
       selectionOptions =
-          new StringSelectionOptions(options.toList(), shouldSort: sort);      
+          StringSelectionOptions(options.toList(), shouldSort: sort);
     }
     _optionsCount = selectionOptions.optionsList.length;
   }
@@ -63,15 +67,13 @@ class FoSelectComponent implements AfterChanges, OnDestroy {
       .firstWhere((o) => o.id == selectedId, orElse: () => null);
 
   StringSelectionOptions<FoModel> selectionOptions =
-      new StringSelectionOptions<FoModel>([]);
+      StringSelectionOptions<FoModel>([]);
 
-  final FoMessagesService msg;
-  final StreamController<bool> _onVisibleChangeController =
-      new StreamController();
+  final StreamController<bool> _onVisibleChangeController = StreamController();
   final StreamController<Object> _onSelectedIdChangeController =
-      new StreamController();
+      StreamController();
   final StreamController<Object> onActionButtonTriggerController =
-      new StreamController();
+      StreamController();
 
   bool tooltipModalVisible = false;
   int _optionsCount = 0;

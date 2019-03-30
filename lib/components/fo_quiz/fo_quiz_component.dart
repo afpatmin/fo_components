@@ -13,8 +13,8 @@ class FoQuizDoneEvent {
 @Component(
     selector: 'fo-quiz',
     templateUrl: 'fo_quiz_component.html',
-    styleUrls: const ['fo_quiz_component.css'],
-    directives: const [FoQuestionComponent, NgFor],
+    styleUrls: ['fo_quiz_component.css'],
+    directives: [FoQuestionComponent, NgFor],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoQuizComponent implements OnInit, OnDestroy {
   @override
@@ -32,7 +32,7 @@ class FoQuizComponent implements OnInit, OnDestroy {
 
     if (index == model.questions.length - 1) {
       _doneController
-          .add(new FoQuizDoneEvent(_calcScore(model), _calcMaxPoints(model)));
+          .add(FoQuizDoneEvent(_calcScore(model), _calcMaxPoints(model)));
     } else {
       activeQuestion = model.questions[index + 1];
     }
@@ -67,8 +67,9 @@ class FoQuizComponent implements OnInit, OnDestroy {
     /// Add only highest score option in single-selects
     for (final question
         in quiz.questions.where((q) => q.multiSelect == false)) {
-      final sortedOptions = new List<FoOptionModel>.from(question.options)
-        ..sort((o1, o2) => o2.score - o1.score)..first.score;
+      final sortedOptions = List<FoOptionModel>.from(question.options)
+        ..sort((o1, o2) => o2.score - o1.score)
+        ..first.score;
       maxPoints += sortedOptions.first.score;
 
       for (final option in question.options) {
@@ -80,7 +81,7 @@ class FoQuizComponent implements OnInit, OnDestroy {
 
   FoQuestionModel activeQuestion;
 
-  final _doneController = new StreamController<FoQuizDoneEvent>();
+  final _doneController = StreamController<FoQuizDoneEvent>();
 
   @Input()
   FoQuizModel model;

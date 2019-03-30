@@ -4,14 +4,12 @@ import 'package:angular_components/material_button/material_button.dart';
 import '../../models/fo_quiz_model.dart';
 
 @Component(
-  selector: 'fo-option',
-  templateUrl: 'fo_option_component.html',
-  styleUrls: const ['fo_option_component.css'],
-  directives: const [NgIf, MaterialButtonComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush
-)
+    selector: 'fo-option',
+    templateUrl: 'fo_option_component.html',
+    styleUrls: ['fo_option_component.css'],
+    directives: [NgIf, MaterialButtonComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoOptionComponent implements OnDestroy {
-
   @override
   void ngOnDestroy() {
     _triggerController.close();
@@ -19,10 +17,10 @@ class FoOptionComponent implements OnDestroy {
 
   void onSelect() {
     model.selected = !model.selected;
-    _triggerController.add(model);    
+    _triggerController.add(model);
   }
 
-  final StreamController<FoOptionModel> _triggerController = new StreamController();
+  final StreamController<FoOptionModel> _triggerController = StreamController();
 
   @Input()
   FoOptionModel model;

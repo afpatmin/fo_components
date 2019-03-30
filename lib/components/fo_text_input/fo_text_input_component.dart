@@ -15,8 +15,8 @@ import 'fo_error_output_component.dart';
 @Component(
     selector: 'fo-text-input',
     templateUrl: 'fo_text_input_component.html',
-    styleUrls: const ['fo_text_input_component.css'],
-    directives: const [
+    styleUrls: ['fo_text_input_component.css'],
+    directives: [
       FoButtonComponent,
       FoDropdownListComponent,
       FoErrorOutputComponent,
@@ -26,7 +26,7 @@ import 'fo_error_output_component.dart';
       NgClass,
       NgIf
     ],
-    pipes: const [CapitalizePipe],
+    pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   @Input()

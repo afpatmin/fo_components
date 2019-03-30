@@ -2,6 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
+
 import 'package:angular/angular.dart';
 import 'package:angular_components/material_checkbox/material_checkbox.dart';
 import 'package:angular_components/material_chips/material_chip.dart';
@@ -11,14 +12,15 @@ import 'package:angular_components/material_select/material_select_dropdown_item
 import 'package:angular_components/material_select/material_select_searchbox.dart';
 import 'package:angular_components/model/selection/string_selection_options.dart';
 import 'package:fo_model/fo_model.dart';
+import 'package:intl/intl.dart';
+
 import '../../pipes/capitalize_pipe.dart';
-import '../../services/fo_messages_service.dart';
 
 @Component(
     selector: 'fo-multi-select',
-    styleUrls: const ['fo_multi_select_component.css'],
+    styleUrls: ['fo_multi_select_component.css'],
     templateUrl: 'fo_multi_select_component.html',
-    directives: const [
+    directives: [
       coreDirectives,
       MaterialCheckboxComponent,
       MaterialChipComponent,
@@ -27,54 +29,17 @@ import '../../services/fo_messages_service.dart';
       MaterialSelectDropdownItemComponent,
       MaterialSelectSearchboxComponent
     ],
-    pipes: const [CapitalizePipe],
+    pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoMultiSelectComponent implements AfterChanges, OnDestroy {
-  FoMultiSelectComponent(this.msg) {
-    buttonText = msg.select();
-  }
+  final String msgSearch = Intl.message('search', name: 'search');
 
-  @override
-  void ngAfterChanges() {
-    if (options == null) {
-      selectionOptions = new StringSelectionOptions([]);
-    } else if (options.length != _optionsCount) {
-      selectionOptions = new StringSelectionOptions(
-          options.toList(growable: false),
-          shouldSort: sort);
-    }
-    _optionsCount = selectionOptions.optionsList.length;
-  }
+  StringSelectionOptions<FoModel> selectionOptions = StringSelectionOptions([]);
 
-  @override
-  void ngOnDestroy() {
-    _onVisibleChangeController.close();
-    _onSelectedIdsChangeController.close();
-  }
+  final StreamController<bool> _onVisibleChangeController = StreamController();
 
-  void onToggle(Object id, bool status) {
-    if (id == null || disabled) return;
-    if (status == true) {
-      selectedIds.add(id);
-    } else {
-      selectedIds.remove(id);
-    }
-    _onSelectedIdsChangeController.add(selectedIds);
-  }
-
-  FoModel getModel(Object id) => options == null
-      ? null
-      : options.firstWhere((model) => model.id == id, orElse: () => null);
-
-  StringSelectionOptions<FoModel> selectionOptions =
-      new StringSelectionOptions([]);
-
-  final StreamController<bool> _onVisibleChangeController =
-      new StreamController();
   final StreamController<List<Object>> _onSelectedIdsChangeController =
-      new StreamController();
-
-  final FoMessagesService msg;
+      StreamController();
 
   int _optionsCount = 0;
 
@@ -86,7 +51,6 @@ class FoMultiSelectComponent implements AfterChanges, OnDestroy {
 
   @Input()
   bool fullWidth = false;
-
   @Input()
   String label = '';
 
@@ -108,10 +72,45 @@ class FoMultiSelectComponent implements AfterChanges, OnDestroy {
   @Input()
   bool visible = false;
 
-  @Output('visibleChange')
-  Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
+  FoMultiSelectComponent() {
+    buttonText = Intl.message('select', name: 'select');
+  }
 
   @Output('selectedIdsChange')
   Stream<List<Object>> get onSelectedIdsChangeOutput =>
       _onSelectedIdsChangeController.stream;
+
+  @Output('visibleChange')
+  Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
+
+  FoModel getModel(Object id) => options == null
+      ? null
+      : options.firstWhere((model) => model.id == id, orElse: () => null);
+
+  @override
+  void ngAfterChanges() {
+    if (options == null) {
+      selectionOptions = StringSelectionOptions([]);
+    } else if (options.length != _optionsCount) {
+      selectionOptions = StringSelectionOptions(options.toList(growable: false),
+          shouldSort: sort);
+    }
+    _optionsCount = selectionOptions.optionsList.length;
+  }
+
+  @override
+  void ngOnDestroy() {
+    _onVisibleChangeController.close();
+    _onSelectedIdsChangeController.close();
+  }
+
+  void onToggle(Object id, bool status) {
+    if (id == null || disabled) return;
+    if (status == true) {
+      selectedIds.add(id);
+    } else {
+      selectedIds.remove(id);
+    }
+    _onSelectedIdsChangeController.add(selectedIds);
+  }
 }

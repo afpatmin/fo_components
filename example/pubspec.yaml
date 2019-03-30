@@ -13,6 +13,9 @@ dependencies:
 
   fo_components:
     path: '../'
+
+  fo_model:
+    git: https://github.com/afpatmin/fo_model
   
   grid:
     git: https://github.com/afpatmin/grid  

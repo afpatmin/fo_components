@@ -12,9 +12,9 @@ import 'fo_carousel_slide_component.dart';
 
 @Component(
     selector: 'fo-carousel',
-    styleUrls: const ['fo_carousel_component.css'],
+    styleUrls: ['fo_carousel_component.css'],
     templateUrl: 'fo_carousel_component.html',
-    directives: const [      
+    directives: [
       FoButtonComponent,
       FoCarouselSlideComponent,
       NgIf,
@@ -24,7 +24,7 @@ import 'fo_carousel_slide_component.dart';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoCarouselComponent implements OnDestroy, OnInit {
-  final StreamController<int> _onStepController = new StreamController();
+  final StreamController<int> _onStepController = StreamController();
   Timer timer;
   final ChangeDetectorRef _changeDetectorRef;
 
@@ -57,8 +57,8 @@ class FoCarouselComponent implements OnDestroy, OnInit {
   @override
   void ngOnInit() {
     if (duration != null) {
-      timer = new Timer.periodic(
-          new Duration(milliseconds: duration), (_) => stepBy(1));
+      timer =
+          Timer.periodic(Duration(milliseconds: duration), (_) => stepBy(1));
     }
   }
 
@@ -69,8 +69,7 @@ class FoCarouselComponent implements OnDestroy, OnInit {
 
       timer?.cancel();
       if (duration != null) {
-        timer =
-            new Timer(new Duration(milliseconds: duration), () => stepBy(1));
+        timer = Timer(Duration(milliseconds: duration), () => stepBy(1));
       }
       _changeDetectorRef.markForCheck();
     }
@@ -84,7 +83,7 @@ class FoCarouselComponent implements OnDestroy, OnInit {
     _onStepController.add(step);
     timer?.cancel();
     if (duration != null) {
-      timer = new Timer(new Duration(milliseconds: duration), () => stepBy(1));
+      timer = Timer(Duration(milliseconds: duration), () => stepBy(1));
     }
     _changeDetectorRef.markForCheck();
   }

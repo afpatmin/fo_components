@@ -4,13 +4,13 @@ import 'dart:js';
 import 'package:angular/angular.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
 
-typedef void YoutubeCallback(JsObject event);
+typedef YoutubeCallback = void Function(JsObject event);
 
 @Component(
     selector: 'fo-youtube-player',
-    styleUrls: const ['fo_youtube_player_component.css'],
+    styleUrls: ['fo_youtube_player_component.css'],
     templateUrl: 'fo_youtube_player_component.html',
-    directives: const [MaterialIconComponent, NgIf])
+    directives: [MaterialIconComponent, NgIf])
 class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
   FoYouTubePlayerComponent(this._host);
 
@@ -34,10 +34,10 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
     _host
         .querySelector('#youtube-player-wrapper')
         .children
-        .insert(0, new DivElement()..id = elementId);
+        .insert(0, DivElement()..id = elementId);
 
     if (document.head.querySelector('#fo-youtube') == null) {
-      document.head.children.add(new ScriptElement()
+      document.head.children.add(ScriptElement()
         ..src = 'https://www.youtube.com/iframe_api'
         ..id = 'fo-youtube');
       context['onYouTubeIframeAPIReady'] = _onAPIReady;
@@ -61,7 +61,7 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
 
   void _onAPIReady() {
     // Youtube API is ready, initialize video
-    _player = new JsObject(context['YT']['Player'], [elementId, params]);
+    _player = JsObject(context['YT']['Player'], [elementId, params]);
   }
 
   void _onReady(JsObject event) {}
@@ -114,11 +114,10 @@ class FoYouTubePlayerComponent implements OnInit, OnChanges, OnDestroy {
     params['playerVars'] = vars;
     params['events'] = events;
 
-    return new JsObject.jsify(params);
+    return JsObject.jsify(params);
   }
 
-  final StreamController<String> _onStateChangeController =
-      new StreamController();
+  final StreamController<String> _onStateChangeController = StreamController();
 
   JsObject _player;
 

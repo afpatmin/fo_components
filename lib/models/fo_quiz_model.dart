@@ -10,9 +10,9 @@ class FoQuizModel {
 
   Map<String, dynamic> toJson() => _$FoQuizModelToJson(this);
 
-  @JsonKey(nullable: false)  
+  @JsonKey(nullable: false)
   final List<FoQuestionModel> questions;
-  
+
   int passScore = 0;
 }
 
@@ -25,10 +25,10 @@ class FoQuestionModel {
 
   Map<String, dynamic> toJson() => _$FoQuestionModelToJson(this);
 
-  @JsonKey(nullable: false)  
+  @JsonKey(nullable: false)
   final String label;
 
-  @JsonKey(nullable: false)  
+  @JsonKey(nullable: false)
   final List<FoOptionModel> options;
 
   @JsonKey(nullable: false)
@@ -54,7 +54,7 @@ class FoOptionModel {
   @JsonKey(nullable: false)
   int score;
 
-  @JsonKey(nullable: false)  
+  @JsonKey(nullable: false)
   bool selected;
 
   FoQuizModel child;

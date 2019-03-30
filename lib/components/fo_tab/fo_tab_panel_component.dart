@@ -8,8 +8,8 @@ import 'fo_tab_component.dart';
 @Component(
   selector: 'fo-tab-panel',
   templateUrl: 'fo_tab_panel_component.html',
-  styleUrls: const ['fo_tab_panel_component.css'],
-  directives: const [FoIconComponent, FoTabComponent, NgFor, NgIf],
+  styleUrls: ['fo_tab_panel_component.css'],
+  directives: [FoIconComponent, FoTabComponent, NgFor, NgIf],
 )
 class FoTabPanelComponent implements AfterChanges, OnDestroy {
   List<FoTabComponent> _tabs;
@@ -22,20 +22,18 @@ class FoTabPanelComponent implements AfterChanges, OnDestroy {
   @Input()
   List<String> hideLabelsOn = [];
 
-  final StreamController<int> _tabIndexChangeController =
-      new StreamController();
+  final StreamController<int> _tabIndexChangeController = StreamController();
   FoTabPanelComponent();
 
   @Output('tabIndexChange')
-  Stream<int> get tabIndexChange =>
-      _tabIndexChangeController.stream;
+  Stream<int> get tabIndexChange => _tabIndexChangeController.stream;
 
   List<FoTabComponent> get tabs => _tabs;
 
   @ContentChildren(FoTabComponent)
   set tabs(List<FoTabComponent> value) {
     _tabs = value;
-    _evaluateActiveTab();  
+    _evaluateActiveTab();
   }
 
   String backgroundColor(FoTabComponent tab) =>
@@ -58,7 +56,7 @@ class FoTabPanelComponent implements AfterChanges, OnDestroy {
     for (final t in tabs) {
       t.active = false;
     }
-    tab.active = true;    
+    tab.active = true;
     _tabIndexChangeController.add(tabs.indexOf(tab));
   }
 
@@ -74,11 +72,10 @@ class FoTabPanelComponent implements AfterChanges, OnDestroy {
       }
       if (tabIndex >= _tabs.length) {
         tabIndex = _tabs.length - 1;
-      }
-      else if (tabIndex < 0) {
+      } else if (tabIndex < 0) {
         tabIndex = 0;
       }
       _tabs[tabIndex].active = true;
-    }        
+    }
   }
 }

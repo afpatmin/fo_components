@@ -1,3 +1,1 @@
-class FoButtonEvent {
-  
-}
+class FoButtonEvent {}

@@ -13,10 +13,10 @@ import 'package:angular_forms/angular_forms.dart';
 
 @Component(
     selector: 'fo-multi-input',
-    styleUrls: const ['fo_multi_input_component.css'],
+    styleUrls: ['fo_multi_input_component.css'],
     templateUrl: 'fo_multi_input_component.html',
-    directives: const [
-      formDirectives, 
+    directives: [
+      formDirectives,
       MaterialButtonComponent,
       MaterialChipComponent,
       MaterialIconComponent,
@@ -24,7 +24,7 @@ import 'package:angular_forms/angular_forms.dart';
       NgFor,
       NgIf
     ],
-    pipes: const [],
+    pipes: [],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
   ChangeFunction<String> _onChange;
@@ -53,7 +53,7 @@ class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
   }
 
   final StreamController<List<String>> _onValueChangeController =
-      new StreamController();
+      StreamController();
 
   @Input()
   List<String> value = [];

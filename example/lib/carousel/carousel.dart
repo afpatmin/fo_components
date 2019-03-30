@@ -23,7 +23,7 @@ class Carousel {
     <p style="text-align: center; background-color:bisque; line-height: 1600%;">..to fit my largest slide</p>
   </fo-carousel-slide>
 </fo-carousel>''';
-final String htmlRadioButtons = '''
+  final String htmlRadioButtons = '''
 <fo-carousel [showArrowButtons]="false"
              [showRadioButtons]="true">
   <fo-carousel-slide>
@@ -37,7 +37,7 @@ final String htmlRadioButtons = '''
   </fo-carousel-slide>
 </fo-carousel>
 ''';
-final String htmlInterval = '''
+  final String htmlInterval = '''
 <fo-carousel [duration]="3000"
              [showArrowButtons]="false">
   <fo-carousel-slide>
