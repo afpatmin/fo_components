@@ -3,9 +3,9 @@
   <div class="left">
     <ng-content></ng-content>
   </div>
-  <div class="right"> HTML
-
-    <code [innerText]="html"></code>
+  <div class="right"> html <code [innerText]="html"></code>
+    <ng-container *ngIf="dart != null"> dart <code [innerText]="dart"></code>
+    </ng-container>
     <ng-container *ngIf="notesHtml != null">
       <div id="notes"> Notes </div>
       <div [safeInnerHtml]="notesHtml"></div>

@@ -14,6 +14,9 @@ class Section implements OnInit {
   String html;
 
   @Input()
+  String dart;
+
+  @Input()
   String notes;
 
   SafeHtml notesHtml;

@@ -1,8 +1,11 @@
 import 'package:angular/angular.dart';
 import 'package:fo_components/components/fo_data_table/fo_data_table_component.dart';
 import 'package:fo_model/fo_model.dart';
+import 'package:intl/intl.dart';
 import '../component_info/component_info.dart';
 import '../section/section.dart';
+
+final DateFormat df = DateFormat('y');
 
 @Component(
     selector: 'data-table',
@@ -10,46 +13,67 @@ import '../section/section.dart';
     directives: [ComponentInfo, FoDataTableComponent, Section])
 class DataTable {
   final String htmlDefault = '''  
-<p> CONTENT HERE </p>''';
+<fo-data-table [data]="data"
+               [columns]="columns"
+               (rowclick)="clickedId = \$event">
+</fo-data-table>
+<p>Clicked country: {{clickedId}}</p>''';
+
+  final String dartDefault = '''
+Component {
+  ... Component code ...  
 
   final columns = {
     'id': 'ID',
     'country': 'Country',
     'language': 'Language',
-    'pop': 'Population'
+    'pop': 'Population',
+    'founded': 'Founded'
   };
 
   final data = {
-    '1': DataModel()
-      ..id = '1'
-      ..founded = DateTime(1100, 01, 12)
+    'SE': DataModel()
+      ..id = 'SE'
+      ..founded = DateTime(1397, 01, 01)
       ..country = 'Sweden'
       ..language = 'Swedish'
       ..pop = 10000000,
-    '2': DataModel()
-      ..id = '2'
-      ..founded = DateTime(1200, 01, 12)
+    'DK': DataModel()
+      ..id = 'DK'
+      ..founded = DateTime(1397, 01, 01)
       ..country = 'Denmark'
       ..language = 'Danish'
-      ..pop = 5000000,
-    '3': DataModel()
-      ..id = '3'
-      ..founded = DateTime(1300, 01, 12)
+      ..pop = 5750000,
+    'NO': DataModel()
+      ..id = 'NO'
+      ..founded = DateTime(872, 01, 01)
       ..country = 'Norway'
       ..language = 'Norwegian'
-      ..pop = 4000000,
-    '4': DataModel()
-      ..id = '1'
-      ..founded = DateTime(1400, 01, 12)
+      ..pop = 5300000,
+    'FI': DataModel()
+      ..id = 'FI'
+      ..founded = DateTime(1809, 03, 29)
       ..country = 'Finland'
       ..language = 'Finnish'
-      ..pop = 4000000,
-    '5': DataModel()
-      ..id = '5'
-      ..founded = DateTime(1500, 01, 12)
+      ..pop = 5503000,
+    'ISL': DataModel()
+      ..id = 'ISL'
+      ..founded = DateTime(1944, 06, 17)
       ..country = 'Iceland'
       ..language = 'Icelandic'
-      ..pop = 250000,
+      ..pop = 339000,
+    'BE': DataModel()
+      ..id = 'BE'
+      ..founded = DateTime(1830, 10, 4)
+      ..country = 'Belgium'
+      ..language = 'Dutch, French, German'
+      ..pop = 11350000,
+    'FR': DataModel()
+      ..id = 'FR'
+      ..founded = DateTime(1789, 07, 14)
+      ..country = 'France'
+      ..language = 'French'
+      ..pop = 67190000,
   };
 }
 
@@ -60,6 +84,84 @@ class DataModel extends FoModel {
   int pop;
 
   @override
-  Map<String, dynamic> toJson() =>
-      {'id': id, 'country': country, 'language': language, 'pop': pop};
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'country': country,
+    'language': language,
+    'pop': pop,
+    'founded': df.format(founded)
+  };
+}
+''';
+
+  final columns = {
+    'id': 'ID',
+    'country': 'Country',
+    'language': 'Language',
+    'pop': 'Population',
+    'founded': 'Founded'
+  };
+
+  final data = {
+    'SE': DataModel()
+      ..id = 'SE'
+      ..founded = DateTime(1397, 01, 01)
+      ..country = 'Sweden'
+      ..language = 'Swedish'
+      ..pop = 10000000,
+    'DK': DataModel()
+      ..id = 'DK'
+      ..founded = DateTime(1397, 01, 01)
+      ..country = 'Denmark'
+      ..language = 'Danish'
+      ..pop = 5750000,
+    'NO': DataModel()
+      ..id = 'NO'
+      ..founded = DateTime(872, 01, 01)
+      ..country = 'Norway'
+      ..language = 'Norwegian'
+      ..pop = 5300000,
+    'FI': DataModel()
+      ..id = 'FI'
+      ..founded = DateTime(1809, 03, 29)
+      ..country = 'Finland'
+      ..language = 'Finnish'
+      ..pop = 5503000,
+    'ISL': DataModel()
+      ..id = 'ISL'
+      ..founded = DateTime(1944, 06, 17)
+      ..country = 'Iceland'
+      ..language = 'Icelandic'
+      ..pop = 339000,
+    'BE': DataModel()
+      ..id = 'BE'
+      ..founded = DateTime(1830, 10, 4)
+      ..country = 'Belgium'
+      ..language = 'Dutch, French, German'
+      ..pop = 11350000,
+    'FR': DataModel()
+      ..id = 'FR'
+      ..founded = DateTime(1789, 07, 14)
+      ..country = 'France'
+      ..language = 'French'
+      ..pop = 67190000,
+  };
+
+  String clickedId;
+}
+
+class DataModel extends FoModel {
+  DateTime founded;
+  String country;
+  String language;
+  int pop;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'country': country,
+        'language': language,
+        'pop': pop,
+        'founded': df.format(founded)
+      };
 }
