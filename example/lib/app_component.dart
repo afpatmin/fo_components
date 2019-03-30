@@ -7,6 +7,7 @@ import 'button/button.template.dart' as button_comp;
 import 'carousel/carousel.template.dart' as carousel_comp;
 import 'data_table/data_table.template.dart' as data_table_comp;
 import 'dropdown_select/dropdown_select.template.dart' as dropdown_select_comp;
+import 'text_input/text_input.template.dart' as text_input_comp;
 
 @Component(
     selector: 'app',
@@ -31,5 +32,8 @@ class AppComponent {
     RouteDefinition(
         path: 'FoDropdownSelectComponent',
         component: dropdown_select_comp.DropdownSelectNgFactory),
+    RouteDefinition(
+        path: 'FoTextInputComponent',
+        component: text_input_comp.TextInputNgFactory)
   ];
 }

@@ -1,0 +1,27 @@
+<component-info name="FoTextInputComponent"
+                description="An input field for user text input, with validation optional auto-suggest options."
+                source="https://github.com/afpatmin/fo_components/tree/master/lib/components/fo_text_input">
+</component-info>
+<section label="Default"
+         [html]="htmlDefault">
+  <fo-text-input label="Enter a value"
+                 [(ngModel)]="text"></fo-text-input>
+  <p>Text: {{text}}</p>
+</section>
+<section label="AutoSuggest"
+         [html]="htmlAutoSuggest"
+         [dart]="dartAutoSuggest">
+  <fo-text-input label="Enter your job title"
+                 [options]="autoSuggestOptions"
+                 [(ngModel)]="autoSuggest"></fo-text-input>
+  <p>Text: {{autoSuggest}}</p>
+</section>
+<section label="Validation"
+         [html]="htmlValidation">
+  <form [ngFormModel]="form">
+    <fo-text-input label="Your email"
+                   [(ngModel)]="email"
+                   ngControl="email"></fo-text-input>
+    <p>Text: {{email}}</p>
+  </form>
+</section>
