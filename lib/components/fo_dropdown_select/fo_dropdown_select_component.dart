@@ -28,12 +28,6 @@ class FoDropdownSelectComponent implements OnInit, OnDestroy {
   @Input()
   Map<String, List<FoDropdownOption>> options;
 
-  @Input()
-  bool leftBorder = true;
-
-  @Input()
-  bool rightBorder = true;
-
   final StreamController<Object> _selectedIdController =
       StreamController<Object>();
   final dom.Element _host;

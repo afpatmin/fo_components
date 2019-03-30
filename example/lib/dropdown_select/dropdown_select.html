@@ -1,0 +1,13 @@
+<component-info name="FoDropdownSelectComponent"
+                description="A component for selecting a single value from a list of predefined models."
+                source="https://github.com/afpatmin/fo_components/tree/master/lib/components/fo_dropdown_select">
+</component-info>
+<section label="Default"
+         [html]="htmlDefault"
+         [dart]="dartDefault">
+  <fo-dropdown-select label="Select object"
+                      [options]="options"
+                      [(selectedId)]="selectedId">
+  </fo-dropdown-select>
+  <p>Selected id: {{selectedId}}</p>
+</section>

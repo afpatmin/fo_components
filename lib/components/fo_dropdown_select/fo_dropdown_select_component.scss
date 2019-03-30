@@ -16,8 +16,9 @@
     transition: box-shadow $transitionSpeed;
     display: flex;
     align-items: center;
-    border-width: 1px 0;
+    border-width: 1px;
     border-style: solid;
+    border-radius: $x-small;
 
     div#selectedValue {
       flex: 1;
@@ -36,19 +37,6 @@
     }
   }
 
-  div#selector.leftBorder {
-    border-top-left-radius: $x-small;
-    border-bottom-left-radius: $x-small;
-    border-left-width: 1px;
-  }
-
-  div#selector.rightBorder {
-    border-top-right-radius: $x-small;
-    border-bottom-right-radius: $x-small;
-    border-right-width: 1px;
-
-  }
-
   div#selector.focus {
     @include boxShadow();
   }
@@ -59,12 +47,30 @@
     div#selectedValue {
       text-align: center;
     }
+
     div#selectedValue::before {
       content: '';
       display: inline-block;
       width: 1em;
       margin: $small;
-      
+
     }
   }
+}
+
+:host[noLeftBorder] {
+  div#selector {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left-width: 0;
+  }
+}
+
+:host[noRightBorder] {
+  div#selector {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right-width: 0;
+  }
+
 }

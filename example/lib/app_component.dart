@@ -6,6 +6,7 @@ import 'package:fo_components/pipes/capitalize_pipe.dart';
 import 'button/button.template.dart' as button_comp;
 import 'carousel/carousel.template.dart' as carousel_comp;
 import 'data_table/data_table.template.dart' as data_table_comp;
+import 'dropdown_select/dropdown_select.template.dart' as dropdown_select_comp;
 
 @Component(
     selector: 'app',
@@ -26,6 +27,9 @@ class AppComponent {
         component: carousel_comp.CarouselNgFactory),
     RouteDefinition(
         path: 'FoDataTableComponent',
-        component: data_table_comp.DataTableNgFactory)
+        component: data_table_comp.DataTableNgFactory),
+    RouteDefinition(
+        path: 'FoDropdownSelectComponent',
+        component: dropdown_select_comp.DropdownSelectNgFactory),
   ];
 }
