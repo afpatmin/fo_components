@@ -3,8 +3,8 @@
   <div class="left">
     <ng-content></ng-content>
   </div>
-  <div class="right"> html <code [innerText]="html"></code>
-    <ng-container *ngIf="dart != null"> dart <code [innerText]="dart"></code>
+  <div class="right"> html <code [attr.innerText]="html"></code>
+    <ng-container *ngIf="dart != null"> dart <code [attr.innerText]="dart"></code>
     </ng-container>
     <ng-container *ngIf="notesHtml != null">
       <div id="notes"> Notes </div>

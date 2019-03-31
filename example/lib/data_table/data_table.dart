@@ -94,7 +94,7 @@ class DataModel extends FoModel {
 }
 ''';
 
-  final columns = {
+  final Map<String, String> columns = {
     'id': 'ID',
     'country': 'Country',
     'language': 'Language',
@@ -102,7 +102,7 @@ class DataModel extends FoModel {
     'founded': 'Founded'
   };
 
-  final data = {
+  final Map<String, DataModel> data = {
     'SE': DataModel()
       ..id = 'SE'
       ..founded = DateTime(1397, 01, 01)
