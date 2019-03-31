@@ -1,6 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:fo_components/components/fo_data_table/fo_data_table_component.dart';
-import 'package:fo_model/fo_model.dart';
+import 'package:fo_components/models/fo_model.dart';
 import 'package:intl/intl.dart';
 import '../component_info/component_info.dart';
 import '../section/section.dart';
