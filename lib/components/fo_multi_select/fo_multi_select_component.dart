@@ -11,9 +11,8 @@ import 'package:angular_components/material_select/material_dropdown_select.dart
 import 'package:angular_components/material_select/material_select_dropdown_item.dart';
 import 'package:angular_components/material_select/material_select_searchbox.dart';
 import 'package:angular_components/model/selection/string_selection_options.dart';
-import 'package:fo_model/fo_model.dart';
 import 'package:intl/intl.dart';
-
+import '../../models/fo_model.dart';
 import '../../pipes/capitalize_pipe.dart';
 
 @Component(
@@ -31,6 +30,7 @@ import '../../pipes/capitalize_pipe.dart';
     ],
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
+@Deprecated('This component will eventually be replaced by an extension of FoDropdownSelect')
 class FoMultiSelectComponent implements AfterChanges, OnDestroy {
   final String msgSearch = Intl.message('search', name: 'search');
 

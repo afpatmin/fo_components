@@ -1,1 +1,1 @@
-# FoComponents 0.1.6
+# FoComponents 0.2.0

@@ -14,9 +14,9 @@ import 'package:angular_components/material_input/material_input.dart';
 import 'package:angular_components/material_spinner/material_spinner.dart';
 import 'package:angular_components/material_tooltip/material_tooltip.dart';
 import 'package:collection/collection.dart';
-import 'package:fo_model/fo_model.dart';
 import 'package:intl/intl.dart';
 
+import '../../models/fo_model.dart';
 import '../../pipes/capitalize_pipe.dart';
 import '../../pipes/range_pipe.dart';
 import '../fo_modal/fo_modal_component.dart';

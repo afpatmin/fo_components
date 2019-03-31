@@ -10,8 +10,8 @@ import 'package:angular_components/material_select/material_dropdown_select.dart
 import 'package:angular_components/material_select/material_select_dropdown_item.dart';
 import 'package:angular_components/material_select/material_select_searchbox.dart';
 import 'package:angular_components/model/selection/string_selection_options.dart';
-import 'package:fo_model/fo_model.dart';
 import 'package:intl/intl.dart';
+import '../../models/fo_model.dart';
 import '../../pipes/capitalize_pipe.dart';
 import '../fo_modal/fo_modal_component.dart';
 
@@ -31,6 +31,7 @@ import '../fo_modal/fo_modal_component.dart';
     ],
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
+@Deprecated('Please use FoDropdownSelectComponent instead')
 class FoSelectComponent implements AfterChanges, OnDestroy {
   FoSelectComponent();
 

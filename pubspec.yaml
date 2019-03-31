@@ -1,8 +1,8 @@
 name: fo_components
-description: A collection of Angular Dart components
+description: A collection of Angular components for both common and uncommon scenarios.
 author: Patrick Minogue <patrick.minogue@gmail.com>
-homepage: https://github.com/afpatmin
-version: 0.1.7
+homepage: https://github.com/afpatmin/fo_components
+version: 0.2.0
 environment:
   sdk: '>=2.0.0 <3.0.0'
 
@@ -10,11 +10,8 @@ dependencies:
   angular: ^5.2.0
   angular_components: ^0.12.0
   angular_forms: ^2.1.1
-  angular_router: ^2.0.0-alpha+21  
-  fo_model:
-    git: https://github.com/afpatmin/fo_model
-  grid:
-    git: https://github.com/afpatmin/grid
+  angular_router: ^2.0.0-alpha+21    
+  grid_css: 0.1.1
   intl: ^0.15.7
   sass_builder: ^2.1.2
 

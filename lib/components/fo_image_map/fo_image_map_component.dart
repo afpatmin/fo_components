@@ -3,7 +3,7 @@
 
 import 'dart:async';
 import 'package:angular/angular.dart';
-import 'package:fo_model/fo_model.dart';
+import '../../models/fo_model.dart';
 import '../fo_multi_select/fo_multi_select_component.dart';
 
 @Component(
