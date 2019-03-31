@@ -25,7 +25,7 @@ class TextInput {
 <p>Text: {{autoSuggest}}</p>
 ''';
 
-final String dartAutoSuggest = '''
+  final String dartAutoSuggest = '''
 import 'package:fo_components/components/fo_dropdown_list/fo_dropdown_option.dart';
 ...
 
