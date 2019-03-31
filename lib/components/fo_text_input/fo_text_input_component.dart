@@ -56,9 +56,10 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   final ChangeDetectorRef _changeDetectorRef;
   final StreamController _actionButtonController =
       StreamController<FoButtonEvent>();
-  final StreamController _selectionChangeController =
+  final StreamController<String> changeController = StreamController<String>();
+  final StreamController<FoDropdownOption> _selectionChangeController =
       StreamController<FoDropdownOption>();
-  final StreamController _focusController = StreamController<html.FocusEvent>();
+  final StreamController<html.FocusEvent> _focusController = StreamController<html.FocusEvent>();
   bool dropdownVisible = false;
   int get dropdownWidth =>
       inputElement?.getBoundingClientRect()?.width?.toInt();
@@ -174,6 +175,7 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   @override
   void ngOnDestroy() {
     _actionButtonController.close();
+    changeController.close();
     _selectionChangeController.close();
     _focusController.close();
   }

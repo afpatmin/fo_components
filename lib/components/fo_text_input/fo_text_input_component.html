@@ -14,7 +14,8 @@
            [class.rightPadding]="clearIcon == true"
            [class.color-alert]="control?.valid == false && control?.pristine != true"
            [ngModel]="value"
-           (ngModelChange)="onValueChange($event)"
+           (ngModelChange)="onValueChange($event)"           
+           (change)="changeController.add($event)"
            (focus)="onFocus($event)"
            (blur)="hasFocus = false"
            type="text">           

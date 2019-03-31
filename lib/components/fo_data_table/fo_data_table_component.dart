@@ -7,20 +7,21 @@ import 'dart:html' as dom;
 import 'dart:math';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_button/material_button.dart';
 import 'package:angular_components/material_checkbox/material_checkbox.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
-import 'package:angular_components/material_input/material_input.dart';
 import 'package:angular_components/material_spinner/material_spinner.dart';
 import 'package:angular_components/material_tooltip/material_tooltip.dart';
+import 'package:angular_forms/angular_forms.dart';
 import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
 
-import '../../models/fo_model.dart';
 import '../../pipes/capitalize_pipe.dart';
 import '../../pipes/range_pipe.dart';
+import '../fo_button/fo_button_component.dart';
+import '../fo_dropdown_list/fo_dropdown_option.dart';
+import '../fo_dropdown_select/fo_dropdown_select_component.dart';
 import '../fo_modal/fo_modal_component.dart';
-import '../fo_select/fo_select_component.dart';
+import '../fo_text_input/fo_text_input_component.dart';
 
 typedef ErrorFn = String Function(Object model);
 
@@ -45,12 +46,13 @@ class BatchOperationEvent {
     templateUrl: 'fo_data_table_component.html',
     directives: <dynamic>[
       coreDirectives,
+      FoButtonComponent,
+      FoDropdownSelectComponent,
       FoModalComponent,
-      FoSelectComponent,
-      MaterialButtonComponent,
-      MaterialIconComponent,
+      formDirectives,
+      FoTextInputComponent,
       MaterialCheckboxComponent,
-      materialInputDirectives,
+      MaterialIconComponent,
       MaterialSpinnerComponent,
       MaterialTooltipDirective
     ],
@@ -80,35 +82,44 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
   final String msgInformation =
       Intl.message('information', name: 'information');
 
-  final List<FoModel> rowOptions = [
-    FoModel()..id = 5,
-    FoModel()..id = 10,
-    FoModel()..id = 15,
-    FoModel()..id = 20,
-    FoModel()..id = 25,
-    FoModel()..id = 50,
-    FoModel()..id = 100,
-    FoModel()..id = 1000
-  ];
+  final Map<String, List<FoDropdownOption>> rowOptions = {
+    '': [
+      FoDropdownOption()
+        ..id = 5
+        ..label = '5',
+      FoDropdownOption()
+        ..id = 10
+        ..label = '10',
+      FoDropdownOption()
+        ..id = 15
+        ..label = '15',
+      FoDropdownOption()
+        ..id = 20
+        ..label = '20',
+      FoDropdownOption()
+        ..id = 25
+        ..label = '25',
+      FoDropdownOption()
+        ..id = 50
+        ..label = '50',
+      FoDropdownOption()
+        ..id = 100
+        ..label = '100',
+      FoDropdownOption()
+        ..id = 1000
+        ..label = '1000'
+    ]
+  };
 
-  FoModel _selectedRowOption;
-
+  int selectedRowId;
   Object deleteBufferId;
-
   int firstIndex = 0;
-
   int lastIndex = 1;
-
   int currentPage = 1;
-
   String searchPhrase = '';
-
   List<Object> _filteredKeys;
-
   bool infoModalOpen = false;
-
   bool _allChecked;
-
   final int liveSearchThreshold = 500;
 
   final StreamController<String> onAddController = StreamController();
@@ -163,7 +174,7 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
   bool showCheckboxes = false;
 
   @Input()
-  List<FoModel> batchOperations;
+  Map<String, List<FoDropdownOption>> batchOperations;
 
   @Input()
   bool showDeleteButtons = false;
@@ -187,7 +198,7 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
   bool disabled = false;
 
   FoDataTableComponent() {
-    selectedRowOptionId = rowOptions.first.id;
+    selectedRowId = rowOptions[''].first.id;
   }
   bool get allChecked => _allChecked;
 
@@ -226,26 +237,18 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
   @Output('sort')
   Stream<Map<String, dynamic>> get onSortOutput => _onSortController.stream;
 
-  int get selectedRowOptionId => _selectedRowOption?.id;
-
-  set selectedRowOptionId(int value) {
-    _selectedRowOption = rowOptions.firstWhere((row) => row.id == value,
-        orElse: () => rowOptions.first);
-  } // = ((model) => null);
-
   @Output('selectedRowsChange')
   Stream<Set<Object>> get selectedRowsChange => onSelectedRowsController.stream;
 
-  int get totalPages =>
-      (filteredKeys.length.toDouble() / _selectedRowOption.id).ceil();
+  int get totalPages => (filteredKeys.length.toDouble() / selectedRowId).ceil();
 
   dynamic getCell(Object id, String column) {
     if (data == null || data[id] == null)
       return null;
     else {
-      final FoModel model = data[id];
-      final json = model.toJson();
-      final cell = json[column];
+      final model = data[id];
+      final encoded = json.decode(json.encode(model));
+      final cell = encoded[column];
       if (cell == null) return null;
 
       if (cell is String) {
@@ -287,11 +290,9 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
     data ??= {};
 
     if (changes.containsKey('rows')) {
-      selectedRowOptionId = rowOptions
-          .firstWhere((r) => r.id == rows, orElse: () => rowOptions.first)
-          .id;
+      selectedRowId = rows;
       firstIndex = 0;
-      lastIndex = _selectedRowOption.id;
+      lastIndex = selectedRowId;
     }
     if (_filteredKeys == null || !eq(data.keys.toList(), filteredKeys)) {
       _filteredKeys = List.from(data.keys);
@@ -301,7 +302,7 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
       final bufferSortOrder = sortOrder;
 
       if (internalFilter) {
-        onSearch();
+        onFilter();
       }
       if (internalSort) {
         onSort(bufferSortColumn, bufferSortOrder);
@@ -351,7 +352,6 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
         if (model == null) continue;
 
         final row = json.decode(json.encode(model));
-
         final properties = columns.keys.map((col) => row[col]).toList()
           ..addAll(
               evaluatedColumns.keys.map((id) => evaluatedColumns[id](model)));
@@ -381,19 +381,7 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
     }
   }
 
-  void onFilterChange(String event) {
-    if (lazyFilter) {
-      onSearch();
-    }
-  }
-
-  void onRowClick(Object event) {
-    if (!disabled) {
-      onRowClickController.add(event);
-    }
-  }
-
-  void onSearch() {
+  void onFilter() {
     if (internalFilter && searchPhrase?.isNotEmpty == true) {
       bool find(Object model, List<String> keywords) {
         bool allKeywords;
@@ -439,9 +427,21 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
     setIndices(0);
   }
 
-  void onSearchKeyUp(dom.KeyboardEvent e) {
+  void onFilterChange() {
+    if (lazyFilter) {
+      onFilter();
+    }
+  }
+
+  void onFilterKeyUp(dom.KeyboardEvent e) {
     if (!lazyFilter) {
-      onSearch();
+      onFilter();
+    }
+  }
+
+  void onRowClick(Object event) {
+    if (!disabled) {
+      onRowClickController.add(event);
     }
   }
 
@@ -519,21 +519,18 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
   }
 
   void setIndices(int inFirstIndex) {
-    if (inFirstIndex <= -(_selectedRowOption.id as int) ||
-        inFirstIndex >= data.length) return;
+    if (inFirstIndex <= -selectedRowId || inFirstIndex >= data.length) return;
 
     firstIndex = max(0, inFirstIndex);
     if (searchPhrase != null && searchPhrase.isNotEmpty)
-      firstIndex =
-          max(0, min(firstIndex, filteredKeys.length - _selectedRowOption.id));
-    lastIndex = firstIndex + _selectedRowOption.id;
+      firstIndex = max(0, min(firstIndex, filteredKeys.length - selectedRowId));
+    lastIndex = firstIndex + selectedRowId;
 
-    currentPage = (data.isEmpty)
-        ? 0
-        : (firstIndex.toDouble() / _selectedRowOption.id).ceil() + 1;
+    currentPage =
+        (data.isEmpty) ? 0 : (firstIndex.toDouble() / selectedRowId).ceil() + 1;
   }
 
   void step(int steps) {
-    setIndices(firstIndex + (steps * _selectedRowOption.id));
+    setIndices(firstIndex + (steps * selectedRowId));
   }
 }

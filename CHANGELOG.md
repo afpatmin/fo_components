@@ -1,5 +1,10 @@
-## 0.2.0
+## 0.2.1
+### General
+### Component updates
+* Added FoDropdownSelect disabled input
 
+
+## 0.2.0
 ### General
 * Added example/ and docs/ folders (docs/ is published on github pages)
 * Added CHANGELOG.md
