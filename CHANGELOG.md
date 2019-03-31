@@ -1,7 +1,15 @@
 ## 0.2.1
 ### General
+* Added example/ to .gitignore
+
 ### Component updates
 * Added FoDropdownSelect disabled input
+* Replaced material components in FoDataTableComponent with in-house components
+* Better dense directive for button, dropdownselect and textinput
+* Added actionButton logic to dropdownselect
+
+### Other
+* Removed value field from FoDropdownOption
 
 
 ## 0.2.0

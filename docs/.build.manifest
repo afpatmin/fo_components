@@ -55,6 +55,9 @@ packages/front_end/src/fasta/source/README.md
 packages/grid/constants.scss
 packages/grid/grid.scss
 packages/grid/theme.scss
+packages/grid_css/constants.scss
+packages/grid_css/grid.scss
+packages/grid_css/theme.scss
 packages/intl/src/data/dates/README.txt
 packages/intl/src/data/dates/patterns/af.json
 packages/intl/src/data/dates/patterns/am.json
