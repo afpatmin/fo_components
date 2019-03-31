@@ -2,6 +2,7 @@
           (click)="onClick($event)">
   <div id="selector"
        class="gray-color-bright"
+       [class.disabled]="disabled == true"
        [class.focus]="dropdownVisible">
     <div id="selectedValue"> {{selectedOption == null ? '-' : selectedOption.label}} </div>
     <material-icon class="arrow"
@@ -9,7 +10,7 @@
                    icon="keyboard_arrow_down"></material-icon>
   </div>
 </fo-label>
-<fo-dropdown-list *ngIf="options != null && dropdownVisible == true"
+<fo-dropdown-list *ngIf="options != null && dropdownVisible == true && disabled != true"
                   [options]="options"
                   [width]="dropdownWidth"
                   (select)="onSelect($event)"

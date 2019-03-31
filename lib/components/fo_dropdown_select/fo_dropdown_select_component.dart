@@ -26,6 +26,9 @@ class FoDropdownSelectComponent implements OnInit, OnDestroy {
   String label;
 
   @Input()
+  bool disabled = false;
+
+  @Input()
   Map<String, List<FoDropdownOption>> options;
 
   final StreamController<Object> _selectedIdController =
@@ -66,7 +69,9 @@ class FoDropdownSelectComponent implements OnInit, OnDestroy {
   }
 
   void onClick(dom.Event e) {
-    dropdownVisible = !dropdownVisible;
+    if (disabled != true) {
+      dropdownVisible = !dropdownVisible;
+    }
     e.stopPropagation();
   }
 
