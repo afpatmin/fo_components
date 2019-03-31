@@ -52,15 +52,12 @@ class FoDropdownListComponent
     if (visible == true) {
       final rect = host.getBoundingClientRect();
       top = '${rect.top}px';
-      
 
       final offsetFromTop = rect.top + html.window.scrollY;
       final spaceLeft = html.document.body.clientHeight - offsetFromTop;
 
+      elementMaxHeight = '${spaceLeft}px';
 
-      elementMaxHeight =
-          '${spaceLeft}px';
-                  
       if (filter == null || filter.isEmpty) {
         _filteredOptions = Map.from(options);
       } else {

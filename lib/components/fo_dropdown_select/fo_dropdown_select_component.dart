@@ -39,7 +39,8 @@ class FoDropdownSelectComponent implements OnInit, OnDestroy {
 
   final StreamController<Object> _selectedIdController =
       StreamController<Object>();
-  final StreamController<FoButtonEvent> actionButtonController = StreamController<FoButtonEvent>();
+  final StreamController<FoButtonEvent> actionButtonController =
+      StreamController<FoButtonEvent>();
   final dom.Element _host;
   bool dropdownVisible = false;
   FoDropdownOption selectedOption;
@@ -96,6 +97,6 @@ class FoDropdownSelectComponent implements OnInit, OnDestroy {
   @override
   void ngOnInit() {
     // This will select first option with id == null if it exists
-    selectedId = selectedOption?.id;    
+    selectedId = selectedOption?.id;
   }
 }
