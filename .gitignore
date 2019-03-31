@@ -1,5 +1,6 @@
 .packages
 build/
+example/
 pubspec.lock
 
 .dart_tool
