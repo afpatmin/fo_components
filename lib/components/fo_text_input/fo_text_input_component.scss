@@ -10,6 +10,7 @@
   position: relative;
 
   input {
+    background-color: white;
     outline: none;
     margin: 0;
   }
@@ -69,4 +70,14 @@
     @include boxShadow();
   }
   @include fo-button-font-size(1rem);
+}
+
+:host[dense] {
+  fo-label {
+    div#flexContainer {
+      input {    
+        line-height: 100%;    
+      }
+    }
+  }
 }

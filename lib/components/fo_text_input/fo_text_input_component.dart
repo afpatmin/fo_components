@@ -28,7 +28,8 @@ import 'fo_error_output_component.dart';
     ],
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
+class FoTextInputComponent
+    implements ControlValueAccessor<String>, OnInit, OnDestroy {
   @Input()
   String actionButtonLabel;
 
@@ -54,12 +55,13 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   ChangeFunction<String> _onChange;
   NgControl control;
   final ChangeDetectorRef _changeDetectorRef;
-  final StreamController _actionButtonController =
-      StreamController<FoButtonEvent>();
-  final StreamController<String> changeController = StreamController<String>();
+  StreamController actionButtonController;
+  final StreamController<html.Event> changeController =
+      StreamController<html.Event>();
   final StreamController<FoDropdownOption> _selectionChangeController =
       StreamController<FoDropdownOption>();
-  final StreamController<html.FocusEvent> _focusController = StreamController<html.FocusEvent>();
+  final StreamController<html.FocusEvent> _focusController =
+      StreamController<html.FocusEvent>();
   bool dropdownVisible = false;
   int get dropdownWidth =>
       inputElement?.getBoundingClientRect()?.width?.toInt();
@@ -108,14 +110,10 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
 
   @Output('actionButtonTrigger')
   Stream<FoButtonEvent> get actionButtonTrigger =>
-      _actionButtonController.stream;
+      actionButtonController?.stream;
 
   @Output('focus')
   Stream<html.FocusEvent> get focus => _focusController.stream;
-
-  void onActionButtonTrigger(FoButtonEvent event) {
-    _actionButtonController.add(event);
-  }
 
   void onClear(html.Event event) {
     // Prevent the input from gaining focus
@@ -174,9 +172,16 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
 
   @override
   void ngOnDestroy() {
-    _actionButtonController.close();
+    actionButtonController?.close();
     changeController.close();
     _selectionChangeController.close();
     _focusController.close();
+  }
+
+  @override
+  void ngOnInit() {
+    if (actionButtonLabel != null) {
+      actionButtonController = StreamController<FoButtonEvent>();
+    }
   }
 }

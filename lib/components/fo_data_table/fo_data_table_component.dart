@@ -67,6 +67,7 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
   final String msgDownloadCsv =
       Intl.message('download .CSV file', name: 'download_csv');
   final String msgAdd = Intl.message('add', name: 'add');
+  final String msgGo = Intl.message('go', name: 'go');
   final String msgRows =
       Intl.plural(2, one: 'row', other: 'rows', args: [2], name: 'row');
   final String msgPage =
@@ -242,6 +243,11 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
 
   int get totalPages => (filteredKeys.length.toDouble() / selectedRowId).ceil();
 
+  void onActionButtonTrigger() {
+    _onBatchOperationController
+        .add(BatchOperationEvent(selectedBatchOperation, selectedRows.toSet()));
+  }
+
   dynamic getCell(Object id, String column) {
     if (data == null || data[id] == null)
       return null;
@@ -324,6 +330,8 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
     _onBatchOperationController.close();
   }
 
+  String selectedBatchOperation;
+
   void onBatchOperationTrigger(String event) {
     _onBatchOperationController
         .add(BatchOperationEvent(event, Set.from(selectedRows)));
@@ -383,7 +391,7 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
 
   void onFilter() {
     if (internalFilter && searchPhrase?.isNotEmpty == true) {
-      bool find(Object model, List<String> keywords) {
+      bool find(Object key, Object model, List<String> keywords) {
         bool allKeywords;
         final row = json.decode(json.encode(model));
         for (final keyword in keywords) {
@@ -397,7 +405,8 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
             }
           }
           for (final col in evaluatedColumns.keys) {
-            final r = _evaluatedColumnsBuffer[row['id']];
+            final r = _evaluatedColumnsBuffer[key];
+
             final data = (r?.containsKey(col) == true) ? r[col] : null;
             if (data != null &&
                 data.toString().toLowerCase().contains(keyword)) {
@@ -418,12 +427,11 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
       sortOrder = null;
 
       _filteredKeys =
-          data.keys.where((key) => find(data[key], keywords)).toList();
+          data.keys.where((key) => find(key, data[key], keywords)).toList();
     } else
       _filteredKeys = null;
 
     _onFilterController.add(searchPhrase);
-
     setIndices(0);
   }
 
@@ -497,21 +505,18 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
           }
         }
 
-        final values = filteredKeys.map((key) => data[key]).toList();
-
+        final values = filteredKeys.map((key) => [key, data[key]]).toList();
         if (values != null) {
           if (columns.keys.contains(sortColumn)) {
             values.sort((a, b) => sort(
-                json.decode(json.encode(a))[sortColumn].toString(),
-                json.decode(json.encode(b))[sortColumn].toString()));
+                json.decode(json.encode(a[1]))[sortColumn].toString(),
+                json.decode(json.encode(b[1]))[sortColumn].toString()));
           } else if (evaluatedColumns.containsKey(sortColumn)) {
-            values.sort((a, b) => sort(evaluatedColumns[sortColumn](a),
-                evaluatedColumns[sortColumn](b)));
+            values.sort((a, b) => sort(evaluatedColumns[sortColumn](a[1]),
+                evaluatedColumns[sortColumn](b[1])));
           }
 
-          _filteredKeys = values
-              .map((model) => json.decode(json.encode(model))['id'])
-              .toList();
+          _filteredKeys = values.map((row) => row[0]).toList();
         }
       }
     }
@@ -530,7 +535,16 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
         (data.isEmpty) ? 0 : (firstIndex.toDouble() / selectedRowId).ceil() + 1;
   }
 
+  void onDeleteRow(Object key, dom.Event event) {
+    if (disabled == false) {
+      deleteBufferId = key;
+    }
+    event.stopPropagation();
+  }
+
   void step(int steps) {
-    setIndices(firstIndex + (steps * selectedRowId));
+    if (!disabled) {
+      setIndices(firstIndex + (steps * selectedRowId));
+    }
   }
 }

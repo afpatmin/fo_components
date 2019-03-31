@@ -1,5 +1,6 @@
 $transitionSpeed: 0.3s ease;
 
+@import 'package:angular_components/material_checkbox/mixins';
 @import 'package:angular_components/material_radio/mixins';
 
 @mixin foregroundColor($color) {
@@ -22,10 +23,17 @@ $transitionSpeed: 0.3s ease;
   $alertColorDark: darken($alertColor, $lightstep);
   $alertColorBright: lighten($alertColor, $lightstep);
 
+  @include material-checkbox-color($primaryColor);
   @include material-radio-color($primaryColor);
+
+  material-spinner {
+    border-color: $primaryColor;
+  }
+
 
   ::ng-deep fo-button:not([noHover])>button:not(:disabled):hover {
     background-color: $secondaryColor;
+    border-color: $secondaryColor;
   }
 
   ::ng-deep fo-button[white]:not([noHover])button:not(:disabled).themeable:hover {
@@ -33,9 +41,14 @@ $transitionSpeed: 0.3s ease;
     color: white;
   }
 
+  ::ng-deep fo-button:not([white])>button {
+    border-color: $primaryColor;
+  }
+
   ::ng-deep fo-button>button:disabled {
-    background-color: $grayColor;
-    border-color: $grayColor;
+    background-color: lighten($grayColorBright, 10%) !important;
+    border-color: $grayColorBright !important;
+    color: $grayColorBright !important;
   }
 
   ::ng-deep fo-dropdown-option:hover {
@@ -45,6 +58,17 @@ $transitionSpeed: 0.3s ease;
   ::ng-deep input::placeholder,
   ::ng-deep textarea::placeholder {
     color: $grayColorBright;
+  }
+
+  ::ng-deep input:disabled,
+  ::ng-deep textarea:disabled {
+    background-color: lighten($grayColorBright, 10%) !important;
+  }
+
+  ::ng-deep fo-dropdown-select {
+    div#selector.disabled {
+      background-color: lighten($grayColorBright, 10%) !important;
+    }
   }
 
   ::ng-deep .black-color {

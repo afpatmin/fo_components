@@ -4,6 +4,8 @@ import 'dart:html' as dom;
 import 'package:angular/angular.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
 
+import '../fo_button/fo_button_component.dart';
+import '../fo_button/fo_button_event.dart';
 import '../fo_dropdown_list/fo_dropdown_list_component.dart';
 import '../fo_dropdown_list/fo_dropdown_option.dart';
 import '../fo_label/fo_label_component.dart';
@@ -15,6 +17,7 @@ import '../fo_label/fo_label_component.dart';
       'fo_dropdown_select_component.css'
     ],
     directives: [
+      FoButtonComponent,
       FoDropdownListComponent,
       FoLabelComponent,
       MaterialIconComponent,
@@ -26,6 +29,9 @@ class FoDropdownSelectComponent implements OnInit, OnDestroy {
   String label;
 
   @Input()
+  String actionButtonLabel;
+
+  @Input()
   bool disabled = false;
 
   @Input()
@@ -33,6 +39,7 @@ class FoDropdownSelectComponent implements OnInit, OnDestroy {
 
   final StreamController<Object> _selectedIdController =
       StreamController<Object>();
+  final StreamController<FoButtonEvent> actionButtonController = StreamController<FoButtonEvent>();
   final dom.Element _host;
   bool dropdownVisible = false;
   FoDropdownOption selectedOption;
@@ -63,8 +70,13 @@ class FoDropdownSelectComponent implements OnInit, OnDestroy {
   @Output('selectedIdChange')
   Stream<Object> get selectedIdChange => _selectedIdController.stream;
 
+  @Output('actionButtonTrigger')
+  Stream<FoButtonEvent> get actionButtonTrigger =>
+      actionButtonController.stream;
+
   @override
   void ngOnDestroy() {
+    actionButtonController.close();
     _selectedIdController.close();
   }
 
@@ -84,6 +96,6 @@ class FoDropdownSelectComponent implements OnInit, OnDestroy {
   @override
   void ngOnInit() {
     // This will select first option with id == null if it exists
-    selectedId = selectedOption?.id;
+    selectedId = selectedOption?.id;    
   }
 }

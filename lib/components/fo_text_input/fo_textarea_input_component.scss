@@ -6,6 +6,7 @@
   position: relative;
   
   textarea {    
+    background-color: white;
     resize: none;    
     border-radius: $borderRadius;
     @include inputStyle;

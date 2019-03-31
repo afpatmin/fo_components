@@ -1,8 +1,8 @@
 @import 'package:grid_css/constants';
 @import '../../mixins.scss';
 
-:host {
-  div#label {
+:host {  
+  div#label {    
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
