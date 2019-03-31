@@ -30,7 +30,8 @@ import '../../pipes/capitalize_pipe.dart';
     ],
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-@Deprecated('This component will eventually be replaced by an extension of FoDropdownSelect')
+@Deprecated(
+    'This component will eventually be replaced by an extension of FoDropdownSelect')
 class FoMultiSelectComponent implements AfterChanges, OnDestroy {
   final String msgSearch = Intl.message('search', name: 'search');
 

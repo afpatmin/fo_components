@@ -2,7 +2,7 @@
 class FoModel {
   FoModel();
 
-  Map<String, dynamic> toJson() => {'id':id.toString()};
+  Map<String, dynamic> toJson() => {'id': id.toString()};
 
   @override
   String toString() => id.toString();

@@ -26,7 +26,8 @@ import 'package:angular_forms/angular_forms.dart';
     ],
     pipes: [],
     changeDetection: ChangeDetectionStrategy.OnPush)
-@Deprecated('This component will eventually be replaced by an extension of FoTextInputComponent')
+@Deprecated(
+    'This component will eventually be replaced by an extension of FoTextInputComponent')
 class FoMultiInputComponent implements OnDestroy, ControlValueAccessor<String> {
   ChangeFunction<String> _onChange;
 
