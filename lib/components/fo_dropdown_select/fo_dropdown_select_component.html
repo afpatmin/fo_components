@@ -15,7 +15,6 @@
   <fo-button *ngIf="actionButtonLabel != null"
              [label]="actionButtonLabel"
              noLeftBorder
-             dense
              clearSize
              [disabled]="disabled || selectedOption == null"
              (trigger)="actionButtonController.add($event)"></fo-button>

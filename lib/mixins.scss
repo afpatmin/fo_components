@@ -48,7 +48,7 @@ $transitionSpeed: 0.3s ease;
   ::ng-deep fo-button>button:disabled {
     background-color: lighten($grayColorBright, 10%) !important;
     border-color: $grayColorBright !important;
-    color: $grayColorBright !important;
+    color: $grayColor !important;
   }
 
   ::ng-deep fo-dropdown-option:hover {

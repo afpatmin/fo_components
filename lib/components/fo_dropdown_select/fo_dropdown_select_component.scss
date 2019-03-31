@@ -9,10 +9,12 @@
   div#flexAligner {
     display: flex;
     align-items: flex-end;
+
     fo-label {
       flex: auto;
     }
-    div#selector {      
+
+    div#selector {
       background-color: white;
       transition: box-shadow $transitionSpeed;
       display: flex;
@@ -56,6 +58,7 @@
       div#selectedValue {
         text-align: center;
       }
+
       div#selectedValue::before {
         content: '';
         display: inline-block;
@@ -91,7 +94,11 @@
     div#selector {
       div#selectedValue {
         line-height: 100%;
-      }
+      }      
+    }
+    ::ng-deep fo-button>button {
+      padding: $small $large;
+      line-height: 100%;
     }
   }
 }
