@@ -5,9 +5,8 @@ import 'dart:async';
 import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_components/laminate/components/modal/modal.dart';
-import 'package:angular_components/material_button/material_button.dart';
 import 'package:angular_components/material_dialog/material_dialog.dart';
-import 'package:angular_components/material_icon/material_icon.dart';
+import 'package:fo_components/components/fo_button/fo_button_component.dart';
 
 @Component(
     selector: 'fo-modal',
@@ -15,9 +14,8 @@ import 'package:angular_components/material_icon/material_icon.dart';
     templateUrl: 'fo_modal_component.html',
     directives: [
       coreDirectives,
-      MaterialButtonComponent,
+      FoButtonComponent,
       MaterialDialogComponent,
-      MaterialIconComponent,
       ModalComponent,
     ],
     pipes: [],

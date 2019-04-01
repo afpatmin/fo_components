@@ -13,11 +13,12 @@
         <h3 *ngIf="titleImageUrl == null && title != null">{{title}}</h3>
         <div *ngIf="showCloseButton"
              id="closeButtonContainer">
-          <material-button clear-size
-                           (trigger)="close()">
-            <material-icon icon="close"
-                           size="x-large"></material-icon>
-          </material-button>
+          <fo-button clearSize                     
+                     dense
+                     white
+                     icon="close"
+                     (trigger)="close()">
+          </fo-button>
         </div>
       </div>
     </div>

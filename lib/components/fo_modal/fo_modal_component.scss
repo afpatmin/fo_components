@@ -1,4 +1,5 @@
 @import 'package:angular_components/material_dialog/mixins';
+@import 'package:fo_components/components/fo_button/mixins';
 @import 'package:grid_css/constants';
 @import 'package:fo_components/mixins';
 
@@ -16,23 +17,29 @@ material-dialog {
   margin-right: 5vw;
   max-height: 95vh;
   text-align: left;
+
   [header] {
     div.flexContainer {
       display: flex;
+
       img {
         max-width: 90%;
         max-height: 100px;
         margin: 1rem auto;
         align-self: flex-start;
       }
+
       h3 {
         align-self: center;
         margin-bottom: 0;
         color: #333;
       }
-      material-button {
-        color: #333;
+
+      div#closeButtonContainer {
+
+        @include fo-button-font-size(0.7rem);
       }
+
       div#closeButtonContainer {
         flex: auto;
         align-self: flex-start;
@@ -41,6 +48,7 @@ material-dialog {
       }
     }
   }
+
   ::ng-deep main {
     -webkit-overflow-scrolling: touch; // Smooth scrolling on tablets/phones        
   }
