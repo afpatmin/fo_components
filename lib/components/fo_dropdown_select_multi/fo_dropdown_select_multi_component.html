@@ -2,7 +2,7 @@
                     [options]="filteredOptions"
                     [disabled]="disabled"
                     [actionButtonLabel]="msgAdd | capitalize"
-                    (actionButtonTrigger)="onAddSelected()"
+                    (actionButtonTrigger)="onAdd(selectedId)"
                     [(selectedId)]="selectedId"></fo-dropdown-select>
 <div id="selectedOptions">
   <ul>

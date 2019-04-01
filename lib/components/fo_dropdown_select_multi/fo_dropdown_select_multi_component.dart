@@ -10,13 +10,14 @@ import '../fo_dropdown_select/fo_dropdown_select_component.dart';
 @Component(
     selector: 'fo-dropdown-select-multi',
     templateUrl: 'fo_dropdown_select_multi_component.html',
+    styleUrls: ['fo_dropdown_select_multi_component.css'],
     directives: [FoDropdownSelectComponent, NgFor],
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDropdownSelectMultiComponent implements OnInit, OnDestroy {
   final String msgAdd = Intl.message('add', name: 'add');
-  final StreamController<List<String>> selectionChangeController =
-      StreamController<List<String>>();
+  final StreamController<List<Object>> selectionChangeController =
+      StreamController<List<Object>>();
 
   @Input()
   String label;
@@ -35,7 +36,7 @@ class FoDropdownSelectMultiComponent implements OnInit, OnDestroy {
   Object selectedId;
   List<FoDropdownOption> addedOptions = [];
   @Output('selectedIdsChange')
-  Stream<List<String>> get selectedIdsChange =>
+  Stream<List<Object>> get selectedIdsChange =>
       selectionChangeController.stream;
 
   @override
@@ -45,13 +46,14 @@ class FoDropdownSelectMultiComponent implements OnInit, OnDestroy {
 
   @override
   void ngOnInit() {
-    filteredOptions = Map.from(allOptions);
+    _updateFilteredOptions();
+    selectedIds?.forEach(onAdd);
   }
 
-  void onAddSelected() {
+  void onAdd(Object id) {
     for (final category in allOptions.keys) {
       final match = allOptions[category]
-          .firstWhere((option) => option.id == selectedId, orElse: () => null);
+          .firstWhere((option) => option.id == id, orElse: () => null);
       if (match != null) {
         addedOptions.add(match);
         _updateFilteredOptions();
@@ -79,7 +81,6 @@ class FoDropdownSelectMultiComponent implements OnInit, OnDestroy {
           .removeWhere((option) => addedOptionIds.contains(option.id));
     }
 
-    selectionChangeController
-        .add(addedOptionIds.toList(growable: false).cast<String>());
+    selectionChangeController.add(addedOptionIds.toList(growable: false));
   }
 }
