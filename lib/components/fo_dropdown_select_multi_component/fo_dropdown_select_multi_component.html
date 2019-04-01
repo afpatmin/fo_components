@@ -1,0 +1,12 @@
+<fo-dropdown-select [label]="label"
+                    [options]="filteredOptions"
+                    [disabled]="disabled"
+                    [actionButtonLabel]="msgAdd | capitalize"
+                    (actionButtonTrigger)="onAddSelected()"
+                    [(selectedId)]="selectedId"></fo-dropdown-select>
+<div id="selectedOptions">
+  <ul>
+    <li *ngFor="let option of addedOptions"
+        (click)="onRemove(option.id)"> {{option.label}} </li>
+  </ul>
+</div>
