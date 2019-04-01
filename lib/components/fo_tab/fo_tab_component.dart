@@ -25,10 +25,10 @@ class FoTabComponent {
   String icon;
 
   @Input()
-  String labelColor = '#333';
+  String labelColor;
 
   @Input()
-  String backgroundColor = '#888';
+  String backgroundColor;
 
   final dom.Element _host;
 }

@@ -55,6 +55,15 @@ $transitionSpeed: 0.3s ease;
     background-color: $primaryColor;
   }
 
+  ::ng-deep fo-tab-panel {
+    div#tabStrip {
+      div.tabButton {
+        color: darken($grayColor, $lightstep);
+        background-color: $primaryColor;
+      }
+    }
+  }
+
   ::ng-deep input::placeholder,
   ::ng-deep textarea::placeholder {
     color: $grayColorBright;
