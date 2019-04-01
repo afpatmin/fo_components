@@ -24,7 +24,7 @@ import '../fo_label/fo_label_component.dart';
       NgClass,
       NgIf
     ])
-class FoDropdownSelectComponent implements OnInit, OnDestroy {
+class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   String label;
 
@@ -82,7 +82,7 @@ class FoDropdownSelectComponent implements OnInit, OnDestroy {
   }
 
   void onClick(dom.Event e) {
-    if (disabled != true) {
+    if (disabled != true && options.values.where((os) => os?.isNotEmpty == true).isNotEmpty) {
       dropdownVisible = !dropdownVisible;
     }
     e.stopPropagation();
@@ -98,5 +98,12 @@ class FoDropdownSelectComponent implements OnInit, OnDestroy {
   void ngOnInit() {
     // This will select first option with id == null if it exists
     selectedId = selectedOption?.id;
+  }
+
+  @override
+  void ngOnChanges(Map<String, SimpleChange> changes) {
+    if (changes.containsKey('options')) {
+      selectedOption = null;
+    }
   }
 }
