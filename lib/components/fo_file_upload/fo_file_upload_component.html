@@ -9,29 +9,32 @@
          [accept]="accept" />
   <p *ngIf="!valid"
      class="margin-top-small margin-bottom-small">
-    <material-button raised
-                     (trigger)="input.click()">
-      <material-icon icon="folder_open"></material-icon>
-    </material-button>
+    <fo-button (trigger)="input.click()"
+               dense
+               white
+               [disabled]="disabled"
+               icon="folder_open">
+    </fo-button>
   </p>
   <p *ngIf="valid"
      class="margin-top-small margin-bottom-small">
-    <material-button raised
-                     [disabled]="disabled || !valid"
-                     (trigger)="upload()">
-      <material-icon icon="file_upload"></material-icon>
-    </material-button>
+    <fo-button dense
+               white
+               [disabled]="disabled || !valid"
+               (trigger)="upload()"
+               icon="file_upload">
+    </fo-button>
   </p>
   <p>
     <span *ngIf="file == null">...</span>
-    <span *ngIf="file != null">{{file.name}} ({{(file.size / 1024).round()}}kb)</span>
-    <material-icon *ngIf="file != null"
-                   icon="cancel"
-                   size="small"
-                   class="color-alert clickable"
-                   (click)="clearSelection()"></material-icon>
+    <ng-container *ngIf="file != null"> {{file.name}} ({{(file.size / 1024).ceil()}}kb) <material-icon icon="cancel"
+                     size="medium"
+                     baseline
+                     class="color-alert"
+                     (click)="clearSelection()"></material-icon>
+    </ng-container>
   </p>
   <p class="color-alert"
-     *ngIf="file != null && file.size > maxByteSize"> {{msgMaxFilesizeExceeded}}
-    ({{((maxByteSize/1024)/1024).ceil()}}mb) </p>
+     *ngIf="file != null && file.size > maxByteSize"> {{msgMaxFilesizeExceeded | capitalize}}
+    ({{(maxByteSize/1024).ceil()}}kb) </p>
 </div>

@@ -14,51 +14,66 @@
     outline: none;
     margin: 0;
   }
+
+  input::selection {    
+    color: white;
+  }
+
   input,
   input:focus {
     font-size: 1rem;
-  }  
+  }
+
   div#flexContainer {
     display: flex;
-    align-items: center;    
+    align-items: center;
     transition: box-shadow $transitionSpeed;
     border-radius: $borderRadius;
+
     material-icon {
       box-shadow: none;
       -webkit-box-shadow: none;
     }
+
     material-icon.clear {
       width: 0;
       z-index: 2;
       transform: translateX(-$large);
       cursor: pointer;
     }
+
     material-icon.leading {
       width: 0;
       z-index: 2;
       transform: translateX($medium);
     }
+
     input {
       @include inputStyle;
       border-left-width: 0;
       border-right-width: 0;
     }
+
     input.leftPadding {
       padding-left: $x-large;
     }
+
     input.leftBorder {
       border-top-left-radius: $borderRadius;
       border-bottom-left-radius: $borderRadius;
       border-left-width: 1px;
     }
+
     input.rightPadding {
       padding-right: $x-large;
     }
+
     input.rightBorder {
       border-top-right-radius: $borderRadius;
       border-bottom-right-radius: $borderRadius;
       border-right-width: 1px;
     }
+
     ::ng-deep fo-button {
       button.themeable {
         padding-left: $large;
@@ -66,17 +81,19 @@
       }
     }
   }
+
   div#flexContainer:focus-within {
     @include boxShadow();
   }
+
   @include fo-button-font-size(1rem);
 }
 
 :host[dense] {
   fo-label {
     div#flexContainer {
-      input {    
-        line-height: 100%;    
+      input {
+        line-height: 100%;
       }
     }
   }

@@ -3,6 +3,8 @@ $transitionSpeed: 0.3s ease;
 @import 'package:angular_components/material_checkbox/mixins';
 @import 'package:angular_components/material_radio/mixins';
 
+@import 'components/fo_file_upload/mixins';
+
 @mixin foregroundColor($color) {
   color: $color;
   border-color: $color;
@@ -25,6 +27,10 @@ $transitionSpeed: 0.3s ease;
 
   @include material-checkbox-color($primaryColor);
   @include material-radio-color($primaryColor);
+
+  @include fo-file-upload-border-color($grayColor);
+
+  
 
   material-spinner {
     border-color: $primaryColor;
@@ -67,6 +73,11 @@ $transitionSpeed: 0.3s ease;
   ::ng-deep input::placeholder,
   ::ng-deep textarea::placeholder {
     color: $grayColorBright;
+  }
+
+  ::ng-deep input::selection,
+  ::ng-deep textarea::selection {
+    background-color: $grayColor;
   }
 
   ::ng-deep input:disabled,

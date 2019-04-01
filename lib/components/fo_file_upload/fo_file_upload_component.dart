@@ -5,22 +5,22 @@ import 'dart:async';
 import 'dart:html' as dom;
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_button/material_button.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
 import 'package:intl/intl.dart';
+
+import '../../pipes/capitalize_pipe.dart';
+import '../fo_button/fo_button_component.dart';
 
 @Component(
     selector: 'fo-file-upload',
     templateUrl: 'fo_file_upload_component.html',
     styleUrls: ['fo_file_upload_component.css'],
-    directives: [NgIf, MaterialButtonComponent, MaterialIconComponent],
-    pipes: [],
+    directives: [NgIf, FoButtonComponent, MaterialIconComponent],
+    pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FileUploadComponent implements OnDestroy {
   final StreamController<dom.File> onUploadController = StreamController();
-
   dom.FileUploadInputElement _fileInput;
-
   dom.File file;
 
   final String msgMaxFilesizeExceeded =
@@ -37,7 +37,9 @@ class FileUploadComponent implements OnDestroy {
 
   @Input()
   int maxByteSize = 1048576;
+
   FileUploadComponent();
+
   @Output('upload')
   Stream<dom.File> get onUploadOutput => onUploadController.stream;
   bool get valid => file != null && file.size <= maxByteSize;
@@ -54,13 +56,15 @@ class FileUploadComponent implements OnDestroy {
 
   void onDrop(dom.MouseEvent event) {
     event.preventDefault();
-    final dt = event.dataTransfer;
-    file = (dt.files.isEmpty) ? null : file = dt.files.last;
+    if (disabled != true) {
+      final dt = event.dataTransfer;
+      file = (dt.files.isEmpty) ? null : file = dt.files.last;
+    }
   }
 
   void onFileChange(dom.Event event) {
     _fileInput = event.target;
-    file = (_fileInput.files.isNotEmpty) ? _fileInput.files.last : null;
+    file = (_fileInput.files.isNotEmpty) ? _fileInput.files.last : null;    
   }
 
   void upload() {

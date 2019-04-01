@@ -1,6 +1,11 @@
 ## 0.2.2
 ### General
-* Added documentation for FoTabPanel
+* Added documentation for FoFileUpload, FoTabPanel
+* Added dense attribute example for FoTextInput
+
+### Component updates
+* FoTabPanel now colored according to theme primary color
+* FoFileUpload now uses in-house buttons
 
 ## 0.2.1
 ### General
