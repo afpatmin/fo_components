@@ -2,29 +2,20 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
+
 import 'package:angular/angular.dart';
-import '../../models/fo_model.dart';
-import '../fo_multi_select/fo_multi_select_component.dart';
+
+import '../fo_dropdown_list/fo_dropdown_option.dart';
+import '../fo_dropdown_select_multi/fo_dropdown_select_multi_component.dart';
 
 @Component(
     selector: 'fo-image-map',
     styleUrls: ['fo_image_map_component.css'],
     templateUrl: 'fo_image_map_component.html',
-    directives: [NgFor, NgIf, FoMultiSelectComponent],
+    directives: [NgFor, NgIf, FoDropdownSelectMultiComponent],
     pipes: [],
     changeDetection: ChangeDetectionStrategy.Default)
 class FoImageMapComponent implements OnDestroy {
-  FoImageMapComponent();
-
-  @override
-  void ngOnDestroy() {
-    _onSelectedIdsChangeController.close();
-  }
-
-  void onSelectionChange(List<String> selectedIds) {
-    _onSelectedIdsChangeController.add(selectedIds);
-  }
-
   final StreamController<List<String>> _onSelectedIdsChangeController =
       StreamController();
 
@@ -32,24 +23,104 @@ class FoImageMapComponent implements OnDestroy {
   String label = 'select';
 
   @Input()
-  Iterable<FoZoneModel> zones = [];
+  Map<String, List<FoZoneModel>> zones = {};
 
+  /// A valid image url
   @Input()
   String src = '';
 
   @Input()
-  List<String> selectedIds = [];
+  List<Object> selectedIds = [];
 
   @Input()
   bool showSelector = true;
 
+  FoImageMapComponent();
+
   @Output('selectedIdsChange')
   Stream<List<String>> get onSelectedIdsChangeOutput =>
       _onSelectedIdsChangeController.stream;
+
+  @override
+  void ngOnDestroy() {
+    _onSelectedIdsChangeController.close();
+  }
+
+  void onSelectionChange(List<Object> ids) {
+    selectedIds = ids.cast<String>();    
+    _onSelectedIdsChangeController.add(selectedIds);   
+    
+  }
 }
 
-class FoZoneModel extends FoModel {
-  FoZoneModel(List<FoShape> shapes, String id, this.label) {
+abstract class FoShape {
+  final int _x;
+  final int _y;
+
+  /// Can be either rectangle, polygon or ellipse
+  final String type;
+
+  final bool roundedCorners;
+
+  /// CSS transform
+  final String transform;
+
+  FoShape(this._x, this._y, this.type, this.roundedCorners, this.transform);
+  String get x => '$_x';
+  String get y => '$_y';
+}
+
+class FoShapeEllipse extends FoShape {
+  final int _rx;
+
+  final int _ry;
+  FoShapeEllipse(int x, int y, this._rx, this._ry)
+      : super(x, y, 'ellipse', false, '');
+
+  String get rx => '$_rx';
+  String get ry => '$_ry';
+}
+
+class FoShapePoint {
+  final int x;
+
+  final int y;
+
+  FoShapePoint(this.x, this.y);
+  @override
+  String toString() => '$x,$y';
+}
+
+class FoShapePolygon extends FoShape {
+  final List<FoShapePoint> _points;
+
+  FoShapePolygon(this._points,
+      {bool roundedCorners = true, String transform = ''})
+      : super(null, null, 'polygon', roundedCorners, transform);
+
+  String get points => _points.map((point) => point.toString()).join(' ');
+}
+
+class FoShapeRectangle extends FoShape {
+  final int _width;
+
+  final int _height;
+  FoShapeRectangle(int x, int y, this._width, this._height,
+      {bool roundedCorners = true, String transform = ''})
+      : super(x, y, 'rectangle', roundedCorners, transform);
+
+  String get height => '$_height';
+  String get width => '$_width';
+}
+class FoZoneModel extends FoDropdownOption {
+  final List<FoShapeEllipse> ellipses = [];
+
+  final List<FoShapeRectangle> rectangles = [];
+
+  final List<FoShapePolygon> polygons = [];
+
+  FoZoneModel(List<FoShape> shapes, String id, String label) {
+    super.label = label;
     for (final shp in shapes) {
       switch (shp.type) {
         case 'ellipse':
@@ -72,72 +143,8 @@ class FoZoneModel extends FoModel {
     super.id = id;
   }
 
-  @override
   Map<String, dynamic> toJson() => {'id': id, 'label': label};
 
   @override
   String toString() => label;
-
-  final String label;
-
-  final List<FoShapeEllipse> ellipses = [];
-  final List<FoShapeRectangle> rectangles = [];
-  final List<FoShapePolygon> polygons = [];
-}
-
-abstract class FoShape {
-  FoShape(this._x, this._y, this.type, this.roundedCorners, this.transform);
-
-  String get x => '$_x';
-  String get y => '$_y';
-
-  final int _x;
-  final int _y;
-
-  final String type;
-  final bool roundedCorners;
-  final String transform;
-}
-
-class FoShapeEllipse extends FoShape {
-  FoShapeEllipse(int x, int y, this._rx, this._ry)
-      : super(x, y, 'ellipse', false, '');
-
-  String get rx => '$_rx';
-  String get ry => '$_ry';
-
-  final int _rx;
-  final int _ry;
-}
-
-class FoShapePolygon extends FoShape {
-  FoShapePolygon(this._points,
-      {bool roundedCorners = true, String transform = ''})
-      : super(null, null, 'polygon', roundedCorners, transform);
-
-  String get points => _points.map((point) => point.toString()).join(' ');
-
-  final List<FoShapePoint> _points;
-}
-
-class FoShapePoint {
-  FoShapePoint(this.x, this.y);
-
-  @override
-  String toString() => '$x,$y';
-
-  final int x;
-  final int y;
-}
-
-class FoShapeRectangle extends FoShape {
-  FoShapeRectangle(int x, int y, this._width, this._height,
-      {bool roundedCorners = true, String transform = ''})
-      : super(x, y, 'rectangle', roundedCorners, transform);
-
-  String get width => '$_width';
-  String get height => '$_height';
-
-  final int _width;
-  final int _height;
 }

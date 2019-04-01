@@ -4,6 +4,9 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  img {
+    width: 100%;
+  }
   svg {
     position: absolute;
     top: 0;
