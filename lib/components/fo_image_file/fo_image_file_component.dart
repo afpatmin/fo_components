@@ -7,8 +7,7 @@ import 'dart:html' as dom;
 import 'dart:typed_data';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_button/material_button.dart';
-import 'package:angular_components/material_icon/material_icon.dart';
+import 'package:fo_components/components/fo_button/fo_button_component.dart';
 import 'package:intl/intl.dart';
 
 @Component(
@@ -17,8 +16,7 @@ import 'package:intl/intl.dart';
     styleUrls: ['fo_image_file_component.css'],
     directives: [
       coreDirectives,
-      MaterialIconComponent,
-      MaterialButtonComponent
+      FoButtonComponent
     ],
     pipes: [],
     changeDetection: ChangeDetectionStrategy.OnPush)
@@ -29,6 +27,7 @@ class FoImageFileComponent implements OnDestroy {
   @Input()
   String accept = 'image/jpg,image/jpeg,image/png,image/gif';
 
+  /// Image source. Can be either a base64 encoded string, or an url
   @Input()
   String source = '';
 
@@ -41,12 +40,15 @@ class FoImageFileComponent implements OnDestroy {
   @Input()
   bool disabled = false;
 
+  /// Maximum width in pixels of the output image
   @Input()
   int maxWidth = 1024;
 
+  /// Maximum width in pixels of the output image
   @Input()
   int maxHeight = 1024;
 
+  /// Maximum bytesize in pixels of the output image
   @Input()
   int maxByteSize = 1024000;
 
@@ -54,23 +56,14 @@ class FoImageFileComponent implements OnDestroy {
   int brightness = 100;
 
   String _base64Data = '';
-
   bool invalidFile = false;
-
   int _byteSize;
-
   int _orientation = 0;
-
   final dom.FileReader _metaReader = dom.FileReader();
-
   final dom.FileReader _reader = dom.FileReader();
-
   final ChangeDetectorRef _changeDetectorRef;
-
   final StreamController<String> _onSourceChangeController = StreamController();
-
   dom.FileUploadInputElement _fileInput;
-
   dom.File _file;
 
   FoImageFileComponent(this._changeDetectorRef) {
@@ -79,6 +72,7 @@ class FoImageFileComponent implements OnDestroy {
   }
 
   String get brightnessFilter => 'brightness($brightness%)';
+
   @Output('sourceChange')
   Stream<String> get onSourceChange => _onSourceChangeController.stream;
   void clearSource() {

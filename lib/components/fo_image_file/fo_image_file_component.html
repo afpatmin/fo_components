@@ -9,24 +9,23 @@
          [src]="source"
          alt="{{alt}}"
          [style.filter]="brightnessFilter" />
-    <material-button class="delete color-alert"
-                     clear-size
-                     raised
-                     [disabled]="disabled"
-                     (trigger)="fileInput.value = null; clearSource()">
-      <material-icon icon="delete"
-                     size="x-large"></material-icon>
-    </material-button>
+    <fo-button class="delete color-alert"
+               clearSize
+               white
+               dense
+               [disabled]="disabled"
+               (trigger)="fileInput.value = null; clearSource()"
+               icon="delete">
+    </fo-button>
   </div>
-  <material-button class="add"
-                   clear-size
-                   raised
-                   *ngIf="source == null || source.isEmpty"
-                   [disabled]="disabled"
-                   (trigger)="fileInput.click()">
-    <material-icon icon="add_a_photo"
-                   size="x-large"></material-icon>
-  </material-button>
+  <fo-button class="add"             
+             white
+             dense
+             *ngIf="source == null || source.isEmpty"
+             [disabled]="disabled"
+             (trigger)="fileInput.click()"
+             icon="add_a_photo">
+  </fo-button>
   <input type="file"
          #fileInput
          (change)="onFileChange($event)"

@@ -1,31 +1,37 @@
 @import '../../mixins.scss';
 
-:host {    
-    div.container {
-        border: 1px dashed #ccc;
-        padding: 0.5rem;
-        text-align: center;
-        div.image {
-            @include boxShadow();        
-            position: relative;
-            img {
-                width: 100%;
-                height: auto;
-                margin: 0 auto;
-            }
-            material-button.delete {
-                position: absolute;
-                top: 0.25em;
-                right: 0.25em;                        
-            }
-        }
-        input[type=file] {
-            display: none !important;
-        }
-        p.error-output {
-            color: white;
-            padding: 0.5rem;
-            margin: 0.5rem 0 0 0;
-        }
+:host {
+  div.container {
+    border-width: 1px;
+    border-style: dashed;
+    padding: 0.5rem;
+    text-align: center;
+
+    div.image {
+      @include boxShadow();
+      position: relative;
+
+      img {
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+      }
+
+      fo-button.delete {
+        position: absolute;
+        top: 0.25em;
+        right: 0.25em;
+      }
     }
+
+    input[type=file] {
+      display: none !important;
+    }
+
+    p.error-output {
+      color: white;
+      padding: 0.5rem;
+      margin: 0.5rem 0 0 0;
+    }
+  }
 }

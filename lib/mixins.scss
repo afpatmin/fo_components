@@ -4,6 +4,7 @@ $transitionSpeed: 0.3s ease;
 @import 'package:angular_components/material_radio/mixins';
 
 @import 'components/fo_file_upload/mixins';
+@import 'components/fo_image_file/mixins';
 
 @mixin foregroundColor($color) {
   color: $color;
@@ -29,8 +30,7 @@ $transitionSpeed: 0.3s ease;
   @include material-radio-color($primaryColor);
 
   @include fo-file-upload-border-color($grayColor);
-
-  
+  @include fo-image-file-border-color($grayColor);
 
   material-spinner {
     border-color: $primaryColor;

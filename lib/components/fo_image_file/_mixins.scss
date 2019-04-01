@@ -1,0 +1,7 @@
+@mixin fo-image-file-border-color($color) {
+  ::ng-deep fo-image-file {
+    div.container {
+      border-color: $color;
+    }
+  }
+}
