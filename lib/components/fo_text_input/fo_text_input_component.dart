@@ -28,8 +28,7 @@ import 'fo_error_output_component.dart';
     ],
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoTextInputComponent
-    implements ControlValueAccessor<String>, OnInit, OnDestroy {
+class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   @Input()
   String actionButtonLabel;
 
@@ -55,7 +54,8 @@ class FoTextInputComponent
   ChangeFunction<String> _onChange;
   NgControl control;
   final ChangeDetectorRef _changeDetectorRef;
-  StreamController actionButtonController;
+  final StreamController<FoButtonEvent> actionButtonController =
+      StreamController<FoButtonEvent>();
   final StreamController<html.Event> changeController =
       StreamController<html.Event>();
   final StreamController<FoDropdownOption> _selectionChangeController =
@@ -110,7 +110,7 @@ class FoTextInputComponent
 
   @Output('actionButtonTrigger')
   Stream<FoButtonEvent> get actionButtonTrigger =>
-      actionButtonController?.stream;
+      actionButtonController.stream;
 
   @Output('focus')
   Stream<html.FocusEvent> get focus => _focusController.stream;
@@ -176,12 +176,5 @@ class FoTextInputComponent
     changeController.close();
     _selectionChangeController.close();
     _focusController.close();
-  }
-
-  @override
-  void ngOnInit() {
-    if (actionButtonLabel != null) {
-      actionButtonController = StreamController<FoButtonEvent>();
-    }
   }
 }
