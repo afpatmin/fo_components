@@ -1,3 +1,7 @@
+## 0.2.2
+### General
+* Added documentation for FoTabPanel
+
 ## 0.2.1
 ### General
 * Added example/ to .gitignore
