@@ -64,7 +64,7 @@ class FileUploadComponent implements OnDestroy {
 
   void onFileChange(dom.Event event) {
     _fileInput = event.target;
-    file = (_fileInput.files.isNotEmpty) ? _fileInput.files.last : null;    
+    file = (_fileInput.files.isNotEmpty) ? _fileInput.files.last : null;
   }
 
   void upload() {

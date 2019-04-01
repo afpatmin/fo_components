@@ -47,9 +47,8 @@ class FoImageMapComponent implements OnDestroy {
   }
 
   void onSelectionChange(List<Object> ids) {
-    selectedIds = ids.cast<String>();    
-    _onSelectedIdsChangeController.add(selectedIds);   
-    
+    selectedIds = ids.cast<String>();
+    _onSelectedIdsChangeController.add(selectedIds);
   }
 }
 
@@ -112,6 +111,7 @@ class FoShapeRectangle extends FoShape {
   String get height => '$_height';
   String get width => '$_width';
 }
+
 class FoZoneModel extends FoDropdownOption {
   final List<FoShapeEllipse> ellipses = [];
 

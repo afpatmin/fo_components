@@ -14,10 +14,7 @@ import 'package:intl/intl.dart';
     selector: 'fo-image-file',
     templateUrl: 'fo_image_file_component.html',
     styleUrls: ['fo_image_file_component.css'],
-    directives: [
-      coreDirectives,
-      FoButtonComponent
-    ],
+    directives: [coreDirectives, FoButtonComponent],
     pipes: [],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoImageFileComponent implements OnDestroy {

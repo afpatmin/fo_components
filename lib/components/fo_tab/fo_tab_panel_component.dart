@@ -19,7 +19,7 @@ class FoTabPanelComponent implements AfterChanges, OnDestroy {
 
   @Input()
   List<String> hideIconsOn = [];
-  
+
   @Input()
   List<String> hideLabelsOn = [];
 
