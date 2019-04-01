@@ -1,11 +1,15 @@
 ## 0.2.2
 ### General
-* Added documentation for FoFileUpload, FoTabPanel
+* Added documentation for FoFileUpload, FoIcon, FoImageFile, FoImageMap, FoTabPanel
+* Added documentation for FoModal, FoNotification, FoNumberInput, FoPanel, FoQUiz, FoRating
 * Added dense attribute example for FoTextInput
+
+### New Components
+* FoDropdownSelectMultiComponent
 
 ### Component updates
 * FoTabPanel now colored according to theme primary color
-* FoFileUpload now uses in-house buttons
+* FoFileUpload, FoImageFile, FoImageMap, FoModal now uses in-house buttons
 
 ## 0.2.1
 ### General
