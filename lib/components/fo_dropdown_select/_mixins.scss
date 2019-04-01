@@ -1,4 +1,5 @@
 @import 'package:angular_components/material_icon/mixins';
+@import '../fo_button/mixins';
 @import '../fo_dropdown_list/mixins';
 @import '../fo_label/mixins';
 
@@ -11,5 +12,6 @@
       @include material-icon-size($size !important);
     }
   }
+  @include fo-button-font-size($size);
   @include dropdown-list-font-size($size);
 }
