@@ -1,0 +1,35 @@
+@import '../fo_dropdown_select/mixins';
+
+@mixin fo-dropdown-select-multi-font-size($size) {
+  @include fo-dropdown-select-font-size($size);
+
+  ::ng-deep fo-dropdown-select-multi {
+    div#selectedOptions {
+      ul {
+        li {
+          font-size: $size;
+        }
+      }
+    }
+  }
+}
+
+@mixin fo-dropdown-select-multi-option-background-color($color) {
+  ::ng-deep fo-dropdown-select-multi {
+    div#selectedOptions {
+      ul {
+        li {
+          background-color: $color;
+        }
+      }
+    }
+  }
+}
+
+@mixin fo-dropdown-select-multi-options-border-color($color) {
+  ::ng-deep fo-dropdown-select-multi {
+    div#selectedOptions {
+      border-color: $color;      
+    }
+  }
+}
