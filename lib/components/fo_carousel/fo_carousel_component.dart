@@ -38,6 +38,9 @@ class FoCarouselComponent implements OnDestroy, OnInit {
   bool showArrowButtons = true;
 
   @Input()
+  bool disabled = false;
+
+  @Input()
   int duration;
   @ContentChildren(FoCarouselSlideComponent)
   List<FoCarouselSlideComponent> slides = [];
@@ -76,15 +79,17 @@ class FoCarouselComponent implements OnDestroy, OnInit {
   }
 
   void stepBy(int steps) {
-    step += steps;
-    if (step >= slides.length || step < 0) {
-      step = 0;
+    if (disabled != true) {
+      step += steps;
+      if (step >= slides.length || step < 0) {
+        step = 0;
+      }
+      _onStepController.add(step);
+      timer?.cancel();
+      if (duration != null) {
+        timer = Timer(Duration(milliseconds: duration), () => stepBy(1));
+      }
+      _changeDetectorRef.markForCheck();
     }
-    _onStepController.add(step);
-    timer?.cancel();
-    if (duration != null) {
-      timer = Timer(Duration(milliseconds: duration), () => stepBy(1));
-    }
-    _changeDetectorRef.markForCheck();
   }
 }
