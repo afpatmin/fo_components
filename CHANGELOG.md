@@ -1,4 +1,10 @@
+## 0.2.2+1
+
+### Bugfixes
+* Fixed an issue where grid_css wasn't imported properly in some cases
+
 ## 0.2.2
+
 ### General
 * Added documentation for FoFileUpload, FoIcon, FoImageFile, FoImageMap, FoTabPanel FoModal, FoNotification, FoNumberInput, FoPanel, FoQUiz, and FoRating
 * Added dense attribute example for FoTextInput
