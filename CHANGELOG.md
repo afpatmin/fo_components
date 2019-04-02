@@ -1,7 +1,12 @@
 ## 0.2.2+1
 
+### General
+* Added a docs start page
+* Improved docs layout
+
 ### Bugfixes
 * Fixed an issue where grid_css wasn't imported properly in some cases
+* FoImageMapZone zone origins are now properly reset after draws
 
 ## 0.2.2
 

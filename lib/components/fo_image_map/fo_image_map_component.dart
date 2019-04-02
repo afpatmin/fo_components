@@ -2,6 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
+import 'dart:html' as html;
 
 import 'package:angular/angular.dart';
 
@@ -12,10 +13,8 @@ import '../fo_dropdown_select_multi/fo_dropdown_select_multi_component.dart';
     selector: 'fo-image-map',
     styleUrls: ['fo_image_map_component.css'],
     templateUrl: 'fo_image_map_component.html',
-    directives: [NgFor, NgIf, FoDropdownSelectMultiComponent],
-    pipes: [],
-    changeDetection: ChangeDetectionStrategy.Default)
-class FoImageMapComponent implements OnDestroy {
+    directives: [NgFor, NgIf, FoDropdownSelectMultiComponent])
+class FoImageMapComponent implements AfterViewInit, OnDestroy {
   final StreamController<List<String>> _onSelectedIdsChangeController =
       StreamController();
 
@@ -38,6 +37,11 @@ class FoImageMapComponent implements OnDestroy {
   @Input()
   bool showSelector = true;
 
+  @ViewChild('image')
+  html.ImageElement image;
+
+  String viewBox;
+
   FoImageMapComponent();
 
   @Output('selectedIdsChange')
@@ -52,6 +56,14 @@ class FoImageMapComponent implements OnDestroy {
   void onSelectionChange(List<Object> ids) {
     selectedIds = ids.cast<String>();
     _onSelectedIdsChangeController.add(selectedIds);
+  }
+
+  @override
+  void ngAfterViewInit() {
+    image.onLoad.listen((_) {
+      final rect = image.getBoundingClientRect();
+      viewBox = '0 0 ${rect.width} ${rect.height}';
+    });
   }
 }
 
