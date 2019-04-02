@@ -1,15 +1,20 @@
 ## 0.2.2
 ### General
-* Added documentation for FoFileUpload, FoIcon, FoImageFile, FoImageMap, FoTabPanel
-* Added documentation for FoModal, FoNotification, FoNumberInput, FoPanel, FoQUiz, FoRating
+* Added documentation for FoFileUpload, FoIcon, FoImageFile, FoImageMap, FoTabPanel FoModal, FoNotification, FoNumberInput, FoPanel, FoQUiz, and FoRating
 * Added dense attribute example for FoTextInput
+* Removed deprecated components FoSelect, FoMultiSelect, FoMultiInput, FoYoutubeComponent
+* Added disabled checkbox to affected components in docs
+* Improved navigation in docs
 
 ### New Components
 * FoDropdownSelectMultiComponent
 
 ### Component updates
 * FoTabPanel now colored according to theme primary color
-* FoFileUpload, FoImageFile, FoImageMap, FoModal now uses in-house buttons
+* FoFileUpload, FoImageFile, FoImageMap, FoModal, FoNotification, FoNumberInput, FoPanel, FoQuiz, FoRating now has in-house components instead of material ones
+
+### Bugfixes
+* FoTextInput font-size mixins now applies to action button aswell
 
 ## 0.2.1
 ### General
