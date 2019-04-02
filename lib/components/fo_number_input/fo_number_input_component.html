@@ -1,54 +1,30 @@
-<label>{{label}}</label>
-<div>
-    <span>{{leadingText}}&nbsp;</span>
-    <material-button clear-size
-                     tabindex="-1"
-                     dense
-                     [disabled]="disabled || (value != null && value <= min)"
-                     (mousedown)="onMouseDown(-step)"
-                     (touchstart)="onMouseDown(-step)"
-                     (keydown)="onKeyDown($event, -step)">
-        <material-icon icon="remove"
-                       size="medium"></material-icon>
-    </material-button>
-    <span class="clickable"
-          tabindex="{{tabIndex}}"
-          (focus)="openPopup()"      
-          (click)="openPopup()"          
-          [class.disabled]="disabled"
-          id="valueOutput"          
-          popupSource
-          #source="popupSource">{{formattedValue}}</span>
-    <material-button clear-size
-                     tabindex="-1"
-                     dense
-                     [disabled]="disabled || (value != null && value >= max)"
-                     (mousedown)="onMouseDown(step)"
-                     (touchstart)="onMouseDown(step)"
-                     (keydown)="onKeyDown($event, step)">
-        <material-icon icon="add"
-                       size="medium"></material-icon>
-    </material-button>
-    <span>&nbsp;{{trailingText}}</span>
+<fo-label [value]="label"></fo-label>
+<div id="flexContainer">
+  <fo-button clearSize
+             noRightBorder
+             [attr.tabindex]="tabIndexSub"
+             [disabled]="disabled || (value != null && value <= min)"
+             (mousedown)="onMouseDown(-step)"
+             (touchstart)="onMouseDown(-step)"
+             (keydown)="onKeyDown($event, -step)"
+             icon="remove">
+  </fo-button>
+  <fo-text-input noRightBorder
+                 noLeftBorder
+                 centerValue
+                 [attr.tabindex]="tabIndex"
+                 [disabled]="disabled"
+                 [ngModel]="value?.toString()"
+                 (blur)="onInputBlur($event)"
+                 (ngModelChange)="setValueClamped($event)"></fo-text-input>
+  <fo-button clearSize
+             noLeftBorder
+             [attr.tabindex]="tabIndexAdd"
+             [disabled]="disabled || (value != null && value >= max)"
+             (mousedown)="onMouseDown(step)"
+             (touchstart)="onMouseDown(step)"
+             (keydown)="onKeyDown($event, step)"
+             icon="add">
+  </fo-button>
+  <span>&nbsp;{{trailingText}}</span>
 </div>
-<material-popup [(visible)]="popupVisible"
-                [source]="source"
-                [autoDismiss]="true"
-                [constrainToViewport]="true"
-                [preferredPositions]="position"
-                [enforceSpaceConstraints]="true">
-    <div class="row padding-top-small"
-         *ngIf="popupVisible">
-        <div class="col">
-            <material-input [label]="msgEnterValue | capitalize"
-                            floatingLabel
-                            inputmode="numeric"
-                            type="tel"
-                            pattern="[-]?\d*"
-                            autoFocus
-                            [disabled]="disabled"
-                            (change)="setValueClamped($event); popupVisible = false;"
-                            [ngModel]="value?.toString()"></material-input>
-        </div>
-    </div>
-</material-popup>

@@ -1,6 +1,14 @@
 :host {
     outline: none;
-    label {
+    div#flexContainer {
+      display: flex;
+
+      fo-text-input {
+        flex: auto;
+      }
+    }
+    
+    /*label {
         display: block;
         font-size: 0.75em;
         color: #888;
@@ -26,5 +34,5 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-    }
+    }*/
 }

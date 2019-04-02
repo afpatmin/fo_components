@@ -6,99 +6,90 @@ import 'dart:html' as html;
 import 'dart:math' as math;
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/focus/focus.dart';
-import 'package:angular_components/laminate/enums/alignment.dart';
-import 'package:angular_components/material_button/material_button.dart';
-import 'package:angular_components/material_icon/material_icon.dart';
-import 'package:angular_components/material_input/material_input.dart';
-import 'package:angular_components/material_input/material_number_accessor.dart';
-import 'package:angular_components/material_popup/material_popup.dart';
 import 'package:angular_forms/angular_forms.dart';
+import 'package:fo_components/components/fo_button/fo_button_component.dart';
+import 'package:fo_components/components/fo_label/fo_label_component.dart';
+import 'package:fo_components/components/fo_text_input/fo_text_input_component.dart';
 import 'package:intl/intl.dart';
 
 import '../../pipes/capitalize_pipe.dart';
-import '../fo_modal/fo_modal_component.dart';
 
 @Component(
     selector: 'fo-number-input',
     styleUrls: ['fo_number_input_component.css'],
     templateUrl: 'fo_number_input_component.html',
     directives: [
-      AutoFocusDirective,
       coreDirectives,
-      FoModalComponent,
+      FoButtonComponent,
+      FoLabelComponent,
+      FoTextInputComponent,
       formDirectives,
-      materialInputDirectives,
-      materialNumberInputDirectives,
-      AutoFocusDirective,
-      MaterialButtonComponent,
-      MaterialIconComponent,
-      MaterialInputComponent,
-      MaterialPopupComponent,
-      PopupSourceDirective
     ],
-    providers: [FORM_PROVIDERS],
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
-  final List<RelativePosition> position = [RelativePosition.AdjacentBottom];
 
   ChangeFunction<int> _onChange;
-
   NgControl control;
-
   int value;
-
   StreamSubscription<html.KeyboardEvent> _keyUpListener;
-
   StreamSubscription<html.MouseEvent> _mouseUpListener;
-
   StreamSubscription<html.TouchEvent> _touchEndListener;
-
   final ChangeDetectorRef _changeDetectorRef;
-
   Timer autoAddTimer;
-
   Timer addStepTimer;
-
   bool popupVisible = false;
-
   String tabIndex = '0';
+  int tabIndexNum = 0;
 
   final String msgEnterValue = Intl.message('enter value', name: 'enter_value');
 
   @Input()
   bool disabled = false;
+
   @Input()
   String label = 'value';
-  @Input()
-  String leadingText = '';
 
   @Input()
   int max = 9999;
+
   @Input()
   int min = 0;
+
   @Input()
   int step = 1;
+
   @Input()
   String trailingText = '';
-  @ViewChild(MaterialInputComponent)
-  MaterialInputComponent input;
+
   FoNumberInputComponent(@Self() @Optional() this.control,
       @Attribute('tabindex') this.tabIndex, this._changeDetectorRef) {
+    try {
+      tabIndexNum = tabIndex == null ? null : int.parse(tabIndex);
+    } on FormatException catch (e) {
+      print(e.message);
+    }
+
     _mouseUpListener = html.document.onMouseUp.listen(onMouseUp);
     _touchEndListener = html.document.onTouchEnd.listen(onMouseUp);
     _keyUpListener = html.document.onKeyUp.listen(onMouseUp);
 
     if (control != null) control.valueAccessor = this;
   }
+
+  String get tabIndexSub => tabIndexNum == null ? null : '${tabIndexNum - 1}';
+  String get tabIndexAdd => tabIndexNum == null ? null : '${tabIndexNum + 1}';
+
   String get formattedValue => value == null ? '-' : value.toString();
+
   void add(int count) {
     value ??= (count is double) ? 0.0 : 0;
 
     if (value + count >= min && value + count <= max) {
       value += count;
-      _onChange(value);
+      if (_onChange != null) {
+        _onChange(value);
+      }
       _changeDetectorRef.markForCheck();
     }
   }
@@ -144,9 +135,40 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
     addStepTimer = null;
   }
 
-  void openPopup() {
-    if (!disabled) {
-      popupVisible = true;
+  void onInputBlur(String v) {
+    if (v == null) {
+      value = 0;
+    } else {
+      var newValue = 0;
+      try {
+        newValue = int.parse(v);
+        if (newValue > max) throw const FormatException('Value too large!');
+        if (newValue < min) throw const FormatException('Value too small');
+        value = newValue;
+      } on FormatException catch (e) {
+        print(e);
+        
+        // Reset the value
+        if (value > min) {
+          if (value == max) {
+            value = min;
+            Future.delayed(const Duration(milliseconds: 0)).then((_) {
+              value = max;
+            });
+          }
+          else value = max;          
+        } else {
+          if (value == min) {
+            value = max;
+            Future.delayed(const Duration(milliseconds: 0)).then((_) {
+              value = min;
+            });
+          }
+          else {
+            value = min;
+          }          
+        }
+      }
     }
   }
 
@@ -157,17 +179,20 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
   void registerOnTouched(TouchFunction f) {}
 
   void setValueClamped(String v) {
-    if (v == null)
+    if (v == null || v.isEmpty)
       value = 0;
     else {
       try {
-        value = v == null ? 0 : math.max(min, math.min(max, int.parse(v)));
+        value = int.parse(v);
       } on FormatException {
-        value = 0;
+        value ??= 0;
       }
+      value = math.min(max, math.max(min, value));
     }
 
-    _onChange(value);
+    if (_onChange != null) {
+      _onChange(value);
+    }
   }
 
   @override
