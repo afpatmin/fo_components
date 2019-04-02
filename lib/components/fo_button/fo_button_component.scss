@@ -4,6 +4,7 @@
 
 :host {
   display: inline-block;
+  font-size: 0;
 
   button {
     width: 100%;
@@ -63,8 +64,8 @@
 
 :host[clearSize] {
   button {
-    padding-left: $x-small;
-    padding-right: $x-small;
+    padding-left: $small;
+    padding-right: $small;
   }
 }
 
