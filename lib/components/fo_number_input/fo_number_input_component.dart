@@ -8,6 +8,7 @@ import 'dart:math' as math;
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:fo_components/components/fo_button/fo_button_component.dart';
+import 'package:fo_components/components/fo_dropdown_list/fo_dropdown_option.dart';
 import 'package:fo_components/components/fo_label/fo_label_component.dart';
 import 'package:fo_components/components/fo_text_input/fo_text_input_component.dart';
 import 'package:intl/intl.dart';
@@ -28,7 +29,6 @@ import '../../pipes/capitalize_pipe.dart';
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
-
   ChangeFunction<int> _onChange;
   NgControl control;
   int value;
@@ -60,6 +60,9 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
   int step = 1;
 
   @Input()
+  Map<String, List<FoDropdownOption>> options;
+
+  @Input()
   String trailingText = '';
 
   FoNumberInputComponent(@Self() @Optional() this.control,
@@ -77,10 +80,10 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
     if (control != null) control.valueAccessor = this;
   }
 
-  String get tabIndexSub => tabIndexNum == null ? null : '${tabIndexNum - 1}';
+  String get formattedValue => value == null ? '-' : value.toString();
   String get tabIndexAdd => tabIndexNum == null ? null : '${tabIndexNum + 1}';
 
-  String get formattedValue => value == null ? '-' : value.toString();
+  String get tabIndexSub => tabIndexNum == null ? null : '${tabIndexNum - 1}';
 
   void add(int count) {
     value ??= (count is double) ? 0.0 : 0;
@@ -103,6 +106,51 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
 
   @override
   void onDisabledChanged(bool isDisabled) {}
+
+  void onInputBlur(String v) {
+    if (v == null) {
+      value = 0;
+    } else {
+      var newValue = 0;
+      try {
+        newValue = int.parse(v);
+        if (newValue > max) throw const FormatException('Value too large!');
+        if (newValue < min) throw const FormatException('Value too small');
+        value = newValue;
+      } on FormatException catch (e) {
+        print(e);
+
+        // Reset the value
+        if (value > min) {
+          if (value == max) {
+            value = min;
+            Future.delayed(const Duration(milliseconds: 0)).then((_) {
+              value = max;
+              if (_onChange != null) {
+                _onChange(value);
+              }
+            });
+          } else
+            value = max;
+        } else {
+          if (value == min) {
+            value = max;
+            Future.delayed(const Duration(milliseconds: 0)).then((_) {
+              value = min;
+              if (_onChange != null) {
+                _onChange(value);
+              }
+            });
+          } else {
+            value = min;
+          }
+        }
+      }
+    }
+    if (_onChange != null) {
+      _onChange(value);
+    }
+  }
 
   void onKeyDown(html.KeyboardEvent event, int count) {
     if (event.keyCode == html.KeyCode.ENTER ||
@@ -133,43 +181,6 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
     addStepTimer?.cancel();
     autoAddTimer = null;
     addStepTimer = null;
-  }
-
-  void onInputBlur(String v) {
-    if (v == null) {
-      value = 0;
-    } else {
-      var newValue = 0;
-      try {
-        newValue = int.parse(v);
-        if (newValue > max) throw const FormatException('Value too large!');
-        if (newValue < min) throw const FormatException('Value too small');
-        value = newValue;
-      } on FormatException catch (e) {
-        print(e);
-        
-        // Reset the value
-        if (value > min) {
-          if (value == max) {
-            value = min;
-            Future.delayed(const Duration(milliseconds: 0)).then((_) {
-              value = max;
-            });
-          }
-          else value = max;          
-        } else {
-          if (value == min) {
-            value = max;
-            Future.delayed(const Duration(milliseconds: 0)).then((_) {
-              value = min;
-            });
-          }
-          else {
-            value = min;
-          }          
-        }
-      }
-    }
   }
 
   @override
