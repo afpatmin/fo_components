@@ -1,8 +1,10 @@
+@import 'package:fo_components/components/fo_button/mixins';
 @import 'package:grid_css/constants';
-@import '../../mixins.scss';
+@import '../../mixins';
 
 :host {
   div#foPanel {
+    @include fo-button-font-size(0.5rem);
     @include boxShadow();
     overflow: hidden;
     display: block;

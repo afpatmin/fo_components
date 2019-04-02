@@ -1,14 +1,13 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_button/material_button.dart';
-import 'package:angular_components/material_icon/material_icon.dart';
+import 'package:fo_components/components/fo_button/fo_button_component.dart';
 import '../../pipes/capitalize_pipe.dart';
 
 @Component(
     selector: 'fo-panel',
     templateUrl: 'fo_panel_component.html',
     styleUrls: ['fo_panel_component.css'],
-    directives: [MaterialButtonComponent, MaterialIconComponent, NgIf],
+    directives: [FoButtonComponent, NgIf],
     pipes: [CapitalizePipe])
 class FoPanelComponent implements OnDestroy {
   final StreamController _visibleChangeController = StreamController<bool>();
@@ -16,7 +15,7 @@ class FoPanelComponent implements OnDestroy {
   FoPanelComponent();
 
   @Input()
-  String title;
+  String header;
 
   @Input()
   bool visible = true;
