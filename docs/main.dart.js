@@ -7383,7 +7383,7 @@ _.a=_.x=_.r=null
 _.b=a
 _.c=b
 _.f=_.e=_.d=null},
-df:function df(){this.b="dart-logo.png"
+df:function df(){this.b="https://www.dartlang.org/assets/shared/dart-logo-for-shares.png"
 this.c=!1},
 dg:function dg(a,b){this.c=a
 this.d=b
@@ -24972,7 +24972,7 @@ q=$.f_=q.X(j,C.j,$.Nw)}t.W(q)
 k.Q=t
 p=t.e
 p.setAttribute("label","Select zones")
-p.setAttribute("src","dart-logo.png")
+p.setAttribute("src","https://www.dartlang.org/assets/shared/dart-logo-for-shares.png?2")
 t=[P.d,P.b]
 h=new K.b4(P.N(j,j,j,!1,t),P.o(h,[P.d,K.eP]),H.k([],[P.m]))
 k.ch=h
@@ -25008,7 +25008,7 @@ u.b='<fo-image-map label="Select zones"\n              [zones]="zones"\n        
 u.c="Map<String, List<FoZoneModel>> zones = {\n  '': [\n    FoZoneModel([FoShapeRectangle(0, 0, 50, 50)], 'shape1', 'Square'),\n    FoZoneModel([FoShapeEllipse(0, 0, 20, 20)], 'shape2', 'Circle')\n  ]\n};\n\nList<String> selectedIds = ['shape1', 'shape2'];\n"}if(m)o.z.N()
 if(m){u=o.ch
 u.b="Select zones"
-u.d="dart-logo.png"}s=n.c
+u.d="https://www.dartlang.org/assets/shared/dart-logo-for-shares.png?2"}s=n.c
 u=o.db
 if(u!==s){o.ch.sxo(s)
 o.db=s}r=n.e
