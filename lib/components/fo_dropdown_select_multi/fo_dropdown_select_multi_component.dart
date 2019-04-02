@@ -11,7 +11,7 @@ import '../fo_dropdown_select/fo_dropdown_select_component.dart';
     selector: 'fo-dropdown-select-multi',
     templateUrl: 'fo_dropdown_select_multi_component.html',
     styleUrls: ['fo_dropdown_select_multi_component.css'],
-    directives: [FoDropdownSelectComponent, NgFor],
+    directives: [FoDropdownSelectComponent, NgClass, NgFor],
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDropdownSelectMultiComponent implements OnInit, OnDestroy {
@@ -51,20 +51,24 @@ class FoDropdownSelectMultiComponent implements OnInit, OnDestroy {
   }
 
   void onAdd(Object id) {
-    for (final category in allOptions.keys) {
-      final match = allOptions[category]
-          .firstWhere((option) => option.id == id, orElse: () => null);
-      if (match != null) {
-        addedOptions.add(match);
-        _updateFilteredOptions();
-        break;
+    if (disabled != true) {
+      for (final category in allOptions.keys) {
+        final match = allOptions[category]
+            .firstWhere((option) => option.id == id, orElse: () => null);
+        if (match != null) {
+          addedOptions.add(match);
+          _updateFilteredOptions();
+          break;
+        }
       }
     }
   }
 
   void onRemove(Object id) {
-    addedOptions.removeWhere((o) => o.id == id);
-    _updateFilteredOptions();
+    if (disabled != true) {
+      addedOptions.removeWhere((o) => o.id == id);
+      _updateFilteredOptions();
+    }
   }
 
   void _updateFilteredOptions() {

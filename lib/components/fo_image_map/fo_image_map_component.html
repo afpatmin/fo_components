@@ -35,6 +35,7 @@
 </div>
 <fo-dropdown-select-multi *ngIf="showSelector"
                           [label]="label"
+                          [disabled]="disabled"
                           [options]="zones"
                           [selectedIds]="selectedIds"
                           (selectedIdsChange)="onSelectionChange($event)"></fo-dropdown-select-multi>

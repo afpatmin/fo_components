@@ -30,6 +30,9 @@ class FoImageMapComponent implements OnDestroy {
   String src = '';
 
   @Input()
+  bool disabled = false;
+
+  @Input()
   List<Object> selectedIds = [];
 
   @Input()

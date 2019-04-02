@@ -7,6 +7,7 @@
 <div id="selectedOptions">
   <ul>
     <li *ngFor="let option of addedOptions"
-        (click)="onRemove(option.id)"> {{option.label}} </li>
+        (click)="onRemove(option.id)"
+        [class.disabled]="disabled"> {{option.label}} </li>
   </ul>
 </div>
