@@ -1,7 +1,8 @@
-<material-button raised
-                 [class.unSelected]="!model.selected"
-                 [style.background-color]="buttonColor"
-                 (trigger)="onSelect()"
-                 [disabled]="disabled">
-    {{model.label}}
-</material-button> 
+<fo-button [label]="model.label"
+           white
+           [class.selected]="model.selected"
+           dense
+           clearSize
+           (trigger)="onSelect()"
+           [disabled]="disabled">
+</fo-button>

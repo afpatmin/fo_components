@@ -1,9 +1,48 @@
 @import 'package:angular_components/material_icon/mixins';
+
 @mixin fo-button-font-size($size) {
   ::ng-deep fo-button {
     button.themeable {
-      font-size: $size !important;      
+      font-size: $size !important;
       @include material-icon-size($size * 1.5 !important);
     }
   }
-} 
+}
+
+@mixin fo-button-colors($color, $backgroundColor, $backgroundColorhover, $backgroundColorDisabled) {  
+  
+  // Default
+  ::ng-deep fo-button:not([white])>button {
+    background-color: $backgroundColor;
+    border-color: $backgroundColor;
+    color: $color;
+  }
+
+  // Selected
+  ::ng-deep fo-button.selected>button:not(:disabled).themeable {
+    background-color: $backgroundColor;
+    border-color: $backgroundColor;
+    color: $color;
+  }
+  
+  // Hover effect
+  ::ng-deep fo-button:not([noHover])>button:not(:disabled).themeable:hover {
+    background-color: $backgroundColorhover;
+    border-color: $backgroundColorhover;
+  }
+
+  // Hover effect for white
+  ::ng-deep fo-button[white]:not([noHover])button:not(:disabled).themeable:hover {
+    background-color: $backgroundColorhover;
+    border-color: $backgroundColorhover;
+    color: white;
+  }
+
+
+  // Disabled
+  ::ng-deep fo-button>button:disabled {
+    background-color: $backgroundColorDisabled;
+    border-color: darken($backgroundColorDisabled, 10%);
+    color: white;
+  }
+}

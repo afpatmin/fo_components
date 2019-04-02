@@ -3,9 +3,11 @@ $transitionSpeed: 0.3s ease;
 @import 'package:angular_components/material_checkbox/mixins';
 @import 'package:angular_components/material_radio/mixins';
 
+@import 'components/fo_button/mixins';
 @import 'components/fo_file_upload/mixins';
 @import 'components/fo_image_file/mixins';
 @import 'components/fo_dropdown_select_multi/mixins';
+@import 'components/fo_quiz/mixins';
 
 @mixin foregroundColor($color) {
   color: $color;
@@ -29,36 +31,18 @@ $transitionSpeed: 0.3s ease;
 
   @include material-checkbox-color($primaryColor);
   @include material-radio-color($primaryColor);
-  @include fo-dropdown-select-multi-option-background-color($primaryColor);
 
+
+  @include fo-button-colors(white, $primaryColor, $primaryColorBright, $grayColorBright);
+  @include fo-dropdown-select-multi-option-background-color($primaryColor);
+  @include fo-dropdown-select-multi-options-border-color($grayColor);
   @include fo-file-upload-border-color($grayColor);
   @include fo-image-file-border-color($grayColor);
-  @include fo-dropdown-select-multi-options-border-color($grayColor);
 
   material-spinner {
     border-color: $primaryColor;
   }
 
-
-  ::ng-deep fo-button:not([noHover])>button:not(:disabled):hover {
-    background-color: $secondaryColor;
-    border-color: $secondaryColor;
-  }
-
-  ::ng-deep fo-button[white]:not([noHover])button:not(:disabled).themeable:hover {
-    background-color: $secondaryColor;
-    color: white;
-  }
-
-  ::ng-deep fo-button:not([white])>button {
-    border-color: $primaryColor;
-  }
-
-  ::ng-deep fo-button>button:disabled {
-    background-color: lighten($grayColorBright, 10%) !important;
-    border-color: $grayColorBright !important;
-    color: $grayColor !important;
-  }
 
   ::ng-deep fo-dropdown-option:hover {
     background-color: $primaryColor;

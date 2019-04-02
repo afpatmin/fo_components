@@ -1,8 +1,9 @@
 import 'dart:async';
+
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_button/material_button.dart';
-import 'package:angular_components/material_icon/material_icon.dart';
+
 import '../../models/fo_quiz_model.dart';
+import '../fo_button/fo_button_component.dart';
 import 'fo_option_component.dart';
 import 'fo_quiz_component.dart';
 
@@ -11,17 +12,34 @@ import 'fo_quiz_component.dart';
     templateUrl: 'fo_question_component.html',
     styleUrls: ['fo_question_component.css'],
     directives: [
+      FoButtonComponent,
       FoOptionComponent,
       FoQuizComponent,
-      MaterialButtonComponent,
-      MaterialIconComponent,
       NgFor,
       NgIf
     ],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoQuestionComponent implements OnChanges, OnDestroy {
-  FoQuestionComponent(this._changeDetectorRef);
+  bool leftHidden = true;
+  bool rightHidden = true;
+  bool transition = false;
+  FoQuizModel currentChildQuiz;
+  final StreamController<FoQuestionModel> doneController = StreamController();
+  final ChangeDetectorRef _changeDetectorRef;
 
+  @Input()
+  FoQuestionModel model;
+
+  @Input()
+  bool disabled = false;
+  @Input()
+  String buttonColor;
+  FoQuestionComponent(this._changeDetectorRef);
+  @Output('done')
+  Stream<FoQuestionModel> get onDone => doneController.stream;
+
+  Iterable<FoOptionModel> get selectedOptions =>
+      model.options.where((o) => o.selected);
   @override
   void ngOnChanges(Map<String, SimpleChange> changes) {
     leftHidden = true;
@@ -49,6 +67,32 @@ class FoQuestionComponent implements OnChanges, OnDestroy {
     doneController.close();
   }
 
+  void onChildQuizDone(FoQuizDoneEvent event) {
+    /// See if there is another selected option with a child quiz after this one
+    /// If there is one, show that, otherwise emit done
+    final index = model.options.indexOf(
+        model.options.firstWhere((option) => option.child == currentChildQuiz));
+    final nextOptionWithChildQuiz = model.options.skip(index + 1).firstWhere(
+        (option) => option.child != null && option.selected,
+        orElse: () => null);
+
+    currentChildQuiz = nextOptionWithChildQuiz?.child;
+    if (currentChildQuiz == null) doneController.add(model);
+  }
+
+  /// Executed when the 'next' button is triggered
+  /// (Only applies to multiSelect)
+  void onNextTrigger() {
+    final selected = selectedOptions;
+
+    currentChildQuiz = selected
+        .firstWhere((option) => option.child != null, orElse: () => null)
+        ?.child;
+    if (currentChildQuiz == null) {
+      doneController.add(model);
+    }
+  }
+
   void onOptionTrigger(FoOptionModel option) {
     currentChildQuiz = null;
 
@@ -68,53 +112,4 @@ class FoQuestionComponent implements OnChanges, OnDestroy {
       }
     }
   }
-
-  /// Executed when the 'next' button is triggered
-  /// (Only applies to multiSelect)
-  void onNextTrigger() {
-    final selected = selectedOptions;
-
-    currentChildQuiz = selected
-        .firstWhere((option) => option.child != null, orElse: () => null)
-        ?.child;
-    if (currentChildQuiz == null) {
-      doneController.add(model);
-    }
-  }
-
-  void onChildQuizDone(FoQuizDoneEvent event) {
-    /// See if there is another selected option with a child quiz after this one
-    /// If there is one, show that, otherwise emit done
-    final index = model.options.indexOf(
-        model.options.firstWhere((option) => option.child == currentChildQuiz));
-    final nextOptionWithChildQuiz = model.options.skip(index + 1).firstWhere(
-        (option) => option.child != null && option.selected,
-        orElse: () => null);
-
-    currentChildQuiz = nextOptionWithChildQuiz?.child;
-    if (currentChildQuiz == null) doneController.add(model);
-  }
-
-  Iterable<FoOptionModel> get selectedOptions =>
-      model.options.where((o) => o.selected);
-
-  bool leftHidden = true;
-  bool rightHidden = true;
-  bool transition = false;
-  FoQuizModel currentChildQuiz;
-
-  final StreamController<FoQuestionModel> doneController = StreamController();
-  final ChangeDetectorRef _changeDetectorRef;
-
-  @Input()
-  FoQuestionModel model;
-
-  @Input()
-  bool disabled = false;
-
-  @Input()
-  String buttonColor;
-
-  @Output('done')
-  Stream<FoQuestionModel> get onDone => doneController.stream;
 }
