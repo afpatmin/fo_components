@@ -4,11 +4,13 @@ import 'dart:math';
 import 'package:angular/angular.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
 
+import '../fo_label/fo_label_component.dart';
+
 @Component(
   selector: 'fo-rating',
   templateUrl: 'fo_rating_component.html',
   styleUrls: ['fo_rating_component.css'],
-  directives: [MaterialIconComponent, NgFor],
+  directives: [FoLabelComponent, MaterialIconComponent, NgClass, NgFor],
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class FoRatingComponent implements OnChanges, OnDestroy {
@@ -20,6 +22,9 @@ class FoRatingComponent implements OnChanges, OnDestroy {
 
   @Input()
   int value;
+
+  @Input()
+  String label;
 
   final StreamController<int> _valueChangeController = StreamController();
 
