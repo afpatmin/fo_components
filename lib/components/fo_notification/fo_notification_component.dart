@@ -1,20 +1,18 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_button/material_button.dart';
-import 'package:angular_components/material_icon/material_icon.dart';
+import 'package:fo_components/components/fo_button/fo_button_component.dart';
 
-/// A notification popup located at the bottom of the screen
-/// that can be set to close after a specified duration.
-/// It will always start out as visible on creation
+/// A notification popup shown at the bottom of the screen.
+/// It can be set to close after a specified duration,
+/// and will always start out as visible on init
 @Component(
     selector: 'fo-notification',
     templateUrl: 'fo_notification_component.html',
     styleUrls: ['fo_notification_component.css'],
-    directives: [MaterialButtonComponent, MaterialIconComponent, NgIf],
-    providers: [],
-    pipes: [],
-    changeDetection: ChangeDetectionStrategy.OnPush)
-class FoNotificationComponent implements OnInit, OnDestroy {
+    directives: [FoButtonComponent, NgIf],
+    changeDetection: ChangeDetectionStrategy.Stateful)
+class FoNotificationComponent extends ComponentState
+    implements OnInit, OnDestroy {
   FoNotificationComponent();
 
   @override
@@ -30,9 +28,11 @@ class FoNotificationComponent implements OnInit, OnDestroy {
     _onCloseController = null;
   }
 
-  void close() {
-    _onCloseController?.add('');
-    _isOpen = false;
+  void close() {    
+    _onCloseController?.add('');    
+    setState(() {
+      _isOpen = false;
+    });
   }
 
   bool get isOpen => _isOpen;
@@ -44,7 +44,7 @@ class FoNotificationComponent implements OnInit, OnDestroy {
   bool showCloseButton = true;
 
   @Input()
-  String header = 'notification';
+  String header = 'Notification';
 
   @Input()
   int visibleSeconds;

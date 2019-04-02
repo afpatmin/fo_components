@@ -1,4 +1,4 @@
-@import '../../mixins.scss';
+@import 'package:fo_components/components/fo_button/mixins';
 
 :host {
     z-index: 99;
@@ -6,15 +6,19 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    text-align: center;
-    div#notificationContainer {
-        @include boxShadow();        
+    div#notificationContainer {             
         padding: 0.5rem 1rem;
-        background-color: black;
+        background-color: rgba(0,0,0,0.8);
         color: white;
-        -webkit-border-radius: 0.5rem;
-        -moz-border-radius: 0.5rem;
-        border-radius: 0.5rem;
+
+        @include fo-button-font-size(0.5rem);
+        fo-button {
+          margin-top: -0.5rem;
+          color: black;
+          float: right;
+        }
+        
+
         ::ng-deep a {
             color: white;
             text-decoration: underline;
