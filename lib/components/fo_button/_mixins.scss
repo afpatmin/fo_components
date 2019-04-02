@@ -40,9 +40,9 @@
 
 
   // Disabled
-  ::ng-deep fo-button>button:disabled {
-    background-color: $backgroundColorDisabled;
-    border-color: darken($backgroundColorDisabled, 10%);
-    color: white;
+  ::ng-deep fo-button>button.themeable:disabled {
+    background-color: $backgroundColorDisabled !important;
+    border-color: darken($backgroundColorDisabled, 10%) !important;
+    color: white !important;
   }
 }
