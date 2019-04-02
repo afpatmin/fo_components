@@ -8,7 +8,7 @@
            #input
            [disabled]="disabled == true"
            [placeholder]="placeholder"           
-           [class.rightBorder]="actionButtonLabel == null"
+           [class.noRightBorder]="actionButtonLabel != null"
            [class.leftPadding]="leadingIcon != null"
            [class.rightPadding]="clearIcon == true"
            [class.color-alert]="control?.valid == false && control?.pristine != true"

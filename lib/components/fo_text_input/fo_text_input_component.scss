@@ -31,6 +31,9 @@
     border-radius: $borderRadius;
 
     input {
+      border-top-left-radius: $borderRadius;
+      border-bottom-left-radius: $borderRadius;
+      border-left-width: 1px;
       border-top-right-radius: $borderRadius;
       border-bottom-right-radius: $borderRadius;
       border-right-width: 1px;
@@ -55,9 +58,7 @@
     }
 
     input {
-      @include inputStyle;
-      border-left-width: 0;
-      border-right-width: 0;
+      @include inputStyle;      
     }
 
     input.leftPadding {
@@ -68,10 +69,10 @@
       padding-right: $x-large;
     }
 
-    input.rightBorder {
-      border-top-right-radius: $borderRadius;
-      border-bottom-right-radius: $borderRadius;
-      border-right-width: 1px;
+    input.noRightBorder {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right-width: 0;
     }
 
     ::ng-deep fo-button {
@@ -97,7 +98,6 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-left-width: 0;
-
   }
 }
 
