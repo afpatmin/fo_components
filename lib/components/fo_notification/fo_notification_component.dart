@@ -28,8 +28,8 @@ class FoNotificationComponent extends ComponentState
     _onCloseController = null;
   }
 
-  void close() {    
-    _onCloseController?.add('');    
+  void close() {
+    _onCloseController?.add('');
     setState(() {
       _isOpen = false;
     });

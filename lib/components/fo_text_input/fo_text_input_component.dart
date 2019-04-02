@@ -62,8 +62,7 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
       StreamController<FoDropdownOption>();
   final StreamController<html.FocusEvent> _focusController =
       StreamController<html.FocusEvent>();
-  final StreamController<String> _blurController =
-      StreamController<String>();
+  final StreamController<String> _blurController = StreamController<String>();
   bool dropdownVisible = false;
   int get dropdownWidth =>
       inputElement?.getBoundingClientRect()?.width?.toInt();
