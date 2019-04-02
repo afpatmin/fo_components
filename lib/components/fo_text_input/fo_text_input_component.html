@@ -7,8 +7,7 @@
     <input class="roundLeft gray-color-bright"
            #input
            [disabled]="disabled == true"
-           [placeholder]="placeholder"
-           [class.leftBorder]="true"
+           [placeholder]="placeholder"           
            [class.rightBorder]="actionButtonLabel == null"
            [class.leftPadding]="leadingIcon != null"
            [class.rightPadding]="clearIcon == true"
@@ -17,7 +16,7 @@
            (ngModelChange)="onValueChange($event)"           
            (change)="changeController.add($event)"
            (focus)="onFocus($event)"
-           (blur)="hasFocus = false"
+           (blur)="onBlur($event)"
            type="text">           
     <material-icon *ngIf="clearIcon == true && value?.isEmpty == false"
                    size="large"

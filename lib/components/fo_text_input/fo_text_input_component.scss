@@ -15,7 +15,7 @@
     margin: 0;
   }
 
-  input::selection {    
+  input::selection {
     color: white;
   }
 
@@ -29,6 +29,12 @@
     align-items: center;
     transition: box-shadow $transitionSpeed;
     border-radius: $borderRadius;
+
+    input {
+      border-top-right-radius: $borderRadius;
+      border-bottom-right-radius: $borderRadius;
+      border-right-width: 1px;
+    }
 
     material-icon {
       box-shadow: none;
@@ -58,12 +64,6 @@
       padding-left: $x-large;
     }
 
-    input.leftBorder {
-      border-top-left-radius: $borderRadius;
-      border-bottom-left-radius: $borderRadius;
-      border-left-width: 1px;
-    }
-
     input.rightPadding {
       padding-right: $x-large;
     }
@@ -87,6 +87,40 @@
   }
 
   @include fo-button-font-size(1rem);
+}
+
+
+:host[noLeftBorder] {
+
+  div#flexContainer,
+  div#flexContainer input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left-width: 0;
+
+  }
+}
+
+:host[noRightBorder] {
+  fo-label {
+
+    div#flexContainer,
+    div#flexContainer input {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right-width: 0;
+    }
+  }
+}
+
+:host[centerValue] {
+  fo-label {
+    div#flexContainer {
+      input {
+        text-align: center;
+      }
+    }
+  }
 }
 
 :host[dense] {

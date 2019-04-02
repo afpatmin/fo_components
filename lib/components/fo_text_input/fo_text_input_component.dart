@@ -62,6 +62,8 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
       StreamController<FoDropdownOption>();
   final StreamController<html.FocusEvent> _focusController =
       StreamController<html.FocusEvent>();
+  final StreamController<String> _blurController =
+      StreamController<String>();
   bool dropdownVisible = false;
   int get dropdownWidth =>
       inputElement?.getBoundingClientRect()?.width?.toInt();
@@ -115,6 +117,9 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   @Output('focus')
   Stream<html.FocusEvent> get focus => _focusController.stream;
 
+  @Output('blur')
+  Stream<String> get blur => _blurController.stream;
+
   void onClear(html.Event event) {
     // Prevent the input from gaining focus
     event.preventDefault();
@@ -148,6 +153,16 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
     _focusController.add(event);
   }
 
+  void onBlur(html.Event event) {
+    hasFocus = false;
+    _blurController.add(value);
+    /*
+    Future.delayed(const Duration(milliseconds: 100)).then((_) {
+      _changeDetectorRef.detectChanges();
+    });
+    */
+  }
+
   @override
   void onDisabledChanged(bool isDisabled) {
     disabled = isDisabled;
@@ -176,5 +191,6 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
     changeController.close();
     _selectionChangeController.close();
     _focusController.close();
+    _blurController.close();
   }
 }
