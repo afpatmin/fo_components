@@ -5,6 +5,10 @@
        class="gray-color-bright"
        [style.width]="elementWidth"
        [style.max-height]="elementMaxHeight">
+    <div *ngIf="allowNullSelection">
+      <fo-dropdown-option [model]="nullOption"
+                          (click)="onSelect($event, nullOption)"></fo-dropdown-option>
+    </div>
     <div *ngFor="let category of filteredOptions.keys">
       <div *ngIf="category.isNotEmpty"
            class="black-color category"><strong>{{category}}</strong></div>

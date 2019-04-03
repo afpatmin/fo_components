@@ -19,6 +19,9 @@
         margin: $large $medium $small $medium;
         text-transform: uppercase;
       }
+      div.category:first-child {
+        margin-top: $small;
+      }
       hr {
         border-top: 0;
         border-style: solid;

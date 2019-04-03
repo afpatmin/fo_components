@@ -21,10 +21,17 @@ class FoDropdownListComponent
   bool visible = false;
 
   @Input()
+  bool allowNullSelection = false;
+
+  @Input()
   Map<String, List<FoDropdownOption>> options;
 
   @Input()
   String filter;
+
+  final FoDropdownOption nullOption = FoDropdownOption()
+    ..id = null
+    ..label = '-';
 
   final ChangeDetectorRef _changeDetectorRef;
   final html.Element host;

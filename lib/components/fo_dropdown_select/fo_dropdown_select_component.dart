@@ -35,6 +35,9 @@ class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
   bool disabled = false;
 
   @Input()
+  bool allowNullSelection = false;
+
+  @Input()
   Map<String, List<FoDropdownOption>> options;
 
   final StreamController<Object> _selectedIdController =

@@ -1,3 +1,10 @@
+## 0.2.2+2
+
+### Component updates
+#### FoDropdownSelect
+* Added [allowNullSelection] option
+* Adjusted option category margins
+
 ## 0.2.2+1
 
 ### General
@@ -11,7 +18,7 @@
 ## 0.2.2
 
 ### General
-* Added documentation for FoFileUpload, FoIcon, FoImageFile, FoImageMap, FoTabPanel FoModal, FoNotification, FoNumberInput, FoPanel, FoQUiz, and FoRating
+* Added documentation for FoFileUpload, FoIcon, FoImageFile, FoImageMap, FoTabPanel FoModal, FoNotification, FoNumberInput, FoPanel, FoQuiz, and FoRating
 * Added dense attribute example for FoTextInput
 * Removed deprecated components FoSelect, FoMultiSelect, FoMultiInput, FoYoutubeComponent
 * Added disabled checkbox to affected components in docs
