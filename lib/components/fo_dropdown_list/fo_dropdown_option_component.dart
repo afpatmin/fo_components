@@ -10,5 +10,5 @@ import 'fo_dropdown_option.dart';
 )
 class FoDropdownOptionComponent {
   @Input()
-  FoDropdownOption model;
+  FoDropdownOptionRenderable model;
 }

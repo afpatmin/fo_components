@@ -1,16 +1,16 @@
 <table>
   <tr>
-    <td class="leadingIcon" *ngIf="model.icon?.isEmpty == false">
-      <material-icon [icon]="model.icon"
+    <td class="leadingIcon" *ngIf="model.renderIcon?.isEmpty == false">
+      <material-icon [icon]="model.renderIcon"
                      size="x-large"
                      baseline></material-icon>
     </td>
     <td>
-      <div class="black-color">{{model.label}}</div>
-      <div class="gray-color">{{model.secondaryLabel}}</div>
+      <div class="black-color">{{model.renderLabel}}</div>
+      <div class="gray-color">{{model.renderSecondaryLabel}}</div>
     </td>
-    <td class="black-color info" *ngIf="model.info?.isEmpty == false">
-      <strong>{{model.info}}</strong>
+    <td class="black-color info" *ngIf="model.renderInfo?.isEmpty == false">
+      <strong>{{model.renderInfo}}</strong>
     </td>
   </tr>
 </table>
