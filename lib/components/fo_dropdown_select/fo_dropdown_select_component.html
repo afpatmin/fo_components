@@ -6,7 +6,7 @@
          [class.noRightBorder]="actionButtonLabel != null"
          [class.disabled]="disabled == true"
          [class.focus]="dropdownVisible">
-      <div id="selectedValue"> {{selectedOption == null ? '-' : selectedOption.label}} </div>
+      <div id="selectedValue"> {{selectedOption == null ? '-' : selectedOption.renderLabel}} </div>
       <material-icon class="arrow"
                      baseline
                      icon="keyboard_arrow_down"></material-icon>

@@ -24,7 +24,7 @@ class FoDropdownListComponent
   bool allowNullSelection = false;
 
   @Input()
-  Map<String, List<FoDropdownOption>> options;
+  Map<String, List<FoDropdownOptionRenderable>> options;
 
   @Input()
   String filter;
@@ -37,8 +37,8 @@ class FoDropdownListComponent
   final html.Element host;
   final StreamController _visibleController = StreamController<bool>();
   final StreamController _selectController =
-      StreamController<FoDropdownOption>();
-  Map<String, List<FoDropdownOption>> _filteredOptions;
+      StreamController<FoDropdownOptionRenderable>();
+  Map<String, List<FoDropdownOptionRenderable>> _filteredOptions;
 
   FoDropdownListComponent(this._changeDetectorRef, this.host);
 
@@ -46,13 +46,13 @@ class FoDropdownListComponent
 
   String elementMaxHeight = '100px';
 
-  Map<String, List<FoDropdownOption>> get filteredOptions => _filteredOptions;
+  Map<String, List<FoDropdownOptionRenderable>> get filteredOptions => _filteredOptions;
 
   @Output('visibleChange')
   Stream<bool> get visibleChange => _visibleController.stream;
 
   @Output('select')
-  Stream<FoDropdownOption> get select => _selectController.stream;
+  Stream<FoDropdownOptionRenderable> get select => _selectController.stream;
 
   @override
   void ngAfterChanges() {
@@ -72,7 +72,7 @@ class FoDropdownListComponent
         for (final category in options.keys) {
           _filteredOptions[category] = options[category]
               .where((option) =>
-                  option.label.toLowerCase().contains(filter.toLowerCase()))
+                  option.renderLabel.toLowerCase().contains(filter.toLowerCase()))
               .toList(growable: false);
           if (_filteredOptions[category].isEmpty) {
             _filteredOptions.remove(category);
@@ -87,7 +87,7 @@ class FoDropdownListComponent
 
   String top;
 
-  void onSelect(html.Event e, FoDropdownOption option) {
+  void onSelect(html.Event e, FoDropdownOptionRenderable option) {
     e.stopPropagation();
     _selectController.add(option);
   }

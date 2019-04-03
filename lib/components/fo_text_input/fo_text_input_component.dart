@@ -45,7 +45,7 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   String placeholder;
 
   @Input()
-  Map<String, List<FoDropdownOption>> options;
+  Map<String, List<FoDropdownOptionRenderable>> options;
 
   @Input()
   bool disabled = false;
@@ -58,8 +58,8 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
       StreamController<FoButtonEvent>();
   final StreamController<html.Event> changeController =
       StreamController<html.Event>();
-  final StreamController<FoDropdownOption> _selectionChangeController =
-      StreamController<FoDropdownOption>();
+  final StreamController<FoDropdownOptionRenderable> _selectionChangeController =
+      StreamController<FoDropdownOptionRenderable>();
   final StreamController<html.FocusEvent> _focusController =
       StreamController<html.FocusEvent>();
   final StreamController<String> _blurController = StreamController<String>();
@@ -106,7 +106,7 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   }
 
   @Output('selectionChange')
-  Stream<FoDropdownOption> get selectionChange =>
+  Stream<FoDropdownOptionRenderable> get selectionChange =>
       _selectionChangeController.stream;
 
   @Output('actionButtonTrigger')
@@ -129,8 +129,8 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
     }
   }
 
-  void onFilterSelect(FoDropdownOption event) {
-    value = event.label;
+  void onFilterSelect(FoDropdownOptionRenderable event) {
+    value = event.renderLabel;
     dropdownVisible = false;
     if (_onChange != null) {
       _onChange(value);

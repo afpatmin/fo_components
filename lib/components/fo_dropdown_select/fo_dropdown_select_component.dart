@@ -38,7 +38,7 @@ class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
   bool allowNullSelection = false;
 
   @Input()
-  Map<String, List<FoDropdownOption>> options;
+  Map<String, List<FoDropdownOptionRenderable>> options;
 
   final StreamController<Object> _selectedIdController =
       StreamController<Object>();
@@ -46,7 +46,7 @@ class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
       StreamController<FoButtonEvent>();
   final dom.Element _host;
   bool dropdownVisible = false;
-  FoDropdownOption selectedOption;
+  FoDropdownOptionRenderable selectedOption;
 
   FoDropdownSelectComponent(this._host);
 
@@ -59,7 +59,7 @@ class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
       for (final category in options.keys) {
         if (options[category] != null) {
           selectedOption = options[category]
-              .firstWhere((e) => e.id == id, orElse: () => null);
+              .firstWhere((e) => e.renderId == id, orElse: () => null);
 
           if (selectedOption != null) {
             return;
@@ -92,16 +92,16 @@ class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
     e.stopPropagation();
   }
 
-  void onSelect(FoDropdownOption event) {
+  void onSelect(FoDropdownOptionRenderable event) {
     dropdownVisible = false;
     selectedOption = event;
-    _selectedIdController.add(event.id);
+    _selectedIdController.add(event.renderId);
   }
 
   @override
   void ngOnInit() {
     // This will select first option with id == null if it exists
-    selectedId = selectedOption?.id;
+    selectedId = selectedOption?.renderId;
   }
 
   @override

@@ -29,12 +29,12 @@ class FoDropdownSelectMultiComponent implements OnInit, OnDestroy {
   List<Object> selectedIds = [];
 
   @Input('options')
-  Map<String, List<FoDropdownOption>> allOptions;
+  Map<String, List<FoDropdownOptionRenderable>> allOptions;
 
-  Map<String, List<FoDropdownOption>> filteredOptions = {};
+  Map<String, List<FoDropdownOptionRenderable>> filteredOptions = {};
 
   Object selectedId;
-  List<FoDropdownOption> addedOptions = [];
+  List<FoDropdownOptionRenderable> addedOptions = [];
   @Output('selectedIdsChange')
   Stream<List<Object>> get selectedIdsChange =>
       selectionChangeController.stream;
@@ -54,7 +54,7 @@ class FoDropdownSelectMultiComponent implements OnInit, OnDestroy {
     if (disabled != true) {
       for (final category in allOptions.keys) {
         final match = allOptions[category]
-            .firstWhere((option) => option.id == id, orElse: () => null);
+            .firstWhere((option) => option.renderId == id, orElse: () => null);
         if (match != null) {
           addedOptions.add(match);
           _updateFilteredOptions();
@@ -66,7 +66,7 @@ class FoDropdownSelectMultiComponent implements OnInit, OnDestroy {
 
   void onRemove(Object id) {
     if (disabled != true) {
-      addedOptions.removeWhere((o) => o.id == id);
+      addedOptions.removeWhere((o) => o.renderId == id);
       _updateFilteredOptions();
     }
   }
@@ -79,10 +79,10 @@ class FoDropdownSelectMultiComponent implements OnInit, OnDestroy {
     }
 
     // Remove any options found in addedOptions list
-    final addedOptionIds = addedOptions.map((o) => o.id);
+    final addedOptionIds = addedOptions.map((o) => o.renderId);
     for (final category in filteredOptions.keys) {
       filteredOptions[category]
-          .removeWhere((option) => addedOptionIds.contains(option.id));
+          .removeWhere((option) => addedOptionIds.contains(option.renderId));
     }
 
     selectionChangeController.add(addedOptionIds.toList(growable: false));

@@ -1,3 +1,9 @@
+## 0.2.2+3
+### Component updates
+#### FoDropdownList, FoDropdownSelect, FoDropdownSelectMulti, FoTextInput
+* Now using abstract class FoDropdownOptionRenderable instead of FoDropdownOption
+
+
 ## 0.2.2+2
 
 ### Component updates
