@@ -3,17 +3,19 @@
 * Theme now changes material-toggle color
 
 ### Component Updates
+
 #### DataTable
 * Removed focus shadow from filter text input
+
 #### DropdownSelect
 * Null check for options on click
 * selectedId no longer always resets to null on init
+
 #### DropdownList
 * null option is now hidden if filterstring isn't empty
 
-
 #### TextInput
-* Now has type attribute
+* Got type attribute
 
 # 1.0.1+1
 ### Bugfixes
