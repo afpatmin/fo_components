@@ -8,16 +8,16 @@ class FoDropdownOption implements FoDropdownOptionRenderable {
   @override
   String get renderIcon => icon;
 
-  @override  
+  @override
   Object get renderId => id;
 
-  @override  
+  @override
   String get renderInfo => info;
 
-  @override  
+  @override
   String get renderLabel => label;
 
-  @override  
+  @override
   String get renderSecondaryLabel => secondaryLabel;
 }
 

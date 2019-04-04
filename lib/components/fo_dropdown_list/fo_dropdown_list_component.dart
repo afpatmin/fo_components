@@ -14,7 +14,7 @@ import 'fo_dropdown_option_component.dart';
     selector: 'fo-dropdown-list',
     templateUrl: 'fo_dropdown_list_component.html',
     styleUrls: ['fo_dropdown_list_component.css'],
-    directives: [      
+    directives: [
       NgClass,
       NgFor,
       NgIf,

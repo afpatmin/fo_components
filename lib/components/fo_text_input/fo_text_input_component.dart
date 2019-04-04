@@ -63,7 +63,8 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
       StreamController<FoButtonEvent>();
   final StreamController<html.Event> changeController =
       StreamController<html.Event>();
-  final StreamController<FoDropdownOptionRenderable> _selectionChangeController =
+  final StreamController<FoDropdownOptionRenderable>
+      _selectionChangeController =
       StreamController<FoDropdownOptionRenderable>();
   final StreamController<html.FocusEvent> _focusController =
       StreamController<html.FocusEvent>();
@@ -152,7 +153,7 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
     dropdownVisible = options != null && value?.isEmpty == false;
   }
 
-  void onFocus(html.FocusEvent event) {    
+  void onFocus(html.FocusEvent event) {
     hasFocus = true;
     _focusController.add(event);
   }

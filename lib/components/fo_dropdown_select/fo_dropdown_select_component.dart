@@ -84,7 +84,7 @@ class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
   @override
   void ngOnDestroy() {
     actionButtonController.close();
-    
+
     _selectedIdController.close();
   }
 
