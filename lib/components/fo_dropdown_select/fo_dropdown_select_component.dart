@@ -90,7 +90,8 @@ class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
 
   void onClick(dom.Event e) {
     if (disabled != true &&
-        options.values.where((os) => os?.isNotEmpty == true).isNotEmpty) {
+        options?.values?.where((os) => os?.isNotEmpty == true)?.isNotEmpty ==
+            true) {
       dropdownVisible = !dropdownVisible;
     }
     e.stopPropagation();

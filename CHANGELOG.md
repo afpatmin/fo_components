@@ -1,3 +1,10 @@
+# 1.0.2
+### Component Updates
+#### DataTable
+* Removed focus shadow from filter text input
+#### DropdownSelect
+* Null check for options on click
+
 # 1.0.1+1
 ### Bugfixes
 * Fixed issue where FoDropdownSelectMulti generics sometimes didn't work properly
