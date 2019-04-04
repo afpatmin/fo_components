@@ -1,3 +1,18 @@
+## 1.0.0
+### General
+* Everything public is now properly exported in lib/fo_components.dart
+* Bumped dart sdk constraints '>=2.2.0 <3.0.0' (previously '>=2.0.0 <3.0.0')
+
+### Component updates
+#### FoDropdownSelect & FoDropdownSelectMulti
+* Added optional search filter ([showSearch]="true")
+
+### Removed components
+* FoYoutubePlayer
+
+### Bugfixes
+* FoDropdownSelectMulti selectedIds didn't get reflected properly when updated from elsewhere
+
 ## 0.2.2+3
 ### Component updates
 #### FoDropdownList, FoDropdownSelect, FoDropdownSelectMulti, FoTextInput

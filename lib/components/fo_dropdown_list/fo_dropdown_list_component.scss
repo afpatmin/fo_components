@@ -1,4 +1,6 @@
 @import 'package:grid_css/constants';
+@import '../../mixins';
+
 :host {
   position: relative;
   display: block;
@@ -7,20 +9,23 @@
     position: fixed;
     z-index: 99;
     div#dropdownContent {
+      @include boxShadow();
       text-align: left;
-      background-color: white;
-      padding-bottom: $medium;
+      background-color: white;      
       border-width: 1px;
       border-style: solid;
       border-radius: $x-small;
       overflow-y: auto;
       box-sizing: border-box;
+      div#filterContainer {
+        margin: $small;
+      }
       div.category {
         margin: $large $medium $small $medium;
         text-transform: uppercase;
       }
       div.category:first-child {
-        margin-top: $small;
+        margin-top: $medium;
       }
       hr {
         border-top: 0;

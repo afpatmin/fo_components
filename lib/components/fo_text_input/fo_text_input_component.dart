@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:html' as html;
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
+import 'package:angular_components/focus/focus.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
 import 'package:intl/intl.dart';
 import '../../pipes/capitalize_pipe.dart';
@@ -17,6 +18,7 @@ import 'fo_error_output_component.dart';
     templateUrl: 'fo_text_input_component.html',
     styleUrls: ['fo_text_input_component.css'],
     directives: [
+      AutoFocusDirective,
       FoButtonComponent,
       FoDropdownListComponent,
       FoErrorOutputComponent,
@@ -31,6 +33,9 @@ import 'fo_error_output_component.dart';
 class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   @Input()
   String actionButtonLabel;
+
+  @Input()
+  bool autoFocus = false;
 
   @Input()
   String label;
@@ -147,7 +152,7 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
     dropdownVisible = options != null && value?.isEmpty == false;
   }
 
-  void onFocus(html.FocusEvent event) {
+  void onFocus(html.FocusEvent event) {    
     hasFocus = true;
     _focusController.add(event);
   }

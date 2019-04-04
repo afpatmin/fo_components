@@ -58,7 +58,7 @@
     }
 
     input {
-      @include inputStyle;      
+      @include inputStyle;
     }
 
     input.leftPadding {
@@ -91,6 +91,13 @@
 }
 
 
+:host[noFocusShadow] {
+  div#flexContainer:focus-within {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+}
+
 :host[noLeftBorder] {
 
   div#flexContainer,
@@ -100,6 +107,7 @@
     border-left-width: 0;
   }
 }
+
 
 :host[noRightBorder] {
   fo-label {

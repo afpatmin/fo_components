@@ -1,6 +1,7 @@
 <fo-dropdown-select [label]="label"
                     [options]="filteredOptions"
                     [disabled]="disabled"
+                    [showSearch]="showSearch"
                     [actionButtonLabel]="msgAdd | capitalize"
                     (actionButtonTrigger)="onAdd(selectedId)"
                     [(selectedId)]="selectedId"></fo-dropdown-select>

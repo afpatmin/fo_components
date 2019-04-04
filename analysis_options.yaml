@@ -3,10 +3,12 @@ analyzer:
     - .dart_tool/
     - build/    
     - .packages
+    - lib/models/
   plugins:
     - angular      
   errors:
     uri_has_not_been_generated: ignore
+    todo: ignore
 
 linter:
   rules:

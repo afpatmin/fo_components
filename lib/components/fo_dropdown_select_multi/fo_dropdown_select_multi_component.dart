@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:angular/angular.dart';
+import 'package:collection/collection.dart';
 import 'package:fo_components/pipes/capitalize_pipe.dart';
 import 'package:intl/intl.dart';
 
@@ -14,10 +15,12 @@ import '../fo_dropdown_select/fo_dropdown_select_component.dart';
     directives: [FoDropdownSelectComponent, NgClass, NgFor],
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoDropdownSelectMultiComponent implements OnInit, OnDestroy {
+class FoDropdownSelectMultiComponent implements OnInit, OnChanges, OnDestroy {
   final String msgAdd = Intl.message('add', name: 'add');
   final StreamController<List<Object>> selectionChangeController =
       StreamController<List<Object>>();
+
+  final _equal = const ListEquality().equals;
 
   @Input()
   String label;
@@ -31,23 +34,30 @@ class FoDropdownSelectMultiComponent implements OnInit, OnDestroy {
   @Input('options')
   Map<String, List<FoDropdownOptionRenderable>> allOptions;
 
-  Map<String, List<FoDropdownOptionRenderable>> filteredOptions = {};
+  @Input()
+  bool showSearch = false;
 
+  Map<String, List<FoDropdownOptionRenderable>> filteredOptions = {};
   Object selectedId;
   List<FoDropdownOptionRenderable> addedOptions = [];
+
   @Output('selectedIdsChange')
   Stream<List<Object>> get selectedIdsChange =>
       selectionChangeController.stream;
 
   @override
-  void ngOnDestroy() {
-    selectionChangeController.close();
+  void ngOnChanges(Map<String, SimpleChange> changes) {
+    if (changes.containsKey('selectedIds') &&
+        !_equal(changes['selectedIds'].previousValue,
+            changes['selectedIds'].currentValue)) {
+      addedOptions = [];
+      selectedIds?.forEach(onAdd);
+    }
   }
 
   @override
-  void ngOnInit() {
-    _updateFilteredOptions();
-    selectedIds?.forEach(onAdd);
+  void ngOnDestroy() {
+    selectionChangeController.close();
   }
 
   void onAdd(Object id) {
@@ -86,5 +96,10 @@ class FoDropdownSelectMultiComponent implements OnInit, OnDestroy {
     }
 
     selectionChangeController.add(addedOptionIds.toList(growable: false));
+  }
+
+  @override
+  void ngOnInit() {
+    _updateFilteredOptions();
   }
 }

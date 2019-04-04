@@ -69,6 +69,9 @@ class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  @Input()
+  bool showSearch = false;
+
   int get dropdownWidth => _host?.getBoundingClientRect()?.width?.toInt();
 
   @Output('selectedIdChange')
@@ -81,6 +84,7 @@ class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
   @override
   void ngOnDestroy() {
     actionButtonController.close();
+    
     _selectedIdController.close();
   }
 

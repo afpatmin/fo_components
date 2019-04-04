@@ -21,6 +21,7 @@
 </div>
 <fo-dropdown-list *ngIf="options != null && dropdownVisible == true && disabled != true"
                   [options]="options"
+                  [showSearch]="showSearch"
                   [allowNullSelection]="allowNullSelection"
                   [width]="dropdownWidth"
                   (select)="onSelect($event)"

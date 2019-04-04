@@ -1,10 +1,21 @@
 <div id="fixer"
      [style.top]="top"
+     (click)="$event.stopPropagation()"
      *ngIf="visible && options != null">
   <div id="dropdownContent"
        class="gray-color-bright"
        [style.width]="elementWidth"
        [style.max-height]="elementMaxHeight">
+    <div id="filterContainer">
+      <fo-text-input *ngIf="showSearch == true"
+                     [autoFocus]="visible"
+                     noFocusShadow
+                     [label]="msgFilter | capitalize"
+                     dense
+                     [ngModel]="filter"
+                     (ngModelChange)="updateFilteredOptions($event)">
+      </fo-text-input>
+    </div>
     <div *ngIf="allowNullSelection">
       <fo-dropdown-option [model]="nullOption"
                           (click)="onSelect($event, nullOption)"></fo-dropdown-option>

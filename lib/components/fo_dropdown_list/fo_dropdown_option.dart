@@ -21,7 +21,7 @@ class FoDropdownOption implements FoDropdownOptionRenderable {
   String get renderSecondaryLabel => secondaryLabel;
 }
 
-/// Objects implementing this class can be put in a DropdownList
+/// Objects implementing this class can be rendered by a DropdownList
 abstract class FoDropdownOptionRenderable {
   Object get renderId;
   String get renderIcon;
