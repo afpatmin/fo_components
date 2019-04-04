@@ -6,10 +6,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    cursor: pointer;
-    span {
-      transition: color $transitionSpeed;
-      margin-right: $x-small;
-    }
-  }  
+    cursor: pointer;  
+  }
 }
