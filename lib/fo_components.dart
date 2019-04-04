@@ -21,3 +21,4 @@ export 'components/fo_rating/fo_rating_component.dart';
 export 'components/fo_tab/fo_tab_component.dart';
 export 'components/fo_tab/fo_tab_panel_component.dart';
 export 'components/fo_text_input/fo_text_input_component.dart';
+export 'components/fo_text_input/fo_textarea_input_component.dart';
