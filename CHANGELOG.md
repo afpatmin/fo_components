@@ -8,6 +8,10 @@
 #### DropdownSelect
 * Null check for options on click
 * selectedId no longer always resets to null on init
+#### DropdownList
+* null option is now hidden if filterstring isn't empty
+
+
 #### TextInput
 * Now has type attribute
 

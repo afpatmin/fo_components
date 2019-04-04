@@ -16,7 +16,7 @@
                      (ngModelChange)="updateFilteredOptions($event)">
       </fo-text-input>
     </div>
-    <div *ngIf="allowNullSelection">
+    <div *ngIf="allowNullSelection && filter?.isEmpty != false">
       <fo-dropdown-option [model]="nullOption"
                           (click)="onSelect($event, nullOption)"></fo-dropdown-option>
     </div>
