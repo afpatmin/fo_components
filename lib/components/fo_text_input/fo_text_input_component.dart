@@ -55,6 +55,9 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   @Input()
   bool disabled = false;
 
+  @Input()
+  String type = 'text';
+
   String value;
   ChangeFunction<String> _onChange;
   NgControl control;

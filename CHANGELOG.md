@@ -1,9 +1,14 @@
 # 1.0.2
+### General
+* Theme now changes material-toggle color
+
 ### Component Updates
 #### DataTable
 * Removed focus shadow from filter text input
 #### DropdownSelect
 * Null check for options on click
+#### TextInput
+* Now has type attribute
 
 # 1.0.1+1
 ### Bugfixes
