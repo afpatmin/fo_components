@@ -2,6 +2,7 @@ $transitionSpeed: 0.3s ease;
 
 @import 'package:angular_components/material_checkbox/mixins';
 @import 'package:angular_components/material_radio/mixins';
+@import 'package:angular_components/material_toggle/mixins';
 
 @import 'components/fo_button/mixins';
 @import 'components/fo_file_upload/mixins';
@@ -31,7 +32,7 @@ $transitionSpeed: 0.3s ease;
 
   @include material-checkbox-color($primaryColor);
   @include material-radio-color($primaryColor);
-
+  @include material-toggle-color($primaryColor);
 
   @include fo-button-colors(white, $primaryColor, $primaryColorBright, $grayColorBright);
   @include fo-dropdown-select-multi-option-background-color($primaryColor);
