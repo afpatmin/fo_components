@@ -15,10 +15,10 @@ import '../fo_dropdown_select/fo_dropdown_select_component.dart';
     directives: [FoDropdownSelectComponent, NgClass, NgFor],
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoDropdownSelectMultiComponent implements OnInit, OnChanges, OnDestroy {
+class FoDropdownSelectMultiComponent<T> implements OnInit, OnChanges, OnDestroy {
   final String msgAdd = Intl.message('add', name: 'add');
-  final StreamController<List<Object>> selectionChangeController =
-      StreamController<List<Object>>();
+  final StreamController<List<T>> selectionChangeController =
+      StreamController<List<T>>();
 
   final _equal = const ListEquality().equals;
 
@@ -29,7 +29,7 @@ class FoDropdownSelectMultiComponent implements OnInit, OnChanges, OnDestroy {
   bool disabled = false;
 
   @Input()
-  List<Object> selectedIds = [];
+  List<T> selectedIds = [];
 
   @Input('options')
   Map<String, List<FoDropdownOptionRenderable>> allOptions;
@@ -42,7 +42,7 @@ class FoDropdownSelectMultiComponent implements OnInit, OnChanges, OnDestroy {
   List<FoDropdownOptionRenderable> addedOptions = [];
 
   @Output('selectedIdsChange')
-  Stream<List<Object>> get selectedIdsChange =>
+  Stream<List<T>> get selectedIdsChange =>
       selectionChangeController.stream;
 
   @override
@@ -83,9 +83,9 @@ class FoDropdownSelectMultiComponent implements OnInit, OnChanges, OnDestroy {
 
   void _updateFilteredOptions() {
     // Reset filtered options to contain all options
-    filteredOptions = {};
+    filteredOptions = <String, List<FoDropdownOptionRenderable>>{};
     for (final category in allOptions.keys) {
-      filteredOptions[category] = List.from(allOptions[category]);
+      filteredOptions[category] = allOptions[category].toList();
     }
 
     // Remove any options found in addedOptions list
