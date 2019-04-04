@@ -1,13 +1,21 @@
+# 1.0.1
+### General
+* Added FoTextAreaInput example in docs
+
+### Component Updates
+#### FoDropdownSelectMulti
+* Added support for generics (selectedIds can now have any type)
+
 ## 1.0.0
 ### General
 * Everything public is now properly exported in lib/fo_components.dart
 * Bumped dart sdk constraints '>=2.2.0 <3.0.0' (previously '>=2.0.0 <3.0.0')
 
-### Component updates
+### Component Updates
 #### FoDropdownSelect & FoDropdownSelectMulti
 * Added optional search filter ([showSearch]="true")
 
-### Removed components
+### Removed
 * FoYoutubePlayer
 
 ### Bugfixes
@@ -21,7 +29,7 @@
 
 ## 0.2.2+2
 
-### Component updates
+### Component Updates
 #### FoDropdownSelect
 * Added [allowNullSelection] option
 * Adjusted option category margins
@@ -48,7 +56,7 @@
 ### New Components
 * FoDropdownSelectMultiComponent
 
-### Component updates
+### Component Updates
 * FoTabPanel now colored according to theme primary color
 * FoFileUpload, FoImageFile, FoImageMap, FoModal, FoNotification, FoNumberInput, FoPanel, FoQuiz, FoRating now has in-house components instead of material ones
 
@@ -59,7 +67,7 @@
 ### General
 * Added example/ to .gitignore
 
-### Component updates
+### Component Updates
 * Added FoDropdownSelect disabled input
 * Replaced material components in FoDataTableComponent with in-house components
 * Better dense directive for button, dropdownselect and textinput
