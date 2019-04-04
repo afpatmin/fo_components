@@ -15,7 +15,8 @@ import '../fo_dropdown_select/fo_dropdown_select_component.dart';
     directives: [FoDropdownSelectComponent, NgClass, NgFor],
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoDropdownSelectMultiComponent<T> implements OnInit, OnChanges, OnDestroy {
+class FoDropdownSelectMultiComponent<T>
+    implements OnInit, OnChanges, OnDestroy {
   final String msgAdd = Intl.message('add', name: 'add');
   final StreamController<List<T>> selectionChangeController =
       StreamController<List<T>>();
@@ -42,8 +43,7 @@ class FoDropdownSelectMultiComponent<T> implements OnInit, OnChanges, OnDestroy 
   List<FoDropdownOptionRenderable> addedOptions = [];
 
   @Output('selectedIdsChange')
-  Stream<List<T>> get selectedIdsChange =>
-      selectionChangeController.stream;
+  Stream<List<T>> get selectedIdsChange => selectionChangeController.stream;
 
   @override
   void ngOnChanges(Map<String, SimpleChange> changes) {
@@ -95,7 +95,8 @@ class FoDropdownSelectMultiComponent<T> implements OnInit, OnChanges, OnDestroy 
           .removeWhere((option) => addedOptionIds.contains(option.renderId));
     }
 
-    selectionChangeController.add(addedOptionIds.toList(growable: false).cast<T>());
+    selectionChangeController
+        .add(addedOptionIds.toList(growable: false).cast<T>());
   }
 
   @override
