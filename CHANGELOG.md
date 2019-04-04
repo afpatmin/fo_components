@@ -7,6 +7,7 @@
 * Removed focus shadow from filter text input
 #### DropdownSelect
 * Null check for options on click
+* selectedId no longer always resets to null on init
 #### TextInput
 * Now has type attribute
 
