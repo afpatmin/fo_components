@@ -1,3 +1,7 @@
+# 1.0.1+1
+### Bugfixes
+* Fixed issue where FoDropdownSelectMulti generics sometimes didn't work properly
+
 # 1.0.1
 ### General
 * Added FoTextAreaInput example in docs

@@ -95,7 +95,7 @@ class FoDropdownSelectMultiComponent<T> implements OnInit, OnChanges, OnDestroy 
           .removeWhere((option) => addedOptionIds.contains(option.renderId));
     }
 
-    selectionChangeController.add(addedOptionIds.toList(growable: false));
+    selectionChangeController.add(addedOptionIds.toList(growable: false).cast<T>());
   }
 
   @override
