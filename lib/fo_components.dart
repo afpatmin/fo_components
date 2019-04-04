@@ -22,3 +22,8 @@ export 'components/fo_tab/fo_tab_component.dart';
 export 'components/fo_tab/fo_tab_panel_component.dart';
 export 'components/fo_text_input/fo_text_input_component.dart';
 export 'components/fo_text_input/fo_textarea_input_component.dart';
+
+export 'pipes/capitalize_pipe.dart';
+export 'pipes/currency_pipe.dart';
+
+export 'validators/fo_validators.dart';
