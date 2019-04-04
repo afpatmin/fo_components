@@ -106,7 +106,7 @@ class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
   @override
   void ngOnInit() {
     // This will select first option with id == null if it exists
-    selectedId = selectedOption?.renderId;
+    selectedId ??= selectedOption?.renderId;
   }
 
   @override
