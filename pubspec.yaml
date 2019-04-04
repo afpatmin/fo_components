@@ -9,8 +9,7 @@ environment:
 dependencies:
   angular: ^5.2.0
   angular_components: ^0.12.0
-  angular_forms: ^2.1.1
-  angular_router: ^2.0.0-alpha+21    
+  angular_forms: ^2.1.1  
   collection: ^1.14.11
   grid_css: ^0.1.1
   intl: ^0.15.7
