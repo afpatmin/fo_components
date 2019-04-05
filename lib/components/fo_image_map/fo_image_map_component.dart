@@ -62,7 +62,10 @@ class FoImageMapComponent implements AfterViewInit, OnDestroy {
   void ngAfterViewInit() {
     image.onLoad.listen((_) {
       final rect = image.getBoundingClientRect();
-      viewBox = '0 0 ${rect.width} ${rect.height}';
+
+      final ratio = rect.width.toDouble() / rect.height;
+
+      viewBox = '0 0 ${100*ratio} ${100/ratio}';
     });
   }
 }
