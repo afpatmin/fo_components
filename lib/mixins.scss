@@ -32,7 +32,7 @@ $transitionSpeed: 0.3s ease;
 
   @include material-checkbox-color($primaryColor);
   @include material-radio-color($primaryColor);
-  @include material-toggle-color($primaryColor);
+  @include material-toggle-theme($primaryColor);
 
   @include fo-button-colors(white, $primaryColor, $primaryColorBright, $grayColorBright);
   @include fo-dropdown-select-multi-option-background-color($primaryColor);
