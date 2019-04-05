@@ -17,7 +17,7 @@
     padding: $small $x-large;
     outline: none;
     border-width: 1px;
-    border-style: solid;    
+    border-style: solid;
     box-sizing: border-box;
     color: white;
     line-height: 200%;
@@ -51,14 +51,16 @@
 :host[dense] {
   button {
     padding: $small $large;
-    line-height: 100%;   
+    line-height: 100%;
+
+    @include material-icon-size(1rem);
   }
 }
 
 :host[white] {
   button {
     color: inherit;
-    background-color: white;    
+    background-color: white;
   }
 }
 
