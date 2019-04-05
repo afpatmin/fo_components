@@ -1,9 +1,9 @@
-analyzer:  
+analyzer:
   exclude:
     - .dart_tool/
     - build/    
     - .packages
-    - lib/models/
+    - lib/models/fo_quiz_model.g.dart    
   plugins:
     - angular      
   errors:
