@@ -1,3 +1,8 @@
+# 1.0.2+1
+#### Bugfixes
+* DropdownSelect now initializes properly with selectedId
+
+
 # 1.0.2
 ### General
 * Theme now changes material-toggle color
