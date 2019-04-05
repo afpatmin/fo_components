@@ -65,7 +65,7 @@ class FoImageMapComponent implements AfterViewInit, OnDestroy {
 
       final ratio = rect.width.toDouble() / rect.height;
 
-      viewBox = '0 0 ${100*ratio} ${100/ratio}';
+      viewBox = '0 0 ${100 * ratio} ${100 / ratio}';
     });
   }
 }
