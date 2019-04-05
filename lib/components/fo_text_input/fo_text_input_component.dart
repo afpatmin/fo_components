@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'dart:html' as html;
+
 import 'package:angular/angular.dart';
-import 'package:angular_forms/angular_forms.dart';
+import 'package:angular_components/angular_components.dart';
 import 'package:angular_components/focus/focus.dart';
+import 'package:angular_components/material_datepicker/module.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
-import 'package:angular_components/utils/browser/dom_service/dom_service.dart';
+import 'package:angular_forms/angular_forms.dart';
 import 'package:intl/intl.dart';
+
 import '../../pipes/capitalize_pipe.dart';
 import '../fo_button/fo_button_component.dart';
 import '../fo_button/fo_button_event.dart';
@@ -30,7 +33,7 @@ import 'fo_error_output_component.dart';
       NgIf
     ],
     pipes: [CapitalizePipe],
-    providers: [DomService],
+    providers: [datepickerBindings],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   @Input()
@@ -75,18 +78,25 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
       StreamController<html.FocusEvent>();
   final StreamController<String> _blurController = StreamController<String>();
   bool dropdownVisible = false;
-  int get dropdownWidth =>
-      inputElement?.getBoundingClientRect()?.width?.toInt();
-
   @ViewChild('input')
   html.InputElement inputElement;
+
+  bool hasFocus = false;
 
   FoTextInputComponent(
       @Self() @Optional() this.control, this._changeDetectorRef) {
     if (control != null) control.valueAccessor = this;
   }
 
-  bool hasFocus = false;
+  @Output('actionButtonTrigger')
+  Stream<FoButtonEvent> get actionButtonTrigger =>
+      actionButtonController.stream;
+
+  @Output('blur')
+  Stream<String> get blur => _blurController.stream;
+
+  int get dropdownWidth =>
+      inputElement?.getBoundingClientRect()?.width?.toInt();
 
   String get errorMessage {
     final errors = control?.errors;
@@ -116,51 +126,20 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
     }
   }
 
+  @Output('focus')
+  Stream<html.FocusEvent> get focus => _focusController.stream;
+
   @Output('selectionChange')
   Stream<FoDropdownOptionRenderable> get selectionChange =>
       _selectionChangeController.stream;
 
-  @Output('actionButtonTrigger')
-  Stream<FoButtonEvent> get actionButtonTrigger =>
-      actionButtonController.stream;
-
-  @Output('focus')
-  Stream<html.FocusEvent> get focus => _focusController.stream;
-
-  @Output('blur')
-  Stream<String> get blur => _blurController.stream;
-
-  void onClear(html.Event event) {
-    // Prevent the input from gaining focus
-    event.preventDefault();
-    value = '';
-    dropdownVisible = false;
-    if (_onChange != null) {
-      _onChange(value);
-    }
-  }
-
-  void onFilterSelect(FoDropdownOptionRenderable event) {
-    value = event.renderLabel;
-    dropdownVisible = false;
-    if (_onChange != null) {
-      _onChange(value);
-    }
-    _selectionChangeController.add(event);
-  }
-
-  void onValueChange(String event) {
-    value = event;
-    if (_onChange != null) {
-      _onChange(value);
-    }
-
-    dropdownVisible = options != null && value?.isEmpty == false;
-  }
-
-  void onFocus(html.FocusEvent event) {
-    hasFocus = true;
-    _focusController.add(event);
+  @override
+  void ngOnDestroy() {
+    actionButtonController?.close();
+    changeController.close();
+    _selectionChangeController.close();
+    _focusController.close();
+    _blurController.close();
   }
 
   void onBlur(html.Event event) {
@@ -173,9 +152,42 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
     */
   }
 
+  void onClear(html.Event event) {
+    // Prevent the input from gaining focus
+    event.preventDefault();
+    value = '';
+    dropdownVisible = false;
+    if (_onChange != null) {
+      _onChange(value);
+    }
+  }
+
   @override
   void onDisabledChanged(bool isDisabled) {
     disabled = isDisabled;
+  }
+
+  void onFilterSelect(FoDropdownOptionRenderable event) {
+    value = event.renderLabel;
+    dropdownVisible = false;
+    if (_onChange != null) {
+      _onChange(value);
+    }
+    _selectionChangeController.add(event);
+  }
+
+  void onFocus(html.FocusEvent event) {
+    hasFocus = true;
+    _focusController.add(event);
+  }
+
+  void onValueChange(String event) {
+    value = event;
+    if (_onChange != null) {
+      _onChange(value);
+    }
+
+    dropdownVisible = options != null && value?.isEmpty == false;
   }
 
   @override
@@ -193,14 +205,5 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
       dropdownVisible = options != null && value?.isEmpty == false;
       _changeDetectorRef.markForCheck();
     });
-  }
-
-  @override
-  void ngOnDestroy() {
-    actionButtonController?.close();
-    changeController.close();
-    _selectionChangeController.close();
-    _focusController.close();
-    _blurController.close();
   }
 }

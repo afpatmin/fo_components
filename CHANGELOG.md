@@ -15,7 +15,7 @@
 
 #### TextInput
 * Got type attribute
-* added DomService to providers (needed by autofocus)
+* added datePickerBindings to providers (needed by autofocus)
 
 # 1.0.1+1
 ### Bugfixes
