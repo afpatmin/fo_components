@@ -9,7 +9,7 @@
   }
   ::ng-deep fo-button[dense] {
     button.themeable {
-      @include material-icon-size($size !important);
+      @include material-icon-size($size * 1.3 !important);
     }
   }
 }
