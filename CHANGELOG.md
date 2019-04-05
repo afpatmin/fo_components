@@ -15,7 +15,8 @@
 
 #### TextInput
 * Got type attribute
-* added datePickerBindings to providers (needed by autofocus)
+* Added datePickerBindings to providers (needed by autofocus)
+* ActionButton now disabled if value is empty
 
 # 1.0.1+1
 ### Bugfixes

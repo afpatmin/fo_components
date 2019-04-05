@@ -28,7 +28,7 @@
     <fo-button *ngIf="actionButtonLabel != null"
                [label]="actionButtonLabel"
                noLeftBorder
-               [disabled]="disabled || control?.valid == false"
+               [disabled]="disabled || control?.valid == false || value?.isEmpty != false"
                (trigger)="actionButtonController?.add($event)"></fo-button>
   </div>
   <fo-error-output *ngIf="hasFocus == true && errorMessage != null && control?.pristine != true && dropdownVisible == false"
