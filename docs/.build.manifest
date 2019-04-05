@@ -53,9 +53,6 @@ packages/front_end/src/fasta/dill/README.md
 packages/front_end/src/fasta/kernel/README.md
 packages/front_end/src/fasta/parser/parser.md
 packages/front_end/src/fasta/source/README.md
-packages/grid/constants.scss
-packages/grid/grid.scss
-packages/grid/theme.scss
 packages/grid_css/constants.scss
 packages/grid_css/grid.scss
 packages/grid_css/theme.scss
