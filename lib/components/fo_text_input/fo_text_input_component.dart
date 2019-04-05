@@ -4,6 +4,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_components/focus/focus.dart';
 import 'package:angular_components/material_icon/material_icon.dart';
+import 'package:angular_components/utils/browser/dom_service/dom_service.dart';
 import 'package:intl/intl.dart';
 import '../../pipes/capitalize_pipe.dart';
 import '../fo_button/fo_button_component.dart';
@@ -29,6 +30,7 @@ import 'fo_error_output_component.dart';
       NgIf
     ],
     pipes: [CapitalizePipe],
+    providers: [DomService],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   @Input()

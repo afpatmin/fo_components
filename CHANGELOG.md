@@ -3,7 +3,6 @@
 * Theme now changes material-toggle color
 
 ### Component Updates
-
 #### DataTable
 * Removed focus shadow from filter text input
 
@@ -16,6 +15,7 @@
 
 #### TextInput
 * Got type attribute
+* added DomService to providers (needed by autofocus)
 
 # 1.0.1+1
 ### Bugfixes
