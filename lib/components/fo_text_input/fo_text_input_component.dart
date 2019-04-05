@@ -195,6 +195,13 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
     _onChange = f;
   }
 
+  void onKeyUp(html.KeyboardEvent event) {
+    if (actionButtonLabel != null && event?.keyCode == html.KeyCode.ENTER ||
+        event?.keyCode == html.KeyCode.MAC_ENTER) {
+      actionButtonController.add(FoButtonEvent());
+    }
+  }
+
   @override
   void registerOnTouched(TouchFunction f) {}
 

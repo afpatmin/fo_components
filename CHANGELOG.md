@@ -3,6 +3,9 @@
 * Theme now changes material-toggle color
 
 ### Component Updates
+#### Button
+* Decreased icon size for [dense]
+* 
 #### DataTable
 * Removed focus shadow from filter text input
 
@@ -17,6 +20,7 @@
 * Got type attribute
 * Added datePickerBindings to providers (needed by autofocus)
 * ActionButton now disabled if value is empty
+* ActionButton now triggered on enter
 
 # 1.0.1+1
 ### Bugfixes

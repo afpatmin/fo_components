@@ -17,9 +17,9 @@
            [ngModel]="value"
            (ngModelChange)="onValueChange($event)"           
            (change)="changeController.add($event)"
+           (keyup)="onKeyUp($event)"
            (focus)="onFocus($event)"
-           (blur)="onBlur($event)"
-           type="text">           
+           (blur)="onBlur($event)">            
     <material-icon *ngIf="clearIcon == true && value?.isEmpty == false"
                    size="large"
                    class="color-alert clear"
