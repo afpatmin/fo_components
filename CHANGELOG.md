@@ -16,6 +16,9 @@
 #### DropdownList
 * null option is now hidden if filterstring isn't empty
 
+#### ImageMap
+* Fixed issue where zones wasnt scaled properly with image
+
 #### TextInput
 * Got type attribute
 * Added datePickerBindings to providers (needed by autofocus)
