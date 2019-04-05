@@ -109,6 +109,8 @@ class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
     selectedId ??= selectedOption?.renderId;
   }
 
+  Object get selectedId => selectedOption?.renderId;
+
   @override
   void ngOnChanges(Map<String, SimpleChange> changes) {
     if (changes.containsKey('options')) {
