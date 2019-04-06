@@ -203,5 +203,6 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   @override
   void writeValue(String obj) {
     value = obj;    
+    _changeDetectorRef.markForCheck();
   }
 }

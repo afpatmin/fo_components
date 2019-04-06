@@ -34,6 +34,7 @@ class FoTextAreaInputComponent
   @Input()
   int rows = 5;
 
+  final ChangeDetectorRef _changeDetectorRef;
   bool hasFocus = false;
   String value;
   ChangeFunction<String> _onChange;
@@ -43,7 +44,8 @@ class FoTextAreaInputComponent
   @ViewChild('textArea')
   html.TextAreaElement textAreaElement;
 
-  FoTextAreaInputComponent(@Self() @Optional() this.control) {
+  FoTextAreaInputComponent(
+      @Self() @Optional() this.control, this._changeDetectorRef) {
     if (control != null) control.valueAccessor = this;
   }
 
@@ -106,6 +108,7 @@ class FoTextAreaInputComponent
   @override
   void writeValue(String obj) {
     value = obj;
+    _changeDetectorRef.markForCheck();
   }
 
   @override
