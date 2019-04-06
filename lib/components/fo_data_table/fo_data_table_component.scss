@@ -52,6 +52,7 @@ div.table-container {
     -ms-user-select: none;
     user-select: none;
     background-color: white;
+    z-index: 1;
     div.output-container {
         overflow-x: auto;
         table.output {
