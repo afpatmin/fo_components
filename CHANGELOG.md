@@ -1,5 +1,13 @@
+# 1.0.3
+### Bugfixes
+* TextInput with options no longer showing options if a value is set initially
+* TextInput now properly updates view when value is changed externally
+* TextInput no longer crashes when autofilled
+* DataTable table now has z-index so that batchOperation is shown under
+
+
 # 1.0.2+1
-#### Bugfixes
+### Bugfixes
 * DropdownSelect now initializes properly with selectedId
 
 
