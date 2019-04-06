@@ -145,11 +145,6 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   void onBlur(html.Event event) {
     hasFocus = false;
     _blurController.add(value);
-    /*
-    Future.delayed(const Duration(milliseconds: 100)).then((_) {
-      _changeDetectorRef.detectChanges();
-    });
-    */
   }
 
   void onClear(html.Event event) {
@@ -207,10 +202,6 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
 
   @override
   void writeValue(String obj) {
-    value = obj;
-    Future.delayed(const Duration(milliseconds: 100)).then((_) {
-      dropdownVisible = options != null && value?.isEmpty == false;
-      _changeDetectorRef.markForCheck();
-    });
+    value = obj;    
   }
 }
