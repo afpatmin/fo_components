@@ -38,6 +38,10 @@ class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
   bool allowNullSelection = false;
 
   @Input()
+  /// Make sure options doesn't extend beyond the viewport
+  bool constrainToViewPort = true;
+
+  @Input()
   Map<String, List<FoDropdownOptionRenderable>> options;
 
   final StreamController<Object> _selectedIdController =

@@ -37,7 +37,7 @@ class FoDropdownListComponent
   bool allowNullSelection = false;
 
   @Input()
-  bool constrainToViewPort = false;
+  bool constrainToViewPort = true;
 
   @Input()
   Map<String, List<FoDropdownOptionRenderable>> options;
