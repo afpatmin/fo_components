@@ -37,6 +37,9 @@ class FoDropdownListComponent
   bool allowNullSelection = false;
 
   @Input()
+  bool constrainToViewPort = false;
+
+  @Input()
   Map<String, List<FoDropdownOptionRenderable>> options;
 
   @Input()
@@ -85,9 +88,11 @@ class FoDropdownListComponent
       top = '${rect.top}px';
 
       final offsetFromTop = rect.top + html.window.scrollY;
-      final spaceLeft = html.document.body.clientHeight - offsetFromTop;
-
-      elementMaxHeight = '${spaceLeft}px';
+      final spaceTotal = constrainToViewPort == true
+          ? html.window.innerHeight
+          : html.document.body.clientHeight;
+      
+      elementMaxHeight = '${spaceTotal - offsetFromTop}px';
 
       updateFilteredOptions(filter);
       if (_filteredOptions.isEmpty) {
