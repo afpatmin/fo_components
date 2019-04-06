@@ -87,12 +87,9 @@ class FoDropdownListComponent
       final rect = host.getBoundingClientRect();
       top = '${rect.top}px';
 
-      final offsetFromTop = rect.top + html.window.scrollY;
-      final spaceTotal = constrainToViewPort == true
-          ? html.window.innerHeight
-          : html.document.body.clientHeight;
-      
-      elementMaxHeight = '${spaceTotal - offsetFromTop}px';
+      elementMaxHeight = constrainToViewPort == true
+          ? '${html.window.innerHeight - rect.top}px'
+          : '${html.document.body.clientHeight - (rect.top + html.window.scrollY)}px';
 
       updateFilteredOptions(filter);
       if (_filteredOptions.isEmpty) {

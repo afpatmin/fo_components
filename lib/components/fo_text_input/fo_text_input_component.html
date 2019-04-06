@@ -38,6 +38,7 @@
   <fo-dropdown-list *ngIf="options != null && value?.isEmpty == false && dropdownVisible"
                     [options]="options"
                     [filter]="value"
+                    [constrainToViewPort]="constrainToViewPort"
                     [width]="dropdownWidth"
                     (select)="onFilterSelect($event)"
                     [(visible)]="dropdownVisible">

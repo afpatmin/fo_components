@@ -61,6 +61,11 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   bool disabled = false;
 
   @Input()
+
+  /// Make sure options doesn't extend beyond the viewport
+  bool constrainToViewPort = true;
+
+  @Input()
   String type = 'text';
 
   String value;
@@ -194,7 +199,7 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
     if (event is html.KeyboardEvent &&
         (actionButtonLabel != null && event?.keyCode == html.KeyCode.ENTER ||
             event?.keyCode == html.KeyCode.MAC_ENTER &&
-                value?.isEmpty == false)) { 
+                value?.isEmpty == false)) {
       actionButtonController.add(FoButtonEvent());
     }
   }
