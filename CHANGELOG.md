@@ -5,6 +5,9 @@
 * TextInput no longer crashes when autofilled
 * DataTable table now has z-index so that batchOperation is shown under
 
+### Component updates
+### TextInput, DropdownSelect, DropdownMultiSelect, DropdownList
+* Added constrainToViewPort input
 
 # 1.0.2+1
 ### Bugfixes
