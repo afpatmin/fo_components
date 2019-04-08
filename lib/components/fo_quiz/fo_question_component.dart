@@ -40,7 +40,7 @@ class FoQuestionComponent implements AfterChanges, OnDestroy {
 
   Iterable<FoOptionModel> get selectedOptions =>
       model.options.where((o) => o.selected);
-  
+
   @override
   void ngAfterChanges() {
     leftHidden = true;

@@ -49,11 +49,11 @@ class FoDropdownSelectMultiComponent<T>
 
   List<FoDropdownOptionRenderable> addedOptions = [];
   List<T> get selectedIds => _selectedIds;
-  
+
   @Input('selectedIds')
   set selectedIds(List<T> value) {
     _selectedIdsChanged = !_equal(value, _selectedIds);
-    _selectedIds = value;    
+    _selectedIds = value;
   }
 
   @Output('selectedIdsChange')
@@ -73,8 +73,8 @@ class FoDropdownSelectMultiComponent<T>
   }
 
   @override
-  void ngOnInit() {    
-    _updateFilteredOptions();    
+  void ngOnInit() {
+    _updateFilteredOptions();
   }
 
   void onAdd(Object id) {

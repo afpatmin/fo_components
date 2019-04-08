@@ -37,7 +37,7 @@ class FoRatingComponent implements AfterChanges, OnDestroy {
   int get max => _max;
 
   @Input()
-  set max(int value) {    
+  set max(int value) {
     _max = value;
     _maxChanged = true;
   }
