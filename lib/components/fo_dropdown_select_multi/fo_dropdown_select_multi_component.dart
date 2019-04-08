@@ -16,7 +16,7 @@ import '../fo_dropdown_select/fo_dropdown_select_component.dart';
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDropdownSelectMultiComponent<T>
-    implements OnInit, OnChanges, OnDestroy {
+    implements OnInit, AfterChanges, OnDestroy {
   final String msgAdd = Intl.message('add', name: 'add');
   final StreamController<List<T>> selectionChangeController =
       StreamController<List<T>>();
@@ -29,12 +29,12 @@ class FoDropdownSelectMultiComponent<T>
   @Input()
   bool disabled = false;
 
-  @Input()
-  List<T> selectedIds = [];
+  List<T> _selectedIds = [];
+
+  bool _selectedIdsChanged = true;
 
   @Input('options')
   Map<String, List<FoDropdownOptionRenderable>> allOptions;
-
   @Input()
 
   /// Make sure options doesn't extend beyond the viewport
@@ -44,17 +44,24 @@ class FoDropdownSelectMultiComponent<T>
   bool showSearch = false;
 
   Map<String, List<FoDropdownOptionRenderable>> filteredOptions = {};
+
   Object selectedId;
+
   List<FoDropdownOptionRenderable> addedOptions = [];
+  List<T> get selectedIds => _selectedIds;
+  
+  @Input('selectedIds')
+  set selectedIds(List<T> value) {
+    _selectedIdsChanged = !_equal(value, _selectedIds);
+    _selectedIds = value;    
+  }
 
   @Output('selectedIdsChange')
   Stream<List<T>> get selectedIdsChange => selectionChangeController.stream;
 
   @override
-  void ngOnChanges(Map<String, SimpleChange> changes) {
-    if (changes.containsKey('selectedIds') &&
-        !_equal(changes['selectedIds'].previousValue,
-            changes['selectedIds'].currentValue)) {
+  void ngAfterChanges() {
+    if (_selectedIdsChanged == true) {
       addedOptions = [];
       selectedIds?.forEach(onAdd);
     }
@@ -63,6 +70,11 @@ class FoDropdownSelectMultiComponent<T>
   @override
   void ngOnDestroy() {
     selectionChangeController.close();
+  }
+
+  @override
+  void ngOnInit() {    
+    _updateFilteredOptions();    
   }
 
   void onAdd(Object id) {
@@ -102,10 +114,5 @@ class FoDropdownSelectMultiComponent<T>
 
     selectionChangeController
         .add(addedOptionIds.toList(growable: false).cast<T>());
-  }
-
-  @override
-  void ngOnInit() {
-    _updateFilteredOptions();
   }
 }

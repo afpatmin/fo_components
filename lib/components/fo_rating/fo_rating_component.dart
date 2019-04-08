@@ -13,9 +13,9 @@ import '../fo_label/fo_label_component.dart';
   directives: [FoLabelComponent, MaterialIconComponent, NgClass, NgFor],
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
-class FoRatingComponent implements OnChanges, OnDestroy {
-  @Input()
-  int max = 5;
+class FoRatingComponent implements AfterChanges, OnDestroy {
+  bool _maxChanged = true;
+  int _max = 5;
 
   @Input()
   bool disabled = false;
@@ -34,6 +34,14 @@ class FoRatingComponent implements OnChanges, OnDestroy {
       ? []
       : _options.where((o) => value >= o).toList(growable: false);
 
+  int get max => _max;
+
+  @Input()
+  set max(int value) {    
+    _max = value;
+    _maxChanged = true;
+  }
+
   List<int> get unfilled => value == null
       ? _options
       : _options.where((o) => value < o).toList(growable: false);
@@ -42,15 +50,15 @@ class FoRatingComponent implements OnChanges, OnDestroy {
   Stream<int> get valueChange => _valueChangeController.stream;
 
   @override
-  void ngOnChanges(Map<String, SimpleChange> changes) {
+  void ngAfterChanges() {
     /// Max value has changed, reset starlist
-    if (changes.containsKey('max') &&
-        changes['max'].previousValue != changes['max'].currentValue) {
+    if (_maxChanged == true) {
       _options = max == null ? [] : List.generate(max, (i) => i + 1);
 
       // Reset selected value to max
       value = (value == null || max == null) ? null : min(value, max);
       _valueChangeController.add(value);
+      _maxChanged = false;
     }
   }
 

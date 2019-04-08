@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:angular/angular.dart';
 import 'package:fo_components/components/fo_button/fo_button_component.dart';
 
@@ -10,34 +11,12 @@ import 'package:fo_components/components/fo_button/fo_button_component.dart';
     templateUrl: 'fo_notification_component.html',
     styleUrls: ['fo_notification_component.css'],
     directives: [FoButtonComponent, NgIf],
-    changeDetection: ChangeDetectionStrategy.Stateful)
-class FoNotificationComponent extends ComponentState
-    implements OnInit, OnDestroy {
-  FoNotificationComponent();
-
-  @override
-  void ngOnInit() {
-    if (visibleSeconds != null) {
-      Future.delayed(Duration(seconds: visibleSeconds)).then((_) => close());
-    }
-  }
-
-  @override
-  void ngOnDestroy() {
-    _onCloseController.close();
-    _onCloseController = null;
-  }
-
-  void close() {
-    _onCloseController?.add('');
-    setState(() {
-      _isOpen = false;
-    });
-  }
-
-  bool get isOpen => _isOpen;
+    changeDetection: ChangeDetectionStrategy.OnPush)
+class FoNotificationComponent implements OnInit, OnDestroy {
+  final ChangeDetectorRef _changeDetectorRef;
 
   bool _isOpen = true;
+
   StreamController<String> _onCloseController = StreamController();
 
   @Input()
@@ -49,6 +28,28 @@ class FoNotificationComponent extends ComponentState
   @Input()
   int visibleSeconds;
 
+  FoNotificationComponent(this._changeDetectorRef);
+  bool get isOpen => _isOpen;
+
   @Output('close')
   Stream<String> get onClose => _onCloseController.stream;
+
+  void close() {
+    _onCloseController?.add('');
+    _isOpen = false;
+    _changeDetectorRef.markForCheck();
+  }
+
+  @override
+  void ngOnDestroy() {
+    _onCloseController.close();
+    _onCloseController = null;
+  }
+
+  @override
+  void ngOnInit() {
+    if (visibleSeconds != null) {
+      Future.delayed(Duration(seconds: visibleSeconds)).then((_) => close());
+    }
+  }
 }

@@ -19,12 +19,10 @@
     -ms-transition: opacity 200ms;
     -o-transition: opacity 200ms;
     transition: opacity 200ms;
-    material-button {
-      @include button-background-color('[raised]', #fff);
-      background-color: #fff;
+    fo-button {          
       ::ng-deep material-icon {
         i {
-          font-size: 3em;
+          font-size: 2em;
         }
       }
     }
@@ -60,8 +58,8 @@
   @media screen and (max-width: $medium-width-threshold) {
     .arrow {
       top: auto;
-      bottom: 20px;
-      material-button {
+      bottom: 30px;
+      fo-button {
         ::ng-deep material-icon {
           i {
             font-size: 1.3em;

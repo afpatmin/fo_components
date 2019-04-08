@@ -24,7 +24,7 @@ import '../fo_label/fo_label_component.dart';
       NgClass,
       NgIf
     ])
-class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
+class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @Input()
   String label;
 
@@ -42,21 +42,39 @@ class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
   /// Make sure options doesn't extend beyond the viewport
   bool constrainToViewPort = true;
 
-  @Input()
-  Map<String, List<FoDropdownOptionRenderable>> options;
+  Map<String, List<FoDropdownOptionRenderable>> _options;
+
+  bool _optionsChanged;
 
   final StreamController<Object> _selectedIdController =
       StreamController<Object>();
   final StreamController<FoButtonEvent> actionButtonController =
       StreamController<FoButtonEvent>();
+
   final dom.Element _host;
   bool dropdownVisible = false;
   FoDropdownOptionRenderable selectedOption;
-
+  @Input()
+  bool showSearch = false;
   FoDropdownSelectComponent(this._host);
 
+  @Output('actionButtonTrigger')
+  Stream<FoButtonEvent> get actionButtonTrigger =>
+      actionButtonController.stream;
+
+  int get dropdownWidth => _host?.getBoundingClientRect()?.width?.toInt();
+
+  Map<String, List<FoDropdownOptionRenderable>> get options => _options;
+
+  @Input()
+  set options(Map<String, List<FoDropdownOptionRenderable>> value) {
+    _options = value;
+    _optionsChanged = true;
+  }
+
+  Object get selectedId => selectedOption?.renderId;
+
   @Input('selectedId')
-  // ignore: avoid_setters_without_getters
   set selectedId(Object id) {
     selectedOption = null;
 
@@ -64,7 +82,7 @@ class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
       for (final category in options.keys) {
         if (options[category] != null) {
           selectedOption = options[category]
-              .firstWhere((e) => e.renderId == id, orElse: () => null);
+              .firstWhere((e) => e?.renderId == id, orElse: () => null);
 
           if (selectedOption != null) {
             return;
@@ -74,17 +92,23 @@ class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  @Input()
-  bool showSearch = false;
-
-  int get dropdownWidth => _host?.getBoundingClientRect()?.width?.toInt();
-
   @Output('selectedIdChange')
   Stream<Object> get selectedIdChange => _selectedIdController.stream;
 
-  @Output('actionButtonTrigger')
-  Stream<FoButtonEvent> get actionButtonTrigger =>
-      actionButtonController.stream;
+  @override
+  void ngAfterChanges() {
+    if (_optionsChanged == true) {
+      // Make sure selectedOption is still in options
+      if (selectedOption != null) {
+        for (final category in options.keys) {
+          if (options[category].contains(selectedOption)) {
+            return;
+          }
+        }
+        selectedOption = null;
+      }
+    }
+  }
 
   @override
   void ngOnDestroy() {
@@ -105,28 +129,5 @@ class FoDropdownSelectComponent implements OnInit, OnChanges, OnDestroy {
     dropdownVisible = false;
     selectedOption = event;
     _selectedIdController.add(event.renderId);
-  }
-
-  @override
-  void ngOnInit() {
-    // This will select first option with id == null if it exists
-    selectedId ??= selectedOption?.renderId;
-  }
-
-  Object get selectedId => selectedOption?.renderId;
-
-  @override
-  void ngOnChanges(Map<String, SimpleChange> changes) {
-    if (changes.containsKey('options')) {
-      // Make sure selectedOption is still in options
-      if (selectedOption != null) {
-        for (final category in options.keys) {
-          if (options[category].contains(selectedOption)) {
-            return;
-          }
-        }
-        selectedOption = null;
-      }
-    }
   }
 }

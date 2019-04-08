@@ -1,3 +1,14 @@
+# 1.0.4
+### General
+* Replaced ngOnChanges with interal logic due to it becomign deprecated in angular
+* Removed instances of changeDetectionStrategy.Stateful
+
+### Component updates
+#### Carousel
+* Slight style adjustments to Next/Previous buttons
+#### DropdownSelect
+* Removed crazy workaround to set selectedId on init
+
 # 1.0.3+4
 ### Component updates
 #### TextAreaInput

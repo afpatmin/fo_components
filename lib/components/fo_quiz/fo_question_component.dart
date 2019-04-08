@@ -19,7 +19,7 @@ import 'fo_quiz_component.dart';
       NgIf
     ],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoQuestionComponent implements OnChanges, OnDestroy {
+class FoQuestionComponent implements AfterChanges, OnDestroy {
   bool leftHidden = true;
   bool rightHidden = true;
   bool transition = false;
@@ -40,8 +40,9 @@ class FoQuestionComponent implements OnChanges, OnDestroy {
 
   Iterable<FoOptionModel> get selectedOptions =>
       model.options.where((o) => o.selected);
+  
   @override
-  void ngOnChanges(Map<String, SimpleChange> changes) {
+  void ngAfterChanges() {
     leftHidden = true;
     rightHidden = true;
     transition = false;

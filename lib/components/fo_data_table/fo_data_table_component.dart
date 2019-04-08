@@ -58,7 +58,7 @@ class BatchOperationEvent {
     ],
     pipes: [CapitalizePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoDataTableComponent implements OnChanges, OnDestroy {
+class FoDataTableComponent implements AfterChanges, OnDestroy {
   final Function eq = const ListEquality().equals;
 
   final String msgFilter = Intl.message('filter', name: 'filter');
@@ -122,6 +122,9 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
   bool infoModalOpen = false;
   bool _allChecked;
   final int liveSearchThreshold = 500;
+
+  int _rows = 10;
+  bool _rowsChanged = false;
 
   final StreamController<String> onAddController = StreamController();
 
@@ -193,16 +196,15 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
   Set<Object> selectedRows = {};
 
   @Input()
-  int rows = 10;
-
-  @Input()
   bool disabled = false;
+
+  String selectedBatchOperation;
 
   FoDataTableComponent() {
     selectedRowId = rowOptions[''].first.id;
   }
-  bool get allChecked => _allChecked;
 
+  bool get allChecked => _allChecked;
   set allChecked(bool state) {
     _allChecked = state;
     if (_allChecked)
@@ -238,15 +240,18 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
   @Output('sort')
   Stream<Map<String, dynamic>> get onSortOutput => _onSortController.stream;
 
+  int get rows => _rows;
+
+  @Input('rows')
+  set rows(int value) {
+    _rows = value;
+    _rowsChanged = true;
+  }
+
   @Output('selectedRowsChange')
   Stream<Set<Object>> get selectedRowsChange => onSelectedRowsController.stream;
 
   int get totalPages => (filteredKeys.length.toDouble() / selectedRowId).ceil();
-
-  void onActionButtonTrigger() {
-    _onBatchOperationController
-        .add(BatchOperationEvent(selectedBatchOperation, selectedRows.toSet()));
-  }
 
   dynamic getCell(Object id, String column) {
     if (data == null || data[id] == null)
@@ -291,14 +296,15 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
   bool isBool(Object value) => value is bool;
 
   @override
-  void ngOnChanges(Map<String, SimpleChange> changes) {
+  void ngAfterChanges() {
     _evaluatedColumnsBuffer.clear();
     data ??= {};
 
-    if (changes.containsKey('rows')) {
+    if (_rowsChanged == true) {
       selectedRowId = rows;
       firstIndex = 0;
       lastIndex = selectedRowId;
+      _rowsChanged = false;
     }
     if (_filteredKeys == null || !eq(data.keys.toList(), filteredKeys)) {
       _filteredKeys = List.from(data.keys);
@@ -330,7 +336,10 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
     _onBatchOperationController.close();
   }
 
-  String selectedBatchOperation;
+  void onActionButtonTrigger() {
+    _onBatchOperationController
+        .add(BatchOperationEvent(selectedBatchOperation, selectedRows.toSet()));
+  }
 
   void onBatchOperationTrigger(String event) {
     _onBatchOperationController
@@ -345,6 +354,13 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
     else
       selectedRows.remove(id);
     onSelectedRowsController.add(selectedRows);
+  }
+
+  void onDeleteRow(Object key, dom.Event event) {
+    if (disabled == false) {
+      deleteBufferId = key;
+    }
+    event.stopPropagation();
   }
 
   void onDownloadDataCSV() {
@@ -533,13 +549,6 @@ class FoDataTableComponent implements OnChanges, OnDestroy {
 
     currentPage =
         (data.isEmpty) ? 0 : (firstIndex.toDouble() / selectedRowId).ceil() + 1;
-  }
-
-  void onDeleteRow(Object key, dom.Event event) {
-    if (disabled == false) {
-      deleteBufferId = key;
-    }
-    event.stopPropagation();
   }
 
   void step(int steps) {
