@@ -40,14 +40,11 @@ class FoTextAreaInputComponent
   ChangeFunction<String> _onChange;
   NgControl control;
   final StreamController _focusController = StreamController<html.FocusEvent>();
-  html.Element host;
+  html.Element _host;
   html.TextAreaElement inputElement;
 
-  @ViewChild('textArea')
-  html.TextAreaElement textAreaElement;
-
   FoTextAreaInputComponent(
-      @Self() @Optional() this.control, this._changeDetectorRef) {
+      @Self() @Optional() this.control, this._host, this._changeDetectorRef) {
     if (control != null) control.valueAccessor = this;
   }
 
@@ -120,6 +117,6 @@ class FoTextAreaInputComponent
 
   @override
   void ngAfterViewInit() {
-    inputElement = host.querySelector('textarea');
+    inputElement = _host.querySelector('textarea');
   }
 }
