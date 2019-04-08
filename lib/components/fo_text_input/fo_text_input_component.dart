@@ -35,7 +35,8 @@ import 'fo_error_output_component.dart';
     pipes: [CapitalizePipe],
     providers: [datepickerBindings],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
+class FoTextInputComponent
+    implements ControlValueAccessor<String>, AfterViewInit, OnDestroy {
   @Input()
   String actionButtonLabel;
 
@@ -83,20 +84,15 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
       StreamController<html.FocusEvent>();
   final StreamController<String> _blurController = StreamController<String>();
   bool dropdownVisible = false;
-  @ViewChild('input')
-  html.InputElement inputElement;
-
+  html.Element host;
   bool hasFocus = false;
-
   FoTextInputComponent(
-      @Self() @Optional() this.control, this._changeDetectorRef) {
+      @Self() @Optional() this.control, this.host, this._changeDetectorRef) {
     if (control != null) control.valueAccessor = this;
   }
-
   @Output('actionButtonTrigger')
   Stream<FoButtonEvent> get actionButtonTrigger =>
       actionButtonController.stream;
-
   @Output('blur')
   Stream<String> get blur => _blurController.stream;
 
@@ -134,9 +130,15 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   @Output('focus')
   Stream<html.FocusEvent> get focus => _focusController.stream;
 
+  html.InputElement inputElement;
+
   @Output('selectionChange')
   Stream<FoDropdownOptionRenderable> get selectionChange =>
       _selectionChangeController.stream;
+
+  int get selectionEnd => inputElement?.selectionEnd;
+
+  int get selectionStart => inputElement?.selectionStart;
 
   @override
   void ngOnDestroy() {
@@ -181,6 +183,15 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
     _focusController.add(event);
   }
 
+  void onKeyUp(html.Event event) {
+    if (event is html.KeyboardEvent &&
+        (actionButtonLabel != null && event?.keyCode == html.KeyCode.ENTER ||
+            event?.keyCode == html.KeyCode.MAC_ENTER &&
+                value?.isEmpty == false)) {
+      actionButtonController.add(FoButtonEvent());
+    }
+  }
+
   void onValueChange(String event) {
     value = event;
     if (_onChange != null) {
@@ -195,15 +206,6 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
     _onChange = f;
   }
 
-  void onKeyUp(html.Event event) {
-    if (event is html.KeyboardEvent &&
-        (actionButtonLabel != null && event?.keyCode == html.KeyCode.ENTER ||
-            event?.keyCode == html.KeyCode.MAC_ENTER &&
-                value?.isEmpty == false)) {
-      actionButtonController.add(FoButtonEvent());
-    }
-  }
-
   @override
   void registerOnTouched(TouchFunction f) {}
 
@@ -211,5 +213,10 @@ class FoTextInputComponent implements ControlValueAccessor<String>, OnDestroy {
   void writeValue(String obj) {
     value = obj;
     _changeDetectorRef.markForCheck();
+  }
+
+  @override
+  void ngAfterViewInit() {
+    inputElement = host.querySelector('input');
   }
 }

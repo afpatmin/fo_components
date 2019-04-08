@@ -5,21 +5,20 @@
                    class="gray-color leading"
                    [icon]="leadingIcon"></material-icon>
     <input class="roundLeft gray-color-bright"
-           #input
            type="{{type}}"
            [autoFocus]="autoFocus"
            [disabled]="disabled == true"
-           [placeholder]="placeholder"           
+           [placeholder]="placeholder"
            [class.noRightBorder]="actionButtonLabel != null"
            [class.leftPadding]="leadingIcon != null"
            [class.rightPadding]="clearIcon == true"
            [class.color-alert]="control?.valid == false && control?.pristine != true"
            [ngModel]="value"
-           (ngModelChange)="onValueChange($event)"           
+           (ngModelChange)="onValueChange($event)"
            (change)="changeController.add($event)"
            (keyup)="onKeyUp($event)"
            (focus)="onFocus($event)"
-           (blur)="onBlur($event)">            
+           (blur)="onBlur($event)">
     <material-icon *ngIf="clearIcon == true && value?.isEmpty == false"
                    size="large"
                    class="color-alert clear"
