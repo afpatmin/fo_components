@@ -1,3 +1,8 @@
+# 1.0.3+2
+### Component updates
+#### TextAreaInput
+* Added inputElement ref
+
 # 1.0.3+1
 ### Component updates
 #### TextInput

@@ -61,9 +61,8 @@ class FoTextInputComponent
   @Input()
   bool disabled = false;
 
-  @Input()
-
   /// Make sure options doesn't extend beyond the viewport
+  @Input()
   bool constrainToViewPort = true;
 
   @Input()
@@ -85,6 +84,7 @@ class FoTextInputComponent
   final StreamController<String> _blurController = StreamController<String>();
   bool dropdownVisible = false;
   html.Element host;
+  html.InputElement inputElement;
   bool hasFocus = false;
   FoTextInputComponent(
       @Self() @Optional() this.control, this.host, this._changeDetectorRef) {
@@ -130,14 +130,11 @@ class FoTextInputComponent
   @Output('focus')
   Stream<html.FocusEvent> get focus => _focusController.stream;
 
-  html.InputElement inputElement;
-
   @Output('selectionChange')
   Stream<FoDropdownOptionRenderable> get selectionChange =>
       _selectionChangeController.stream;
 
   int get selectionEnd => inputElement?.selectionEnd;
-
   int get selectionStart => inputElement?.selectionStart;
 
   @override

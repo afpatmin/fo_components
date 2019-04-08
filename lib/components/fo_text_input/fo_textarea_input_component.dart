@@ -21,7 +21,7 @@ import 'fo_error_output_component.dart';
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoTextAreaInputComponent
-    implements ControlValueAccessor<String>, OnDestroy {
+    implements ControlValueAccessor<String>, AfterViewInit, OnDestroy {
   @Input()
   String label;
 
@@ -40,6 +40,8 @@ class FoTextAreaInputComponent
   ChangeFunction<String> _onChange;
   NgControl control;
   final StreamController _focusController = StreamController<html.FocusEvent>();
+  html.Element host;
+  html.TextAreaElement inputElement;
 
   @ViewChild('textArea')
   html.TextAreaElement textAreaElement;
@@ -114,5 +116,10 @@ class FoTextAreaInputComponent
   @override
   void ngOnDestroy() {
     _focusController.close();
+  }
+
+  @override
+  void ngAfterViewInit() {
+    inputElement = host.querySelector('input');
   }
 }
