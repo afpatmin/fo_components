@@ -1,3 +1,8 @@
+# 1.0.4
+### Component updates
+#### TextInput
+* Added inputElement ref
+
 # 1.0.3
 ### Bugfixes
 * TextInput with options no longer showing options if a value is set initially
@@ -6,7 +11,7 @@
 * DataTable table now has z-index so that batchOperation is shown under
 
 ### Component updates
-### TextInput, DropdownSelect, DropdownMultiSelect, DropdownList
+#### TextInput, DropdownSelect, DropdownMultiSelect, DropdownList
 * Added constrainToViewPort input
 
 # 1.0.2+1
