@@ -120,6 +120,6 @@ class FoTextAreaInputComponent
 
   @override
   void ngAfterViewInit() {
-    inputElement = host.querySelector('input');
+    inputElement = host.querySelector('textarea');
   }
 }
