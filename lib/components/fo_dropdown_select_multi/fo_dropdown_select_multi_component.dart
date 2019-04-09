@@ -113,6 +113,6 @@ class FoDropdownSelectMultiComponent<T>
     }
 
     selectionChangeController
-        .add(addedOptionIds.toList(growable: false).cast<T>());
+        .add(addedOptionIds.toList().cast<T>());
   }
 }
