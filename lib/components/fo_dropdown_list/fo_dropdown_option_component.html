@@ -1,15 +1,17 @@
 <table>
   <tr>
-    <td class="leadingIcon" *ngIf="model.renderIcon?.isEmpty == false">
-      <material-icon [icon]="model.renderIcon"
-                     size="x-large"
-                     baseline></material-icon>
+    <td class="leadingIcon"
+        *ngIf="model.renderIcon?.isEmpty == false">
+      <fo-icon [icon]="model.renderIcon"
+               [material]="materialIcon">
+      </fo-icon>
     </td>
     <td>
       <div class="black-color">{{model.renderLabel}}</div>
       <div class="gray-color">{{model.renderSecondaryLabel}}</div>
     </td>
-    <td class="black-color info" *ngIf="model.renderInfo?.isEmpty == false">
+    <td class="black-color info"
+        *ngIf="model.renderInfo?.isEmpty == false">
       <strong>{{model.renderInfo}}</strong>
     </td>
   </tr>

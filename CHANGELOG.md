@@ -1,3 +1,16 @@
+# 1.0.5
+### Component updates
+#### Notification
+* FoButton style now only applied to close button
+
+#### FoIcon
+* Added boolean input [material]. If set to true, FoIcon will become a proxy to MaterialIcon (defaults to false)
+
+#### DropdownList, DropdownSelect, DropdownMultiSelect, TextInput
+* Added boolean input [materialIcons]. If set to false, rendered icons are FoIcons (defaults to true)
+
+### Bugfixes
+
 # 1.0.4
 ### General
 * Replaced ngOnChanges with interal logic due to it becomign deprecated in angular

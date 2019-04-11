@@ -27,11 +27,9 @@
   </p>
   <p>
     <span *ngIf="file == null">...</span>
-    <ng-container *ngIf="file != null"> {{file.name}} ({{(file.size / 1024).ceil()}}kb) <material-icon icon="cancel"
-                     size="medium"
-                     baseline
-                     class="color-alert"
-                     (click)="clearSelection()"></material-icon>
+    <ng-container *ngIf="file != null"> {{file.name}} ({{(file.size / 1024).ceil()}}kb) <fo-icon icon="cancel"
+               class="color-alert"
+               (click)="clearSelection()"></fo-icon>
     </ng-container>
   </p>
   <p class="color-alert"

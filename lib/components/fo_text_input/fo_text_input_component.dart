@@ -5,7 +5,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_components/focus/focus.dart';
 import 'package:angular_components/material_datepicker/module.dart';
-import 'package:angular_components/material_icon/material_icon.dart';
+import 'package:fo_components/components/fo_icon/fo_icon_component.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:intl/intl.dart';
 
@@ -28,7 +28,7 @@ import 'fo_error_output_component.dart';
       FoErrorOutputComponent,
       FoLabelComponent,
       formDirectives,
-      MaterialIconComponent,
+      FoIconComponent,
       NgClass,
       NgIf
     ],
@@ -67,6 +67,9 @@ class FoTextInputComponent
 
   @Input()
   String type = 'text';
+
+  @Input()
+  bool materialIcons = true;
 
   String value;
   ChangeFunction<String> _onChange;

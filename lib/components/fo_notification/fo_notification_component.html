@@ -1,15 +1,17 @@
 <div *ngIf="isOpen"
      id="notificationContainer">
-  <h2 class="overflowEllipsis margin-top-medium margin-bottom-none"> {{header}} <fo-button
-               *ngIf="showCloseButton == true"
-               dense
-               clearSize
-               noHover
-               white
-               icon="close"
-               (trigger)="close()">
-    </fo-button>
-  </h2>
+  <div id="header">
+    <h2 class="overflowEllipsis margin-top-medium margin-bottom-none"> {{header}} <fo-button
+                 *ngIf="showCloseButton == true"
+                 dense
+                 clearSize
+                 noHover
+                 white
+                 icon="close"
+                 (trigger)="close()">
+      </fo-button>
+    </h2>
+  </div>
   <div>
     <ng-content></ng-content>
   </div>

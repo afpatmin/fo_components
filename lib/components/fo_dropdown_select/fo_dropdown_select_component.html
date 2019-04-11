@@ -7,9 +7,9 @@
          [class.disabled]="disabled == true"
          [class.focus]="dropdownVisible">
       <div id="selectedValue"> {{selectedOption == null ? '-' : selectedOption.renderLabel}} </div>
-      <material-icon class="arrow"
-                     baseline
-                     icon="keyboard_arrow_down"></material-icon>
+      <fo-icon class="arrow"
+               [material]="true"
+               icon="keyboard_arrow_down"></fo-icon>
     </div>
   </fo-label>
   <fo-button *ngIf="actionButtonLabel != null"
@@ -24,6 +24,7 @@
                   [showSearch]="showSearch"
                   [constrainToViewPort]="constrainToViewPort"
                   [allowNullSelection]="allowNullSelection"
+                  [materialIcons]="materialIcons"
                   [width]="dropdownWidth"
                   (select)="onSelect($event)"
                   [(visible)]="dropdownVisible">

@@ -43,6 +43,9 @@ class FoDropdownSelectMultiComponent<T>
   @Input()
   bool showSearch = false;
 
+  @Input()
+  bool materialIcons = true;
+
   Map<String, List<FoDropdownOptionRenderable>> filteredOptions = {};
 
   Object selectedId;

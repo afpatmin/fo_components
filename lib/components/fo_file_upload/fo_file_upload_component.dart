@@ -1,21 +1,18 @@
-// Copyright (c) 2016, BuyByMarcus Ltd. All rights reserved. Use of this source code
-// is governed by a BSD-style license that can be found in the LICENSE file.
-
 import 'dart:async';
 import 'dart:html' as dom;
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_icon/material_icon.dart';
 import 'package:intl/intl.dart';
 
 import '../../pipes/capitalize_pipe.dart';
 import '../fo_button/fo_button_component.dart';
+import '../fo_icon/fo_icon_component.dart';
 
 @Component(
     selector: 'fo-file-upload',
     templateUrl: 'fo_file_upload_component.html',
     styleUrls: ['fo_file_upload_component.css'],
-    directives: [NgIf, FoButtonComponent, MaterialIconComponent],
+    directives: [NgIf, FoButtonComponent, FoIconComponent],
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FileUploadComponent implements OnDestroy {

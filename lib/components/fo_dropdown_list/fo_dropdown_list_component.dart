@@ -40,6 +40,9 @@ class FoDropdownListComponent
   bool constrainToViewPort = true;
 
   @Input()
+  bool materialIcons = true;
+
+  @Input()
   Map<String, List<FoDropdownOptionRenderable>> options;
 
   @Input()

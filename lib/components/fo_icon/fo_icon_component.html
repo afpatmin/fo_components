@@ -1,1 +1,7 @@
-<span [class]="iconClass" [style.font-size]="size"></span>
+<material-icon *ngIf="material == true"
+               [style.font-size]="size"
+               baseline
+               [icon]="icon"></material-icon>
+<span *ngIf="material != true"
+      [class]="iconClass"
+      [style.font-size]="size"></span>

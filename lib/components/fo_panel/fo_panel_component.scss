@@ -4,7 +4,7 @@
 
 :host {
   div#foPanel {
-    @include fo-button-font-size(0.5rem);
+    @include fo-button-font-size(0.7rem);
     @include boxShadow();
     overflow: hidden;
     display: block;

@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:html' as dom;
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_icon/material_icon.dart';
 
 import '../fo_button/fo_button_component.dart';
 import '../fo_button/fo_button_event.dart';
 import '../fo_dropdown_list/fo_dropdown_list_component.dart';
 import '../fo_dropdown_list/fo_dropdown_option.dart';
+import '../fo_icon/fo_icon_component.dart';
 import '../fo_label/fo_label_component.dart';
 
 @Component(
@@ -19,8 +19,8 @@ import '../fo_label/fo_label_component.dart';
     directives: [
       FoButtonComponent,
       FoDropdownListComponent,
+      FoIconComponent,
       FoLabelComponent,
-      MaterialIconComponent,
       NgClass,
       NgIf
     ])
@@ -37,10 +37,12 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @Input()
   bool allowNullSelection = false;
 
-  @Input()
-
   /// Make sure options doesn't extend beyond the viewport
+  @Input()
   bool constrainToViewPort = true;
+
+  @Input()
+  bool materialIcons = true;
 
   Map<String, List<FoDropdownOptionRenderable>> _options;
 

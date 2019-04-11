@@ -1,33 +1,37 @@
 @import 'package:fo_components/components/fo_button/mixins';
 
 :host {
-    z-index: 99;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    div#notificationContainer {             
-        padding: 0.5rem 1rem;
-        background-color: rgba(0,0,0,0.8);
-        color: white;
+  z-index: 99;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 
-        @include fo-button-font-size(0.5rem);
-        fo-button {
-          margin-top: -0.5rem;
-          color: black;
-          float: right;
-        }
-        
+  div#notificationContainer {
+    padding: 0.5rem 1rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
 
-        ::ng-deep a {
-            color: white;
-            text-decoration: underline;
-        }
-        h3.overflowEllipsis {
-            overflow: hidden;
-            -ms-text-overflow: ellipsis;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
+    div#header {
+      @include fo-button-font-size(0.7rem);
+      fo-button {
+        margin-top: -0.5rem;
+        color: black;
+        float: right;
+      }
     }
+
+
+    ::ng-deep a {
+      color: white;
+      text-decoration: underline;
+    }
+
+    h3.overflowEllipsis {
+      overflow: hidden;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
 }

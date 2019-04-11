@@ -39,19 +39,19 @@
       border-right-width: 1px;
     }
 
-    material-icon {
+    material-icon, fo-icon {
       box-shadow: none;
       -webkit-box-shadow: none;
     }
 
-    material-icon.clear {
+    material-icon.clear, fo-icon.clear {
       width: 0;
       z-index: 2;
       transform: translateX(-$large);
       cursor: pointer;
     }
 
-    material-icon.leading {
+    material-icon.leading, fo-icon.leading {
       width: 0;
       z-index: 2;
       transform: translateX($medium);

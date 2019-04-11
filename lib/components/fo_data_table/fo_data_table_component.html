@@ -1,12 +1,11 @@
 <div class="row expand collapse">
   <div class="m7 l8 col">
-    <h3 class="margin-bottom-none"> {{label | capitalize}} <material-icon baseline
-                     size="large"
-                     *ngIf="description != null"
-                     icon="help_outline"
-                     (click)="infoModalOpen = true"
-                     class="clickable">
-      </material-icon>
+    <h3 class="margin-bottom-none"> {{label | capitalize}} <fo-icon *ngIf="description != null"
+               [material]="true"
+               icon="help_outline"
+               (click)="infoModalOpen = true"
+               class="clickable">
+      </fo-icon>
     </h3>
   </div>
   <div class="m5 l4 col text-right">
@@ -36,26 +35,20 @@
           <td *ngFor="let cell of columns.keys"
               (click)="onSort(cell)">
             <span>{{columns[cell]}}</span>
-            <material-icon baseline
-                           size="small"
-                           [class.hidden]="sortColumn != cell || sortOrder == 'DESC'"
-                           icon="keyboard_arrow_up"></material-icon>
-            <material-icon baseline
-                           size="small"
-                           [class.hidden]="sortColumn != cell || sortOrder == 'ASC'"
-                           icon="keyboard_arrow_down"></material-icon>
+            <fo-icon [class.hidden]="sortColumn != cell || sortOrder == 'DESC'"
+                     icon="keyboard_arrow_up"></fo-icon>
+            <fo-icon [class.hidden]="sortColumn != cell || sortOrder == 'ASC'"
+                     icon="keyboard_arrow_down"></fo-icon>
           </td>
           <td *ngFor="let cell of evaluatedColumns.keys"
               (click)="onSort(cell)">
             <span>{{cell}}</span>
-            <material-icon baseline
-                           size="small"
-                           [class.hidden]="sortColumn != cell || sortOrder == 'DESC'"
-                           icon="keyboard_arrow_up"></material-icon>
-            <material-icon baseline
-                           size="small"
-                           [class.hidden]="sortColumn != cell || sortOrder == 'ASC'"
-                           icon="keyboard_arrow_down"></material-icon>
+            <fo-icon size="small"
+                     [class.hidden]="sortColumn != cell || sortOrder == 'DESC'"
+                     icon="keyboard_arrow_up"></fo-icon>
+            <fo-icon size="small"
+                     [class.hidden]="sortColumn != cell || sortOrder == 'ASC'"
+                     icon="keyboard_arrow_down"></fo-icon>
           </td>
           <td *ngIf="showDeleteButtons"
               class="buttonCell"></td>
@@ -72,34 +65,32 @@
             </material-checkbox>
           </td>
           <td *ngIf="errorFunction != null && data != null">
-            <material-icon *ngIf="errorFunction(data[key]) != null"
-                           icon="warning"
-                           [materialTooltip]="errorFunction(data[key]) | capitalize"
-                           size="medium"></material-icon>
+            <fo-icon *ngIf="errorFunction(data[key]) != null"
+                     icon="warning"
+                     [materialTooltip]="errorFunction(data[key]) | capitalize"
+                     [material]="true"></fo-icon>
           </td>
           <td *ngFor="let cell of columns.keys">
             <span *ngIf="!isBool(getCell(key, cell))">{{getCell(key, cell)}}</span>
-            <material-icon *ngIf="getCell(key, cell) == true"
-                           baseline
-                           icon="check"
-                           size="x-small">
-            </material-icon>
+            <fo-icon *ngIf="getCell(key, cell) == true"
+                     icon="check"
+                     [material]="true">
+            </fo-icon>
           </td>
           <td *ngFor="let cell of evaluatedColumns.keys">
             <span *ngIf="!isBool(getEvaluatedColumn(key, cell))">{{getEvaluatedColumn(key, cell)}}</span>
-            <material-icon *ngIf="getEvaluatedColumn(key, cell) == true"
-                           baseline
-                           icon="check"
-                           size="small">
-            </material-icon>
+            <fo-icon *ngIf="getEvaluatedColumn(key, cell) == true"
+                     icon="check"
+                     [material]="true">
+            </fo-icon>
           </td>
           <td *ngIf="showDeleteButtons"
               class="text-center">
-            <material-icon class="clickable color-alert"
-                           icon="delete_forever"
-                           size="x-large"
-                           (click)="onDeleteRow(key, $event)">
-            </material-icon>
+            <fo-icon class="clickable color-alert"
+                     icon="delete_forever"
+                     (click)="onDeleteRow(key, $event)"
+                     [material]="true">
+            </fo-icon>
           </td>
         </tr>
       </tbody>
@@ -116,9 +107,7 @@
     <div class="col color-alert text-center"
          *ngIf="!disabled">
       <p class="margin-bottom-none">
-        <material-icon baseline
-                       size="x-large"
-                       icon="error"></material-icon> {{msgNoResultsFound | capitalize}}
+        <fo-icon icon="error" [material]="true"></fo-icon> {{msgNoResultsFound | capitalize}}
       </p>
     </div>
   </div>
@@ -163,16 +152,16 @@
         </div>
         <div class="float-right"
              id="stepper">
-          <material-icon class="clickable vertical-align-middle"
-                         [class.disabled]="disabled || firstIndex <= 0"
-                         icon="navigate_before"
-                         (click)="step(-1)">
-          </material-icon> {{msgPage}} {{currentPage}}/{{totalPages}} ({{filteredKeys.length}} {{msgRows}})
-          <material-icon class="clickable vertical-align-middle"
-                         [class.disabled]="disabled || lastIndex >= filteredKeys.length"
-                         icon="navigate_next"
-                         (click)="step(1)">
-          </material-icon>
+          <fo-icon class="clickable vertical-align-middle"
+                   [class.disabled]="disabled || firstIndex <= 0"
+                   icon="navigate_before"
+                   (click)="step(-1)">
+          </fo-icon> {{msgPage}} {{currentPage}}/{{totalPages}} ({{filteredKeys.length}} {{msgRows}}) <fo-icon
+                   class="clickable vertical-align-middle"
+                   [class.disabled]="disabled || lastIndex >= filteredKeys.length"
+                   icon="navigate_next"
+                   (click)="step(1)">
+          </fo-icon>
         </div>
       </div>
     </div>

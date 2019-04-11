@@ -8,7 +8,6 @@ import 'dart:math';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/material_checkbox/material_checkbox.dart';
-import 'package:angular_components/material_icon/material_icon.dart';
 import 'package:angular_components/material_spinner/material_spinner.dart';
 import 'package:angular_components/material_tooltip/material_tooltip.dart';
 import 'package:angular_forms/angular_forms.dart';
@@ -20,6 +19,7 @@ import '../../pipes/range_pipe.dart';
 import '../fo_button/fo_button_component.dart';
 import '../fo_dropdown_list/fo_dropdown_option.dart';
 import '../fo_dropdown_select/fo_dropdown_select_component.dart';
+import '../fo_icon/fo_icon_component.dart';
 import '../fo_modal/fo_modal_component.dart';
 import '../fo_text_input/fo_text_input_component.dart';
 
@@ -52,7 +52,7 @@ class BatchOperationEvent {
       formDirectives,
       FoTextInputComponent,
       MaterialCheckboxComponent,
-      MaterialIconComponent,
+      FoIconComponent,
       MaterialSpinnerComponent,
       MaterialTooltipDirective
     ],
