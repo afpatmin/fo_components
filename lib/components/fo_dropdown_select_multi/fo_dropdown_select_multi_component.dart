@@ -115,7 +115,6 @@ class FoDropdownSelectMultiComponent<T>
           .removeWhere((option) => addedOptionIds.contains(option.renderId));
     }
 
-    selectionChangeController
-        .add(addedOptionIds.toList().cast<T>());
+    selectionChangeController.add(addedOptionIds.toList().cast<T>());
   }
 }
