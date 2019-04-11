@@ -14,7 +14,7 @@
   }
 }
 
-@mixin fo-dropdown-select-multi-option-background-color($color) {
+@mixin fo-dropdown-select-multi-options-background-color($color) {
   ::ng-deep fo-dropdown-select-multi {
     div#selectedOptions {
       ul {

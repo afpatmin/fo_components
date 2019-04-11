@@ -1,26 +1,31 @@
 @import 'package:grid_css/constants';
+
 :host {
   cursor: pointer;
   display: block;
-  padding: $small 0;  
+  padding: $small 0;
+
   table {
     width: 100%;
     table-layout: fixed;
     padding: 0 $medium;
+
     tr {
       td {
         overflow: hidden;
         text-overflow: ellipsis;
       }
+
       td.leadingIcon {
         text-align: center;
         width: $large;
       }
+
       td.info {
         text-align: right;
         font-weight: bold;
-        overflow: hidden;    
-        white-space: nowrap;        
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
   }
@@ -29,7 +34,10 @@
 :host:hover {
   table {
     tr {
-      td, td>div {
+      td,
+      td>div,
+      td.leadingIcon>fo-icon
+      {
         color: white;
       }
     }

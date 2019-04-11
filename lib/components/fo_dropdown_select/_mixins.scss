@@ -13,5 +13,5 @@
     }
   }
   @include fo-button-font-size($size);
-  @include dropdown-list-font-size($size);
+  @include fo-dropdown-list-font-size($size);
 }

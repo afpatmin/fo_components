@@ -1,9 +1,27 @@
 @import 'package:angular_components/material_icon/mixins';
-@mixin dropdown-list-font-size($size) {
+
+@mixin fo-dropdown-list-colors($primaryColor, $borderColor) {
+  ::ng-deep div#dropdownContent {
+    border-color: $borderColor;
+
+    fo-dropdown-option:not(:hover) {
+      fo-icon {
+        color: $primaryColor;
+      }
+    }
+
+    fo-dropdown-option:hover {
+      background-color: $primaryColor;
+    }
+  }
+}
+
+@mixin fo-dropdown-list-font-size($size) {
   ::ng-deep div#dropdownContent {
     div.category {
       font-size: $size !important;
     }
+
     fo-dropdown-option {
       table {
         font-size: $size;

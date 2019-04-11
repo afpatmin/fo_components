@@ -10,6 +10,7 @@
 * Added boolean input [materialIcons]. If set to false, rendered icons are FoIcons (defaults to true)
 
 ### Bugfixes
+* TextAreaInput now has proper border color when input isn't valid
 
 # 1.0.4
 ### General
