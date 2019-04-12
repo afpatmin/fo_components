@@ -1,9 +1,14 @@
+# 1.0.5+1
+### Component updates
+#### Panel
+* FoButton style now only applied to close button
+
 # 1.0.5
 ### Component updates
 #### Notification
 * FoButton style now only applied to close button
 
-#### FoIcon
+#### Icon
 * Added boolean input [material]. If set to true, FoIcon will become a proxy to MaterialIcon (defaults to false)
 
 #### DropdownList, DropdownSelect, DropdownMultiSelect, TextInput

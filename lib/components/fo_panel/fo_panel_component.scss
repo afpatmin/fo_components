@@ -4,15 +4,17 @@
 
 :host {
   div#foPanel {
-    @include fo-button-font-size(0.7rem);
     @include boxShadow();
     overflow: hidden;
     display: block;
     padding: 0 $medium $small $medium;
     background-color: white;
+
     div#panelHeader {
+      @include fo-button-font-size(0.7rem);
       display: flex;
       align-items: center;
+
       h3 {
         flex: 1;
         overflow: hidden;
