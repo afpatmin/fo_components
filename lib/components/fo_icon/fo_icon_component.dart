@@ -6,9 +6,9 @@ import 'package:angular_components/material_icon/material_icon.dart';
     selector: 'fo-icon',
     templateUrl: 'fo_icon_component.html',
     styleUrls: ['fo_icon_component.css'],
-    directives: [MaterialIconComponent, NgIf, NgStyle],
+    directives: [MaterialIconComponent, NgFor, NgIf, NgStyle],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoIconComponent {
+class FoIconComponent implements AfterChanges {
   String get iconClass => 'icon-$icon';
 
   @Input()
@@ -17,7 +17,19 @@ class FoIconComponent {
   @Input()
   String icon;
 
+  @Input()
+  int colorCount = 1;
+
   /// If this flag is set, fo_icon uses material icon instead
   @Input()
   bool material = false;
+
+  List<String> subPaths = [];
+
+  @override
+  void ngAfterChanges() {
+    subPaths = colorCount > 1
+        ? List.generate(colorCount, (i) => 'path${i + 1}', growable: false)
+        : null;
+  }
 }

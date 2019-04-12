@@ -1,7 +1,10 @@
 # 1.0.5+1
 ### Component updates
 #### Panel
-* FoButton style now only applied to close button
+* Button style now only applied to close button
+
+#### Icon
+* Now supports multiple colors using input colorCount
 
 # 1.0.5
 ### Component updates

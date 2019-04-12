@@ -2,6 +2,15 @@
                [style.font-size]="size"
                baseline
                [icon]="icon"></material-icon>
-<span *ngIf="material != true"
-      [class]="iconClass"
-      [style.font-size]="size"></span>
+<ng-container *ngIf="material != true">
+  <span *ngIf="colorCount == 1"
+        [class]="iconClass"
+        [style.font-size]="size"></span>
+  <span *ngIf="colorCount > 1"
+        [class]="iconClass">
+    <span *ngFor="let path of subPaths"
+          [class]="path"
+          [style.font-size]="size">
+    </span>
+  </span>
+</ng-container>
