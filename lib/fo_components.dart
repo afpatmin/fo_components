@@ -5,6 +5,7 @@ library fo_components;
 
 export 'components/fo_button/fo_button_component.dart';
 export 'components/fo_carousel/fo_carousel_component.dart';
+export 'components/fo_carousel/fo_carousel_slide_component.dart';
 export 'components/fo_data_table/fo_data_table_component.dart';
 export 'components/fo_dropdown_select/fo_dropdown_select_component.dart';
 export 'components/fo_dropdown_select_multi/fo_dropdown_select_multi_component.dart';
