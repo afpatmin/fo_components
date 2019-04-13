@@ -1,32 +1,27 @@
-<modal [visible]="visible">
-  <material-dialog headered
-                   class="themeable"
-                   [class.fixed-height]="fixedHeight"
-                   [class.fixed-width]="fixedWidth"
-                   [class.small-padding]="smallPadding"
-                   [error]="error">
-    <div header>
-      <div class="flexContainer">
-        <img *ngIf="titleImageUrl != null"
-             [src]="titleImageUrl"
-             alt="title" />
-        <h3 *ngIf="titleImageUrl == null && title != null">{{title}}</h3>
-        <div *ngIf="showCloseButton"
-             id="closeButtonContainer">
-          <fo-button clearSize                     
-                     dense
-                     white
-                     icon="close"
-                     (trigger)="close()">
-          </fo-button>
-        </div>
+<div *ngIf="visible"
+     id="modalOverlay">
+  <div id="modalContent"
+       [style.transform]="transform">
+    <div id="modalHeader">
+      <div id="modalHeaderTitle">
+        <h2 *ngIf="header != null">{{header}}</h2>
       </div>
+      <fo-button clearSize
+                 white
+                 dense
+                 *ngIf="showCloseButton"
+                 icon="close"
+                 [materialIcon]="true"
+                 (trigger)="close()"></fo-button>
     </div>
-    <div class="modal-content">
+    <div id="modalError"
+         class="color-alert"
+         *ngIf="error != null"> {{error}} </div>
+    <div id="modalMain">
       <ng-content></ng-content>
     </div>
-    <div footer>
+    <div id="modalFooter">
       <ng-content select="[footer]"></ng-content>
     </div>
-  </material-dialog>
-</modal>
+  </div>
+</div>

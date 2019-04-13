@@ -1,0 +1,14 @@
+@mixin fo-modal-colors($dividerColor) {    
+  ::ng-deep fo-modal {
+    div#modalOverlay {
+      div#modalContent {
+        div#modalHeader, div#modalError, div#modalMain {
+          border-bottom-color: $dividerColor;
+        }         
+        div#modalError {
+          background-color: $dividerColor;
+        }
+      }
+    }    
+  }
+}

@@ -1,68 +1,110 @@
-@import 'package:angular_components/material_dialog/mixins';
 @import 'package:fo_components/components/fo_button/mixins';
 @import 'package:grid_css/constants';
 @import 'package:fo_components/mixins';
 
-material-dialog.small-padding {
-  @include material-dialog-body-padding($padding: $small);
-  @include material-dialog-header-padding($padding: $small);
-  @include material-dialog-footer-padding($padding: $small);
-}
+:host {
+  div#modalOverlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
 
-material-dialog {
-  @include material-dialog-header-color(white);
-  min-width: 15rem;
-  max-width: 90vw;
-  margin-left: 5vw;
-  margin-right: 5vw;
-  max-height: 95vh;
-  text-align: left;
-
-  [header] {
-    div.flexContainer {
+    div#modalContent {
+      @include boxShadow();
       display: flex;
+      flex-direction: column;
+      background-color: white;
+      max-height: 95vh;
+      max-width: 90vw;
+      overflow: hidden;      
 
-      img {
-        max-width: 90%;
-        max-height: 100px;
-        margin: 1rem auto;
-        align-self: flex-start;
+      div#modalHeader,
+      div#modalFooter {
+        padding: $medium;        
       }
 
-      h3 {
-        align-self: center;
-        margin-bottom: 0;
-        color: #333;
-      }
+      div#modalHeader {
+        display: flex;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+        align-items: center;
 
-      div#closeButtonContainer {
+        div#modalHeaderTitle {
+          flex: auto;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          min-width: 10rem;
+
+          h2 {
+            font-size: 1.2rem;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
 
         @include fo-button-font-size(0.7rem);
+
+        fo-button {
+          margin-left: $small;
+        }
       }
 
-      div#closeButtonContainer {
+      div#modalError {
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+        padding: $small $medium;
+      }
+
+      div#modalMain {
+        padding: $small $medium;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        overflow-y: auto;
         flex: auto;
-        align-self: flex-start;
-        text-align: right;
-        margin-left: 0.5rem;
+        -webkit-overflow-scrolling: touch; // Smooth scrolling on tablets/phones 
       }
     }
   }
 
-  ::ng-deep main {
-    -webkit-overflow-scrolling: touch; // Smooth scrolling on tablets/phones        
+
+}
+
+:host[dense] {
+  div#modalOverlay {
+    div#modalContent {
+      div#modalHeader,
+      div#modalFooter {
+        padding: $small;
+      }
+      div#modalError {
+        padding: $x-small $small;
+      }
+      div#modalMain {
+        padding: $x-small $small;
+      }
+    }
   }
 }
 
-material-dialog.fixed-height {
-  div.modal-content {
-    height: 80vh;
+:host[fullWidth] {
+  div#modalOverlay {
+    div#modalContent {
+      width: 90vw;
+    }
   }
 }
 
-material-dialog.fixed-width {
-  width: 95vw;
-  margin-left: 2.5vw;
-  margin-right: 2.5vw;
-  max-width: $max-width;
+:host[fullHeight] {
+  div#modalOverlay {
+    div#modalContent {
+      height: 95vh;
+    }
+  }
 }

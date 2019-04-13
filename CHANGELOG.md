@@ -1,10 +1,20 @@
-# 1.0.5+1
+# 1.1.0
+### Bugfixes
+####
+* Now exporting CarouselSlide
+
 ### Component updates
 #### Panel
 * Button style now only applied to close button
 
 #### Icon
 * Now supports multiple colors using input colorCount
+
+#### Modal
+* No longer using MaterialModal under the hood
+* Breaking: Renamed input 'title' to 'header'
+* Breaking: Replaced 'fixedWidth' and 'fixedHeight' inputs with pure-css attributes 'fullWidth' and 'fullHeight'
+* Breaking: Replaced largePadding input with pure css attribute 'dense'
 
 # 1.0.5
 ### Component updates
