@@ -1,3 +1,7 @@
+# 1.1.0+1
+#### Component updates
+* Icon no longer requires colorCount input to support colors (instead all icons has support for 16 colors)
+
 # 1.1.0
 ### Bugfixes
 ####

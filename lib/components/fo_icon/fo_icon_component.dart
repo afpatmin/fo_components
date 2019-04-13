@@ -25,6 +25,6 @@ class FoIconComponent implements AfterChanges {
 
   @override
   void ngAfterChanges() {
-    subPaths = List.generate(10, (i) => 'path${i + 1}', growable: false);
+    subPaths = List.generate(16, (i) => 'path${i + 1}', growable: false);
   }
 }
