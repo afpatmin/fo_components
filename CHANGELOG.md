@@ -14,7 +14,7 @@
 * No longer using MaterialModal under the hood
 * Breaking: Renamed input 'title' to 'header'
 * Breaking: Replaced 'fixedWidth' and 'fixedHeight' inputs with pure-css attributes 'fullWidth' and 'fullHeight'
-* Breaking: Replaced largePadding input with pure css attribute 'dense'
+* Breaking: Replaced 'largePadding' input with pure css attribute 'dense'
 
 # 1.0.5
 ### Component updates
