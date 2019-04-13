@@ -7,11 +7,7 @@ import 'package:fo_components/components/fo_button/fo_button_component.dart';
     selector: 'fo-modal',
     styleUrls: ['fo_modal_component.css'],
     templateUrl: 'fo_modal_component.html',
-    directives: [
-      coreDirectives,
-      FoButtonComponent,
-      NgStyle
-    ])
+    directives: [coreDirectives, FoButtonComponent, NgStyle])
 class FoModalComponent implements OnDestroy {
   FoModalComponent();
 
