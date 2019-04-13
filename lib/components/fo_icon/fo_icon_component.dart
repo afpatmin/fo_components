@@ -17,9 +17,6 @@ class FoIconComponent implements AfterChanges {
   @Input()
   String icon;
 
-  @Input()
-  int colorCount = 1;
-
   /// If this flag is set, fo_icon uses material icon instead
   @Input()
   bool material = false;
@@ -28,8 +25,6 @@ class FoIconComponent implements AfterChanges {
 
   @override
   void ngAfterChanges() {
-    subPaths = colorCount > 1
-        ? List.generate(colorCount, (i) => 'path${i + 1}', growable: false)
-        : null;
+    subPaths = List.generate(10, (i) => 'path${i + 1}', growable: false);
   }
 }
