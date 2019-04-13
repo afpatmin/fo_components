@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?jn7p3c');
-  src:  url('fonts/icomoon.eot?jn7p3c#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?jn7p3c') format('truetype'),
-    url('fonts/icomoon.woff?jn7p3c') format('woff'),
-    url('fonts/icomoon.svg?jn7p3c#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?2fjmb9');
+  src:  url('fonts/icomoon.eot?2fjmb9#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?2fjmb9') format('truetype'),
+    url('fonts/icomoon.woff?2fjmb9') format('woff'),
+    url('fonts/icomoon.svg?2fjmb9#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -33,6 +33,434 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon-important:before {
+
+.icon-flag_be .path1:before {
+  content: "\e900";
+  color: rgb(3, 3, 3);
+}
+.icon-flag_be .path2:before {
+  content: "\e901";
+  margin-left: -1.5em;
+  color: rgb(254, 212, 71);
+}
+.icon-flag_be .path3:before {
+  content: "\e902";
+  margin-left: -1.5em;
+  color: rgb(249, 8, 5);
+}
+.icon-flag_ca .path1:before {
+  content: "\e903";
+  color: rgb(243, 243, 244);
+}
+.icon-flag_ca .path2:before {
+  content: "\e904";
+  margin-left: -1.5em;
+  color: rgb(249, 8, 5);
+}
+.icon-flag_ca .path3:before {
+  content: "\e905";
+  margin-left: -1.5em;
+  color: rgb(249, 8, 5);
+}
+.icon-flag_ca .path4:before {
+  content: "\e906";
+  margin-left: -1.5em;
+  color: rgb(249, 8, 5);
+}
+.icon-flag_de .path1:before {
+  content: "\e907";
+  color: rgb(3, 3, 3);
+}
+.icon-flag_de .path2:before {
+  content: "\e908";
+  margin-left: -1.5em;
+  color: rgb(249, 8, 5);
+}
+.icon-flag_de .path3:before {
+  content: "\e909";
+  margin-left: -1.5em;
+  color: rgb(254, 212, 71);
+}
+.icon-flag_dk .path1:before {
+  content: "\e90a";
+  color: rgb(249, 8, 5);
+}
+.icon-flag_dk .path2:before {
+  content: "\e90b";
+  margin-left: -1.5em;
+  color: rgb(244, 244, 247);
+}
+.icon-flag_ee .path1:before {
+  content: "\e915";
+  color: rgb(243, 243, 244);
+}
+.icon-flag_ee .path2:before {
+  content: "\e916";
+  margin-left: -1.5em;
+  color: rgb(4, 99, 200);
+}
+.icon-flag_ee .path3:before {
+  content: "\e918";
+  margin-left: -1.5em;
+  color: rgb(0, 0, 0);
+}
+.icon-flag_es .path1:before {
+  content: "\e919";
+  color: rgb(255, 0, 0);
+}
+.icon-flag_es .path2:before {
+  content: "\e91b";
+  margin-left: -1.5em;
+  color: rgb(255, 255, 51);
+}
+.icon-flag_fi .path1:before {
+  content: "\e921";
+  color: rgb(243, 243, 244);
+}
+.icon-flag_fi .path2:before {
+  content: "\e922";
+  margin-left: -1.5em;
+  color: rgb(22, 114, 240);
+}
+.icon-flag_fr .path1:before {
+  content: "\e923";
+  color: rgb(249, 8, 5);
+}
+.icon-flag_fr .path2:before {
+  content: "\e924";
+  margin-left: -1.5em;
+  color: rgb(243, 243, 244);
+}
+.icon-flag_fr .path3:before {
+  content: "\e925";
+  margin-left: -1.5em;
+  color: rgb(4, 99, 200);
+}
+.icon-flag_gb .path1:before {
+  content: "\e926";
+  color: rgb(4, 55, 160);
+}
+.icon-flag_gb .path2:before {
+  content: "\e927";
+  margin-left: -1.5em;
+  color: rgb(251, 249, 248);
+}
+.icon-flag_gb .path3:before {
+  content: "\e928";
+  margin-left: -1.5em;
+  color: rgb(249, 8, 5);
+}
+.icon-flag_gb .path4:before {
+  content: "\e929";
+  margin-left: -1.5em;
+  color: rgb(251, 249, 248);
+}
+.icon-flag_gb .path5:before {
+  content: "\e92a";
+  margin-left: -1.5em;
+  color: rgb(249, 8, 5);
+}
+.icon-flag_gr .path1:before {
+  content: "\e92b";
+  color: rgb(22, 114, 240);
+}
+.icon-flag_gr .path2:before {
+  content: "\e92c";
+  margin-left: -1.5em;
+  color: rgb(243, 243, 244);
+}
+.icon-flag_ie .path1:before {
+  content: "\e92d";
+  color: rgb(243, 243, 244);
+}
+.icon-flag_ie .path2:before {
+  content: "\e92e";
+  margin-left: -1.5em;
+  color: rgb(244, 150, 35);
+}
+.icon-flag_ie .path3:before {
+  content: "\e92f";
+  margin-left: -1.5em;
+  color: rgb(70, 182, 28);
+}
+.icon-flag_it .path1:before {
+  content: "\e930";
+  color: rgb(249, 8, 5);
+}
+.icon-flag_it .path2:before {
+  content: "\e931";
+  margin-left: -1.5em;
+  color: rgb(243, 243, 244);
+}
+.icon-flag_it .path3:before {
+  content: "\e932";
+  margin-left: -1.5em;
+  color: rgb(70, 182, 28);
+}
+.icon-flag_mx .path1:before {
+  content: "\e933";
+  color: rgb(206, 17, 38);
+}
+.icon-flag_mx .path2:before {
+  content: "\e934";
+  margin-left: -1.5em;
+  color: rgb(243, 243, 244);
+}
+.icon-flag_mx .path3:before {
+  content: "\e935";
+  margin-left: -1.5em;
+  color: rgb(0, 104, 71);
+}
+.icon-flag_mx .path4:before {
+  content: "\e936";
+  margin-left: -1.5em;
+  color: rgb(255, 210, 80);
+}
+.icon-flag_mx .path5:before {
+  content: "\e937";
+  margin-left: -1.5em;
+  color: rgb(0, 195, 160);
+}
+.icon-flag_mx .path6:before {
+  content: "\e938";
+  margin-left: -1.5em;
+  color: rgb(0, 195, 160);
+}
+.icon-flag_mx .path7:before {
+  content: "\e939";
+  margin-left: -1.5em;
+  color: rgb(0, 170, 220);
+}
+.icon-flag_mx .path8:before {
+  content: "\e93b";
+  margin-left: -1.5em;
+  color: rgb(115, 45, 55);
+}
+.icon-flag_mx .path9:before {
+  content: "\e93c";
+  margin-left: -1.5em;
+  color: rgb(170, 210, 100);
+}
+.icon-flag_mx .path10:before {
+  content: "\e93d";
+  margin-left: -1.5em;
+  color: rgb(135, 65, 80);
+}
+.icon-flag_mx .path11:before {
+  content: "\e93e";
+  margin-left: -1.5em;
+  color: rgb(115, 45, 55);
+}
+.icon-flag_mx .path12:before {
+  content: "\e93f";
+  margin-left: -1.5em;
+  color: rgb(120, 60, 70);
+}
+.icon-flag_mx .path13:before {
+  content: "\e940";
+  margin-left: -1.5em;
+  color: rgb(255, 210, 80);
+}
+.icon-flag_mx .path14:before {
+  content: "\e941";
+  margin-left: -1.5em;
+  color: rgb(170, 210, 100);
+}
+.icon-flag_mx .path15:before {
+  content: "\e942";
+  margin-left: -1.5em;
+  color: rgb(255, 225, 90);
+}
+.icon-flag_mx .path16:before {
+  content: "\e943";
+  margin-left: -1.5em;
+  color: rgb(255, 225, 90);
+}
+.icon-flag_mx .path17:before {
+  content: "\e944";
+  margin-left: -1.5em;
+  color: rgb(255, 225, 90);
+}
+.icon-flag_mx .path18:before {
+  content: "\e945";
+  margin-left: -1.5em;
+  color: rgb(255, 225, 90);
+}
+.icon-flag_mx .path19:before {
+  content: "\e946";
+  margin-left: -1.5em;
+  color: rgb(255, 225, 90);
+}
+.icon-flag_mx .path20:before {
+  content: "\e947";
+  margin-left: -1.5em;
+  color: rgb(255, 225, 90);
+}
+.icon-flag_mx .path21:before {
+  content: "\e948";
+  margin-left: -1.5em;
+  color: rgb(255, 180, 120);
+}
+.icon-flag_mx .path22:before {
+  content: "\e949";
+  margin-left: -1.5em;
+  color: rgb(155, 75, 90);
+}
+.icon-flag_nl .path1:before {
+  content: "\e94a";
+  color: rgb(243, 243, 244);
+}
+.icon-flag_nl .path2:before {
+  content: "\e94b";
+  margin-left: -1.5em;
+  color: rgb(4, 99, 200);
+}
+.icon-flag_nl .path3:before {
+  content: "\e94c";
+  margin-left: -1.5em;
+  color: rgb(249, 8, 5);
+}
+.icon-flag_no .path1:before {
+  content: "\e94d";
+  color: rgb(249, 8, 5);
+}
+.icon-flag_no .path2:before {
+  content: "\e94e";
+  margin-left: -1.5em;
+  color: rgb(251, 249, 248);
+}
+.icon-flag_no .path3:before {
+  content: "\e94f";
+  margin-left: -1.5em;
+  color: rgb(4, 99, 200);
+}
+.icon-flag_other:before {
+  content: "\e950";
+}
+.icon-flag_pl .path1:before {
+  content: "\e951";
+  color: rgb(243, 243, 244);
+}
+.icon-flag_pl .path2:before {
+  content: "\e952";
+  margin-left: -1.5em;
+  color: rgb(249, 8, 5);
+}
+.icon-flag_se .path1:before {
+  content: "\e953";
+  color: rgb(4, 99, 200);
+}
+.icon-flag_se .path2:before {
+  content: "\e954";
+  margin-left: -1.5em;
+  color: rgb(254, 210, 65);
+}
+.icon-flag_tr .path1:before {
+  content: "\e955";
+  color: rgb(249, 8, 5);
+}
+.icon-flag_tr .path2:before {
+  content: "\e956";
+  margin-left: -1.5em;
+  color: rgb(255, 255, 255);
+}
+.icon-flag_us .path1:before {
+  content: "\e957";
+  color: rgb(243, 243, 244);
+}
+.icon-flag_us .path2:before {
+  content: "\e958";
+  margin-left: -1.5em;
+  color: rgb(249, 8, 5);
+}
+.icon-flag_us .path3:before {
+  content: "\e959";
+  margin-left: -1.5em;
+  color: rgb(4, 55, 160);
+}
+.icon-flag_us .path4:before {
+  content: "\e95a";
+  margin-left: -1.5em;
+  color: rgb(251, 249, 248);
+}
+.icon-cart:before {
+  content: "\e93a";
+}
+.icon-user:before {
+  content: "\e971";
+}
+.icon-search:before {
+  content: "\e986";
+}
+.icon-menu:before {
+  content: "\e9bd";
+}
+.icon-cross:before {
+  content: "\ea0f";
+}
+.icon-arrow-right:before {
+  content: "\ea42";
+}
+.icon-arrow-down:before {
+  content: "\ea43";
+}
+.icon-arrow-left:before {
+  content: "\ea44";
+}
+.icon-facebook:before {
+  content: "\ea91";
+}
+.icon-instagram:before {
+  content: "\ea92";
+}
+.icon-linkedin:before {
+  content: "\eaca";
+}
+.icon-information:before {
+  content: "\e917";
+}
+.icon-cookie:before {
   content: "\e91a";
+}
+.icon-day:before {
+  content: "\e91c";
+}
+.icon-evening:before {
+  content: "\e91d";
+}
+.icon-night:before {
+  content: "\e91e";
+}
+.icon-morning-and-evening:before {
+  content: "\e91f";
+}
+.icon-time-specified:before {
+  content: "\e920";
+}
+.icon-category-cleansing:before {
+  content: "\e90c";
+}
+.icon-category-rehydrating:before {
+  content: "\e90d";
+}
+.icon-category-healing:before {
+  content: "\e90e";
+}
+.icon-category-serum:before {
+  content: "\e90f";
+}
+.icon-category-facemask:before {
+  content: "\e910";
+}
+.icon-category-eye-care:before {
+  content: "\e911";
+}
+.icon-category-toner:before {
+  content: "\e912";
+}
+.icon-category-sunscreen:before {
+  content: "\e913";
+}
+.icon-category-accessories:before {
+  content: "\e914";
 }
