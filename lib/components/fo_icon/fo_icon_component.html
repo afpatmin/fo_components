@@ -1,1 +1,12 @@
-<span [class]="iconClass" [style.font-size]="size"></span>
+<material-icon *ngIf="material == true"
+               [style.font-size]="size"
+               baseline
+               [icon]="icon"></material-icon>
+<ng-container *ngIf="material != true">
+  <span [class]="iconClass">
+    <span *ngFor="let path of subPaths"
+          [class]="path"
+          [style.font-size]="size">
+    </span>
+  </span>
+</ng-container>

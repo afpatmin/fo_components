@@ -4,38 +4,75 @@
 import 'dart:async';
 import 'dart:html' as html;
 import 'dart:math' as math;
+
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
 import 'package:angular_forms/angular_forms.dart';
-import '../../pipes/fo_name_pipe.dart';
-import '../../services/fo_messages_service.dart';
-import '../fo_modal/fo_modal_component.dart';
+import 'package:fo_components/components/fo_button/fo_button_component.dart';
+import 'package:fo_components/components/fo_dropdown_list/fo_dropdown_option.dart';
+import 'package:fo_components/components/fo_label/fo_label_component.dart';
+import 'package:fo_components/components/fo_text_input/fo_text_input_component.dart';
+import 'package:intl/intl.dart';
+
+import '../../pipes/capitalize_pipe.dart';
 
 @Component(
     selector: 'fo-number-input',
-    styleUrls: const ['fo_number_input_component.css'],
+    styleUrls: ['fo_number_input_component.css'],
     templateUrl: 'fo_number_input_component.html',
-    directives: const [
-      AutoFocusDirective,
+    directives: [
       coreDirectives,
-      FoModalComponent,
+      FoButtonComponent,
+      FoLabelComponent,
+      FoTextInputComponent,
       formDirectives,
-      materialInputDirectives,
-      materialNumberInputDirectives,
-      AutoFocusDirective,
-      MaterialButtonComponent,
-      MaterialIconComponent,
-      MaterialInputComponent,
-      MaterialPopupComponent,
-    PopupSourceDirective  
     ],
-    providers: const [FORM_PROVIDERS],
-    pipes: const [NamePipe],
+    pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoNumberInputComponent
-    implements OnDestroy, ControlValueAccessor<int> {
+class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
+  ChangeFunction<int> _onChange;
+  NgControl control;
+  int value;
+  StreamSubscription<html.KeyboardEvent> _keyUpListener;
+  StreamSubscription<html.MouseEvent> _mouseUpListener;
+  StreamSubscription<html.TouchEvent> _touchEndListener;
+  final ChangeDetectorRef _changeDetectorRef;
+  Timer autoAddTimer;
+  Timer addStepTimer;
+  bool popupVisible = false;
+  String tabIndex = '0';
+  int tabIndexNum = 0;
+
+  final String msgEnterValue = Intl.message('enter value', name: 'enter_value');
+
+  @Input()
+  bool disabled = false;
+
+  @Input()
+  String label = 'value';
+
+  @Input()
+  int max = 9999;
+
+  @Input()
+  int min = 0;
+
+  @Input()
+  int step = 1;
+
+  @Input()
+  Map<String, List<FoDropdownOption>> options;
+
+  @Input()
+  String trailingText = '';
+
   FoNumberInputComponent(@Self() @Optional() this.control,
-      @Attribute('tabindex') this.tabIndex, this._changeDetectorRef, this.msg) {
+      @Attribute('tabindex') this.tabIndex, this._changeDetectorRef) {
+    try {
+      tabIndexNum = tabIndex == null ? null : int.parse(tabIndex);
+    } on FormatException catch (e) {
+      print(e.message);
+    }
+
     _mouseUpListener = html.document.onMouseUp.listen(onMouseUp);
     _touchEndListener = html.document.onTouchEnd.listen(onMouseUp);
     _keyUpListener = html.document.onKeyUp.listen(onMouseUp);
@@ -43,30 +80,22 @@ class FoNumberInputComponent
     if (control != null) control.valueAccessor = this;
   }
 
-  void setValueClamped(String v) {
-    if (v == null)
-      value = 0;
-    else {
-      try {
-        value = v == null ? 0 : math.max(min, math.min(max, int.parse(v)));
-      } on FormatException {
-        value = 0;
+  String get formattedValue => value == null ? '-' : value.toString();
+  String get tabIndexAdd => tabIndexNum == null ? null : '${tabIndexNum + 1}';
+
+  String get tabIndexSub => tabIndexNum == null ? null : '${tabIndexNum - 1}';
+
+  void add(int count) {
+    value ??= (count is double) ? 0.0 : 0;
+
+    if (value + count >= min && value + count <= max) {
+      value += count;
+      if (_onChange != null) {
+        _onChange(value);
       }
+      _changeDetectorRef.markForCheck();
     }
-
-    _onChange(value);
   }
-
-  @override
-  void registerOnTouched(TouchFunction f) {}
-
-  @override
-  void writeValue(int obj) {
-    value = obj;
-  }
-
-  @override
-  void registerOnChange(ChangeFunction<int> f) => _onChange = f;
 
   @override
   void ngOnDestroy() {
@@ -75,9 +104,51 @@ class FoNumberInputComponent
     _keyUpListener.cancel();
   }
 
-  void openPopup() {
-    if (!disabled) {
-      popupVisible = true;
+  @override
+  void onDisabledChanged(bool isDisabled) {}
+
+  void onInputBlur(String v) {
+    if (v == null) {
+      value = 0;
+    } else {
+      var newValue = 0;
+      try {
+        newValue = int.parse(v);
+        if (newValue > max) throw const FormatException('Value too large!');
+        if (newValue < min) throw const FormatException('Value too small');
+        value = newValue;
+      } on FormatException catch (e) {
+        print(e);
+
+        // Reset the value
+        if (value > min) {
+          if (value == max) {
+            value = min;
+            Future.delayed(const Duration(milliseconds: 0)).then((_) {
+              value = max;
+              if (_onChange != null) {
+                _onChange(value);
+              }
+            });
+          } else
+            value = max;
+        } else {
+          if (value == min) {
+            value = max;
+            Future.delayed(const Duration(milliseconds: 0)).then((_) {
+              value = min;
+              if (_onChange != null) {
+                _onChange(value);
+              }
+            });
+          } else {
+            value = min;
+          }
+        }
+      }
+    }
+    if (_onChange != null) {
+      _onChange(value);
     }
   }
 
@@ -97,11 +168,11 @@ class FoNumberInputComponent
     addStepTimer?.cancel();
     addStepTimer = null;
 
-    autoAddTimer = new Timer(const Duration(milliseconds: 600), () {
+    autoAddTimer = Timer(const Duration(milliseconds: 600), () {
       autoAddTimer = null;
       addStepTimer?.cancel();
-      addStepTimer = new Timer.periodic(
-          const Duration(milliseconds: 10), (_) => add(count));
+      addStepTimer =
+          Timer.periodic(const Duration(milliseconds: 10), (_) => add(count));
     });
   }
 
@@ -112,59 +183,31 @@ class FoNumberInputComponent
     addStepTimer = null;
   }
 
-  String get formattedValue => value == null ? '-' : value.toString();
+  @override
+  void registerOnChange(ChangeFunction<int> f) => _onChange = f;
 
-  void add(int count) {
-    value ??= (count is double) ? 0.0 : 0;
+  @override
+  void registerOnTouched(TouchFunction f) {}
 
-    if (value + count >= min && value + count <= max) {
-      value += count;
+  void setValueClamped(String v) {
+    if (v == null || v.isEmpty)
+      value = 0;
+    else {
+      try {
+        value = int.parse(v);
+      } on FormatException {
+        value ??= 0;
+      }
+      value = math.min(max, math.max(min, value));
+    }
+
+    if (_onChange != null) {
       _onChange(value);
-      _changeDetectorRef.markForCheck();
     }
   }
 
-
-  final List<RelativePosition> position = [RelativePosition.AdjacentBottom];
-
-  ChangeFunction<int> _onChange;
-  NgControl control;
-  int value;
-
-  final FoMessagesService msg;
-  StreamSubscription<html.KeyboardEvent> _keyUpListener;
-  StreamSubscription<html.MouseEvent> _mouseUpListener;
-  StreamSubscription<html.TouchEvent> _touchEndListener;
-  final ChangeDetectorRef _changeDetectorRef;
-  Timer autoAddTimer;
-  Timer addStepTimer;
-  bool popupVisible = false;
-  String tabIndex = '0';
-
-  @Input()
-  bool disabled = false;
-
-  @Input()
-  String label = 'value';
-
-  @Input()
-  String leadingText = '';
-
-  @Input()
-  int max = 9999;
-
-  @Input()
-  int min = 0;
-
-  @Input()
-  int step = 1;
-
-  @Input()
-  String trailingText = '';
-
   @override
-  void onDisabledChanged(bool isDisabled) {}
-
-  @ViewChild(MaterialInputComponent)
-  MaterialInputComponent input;
+  void writeValue(int obj) {
+    value = obj;
+  }
 }

@@ -7,56 +7,48 @@ part of 'fo_quiz_model.dart';
 // **************************************************************************
 
 FoQuizModel _$FoQuizModelFromJson(Map<String, dynamic> json) {
-  return new FoQuizModel((json['questions'] as List)
-      .map((e) => new FoQuestionModel.fromJson(e as Map<String, dynamic>))
-      .toList());
+  return FoQuizModel((json['questions'] as List)
+      .map((e) => FoQuestionModel.fromJson(e as Map<String, dynamic>))
+      .toList())
+    ..passScore = json['passScore'] as int;
 }
 
-abstract class _$FoQuizModelSerializerMixin {
-  List<FoQuestionModel> get questions;
-  Map<String, dynamic> toJson() => <String, dynamic>{'questions': questions};
-}
+Map<String, dynamic> _$FoQuizModelToJson(FoQuizModel instance) =>
+    <String, dynamic>{
+      'questions': instance.questions,
+      'passScore': instance.passScore
+    };
 
 FoQuestionModel _$FoQuestionModelFromJson(Map<String, dynamic> json) {
-  return new FoQuestionModel(
+  return FoQuestionModel(
       json['label'] as String,
       (json['options'] as List)
-          .map((e) => new FoOptionModel.fromJson(e as Map<String, dynamic>))
+          .map((e) => FoOptionModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       multiSelect: json['multiSelect'] as bool);
 }
 
-abstract class _$FoQuestionModelSerializerMixin {
-  String get label;
-  List<FoOptionModel> get options;
-  bool get multiSelect;
-  Map<String, dynamic> toJson() => <String, dynamic>{
-        'label': label,
-        'options': options,
-        'multiSelect': multiSelect
-      };
-}
+Map<String, dynamic> _$FoQuestionModelToJson(FoQuestionModel instance) =>
+    <String, dynamic>{
+      'label': instance.label,
+      'options': instance.options,
+      'multiSelect': instance.multiSelect
+    };
 
 FoOptionModel _$FoOptionModelFromJson(Map<String, dynamic> json) {
-  return new FoOptionModel(json['value'] as String, json['label'] as String,
+  return FoOptionModel(json['value'] as String, json['label'] as String,
       selected: json['selected'] as bool,
       score: json['score'] as int,
       child: json['child'] == null
           ? null
-          : new FoQuizModel.fromJson(json['child'] as Map<String, dynamic>));
+          : FoQuizModel.fromJson(json['child'] as Map<String, dynamic>));
 }
 
-abstract class _$FoOptionModelSerializerMixin {
-  String get value;
-  String get label;
-  int get score;
-  bool get selected;
-  FoQuizModel get child;
-  Map<String, dynamic> toJson() => <String, dynamic>{
-        'value': value,
-        'label': label,
-        'score': score,
-        'selected': selected,
-        'child': child
-      };
-}
+Map<String, dynamic> _$FoOptionModelToJson(FoOptionModel instance) =>
+    <String, dynamic>{
+      'value': instance.value,
+      'label': instance.label,
+      'score': instance.score,
+      'selected': instance.selected,
+      'child': instance.child
+    };

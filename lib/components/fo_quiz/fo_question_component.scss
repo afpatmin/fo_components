@@ -1,40 +1,47 @@
+@import 'package:grid_css/constants';
+@import '../fo_button/mixins';
+
 :host {
-    display: block;
-    div.flex-container {
-        padding: 0 2rem;
-        display: flex;
-        flex-direction: column;
-        div.transition {
-            transition: all 500ms ease;
-            -webkit-transition: all 500ms ease;
-        }
-        div.flex-left {
-            align-self: flex-start;
-            p.question {
-                background-color: #888;
-                color: white;
-                padding: 1rem;
-                border-radius: 1rem;
-                -webkit-border-radius: 1rem;
-            }
-            transform: none;
-            opacity: 1;
-        }
-        div.flex-left.is-hidden {
-            transform: translateX(-2rem);
-            opacity: 0;
-        }
-        div.flex-right {
-            align-self: flex-end;
-            width: 100%;
-            opacity: 1;
-            div.answer {                
-                padding: 1rem;
-            }
-        }
-        div.flex-right.is-hidden {
-            transform: translateX(2rem);
-            opacity: 0;
-        }
+  display: block;
+  div.container {
+    padding: 0 $large;  
+    div.transition {
+      transition: all 500ms ease;
+      -webkit-transition: all 500ms ease;
     }
+    div.questionContainer {    
+      p.question {
+        background-color: #888;
+        color: white;
+        padding: $medium;
+        margin: 0;
+        border-radius: $small;
+        -webkit-border-radius: $small;
+        text-align: center;
+      }
+      transform: none;
+      opacity: 1;
+    }
+    div.questionContainer.is-hidden {
+      transform: translateX(-$large);
+      opacity: 0;
+    }
+    div.answerContainer {     
+      opacity: 1;
+      div.answer {
+        text-align: center;
+        padding: $medium 0;
+      }
+    }
+    div.answerContainer.is-hidden {
+      transform: translateX($large);
+      opacity: 0;
+    }
+  }
+
+  div#nextButtonContainer {
+    @include fo-button-font-size(0.7rem);
+    margin-top: $small;
+    text-align: center;
+  }
 }

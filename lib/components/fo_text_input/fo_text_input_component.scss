@@ -1,0 +1,142 @@
+@import 'package:grid_css/constants';
+@import '../../constants.scss';
+@import '../../mixins.scss';
+@import '../fo_button/mixins';
+@import '../fo_dropdown_list/mixins';
+@import 'shared';
+
+:host {
+  display: block;
+  position: relative;
+
+  input {
+    background-color: white;
+    outline: none;
+    margin: 0;
+  }
+
+  input::selection {
+    color: white;
+  }
+
+  input,
+  input:focus {
+    font-size: 1rem;
+  }
+
+  div#flexContainer {
+    display: flex;
+    align-items: center;
+    transition: box-shadow $transitionSpeed;
+    border-radius: $borderRadius;
+
+    input {
+      border-top-left-radius: $borderRadius;
+      border-bottom-left-radius: $borderRadius;
+      border-left-width: 1px;
+      border-top-right-radius: $borderRadius;
+      border-bottom-right-radius: $borderRadius;
+      border-right-width: 1px;
+    }
+
+    material-icon, fo-icon {
+      box-shadow: none;
+      -webkit-box-shadow: none;
+    }
+
+    material-icon.clear, fo-icon.clear {
+      width: 0;
+      z-index: 2;
+      transform: translateX(-$large);
+      cursor: pointer;
+    }
+
+    material-icon.leading, fo-icon.leading {
+      width: 0;
+      z-index: 2;
+      transform: translateX($medium);
+    }
+
+    input {
+      @include inputStyle;
+    }
+
+    input.leftPadding {
+      padding-left: $x-large;
+    }
+
+    input.rightPadding {
+      padding-right: $x-large;
+    }
+
+    input.noRightBorder {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right-width: 0;
+    }
+
+    ::ng-deep fo-button {
+      button.themeable {
+        padding-left: $large;
+        padding-right: $large;
+      }
+    }
+  }
+
+  div#flexContainer:focus-within {
+    @include boxShadow();
+  }
+
+  @include fo-button-font-size(1rem);
+}
+
+
+:host[noFocusShadow] {
+  div#flexContainer:focus-within {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+}
+
+:host[noLeftBorder] {
+
+  div#flexContainer,
+  div#flexContainer input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left-width: 0;
+  }
+}
+
+
+:host[noRightBorder] {
+  fo-label {
+
+    div#flexContainer,
+    div#flexContainer input {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right-width: 0;
+    }
+  }
+}
+
+:host[centerValue] {
+  fo-label {
+    div#flexContainer {
+      input {
+        text-align: center;
+      }
+    }
+  }
+}
+
+:host[dense] {
+  fo-label {
+    div#flexContainer {
+      input {
+        line-height: 100%;
+      }
+    }
+  }
+}

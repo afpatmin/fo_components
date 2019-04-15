@@ -1,10 +1,12 @@
-@import '../../colors';
 :host>div {
   position: relative;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  img {
+    width: 100%;
+  }
   svg {
     position: absolute;
     top: 0;
@@ -14,8 +16,7 @@
       transition: opacity 0.3s ease;
       -webkit-transition: opacity 0.3s ease;
       -moz-transition: opacity 0.3s ease;
-      -o-transition: opacity 0.3s ease;
-      fill: $foColorAlert; //visibility: hidden;
+      -o-transition: opacity 0.3s ease;      
       opacity: 0;
       stroke: white;
       stroke-width: 1;

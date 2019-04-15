@@ -1,6 +1,11 @@
 @import 'package:angular_components/material_button/mixins';
-@import 'package:grid/constants.scss';
-.arrow {
+@import 'package:grid_css/constants.scss';
+:host {
+  display: block;
+  #radioButtons {
+    text-align: center;
+  }
+  .arrow {
     position: absolute;
     top: auto;
     bottom: 50%;
@@ -14,65 +19,59 @@
     -ms-transition: opacity 200ms;
     -o-transition: opacity 200ms;
     transition: opacity 200ms;
-    material-button {
-        @include button-background-color('[raised]', #fff);
-        background-color: #fff;
-        ::ng-deep material-icon {
-            i {
-                font-size: 3em;
-            }
+    fo-button {          
+      ::ng-deep material-icon {
+        i {
+          font-size: 2em;
         }
+      }
     }
-}
-
-.arrow.faded {
+  }
+  .arrow.faded {
     visibility: hidden;
-}
-
-#arrow-left {
+  }
+  #arrow-left {
     left: 0.5em;
     right: auto;
-}
-
-#arrow-right {
+  }
+  #arrow-right {
     left: auto;
     right: 0.5em;
-}
-
-#slide-container {
+  }
+  #slide-container {
     position: relative;
     overflow: hidden;
     #slide-transformer {
-        -webkit-transition: -webkit-transform 500ms;
-        -moz-transition: -moz-transform 500ms;
-        -ms-transition: -ms-transform 500ms;
-        -o-transition: -o-transform 500ms;
-        transition: transform 500ms;
-        white-space: nowrap;
+      -webkit-transition: -webkit-transform 500ms;
+      -moz-transition: -moz-transform 500ms;
+      -ms-transition: -ms-transform 500ms;
+      -o-transition: -o-transform 500ms;
+      transition: transform 500ms;
+      white-space: nowrap;
     }
     #slide-transformer {
-        ::ng-deep * {
-            white-space: initial;
-        }
+      ::ng-deep * {
+        white-space: initial;
+      }
     }
-}
-
-@media screen and (max-width: $medium-width-threshold) {
+  }
+  @media screen and (max-width: $medium-width-threshold) {
     .arrow {
-        top: -16px;
-        bottom: auto;
-        material-button {
-            ::ng-deep material-icon {
-                i {
-                    font-size: 1.3em;
-                }
-            }
+      top: auto;
+      bottom: 30px;
+      fo-button {
+        ::ng-deep material-icon {
+          i {
+            font-size: 1.3em;
+          }
         }
+      }
     }
     #arrow-left {
-        left: 2px;
+      left: 2px;
     }
     #arrow-right {
-        right: 2px;
+      right: 2px;
     }
+  }
 }

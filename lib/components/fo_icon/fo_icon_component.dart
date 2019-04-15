@@ -1,27 +1,14 @@
 import 'package:angular/angular.dart';
+import 'package:angular_components/material_icon/material_icon.dart';
 
-/*
- * Make sure to have copied the resources in 
- * fo_icon/fonts to your project and imported 
- * the icomoon font in your style.css
- *
- * @font-face {
-    font-family: 'icomoon';
-    src: url('fonts/icomoon.eot?xf6dd5');
-    src: url('fonts/icomoon.eot?xf6dd5#iefix') format('embedded-opentype'), url('fonts/icomoon.ttf?xf6dd5') format('truetype'), url('fonts/icomoon.woff?xf6dd5') format('woff'), url('fonts/icomoon.svg?xf6dd5#icomoon') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-*/
+/// An icon component. Make sure to have imported the icomoon font and style into your project.
 @Component(
-  selector: 'fo-icon',
-  templateUrl: 'fo_icon_component.html',
-  styleUrls: const ['fo_icon_component.css'],
-  directives: const [NgStyle],
-  changeDetection: ChangeDetectionStrategy.OnPush
-)
-class FoIconComponent {
-
+    selector: 'fo-icon',
+    templateUrl: 'fo_icon_component.html',
+    styleUrls: ['fo_icon_component.css'],
+    directives: [MaterialIconComponent, NgFor, NgIf, NgStyle],
+    changeDetection: ChangeDetectionStrategy.OnPush)
+class FoIconComponent implements AfterChanges {
   String get iconClass => 'icon-$icon';
 
   @Input()
@@ -29,4 +16,15 @@ class FoIconComponent {
 
   @Input()
   String icon;
+
+  /// If this flag is set, fo_icon uses material icon instead
+  @Input()
+  bool material = false;
+
+  List<String> subPaths = [];
+
+  @override
+  void ngAfterChanges() {
+    subPaths = List.generate(16, (i) => 'path${i + 1}', growable: false);
+  }
 }

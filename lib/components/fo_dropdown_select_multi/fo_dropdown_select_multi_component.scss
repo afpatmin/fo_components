@@ -1,0 +1,32 @@
+@import 'package:grid_css/constants';
+
+:host {
+  display: block;
+
+  div#selectedOptions {
+    border-style: dashed;
+    border-width: 1px;
+    margin-top: $small;
+    font-size: 1rem;
+    min-height: 3.6rem;
+
+    ul {
+      padding: $small;
+      margin: 0;
+
+      li {
+        color: white;
+        display: inline-block;
+        list-style-type: none;
+        cursor: pointer;
+        margin: $x-small;
+        padding: $small;
+        border-radius: $x-small;
+      }
+
+      li.disabled {
+        opacity: 0.5;
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+@import 'package:grid_css/constants';
+@import '../../mixins';
+
+:host {
+  position: relative;
+  display: block;
+  div#fixer {
+    margin-top: $x-small;
+    position: fixed;
+    z-index: 99;
+    div#dropdownContent {
+      @include boxShadow();
+      text-align: left;
+      background-color: white;      
+      border-width: 1px;
+      border-style: solid;
+      border-radius: $x-small;
+      overflow-y: auto;
+      box-sizing: border-box;
+      div#filterContainer {
+        margin: $small;
+      }
+      div.category {
+        margin: $large $medium $small $medium;
+        text-transform: uppercase;
+      }
+      div.category:first-child {
+        margin-top: $medium;
+      }
+      hr {
+        border-top: 0;
+        border-style: solid;
+      }
+    }
+  }
+}

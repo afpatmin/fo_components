@@ -1,14 +1,35 @@
 <label>{{label}}</label>
-<div class="container" (dragenter)="$event.preventDefault()" (dragover)="$event.preventDefault()" (drop)="onDrop($event)">
-    <div *ngIf="source != null && !source.isEmpty" class="image">
-        <img class="box-shadow" [src]="source" alt="{{alt}}" [style.filter]="brightnessFilter" />
-        <material-button class="delete color-alert" clear-size raised [disabled]="disabled" (trigger)="fileInput.value = null; clearSource()">
-            <material-icon icon="delete" size="x-large"></material-icon>
-        </material-button>
-    </div>
-    <material-button class="add" raised *ngIf="source == null || source.isEmpty" [disabled]="disabled" (trigger)="fileInput.click()">
-        <material-icon icon="add_a_photo" size="x-large"></material-icon>
-    </material-button>
-    <input type="file" #fileInput (change)="onFileChange($event)" accept="image/jpg,image/jpeg,image/png,image/gif" />
-    <p *ngIf="invalidFile" class="error-output">{{msg.invalid_file()}}</p>
+<div class="container"
+     (dragenter)="$event.preventDefault()"
+     (dragover)="$event.preventDefault()"
+     (drop)="onDrop($event)">
+  <div *ngIf="source != null && !source.isEmpty"
+       class="image">
+    <img class="box-shadow"
+         [src]="source"
+         alt="{{alt}}"
+         [style.filter]="brightnessFilter" />
+    <fo-button class="delete color-alert"
+               clearSize
+               white
+               dense
+               [disabled]="disabled"
+               (trigger)="fileInput.value = null; clearSource()"
+               icon="delete">
+    </fo-button>
+  </div>
+  <fo-button class="add"             
+             white
+             dense
+             *ngIf="source == null || source.isEmpty"
+             [disabled]="disabled"
+             (trigger)="fileInput.click()"
+             icon="add_a_photo">
+  </fo-button>
+  <input type="file"
+         #fileInput
+         (change)="onFileChange($event)"
+         [accept]="accept" />
+  <p *ngIf="invalidFile"
+     class="error-output background-color-alert-bright">{{msgInvalidFile}}</p>
 </div>

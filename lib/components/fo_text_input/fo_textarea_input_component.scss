@@ -1,0 +1,23 @@
+@import '../../mixins';
+@import 'shared';
+
+:host {
+  display: block;
+  position: relative;
+  
+  textarea {    
+    background-color: white;
+    resize: none;    
+    border-radius: $borderRadius;
+    @include inputStyle;
+    
+  }
+  
+  textarea,
+  textarea:focus {
+    font-size: 1rem;    
+  }
+  textarea:focus {
+    @include boxShadow();
+  }
+} 

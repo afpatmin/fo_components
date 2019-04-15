@@ -1,30 +1,41 @@
 import 'dart:async';
+
 import 'package:angular/angular.dart';
+
 import '../../models/fo_quiz_model.dart';
 import 'fo_question_component.dart';
-
-class FoQuizDoneEvent {
-  FoQuizDoneEvent(this.score, this.maxPoints);
-
-  final int score;
-  final int maxPoints;
-}
 
 @Component(
     selector: 'fo-quiz',
     templateUrl: 'fo_quiz_component.html',
-    styleUrls: const ['fo_quiz_component.css'],
-    directives: const [FoQuestionComponent, NgFor],
+    styleUrls: ['fo_quiz_component.css'],
+    directives: [FoQuestionComponent, NgFor],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoQuizComponent implements OnInit, OnDestroy {
-  @override
-  void ngOnInit() {
-    activeQuestion = model.questions.first;
-  }
+  FoQuestionModel activeQuestion;
+
+  final _doneController = StreamController<FoQuizDoneEvent>();
+
+  @Input()
+  FoQuizModel model;
+
+  @Input()
+  bool disabled = false;
+
+  @Input()
+  String buttonColor = '#666';
+
+  @Output('done')
+  Stream<FoQuizDoneEvent> get onDone => _doneController.stream;
 
   @override
   void ngOnDestroy() {
     _doneController.close();
+  }
+
+  @override
+  void ngOnInit() {
+    activeQuestion = model.questions.first;
   }
 
   void onQuestionDone(FoQuestionModel question) {
@@ -32,10 +43,42 @@ class FoQuizComponent implements OnInit, OnDestroy {
 
     if (index == model.questions.length - 1) {
       _doneController
-          .add(new FoQuizDoneEvent(_calcScore(model), _calcMaxPoints(model)));
+          .add(FoQuizDoneEvent(_calcScore(model), _calcMaxPoints(model)));
     } else {
       activeQuestion = model.questions[index + 1];
     }
+  }
+
+  int _calcMaxPoints(FoQuizModel quiz) {
+    if (quiz == null) return 0;
+    var maxPoints = 0;
+
+    /// Add all options in multi-selects
+    for (final question in quiz.questions.where((q) => q.multiSelect == true)) {
+      for (final option in question.options) {
+        if (option.score > 0) {
+          maxPoints += option.score;
+        }
+        maxPoints += _calcMaxPoints(option.child);
+      }
+    }
+
+    /// Add only highest score option in single-selects
+    for (final question
+        in quiz.questions.where((q) => q.multiSelect == false)) {
+      final sortedOptions = List<FoOptionModel>.from(question.options)
+        ..sort((o1, o2) => o2.score - o1.score);
+
+      final highestScore = sortedOptions.first.score;
+      if (highestScore > 0) {
+        maxPoints += highestScore;
+      }
+
+      for (final option in question.options) {
+        maxPoints += _calcMaxPoints(option.child);
+      }
+    }
+    return maxPoints;
   }
 
   int _calcScore(FoQuizModel quiz) {
@@ -51,46 +94,11 @@ class FoQuizComponent implements OnInit, OnDestroy {
     }
     return score;
   }
+}
 
-  int _calcMaxPoints(FoQuizModel quiz) {
-    if (quiz == null) return 0;
-    var maxPoints = 0;
+class FoQuizDoneEvent {
+  final int score;
 
-    /// Add all options in multi-selects
-    for (final question in quiz.questions.where((q) => q.multiSelect == true)) {
-      for (final option in question.options) {
-        maxPoints += option.score;
-        maxPoints += _calcMaxPoints(option.child);
-      }
-    }
-
-    /// Add only highest score option in single-selects
-    for (final question
-        in quiz.questions.where((q) => q.multiSelect == false)) {
-      final sortedOptions = new List<FoOptionModel>.from(question.options)
-        ..sort((o1, o2) => o2.score - o1.score)..first.score;
-      maxPoints += sortedOptions.first.score;
-
-      for (final option in question.options) {
-        maxPoints += _calcMaxPoints(option.child);
-      }
-    }
-    return maxPoints;
-  }
-
-  FoQuestionModel activeQuestion;
-
-  final _doneController = new StreamController<FoQuizDoneEvent>();
-
-  @Input()
-  FoQuizModel model;
-
-  @Input()
-  bool disabled = false;
-
-  @Input()
-  String buttonColor = '#666';
-
-  @Output('done')
-  Stream<FoQuizDoneEvent> get onDone => _doneController.stream;
+  final int maxPoints;
+  FoQuizDoneEvent(this.score, this.maxPoints);
 }

@@ -1,5 +1,9 @@
 :host {
-    display: block;
+    flex: 1;
+    display: flex;    
+    div.tabContent {
+      flex: 1;
+    }
     div.tabContent.hidden {
       display: none;
     }

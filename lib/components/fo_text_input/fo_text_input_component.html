@@ -1,0 +1,48 @@
+<fo-label [value]="label"
+          [error]="control?.valid == false && control?.pristine != true">
+  <div id="flexContainer">
+    <fo-icon *ngIf="leadingIcon != null"
+             class="gray-color leading"
+             [icon]="leadingIcon"
+             [material]="materialIcons"></fo-icon>
+    <input class="roundLeft gray-color-bright"
+           type="{{type}}"
+           [autoFocus]="autoFocus"
+           [disabled]="disabled == true"
+           [placeholder]="placeholder"
+           [class.noRightBorder]="actionButtonLabel != null"
+           [class.leftPadding]="leadingIcon != null"
+           [class.rightPadding]="clearIcon == true"
+           [class.color-alert]="control?.valid == false && control?.pristine != true"
+           [ngModel]="value"
+           (ngModelChange)="onValueChange($event)"
+           (change)="changeController.add($event)"
+           (keyup)="onKeyUp($event)"
+           (focus)="onFocus($event)"
+           (blur)="onBlur($event)">
+    <fo-icon *ngIf="clearIcon == true && value?.isEmpty == false"
+             size="large"
+             class="color-alert clear"
+             icon="cancel"
+             [material]="true"
+             (click)="onClear($event)"></fo-icon>
+    <fo-button *ngIf="actionButtonLabel != null"
+               [label]="actionButtonLabel"
+               noLeftBorder
+               [disabled]="disabled || control?.valid == false || value?.isEmpty != false"
+               (trigger)="actionButtonController?.add($event)"></fo-button>
+  </div>
+  <fo-error-output *ngIf="hasFocus == true && errorMessage != null && control?.pristine != true && dropdownVisible == false"
+                   class="gray-color-bright"
+                   [message]="errorMessage">
+  </fo-error-output>
+  <fo-dropdown-list *ngIf="options != null && value?.isEmpty == false && dropdownVisible"
+                    [options]="options"
+                    [filter]="value"
+                    [constrainToViewPort]="constrainToViewPort"
+                    [materialIcons]="materialIcons"
+                    [width]="dropdownWidth"
+                    (select)="onFilterSelect($event)"
+                    [(visible)]="dropdownVisible">
+  </fo-dropdown-list>
+</fo-label>

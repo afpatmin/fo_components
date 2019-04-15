@@ -1,10 +1,7 @@
+@import 'package:grid_css/constants';
+
 :host {
-    material-button {
-        color: white;
-        float: right;        
-    }
-    material-button.unSelected {
-        color: inherit;
-        background-color: white !important;
-    }
-} 
+  fo-button {
+    margin: 0 $x-small * 0.5;
+  }
+}

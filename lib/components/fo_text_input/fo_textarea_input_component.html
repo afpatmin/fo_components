@@ -1,0 +1,17 @@
+<fo-label [value]="label"
+          [error]="control?.valid == false && control?.pristine != true">
+  <textarea class="gray-color-bright"
+            [disabled]="disabled"
+            [placeholder]="placeholder"
+            [class.color-alert]="control?.valid == false && control?.pristine != true"
+            noresize
+            (focus)="hasFocus = true"
+            (blur)="hasFocus = false"
+            [rows]="rows"
+            [ngModel]="value"
+            (ngModelChange)="onValueChange($event)"></textarea>
+  <fo-error-output *ngIf="hasFocus == true && errorMessage != null && control?.pristine != true"
+                   class="gray-color-bright"
+                   [message]="errorMessage">
+  </fo-error-output>
+</fo-label>

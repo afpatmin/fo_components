@@ -1,21 +1,46 @@
-@import '../../colors';
+@import '../../mixins.scss';
+@import 'package:grid_css/constants';
 
 :host {
-    display: block;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
-    div#tabStrip {
-        display: flex;
-        align-items: stretch;                
-        div.tabButton {            
-            flex: 1;
-            text-align: center;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            cursor: pointer;
-            padding: 1rem 0.5rem;                        
-            @include boxShadow();
-            transition: color, background-color 300ms ease;
-        }        
+  div#tabStrip {
+    display: flex;
+    align-items: stretch;
+
+    p {
+      line-height: 200%;
     }
+
+    p,
+    h1 {
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+
+    div.tabButton {
+      flex: 1;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      cursor: pointer;
+      padding: $medium $small;
+      @include boxShadow();
+      transition: color, background-color 300ms ease-in;
+      -webkit-transition: color, background-color 300ms ease-in;
+      -moz-transition: color, background-color 300ms ease-in;
+      -o-transition: color, background-color 300ms ease-in;
+    }
+  }
+}
+
+:host[dense] {
+  div#tabStrip {
+    p {
+      line-height: 100%;
+    }
+  }
 }

@@ -1,0 +1,17 @@
+:host {
+  div#ratingContainer {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    material-icon {
+      cursor: pointer;
+    }
+  }
+  div#ratingContainer.disabled {
+    opacity: 0.5;
+  }
+
+
+}

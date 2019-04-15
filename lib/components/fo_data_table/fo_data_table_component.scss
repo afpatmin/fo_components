@@ -1,9 +1,16 @@
-@import 'package:grid/grid';
-@import '../../colors.scss';
+@import 'package:grid_css/grid';
+@import '../fo_button/mixins';
+@import '../fo_text_input/mixins';
+@import '../fo_dropdown_select/mixins';
+@import '../../mixins.scss';
+
 :host {
     display: block;
     width: 100%;
-    color: #555;
+    color: #555;    
+    @include fo-text-input-font-size(0.8rem);
+    @include fo-dropdown-select-font-size(0.8rem);
+    @include fo-button-font-size(0.7rem);
     .display-inline-block {
         display: inline-block;
     }
@@ -38,14 +45,14 @@ material-input {
 }
 
 div.table-container {
-    position: relative;
-    z-index: 1;
+    position: relative;    
     min-width: 245px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     background-color: white;
+    z-index: 1;
     div.output-container {
         overflow-x: auto;
         table.output {
@@ -107,7 +114,9 @@ div.table-container {
         }
     }
     #select-step {
-        // margin-top: 0.2rem;
+        div#stepper {
+          line-height: 1.9rem;
+        }
         #rows-per-page {
             margin-top: 0.15rem;
             margin-left: 0.2rem;

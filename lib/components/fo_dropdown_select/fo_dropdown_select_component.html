@@ -1,0 +1,31 @@
+<div id="flexAligner">
+  <fo-label [value]="label"
+            (click)="onClick($event)">
+    <div id="selector"
+         class="gray-color-bright"
+         [class.noRightBorder]="actionButtonLabel != null"
+         [class.disabled]="disabled == true"
+         [class.focus]="dropdownVisible">
+      <div id="selectedValue"> {{selectedOption == null ? '-' : selectedOption.renderLabel}} </div>
+      <fo-icon class="arrow"
+               [material]="true"
+               icon="keyboard_arrow_down"></fo-icon>
+    </div>
+  </fo-label>
+  <fo-button *ngIf="actionButtonLabel != null"
+             [label]="actionButtonLabel"
+             noLeftBorder
+             clearSize
+             [disabled]="disabled || selectedOption == null"
+             (trigger)="actionButtonController.add($event)"></fo-button>
+</div>
+<fo-dropdown-list *ngIf="options != null && dropdownVisible == true && disabled != true"
+                  [options]="options"
+                  [showSearch]="showSearch"
+                  [constrainToViewPort]="constrainToViewPort"
+                  [allowNullSelection]="allowNullSelection"
+                  [materialIcons]="materialIcons"
+                  [width]="dropdownWidth"
+                  (select)="onSelect($event)"
+                  [(visible)]="dropdownVisible">
+</fo-dropdown-list>

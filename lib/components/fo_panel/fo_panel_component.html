@@ -1,0 +1,13 @@
+<div id="foPanel"
+     *ngIf="visible">
+  <div id="panelHeader">
+    <h3>{{header | capitalize}}</h3>
+    <fo-button dense
+               white
+               clearSize
+               icon="close"
+               (trigger)="onClose()">
+    </fo-button>
+  </div>
+  <ng-content></ng-content>
+</div>

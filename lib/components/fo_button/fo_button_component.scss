@@ -1,0 +1,81 @@
+@import 'package:angular_components/material_icon/mixins';
+@import 'package:grid_css/constants';
+@import '../../constants.scss';
+
+:host {
+  display: inline-block;
+  font-size: 0;
+
+  button {
+    width: 100%;
+    font-size: 1rem;
+    @include material-icon-size(1.5rem);
+    user-select: none;
+    -webkit-user-select: none;
+    transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    padding: $small $x-large;
+    outline: none;
+    border-width: 1px;
+    border-style: solid;
+    box-sizing: border-box;
+    color: white;
+    line-height: 200%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: $x-small;
+
+    material-icon {
+      margin: 0;
+    }
+  }
+}
+
+:host[noLeftBorder] {
+  button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left-width: 0;
+  }
+}
+
+:host[noRightBorder] {
+  button {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right-width: 0;
+  }
+}
+
+:host[dense] {
+  button {
+    padding: $small $large;
+    line-height: 100%;
+
+    @include material-icon-size(1.3rem);
+  }
+}
+
+:host[white] {
+  button {
+    color: inherit;
+    background-color: white;
+  }
+}
+
+:host[clearSize] {
+  button {
+    padding-left: $small;
+    padding-right: $small;
+  }
+}
+
+:host[fullWidth] {
+  width: 100%;
+
+  button {
+    padding-left: $small;
+    padding-right: $small;
+  }
+}

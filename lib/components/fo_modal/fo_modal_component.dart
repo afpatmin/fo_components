@@ -1,68 +1,37 @@
-// Copyright (c) 2017, Patrick Minogue. All rights reserved. Use of this source code
-// is governed by a BSD-style license that can be found in the LICENSE file.
-
 import 'dart:async';
-import 'dart:html' as html;
+import 'dart:html' as dom;
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
+import 'package:fo_components/components/fo_button/fo_button_component.dart';
 
 @Component(
     selector: 'fo-modal',
-    styleUrls: const ['fo_modal_component.css'],
+    styleUrls: ['fo_modal_component.css'],
     templateUrl: 'fo_modal_component.html',
-    directives: const [
-      coreDirectives,
-      MaterialButtonComponent,
-      MaterialDialogComponent,
-      MaterialIconComponent,
-      ModalComponent,
-    ],
-    pipes: const [],
-    changeDetection: ChangeDetectionStrategy.Default)
+    directives: [coreDirectives, FoButtonComponent, NgStyle])
 class FoModalComponent implements OnDestroy {
   FoModalComponent();
 
   @override
   void ngOnDestroy() {
     _onVisibleChangeController.close();
-    html.document.body.style.overflow = '';
   }
 
   void close() {
     _onVisibleChangeController.add(false);
     visible = false;
-    html.document.body.style.overflow = '';
   }
 
-  bool get visible => _visible;
+  String get transform =>
+      'translateX(-${0.5 * (dom.window.innerWidth - dom.document.documentElement.clientWidth)}px)';
 
   @Input()
-  set visible(bool flag) {
-    _visible = flag;
-    if (_visible) {
-      html.document.body.style.overflow = 'hidden';
-    } else {
-      html.document.body.style.removeProperty('overflow');
-    }
-  }
-
-  @Input()
-  String title;
-
-  @Input()
-  String titleImageUrl;
+  String header;
 
   @Input()
   String error;
 
   @Input()
-  bool fixedWidth = false;
-
-  @Input()
-  bool fixedHeight = false;
-
-  @Input()
-  bool smallPadding = true;
+  bool visible = false;
 
   @Input()
   bool showCloseButton = true;
@@ -70,8 +39,5 @@ class FoModalComponent implements OnDestroy {
   @Output('visibleChange')
   Stream<bool> get onVisibleChangeOutput => _onVisibleChangeController.stream;
 
-  final StreamController<bool> _onVisibleChangeController =
-      new StreamController();
-
-  bool _visible = false;
+  final StreamController<bool> _onVisibleChangeController = StreamController();
 }

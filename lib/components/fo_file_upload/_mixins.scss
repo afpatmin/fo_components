@@ -1,0 +1,7 @@
+@mixin fo-file-upload-border-color($color) {
+  ::ng-deep fo-file-upload {
+    div.container {
+      border-color: $color;
+    }
+  }
+}

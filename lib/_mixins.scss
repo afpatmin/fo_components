@@ -1,0 +1,178 @@
+$transitionSpeed: 0.3s ease;
+
+@import 'package:angular_components/material_checkbox/mixins';
+@import 'package:angular_components/material_radio/mixins';
+@import 'package:angular_components/material_toggle/mixins';
+
+@import 'components/fo_button/mixins';
+@import 'components/fo_file_upload/mixins';
+@import 'components/fo_image_file/mixins';
+@import 'components/fo_dropdown_list/mixins';
+@import 'components/fo_dropdown_select_multi/mixins';
+@import 'components/fo_modal/mixins';
+@import 'components/fo_quiz/mixins';
+
+@mixin foregroundColor($color) {
+  color: $color;
+  border-color: $color;
+  stroke: $color;
+}
+
+@mixin backgroundColor($color) {
+  background-color: $color;
+  fill: $color;
+}
+
+@mixin fo-colors($primaryColor, $secondaryColor, $alertColor, $grayColor: #8d8e92, $grayColorBright: #d9dade) {
+  $lightstep: 20%;
+  $primaryColorDark: darken($primaryColor, $lightstep);
+  $primaryColorBright: lighten($primaryColor, $lightstep);
+  $secondaryColorDark: darken($secondaryColor, $lightstep);
+  $secondaryColorBright: lighten($secondaryColor, $lightstep);
+  $alertColorDark: darken($alertColor, $lightstep);
+  $alertColorBright: lighten($alertColor, $lightstep);
+
+  @include material-checkbox-color($primaryColor);
+  @include material-radio-color($primaryColor);
+  @include material-toggle-theme($primaryColor);
+
+  @include fo-button-colors(white, $primaryColor, $primaryColorBright, $grayColorBright);
+  @include fo-dropdown-list-colors($primaryColor, $grayColorBright);
+  @include fo-dropdown-select-multi-options-background-color($primaryColor);
+  @include fo-dropdown-select-multi-options-border-color($grayColor);
+  @include fo-file-upload-border-color($grayColor);
+  @include fo-image-file-border-color($grayColor);
+  @include fo-modal-colors(lighten($grayColorBright, 10%));
+
+  material-spinner {
+    border-color: $primaryColor;
+  }
+
+  ::ng-deep {
+    material-icon>i {
+      margin-bottom: 0 !important;
+
+    }
+  }
+
+  ::ng-deep fo-tab-panel {
+    div#tabStrip {
+      div.tabButton {
+        color: darken($grayColor, $lightstep);
+        background-color: $primaryColor;
+      }
+    }
+  }
+
+  ::ng-deep input::placeholder,
+  ::ng-deep textarea::placeholder {
+    color: $grayColorBright;
+  }
+
+  ::ng-deep input::selection,
+  ::ng-deep textarea::selection {
+    background-color: $grayColor;
+  }
+
+  ::ng-deep input:disabled,
+  ::ng-deep textarea:disabled {
+    background-color: lighten($grayColorBright, 10%) !important;
+  }
+
+  ::ng-deep fo-dropdown-select {
+    div#selector.disabled {
+      background-color: lighten($grayColorBright, 10%) !important;
+    }
+  }
+
+  ::ng-deep .black-color {
+    @include foregroundColor(#555);
+  }
+
+  ::ng-deep .gray-color {
+    @include foregroundColor($grayColor);
+  }
+
+  ::ng-deep .gray-color-bright {
+    @include foregroundColor($grayColorBright);
+  }
+
+  ::ng-deep .color-primary-dark {
+    @include foregroundColor($primaryColorDark);
+  }
+
+  ::ng-deep .color-primary {
+    @include foregroundColor($primaryColor);
+  }
+
+  ::ng-deep .color-primary-bright {
+    @include foregroundColor($primaryColorBright);
+  }
+
+  ::ng-deep .background-color-primary-dark {
+    @include backgroundColor($primaryColorDark);
+  }
+
+  ::ng-deep .background-color-primary {
+    @include backgroundColor($primaryColor);
+  }
+
+  ::ng-deep .background-color-primary-bright {
+    @include backgroundColor($primaryColorBright);
+  }
+
+  ::ng-deep .color-secondary-dark {
+    @include foregroundColor($secondaryColorDark);
+  }
+
+  ::ng-deep .color-secondary {
+    @include foregroundColor($secondaryColor);
+  }
+
+  ::ng-deep .color-secondary-bright {
+    @include foregroundColor($secondaryColorBright);
+  }
+
+  ::ng-deep .background-color-secondary-dark {
+    @include backgroundColor($secondaryColorDark);
+  }
+
+  ::ng-deep .background-color-secondary {
+    @include backgroundColor($secondaryColor);
+  }
+
+  ::ng-deep .background-color-secondary-bright {
+    @include backgroundColor($secondaryColorBright);
+  }
+
+  ::ng-deep .color-alert-dark {
+    @include foregroundColor($alertColorDark);
+  }
+
+  ::ng-deep .color-alert {
+    @include foregroundColor($alertColor);
+  }
+
+  ::ng-deep .color-alert-bright {
+    @include foregroundColor($alertColorBright);
+  }
+
+  ::ng-deep .background-color-alert-dark {
+    @include backgroundColor($alertColorDark);
+  }
+
+  ::ng-deep .background-color-alert {
+    @include backgroundColor($alertColor);
+  }
+
+  ::ng-deep .background-color-alert-bright {
+    @include backgroundColor($alertColorBright);
+  }
+}
+
+@mixin boxShadow() {
+  box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.4);
+}
+
+@include fo-colors(#2E5266, #6E8898, #f77);

@@ -1,0 +1,17 @@
+@import 'package:angular_components/material_icon/mixins';
+@import '../fo_button/mixins';
+@import '../fo_dropdown_list/mixins';
+@import '../fo_label/mixins';
+
+@mixin fo-dropdown-select-font-size($size) {
+  ::ng-deep fo-dropdown-select {
+    @include fo-label-font-size($size);
+    
+    div#selector {
+      font-size: $size;
+      @include material-icon-size($size !important);
+    }
+  }
+  @include fo-button-font-size($size);
+  @include fo-dropdown-list-font-size($size);
+}

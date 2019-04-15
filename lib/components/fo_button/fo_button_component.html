@@ -1,0 +1,9 @@
+<button [disabled]="disabled == true"
+        class="themeable background-color-primary"
+        (click)="onClick()">
+  <span *ngIf="label != null">{{label}}</span>
+  <fo-icon *ngIf="icon != null"
+           [icon]="icon"
+           [material]="materialIcon">
+  </fo-icon>
+</button>

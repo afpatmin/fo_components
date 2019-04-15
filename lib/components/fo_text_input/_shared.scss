@@ -1,0 +1,20 @@
+@import 'package:grid_css/constants';
+@import 'mixins';
+
+$borderRadius: $x-small;
+
+@mixin inputStyle {
+  transition: color $transitionSpeed, box-shadow $transitionSpeed, -webkit-box-shadow $transitionSpeed;
+  flex: auto;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  line-height: 200%;
+  border-width: 1px;
+  border-style: solid;
+  padding: $small $small;
+  min-width: 7rem;
+  color: #555;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}

@@ -1,0 +1,36 @@
+@import 'package:grid_css/constants';
+
+:host {
+  display: block;
+  position: absolute;
+  width: 100%;
+  z-index: 99;
+  margin: $medium 0;
+  background-color: white;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: $x-small;
+
+  div#arrow {
+    position: absolute;
+    top: -6px;
+    left: 20px;
+    background-color: white;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    border-style: solid;
+    border-left-width: 1px;
+    border-top-width: 1px;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    width: 10px;
+    height: 10px;
+  }
+
+  div#message {
+    padding: $medium;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
