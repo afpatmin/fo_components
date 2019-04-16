@@ -1,10 +1,18 @@
+# 1.1.1
+### Component updates
+* Extracted dropdown logic from DropdownList into separate DropdownComponent
+
+### Bugfixes
+* Modal component overlay now has proper z-index
+* Fixed issue with broken size input on single-color Icons
+* DropdownList mixin now properly resizes option icon container
+
 # 1.1.0+1
-#### Component updates
+### Component updates
 * Icon no longer requires colorCount input to support colors (instead all icons has support for 16 colors)
 
 # 1.1.0
 ### Bugfixes
-####
 * Now exporting CarouselSlide
 
 ### Component updates
