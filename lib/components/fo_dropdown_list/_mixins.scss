@@ -26,6 +26,11 @@
       table {
         font-size: $size;
         @include material-icon-size($size !important);
+        tr {
+          td.leadingIcon {
+            width: $size * 1.5;
+          }
+        }
       }
     }
   }

@@ -1,35 +1,32 @@
-<div id="fixer"
-     [style.top]="top"
-     (click)="$event.stopPropagation()"
-     *ngIf="visible && options != null">
-  <div id="dropdownContent"       
-       [style.width]="elementWidth"
-       [style.max-height]="elementMaxHeight">
-    <div id="filterContainer">
-      <fo-text-input *ngIf="showSearch == true"
-                     [autoFocus]="visible"
-                     noFocusShadow
-                     [label]="msgFilter | capitalize"
-                     dense
-                     [ngModel]="filter"
-                     (ngModelChange)="updateFilteredOptions($event)">
-      </fo-text-input>
-    </div>
-    <div *ngIf="allowNullSelection && filter?.isEmpty != false">
-      <fo-dropdown-option [model]="nullOption"
-                          (click)="onSelect($event, nullOption)"
-                          [materialIcon]="materialIcons"></fo-dropdown-option>
-    </div>
-    <div *ngFor="let category of filteredOptions.keys">
-      <div *ngIf="category.isNotEmpty"
-           class="black-color category"><strong>{{category}}</strong></div>
-      <fo-dropdown-option *ngFor="let option of filteredOptions[category]"
-                          [model]="option"
-                          [materialIcon]="materialIcons"
-                          (click)="onSelect($event, option)">
-      </fo-dropdown-option>
-      <hr *ngIf="category != filteredOptions.keys.last"
-          class="gray-color-bright">
-    </div>
+<fo-dropdown *ngIf="options != null"
+             [width]="width"
+             [constrainToViewPort]="constrainToViewPort"
+             [visible]="visible"
+             (visibleChange)="visibleController.add($event)">
+  <div id="filterContainer">
+    <fo-text-input *ngIf="showSearch == true"
+                   [autoFocus]="visible"
+                   noFocusShadow
+                   [label]="msgFilter | capitalize"
+                   dense
+                   [ngModel]="filter"
+                   (ngModelChange)="updateFilteredOptions($event)">
+    </fo-text-input>
   </div>
-</div>
+  <div *ngIf="allowNullSelection && filter?.isEmpty != false">
+    <fo-dropdown-option [model]="nullOption"
+                        (click)="onSelect($event, nullOption)"
+                        [materialIcon]="materialIcons"></fo-dropdown-option>
+  </div>
+  <div *ngFor="let category of filteredOptions.keys">
+    <div *ngIf="category.isNotEmpty"
+         class="black-color category"><strong>{{category}}</strong></div>
+    <fo-dropdown-option *ngFor="let option of filteredOptions[category]"
+                        [model]="option"
+                        [materialIcon]="materialIcons"
+                        (click)="onSelect($event, option)">
+    </fo-dropdown-option>
+    <hr *ngIf="category != filteredOptions.keys.last"
+        class="gray-color-bright">
+  </div>
+</fo-dropdown>
