@@ -2,17 +2,17 @@ name: fo_components
 description: A collection of Angular components for both common and less common use cases.
 author: Patrick Minogue <patrick.minogue@gmail.com>
 homepage: https://github.com/afpatmin/fo_components
-version: 1.1.0+1
+version: 1.1.1
 environment:
   sdk: '>=2.2.0 <3.0.0'  
 
 dependencies:
   angular: ^5.3.0
-  angular_components: ^0.12.0
-  angular_forms: ^2.1.1  
+  angular_components: ^0.13.0
+  angular_forms: ^2.1.1
   collection: ^1.14.11
   grid_css: ^0.1.1
-  intl: ^0.15.7
+  intl: ^0.15.8
   json_annotation: ^2.0.0
   sass_builder: ^2.1.2
 
