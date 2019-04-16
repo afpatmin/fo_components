@@ -1,0 +1,10 @@
+<div id="fixer"
+     [style.top]="top"
+     (click)="$event.stopPropagation()"
+     *ngIf="visible">
+  <div id="dropdownContent"
+       [style.width]="elementWidth"
+       [style.max-height]="elementMaxHeight">
+       <ng-content></ng-content>       
+  </div>
+</div>
