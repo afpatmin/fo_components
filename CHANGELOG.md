@@ -1,3 +1,7 @@
+# 1.1.2
+### Bugfixes
+* Fixed issue where dropdown sometimes crashed due to internal error
+
 # 1.1.1
 ### Component updates
 * Extracted dropdown logic from DropdownList into separate DropdownComponent
