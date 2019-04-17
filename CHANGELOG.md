@@ -2,6 +2,10 @@
 ### Bugfixes
 * Fixed issue where dropdown sometimes crashed due to internal error
 
+### Component updates
+* Added [offsetTop] input to DropdownList
+
+
 # 1.1.1
 ### Component updates
 * Extracted dropdown logic from DropdownList into separate DropdownComponent

@@ -44,6 +44,9 @@ class FoDropdownListComponent implements AfterChanges, OnDestroy {
   bool materialIcons = true;
 
   @Input()
+  int offsetTop = 0;
+
+  @Input()
   Map<String, List<FoDropdownOptionRenderable>> options;
 
   @Input()

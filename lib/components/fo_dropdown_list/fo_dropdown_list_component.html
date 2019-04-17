@@ -1,5 +1,6 @@
 <fo-dropdown *ngIf="options != null && filteredOptions != null"
              [width]="width"
+             [offsetTop]="offsetTop"
              [constrainToViewPort]="constrainToViewPort"
              [visible]="visible"
              (visibleChange)="visibleController.add($event)">
