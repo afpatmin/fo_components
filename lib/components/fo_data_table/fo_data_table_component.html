@@ -107,7 +107,8 @@
     <div class="col color-alert text-center"
          *ngIf="!disabled">
       <p class="margin-bottom-none">
-        <fo-icon icon="error" [material]="true"></fo-icon> {{msgNoResultsFound | capitalize}}
+        <fo-icon icon="error"
+                 [material]="true"></fo-icon> {{msgNoResultsFound | capitalize}}
       </p>
     </div>
   </div>
@@ -185,7 +186,6 @@
   </div>
 </div>
 <fo-modal title="{{msgConfirm | capitalize}}"
-          [smallPadding]="false"
           [visible]="deleteBufferId != null"
           (visibleChange)="deleteBufferId = null"
           [showCloseButton]="false">
@@ -206,7 +206,6 @@
   </p>
 </fo-modal>
 <fo-modal [title]="msgInformation"
-          [smallPadding]="false"
           [(visible)]="infoModalOpen"
           [showCloseButton]="true">
   <p>{{description}}</p>
