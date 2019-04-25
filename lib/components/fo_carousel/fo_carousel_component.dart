@@ -45,7 +45,7 @@ class FoCarouselComponent implements OnDestroy, OnInit {
 
   @ContentChildren(FoCarouselSlideComponent)
   List<FoCarouselSlideComponent> slides = [];
-  
+
   FoCarouselComponent(this._changeDetectorRef);
 
   @Output('stepChange')
