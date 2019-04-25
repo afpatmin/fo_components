@@ -1,3 +1,11 @@
+# 1.1.2+1
+### Bugfixes
+* Updated SDK constraints in pubspec.yaml
+
+### Component updates
+* Added fo-label-color mixin
+* Added fo-tab-panel-colors mixin
+
 # 1.1.2
 ### Bugfixes
 * Fixed issue where dropdown sometimes crashed due to internal error

@@ -1,0 +1,10 @@
+@mixin fo-tab-panel-colors($color, $backgroundColor) {
+  ::ng-deep fo-tab-panel {
+    div#tabStrip {
+      div.tabButton {
+        color: $color;
+        background-color: $backgroundColor;
+      }
+    }
+  }
+}
