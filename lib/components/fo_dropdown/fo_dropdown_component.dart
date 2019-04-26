@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:html' as html;
+import 'dart:math';
 
 import 'package:angular/angular.dart';
 
@@ -48,23 +49,32 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
   @override
   void ngAfterChanges() {
     if (visible == true) {
-      final rect = host.getBoundingClientRect();
-      top = '${rect.top + offsetTop}px';
+      final hostRect = host.getBoundingClientRect();
+
+      top = '${hostRect.top + offsetTop}px';
 
       elementMaxHeight = constrainToViewPort == true
-          ? '${html.window.innerHeight - (rect.top + offsetTop)}px'
-          : '${html.document.body.clientHeight - (rect.top + offsetTop + html.window.scrollY)}px';
+          ? '${html.window.innerHeight - (hostRect.top + offsetTop)}px'
+          : '${html.document.body.clientHeight - (hostRect.top + offsetTop + html.window.scrollY)}px';
     }
   }
 
   @override
   void ngAfterViewInit() {
     html.document.onScroll.listen((e) {
-      top = '${host.getBoundingClientRect().top + offsetTop}px';
+      var newTop = host.getBoundingClientRect().top + offsetTop;
+      if (constrainToViewPort == true) {
+        newTop = max(0, newTop);
+      }
+      top = '${newTop}px';
       _changeDetectorRef.markForCheck();
     });
     html.window.onResize.listen((e) {
-      top = '${host.getBoundingClientRect().top + offsetTop}px';
+      var newTop = host.getBoundingClientRect().top + offsetTop;
+      if (constrainToViewPort == true) {
+        newTop = max(0, newTop);
+      }
+      top = '${newTop}px';
       _changeDetectorRef.markForCheck();
     });
   }

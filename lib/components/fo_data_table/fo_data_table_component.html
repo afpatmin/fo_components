@@ -185,7 +185,7 @@
     </div>
   </div>
 </div>
-<fo-modal title="{{msgConfirm | capitalize}}"
+<fo-modal [header]="msgConfirm | capitalize"
           [visible]="deleteBufferId != null"
           (visibleChange)="deleteBufferId = null"
           [showCloseButton]="false">
@@ -194,11 +194,13 @@
      footer>
     <fo-button [label]="msgCancel | capitalize"
                dense
+               white
                noRightBorder
                clearSize
                (trigger)="deleteBufferId = null"></fo-button>
     <fo-button [label]="msgOk | capitalize"
                dense
+               white
                noLeftBorder
                clearSize
                (trigger)="onDeleteController.add(deleteBufferId); deleteBufferId = null;">

@@ -1,3 +1,9 @@
+# 1.1.2+2
+### Bugfixes
+* Updated SDK constraints in pubspec.yaml
+* Fixed style issue in DataTable modal (when deleting a resource)
+* FoDropDown constrainToViewPort now constraints top aswell as bottom
+
 # 1.1.2+1
 ### Bugfixes
 * Updated SDK constraints in pubspec.yaml
