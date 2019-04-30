@@ -1,3 +1,11 @@
+# 1.1.3
+### Component updates
+#### FoDropdown
+* Added short delay to prevent dropdown to immediately auto-close when spawned by click event
+* Added anchorRight input 
+* constrainToViewPort now takes document scrollbars into account
+* Scroll and resize subscriptions now properly cancelled onDestroy
+
 # 1.1.2+2
 ### Bugfixes
 * Updated SDK constraints in pubspec.yaml
