@@ -12,7 +12,7 @@
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
     z-index: 999;
 
     div#modalContent {
@@ -22,11 +22,11 @@
       background-color: white;
       max-height: 95vh;
       max-width: 90vw;
-      overflow: hidden;      
+      overflow: hidden;
 
       div#modalHeader,
       div#modalFooter {
-        padding: $medium;        
+        padding: $medium;
       }
 
       div#modalHeader {
@@ -34,6 +34,13 @@
         border-bottom-style: solid;
         border-bottom-width: 1px;
         align-items: center;
+
+        ::ng-deep fo-button {
+          button.themeable {
+            font-size: 0.7rem;
+          }
+        }
+
 
         div#modalHeaderTitle {
           flex: auto;
@@ -49,8 +56,6 @@
             text-overflow: ellipsis;
           }
         }
-
-        //@include fo-button-font-size(0.7rem);
 
         fo-button {
           margin-left: $small;
@@ -78,13 +83,16 @@
 :host[dense] {
   div#modalOverlay {
     div#modalContent {
+
       div#modalHeader,
       div#modalFooter {
         padding: $small;
       }
+
       div#modalError {
         padding: $x-small $small;
       }
+
       div#modalMain {
         padding: $x-small $small;
       }

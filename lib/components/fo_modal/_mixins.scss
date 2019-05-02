@@ -27,10 +27,9 @@
           div#modalHeaderTitle {
             h2 {
               font-size: $size !important;
-            }
-
-            @include fo-button-font-size($size);
+            }            
           }
+          @include fo-button-font-size(0.6*$size);
         }
       }
     }
