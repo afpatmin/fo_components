@@ -1,6 +1,12 @@
+# 1.1.3+1
+### Bugfixes
+#### DataTable
+* Fixed broken material icons
+* Rowcount selector now has fixed width to make sure the dropdown is always wide enough
+
 # 1.1.3
 ### Component updates
-#### FoDropdown
+#### Dropdown
 * Added short delay to prevent dropdown to immediately auto-close when spawned by click event
 * Added anchorRight input 
 * constrainToViewPort now takes document scrollbars into account
