@@ -1,3 +1,8 @@
+# 1.1.3+2
+### Component updates
+#### Modal
+* Added fo-modal-font-size mixin 
+
 # 1.1.3+1
 ### Bugfixes
 #### DataTable
