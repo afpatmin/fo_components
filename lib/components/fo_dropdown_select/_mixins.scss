@@ -6,12 +6,20 @@
 @mixin fo-dropdown-select-font-size($size) {
   ::ng-deep fo-dropdown-select {
     @include fo-label-font-size($size);
+
     
-    div#selector {
-      font-size: $size;
-      @include material-icon-size($size !important);
+    div#flexAligner {
+      div#selector {
+        font-size: $size;
+        @include material-icon-size($size !important);
+  
+        div#selectedValue {
+          padding: 0.4*$size 0.8*$size !important;
+        }
+      }
     }
   }
+
   @include fo-button-font-size($size);
   @include fo-dropdown-list-font-size($size);
 }
