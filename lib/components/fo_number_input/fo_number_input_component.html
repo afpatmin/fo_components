@@ -1,11 +1,10 @@
-<fo-label [value]="label"></fo-label>
+  <fo-label [value]="label"></fo-label>
 <div id="flexContainer">
   <fo-button clearSize
              noRightBorder
              [attr.tabindex]="tabIndexSub"
              [disabled]="disabled || (value != null && value <= min)"
-             (mousedown)="onMouseDown(-step)"
-             (touchstart)="onMouseDown(-step)"
+             (mousedown)="onMouseDown(-step)"             
              (keydown)="onKeyDown($event, -step)"
              icon="remove">
   </fo-button>
@@ -22,8 +21,7 @@
              noLeftBorder
              [attr.tabindex]="tabIndexAdd"
              [disabled]="disabled || (value != null && value >= max)"
-             (mousedown)="onMouseDown(step)"
-             (touchstart)="onMouseDown(step)"
+             (mousedown)="onMouseDown(step)"             
              (keydown)="onKeyDown($event, step)"
              icon="add">
   </fo-button>

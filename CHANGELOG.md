@@ -1,5 +1,14 @@
-# 1.1.3+2
+# 1.1.4
+### Bugfixes
+* Fixed issue where number input added two units on each touch event
+
 ### Component updates
+#### Carousel
+* added css directive bottomNavigationOnSmall
+
+#### DropdownSelect
+* Increased dropdown icon size when using fo-dropdown-font-size mixin
+ 
 #### Modal
 * Added fo-modal-font-size mixin 
 

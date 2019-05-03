@@ -1,10 +1,14 @@
 @import 'package:angular_components/material_button/mixins';
+@import '../fo_button/mixins';
 @import 'package:grid_css/constants.scss';
+
 :host {
   display: block;
+
   #radioButtons {
     text-align: center;
   }
+
   .arrow {
     position: absolute;
     top: auto;
@@ -19,7 +23,8 @@
     -ms-transition: opacity 200ms;
     -o-transition: opacity 200ms;
     transition: opacity 200ms;
-    fo-button {          
+
+    fo-button {
       ::ng-deep material-icon {
         i {
           font-size: 2em;
@@ -27,20 +32,25 @@
       }
     }
   }
+
   .arrow.faded {
     visibility: hidden;
   }
+
   #arrow-left {
     left: 0.5em;
     right: auto;
   }
+
   #arrow-right {
     left: auto;
     right: 0.5em;
   }
+
   #slide-container {
     position: relative;
     overflow: hidden;
+
     #slide-transformer {
       -webkit-transition: -webkit-transform 500ms;
       -moz-transition: -moz-transform 500ms;
@@ -49,27 +59,27 @@
       transition: transform 500ms;
       white-space: nowrap;
     }
+
     #slide-transformer {
       ::ng-deep * {
         white-space: initial;
       }
     }
   }
+}
+
+:host[bottomNavigationOnSmall] {
   @media screen and (max-width: $medium-width-threshold) {
     .arrow {
       top: auto;
-      bottom: 30px;
-      fo-button {
-        ::ng-deep material-icon {
-          i {
-            font-size: 1.3em;
-          }
-        }
-      }
+      bottom: 35px;
+      @include fo-button-font-size(0.8rem);
     }
+
     #arrow-left {
       left: 2px;
     }
+
     #arrow-right {
       right: 2px;
     }

@@ -16,8 +16,9 @@
     <div class="arrow"
          [class.faded]="step <= 0"
          id="arrow-left">
-      <fo-button clearSize                 
+      <fo-button clearSize
                  white
+                 dense
                  noHover
                  [disabled]="disabled"
                  (trigger)="stepBy(-1)"
@@ -28,6 +29,7 @@
          [class.faded]="step >= slides.length - 1"
          id="arrow-right">
       <fo-button clearSize
+                 dense
                  white
                  noHover
                  icon="keyboard_arrow_right"
