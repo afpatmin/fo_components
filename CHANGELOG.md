@@ -1,3 +1,7 @@
+# 1.1.5
+### Component updates
+* Added top and bottom css directives to Carousel
+
 # 1.1.4
 ### Bugfixes
 * Fixed issue where number input added two units on each touch event
