@@ -7,15 +7,17 @@
   ::ng-deep fo-dropdown-select {
     @include fo-label-font-size($size);
 
-    
     div#flexAligner {
       div#selector {
         font-size: $size;
         @include material-icon-size(1.5*$size !important);
-  
+
         div#selectedValue {
           padding: 0.4*$size 0.8*$size !important;
         }
+      }
+      ::ng-deep fo-button>button {
+        padding: 0.4*$size 0.8*$size !important;
       }
     }
   }
