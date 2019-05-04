@@ -2,6 +2,7 @@
 ### Component updates
 * Added top and bottom css directives to Carousel
 * Fixed DropdownSelect action button size when using dropdown-select-font-size mixin
+* Dropdown is now properly positioned when it has a fixed parent
 
 # 1.1.4
 ### Bugfixes
