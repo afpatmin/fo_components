@@ -88,7 +88,7 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
       }
       top = '${newTop}px';
     } else {
-      top = null;      
+      top = null;
       elementMaxHeight =
           '${html.document.documentElement.clientHeight - host.getBoundingClientRect().bottom}px';
     }
