@@ -1,5 +1,8 @@
 # 1.1.6
 ### Component updates
+#### DataTable
+* Confirm delete buttons are no longer dense and has all borders
+
 #### DropdownOption 
 * Added ability to renders optional leading image
 * Made secondaryLabel slightly smaller (0.9em)
