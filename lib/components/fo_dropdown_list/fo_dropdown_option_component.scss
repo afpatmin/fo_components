@@ -14,11 +14,24 @@
       td {
         overflow: hidden;
         text-overflow: ellipsis;
+
+        div#secondaryLabel {
+          font-size: 0.9em;
+        }
       }
 
-      td.leadingIcon {
+      td.icon {
         text-align: center;
         width: $large;
+      }
+      td#image {
+        width: 80px;
+        img {
+          display: block;
+          margin: 0 auto;
+          max-width: 60px;
+          max-height: 80px;
+        }
       }
 
       td.info {

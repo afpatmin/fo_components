@@ -1,3 +1,7 @@
+# 1.1.6
+### Component updates
+* DropdownOption now renders an optional leading image
+
 # 1.1.5
 ### Component updates
 * Added top and bottom css directives to Carousel

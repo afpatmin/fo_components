@@ -27,7 +27,7 @@ import 'fo_dropdown_option_component.dart';
     ],
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FoDropdownListComponent implements AfterChanges, OnDestroy {
+class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
   @Input()
   num width;
 

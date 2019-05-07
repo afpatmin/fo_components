@@ -1,18 +1,27 @@
 <table>
   <tr>
-    <td class="leadingIcon"
-        *ngIf="model.renderIcon?.isEmpty == false">
+    <td class="icon"
+        *ngIf="model.renderIcon?.isEmpty == false && model.renderImage?.isEmpty != false">
       <fo-icon [icon]="model.renderIcon"
                [material]="materialIcon">
       </fo-icon>
     </td>
+    <td id="image" *ngIf="model.renderImage?.isEmpty == false">
+      <img [src]="model.renderImage" alt="image">
+    </td>
     <td>
       <div class="black-color">{{model.renderLabel}}</div>
-      <div class="gray-color">{{model.renderSecondaryLabel}}</div>
+      <div class="gray-color" id="secondaryLabel">{{model.renderSecondaryLabel}}</div>
     </td>
     <td class="black-color info"
         *ngIf="model.renderInfo?.isEmpty == false">
       <strong>{{model.renderInfo}}</strong>
+    </td>
+    <td class="icon"
+        *ngIf="model.renderIcon?.isEmpty == false && model.renderImage?.isEmpty == false">
+      <fo-icon [icon]="model.renderIcon"
+               [material]="materialIcon">
+      </fo-icon>
     </td>
   </tr>
 </table>
