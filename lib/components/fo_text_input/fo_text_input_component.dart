@@ -106,7 +106,7 @@ class FoTextInputComponent
   Stream<String> get blur => _blurController.stream;
 
   /// Clear icon is clicked
-  @Output('clear')  
+  @Output('clear')
   Stream<html.Event> get clear => _clearButtonController.stream;
 
   int get dropdownWidth =>
