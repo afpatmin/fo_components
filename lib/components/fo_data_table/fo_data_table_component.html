@@ -199,15 +199,11 @@
   <p class="text-right margin-bottom-none"
      footer>
     <fo-button [label]="msgCancel | capitalize"
-               dense
                white
-               noRightBorder
                clearSize
                (trigger)="deleteBufferId = null"></fo-button>
     <fo-button [label]="msgOk | capitalize"
-               dense
                white
-               noLeftBorder
                clearSize
                (trigger)="onDeleteController.add(deleteBufferId); deleteBufferId = null;">
     </fo-button>
