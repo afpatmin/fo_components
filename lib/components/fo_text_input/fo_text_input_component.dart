@@ -61,7 +61,7 @@ class FoTextInputComponent
   @Input()
   bool disabled = false;
 
-  /// Make sure options doesn't extend beyond the viewport
+  /// Make sure options dropdown doesn't extend beyond the viewport
   @Input()
   bool constrainToViewPort = true;
 
@@ -75,6 +75,8 @@ class FoTextInputComponent
   ChangeFunction<String> _onChange;
   NgControl control;
   final ChangeDetectorRef _changeDetectorRef;
+  final StreamController<html.Event> _clearButtonController =
+      StreamController<html.Event>();
   final StreamController<FoButtonEvent> actionButtonController =
       StreamController<FoButtonEvent>();
   final StreamController<html.Event> changeController =
@@ -93,11 +95,19 @@ class FoTextInputComponent
       @Self() @Optional() this.control, this.host, this._changeDetectorRef) {
     if (control != null) control.valueAccessor = this;
   }
+
+  /// Action button triggered
   @Output('actionButtonTrigger')
   Stream<FoButtonEvent> get actionButtonTrigger =>
       actionButtonController.stream;
+
+  /// Component lost focus
   @Output('blur')
   Stream<String> get blur => _blurController.stream;
+
+  /// Clear icon is clicked
+  @Output('clear')  
+  Stream<html.Event> get clear => _clearButtonController.stream;
 
   int get dropdownWidth =>
       inputElement?.getBoundingClientRect()?.width?.toInt();
@@ -147,6 +157,7 @@ class FoTextInputComponent
     _selectionChangeController.close();
     _focusController.close();
     _blurController.close();
+    _clearButtonController.close();
   }
 
   void onBlur(html.Event event) {
@@ -162,6 +173,7 @@ class FoTextInputComponent
     if (_onChange != null) {
       _onChange(value);
     }
+    _clearButtonController.add(event);
   }
 
   @override

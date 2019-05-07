@@ -1,6 +1,15 @@
 # 1.1.6
 ### Component updates
-* DropdownOption now renders an optional leading image
+#### DropdownOption 
+* Added ability to renders optional leading image
+* Made secondaryLabel slightly smaller (0.9em)
+
+#### Modal
+* Added fo-modal-paddin mixin
+
+#### TextInput
+* Clear icon can now be specified whether or not is material
+* Outputs an event when clear icon is clicked
 
 # 1.1.5
 ### Component updates
