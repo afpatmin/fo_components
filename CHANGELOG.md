@@ -5,7 +5,7 @@
 * Made secondaryLabel slightly smaller (0.9em)
 
 #### Modal
-* Added fo-modal-paddin mixin
+* Added fo-modal-padding mixin
 
 #### TextInput
 * Clear icon can now be specified whether or not is material
