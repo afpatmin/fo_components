@@ -34,6 +34,20 @@
       }
     }
   }
+  ::ng-deep fo-modal[dense] {
+    div#modalOverlay {
+      div#modalContent {
+        div#modalHeader,
+        div#modalFooter {
+          padding: 0.5 * $vertical 0.5 * $horizontal !important; 
+        }
+        div#modalMain {
+          padding-left: 0.5 * $horizontal !important;
+          padding-right: 0.5 * $horizontal !important;
+        }
+      }
+    }
+  }
 }
 
 @mixin fo-modal-font-size($size) {
