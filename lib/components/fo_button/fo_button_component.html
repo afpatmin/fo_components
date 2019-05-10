@@ -1,9 +1,22 @@
 <button [disabled]="disabled == true"
         class="themeable background-color-primary"
         (click)="onClick()">
-  <span *ngIf="label != null">{{label}}</span>
-  <fo-icon *ngIf="icon != null"
-           [icon]="icon"
-           [material]="materialIcon">
-  </fo-icon>
+  <div id="leading"
+       *ngIf="leadingIcon != null || trailingIcon != null">
+    <fo-icon [icon]="leadingIcon"
+             [material]="materialIcon"></fo-icon>
+  </div>
+  <div id="center">
+    <span *ngIf="label != null">{{label}}</span>
+    <fo-icon *ngIf="icon != null"
+             [icon]="icon"
+             [class.spaced]="label != null"
+             [material]="materialIcon">
+    </fo-icon>
+  </div>
+  <div id="trailing"
+       *ngIf="leadingIcon != null || trailingIcon != null">
+    <fo-icon [icon]="trailingIcon"
+             [material]="materialIcon"></fo-icon>
+  </div>
 </button>

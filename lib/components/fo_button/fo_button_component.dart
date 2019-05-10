@@ -17,6 +17,12 @@ class FoButtonComponent implements OnDestroy {
   String icon;
 
   @Input()
+  String leadingIcon;
+
+  @Input()
+  String trailingIcon;  
+
+  @Input()
   bool disabled = false;
 
   @Input()

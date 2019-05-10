@@ -1,3 +1,9 @@
+# 1.1.7
+### Component updates
+#### Button
+* Added leadingIcon and trailingIcon
+* Added some left margin to icon
+
 # 1.1.6
 ### Component updates
 #### DataTable
