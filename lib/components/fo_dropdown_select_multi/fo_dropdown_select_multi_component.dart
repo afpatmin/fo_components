@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html' as dom;
 
 import 'package:angular/angular.dart';
 import 'package:collection/collection.dart';
@@ -23,6 +24,8 @@ class FoDropdownSelectMultiComponent<T>
 
   final _equal = const ListEquality().equals;
 
+  final dom.Element _host;
+
   @Input()
   String label;
 
@@ -35,6 +38,7 @@ class FoDropdownSelectMultiComponent<T>
 
   @Input('options')
   Map<String, List<FoDropdownOptionRenderable>> allOptions;
+
   @Input()
 
   /// Make sure options doesn't extend beyond the viewport
@@ -42,7 +46,6 @@ class FoDropdownSelectMultiComponent<T>
 
   @Input()
   bool showSearch = false;
-
   @Input()
   bool materialIcons = true;
 
@@ -51,8 +54,10 @@ class FoDropdownSelectMultiComponent<T>
   Object selectedId;
 
   List<FoDropdownOptionRenderable> addedOptions = [];
-  List<T> get selectedIds => _selectedIds;
 
+  FoDropdownSelectMultiComponent(this._host);
+
+  List<T> get selectedIds => _selectedIds;
   @Input('selectedIds')
   set selectedIds(List<T> value) {
     _selectedIdsChanged = !_equal(value, _selectedIds);
@@ -61,6 +66,11 @@ class FoDropdownSelectMultiComponent<T>
 
   @Output('selectedIdsChange')
   Stream<List<T>> get selectedIdsChange => selectionChangeController.stream;
+
+  String get square => _host.attributes.containsKey('square') ? '1' : null;
+
+  String get noFocusShadow =>
+      _host.attributes.containsKey('noFocusShadow') ? '1' : null;
 
   @override
   void ngAfterChanges() {

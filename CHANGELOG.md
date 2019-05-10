@@ -1,3 +1,15 @@
+# 1.2.1
+### Component updates
+
+#### Button, Dropdown, DropdownList, DropdownSelect, DropdownSelectMulti, TextAreaInput, TextInput
+* Added css directive 'square' which will remove rounded corners
+
+#### DropdownSelect, DropdownSelectMulti
+* Added css directive 'noFocusShadow' to not highlight on focus
+
+#### NumberInput
+* Removed focus highlight shadow
+
 # 1.2.0
 ### Component updates
 #### Button

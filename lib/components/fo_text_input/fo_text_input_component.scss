@@ -39,12 +39,14 @@
       border-right-width: 1px;
     }
 
-    material-icon, fo-icon {
+    material-icon,
+    fo-icon {
       box-shadow: none;
       -webkit-box-shadow: none;
     }
 
-    material-icon.clear, fo-icon.clear {
+    material-icon.clear,
+    fo-icon.clear {
       width: 0;
       z-index: 2;
       transform: translateX(-$large);
@@ -52,7 +54,8 @@
       font-size: 0.9em;
     }
 
-    material-icon.leading, fo-icon.leading {
+    material-icon.leading,
+    fo-icon.leading {
       width: 0;
       z-index: 2;
       transform: translateX($medium);
@@ -138,6 +141,21 @@
       input {
         line-height: 100%;
       }
+    }
+  }
+}
+
+:host[square] {
+  div#flexContainer {
+    border-radius: 0;
+
+    input {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left-width: 1px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right-width: 1px;
     }
   }
 }

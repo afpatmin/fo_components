@@ -20,13 +20,14 @@
            (keyup)="onKeyUp($event)"
            (focus)="onFocus($event)"
            (blur)="onBlur($event)">
-    <fo-icon *ngIf="clearIcon == true && value?.isEmpty == false"             
+    <fo-icon *ngIf="clearIcon == true && value?.isEmpty == false"
              class="clear"
              icon="close"
              [material]="materialIcons"
              (click)="onClear($event)"></fo-icon>
     <fo-button *ngIf="actionButtonLabel != null"
                [label]="actionButtonLabel"
+               [attr.square]="square"
                noLeftBorder
                [disabled]="disabled || control?.valid == false || value?.isEmpty != false"
                (trigger)="actionButtonController?.add($event)"></fo-button>
@@ -37,6 +38,7 @@
   </fo-error-output>
   <fo-dropdown-list *ngIf="options != null && value?.isEmpty == false && dropdownVisible"
                     [options]="options"
+                    [attr.square]="square"
                     [filter]="value"
                     [constrainToViewPort]="constrainToViewPort"
                     [materialIcons]="materialIcons"

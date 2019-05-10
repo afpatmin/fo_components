@@ -1,5 +1,6 @@
 <fo-dropdown *ngIf="options != null && filteredOptions != null"
              [width]="width"
+             [attr.square]="square"
              [offsetTop]="offsetTop"
              [constrainToViewPort]="constrainToViewPort"
              [visible]="visible"
@@ -7,6 +8,7 @@
   <div id="filterContainer">
     <fo-text-input *ngIf="showSearch == true"
                    [autoFocus]="visible"
+                   [attr.square]="square"
                    noFocusShadow
                    [label]="msgFilter | capitalize"
                    dense

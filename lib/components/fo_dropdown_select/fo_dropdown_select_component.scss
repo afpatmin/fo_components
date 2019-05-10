@@ -94,11 +94,29 @@
     div#selector {
       div#selectedValue {
         line-height: 100%;
-      }      
+      }
     }
+
     ::ng-deep fo-button>button {
       padding: $small $large;
       line-height: 100%;
+    }
+  }
+}
+
+:host[noFocusShadow] {
+  div#flexAligner {
+    div#selector.focus {
+      box-shadow: none;
+      -webkit-box-shadow: none;
+    }
+  }
+}
+
+:host[square] {
+  div#flexAligner {
+    div#selector {
+      border-radius: 0;
     }
   }
 }

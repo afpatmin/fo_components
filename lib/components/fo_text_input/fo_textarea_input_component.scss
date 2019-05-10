@@ -10,7 +10,6 @@
     resize: none;    
     border-radius: $borderRadius;
     @include inputStyle;
-    
   }
   
   textarea,
@@ -20,4 +19,17 @@
   textarea:focus {
     @include boxShadow();
   }
-} 
+}
+
+:host[noFocusShadow] {
+  textarea:focus {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+}
+
+:host[square] {
+  textarea {      
+    border-radius: 0 ;      
+  }  
+}

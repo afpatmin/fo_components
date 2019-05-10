@@ -5,8 +5,8 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_components/focus/focus.dart';
 import 'package:angular_components/material_datepicker/module.dart';
-import 'package:fo_components/components/fo_icon/fo_icon_component.dart';
 import 'package:angular_forms/angular_forms.dart';
+import 'package:fo_components/components/fo_icon/fo_icon_component.dart';
 import 'package:intl/intl.dart';
 
 import '../../pipes/capitalize_pipe.dart';
@@ -72,6 +72,7 @@ class FoTextInputComponent
   bool materialIcons = true;
 
   String value;
+
   ChangeFunction<String> _onChange;
   NgControl control;
   final ChangeDetectorRef _changeDetectorRef;
@@ -148,7 +149,14 @@ class FoTextInputComponent
       _selectionChangeController.stream;
 
   int get selectionEnd => inputElement?.selectionEnd;
+
   int get selectionStart => inputElement?.selectionStart;
+  String get square => host.attributes.containsKey('square') ? '1' : null;
+
+  @override
+  void ngAfterViewInit() {
+    inputElement = host.querySelector('input');
+  }
 
   @override
   void ngOnDestroy() {
@@ -225,10 +233,5 @@ class FoTextInputComponent
   void writeValue(String obj) {
     value = obj;
     _changeDetectorRef.markForCheck();
-  }
-
-  @override
-  void ngAfterViewInit() {
-    inputElement = host.querySelector('input');
   }
 }

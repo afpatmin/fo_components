@@ -99,3 +99,9 @@
     padding-right: $small;
   }
 }
+
+:host[square] {
+  button {
+    border-radius: 0;
+  }
+}

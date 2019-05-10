@@ -1,6 +1,8 @@
 <fo-dropdown-select [label]="label"
                     [options]="filteredOptions"
                     [disabled]="disabled"
+                    [attr.square]="square"
+                    [attr.noFocusShadow]="noFocusShadow"
                     [showSearch]="showSearch"
                     [actionButtonLabel]="msgAdd | capitalize"
                     [materialIcons]="materialIcons"
@@ -11,6 +13,7 @@
   <ul>
     <li *ngFor="let option of addedOptions"
         (click)="onRemove(option.renderId)"
-        [class.disabled]="disabled"> {{option.renderLabel}} </li>
+        [class.disabled]="disabled"
+        [class.round]="square == null"> {{option.renderLabel}} </li>
   </ul>
 </div>

@@ -17,12 +17,11 @@ import '../fo_label/fo_label_component.dart';
       'fo_dropdown_select_component.css'
     ],
     directives: [
+      coreDirectives,
       FoButtonComponent,
       FoDropdownListComponent,
       FoIconComponent,
       FoLabelComponent,
-      NgClass,
-      NgIf
     ])
 class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @Input()
@@ -43,6 +42,8 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
 
   @Input()
   bool materialIcons = true;
+
+  String get square => _host.attributes.containsKey('square') ? '1' : null;
 
   Map<String, List<FoDropdownOptionRenderable>> _options;
 

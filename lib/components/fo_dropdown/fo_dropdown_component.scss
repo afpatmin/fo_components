@@ -20,3 +20,12 @@
     }
   }
 }
+
+:host[square] {
+  div#fixer {
+    div#dropdownContent {
+      border-radius: 0;
+    }
+  }
+
+}

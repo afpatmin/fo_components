@@ -20,6 +20,7 @@
              (trigger)="actionButtonController.add($event)"></fo-button>
 </div>
 <fo-dropdown-list *ngIf="options != null && dropdownVisible == true && disabled != true"
+                  [attr.square]="square"
                   [options]="options"
                   [showSearch]="showSearch"
                   [constrainToViewPort]="constrainToViewPort"
