@@ -27,6 +27,9 @@ class FileUploadComponent implements OnDestroy {
   String accept = 'image/*,.pdf';
 
   @Input()
+  bool materialIcon = true;
+
+  @Input()
   bool disabled = false;
 
   @Input()

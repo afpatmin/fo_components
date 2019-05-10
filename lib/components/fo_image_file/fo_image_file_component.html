@@ -13,6 +13,7 @@
                clearSize
                white
                dense
+               [materialIcon]="materialIcon"
                [disabled]="disabled"
                (trigger)="fileInput.value = null; clearSource()"
                icon="delete">
@@ -24,6 +25,7 @@
              *ngIf="source == null || source.isEmpty"
              [disabled]="disabled"
              (trigger)="fileInput.click()"
+             [materialIcon]="materialIcon"
              icon="add_a_photo">
   </fo-button>
   <input type="file"

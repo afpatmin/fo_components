@@ -32,6 +32,9 @@ class FoImageFileComponent implements OnDestroy {
   String label = 'Image';
 
   @Input()
+  bool materialIcon = true;
+
+  @Input()
   String alt = '';
 
   @Input()

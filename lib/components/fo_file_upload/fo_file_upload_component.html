@@ -12,6 +12,7 @@
     <fo-button (trigger)="input.click()"
                dense
                white
+               [materialIcon]="materialIcon"
                [disabled]="disabled"
                icon="folder_open">
     </fo-button>
@@ -21,6 +22,7 @@
     <fo-button dense
                white
                [disabled]="disabled || !valid"
+               [materialIcon]="materialIcon"
                (trigger)="upload()"
                icon="file_upload">
     </fo-button>
@@ -29,6 +31,7 @@
     <span *ngIf="file == null">...</span>
     <ng-container *ngIf="file != null"> {{file.name}} ({{(file.size / 1024).ceil()}}kb) <fo-icon icon="cancel"
                class="color-alert"
+               [material]="materialIcon"
                (click)="clearSelection()"></fo-icon>
     </ng-container>
   </p>
