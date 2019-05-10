@@ -20,7 +20,7 @@ class FoButtonComponent implements OnDestroy {
   String leadingIcon;
 
   @Input()
-  String trailingIcon;  
+  String trailingIcon;
 
   @Input()
   bool disabled = false;

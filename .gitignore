@@ -1,6 +1,10 @@
 .packages
 build/
-example/
+example/lib
+example/web
+example/analysis_options.yaml
+example/pubspec.yaml
+
 pubspec.lock
 
 .dart_tool

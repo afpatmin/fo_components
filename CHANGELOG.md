@@ -1,8 +1,14 @@
-# 1.1.7
+# 1.2.0
 ### Component updates
 #### Button
 * Added leadingIcon and trailingIcon
 * Added some left margin to icon
+
+#### FileUpload, ImageFile
+* User can now specify whether or not to use material icons (default: true)
+
+#### Other
+* Added example folder with link to examples
 
 # 1.1.6
 ### Component updates
