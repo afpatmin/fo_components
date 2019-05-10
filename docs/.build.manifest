@@ -18,10 +18,6 @@ packages/$sdk/dev_compiler/kernel/amd/require.js
 packages/$sdk/dev_compiler/kernel/common/dart_sdk.js
 packages/$sdk/dev_compiler/kernel/common/run.js
 packages/$sdk/dev_compiler/kernel/es6/dart_sdk.js
-packages/$sdk/dev_compiler/kernel/legacy/dart_library.js
-packages/$sdk/dev_compiler/kernel/legacy/dart_sdk.js
-packages/$sdk/dev_compiler/legacy/dart_library.js
-packages/$sdk/dev_compiler/legacy/dart_sdk.js
 packages/$sdk/dev_compiler/web/dart_stack_trace_mapper.js
 packages/$sdk/dev_compiler/web/ddc_web_compiler.js
 packages/analyzer/src/summary/format.fbs
