@@ -103,7 +103,6 @@
 }
 
 :host[noLeftBorder] {
-
   div#flexContainer,
   div#flexContainer input {
     border-top-left-radius: 0;
@@ -146,16 +145,18 @@
 }
 
 :host[square] {
-  div#flexContainer {
-    border-radius: 0;
-
-    input {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      border-left-width: 1px;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      border-right-width: 1px;
+  fo-label {    
+    div#flexContainer {
+      border-radius: 0;
+  
+      input {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-left-width: 1px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right-width: 1px;
+      }
     }
   }
 }
