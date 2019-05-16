@@ -1,3 +1,8 @@
+# 1.2.2
+### Bugfixes
+#### FoImageMap
+* Fixed issue where not all marked zones was alert-color
+
 # 1.2.1
 ### Component updates
 

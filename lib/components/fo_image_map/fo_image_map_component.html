@@ -10,7 +10,7 @@
     <ng-container *ngFor="let id of zones.keys">
       <ng-container *ngFor="let zone of zones[id]">
         <ellipse *ngFor="let ellipse of zone.ellipses"
-                 class="shape"
+                 class="shape background-color-alert"
                  [class.visible]="selectedIds.contains(zone.id)"
                  [attr.cx]="ellipse.x"
                  [attr.cy]="ellipse.y"
@@ -19,7 +19,7 @@
                  [attr.transform]="ellipse.transform">
         </ellipse>
         <rect *ngFor="let rectangle of zone.rectangles"
-              class="shape"
+              class="shape background-color-alert"
               [class.visible]="selectedIds.contains(zone.id)"
               [attr.x]="rectangle.x"
               [attr.y]="rectangle.y"
