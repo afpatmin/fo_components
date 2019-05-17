@@ -1,5 +1,8 @@
 # 1.2.2
 ### Component updates
+#### Notification, Panel
+* Minor tweaks to icon sizes
+  
 #### ImageFile
 * Added fo-image-file-min-height mixin
 
