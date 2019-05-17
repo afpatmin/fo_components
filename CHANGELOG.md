@@ -1,3 +1,8 @@
+# 1.2.3
+### Component updates
+#### ImageFile
+* Added placeholder input
+
 # 1.2.2
 ### Component updates
 #### Notification, Panel
