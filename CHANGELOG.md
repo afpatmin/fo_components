@@ -1,6 +1,10 @@
 # 1.2.2
+### Component updates
+#### ImageFile
+* Added fo-image-file-min-height mixin
+
 ### Bugfixes
-#### FoImageMap
+#### ImageMap
 * Fixed issue where not all marked zones was alert-color
 
 # 1.2.1

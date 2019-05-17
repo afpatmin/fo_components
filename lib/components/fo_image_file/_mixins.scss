@@ -5,3 +5,11 @@
     }
   }
 }
+
+@mixin fo-image-file-min-height($height) {
+  ::ng-deep fo-image-file {
+    div.container {
+      min-height: $height;
+    }
+  }
+}
