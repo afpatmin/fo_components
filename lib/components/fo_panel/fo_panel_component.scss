@@ -7,11 +7,11 @@
     @include boxShadow();
     overflow: hidden;
     display: block;
-    padding: 0 $medium $small $medium;
+    padding: $medium;
     background-color: white;
 
     div#panelHeader {
-      @include fo-button-font-size(0.7rem);
+      @include fo-button-font-size(0.9rem);
       display: flex;
       align-items: center;
 
@@ -20,6 +20,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        margin: 0;
       }
     }
   }
