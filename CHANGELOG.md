@@ -3,6 +3,9 @@
 #### ImageFile
 * Added placeholder input
 
+#### ImageFile, FileUpload
+* Dashed border now 2px wide (up from 1px)
+
 # 1.2.2
 ### Component updates
 #### Notification, Panel
