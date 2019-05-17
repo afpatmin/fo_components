@@ -10,6 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 
     div.image {
       @include boxShadow();
@@ -26,6 +27,10 @@
         top: $small;
         right: $small;
       }
+    }
+
+    p#placeholder {
+      text-align: center;
     }
 
     input[type=file] {

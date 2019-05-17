@@ -38,6 +38,9 @@ class FoImageFileComponent implements OnDestroy {
   String alt = '';
 
   @Input()
+  String placeholder = '';
+
+  @Input()
   bool disabled = false;
 
   /// Maximum width in pixels of the output image

@@ -2,6 +2,10 @@
   ::ng-deep fo-image-file {
     div.container {
       border-color: $color;
+
+      p#placeholder {
+        color: $color;
+      }
     }
   }
 }
