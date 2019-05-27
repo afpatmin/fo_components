@@ -87,7 +87,7 @@ class FoDropdownSelectMultiComponent<T>
 
   @override
   void ngOnInit() {
-    _updateFilteredOptions();
+    _updateFilteredOptions(outputEvent: false);
   }
 
   void onAdd(Object id) {
@@ -111,7 +111,7 @@ class FoDropdownSelectMultiComponent<T>
     }
   }
 
-  void _updateFilteredOptions() {
+  void _updateFilteredOptions({bool outputEvent = true}) {
     // Reset filtered options to contain all options
     filteredOptions = <String, List<FoDropdownOptionRenderable>>{};
     for (final category in allOptions.keys) {
@@ -125,6 +125,8 @@ class FoDropdownSelectMultiComponent<T>
           .removeWhere((option) => addedOptionIds.contains(option.renderId));
     }
 
-    selectionChangeController.add(addedOptionIds.toList().cast<T>());
+    if (outputEvent == true) {
+      selectionChangeController.add(addedOptionIds.toList().cast<T>());
+    }
   }
 }

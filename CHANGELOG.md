@@ -6,6 +6,9 @@
 #### ImageFile, FileUpload
 * Dashed border now 2px wide (up from 1px)
 
+#### DropdownSelectMulti
+* No longer emitting selectedIdsChange onInit
+
 # 1.2.2
 ### Component updates
 #### Notification, Panel
