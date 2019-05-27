@@ -81,7 +81,7 @@ class FoDropdownSelectMultiComponent<T>
         for (final id in selectedIds) {
           onAdd(id, outputEvent: false);
         }
-      }          
+      }
     }
   }
 
