@@ -1,3 +1,8 @@
+# 1.2.3+1
+### Component updates
+#### DropdownSelectMulti
+* From now on only emit selectedIdsChange when change is internal
+
 # 1.2.3
 ### Component updates
 #### ImageFile

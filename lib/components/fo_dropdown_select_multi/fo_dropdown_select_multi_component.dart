@@ -76,7 +76,12 @@ class FoDropdownSelectMultiComponent<T>
   void ngAfterChanges() {
     if (_selectedIdsChanged == true) {
       addedOptions = [];
-      selectedIds?.forEach(onAdd);
+
+      if (selectedIds != null) {
+        for (final id in selectedIds) {
+          onAdd(id, outputEvent: false);
+        }
+      }          
     }
   }
 
@@ -90,14 +95,14 @@ class FoDropdownSelectMultiComponent<T>
     _updateFilteredOptions(outputEvent: false);
   }
 
-  void onAdd(Object id) {
+  void onAdd(Object id, {bool outputEvent = true}) {
     if (disabled != true) {
       for (final category in allOptions.keys) {
         final match = allOptions[category]
             .firstWhere((option) => option.renderId == id, orElse: () => null);
         if (match != null) {
           addedOptions.add(match);
-          _updateFilteredOptions();
+          _updateFilteredOptions(outputEvent: outputEvent);
           break;
         }
       }
