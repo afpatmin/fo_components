@@ -3,6 +3,12 @@
 #### DropdownSelect
 * Options implementing renderIcon now renders icon in selectedValue aswell as in dropdown
 
+#### ImageFile & FileUpload
+* Dashed border now greyColorBright by default (instead of greyColor)
+
+#### FoLabel
+* Added maxWidth 100%
+
 # 1.2.3+1
 ### Component updates
 #### DropdownSelectMulti
