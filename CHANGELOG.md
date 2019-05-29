@@ -1,3 +1,8 @@
+# 1.2.4
+### Component updates
+#### DropdownSelect
+* Options implementing renderIcon now renders icon in selectedValue aswell as in dropdown
+
 # 1.2.3+1
 ### Component updates
 #### DropdownSelectMulti

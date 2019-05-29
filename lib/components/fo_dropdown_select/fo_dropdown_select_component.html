@@ -6,7 +6,13 @@
          [class.noRightBorder]="actionButtonLabel != null"
          [class.disabled]="disabled == true"
          [class.focus]="dropdownVisible">
-      <div id="selectedValue"> {{selectedOption == null ? '-' : selectedOption.renderLabel}} </div>
+      <div id="selectedValue">
+        <fo-icon *ngIf="selectedOption?.renderIcon != null"
+                 [icon]="selectedOption?.renderIcon"
+                 [material]="materialIcons">
+        </fo-icon> 
+        <span>{{selectedOption == null ? '-' : selectedOption.renderLabel}}</span>
+      </div>
       <fo-icon class="arrow"
                [material]="true"
                icon="keyboard_arrow_down"></fo-icon>

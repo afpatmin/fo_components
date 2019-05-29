@@ -32,6 +32,9 @@
         line-height: 200%;
         color: #555;
         user-select: none;
+        fo-icon {
+          margin-right: $x-small;
+        }
       }
 
       material-icon.arrow {
