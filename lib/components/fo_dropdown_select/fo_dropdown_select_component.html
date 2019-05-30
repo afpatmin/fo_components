@@ -7,10 +7,11 @@
          [class.disabled]="disabled == true"
          [class.focus]="dropdownVisible">
       <div id="selectedValue">
-        <fo-icon *ngIf="selectedOption?.renderIcon != null"
+        <fo-icon class="color-primary"
+                 *ngIf="selectedOption?.renderIcon != null"
                  [icon]="selectedOption?.renderIcon"
                  [material]="materialIcons">
-        </fo-icon> 
+        </fo-icon>
         <span>{{selectedOption == null ? '-' : selectedOption.renderLabel}}</span>
       </div>
       <fo-icon class="arrow"
