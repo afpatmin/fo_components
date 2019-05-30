@@ -1,3 +1,8 @@
+# 1.2.5
+### Component updates
+#### DropdownSelect, DropdownMultiSelect
+* Selected value icon now primaryColor
+
 # 1.2.4
 ### Component updates
 #### DropdownSelect
