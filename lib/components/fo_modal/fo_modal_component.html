@@ -7,9 +7,11 @@
       <div id="modalHeaderTitle">
         <h2 *ngIf="header != null">{{header}}</h2>
       </div>
-      <fo-button white
+      <fo-button *ngIf="showCloseButton == true"
                  dense
-                 *ngIf="showCloseButton == true"
+                 white
+                 [themeColor]="buttonColor"
+                 [themeBackgroundColor]="buttonBackgroundColor"
                  icon="close"
                  [materialIcon]="true"
                  (trigger)="close()"></fo-button>

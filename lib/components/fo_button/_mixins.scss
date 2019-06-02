@@ -32,13 +32,15 @@
   
   // Hover effect
   ::ng-deep fo-button:not([noHover])>button:not(:disabled).themeable:hover {
-    filter: brightness(150%);    
+    filter: brightness(150%);  
+
+    
   }
 
   // Hover effect for white
   ::ng-deep fo-button[white]:not([noHover])button:not(:disabled).themeable:hover {
     background-color: $backgroundColor;
-    border-color: $backgroundColor;
+    border-color: $backgroundColor;    
     color: white;
   }
 

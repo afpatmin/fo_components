@@ -28,6 +28,12 @@ class FoModalComponent implements OnDestroy {
   String header;
 
   @Input()
+  String buttonColor;
+
+  @Input()
+  String buttonBackgroundColor;
+
+  @Input()
   String error;
 
   @Input()
