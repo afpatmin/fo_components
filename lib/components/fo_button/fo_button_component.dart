@@ -22,6 +22,14 @@ class FoButtonComponent implements OnDestroy {
   @Input()
   String trailingIcon;
 
+  /// Set text/icon color dynamically, overrides any color set by mixins and attributes
+  @Input()
+  String themeColor;
+
+  /// Set background color dynamically, overrides any color set by mixins and attributes.
+  @Input()
+  String themeBackgroundColor;
+
   @Input()
   bool disabled = false;
 

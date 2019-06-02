@@ -12,7 +12,7 @@
     @include material-icon-size(1.5rem);
     user-select: none;
     -webkit-user-select: none;
-    transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+    transition: filter 0.3s ease;
     cursor: pointer;
     padding: $small $medium;
     outline: none;

@@ -14,7 +14,7 @@
   }
 }
 
-@mixin fo-button-colors($color, $backgroundColor, $backgroundColorhover, $backgroundColorDisabled) {  
+@mixin fo-button-colors($color, $backgroundColor, $backgroundColorDisabled) {  
   
   // Default
   ::ng-deep fo-button:not([white])>button {
@@ -32,14 +32,13 @@
   
   // Hover effect
   ::ng-deep fo-button:not([noHover])>button:not(:disabled).themeable:hover {
-    background-color: $backgroundColorhover;
-    border-color: $backgroundColorhover;
+    filter: brightness(150%);    
   }
 
   // Hover effect for white
   ::ng-deep fo-button[white]:not([noHover])button:not(:disabled).themeable:hover {
-    background-color: $backgroundColorhover;
-    border-color: $backgroundColorhover;
+    background-color: $backgroundColor;
+    border-color: $backgroundColor;
     color: white;
   }
 
