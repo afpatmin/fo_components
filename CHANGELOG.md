@@ -1,8 +1,11 @@
 # 1.3.0
 ### General
-* (BREAKING) updated angular dependency to 6.0.0-alpha
+* BREAKNIG: Updated angular dependency to 6.0.0-alpha and angular_components to 0.14.0-alpha
 
 ### Component updates
+#### Button
+* BREAKING: Removed backgroundColorHover argument from fo-button-colors mixin
+
 #### DataTable
 * Row selector no longer truncates numbers > 100
 * Fixed icon sizing
