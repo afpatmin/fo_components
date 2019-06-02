@@ -12,7 +12,7 @@ class FoIconComponent implements AfterChanges {
   String get iconClass => 'icon-$icon';
 
   @Input()
-  String size = '1em';
+  String size = '1em !important';
 
   @Input()
   String icon;

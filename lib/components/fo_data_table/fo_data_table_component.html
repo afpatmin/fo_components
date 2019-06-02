@@ -45,12 +45,10 @@
           <td *ngFor="let cell of evaluatedColumns.keys"
               (click)="onSort(cell)">
             <span>{{cell}}</span>
-            <fo-icon size="small"
-                     [class.hidden]="sortColumn != cell || sortOrder == 'DESC'"
+            <fo-icon [class.hidden]="sortColumn != cell || sortOrder == 'DESC'"                     
                      icon="keyboard_arrow_up"
                      [material]="true"></fo-icon>
-            <fo-icon size="small"
-                     [class.hidden]="sortColumn != cell || sortOrder == 'ASC'"
+            <fo-icon [class.hidden]="sortColumn != cell || sortOrder == 'ASC'"                     
                      icon="keyboard_arrow_down"
                      [material]="true"></fo-icon>
           </td>
@@ -71,7 +69,7 @@
           <td *ngIf="errorFunction != null && data != null">
             <fo-icon *ngIf="errorFunction(data[key]) != null"
                      icon="warning"
-                     [materialTooltip]="errorFunction(data[key]) | capitalize"
+                     [materialTooltip]="errorFunction(data[key]) | capitalize"                     
                      [material]="true"></fo-icon>
           </td>
           <td *ngFor="let cell of columns.keys">
@@ -84,13 +82,13 @@
           <td *ngFor="let cell of evaluatedColumns.keys">
             <span *ngIf="!isBool(getEvaluatedColumn(key, cell))">{{getEvaluatedColumn(key, cell)}}</span>
             <fo-icon *ngIf="getEvaluatedColumn(key, cell) == true"
-                     icon="check"
+                     icon="check"                     
                      [material]="true">
             </fo-icon>
           </td>
           <td *ngIf="showDeleteButtons"
               class="text-center">
-            <fo-icon class="clickable color-alert"
+            <fo-icon class="clickable color-alert"                     
                      icon="delete_forever"
                      (click)="onDeleteRow(key, $event)"
                      [material]="true">

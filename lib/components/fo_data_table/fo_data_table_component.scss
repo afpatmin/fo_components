@@ -23,6 +23,9 @@
     .box-shadow {
         @include boxShadow();
     }
+    fo-icon.small {
+      font-size: 0.8em;
+    }
 }
 
 fieldset {
@@ -128,7 +131,7 @@ div.table-container {
         }
 
         fo-dropdown-select {
-          width: 70px;
+          width: 90px;
         }
     }
 }
