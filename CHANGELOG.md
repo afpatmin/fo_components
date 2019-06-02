@@ -5,6 +5,12 @@
 
 #### Modal 
 * Header/Footer now hidden unless populated
+* Added buttonColor and buttonBackgroundColor inputs
+
+#### Quiz
+* Made more pretty
+* Added buttonColor
+
 
 # 1.2.4
 ### Component updates
