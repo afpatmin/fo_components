@@ -23,9 +23,8 @@
 </fo-quiz>
 <div id="nextButtonContainer"
      *ngIf="model.multiSelect == true && currentChildQuiz == null">
-  <fo-button clearSize
-             dense
-             white             
+  <fo-button white
+             dense             
              icon="keyboard_arrow_down"
              [disabled]="selectedOptions.isEmpty"
              (trigger)="onNextTrigger()">
