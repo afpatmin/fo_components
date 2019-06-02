@@ -2,14 +2,15 @@
      id="modalOverlay">
   <div id="modalContent"
        [style.transform]="transform">
-    <div id="modalHeader">
+    <div id="modalHeader"
+         *ngIf="header != null && showCloseButton == true">
       <div id="modalHeaderTitle">
         <h2 *ngIf="header != null">{{header}}</h2>
       </div>
       <fo-button clearSize
                  white
                  dense
-                 *ngIf="showCloseButton"
+                 *ngIf="showCloseButton == true"
                  icon="close"
                  [materialIcon]="true"
                  (trigger)="close()"></fo-button>
@@ -20,7 +21,9 @@
     <div id="modalMain">
       <ng-content></ng-content>
     </div>
-    <div id="modalFooter">
+    <div id="modalFooter"
+         #footer
+         [class.hidden]="footer.childNodes.isEmpty">
       <ng-content select="[footer]"></ng-content>
     </div>
   </div>

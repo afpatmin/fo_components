@@ -3,6 +3,9 @@
 @import 'package:fo_components/mixins';
 
 :host {
+  .hidden {
+    display: none;
+  }
   div#modalOverlay {
     background-color: rgba(0, 0, 0, 0.6);
     position: fixed;

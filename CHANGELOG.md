@@ -3,6 +3,9 @@
 #### DropdownSelect, DropdownMultiSelect
 * Selected value icon now primaryColor
 
+#### Modal 
+* Header/Footer now hidden unless populated
+
 # 1.2.4
 ### Component updates
 #### DropdownSelect
