@@ -1,4 +1,7 @@
-# 1.2.5
+# 1.3.0
+### General
+* (BREAKING) updated angular dependency to 6.0.0-alpha
+
 ### Component updates
 #### DataTable
 * Row selector no longer truncates numbers > 100
