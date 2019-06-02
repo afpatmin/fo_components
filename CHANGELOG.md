@@ -1,5 +1,9 @@
 # 1.2.5
 ### Component updates
+#### DataTable
+* Row selector no longer truncates numbers > 100
+* Fixed icon sizing
+
 #### DropdownSelect, DropdownMultiSelect
 * Selected value icon now primaryColor
 
