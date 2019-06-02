@@ -7,6 +7,7 @@
       @include material-icon-size($size * 1.5 !important);
     }
   }
+
   ::ng-deep fo-button[dense] {
     button.themeable {
       @include material-icon-size($size * 1.3 !important);
@@ -14,8 +15,8 @@
   }
 }
 
-@mixin fo-button-colors($color, $backgroundColor, $backgroundColorDisabled) {  
-  
+@mixin fo-button-colors($color, $backgroundColor, $backgroundColorDisabled) {
+
   // Default
   ::ng-deep fo-button:not([white])>button {
     background-color: $backgroundColor;
@@ -24,23 +25,25 @@
   }
 
   // Selected
-  ::ng-deep fo-button.selected>button:not(:disabled).themeable {
+  ::ng-deep fo-button[white].selected>button:not(:disabled).themeable {
     background-color: $backgroundColor;
     border-color: $backgroundColor;
     color: $color;
   }
-  
+
+  ::ng-deep fo-button:not([white]).selected>button:not(:disabled).themeable {
+    filter: brightness(150%);
+  }
+
   // Hover effect
   ::ng-deep fo-button:not([noHover])>button:not(:disabled).themeable:hover {
-    filter: brightness(150%);  
-
-    
+    filter: brightness(150%);
   }
 
   // Hover effect for white
   ::ng-deep fo-button[white]:not([noHover])button:not(:disabled).themeable:hover {
     background-color: $backgroundColor;
-    border-color: $backgroundColor;    
+    border-color: $backgroundColor;
     color: white;
   }
 
