@@ -124,7 +124,7 @@ class FoDataTableComponent implements AfterChanges, OnDestroy {
   final int liveSearchThreshold = 500;
 
   int _rows = 10;
-  bool _rowsChanged = false;  
+  bool _rowsChanged = false;
 
   final StreamController<String> onAddController = StreamController();
 
