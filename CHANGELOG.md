@@ -1,3 +1,7 @@
+# 1.3.1
+### Button
+* Now properly highlight selected button 
+
 # 1.3.0
 ### General
 * BREAKNIG: Updated angular dependency to 6.0.0-alpha and angular_components to 0.14.0-alpha
