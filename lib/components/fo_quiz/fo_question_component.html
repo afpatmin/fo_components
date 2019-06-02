@@ -2,7 +2,7 @@
   <div class="questionContainer"
        [class.transition]="transition"
        [class.is-hidden]="leftHidden">
-    <p class="question">{{model.label}}</p>
+    <h3 class="question">{{model.label}}</h3>
   </div>
   <div class="answerContainer"
        [class.transition]="transition"
@@ -24,7 +24,7 @@
 <div id="nextButtonContainer"
      *ngIf="model.multiSelect == true && currentChildQuiz == null">
   <fo-button white
-             dense             
+             dense
              icon="keyboard_arrow_down"
              [disabled]="selectedOptions.isEmpty"
              (trigger)="onNextTrigger()">

@@ -22,6 +22,7 @@ class FoQuizComponent implements OnInit, OnDestroy {
   @Input()
   bool disabled = false;
 
+  /// Set background color for buttons dynamically, overrides any color set by mixins and attributes.
   @Input()
   String buttonColor = '#666';
 

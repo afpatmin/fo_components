@@ -10,10 +10,10 @@
       -webkit-transition: all 500ms ease;
     }
     div.questionContainer {    
-      p.question {
-        background-color: #888;
-        color: white;
-        padding: $medium;
+      h3.question {
+        color: #555;        
+        border: 1px solid #eee;
+        padding: $large;
         margin: 0;
         border-radius: $small;
         -webkit-border-radius: $small;

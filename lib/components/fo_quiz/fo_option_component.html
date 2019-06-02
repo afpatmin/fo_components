@@ -1,5 +1,5 @@
 <fo-button [label]="model.label"
-           white
+           [themeBackgroundColor]="buttonColor"
            [class.selected]="model.selected"
            (trigger)="onSelect()"
            [disabled]="disabled">
