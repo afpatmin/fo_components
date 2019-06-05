@@ -1,6 +1,8 @@
 # 1.3.1
 ### Button
-* Now properly highlight selected button 
+* Now properly highlights selected button 
+* Set hover brightness to 120% (down from 150%)
+* Hovering a white button no longer increases its brightness
 
 # 1.3.0
 ### General
