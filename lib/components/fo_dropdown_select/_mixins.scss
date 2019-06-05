@@ -14,8 +14,13 @@
 
         div#selectedValue {
           padding: 0.4*$size 0.8*$size !important;
+
+          fo-icon {
+            margin-right: 1.5*$size;
+          }
         }
       }
+
       ::ng-deep fo-button>button {
         padding: 0.4*$size 0.8*$size !important;
       }
