@@ -5,6 +5,9 @@
 * Hovering a white button no longer increases its brightness
 * Added mixin 'fo-button-vertical-padding'
 
+### DataTable
+* Fixed issue where icon sizes was too large
+
 # 1.3.0
 ### General
 * BREAKNIG: Updated angular dependency to 6.0.0-alpha and angular_components to 0.14.0-alpha
