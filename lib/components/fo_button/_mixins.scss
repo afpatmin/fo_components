@@ -15,6 +15,15 @@
   }
 }
 
+@mixin fo-button-vertical-padding($value) {
+  ::ng-deep fo-button {
+    button.themeable {
+      padding-top: $value;
+      padding-bottom: $value;
+    }
+  }
+}
+
 @mixin fo-button-colors($color, $backgroundColor, $backgroundColorDisabled) {
 
   // Default

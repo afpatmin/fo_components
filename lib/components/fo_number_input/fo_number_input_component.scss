@@ -1,6 +1,8 @@
 :host {
   div#flexContainer {
     display: flex;
+    align-items: stretch;
+    height: 100%;
 
     fo-text-input {
       flex: auto;
