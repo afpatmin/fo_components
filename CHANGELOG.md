@@ -3,6 +3,7 @@
 * Now properly highlights selected button 
 * Set hover brightness to 120% (down from 150%)
 * Hovering a white button no longer increases its brightness
+* Added mixin 'fo-button-vertical-padding'
 
 # 1.3.0
 ### General
