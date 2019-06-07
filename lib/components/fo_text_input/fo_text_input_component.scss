@@ -26,7 +26,7 @@
 
   div#flexContainer {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     height: 100%;
     transition: box-shadow $transitionSpeed;
     border-radius: $borderRadius;
@@ -38,6 +38,7 @@
       border-top-right-radius: $borderRadius;
       border-bottom-right-radius: $borderRadius;
       border-right-width: 1px;
+      align-self: stretch;
     }
 
     material-icon,

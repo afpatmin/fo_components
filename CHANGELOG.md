@@ -1,4 +1,9 @@
 # 1.3.1
+### Bugfixes
+#### TextInput
+* Fixed issue where leading- and trailingIcons didnt align properly
+
+# 1.3.1
 ### Button
 * Now properly highlights selected button 
 * Set hover brightness to 120% (down from 150%)
