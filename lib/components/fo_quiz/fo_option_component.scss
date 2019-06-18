@@ -4,4 +4,10 @@
   fo-button {
     margin: $x-small;
   }
+
+  fo-button.selected {
+    filter: brightness(130%);
+    -webkit-filter: brightness(130%);    
+  }
+  
 }

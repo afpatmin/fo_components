@@ -1,7 +1,10 @@
-# 1.3.1
+# 1.3.2
 ### Bugfixes
 #### TextInput
 * Fixed issue where leading- and trailingIcons didnt align properly
+
+#### Quiz
+* Increased quiz option highlight brightness
 
 # 1.3.1
 ### Button
