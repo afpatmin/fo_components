@@ -1,3 +1,9 @@
+# 1.3.3
+### Component updates
+### Carousel
+* Step buttons are now hidden on small screen, and replaced by swipe gesture
+* Increased step button size and added fade when they are not hovered
+
 # 1.3.2
 ### Bugfixes
 #### TextInput
