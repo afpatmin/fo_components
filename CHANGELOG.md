@@ -1,6 +1,11 @@
+# 1.3.3+1
+### Component updates
+#### Icon
+* Removed tiny bottom margin
+
 # 1.3.3
 ### Component updates
-### Carousel
+#### Carousel
 * Step buttons are now hidden on small screen, and replaced by swipe gesture
 * Increased step button size and added fade when they are not hovered
 
