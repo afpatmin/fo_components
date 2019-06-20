@@ -2,12 +2,13 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
+import 'dart:html' as dom;
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/material_radio/material_radio.dart';
 import 'package:angular_components/material_radio/material_radio_group.dart';
-import '../fo_button/fo_button_component.dart';
 
+import '../fo_button/fo_button_component.dart';
 import 'fo_carousel_slide_component.dart';
 
 @Component(
@@ -27,6 +28,38 @@ class FoCarouselComponent implements OnDestroy, OnInit {
   final StreamController<int> _onStepController = StreamController();
   Timer timer;
   final ChangeDetectorRef _changeDetectorRef;
+
+  void onTouchMove(dom.TouchEvent event) {
+    if (disabled == true) {
+      return;
+    }
+
+    final x = event.touches.first.screen.x;
+    prevX ??= x;
+    final delta = prevX - x;
+
+    void disableWhileScrolling() {
+      disabled = true;
+      _scrollTimer = Timer(Duration(milliseconds: 200), () {
+        disabled = false;
+        _scrollTimer = null;
+        prevX = null;
+      });
+    }
+
+    if (delta < -20 && step > 0) {
+      stepBy(-1);
+      disableWhileScrolling();
+    } else if (delta > 20 && step < slides.length - 1) {
+      stepBy(1);
+      disableWhileScrolling();
+    } else {
+      prevX = x;
+    }
+  }
+
+  int prevX;
+  Timer _scrollTimer;
 
   @Input()
   int step = 0;
@@ -57,6 +90,7 @@ class FoCarouselComponent implements OnDestroy, OnInit {
   void ngOnDestroy() {
     _onStepController.close();
     timer?.cancel();
+    _scrollTimer?.cancel();
   }
 
   @override

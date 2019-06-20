@@ -1,4 +1,6 @@
-<div id="slide-container">
+<div id="slide-container"
+     (touchstart)="prevX = null"
+     (touchmove)="onTouchMove($event)">
   <div id="slide-transformer"
        [style.transform]="transform">
     <ng-content></ng-content>
@@ -16,9 +18,8 @@
     <div class="arrow"
          [class.faded]="step <= 0"
          id="arrow-left">
-      <fo-button clearSize
-                 white
-                 dense
+      <fo-button white
+                 clearSize
                  noHover
                  [disabled]="disabled"
                  (trigger)="stepBy(-1)"
@@ -28,9 +29,8 @@
     <div class="arrow"
          [class.faded]="step >= slides.length - 1"
          id="arrow-right">
-      <fo-button clearSize
-                 dense
-                 white
+      <fo-button white
+                 clearSize
                  noHover
                  icon="keyboard_arrow_right"
                  [disabled]="disabled"

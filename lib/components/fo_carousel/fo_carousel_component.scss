@@ -10,6 +10,7 @@
   }
 
   .arrow {
+    opacity: 0.3;
     position: absolute;
     top: auto;
     bottom: 50%;
@@ -23,7 +24,7 @@
     -ms-transition: opacity 200ms;
     -o-transition: opacity 200ms;
     transition: opacity 200ms;
-
+    
     fo-button {
       ::ng-deep material-icon {
         i {
@@ -31,10 +32,15 @@
         }
       }
     }
+    
   }
 
   .arrow.faded {
     visibility: hidden;
+  }
+
+  .arrow:hover {
+    opacity: 1;
   }
 
   #arrow-left {
@@ -45,6 +51,12 @@
   #arrow-right {
     left: auto;
     right: 0.5em;
+  }
+
+  @media screen and (max-width: $medium-width-threshold - 1) {
+    .arrow {
+      display: none;
+    }    
   }
 
   #slide-container {
@@ -64,24 +76,6 @@
       ::ng-deep * {
         white-space: initial;
       }
-    }
-  }
-}
-
-:host[bottomNavigationOnSmall] {
-  @media screen and (max-width: $medium-width-threshold) {
-    .arrow {
-      top: auto;
-      bottom: 35px;
-      @include fo-button-font-size(0.8rem);
-    }
-
-    #arrow-left {
-      left: 2px;
-    }
-
-    #arrow-right {
-      right: 2px;
     }
   }
 }
