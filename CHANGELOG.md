@@ -1,3 +1,7 @@
+# 1.3.4
+#### Icon
+* Made icon align-center internally
+
 # 1.3.3+1
 ### Component updates
 #### Icon
