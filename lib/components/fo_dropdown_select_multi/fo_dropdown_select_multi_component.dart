@@ -13,7 +13,7 @@ import '../fo_dropdown_select/fo_dropdown_select_component.dart';
     selector: 'fo-dropdown-select-multi',
     templateUrl: 'fo_dropdown_select_multi_component.html',
     styleUrls: ['fo_dropdown_select_multi_component.css'],
-    directives: [FoDropdownSelectComponent, NgClass, NgFor],
+    directives: [FoDropdownSelectComponent, NgClass, NgFor, NgIf],
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDropdownSelectMultiComponent<T>

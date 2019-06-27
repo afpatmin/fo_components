@@ -9,7 +9,7 @@
                     [constrainToViewPort]="constrainToViewPort"
                     (actionButtonTrigger)="onAdd(selectedId)"
                     [(selectedId)]="selectedId"></fo-dropdown-select>
-<div id="selectedOptions">
+<div id="selectedOptions" *ngIf="addedOptions.isNotEmpty">
   <ul>
     <li *ngFor="let option of addedOptions"
         (click)="onRemove(option.renderId)"
