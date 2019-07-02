@@ -4,10 +4,13 @@
 
 :host {
   display: inline-block;
-  font-size: 0;
+  font-size: 0;  
 
   button {
     width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 1rem;
     @include material-icon-size(1.5rem);
     user-select: none;
@@ -21,9 +24,6 @@
     box-sizing: border-box;
     color: white;
     line-height: 200%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     border-radius: $x-small;
     display: flex;
     justify-content: space-between;
@@ -46,6 +46,10 @@
       fo-icon.spaced::before {
         content: ' '
       }
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
       flex: auto;
     }
