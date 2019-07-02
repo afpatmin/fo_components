@@ -1,7 +1,8 @@
-# 1.3.4
+# 1.3.5
 #### Button
 * Text overflow is now ellipsis
 
+# 1.3.4
 #### DropdownSelectMulti
 * Output container no longer showing when no values are selected
 
