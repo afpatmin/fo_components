@@ -88,9 +88,22 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
       }
       top = '${newTop}px';
     } else {
-      top = offsetTop == null ? null : '${offsetTop}px';
-      elementMaxHeight =
-          '${html.document.documentElement.clientHeight - host.getBoundingClientRect().bottom}px';
+      final hostRect = host.getBoundingClientRect();
+      final parentRect = fixedParent.getBoundingClientRect();
+      if (offsetTop == null) {
+        top = null;
+        elementMaxHeight =
+            '${html.document.documentElement.clientHeight - hostRect.bottom}px';
+      } else if (constrainToViewPort == true) {
+        final offsetTopClamped = max(0, offsetTop);
+        top = '${offsetTopClamped - parentRect.top}px';
+        elementMaxHeight =
+            '${html.document.documentElement.clientHeight - hostRect.bottom - offsetTopClamped}px';
+      } else if (constrainToViewPort != true) {
+        top = '${offsetTop - parentRect.top}px';
+        elementMaxHeight =
+            '${html.document.body.clientHeight - hostRect.bottom - offsetTop}px';
+      }
     }
 
     if (anchorRight == true) {
