@@ -1,3 +1,7 @@
+# 1.3.5+1
+#### Dropdown
+* Should now respect viewport constraints even with fixed parent
+
 # 1.3.5
 #### Button
 * Text overflow is now ellipsis

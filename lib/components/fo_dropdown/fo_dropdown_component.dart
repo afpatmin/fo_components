@@ -95,12 +95,12 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
         elementMaxHeight =
             '${html.document.documentElement.clientHeight - hostRect.bottom}px';
       } else if (constrainToViewPort == true) {
-        final offsetTopClamped = max(0, offsetTop);
-        top = '${offsetTopClamped - parentRect.top}px';
+        final offsetTopClamped = max(0, offsetTop);        
+        top = '${offsetTopClamped + parentRect.top}px';
         elementMaxHeight =
             '${html.document.documentElement.clientHeight - hostRect.bottom - offsetTopClamped}px';
       } else if (constrainToViewPort != true) {
-        top = '${offsetTop - parentRect.top}px';
+        top = '${offsetTop + parentRect.top}px';
         elementMaxHeight =
             '${html.document.body.clientHeight - hostRect.bottom - offsetTop}px';
       }
