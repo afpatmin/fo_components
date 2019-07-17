@@ -22,6 +22,10 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
   @Input()
   int offsetTop = 0;
 
+  /// Horizontal offset in pixels
+  @Input()
+  int offsetHorizontal = 0;
+
   /// When this is set to true, the dropdown will stay in the viewport on the vertical axis
   @Input()
   bool constrainToViewPort = true;
@@ -39,6 +43,7 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
 
   String elementMaxHeight = '100px';
   String top;
+  String left;
   String right;
 
   FoDropdownComponent(this.host, this._changeDetectorRef) {
@@ -95,7 +100,7 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
         elementMaxHeight =
             '${html.document.documentElement.clientHeight - hostRect.bottom}px';
       } else if (constrainToViewPort == true) {
-        final offsetTopClamped = max(0, offsetTop);        
+        final offsetTopClamped = max(0, offsetTop);
         top = '${offsetTopClamped + parentRect.top}px';
         elementMaxHeight =
             '${html.document.documentElement.clientHeight - hostRect.bottom - offsetTopClamped}px';
@@ -106,9 +111,15 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
       }
     }
 
+    offsetHorizontal ??= 0;
+
     if (anchorRight == true) {
-      right = '${html.document.documentElement.clientWidth - rect.right}px';
+      right =
+          '${html.document.documentElement.clientWidth - rect.right + offsetHorizontal}px';
+      left = null;
     } else {
+      left =
+          '${rect.left + offsetHorizontal}px';
       right = null;
     }
 
