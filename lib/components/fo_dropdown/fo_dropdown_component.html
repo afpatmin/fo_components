@@ -4,6 +4,9 @@
      [style.right]="right"
      (click)="$event.stopPropagation()"
      *ngIf="visible">
+  <div *ngIf="targetPosition != null"
+       [style.left]="targetPositonLeft"
+       id="arrow"></div>
   <div id="dropdownContent"
        [style.width]="elementWidth"
        [style.max-height]="elementMaxHeight">

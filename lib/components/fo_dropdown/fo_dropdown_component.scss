@@ -8,24 +8,34 @@
     margin-top: $x-small;
     position: fixed;
     z-index: 99;
-    div#dropdownContent {
-      @include boxShadow();
+    @include boxShadow();
+    div#dropdownContent {      
       text-align: left;
-      background-color: white;      
-      border-width: 1px;
-      border-style: solid;
-      border-radius: $x-small;
+      background-color: white;               
       overflow-y: auto;
       box-sizing: border-box;      
+      z-index: 2;
+      position: relative;
+    }
+    div#arrow {            
+      @include boxShadow();
+      background-color: white;
+      transform-origin: center center;      
+      -webkit-transform-origin: center center;
+      -moz-transform-origin: center center;
+      -o-transform-origin: center center;
+      -ms-transform-origin: center center;      
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);      
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      z-index: 1;
+      top: -15px;
+      left: 15px;
     }
   }
-}
-
-:host[square] {
-  div#fixer {
-    div#dropdownContent {
-      border-radius: 0;
-    }
-  }
-
 }

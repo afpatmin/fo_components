@@ -1,3 +1,7 @@
+# 1.3.5+3
+#### Dropdown
+* Added targetPosition input which places a target indicator at the top, use at your own risk.
+
 # 1.3.5+2
 #### Dropdown
 * Added offsetHorizontal input

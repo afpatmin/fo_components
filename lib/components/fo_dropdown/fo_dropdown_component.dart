@@ -26,6 +26,10 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
   @Input()
   int offsetHorizontal = 0;
 
+  /// Target horizontal position in pixels. If set, a marker is shown at the top of the dropdown
+  @Input()
+  int targetPosition;
+
   /// When this is set to true, the dropdown will stay in the viewport on the vertical axis
   @Input()
   bool constrainToViewPort = true;
@@ -40,6 +44,8 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
   final StreamController _visibleController = StreamController<bool>();
   StreamSubscription<html.Event> _documentScrollSub;
   StreamSubscription<html.Event> _windowResizeSub;
+
+  String get targetPositonLeft => '${targetPosition}px';
 
   String elementMaxHeight = '100px';
   String top;
@@ -118,8 +124,7 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
           '${html.document.documentElement.clientWidth - rect.right + offsetHorizontal}px';
       left = null;
     } else {
-      left =
-          '${rect.left + offsetHorizontal}px';
+      left = '${rect.left + offsetHorizontal}px';
       right = null;
     }
 
