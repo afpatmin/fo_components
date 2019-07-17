@@ -2,6 +2,9 @@
 #### Button
 * Text overflow is now ellipsis
 
+#### Dropdown
+* Now handles offsetTop properly when parent is fixed
+
 # 1.3.4
 #### DropdownSelectMulti
 * Output container no longer showing when no values are selected
