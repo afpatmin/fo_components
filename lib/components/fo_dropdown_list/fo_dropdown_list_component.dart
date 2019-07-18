@@ -46,6 +46,14 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
   @Input()
   int offsetTop = 0;
 
+  /// Horizontal offset in pixels
+  @Input()
+  int offsetHorizontal = 0;
+
+  /// Target horizontal position in pixels. If set, a marker is shown at the top of the dropdown
+  @Input()
+  int targetPosition;
+
   @Input()
   Map<String, List<FoDropdownOptionRenderable>> options;
 
