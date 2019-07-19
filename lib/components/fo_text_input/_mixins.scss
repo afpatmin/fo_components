@@ -19,9 +19,19 @@
         @include material-icon-size(1.2*$size);
       }
 
+      fo-icon.leading {
+        transform: translateX(0.5*$size) !important;
+        font-size: 1.2*$size;
+      }
+
       material-icon.clear {
         transform: translateX(-1.5*$size) !important;
         @include material-icon-size($size !important);
+      }
+
+      fo-icon.clear {
+        transform: translateX(-1.5*$size) !important;
+        font-size: $size !important;
       }
 
       input.leftPadding {

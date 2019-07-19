@@ -16,7 +16,7 @@
         text-overflow: ellipsis;
 
         div#label {
-          font-weight: bold;
+          font-weight: 600;
         }
 
         div#secondaryLabel {
@@ -25,8 +25,8 @@
       }
 
       td.icon {
-        text-align: center;
-        width: $large;
+        text-align: center;        
+        width: 2rem;
       }
 
       td#image {
@@ -44,7 +44,7 @@
 
       td.info {
         text-align: right;
-        margin-right: $x-small;        
+        margin-right: $small;        
         overflow: hidden;
         white-space: nowrap;
       }

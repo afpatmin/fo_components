@@ -14,7 +14,7 @@
       }
 
       div#secondaryLabel {
-        color: $borderColor;
+        color: darken($borderColor, 20%);
       }
     }
 
@@ -30,7 +30,7 @@
       table {
         tr {
           td.icon {
-            width: $size;
+            width: $size !important;
             fo-icon {
               font-size: $size;
             }

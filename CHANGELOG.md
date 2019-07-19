@@ -1,3 +1,10 @@
+# 1.3.6+1
+#### TextInput
+* FoIcon now affected by font-size mixin
+
+#### Dropdown
+* Fixed issue where icon td wasn't wide enough when using mixin
+
 # 1.3.6
 #### Dropdown & DropdownList
 * offsetTop and offsetHorizontal are now both null by default
