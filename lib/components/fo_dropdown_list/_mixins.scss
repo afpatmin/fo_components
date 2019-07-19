@@ -1,6 +1,6 @@
 @import 'package:angular_components/material_icon/mixins';
 
-@mixin fo-dropdown-list-colors($primaryColor, $borderColor) {
+@mixin fo-dropdown-list-colors($primaryColor, $secondaryColor, $borderColor) {
   ::ng-deep div#dropdownContent {
     border-color: $borderColor;
 
@@ -8,10 +8,35 @@
       fo-icon {
         color: $primaryColor;
       }
+
+      div#label {
+        color: $secondaryColor;
+      }
+
+      div#secondaryLabel {
+        color: $borderColor;
+      }
     }
 
     fo-dropdown-option:hover {
       background-color: $primaryColor;
+    }
+  }
+}
+
+@mixin fo-dropdown-list-icon-size($size) {
+  ::ng-deep div#dropdownContent {
+    fo-dropdown-option {
+      table {
+        tr {
+          td.icon {
+            width: $size;
+            fo-icon {
+              font-size: $size;
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -26,6 +51,7 @@
       table {
         font-size: $size;
         @include material-icon-size($size !important);
+
         tr {
           td.icon {
             width: $size * 1.5;

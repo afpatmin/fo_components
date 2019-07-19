@@ -15,8 +15,12 @@
         overflow: hidden;
         text-overflow: ellipsis;
 
+        div#label {
+          font-weight: bold;
+        }
+
         div#secondaryLabel {
-          font-size: 0.9em;
+          font-size: 0.9em;          
         }
       }
 
@@ -24,19 +28,23 @@
         text-align: center;
         width: $large;
       }
+
       td#image {
         width: 80px;
+
         img {
           display: block;
           margin: 0 auto;
           max-width: 60px;
           max-height: 80px;
+          border: 1px solid #dde2e9;
+          box-sizing: border-box;
         }
       }
 
       td.info {
         text-align: right;
-        font-weight: bold;
+        margin-right: $x-small;        
         overflow: hidden;
         white-space: nowrap;
       }
@@ -47,10 +55,10 @@
 :host:hover {
   table {
     tr {
+
       td,
       td>div,
-      td.leadingIcon>fo-icon
-      {
+      td.leadingIcon>fo-icon {
         color: white;
       }
     }

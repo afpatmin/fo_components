@@ -10,8 +10,8 @@
       <img [src]="model.renderImage" alt="image">
     </td>
     <td>
-      <div class="black-color">{{model.renderLabel}}</div>
-      <div class="gray-color" id="secondaryLabel">{{model.renderSecondaryLabel}}</div>
+      <div id="label">{{model.renderLabel}}</div>
+      <div id="secondaryLabel">{{model.renderSecondaryLabel}}</div>
     </td>
     <td class="black-color info"
         *ngIf="model.renderInfo?.isEmpty == false">

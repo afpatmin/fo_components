@@ -39,7 +39,7 @@ $transitionSpeed: 0.3s ease;
   @include material-toggle-theme($primaryColor);
 
   @include fo-button-colors(white, $primaryColor, $grayColorBright);
-  @include fo-dropdown-list-colors($primaryColor, $grayColorBright);
+  @include fo-dropdown-list-colors($primaryColor, $secondaryColor, $grayColorBright);
   @include fo-dropdown-select-multi-options-background-color($primaryColor);
   @include fo-dropdown-select-multi-options-border-color($grayColor);
   @include fo-file-upload-border-color($grayColorBright);
@@ -58,7 +58,7 @@ $transitionSpeed: 0.3s ease;
 
     }
   }
-  
+
   ::ng-deep input::placeholder,
   ::ng-deep textarea::placeholder {
     color: $grayColorBright;

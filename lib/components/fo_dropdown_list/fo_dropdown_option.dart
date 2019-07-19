@@ -4,6 +4,7 @@ class FoDropdownOption implements FoDropdownOptionRenderable {
   String label;
   String secondaryLabel;
   String info;
+  String image;
 
   @override
   String get renderIcon => icon;
@@ -21,7 +22,7 @@ class FoDropdownOption implements FoDropdownOptionRenderable {
   String get renderSecondaryLabel => secondaryLabel;
 
   @override
-  String get renderImage => null;
+  String get renderImage => image;
 }
 
 /// Objects implementing this class can be rendered by a DropdownList
