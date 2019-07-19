@@ -1,3 +1,7 @@
+# 1.3.6
+#### Dropdown & DropdownList
+* offsetTop and offsetHorizontal are now both null by default
+
 # 1.3.5+5
 #### DropdownList
 * Added targetPosition and offsetHorizontal inputs

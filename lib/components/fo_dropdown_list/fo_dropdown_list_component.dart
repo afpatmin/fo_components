@@ -44,11 +44,11 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
   bool materialIcons = true;
 
   @Input()
-  int offsetTop = 0;
+  int offsetTop;
 
   /// Horizontal offset in pixels
   @Input()
-  int offsetHorizontal = 0;
+  int offsetHorizontal;
 
   /// Target horizontal position in pixels. If set, a marker is shown at the top of the dropdown
   @Input()

@@ -20,11 +20,11 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
 
   /// Vertical offset in pixels
   @Input()
-  int offsetTop = 0;
+  int offsetTop;
 
   /// Horizontal offset in pixels
   @Input()
-  int offsetHorizontal = 0;
+  int offsetHorizontal;
 
   /// Target horizontal position in pixels. If set, a marker is shown at the top of the dropdown
   @Input()
@@ -88,7 +88,10 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
 
     final fixedParent = findFixedParent(host);
     if (fixedParent == null) {
-      var newTop = rect.top + offsetTop;
+      var newTop = rect.top;
+      if (offsetTop != null) {
+        newTop += offsetTop;
+      }
       if (constrainToViewPort == true) {
         newTop = max(0, newTop);
         elementMaxHeight =

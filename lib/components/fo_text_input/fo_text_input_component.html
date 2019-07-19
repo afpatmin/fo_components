@@ -38,6 +38,7 @@
   </fo-error-output>
   <fo-dropdown-list *ngIf="options != null && value?.isEmpty == false && dropdownVisible"
                     [options]="options"
+                    [offsetTop]="null"
                     [attr.square]="square"
                     [filter]="value"
                     [constrainToViewPort]="constrainToViewPort"
