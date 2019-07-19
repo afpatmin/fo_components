@@ -6,17 +6,17 @@
                [material]="materialIcon">
       </fo-icon>
     </td>
-    <td id="image" *ngIf="model.renderImage?.isEmpty == false">
-      <img [src]="model.renderImage" alt="image">
+    <td id="image"
+        *ngIf="model.renderImage?.isEmpty == false">
+      <img [src]="model.renderImage"
+           alt="image">
     </td>
     <td>
       <div id="label">{{model.renderLabel}}</div>
       <div id="secondaryLabel">{{model.renderSecondaryLabel}}</div>
     </td>
     <td class="black-color info"
-        *ngIf="model.renderInfo?.isEmpty == false">
-      <strong>{{model.renderInfo}}</strong>
-    </td>
+        *ngIf="model.renderInfo?.isEmpty == false"> {{model.renderInfo}} </td>
     <td class="icon"
         *ngIf="model.renderIcon?.isEmpty == false && model.renderImage?.isEmpty == false">
       <fo-icon [icon]="model.renderIcon"

@@ -55,9 +55,9 @@
 :host:hover {
   table {
     tr {
-
       td,
       td>div,
+      td>div#label,
       td.leadingIcon>fo-icon {
         color: white;
       }
