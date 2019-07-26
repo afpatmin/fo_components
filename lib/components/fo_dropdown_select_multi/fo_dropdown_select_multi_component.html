@@ -1,6 +1,7 @@
 <fo-dropdown-select [label]="label"
                     [options]="filteredOptions"
                     [disabled]="disabled"
+                    [placeholder]="placeholder"
                     [attr.square]="square"
                     [attr.noFocusShadow]="noFocusShadow"
                     [showSearch]="showSearch"
@@ -9,7 +10,8 @@
                     [constrainToViewPort]="constrainToViewPort"
                     (actionButtonTrigger)="onAdd(selectedId)"
                     [(selectedId)]="selectedId"></fo-dropdown-select>
-<div id="selectedOptions" *ngIf="addedOptions.isNotEmpty">
+<div id="selectedOptions"
+     *ngIf="addedOptions.isNotEmpty">
   <ul>
     <li *ngFor="let option of addedOptions"
         (click)="onRemove(option.renderId)"

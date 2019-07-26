@@ -12,7 +12,8 @@
            alt="image">
     </td>
     <td>
-      <div id="label">{{model.renderLabel}}</div>
+      <div id="label"
+           [class.semi-bold]="model.renderSecondaryLabel?.isEmpty == false">{{model.renderLabel}}</div>
       <div id="secondaryLabel">{{model.renderSecondaryLabel}}</div>
     </td>
     <td class="black-color info"

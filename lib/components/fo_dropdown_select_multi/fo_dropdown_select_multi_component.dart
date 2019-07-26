@@ -32,6 +32,9 @@ class FoDropdownSelectMultiComponent<T>
   @Input()
   bool disabled = false;
 
+  @Input()
+  String placeholder = '-';
+
   List<T> _selectedIds = [];
 
   bool _selectedIdsChanged = true;

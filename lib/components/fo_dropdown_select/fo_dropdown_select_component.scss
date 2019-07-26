@@ -30,7 +30,6 @@
         white-space: nowrap;
         padding: $small $medium;
         line-height: 200%;
-        color: #555;
         user-select: none;
         fo-icon {
           margin-right: $small;
@@ -38,8 +37,7 @@
       }
 
       material-icon.arrow {
-        margin: 0 $small;
-        color: #555;
+        margin: 0 $small;        
       }
     }
 

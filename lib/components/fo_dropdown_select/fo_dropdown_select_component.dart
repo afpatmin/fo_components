@@ -34,6 +34,9 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   bool disabled = false;
 
   @Input()
+  String placeholder = '-';
+
+  @Input()
   bool allowNullSelection = false;
 
   /// Make sure options doesn't extend beyond the viewport

@@ -1,6 +1,17 @@
+# 1.3.7
+#### DropdownSelect / DropdownSelectMulti
+* Added placeholder input (similar to text input placeholders)
+* Added mixins fo-dropdown-select-dropdown-icon-color and fo-dropdown-select-selected-value-color
+
+#### DropdownOption
+* Label is only semi-bold if secondaryLabel is set
+
+#### Dropdown
+* Removed small margin from top
+
 # 1.3.6+1
 #### TextInput
-* FoIcon now affected by font-size mixin
+* Icon now affected by font-size mixin
 
 #### Dropdown
 * Fixed issue where icon td wasn't wide enough when using mixin

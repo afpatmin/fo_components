@@ -12,7 +12,7 @@
                  [icon]="selectedOption?.renderIcon"
                  [material]="materialIcons">
         </fo-icon>
-        <span>{{selectedOption == null ? '-' : selectedOption.renderLabel}}</span>
+        <span>{{selectedOption == null ? placeholder : selectedOption.renderLabel}}</span>
       </div>
       <fo-icon class="arrow"
                [material]="true"

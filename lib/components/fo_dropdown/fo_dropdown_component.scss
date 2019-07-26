@@ -4,8 +4,7 @@
 :host {
   position: relative;
   display: block;
-  div#fixer {
-    margin-top: $x-small;
+  div#fixer {   
     position: fixed;
     z-index: 99;
     @include boxShadow();
