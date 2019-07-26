@@ -1,3 +1,7 @@
+#1.3.7+1
+#### Button
+* Changed label color when disabled from white to darkened disabled background color
+
 # 1.3.7
 #### DropdownSelect / DropdownSelectMulti
 * Added placeholder input (similar to text input placeholders)
