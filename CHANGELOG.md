@@ -1,4 +1,8 @@
-#1.3.7+1
+# 1.3.8
+#### TextInput
+* Clear icon now always visible
+
+# 1.3.7+1
 #### Button
 * Changed label color when disabled from white to darkened disabled background color
 
