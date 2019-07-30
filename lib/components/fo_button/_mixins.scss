@@ -32,23 +32,24 @@
     color: $color;
   }
 
-  // Selected
+  // Selected (white)
   ::ng-deep fo-button[white].selected > button:not(:disabled).themeable {
     background-color: $backgroundColor;
     border-color: $backgroundColor;
     color: $color;
   }
 
+  // Selected (not white)
   ::ng-deep fo-button:not([white]).selected > button:not(:disabled).themeable {
     filter: brightness(120%);
   }
 
-  // Hover effect for default
+  // Hover effect (not white)
   ::ng-deep fo-button:not([noHover]):not([white]) > button:not(:disabled).themeable:hover {
     filter: brightness(120%);
   }
 
-  // Hover effect for white
+  // Hover effect (white)
   ::ng-deep fo-button[white]:not([noHover])button:not(:disabled).themeable:hover {
     background-color: $backgroundColor;
     border-color: $backgroundColor;

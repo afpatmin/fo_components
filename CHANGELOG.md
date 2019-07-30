@@ -1,4 +1,8 @@
 # 1.3.8
+#### Button
+* Changed how button height and internal alignment is specifed
+* White button border color now #eed2e9
+
 #### TextInput
 * Clear icon now always visible
 

@@ -1,10 +1,10 @@
-@import 'package:angular_components/material_icon/mixins';
-@import 'package:grid_css/constants';
-@import '../../constants.scss';
+@import "package:angular_components/material_icon/mixins";
+@import "package:grid_css/constants";
+@import "../../constants.scss";
 
 :host {
   display: inline-block;
-  font-size: 0;  
+  font-size: 0;
 
   button {
     width: 100%;
@@ -17,17 +17,16 @@
     -webkit-user-select: none;
     transition: all 0.3s ease;
     cursor: pointer;
-    padding: $small $medium;
+    padding: $medium $small;
     outline: none;
     border-width: 1px;
     border-style: solid;
     box-sizing: border-box;
     color: white;
-    line-height: 200%;
+    line-height: 100%;
     border-radius: $x-small;
     display: flex;
     justify-content: space-between;
-
 
     fo-icon,
     material-icon {
@@ -44,14 +43,16 @@
 
     div#center {
       fo-icon.spaced::before {
-        content: ' '
+        content: " ";
       }
 
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-
       flex: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
@@ -75,8 +76,6 @@
 :host[dense] {
   button {
     padding: $small;
-    line-height: 100%;
-
     @include material-icon-size(1.3rem);
   }
 }
@@ -85,6 +84,7 @@
   button {
     color: inherit;
     background-color: white;
+    border-color: #dde2e9;
   }
 }
 
