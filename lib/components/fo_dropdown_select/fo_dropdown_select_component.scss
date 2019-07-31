@@ -15,6 +15,8 @@
       flex: auto;
     }
 
+    @include fo-button-vertical-padding($medium);
+
     div#selector {
       background-color: white;
       transition: box-shadow $transitionSpeed;
@@ -29,8 +31,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        padding: $small $medium;
-        line-height: 200%;
+        padding: $medium;
         user-select: none;
 
         fo-icon {
@@ -96,7 +97,7 @@
   div#flexAligner {
     div#selector {
       div#selectedValue {
-        line-height: 100%;
+        padding: $small $medium;
       }
     }
 

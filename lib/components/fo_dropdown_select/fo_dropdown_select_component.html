@@ -20,7 +20,7 @@
     </div>
   </fo-label>
   <fo-button *ngIf="actionButtonLabel != null"
-             [label]="actionButtonLabel"
+             [label]="actionButtonLabel"             
              noLeftBorder
              [disabled]="disabled || selectedOption == null"
              (trigger)="actionButtonController.add($event)"></fo-button>

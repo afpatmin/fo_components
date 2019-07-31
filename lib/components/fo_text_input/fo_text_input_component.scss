@@ -81,12 +81,7 @@
       border-right-width: 0;
     }
 
-    ::ng-deep fo-button {
-      button.themeable {
-        padding-left: $large;
-        padding-right: $large;
-      }
-    }
+    @include fo-button-vertical-padding($medium);
   }
 
   div#flexContainer:focus-within {
@@ -141,8 +136,10 @@
   fo-label {
     div#flexContainer {
       input {
-        line-height: 100%;
+        padding: $small $small;
       }
+
+      @include fo-button-vertical-padding($small);
     }
   }
 }
