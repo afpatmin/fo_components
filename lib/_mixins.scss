@@ -40,7 +40,7 @@ $transitionSpeed: 0.3s ease;
   @include material-toggle-theme($primaryColor);
 
   @include fo-button-colors(white, $primaryColor, $grayColorBright);
-  @include fo-dropdown-list-colors($primaryColor, $secondaryColor, $grayColorBright);
+  @include fo-dropdown-list-colors($primaryColor, $grayColor, $grayColorBright);
   @include fo-dropdown-select-dropdown-icon-color($primaryColor);
   @include fo-dropdown-select-selected-value-color($grayColor);
   @include fo-dropdown-select-multi-options-background-color($primaryColor);

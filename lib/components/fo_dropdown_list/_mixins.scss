@@ -1,6 +1,6 @@
 @import 'package:angular_components/material_icon/mixins';
 
-@mixin fo-dropdown-list-colors($primaryColor, $secondaryColor, $borderColor) {
+@mixin fo-dropdown-list-colors($primaryColor, $labelColor, $borderColor) {
   ::ng-deep div#dropdownContent {
     border-color: $borderColor;
 
@@ -10,7 +10,7 @@
       }
 
       div#label {
-        color: $secondaryColor;
+        color: $labelColor;
       }
 
       div#secondaryLabel {
