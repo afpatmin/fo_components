@@ -1,4 +1,7 @@
-# 1.3.9
+# 1.4.0
+#### DropdownSelect/TextInput
+* BREAKING: No longer relying on line-height to style, only vertical padding (1rem default, 0.5rem for dense attribute)
+
 #### DropdownSelect
 * Removed clearSize attribute from actionButton
 
