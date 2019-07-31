@@ -98,7 +98,7 @@ class FoDropdownSelectMultiComponent<T>
     _updateFilteredOptions(outputEvent: false);
   }
 
-  void onAdd(Object id, {bool outputEvent = true}) {    
+  void onAdd(Object id, {bool outputEvent = true}) {
     if (disabled != true) {
       for (final category in allOptions.keys) {
         final match = allOptions[category]
