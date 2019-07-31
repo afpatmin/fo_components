@@ -10,8 +10,8 @@
              [material]="materialIcon"></fo-icon>
   </div>
   <div id="center">
-    <span *ngIf="label != null"
-          [style.color]="themeColor">{{label}}</span>
+    <div *ngIf="label != null"
+         [style.color]="themeColor">{{label}}</div>
     <fo-icon *ngIf="icon != null"
              [icon]="icon"
              [style.color]="themeColor"

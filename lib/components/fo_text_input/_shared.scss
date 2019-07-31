@@ -11,9 +11,10 @@ $borderRadius: $x-small;
   outline: none;
   line-height: 100%;
   border-width: 0;
-  padding: $medium $x-small;
+  padding: 0.4em 0;
   min-width: 7rem;
   color: #555;
   box-shadow: none;
   -webkit-box-shadow: none;
+  font-size: 1em;
 }

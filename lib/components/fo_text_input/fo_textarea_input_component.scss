@@ -1,21 +1,25 @@
 @import '../../mixins';
+@import '../fo_label/mixins';
 @import 'shared';
 
 :host {
   display: block;
   position: relative;
-  
-  textarea {    
+  font-size: 1rem;
+  @include fo-label-font-size(1em);
+
+  textarea {
     background-color: white;
-    resize: none;    
+    resize: none;
     border-radius: $borderRadius;
     @include inputStyle;
   }
-  
+
   textarea,
   textarea:focus {
-    font-size: 1rem;    
+    font-size: 1em;
   }
+
   textarea:focus {
     @include boxShadow();
   }
@@ -29,7 +33,7 @@
 }
 
 :host[square] {
-  textarea {      
-    border-radius: 0 ;      
-  }  
+  textarea {
+    border-radius: 0;
+  }
 }

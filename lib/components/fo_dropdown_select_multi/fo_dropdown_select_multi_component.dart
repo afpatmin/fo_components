@@ -14,8 +14,7 @@ import '../fo_dropdown_select/fo_dropdown_select_component.dart';
     templateUrl: 'fo_dropdown_select_multi_component.html',
     styleUrls: ['fo_dropdown_select_multi_component.css'],
     directives: [FoDropdownSelectComponent, NgClass, NgFor, NgIf],
-    pipes: [CapitalizePipe],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    pipes: [CapitalizePipe])
 class FoDropdownSelectMultiComponent<T>
     implements OnInit, AfterChanges, OnDestroy {
   final String msgAdd = Intl.message('add', name: 'add');
@@ -98,6 +97,7 @@ class FoDropdownSelectMultiComponent<T>
   }
 
   void onAdd(Object id, {bool outputEvent = true}) {
+    print("ADD");
     if (disabled != true) {
       for (final category in allOptions.keys) {
         final match = allOptions[category]

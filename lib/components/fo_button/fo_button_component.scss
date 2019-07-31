@@ -4,7 +4,6 @@
 
 :host {
   display: inline-block;
-  font-size: 0;
   align-self: stretch;
 
   button {
@@ -48,8 +47,7 @@
         content: " ";
       }
 
-      white-space: nowrap;
-      overflow: hidden;
+      white-space: nowrap;            
       text-overflow: ellipsis;
       flex: auto;
       display: flex;

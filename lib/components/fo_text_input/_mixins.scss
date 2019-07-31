@@ -5,37 +5,11 @@
 
 @mixin fo-text-input-font-size($size) {
   ::ng-deep fo-text-input {
-    @include fo-label-font-size($size);
-    @include fo-button-vertical-padding(0.4 * $size);
-    @include fo-dropdown-list-font-size($size);
-
-    div#flexContainer {
-      @include fo-button-font-size($size);
-
-      input,
-      input:focus {
-        padding: 0.4 * $size 0.5 * $size !important;
-        font-size: $size;
-      }
-
-      fo-icon.leading {
-        font-size: $size !important;
-      }
-
-      fo-icon.clear {
-        font-size: $size !important;
-      }
-    }
+    font-size: $size;
   }
 
-  ::ng-deep fo-textarea-input {
-    @include fo-label-font-size($size);
-
-    textarea,
-    textarea:focus {
-      font-size: $size !important;
-    }
-
+  ::ng-deep fo-textarea-input {    
+    font-size: $size;
   }
 
   ::ng-deep fo-error-output {
@@ -54,7 +28,7 @@
 
         input {
           color: $textColor;
-        } 
+        }
 
         fo-icon {
           color: $iconColor;

@@ -4,11 +4,11 @@
 
 :host {
   display: block;
-  position: relative;
-  cursor: pointer;
+  position: relative;  
   @include fo-button-vertical-padding($medium);
 
   div#flexContainer {
+    cursor: pointer;
     display: flex;
     border-radius: $x-small;
     border-width: 1px;

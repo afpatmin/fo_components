@@ -14,6 +14,7 @@
 #### DropdownSelect
 * Removed clearSize attribute from actionButton
 * Fixed issue where square attribute didn't propagate to actionButton
+* Now has proper cursor pointer
 
 #### DropdownOption
 * Label color now defaults to grey (use mixin to change it)
