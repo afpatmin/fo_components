@@ -2,6 +2,9 @@
 #### DropdownOption
 * Label color now defaults to grey (use mixin to change it)
 
+#### ImageFile
+* Some adjustments to vertical alignment
+
 # 1.3.8
 #### Button
 * Changed how button height and internal alignment is specifed
