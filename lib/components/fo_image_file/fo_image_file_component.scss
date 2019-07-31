@@ -5,7 +5,7 @@
   div.container {
     border-width: 2px;
     border-style: dashed;
-    padding: 0.5rem;
+    padding: 1rem;
     text-align: center;
     display: flex;
     align-items: center;
@@ -27,6 +27,10 @@
         top: $small;
         right: $small;
       }
+    }
+
+    p {
+      margin-bottom: 0;
     }
 
     p#placeholder {
