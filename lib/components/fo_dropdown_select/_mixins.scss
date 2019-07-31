@@ -7,51 +7,44 @@
   ::ng-deep fo-dropdown-select {
     @include fo-label-font-size($size);
     @include fo-button-vertical-padding(0.4 * $size);
+    @include fo-dropdown-list-font-size($size);
 
-    div#flexAligner {
+    div#flexContainer {
+      @include fo-button-font-size($size);
+
       div#selector {
         font-size: $size;
         @include material-icon-size(1.5 * $size !important);
 
         div#selectedValue {
-          padding: 0.4 * $size 0.8 * $size !important;
+          padding: 0.4 * $size 0.5 * $size !important;
 
           fo-icon {
             margin-right: 1.5 * $size;
           }
         }
-      }      
+      }
     }
-
-    @include fo-button-font-size($size);
-    @include fo-dropdown-list-font-size($size);
   }
 }
 
-@mixin fo-dropdown-select-dropdown-icon-color($color) {
+@mixin fo-dropdown-select-colors($selectedValueColor, $borderColor, $iconColor) {
   ::ng-deep fo-dropdown-select {
-    div#flexAligner {
-      fo-label {
+    fo-label {
+      div#flexContainer {
         div#selector {
+          border-color: $borderColor;
+
+          div#selectedValue {
+            color: $selectedValueColor;
+          }
+
           fo-icon.arrow {
-            color: $color;
+            color: $iconColor;
           }
         }
       }
     }
-  }
-}
 
-@mixin fo-dropdown-select-selected-value-color($color) {
-  ::ng-deep fo-dropdown-select {
-    div#flexAligner {
-      fo-label {
-        div#selector {
-          div#selectedValue {
-            color: $color;
-          }          
-        }
-      }
-    }
   }
 }

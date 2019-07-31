@@ -46,29 +46,31 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @Input()
   bool materialIcons = true;
 
-  String get square => _host.attributes.containsKey('square') ? '1' : null;
-
   Map<String, List<FoDropdownOptionRenderable>> _options;
 
   bool _optionsChanged;
 
   final StreamController<Object> _selectedIdController =
       StreamController<Object>();
-  final StreamController<FoButtonEvent> actionButtonController =
-      StreamController<FoButtonEvent>();
 
+  final StreamController<FoButtonEvent> _actionButtonController =
+      StreamController<FoButtonEvent>();
   final dom.Element _host;
+
   bool dropdownVisible = false;
+
   FoDropdownOptionRenderable selectedOption;
   @Input()
   bool showSearch = false;
   FoDropdownSelectComponent(this._host);
-
   @Output('actionButtonTrigger')
   Stream<FoButtonEvent> get actionButtonTrigger =>
-      actionButtonController.stream;
-
-  int get dropdownWidth => _host?.getBoundingClientRect()?.width?.toInt();
+      _actionButtonController.stream;
+  int get dropdownWidth => _host
+      ?.querySelector('#selector')
+      ?.getBoundingClientRect()
+      ?.width
+      ?.toInt();
 
   Map<String, List<FoDropdownOptionRenderable>> get options => _options;
 
@@ -101,6 +103,8 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @Output('selectedIdChange')
   Stream<Object> get selectedIdChange => _selectedIdController.stream;
 
+  String get square => _host.attributes.containsKey('square') ? '1' : null;
+
   @override
   void ngAfterChanges() {
     if (_optionsChanged == true) {
@@ -118,17 +122,26 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
 
   @override
   void ngOnDestroy() {
-    actionButtonController.close();
+    _actionButtonController.close();
     _selectedIdController.close();
+  }
+
+  void onActionButtonTrigger(FoButtonEvent event) {
+    _actionButtonController.add(event);
+    dropdownVisible = false;
   }
 
   void onClick(dom.Event e) {
     if (disabled != true &&
-        options?.values?.where((os) => os?.isNotEmpty == true)?.isNotEmpty ==
+        options?.values
+                ?.where((option) => option?.isNotEmpty == true)
+                ?.isNotEmpty ==
             true) {
-      dropdownVisible = !dropdownVisible;
+      Future.delayed(const Duration(milliseconds: 100)).then((_) {
+        dropdownVisible = !dropdownVisible;
+      });
+      e.stopPropagation();
     }
-    e.stopPropagation();
   }
 
   void onSelect(FoDropdownOptionRenderable event) {

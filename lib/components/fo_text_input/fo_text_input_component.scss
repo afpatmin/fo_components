@@ -30,58 +30,39 @@
     height: 100%;
     transition: box-shadow $transitionSpeed;
     border-radius: $borderRadius;
+    border-width: 1px;
+    border-style: solid;
 
     input {
-      border-top-left-radius: $borderRadius;
-      border-bottom-left-radius: $borderRadius;
-      border-left-width: 1px;
-      border-top-right-radius: $borderRadius;
-      border-bottom-right-radius: $borderRadius;
-      border-right-width: 1px;
       align-self: stretch;
     }
 
-    material-icon,
     fo-icon {
       box-shadow: none;
       -webkit-box-shadow: none;
     }
 
-    material-icon.clear,
     fo-icon.clear {
-      width: 0;
       z-index: 2;
-      transform: translateX(-$large);
       cursor: pointer;
       font-size: 0.9em;
+      margin-right: $small;
     }
 
-    material-icon.leading,
     fo-icon.leading {
-      width: 0;
       z-index: 2;
-      transform: translateX($medium);
+      margin-left: $small;
     }
 
     input {
       @include inputStyle;
     }
 
-    input.leftPadding {
-      padding-left: $x-large;
-    }
-
-    input.rightPadding {
-      padding-right: $x-large;
-    }
-
-    input.noRightBorder {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      border-right-width: 0;
-    }
-
     @include fo-button-vertical-padding($medium);
+
+    ::ng-deep fo-button>button {
+      border: 0;
+    }
   }
 
   div#flexContainer:focus-within {
@@ -100,21 +81,19 @@
 }
 
 :host[noLeftBorder] {
-
-  div#flexContainer,
-  div#flexContainer input {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-left-width: 0;
+  fo-label {
+    div#flexContainer {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left-width: 0;
+    }
   }
 }
 
 
 :host[noRightBorder] {
   fo-label {
-
-    div#flexContainer,
-    div#flexContainer input {
+    div#flexContainer {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
       border-right-width: 0;
@@ -136,7 +115,7 @@
   fo-label {
     div#flexContainer {
       input {
-        padding: $small $small;
+        padding: $small $x-small;
       }
 
       @include fo-button-vertical-padding($small);
@@ -148,7 +127,7 @@
   fo-label {
     div#flexContainer {
       border-radius: 0;
-
+      /*
       input {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
@@ -157,6 +136,7 @@
         border-bottom-right-radius: 0;
         border-right-width: 1px;
       }
+      */
     }
   }
 }

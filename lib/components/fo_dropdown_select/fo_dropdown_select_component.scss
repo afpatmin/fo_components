@@ -6,20 +6,15 @@
   display: block;
   position: relative;
   cursor: pointer;
+  @include fo-button-vertical-padding($medium);
 
-  div#flexAligner {
+  div#flexContainer {
     display: flex;
-    align-items: flex-end;
-
-    fo-label {
-      flex: auto;
-    }
-
-    @include fo-button-vertical-padding($medium);
 
     div#selector {
       background-color: white;
       transition: box-shadow $transitionSpeed;
+      flex: 1;
       display: flex;
       align-items: center;
       border-width: 1px;
@@ -49,15 +44,18 @@
       border-bottom-right-radius: 0;
       border-right-width: 0;
     }
-
-    div#selector.focus {
-      @include boxShadow();
-    }
   }
+
+  div#flexContainer.focus {
+    @include boxShadow();
+  }
+
 }
 
+
 :host[centerValue] {
-  div#flexAligner {
+  div#flexContainer {
+
     div#selector {
       div#selectedValue {
         text-align: center;
@@ -73,18 +71,20 @@
   }
 }
 
+
 :host[noLeftBorder] {
-  div#flexAligner {
+  div#flexContainer {
     div#selector {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       border-left-width: 0;
     }
   }
+
 }
 
 :host[noRightBorder] {
-  div#flexAligner {
+  div#flexContainer {
     div#selector {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
@@ -94,7 +94,7 @@
 }
 
 :host[dense] {
-  div#flexAligner {
+  div#flexContainer {
     div#selector {
       div#selectedValue {
         padding: $small $medium;
@@ -105,17 +105,16 @@
   }
 }
 
+
 :host[noFocusShadow] {
-  div#flexAligner {
-    div#selector.focus {
-      box-shadow: none;
-      -webkit-box-shadow: none;
-    }
+  div#flexContainer.focus {
+    box-shadow: none;
+    -webkit-box-shadow: none;
   }
 }
 
 :host[square] {
-  div#flexAligner {
+  div#flexContainer {
     div#selector {
       border-radius: 0;
     }

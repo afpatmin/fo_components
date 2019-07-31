@@ -1,9 +1,13 @@
 # 1.4.0
 #### DropdownSelect/TextInput
 * BREAKING: No longer relying on line-height to style, only vertical padding (1rem default, 0.5rem for dense attribute)
+* BREAKING: Changed how leading/tralining/clearIcons are aligned/sized
+* BREAKING: Replaced two mixins with single: fo-dropdown-select-colors
+* Added fo-text-input-colors mixin
 
 #### DropdownSelect
 * Removed clearSize attribute from actionButton
+* Fixed issue where square attribute didn't propagate to actionButton
 
 #### DropdownOption
 * Label color now defaults to grey (use mixin to change it)
