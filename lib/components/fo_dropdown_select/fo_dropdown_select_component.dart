@@ -63,6 +63,7 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @Input()
   bool showSearch = false;
   FoDropdownSelectComponent(this._host);
+
   @Output('actionButtonTrigger')
   Stream<FoButtonEvent> get actionButtonTrigger =>
       _actionButtonController.stream;
@@ -127,7 +128,7 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
     _selectedIdController.close();
   }
 
-  void onActionButtonTrigger(FoButtonEvent event) {    
+  void onActionButtonTrigger(FoButtonEvent event) {
     _actionButtonController.add(event);
     dropdownVisible = false;
   }
@@ -140,9 +141,11 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
             true) {
       Future.delayed(const Duration(milliseconds: 100)).then((_) {
         dropdownVisible = !dropdownVisible;
-      });      
+      });
     }
-    e..preventDefault()..stopPropagation();
+    e
+      ..preventDefault()
+      ..stopPropagation();
   }
 
   void onSelect(FoDropdownOptionRenderable event) {

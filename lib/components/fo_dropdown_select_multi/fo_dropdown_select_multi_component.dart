@@ -42,11 +42,13 @@ class FoDropdownSelectMultiComponent<T>
   Map<String, List<FoDropdownOptionRenderable>> allOptions;
 
   @Input()
+
   /// Make sure options doesn't extend beyond the viewport
   bool constrainToViewPort = true;
 
   @Input()
   bool showSearch = false;
+
   @Input()
   bool materialIcons = true;
 
@@ -96,8 +98,7 @@ class FoDropdownSelectMultiComponent<T>
     _updateFilteredOptions(outputEvent: false);
   }
 
-  void onAdd(Object id, {bool outputEvent = true}) {
-    print("ADD");
+  void onAdd(Object id, {bool outputEvent = true}) {    
     if (disabled != true) {
       for (final category in allOptions.keys) {
         final match = allOptions[category]
