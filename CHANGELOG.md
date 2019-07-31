@@ -1,4 +1,7 @@
 # 1.3.9
+#### DropdownSelect
+* Removed clearSize attribute from actionButton
+
 #### DropdownOption
 * Label color now defaults to grey (use mixin to change it)
 
