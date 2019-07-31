@@ -1,4 +1,7 @@
 # 1.4.0
+#### DropdownSelectMulti
+* BREAKING: Removed dropdown-select-multi-font-size mixin, now incorporated into dropdown-select-font-size
+
 #### DropdownSelect/TextInput
 * BREAKING: No longer relying on line-height to style, only vertical padding (1rem default, 0.5rem for dense attribute)
 * BREAKING: Changed how leading/tralining/clearIcons are aligned/sized

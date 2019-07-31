@@ -26,6 +26,16 @@
       }
     }
   }
+
+  ::ng-deep fo-dropdown-select-multi {
+    div#selectedOptions {
+      ul {
+        li {
+          font-size: $size;
+        }
+      }
+    }
+  }
 }
 
 @mixin fo-dropdown-select-colors($selectedValueColor, $borderColor, $iconColor) {

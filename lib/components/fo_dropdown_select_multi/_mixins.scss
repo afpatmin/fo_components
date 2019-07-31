@@ -1,19 +1,5 @@
 @import '../fo_dropdown_select/mixins';
 
-@mixin fo-dropdown-select-multi-font-size($size) {
-  @include fo-dropdown-select-font-size($size);
-
-  ::ng-deep fo-dropdown-select-multi {
-    div#selectedOptions {
-      ul {
-        li {
-          font-size: $size;
-        }
-      }
-    }
-  }
-}
-
 @mixin fo-dropdown-select-multi-options-background-color($color) {
   ::ng-deep fo-dropdown-select-multi {
     div#selectedOptions {

@@ -43,7 +43,6 @@ class FoDropdownSelectMultiComponent<T>
   Map<String, List<FoDropdownOptionRenderable>> allOptions;
 
   @Input()
-
   /// Make sure options doesn't extend beyond the viewport
   bool constrainToViewPort = true;
 
