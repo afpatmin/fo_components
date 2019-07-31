@@ -9,10 +9,13 @@
   @include fo-label-font-size(1em);
 
   textarea {
+    @include inputStyle;
+    padding: 0.4em;
     background-color: white;
     resize: none;
+    border-style: solid;
     border-radius: $borderRadius;
-    @include inputStyle;
+    border-width: 1px;
   }
 
   textarea,

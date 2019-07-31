@@ -26,13 +26,16 @@
     overflow: hidden;
 
     input {
+      @include inputStyle;
+      padding: 0.4em 0;
       background-color: white;
       outline: none;
       margin: 0;
       align-self: stretch;
       font-size: 1em;
+      border: 0;
     }
-  
+
     input::selection {
       color: white;
     }
@@ -53,10 +56,6 @@
       z-index: 2;
     }
 
-    input {
-      @include inputStyle;
-    }
-
     @include fo-button-vertical-padding($medium);
 
     ::ng-deep fo-button>button {
@@ -66,7 +65,7 @@
 
   div#flexContainer:focus-within {
     @include boxShadow();
-  }  
+  }
 }
 
 

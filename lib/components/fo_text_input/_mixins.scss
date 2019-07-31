@@ -8,7 +8,7 @@
     font-size: $size;
   }
 
-  ::ng-deep fo-textarea-input {    
+  ::ng-deep fo-textarea-input {
     font-size: $size;
   }
 
@@ -33,6 +33,15 @@
         fo-icon {
           color: $iconColor;
         }
+      }
+    }
+  }
+
+  ::ng-deep fo-textarea-input {
+    fo-label {
+      textarea {
+        color: $textColor;
+        border-color: $borderColor;
       }
     }
   }
