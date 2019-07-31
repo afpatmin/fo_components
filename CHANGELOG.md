@@ -5,6 +5,9 @@
 * BREAKING: Replaced two mixins with single: fo-dropdown-select-colors
 * Added fo-text-input-colors mixin
 
+#### DropdownList
+* FilterContainer now hidden completely if search attribute not set
+
 #### DropdownSelect
 * Removed clearSize attribute from actionButton
 * Fixed issue where square attribute didn't propagate to actionButton

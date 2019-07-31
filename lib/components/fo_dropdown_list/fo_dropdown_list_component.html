@@ -7,9 +7,9 @@
              [targetPosition]="targetPosition"
              [visible]="visible"
              (visibleChange)="visibleController.add($event)">
-  <div id="filterContainer">
-    <fo-text-input *ngIf="showSearch == true"
-                   [autoFocus]="visible"
+  <div id="filterContainer"
+       *ngIf="showSearch == true">
+    <fo-text-input [autoFocus]="visible"
                    [attr.square]="square"
                    noFocusShadow
                    [label]="msgFilter | capitalize"

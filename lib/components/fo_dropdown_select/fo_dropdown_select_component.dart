@@ -66,11 +66,12 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @Output('actionButtonTrigger')
   Stream<FoButtonEvent> get actionButtonTrigger =>
       _actionButtonController.stream;
-  int get dropdownWidth => _host
-      ?.querySelector('#selector')
-      ?.getBoundingClientRect()
-      ?.width
-      ?.toInt();
+
+  int get dropdownWidth =>
+      selectorElement.getBoundingClientRect().width.round();
+
+  @ViewChild('selector')
+  dom.Element selectorElement;
 
   Map<String, List<FoDropdownOptionRenderable>> get options => _options;
 

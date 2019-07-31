@@ -32,9 +32,9 @@
   ::ng-deep fo-dropdown-select {
     fo-label {
       div#flexContainer {
-        div#selector {
-          border-color: $borderColor;
+        border-color: $borderColor;
 
+        div#selector {
           div#selectedValue {
             color: $selectedValueColor;
           }

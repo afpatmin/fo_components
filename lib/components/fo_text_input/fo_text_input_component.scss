@@ -32,6 +32,7 @@
     border-radius: $borderRadius;
     border-width: 1px;
     border-style: solid;
+    overflow: hidden;
 
     input {
       align-self: stretch;

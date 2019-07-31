@@ -10,6 +10,10 @@
 
   div#flexContainer {
     display: flex;
+    border-radius: $x-small;
+    border-width: 1px;
+    border-style: solid;
+    overflow: hidden;
 
     div#selector {
       background-color: white;
@@ -17,9 +21,6 @@
       flex: 1;
       display: flex;
       align-items: center;
-      border-width: 1px;
-      border-style: solid;
-      border-radius: $x-small;
 
       div#selectedValue {
         flex: 1;
@@ -33,16 +34,10 @@
           margin-right: $small;
         }
       }
-
-      material-icon.arrow {
-        margin: 0 $small;
-      }
     }
 
-    div#selector.noRightBorder {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      border-right-width: 0;
+    ::ng-deep fo-button>button {
+      border: 0;
     }
   }
 
@@ -55,7 +50,6 @@
 
 :host[centerValue] {
   div#flexContainer {
-
     div#selector {
       div#selectedValue {
         text-align: center;
@@ -67,28 +61,6 @@
         width: 1em;
         margin: $small;
       }
-    }
-  }
-}
-
-
-:host[noLeftBorder] {
-  div#flexContainer {
-    div#selector {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      border-left-width: 0;
-    }
-  }
-
-}
-
-:host[noRightBorder] {
-  div#flexContainer {
-    div#selector {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      border-right-width: 0;
     }
   }
 }
@@ -115,8 +87,6 @@
 
 :host[square] {
   div#flexContainer {
-    div#selector {
-      border-radius: 0;
-    }
+    border-radius: 0;
   }
 }

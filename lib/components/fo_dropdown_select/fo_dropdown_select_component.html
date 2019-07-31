@@ -2,6 +2,7 @@
   <div id="flexContainer"
        [class.focus]="dropdownVisible">
     <div id="selector"
+         #selector
          [class.noRightBorder]="actionButtonLabel != null"
          [class.disabled]="disabled == true"
          (click)="onClick($event)">
@@ -18,8 +19,7 @@
     </div>
     <fo-button *ngIf="actionButtonLabel != null"
                [label]="actionButtonLabel"
-               [attr.square]="square"
-               noLeftBorder
+               square
                [disabled]="disabled || selectedOption == null"
                (trigger)="onActionButtonTrigger($event)"></fo-button>
   </div>

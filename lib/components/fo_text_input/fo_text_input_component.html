@@ -23,8 +23,7 @@
              (click)="onClear($event)"></fo-icon>
     <fo-button *ngIf="actionButtonLabel != null"
                [label]="actionButtonLabel"
-               [attr.square]="square"
-               noLeftBorder
+               square                         
                [disabled]="disabled || control?.valid == false || value?.isEmpty != false"
                (trigger)="actionButtonController?.add($event)"></fo-button>
   </div>
