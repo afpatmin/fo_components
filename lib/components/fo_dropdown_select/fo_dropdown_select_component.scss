@@ -1,5 +1,6 @@
 @import 'package:grid_css/constants';
 @import '../../mixins.scss';
+@import 'package:fo_components/components/fo_button/mixins';
 
 :host {
   display: block;
@@ -16,7 +17,7 @@
 
     div#selector {
       background-color: white;
-      transition: box-shadow $transitionSpeed;      
+      transition: box-shadow $transitionSpeed;
       display: flex;
       align-items: center;
       border-width: 1px;
@@ -31,13 +32,14 @@
         padding: $small $medium;
         line-height: 200%;
         user-select: none;
+
         fo-icon {
           margin-right: $small;
         }
       }
 
       material-icon.arrow {
-        margin: 0 $small;        
+        margin: 0 $small;
       }
     }
 
@@ -98,10 +100,7 @@
       }
     }
 
-    ::ng-deep fo-button>button {
-      padding: $small $large;
-      line-height: 100%;
-    }
+    @include fo-button-vertical-padding($small);
   }
 }
 
