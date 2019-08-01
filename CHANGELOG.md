@@ -1,3 +1,6 @@
+# 1.4.0+1
+* Fixed some problems with inconsistency using dense attribute
+
 # 1.4.0
 #### DropdownSelectMulti
 * BREAKING: Removed dropdown-select-multi-font-size mixin, now incorporated into dropdown-select-font-size
