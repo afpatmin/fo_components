@@ -1,3 +1,7 @@
+# 1.4.2+1
+#### NumberInput
+* Fixed alignment on number input
+
 # 1.4.2
 #### Modal
 * Added materialIcon input for close button
