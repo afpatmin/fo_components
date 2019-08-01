@@ -72,6 +72,8 @@ class FoDropdownSelectMultiComponent<T>
 
   String get square => _host.attributes.containsKey('square') ? '1' : null;
 
+  String get dense => _host.attributes.containsKey('dense') ? '1' : null;
+
   String get noFocusShadow =>
       _host.attributes.containsKey('noFocusShadow') ? '1' : null;
 

@@ -27,12 +27,11 @@
 
     input {
       @include inputStyle;
-      padding: 0.4em 0;
+      padding: 0.5em;
       background-color: white;
       outline: none;
       margin: 0;
       align-self: stretch;
-      font-size: 1em;
       border: 0;
     }
 
@@ -49,14 +48,17 @@
     fo-icon.clear {
       z-index: 2;
       cursor: pointer;
-      font-size: 0.9em;
+      margin-right: 0.5em;
+      margin-left: -0.25em;
     }
 
     fo-icon.leading {
       z-index: 2;
+      margin-left: 0.5em;
+      margin-right: -0.25em;
     }
 
-    @include fo-button-vertical-padding($medium);
+    @include fo-button-vertical-padding(0.5em);
 
     ::ng-deep fo-button>button {
       border: 0;
@@ -111,7 +113,7 @@
   fo-label {
     div#flexContainer {
       input {
-        padding: $small $x-small;
+        padding: 0.25em 0.5em;
       }
 
       @include fo-button-vertical-padding($small);
@@ -123,16 +125,6 @@
   fo-label {
     div#flexContainer {
       border-radius: 0;
-      /*
-      input {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        border-left-width: 1px;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-        border-right-width: 1px;
-      }
-      */
     }
   }
 }

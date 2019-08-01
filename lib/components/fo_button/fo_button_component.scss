@@ -18,7 +18,7 @@
     -webkit-user-select: none;
     transition: all 0.3s ease;
     cursor: pointer;
-    padding: $medium $small;
+    padding: 0.5em;
     outline: none;
     border-width: 1px;
     border-style: solid;
@@ -35,11 +35,11 @@
     }
 
     div#leading {
-      margin-right: $small;
+      margin-right: 0.5em;
     }
 
     div#trailing {
-      margin-left: $small;
+      margin-left: 0.5em;
     }
 
     div#center {
@@ -47,7 +47,7 @@
         content: " ";
       }
 
-      white-space: nowrap;            
+      white-space: nowrap;
       text-overflow: ellipsis;
       flex: auto;
       display: flex;
@@ -75,7 +75,7 @@
 
 :host[dense] {
   button {
-    padding: $small;
+    padding: 0.25em 0.5em;
     @include material-icon-size(1.3rem);
   }
 }

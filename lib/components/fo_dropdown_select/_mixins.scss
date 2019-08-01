@@ -4,25 +4,10 @@
 @import "../fo_label/mixins";
 
 @mixin fo-dropdown-select-font-size($size) {
-  ::ng-deep fo-dropdown-select {
-    @include fo-label-font-size($size);
-    @include fo-button-vertical-padding(0.4 * $size);
-    @include fo-dropdown-list-font-size($size);
-
-    div#flexContainer {
-      @include fo-button-font-size($size);
-
+  ::ng-deep fo-dropdown-select {    
+    div#flexContainer {      
       div#selector {
         font-size: $size;
-        @include material-icon-size(1.5 * $size !important);
-
-        div#selectedValue {
-          padding: 0.4 * $size 0.5 * $size !important;
-
-          fo-icon {
-            margin-right: 1.5 * $size;
-          }
-        }
       }
     }
   }

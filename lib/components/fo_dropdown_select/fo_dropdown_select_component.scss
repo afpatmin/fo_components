@@ -1,13 +1,19 @@
+@import 'package:fo_components/components/fo_button/mixins';
+@import 'package:fo_components/components/fo_dropdown_list/mixins';
+@import 'package:fo_components/components/fo_label/mixins';
 @import 'package:grid_css/constants';
 @import '../../mixins.scss';
-@import 'package:fo_components/components/fo_button/mixins';
 
 :host {
   display: block;
-  position: relative;  
-  @include fo-button-vertical-padding($medium);
+  position: relative;
+  @include fo-button-vertical-padding(0.5em);
+  @include fo-label-font-size(1em);
+  @include fo-dropdown-list-font-size(1em);
 
   div#flexContainer {
+    @include fo-button-font-size(1em);
+
     cursor: pointer;
     display: flex;
     border-radius: $x-small;
@@ -22,16 +28,20 @@
       display: flex;
       align-items: center;
 
+      fo-icon {
+        font-size: 1.5em;
+      }
+
       div#selectedValue {
         flex: 1;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        padding: $medium;
+        padding: 0.5em;
         user-select: none;
 
         fo-icon {
-          margin-right: $small;
+          margin-right: 1em;
         }
       }
     }
@@ -69,7 +79,7 @@
   div#flexContainer {
     div#selector {
       div#selectedValue {
-        padding: $small $medium;
+        padding: 0.25em 0.5em;
       }
     }
 
