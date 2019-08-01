@@ -13,7 +13,10 @@
     color: white;
 
     div#header {
-      @include fo-button-font-size(0.7rem);
+      fo-button {
+        font-size: 0.7rem;
+      }
+      
       fo-button {
         margin-top: -0.5rem;
         color: black;

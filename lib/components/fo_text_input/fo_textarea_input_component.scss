@@ -5,8 +5,10 @@
 :host {
   display: block;
   position: relative;
-  font-size: 1rem;
-  @include fo-label-font-size(1em);
+
+  fo-label {
+    font-size: 1em;
+  }
 
   textarea {
     @include inputStyle;

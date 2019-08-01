@@ -3,12 +3,12 @@
 :host {
   cursor: pointer;
   display: block;
-  padding: $small 0;
+  padding: 0.25em 0;
 
   table {
     width: 100%;
     table-layout: fixed;
-    padding: 0 $medium;
+    padding: 0 0.5em;
 
     tr {
       td {
@@ -26,7 +26,8 @@
 
       td.icon {
         text-align: center;        
-        width: 2rem;
+        width: 2em;
+        font-size: 1.5em;
       }
 
       td#image {
@@ -44,7 +45,7 @@
 
       td.info {
         text-align: right;
-        margin-right: $small;        
+        margin-right: 0.5em;        
         overflow: hidden;
         white-space: nowrap;
       }

@@ -1,11 +1,3 @@
-@mixin fo-label-font-size($size) {
-  ::ng-deep fo-label {
-    div#label {
-      font-size: $size;
-    }
-  }
-}
-
 @mixin fo-label-color($color) {
   ::ng-deep fo-label {
     div#label {

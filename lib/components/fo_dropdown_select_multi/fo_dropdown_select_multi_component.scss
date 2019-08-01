@@ -2,16 +2,20 @@
 
 :host {
   display: block;
+  //font-size: 1rem;
 
   div#selectedOptions {
     border-style: dashed;
     border-width: 1px;
-    margin-top: $small;
-    font-size: 1rem;
-    min-height: 3.6rem;
+    margin-top: 0.25em;
+    min-height: 3.6em;
+
+    fo-button {
+      font-size: 1em;
+    }
 
     ul {
-      padding: $small;
+      padding: 0.5em;
       margin: 0;
 
       li {
@@ -19,8 +23,8 @@
         display: inline-block;
         list-style-type: none;
         cursor: pointer;
-        margin: $x-small;
-        padding: $small;
+        margin: 0.25em;
+        padding: 0.5em;
       }
 
       li.round {

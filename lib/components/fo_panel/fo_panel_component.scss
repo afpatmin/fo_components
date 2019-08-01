@@ -11,7 +11,9 @@
     background-color: white;
 
     div#panelHeader {
-      @include fo-button-font-size(0.9rem);
+      fo-button {
+        font-size: 0.9rem;
+      }      
       display: flex;
       align-items: center;
 

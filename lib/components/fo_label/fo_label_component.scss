@@ -1,10 +1,11 @@
 @import 'package:grid_css/constants';
-@import '../../mixins.scss';
 
 :host {
   max-width: 100%;
+  //font-size: 1rem;
 
   div#label {
+    font-size: 1em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

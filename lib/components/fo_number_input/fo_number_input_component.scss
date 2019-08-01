@@ -1,11 +1,21 @@
 :host {
+  //font-size: 1rem;
+
   div#flexContainer {
+
+    font-size: 1em;
     display: flex;
     align-items: stretch;
     height: 100%;
 
     fo-text-input {
       flex: auto;
+    }
+
+    fo-button,
+    fo-text-input,
+    fo-label {
+      font-size: 1em;
     }
   }
 }

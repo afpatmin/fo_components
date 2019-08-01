@@ -8,11 +8,14 @@
 :host {
   display: block;
   position: relative;
-  font-size: 1rem;
+  //font-size: 1rem;
 
-  @include fo-label-font-size(1em);  
-  @include fo-dropdown-list-font-size(1em);
-  @include fo-button-font-size(1em);
+  fo-button,
+  fo-dropdown-list,
+  fo-label {
+    font-size: 1em;
+  }
+
 
   div#flexContainer {
     display: flex;

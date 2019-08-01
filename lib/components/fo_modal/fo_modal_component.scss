@@ -3,9 +3,12 @@
 @import 'package:fo_components/mixins';
 
 :host {
+  //font-size: 1rem;
+
   .hidden {
     display: none;
   }
+
   div#modalOverlay {
     background-color: rgba(0, 0, 0, 0.6);
     position: fixed;
@@ -28,7 +31,7 @@
 
       div#modalHeader,
       div#modalFooter {
-        padding: $medium;
+        padding: 0.5em;
       }
 
       div#modalHeader {
@@ -37,21 +40,20 @@
         border-bottom-width: 1px;
         align-items: center;
 
-        ::ng-deep fo-button {
-          button.themeable {
-            font-size: 0.7rem;
-          }
+        fo-button {
+          font-size: 0.6em;
         }
 
 
         div#modalHeaderTitle {
+          font-size: 1em;
           flex: auto;
           overflow: hidden;
           text-overflow: ellipsis;
           min-width: 10rem;
 
           h2 {
-            font-size: 1.2rem;
+            font-size: 1.2em;
             margin: 0;
             white-space: nowrap;
             overflow: hidden;
@@ -60,18 +62,18 @@
         }
 
         fo-button {
-          margin-left: $small;
+          margin-left: 0.25em;
         }
       }
 
       div#modalError {
         border-bottom-style: solid;
         border-bottom-width: 1px;
-        padding: $small $medium;
+        padding: 0.25em 0.5em;
       }
 
       div#modalMain {
-        padding: $small $medium;
+        padding: 0.5em 1em;
         border-bottom-width: 1px;
         border-bottom-style: solid;
         overflow-y: auto;
@@ -88,15 +90,15 @@
 
       div#modalHeader,
       div#modalFooter {
-        padding: $small;
+        padding: 0.25em;
       }
 
       div#modalError {
-        padding: $x-small $small;
+        padding: 0.25em 0.5em;
       }
 
       div#modalMain {
-        padding: $x-small $small;
+        padding: 0.25em 0.5em;
       }
     }
   }

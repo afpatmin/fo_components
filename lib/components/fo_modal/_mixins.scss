@@ -49,21 +49,3 @@
     }
   }
 }
-
-@mixin fo-modal-font-size($size) {
-  ::ng-deep fo-modal {
-    div#modalOverlay {
-      div#modalContent {
-        div#modalHeader {
-          div#modalHeaderTitle {
-            h2 {
-              font-size: $size !important;
-            }
-          }
-
-          @include fo-button-font-size(0.6*$size);
-        }
-      }
-    }
-  }
-}

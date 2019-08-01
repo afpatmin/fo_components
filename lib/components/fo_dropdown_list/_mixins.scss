@@ -40,24 +40,3 @@
     }
   }
 }
-
-@mixin fo-dropdown-list-font-size($size) {
-  ::ng-deep div#dropdownContent {
-    div.category {
-      font-size: $size !important;
-    }
-
-    fo-dropdown-option {
-      table {
-        font-size: $size;
-        @include material-icon-size($size !important);
-
-        tr {
-          td.icon {
-            width: $size * 1.5;
-          }
-        }
-      }
-    }
-  }
-}

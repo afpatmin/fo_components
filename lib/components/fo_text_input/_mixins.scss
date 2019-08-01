@@ -1,25 +1,3 @@
-@import 'package:angular_components/material_icon/mixins';
-@import '../fo_button/mixins';
-@import '../fo_dropdown_list/mixins';
-@import '../fo_label/mixins';
-
-@mixin fo-text-input-font-size($size) {
-  ::ng-deep fo-text-input {
-    font-size: $size;
-  }
-
-  ::ng-deep fo-textarea-input {
-    font-size: $size;
-  }
-
-  ::ng-deep fo-error-output {
-    div#message {
-      font-size: $size;
-    }
-  }
-
-}
-
 @mixin fo-text-input-colors($textColor, $borderColor, $iconColor) {
   ::ng-deep fo-text-input {
     fo-label {

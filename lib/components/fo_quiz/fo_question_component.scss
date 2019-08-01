@@ -3,15 +3,18 @@
 
 :host {
   display: block;
+
   div.container {
-    padding: 0 $large;  
+    padding: 0 $large;
+
     div.transition {
       transition: all 500ms ease;
       -webkit-transition: all 500ms ease;
     }
-    div.questionContainer {    
+
+    div.questionContainer {
       h3.question {
-        color: #555;        
+        color: #555;
         border: 1px solid #eee;
         padding: $large;
         margin: 0;
@@ -19,20 +22,25 @@
         -webkit-border-radius: $small;
         text-align: center;
       }
+
       transform: none;
       opacity: 1;
     }
+
     div.questionContainer.is-hidden {
       transform: translateX(-$large);
       opacity: 0;
     }
-    div.answerContainer {     
+
+    div.answerContainer {
       opacity: 1;
+
       div.answer {
         text-align: center;
         padding: $medium 0;
       }
     }
+
     div.answerContainer.is-hidden {
       transform: translateX($large);
       opacity: 0;
@@ -40,7 +48,10 @@
   }
 
   div#nextButtonContainer {
-    @include fo-button-font-size(0.7rem);
+    fo-button {
+      font-size: 0.7rem;
+    }
+
     margin-top: $small;
     text-align: center;
   }

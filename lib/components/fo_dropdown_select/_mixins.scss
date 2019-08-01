@@ -3,26 +3,6 @@
 @import "../fo_dropdown_list/mixins";
 @import "../fo_label/mixins";
 
-@mixin fo-dropdown-select-font-size($size) {
-  ::ng-deep fo-dropdown-select {    
-    div#flexContainer {      
-      div#selector {
-        font-size: $size;
-      }
-    }
-  }
-
-  ::ng-deep fo-dropdown-select-multi {
-    div#selectedOptions {
-      ul {
-        li {
-          font-size: $size;
-        }
-      }
-    }
-  }
-}
-
 @mixin fo-dropdown-select-colors($selectedValueColor, $borderColor, $iconColor) {
   ::ng-deep fo-dropdown-select {
     fo-label {

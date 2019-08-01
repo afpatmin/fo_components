@@ -2,15 +2,17 @@
 @import '../../mixins';
 
 :host {
+  //font-size: 1rem;
+
   div#filterContainer {
-    margin: $small;
+    margin: 0.5em;
   }
   div.category {
-    margin: $large $medium $small $medium;
+    margin: 1em 0.5em 0.25em 0.5em;
     text-transform: uppercase;
   }
   div.category:first-child {
-    margin-top: $medium;
+    margin-top: 0.5em;
   }
   hr {
     border-top: 0;
