@@ -34,6 +34,9 @@ class FoModalComponent implements OnDestroy {
   String buttonBackgroundColor;
 
   @Input()
+  bool materialIcon = true;
+
+  @Input()
   String error;
 
   @Input()

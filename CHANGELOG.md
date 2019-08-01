@@ -1,3 +1,7 @@
+# 1.4.1+1
+#### Modal
+* Added materialIcon input for close button
+
 # 1.4.1
 * BREAKING: Removed all *-font-size mixins. To set font-size, just do it the normal way (fo-text-input { font-size: 24px; })
 
