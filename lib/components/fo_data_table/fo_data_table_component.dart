@@ -7,6 +7,7 @@ import 'dart:html' as dom;
 import 'dart:math';
 
 import 'package:angular/angular.dart';
+import 'package:angular_components/angular_components.dart';
 import 'package:angular_components/material_checkbox/material_checkbox.dart';
 import 'package:angular_components/material_spinner/material_spinner.dart';
 import 'package:angular_components/material_tooltip/material_tooltip.dart';
@@ -56,6 +57,7 @@ class BatchOperationEvent {
       MaterialSpinnerComponent,
       MaterialTooltipDirective
     ],
+    providers: [materialProviders],
     pipes: [CapitalizePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDataTableComponent implements AfterChanges, OnDestroy {
