@@ -34,7 +34,7 @@
       display: flex;
       align-items: center;
 
-      fo-icon {
+      fo-icon.arrow {
         font-size: 1.5em;
       }
 
@@ -46,9 +46,11 @@
         white-space: nowrap;
         padding: 0.5em;
         user-select: none;
+        display: flex;
+        align-items: center;
 
         fo-icon {
-          margin-right: 1em;
+          margin-right: 0.25em;
         }
       }
     }

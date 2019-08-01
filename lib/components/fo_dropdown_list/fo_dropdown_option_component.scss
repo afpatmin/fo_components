@@ -14,20 +14,22 @@
       td {
         overflow: hidden;
         text-overflow: ellipsis;
-        
+
         div#label.semi-bold {
           font-weight: 600;
         }
 
         div#secondaryLabel {
-          font-size: 0.9em;          
+          font-size: 0.9em;
         }
       }
 
       td.icon {
-        text-align: center;        
-        width: 2em;
-        font-size: 1.5em;
+        text-align: center;
+        width: 1.8em;
+        fo-icon {
+          font-size: 1em;
+        }
       }
 
       td#image {
@@ -45,7 +47,7 @@
 
       td.info {
         text-align: right;
-        margin-right: 0.5em;        
+        margin-right: 0.5em;
         overflow: hidden;
         white-space: nowrap;
       }
@@ -56,6 +58,7 @@
 :host:hover {
   table {
     tr {
+
       td,
       td>div,
       td>div#label,
