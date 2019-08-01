@@ -1,4 +1,4 @@
-# 1.4.1+1
+# 1.4.2
 #### Modal
 * Added materialIcon input for close button
 
