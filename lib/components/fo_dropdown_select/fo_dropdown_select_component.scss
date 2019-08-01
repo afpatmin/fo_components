@@ -83,7 +83,7 @@
       }
     }
 
-    @include fo-button-vertical-padding($small);
+    @include fo-button-vertical-padding(0.25em);
   }
 }
 

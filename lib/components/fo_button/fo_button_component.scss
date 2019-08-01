@@ -4,11 +4,11 @@
 
 :host {
   display: inline-block;
-  align-self: stretch;
 
   button {
     width: 100%;
     height: 100%;
+    line-height: 150%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -23,8 +23,7 @@
     border-width: 1px;
     border-style: solid;
     box-sizing: border-box;
-    color: white;
-    line-height: 100%;
+    color: white;    
     border-radius: $x-small;
     display: flex;
     justify-content: space-between;
