@@ -1,3 +1,6 @@
+# 1.4.1
+* BREAKING: Removed all *-font-size mixins. To set font-size, just do it the normal way (fo-text-input { font-size: 24px; })
+
 # 1.4.0+1
 * Fixed some problems with inconsistency using dense attribute
 
