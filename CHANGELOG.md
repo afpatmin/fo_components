@@ -1,4 +1,7 @@
 # 1.4.2+1
+#### Modal
+* Tweaked alignments slightly
+
 #### NumberInput
 * Fixed alignment on number input
 
