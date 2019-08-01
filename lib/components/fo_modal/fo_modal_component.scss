@@ -30,6 +30,7 @@
       max-width: 90vw;
 
       div#modalHeader,
+      div#modalMain,
       div#modalFooter {
         padding: 0.5em;
       }
@@ -41,9 +42,8 @@
         align-items: center;
 
         fo-button {
-          font-size: 0.6em;
+          font-size: 1em;
         }
-
 
         div#modalHeaderTitle {
           font-size: 1em;
@@ -73,7 +73,6 @@
       }
 
       div#modalMain {
-        padding: 0.5em 1em;
         border-bottom-width: 1px;
         border-bottom-style: solid;
         overflow-y: auto;
