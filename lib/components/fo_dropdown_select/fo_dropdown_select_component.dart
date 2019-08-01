@@ -50,6 +50,8 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
 
   bool _optionsChanged;
 
+  final ChangeDetectorRef _changeDetectorRef;
+
   final StreamController<Object> _selectedIdController =
       StreamController<Object>();
 
@@ -62,7 +64,10 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   FoDropdownOptionRenderable selectedOption;
   @Input()
   bool showSearch = false;
-  FoDropdownSelectComponent(this._host);
+  @ViewChild('selector')
+  dom.Element selectorElement;
+
+  FoDropdownSelectComponent(this._host, this._changeDetectorRef);
 
   @Output('actionButtonTrigger')
   Stream<FoButtonEvent> get actionButtonTrigger =>
@@ -70,9 +75,6 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
 
   int get dropdownWidth =>
       selectorElement.getBoundingClientRect().width.round();
-
-  @ViewChild('selector')
-  dom.Element selectorElement;
 
   Map<String, List<FoDropdownOptionRenderable>> get options => _options;
 
@@ -141,6 +143,7 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
             true) {
       Future.delayed(const Duration(milliseconds: 100)).then((_) {
         dropdownVisible = !dropdownVisible;
+        _changeDetectorRef.markForCheck();
       });
     }
     e
