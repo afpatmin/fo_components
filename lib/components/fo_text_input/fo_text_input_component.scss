@@ -8,7 +8,6 @@
 :host {
   display: block;
   position: relative;
-  //font-size: 1rem;
 
   fo-button,
   fo-dropdown-list,
@@ -30,6 +29,7 @@
 
     input {
       @include inputStyle;
+      line-height: 150%;
       padding: 0.5em;
       background-color: white;
       outline: none;
