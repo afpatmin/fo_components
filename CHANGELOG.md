@@ -1,3 +1,7 @@
+# 1.4.2+3
+#### NumberInput
+* Fixed trailing space issue
+
 # 1.4.2+2
 #### Button
 * Fixed some icon alignment issues
