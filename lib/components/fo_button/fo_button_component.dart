@@ -24,6 +24,7 @@ class FoButtonComponent implements OnDestroy {
   String leadingIcon;
 
   @Input()
+
   /// Only use when the button also has a label
   String trailingIcon;
 
