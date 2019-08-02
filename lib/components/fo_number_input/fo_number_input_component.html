@@ -26,5 +26,5 @@
              (keydown)="onKeyDown($event, step)"
              icon="add">
   </fo-button>
-  <span *ngIf="trailingText?.isEmpty != false" id="trailing">{{trailingText}}</span>
+  <span *ngIf="trailingText?.isNotEmpty == true" id="trailing">{{trailingText}}</span>
 </div>

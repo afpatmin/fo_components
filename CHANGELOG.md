@@ -1,3 +1,7 @@
+# 1.4.2+4 & # 1.4.2+5
+#### NumberInput
+* Fixed trailing space issue for real this time
+
 # 1.4.2+3
 #### NumberInput
 * Fixed trailing space issue
