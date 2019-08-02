@@ -4,7 +4,7 @@
         [style.border-color]="themeBackgroundColor"
         (click)="onClick()">
   <div id="leading"
-       *ngIf="leadingIcon != null || trailingIcon != null">
+       *ngIf="label != null && (leadingIcon != null || trailingIcon != null)">
     <fo-icon [icon]="leadingIcon"
              [style.color]="themeColor"
              [material]="materialIcon"></fo-icon>
@@ -12,15 +12,15 @@
   <div id="center">
     <div *ngIf="label != null"
          [style.color]="themeColor">{{label}}</div>
-    <fo-icon *ngIf="icon != null"
-             [icon]="icon"
-             [style.color]="themeColor"
-             [class.spaced]="label != null"
-             [material]="materialIcon">
-    </fo-icon>
+    <div *ngIf="label == null && icon != null">
+      <fo-icon [icon]="icon"
+               [style.color]="themeColor"
+               [material]="materialIcon">
+      </fo-icon>
+    </div>
   </div>
   <div id="trailing"
-       *ngIf="leadingIcon != null || trailingIcon != null">
+       *ngIf="label != null && (leadingIcon != null || trailingIcon != null)">
     <fo-icon [icon]="trailingIcon"
              [style.color]="themeColor"
              [material]="materialIcon"></fo-icon>

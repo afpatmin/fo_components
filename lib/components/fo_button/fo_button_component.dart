@@ -14,12 +14,17 @@ class FoButtonComponent implements OnDestroy {
   String label;
 
   @Input()
+
+  /// Button icon, don't use when the button has a label (use leading-/trailingIcon for that)
   String icon;
 
   @Input()
+
+  /// Only use when the button also has a label
   String leadingIcon;
 
   @Input()
+  /// Only use when the button also has a label
   String trailingIcon;
 
   /// Set text/icon color dynamically, overrides any color set by mixins and attributes

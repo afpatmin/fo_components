@@ -1,3 +1,7 @@
+# 1.4.2+2
+#### Button
+* Fixed some icon alignment issues
+
 # 1.4.2+1
 #### Modal
 * Tweaked alignments slightly
