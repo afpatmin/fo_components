@@ -1,4 +1,7 @@
 # 1.4.3
+#### DropdownList
+* Added showCategoryLabels input
+
 #### DropdownOption 
 * Made icon container smaller (1.8em -> 1.2em)
 

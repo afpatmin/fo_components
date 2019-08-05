@@ -41,6 +41,9 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
   bool constrainToViewPort = true;
 
   @Input()
+  bool showCategoryLabels = true;
+
+  @Input()
   bool materialIcons = true;
 
   @Input()

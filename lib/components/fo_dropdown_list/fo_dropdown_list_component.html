@@ -24,7 +24,7 @@
                         [materialIcon]="materialIcons"></fo-dropdown-option>
   </div>
   <div *ngFor="let category of filteredOptions.keys">
-    <div *ngIf="category.isNotEmpty"
+    <div *ngIf="showCategoryLabels == true && category.isNotEmpty"
          class="black-color category"><strong>{{category}}</strong></div>
     <fo-dropdown-option *ngFor="let option of filteredOptions[category]"
                         [model]="option"
