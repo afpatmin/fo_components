@@ -1,3 +1,7 @@
+# 1.4.3
+#### DropdownOption 
+* Made icon container smaller (1.8em -> 1.2em)
+
 # 1.4.2+4 & # 1.4.2+5
 #### NumberInput
 * Fixed trailing space issue for real this time
