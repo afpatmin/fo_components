@@ -62,6 +62,9 @@ class FoTextInputComponent
   bool showDropdownCategoryLabels = true;
 
   @Input()
+  bool showDropdownOnFocus = false;
+
+  @Input()
   bool disabled = false;
 
   /// Make sure options dropdown doesn't extend beyond the viewport
@@ -91,13 +94,22 @@ class FoTextInputComponent
   final StreamController<html.FocusEvent> _focusController =
       StreamController<html.FocusEvent>();
   final StreamController<String> _blurController = StreamController<String>();
-  bool dropdownVisible = false;
+  bool _dropdownVisible = false;
   html.Element host;
   html.InputElement inputElement;
   bool hasFocus = false;
   FoTextInputComponent(
       @Self() @Optional() this.control, this.host, this._changeDetectorRef) {
     if (control != null) control.valueAccessor = this;
+  }
+
+  bool get dropdownVisible =>
+      options != null &&
+      (_dropdownVisible && value?.isEmpty == false ||
+          (hasFocus == true && showDropdownOnFocus == true));
+
+  set dropdownVisible(bool value) {
+    _dropdownVisible = value;
   }
 
   /// Action button triggered
@@ -180,7 +192,7 @@ class FoTextInputComponent
     // Prevent the input from gaining focus
     event.preventDefault();
     value = '';
-    dropdownVisible = false;
+    _dropdownVisible = false;
     if (_onChange != null) {
       _onChange(value);
     }
@@ -194,7 +206,8 @@ class FoTextInputComponent
 
   void onFilterSelect(FoDropdownOptionRenderable event) {
     value = event.renderLabel;
-    dropdownVisible = false;
+    _dropdownVisible = false;
+    
     if (_onChange != null) {
       _onChange(value);
     }
@@ -202,6 +215,8 @@ class FoTextInputComponent
   }
 
   void onFocus(html.FocusEvent event) {
+    event..preventDefault();
+
     hasFocus = true;
     _focusController.add(event);
   }
@@ -221,7 +236,7 @@ class FoTextInputComponent
       _onChange(value);
     }
 
-    dropdownVisible = options != null && value?.isEmpty == false;
+    _dropdownVisible = options != null && value?.isEmpty == false;
   }
 
   @override

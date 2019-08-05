@@ -31,8 +31,7 @@
                    class="gray-color-bright"
                    [message]="errorMessage">
   </fo-error-output>
-  <fo-dropdown-list *ngIf="options != null && value?.isEmpty == false && dropdownVisible"
-                    [options]="options"
+  <fo-dropdown-list [options]="options"
                     [showCategoryLabels]="showDropdownCategoryLabels"
                     [offsetTop]="null"
                     [offsetHorizontal]="1"
