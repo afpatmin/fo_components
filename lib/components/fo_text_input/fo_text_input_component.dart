@@ -59,6 +59,9 @@ class FoTextInputComponent
   Map<String, List<FoDropdownOptionRenderable>> options;
 
   @Input()
+  bool showDropdownCategoryLabels = true;
+
+  @Input()
   bool disabled = false;
 
   /// Make sure options dropdown doesn't extend beyond the viewport

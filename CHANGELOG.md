@@ -1,4 +1,7 @@
 # 1.4.3
+#### TextInput, DropdownSelect
+* Added showDropdownCategoryLabels input
+
 #### DropdownList
 * Added showCategoryLabels input
 
