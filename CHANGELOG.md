@@ -1,9 +1,12 @@
 # 1.4.3
+#### TextInput
+* Added showDropdownOnFocus input (default: false)
+
 #### TextInput, DropdownSelect
-* Added showDropdownCategoryLabels input
+* Added showDropdownCategoryLabels input (default: true)
 
 #### DropdownList
-* Added showCategoryLabels input
+* Added showCategoryLabels input (default: true)
 
 #### DropdownOption 
 * Made icon container smaller (1.8em -> 1.2em)
