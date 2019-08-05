@@ -1,5 +1,5 @@
-@import 'package:grid_css/constants';
-@import '../../mixins';
+@import "package:grid_css/constants";
+@import "../../mixins";
 
 :host {
   //font-size: 1rem;
@@ -17,5 +17,6 @@
   hr {
     border-top: 0;
     border-style: solid;
+    margin: 0;
   }
 }
