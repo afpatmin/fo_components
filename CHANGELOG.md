@@ -2,6 +2,9 @@
 #### Modal
 * Fixed font size (so that it can be set normally)
 
+#### TextInput
+* Added filterOptions input (default: true)
+
 # 1.4.3
 #### TextInput
 * Added showDropdownOnFocus input (default: false)
