@@ -1,3 +1,7 @@
+# 1.4.6
+#### TextAreaInput
+* Font size now inherited from parent rather than monospace
+
 # 1.4.5
 #### TextInput
 * (BREAKING): selectionChange output now fires SelectionChangeEvent objects rather than FoDropdownOptionRenderables
