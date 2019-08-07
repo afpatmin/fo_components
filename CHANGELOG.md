@@ -1,3 +1,7 @@
+# 1.4.4
+#### Modal
+* Fixed font size (so that it can be set normally)
+
 # 1.4.3
 #### TextInput
 * Added showDropdownOnFocus input (default: false)
