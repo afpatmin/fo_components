@@ -93,8 +93,7 @@ class FoTextInputComponent
       StreamController<FoButtonEvent>();
   final StreamController<html.Event> changeController =
       StreamController<html.Event>();
-  final StreamController<SelectionChangeEvent>
-      _selectionChangeController =
+  final StreamController<SelectionChangeEvent> _selectionChangeController =
       StreamController<SelectionChangeEvent>();
   final StreamController<html.FocusEvent> _focusController =
       StreamController<html.FocusEvent>();
@@ -212,7 +211,8 @@ class FoTextInputComponent
   }
 
   void onFilterSelect(FoDropdownOptionRenderable event) {
-    _selectionChangeController.add(SelectionChangeEvent(value, event.renderLabel));
+    _selectionChangeController
+        .add(SelectionChangeEvent(value, event.renderLabel));
 
     value = event.renderLabel;
     _dropdownVisible = false;
