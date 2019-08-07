@@ -1,3 +1,7 @@
+# 1.4.5
+#### TextInput
+* (BREAKING): selectionChange output now fires SelectionChangeEvent objects rather than FoDropdownOptionRenderables
+
 # 1.4.4+1
 #### TextInput
 * selectionChange output now fires before the actual ngModel value is set

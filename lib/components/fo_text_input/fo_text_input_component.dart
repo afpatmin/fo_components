@@ -93,9 +93,9 @@ class FoTextInputComponent
       StreamController<FoButtonEvent>();
   final StreamController<html.Event> changeController =
       StreamController<html.Event>();
-  final StreamController<FoDropdownOptionRenderable>
+  final StreamController<SelectionChangeEvent>
       _selectionChangeController =
-      StreamController<FoDropdownOptionRenderable>();
+      StreamController<SelectionChangeEvent>();
   final StreamController<html.FocusEvent> _focusController =
       StreamController<html.FocusEvent>();
   final StreamController<String> _blurController = StreamController<String>();
@@ -167,7 +167,7 @@ class FoTextInputComponent
   Stream<html.FocusEvent> get focus => _focusController.stream;
 
   @Output('selectionChange')
-  Stream<FoDropdownOptionRenderable> get selectionChange =>
+  Stream<SelectionChangeEvent> get selectionChange =>
       _selectionChangeController.stream;
 
   int get selectionEnd => inputElement?.selectionEnd;
@@ -212,13 +212,13 @@ class FoTextInputComponent
   }
 
   void onFilterSelect(FoDropdownOptionRenderable event) {
-    _selectionChangeController.add(event);
+    _selectionChangeController.add(SelectionChangeEvent(value, event.renderLabel));
 
     value = event.renderLabel;
     _dropdownVisible = false;
     if (_onChange != null) {
       _onChange(value);
-    }    
+    }
   }
 
   void onFocus(html.FocusEvent event) {
@@ -258,4 +258,11 @@ class FoTextInputComponent
     value = obj;
     _changeDetectorRef.markForCheck();
   }
+}
+
+class SelectionChangeEvent {
+  final String before;
+  final String after;
+
+  SelectionChangeEvent(this.before, this.after);
 }
