@@ -1,3 +1,16 @@
+# 1.4.3
+#### TextInput
+* Added showDropdownOnFocus input (default: false)
+
+#### TextInput, DropdownSelect
+* Added showDropdownCategoryLabels input (default: true)
+
+#### DropdownList
+* Added showCategoryLabels input (default: true)
+
+#### DropdownOption 
+* Made icon container smaller (1.8em -> 1.2em)
+
 # 1.4.2+4 & # 1.4.2+5
 #### NumberInput
 * Fixed trailing space issue for real this time

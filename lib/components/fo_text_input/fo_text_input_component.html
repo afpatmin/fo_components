@@ -8,7 +8,7 @@
     <input type="{{type}}"
            [autoFocus]="autoFocus"
            [disabled]="disabled == true"
-           [placeholder]="placeholder"           
+           [placeholder]="placeholder"
            [class.color-alert]="control?.valid == false && control?.pristine != true"
            [ngModel]="value"
            (ngModelChange)="onValueChange($event)"
@@ -23,7 +23,7 @@
              (click)="onClear($event)"></fo-icon>
     <fo-button *ngIf="actionButtonLabel != null"
                [label]="actionButtonLabel"
-               square                         
+               square
                [disabled]="disabled || control?.valid == false || value?.isEmpty != false"
                (trigger)="actionButtonController?.add($event)"></fo-button>
   </div>
@@ -31,9 +31,10 @@
                    class="gray-color-bright"
                    [message]="errorMessage">
   </fo-error-output>
-  <fo-dropdown-list *ngIf="options != null && value?.isEmpty == false && dropdownVisible"
-                    [options]="options"
+  <fo-dropdown-list [options]="options"
+                    [showCategoryLabels]="showDropdownCategoryLabels"
                     [offsetTop]="null"
+                    [offsetHorizontal]="1"
                     [attr.square]="square"
                     [filter]="value"
                     [constrainToViewPort]="constrainToViewPort"

@@ -39,6 +39,9 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @Input()
   bool allowNullSelection = false;
 
+  @Input()
+  bool showDropdownCategoryLabels = true;
+
   /// Make sure options doesn't extend beyond the viewport
   @Input()
   bool constrainToViewPort = true;

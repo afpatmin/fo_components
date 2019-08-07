@@ -20,16 +20,18 @@
   </div>
   <div *ngIf="allowNullSelection && filter?.isEmpty != false">
     <fo-dropdown-option [model]="nullOption"
-                        (click)="onSelect($event, nullOption)"
+                        (mousedown)="onSelect($event, nullOption)"
+                        (touchstart)="onSelect($event, nullOption)"
                         [materialIcon]="materialIcons"></fo-dropdown-option>
   </div>
   <div *ngFor="let category of filteredOptions.keys">
-    <div *ngIf="category.isNotEmpty"
+    <div *ngIf="showCategoryLabels == true && category.isNotEmpty"
          class="black-color category"><strong>{{category}}</strong></div>
     <fo-dropdown-option *ngFor="let option of filteredOptions[category]"
                         [model]="option"
                         [materialIcon]="materialIcons"
-                        (click)="onSelect($event, option)">
+                        (mousedown)="onSelect($event, option)"
+                        (touchstart)="onSelect($event, option)">
     </fo-dropdown-option>
     <hr *ngIf="category != filteredOptions.keys.last"
         class="gray-color-bright">
