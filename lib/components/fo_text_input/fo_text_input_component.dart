@@ -55,6 +55,10 @@ class FoTextInputComponent
   @Input()
   String placeholder;
 
+  /// Set to false if you want all options appear regardless of what the user types
+  @Input()
+  bool filterOptions = true;
+
   @Input()
   Map<String, List<FoDropdownOptionRenderable>> options;
 
@@ -80,6 +84,7 @@ class FoTextInputComponent
   String value;
 
   ChangeFunction<String> _onChange;
+
   NgControl control;
   final ChangeDetectorRef _changeDetectorRef;
   final StreamController<html.Event> _clearButtonController =
@@ -103,15 +108,6 @@ class FoTextInputComponent
     if (control != null) control.valueAccessor = this;
   }
 
-  bool get dropdownVisible =>
-      options != null &&
-      (_dropdownVisible && value?.isEmpty == false ||
-          (hasFocus == true && showDropdownOnFocus == true));
-
-  set dropdownVisible(bool value) {
-    _dropdownVisible = value;
-  }
-
   /// Action button triggered
   @Output('actionButtonTrigger')
   Stream<FoButtonEvent> get actionButtonTrigger =>
@@ -124,6 +120,15 @@ class FoTextInputComponent
   /// Clear icon is clicked
   @Output('clear')
   Stream<html.Event> get clear => _clearButtonController.stream;
+
+  bool get dropdownVisible =>
+      options != null &&
+      (_dropdownVisible && (value?.isEmpty == false || filterOptions != true) ||
+          (hasFocus == true && showDropdownOnFocus == true));
+
+  set dropdownVisible(bool value) {
+    _dropdownVisible = value;
+  }
 
   int get dropdownWidth =>
       inputElement?.getBoundingClientRect()?.width?.toInt();
@@ -155,6 +160,8 @@ class FoTextInputComponent
       return errors.toString();
     }
   }
+
+  String get filterValue => filterOptions == true ? value : null;
 
   @Output('focus')
   Stream<html.FocusEvent> get focus => _focusController.stream;
@@ -216,8 +223,7 @@ class FoTextInputComponent
 
   void onFocus(html.FocusEvent event) {
     event..preventDefault();
-
-    hasFocus = true;
+    hasFocus = true;    
     _focusController.add(event);
   }
 
