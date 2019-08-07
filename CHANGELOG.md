@@ -1,6 +1,6 @@
 # 1.4.4
 #### Modal
-* Fixed font size (so that it can be set normally)
+* Fixed font size so that it can be set normally: `fo-modal { font-size: 32px; }`
 
 #### TextInput
 * Added filterOptions input (default: true)
@@ -18,7 +18,7 @@
 #### DropdownOption 
 * Made icon container smaller (1.8em -> 1.2em)
 
-# 1.4.2+4 & # 1.4.2+5
+# 1.4.2+4 & 1.4.2+5
 #### NumberInput
 * Fixed trailing space issue for real this time
 
