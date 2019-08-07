@@ -212,13 +212,13 @@ class FoTextInputComponent
   }
 
   void onFilterSelect(FoDropdownOptionRenderable event) {
+    _selectionChangeController.add(event);
+
     value = event.renderLabel;
     _dropdownVisible = false;
-
     if (_onChange != null) {
       _onChange(value);
-    }
-    _selectionChangeController.add(event);
+    }    
   }
 
   void onFocus(html.FocusEvent event) {

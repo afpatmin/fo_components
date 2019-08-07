@@ -1,3 +1,7 @@
+# 1.4.4+1
+#### TextInput
+* selectionChange output now fires before the actual ngModel value is set
+
 # 1.4.4
 #### Modal
 * Fixed font size so that it can be set normally: `fo-modal { font-size: 32px; }`
