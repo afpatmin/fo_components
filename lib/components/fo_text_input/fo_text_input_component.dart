@@ -223,7 +223,7 @@ class FoTextInputComponent
 
   void onFocus(html.FocusEvent event) {
     event..preventDefault();
-    hasFocus = true;    
+    hasFocus = true;
     _focusController.add(event);
   }
 
