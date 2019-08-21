@@ -1,3 +1,7 @@
+# 1.4.7
+#### Carousel
+* Added noFadeAnimation and noSlideAnimation css directives
+
 # 1.4.6
 #### TextAreaInput
 * Font size now inherited from parent rather than monospace
