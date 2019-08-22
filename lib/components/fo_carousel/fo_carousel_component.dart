@@ -7,8 +7,8 @@ import 'dart:html' as dom;
 import 'package:angular/angular.dart';
 import 'package:angular_components/material_radio/material_radio.dart';
 import 'package:angular_components/material_radio/material_radio_group.dart';
+import 'package:fo_components/components/fo_icon/fo_icon_component.dart';
 
-import '../fo_button/fo_button_component.dart';
 import 'fo_carousel_slide_component.dart';
 
 @Component(
@@ -16,7 +16,7 @@ import 'fo_carousel_slide_component.dart';
     styleUrls: ['fo_carousel_component.css'],
     templateUrl: 'fo_carousel_component.html',
     directives: [
-      FoButtonComponent,
+      FoIconComponent,
       FoCarouselSlideComponent,
       NgIf,
       MaterialRadioComponent,
@@ -63,6 +63,15 @@ class FoCarouselComponent implements OnDestroy, OnInit {
 
   @Input()
   int step = 0;
+
+  @Input()
+  bool materialIcons = true;
+
+  @Input()
+  String nextIcon = 'keyboard_arrow_right';
+
+  @Input()
+  String prevIcon = 'keyboard_arrow_left';
 
   @Input()
   bool showRadioButtons = false;

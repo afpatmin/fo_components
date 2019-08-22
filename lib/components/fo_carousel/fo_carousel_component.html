@@ -16,26 +16,23 @@
   </div>
   <ng-container *ngIf="showArrowButtons">
     <div class="arrow"
+         (click)="stepBy(-1)"
+         [class.disabled]="disabled"
          [class.faded]="step <= 0"
          id="arrow-left">
-      <fo-button white
-                 clearSize
-                 noHover
-                 [disabled]="disabled"
-                 (trigger)="stepBy(-1)"
-                 icon="keyboard_arrow_left">
-      </fo-button>
+      <fo-icon [material]="materialIcons"
+               [icon]="prevIcon">
+      </fo-icon>
     </div>
     <div class="arrow"
+         (click)="stepBy(1)"
+         [class.disabled]="disabled"
          [class.faded]="step >= slides.length - 1"
          id="arrow-right">
-      <fo-button white
-                 clearSize
-                 noHover
-                 icon="keyboard_arrow_right"
-                 [disabled]="disabled"
-                 (trigger)="stepBy(1)">
-      </fo-button>
+      <fo-icon [material]="materialIcons"
+               [icon]="nextIcon">
+      </fo-icon>
+
     </div>
   </ng-container>
 </div>
