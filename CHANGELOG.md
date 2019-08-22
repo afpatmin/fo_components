@@ -1,3 +1,12 @@
+# 1.4.8
+#### Dropdown
+* Fixed issue where position wasn't set properly when anchor/target was translated
+
+#### Carousel
+* Added materialIcons input
+* Added nextIcon and prevIcon inputs
+* No longer using fo-button for next/prev buttons
+
 # 1.4.7
 #### Carousel
 * Added noFadeAnimation and noSlideAnimation css directives
