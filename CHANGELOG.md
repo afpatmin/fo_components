@@ -1,3 +1,15 @@
+# 1.4.9
+#### Carousel
+* Added loop input
+* (BREAKING) Replaced css directive noSlideAnimation with animateSlides input (default: true), and removed animate noFadeAnimation
+* (BREAKING) Slides are no longer animated when set externally
+
+#### DropdownList
+* Improved category labels design
+
+#### ErrorOutput
+* Now has correct width (takes border into account)
+
 # 1.4.8
 #### Dropdown
 * Fixed issue where position wasn't set properly when anchor/target was translated

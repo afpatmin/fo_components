@@ -1,4 +1,4 @@
-@import 'package:grid_css/constants';
+@import "package:grid_css/constants";
 
 :host {
   cursor: pointer;
@@ -33,13 +33,13 @@
       }
 
       td#image {
-        width: 80px;
+        width: 70px;
 
         img {
           display: block;
-          margin: 0 auto;
+          margin: 0;
           max-width: 60px;
-          max-height: 80px;
+          max-height: 60px;
           border: 1px solid #dde2e9;
           box-sizing: border-box;
         }
@@ -58,11 +58,10 @@
 :host:hover {
   table {
     tr {
-
       td,
-      td>div,
-      td>div#label,
-      td.leadingIcon>fo-icon {
+      td > div,
+      td > div#label,
+      td.leadingIcon > fo-icon {
         color: white;
       }
     }

@@ -1,7 +1,9 @@
 <div id="slide-container"
      (touchstart)="prevX = null"
-     (touchmove)="onTouchMove($event)">
+     (touchmove)="onTouchMove($event)"
+     (touchend)="onTouchEnd($event)">
   <div id="slide-transformer"
+       [class.animate]="animateSlides == true"
        [style.transform]="transform">
     <ng-content></ng-content>
   </div>
@@ -18,7 +20,7 @@
     <div class="arrow"
          (click)="stepBy(-1)"
          [class.disabled]="disabled"
-         [class.faded]="step <= 0"
+         [class.faded]="step <= 0 && loop != true"
          id="arrow-left">
       <fo-icon [material]="materialIcons"
                [icon]="prevIcon">
@@ -27,7 +29,7 @@
     <div class="arrow"
          (click)="stepBy(1)"
          [class.disabled]="disabled"
-         [class.faded]="step >= slides.length - 1"
+         [class.faded]="step >= slides.length - 1 && loop != true"
          id="arrow-right">
       <fo-icon [material]="materialIcons"
                [icon]="nextIcon">

@@ -3,6 +3,7 @@
 
 import 'dart:async';
 import 'dart:html' as dom;
+import 'dart:math' as math;
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/material_radio/material_radio.dart';
@@ -28,41 +29,12 @@ class FoCarouselComponent implements OnDestroy, OnInit {
   final StreamController<int> _onStepController = StreamController();
   Timer timer;
   final ChangeDetectorRef _changeDetectorRef;
-
-  void onTouchMove(dom.TouchEvent event) {
-    if (disabled == true) {
-      return;
-    }
-
-    final x = event.touches.first.screen.x;
-    prevX ??= x;
-    final delta = prevX - x;
-
-    void disableWhileScrolling() {
-      disabled = true;
-      _scrollTimer = Timer(Duration(milliseconds: 200), () {
-        disabled = false;
-        _scrollTimer = null;
-        prevX = null;
-      });
-    }
-
-    if (delta < -20 && step > 0) {
-      stepBy(-1);
-      disableWhileScrolling();
-    } else if (delta > 20 && step < slides.length - 1) {
-      stepBy(1);
-      disableWhileScrolling();
-    } else {
-      prevX = x;
-    }
-  }
-
   int prevX;
+  int _deltaX = 0;
   Timer _scrollTimer;
-
-  @Input()
-  int step = 0;
+  int _step = 0;
+  bool _animateSlides = true;
+  bool _animateSlidesSetting = true;
 
   @Input()
   bool materialIcons = true;
@@ -83,17 +55,40 @@ class FoCarouselComponent implements OnDestroy, OnInit {
   bool disabled = false;
 
   @Input()
+  bool loop = false;
+
+  @Input()
   int duration;
+
+  double dragOffset = 0.0;
 
   @ContentChildren(FoCarouselSlideComponent)
   List<FoCarouselSlideComponent> slides = [];
 
   FoCarouselComponent(this._changeDetectorRef);
 
+  bool get animateSlides => _animateSlides;
+
+  @Input()
+  set animateSlides(bool value) {
+    _animateSlidesSetting = value;
+    _animateSlides = value;
+  }
+
+  int get step => _step;
+
+  @Input()
+  set step(int value) {
+    if (_step != value) {
+      _disableSlideAnimation();
+      _step = value;
+    }
+  }
+
   @Output('stepChange')
   Stream<int> get stepOutput => _onStepController.stream;
 
-  String get transform => 'translate3d(${-step * 100}%, 0, 0)';
+  String get transform => 'translate3d(${-(step + dragOffset) * 100}%, 0, 0)';
 
   @override
   void ngOnDestroy() {
@@ -112,7 +107,7 @@ class FoCarouselComponent implements OnDestroy, OnInit {
 
   void onButtonChange(int slideNo, bool flag) {
     if (flag) {
-      step = slideNo;
+      _step = slideNo;
       _onStepController.add(step);
 
       timer?.cancel();
@@ -123,12 +118,60 @@ class FoCarouselComponent implements OnDestroy, OnInit {
     }
   }
 
+  void onTouchEnd(dom.TouchEvent event) {
+    dragOffset = 0.0;
+    if (disabled == true) {
+      return;
+    }
+
+    void disableWhileStepping() {
+      disabled = true;
+      _scrollTimer = Timer(const Duration(milliseconds: 200), () {
+        disabled = false;
+        _scrollTimer = null;
+        prevX = null;
+      });
+    }
+
+    if (_deltaX < -10) {
+      stepBy(-1);
+      disableWhileStepping();
+    } else if (_deltaX > 10) {
+      stepBy(1);
+      disableWhileStepping();
+    }
+  }
+
+  void onTouchMove(dom.TouchEvent event) {
+    if (disabled == true) {
+      return;
+    }
+
+    final x = event.touches.first.screen.x;
+    prevX ??= x;
+    _deltaX = prevX - x;
+    dragOffset = math.max(-0.2, math.min(0.2, _deltaX.toDouble()));
+  }
+
   void stepBy(int steps) {
     if (disabled != true) {
-      step += steps;
-      if (step >= slides.length || step < 0) {
-        step = 0;
+      if (loop == true) {
+        _step += steps;
+        if (step >= slides.length) {
+          _disableSlideAnimation();
+          _step = 0;
+        } else if (step < 0) {
+          _disableSlideAnimation();
+          _step = slides.length - 1;
+        }
+      } else {
+        _step += steps;
+        if (step >= slides.length || step < 0) {
+          _disableSlideAnimation();
+          _step = 0;
+        }
       }
+
       _onStepController.add(step);
       timer?.cancel();
       if (duration != null) {
@@ -136,5 +179,14 @@ class FoCarouselComponent implements OnDestroy, OnInit {
       }
       _changeDetectorRef.markForCheck();
     }
+  }
+
+  /// Don't animate slides for a specified duration (200ms by default)
+  void _disableSlideAnimation(
+      {duration = const Duration(milliseconds: 200)}) async {
+    _animateSlides = false;
+    await Future.delayed(duration);
+    _animateSlides = _animateSlidesSetting;
+    _changeDetectorRef.markForCheck();
   }
 }
