@@ -10,6 +10,9 @@
 #### ErrorOutput
 * Now has correct width (takes border into account)
 
+#### Other
+* Bumped some dependencies (build_runner, json_serializable)
+
 # 1.4.8
 #### Dropdown
 * Fixed issue where position wasn't set properly when anchor/target was translated
