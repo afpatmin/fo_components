@@ -1,6 +1,8 @@
+# 1.4.9+2
+* Same as 1.4.9+1 but with json_annotation
+
 # 1.4.9+1
 * Fixed sass_builder dependency issue (moved back from devv_dependencies to dependencies)
-* Same as above but with json_annotation
 
 # 1.4.9
 #### Carousel
