@@ -9,6 +9,7 @@
     z-index: 99;
     @include boxShadow();
     box-sizing: content-box;
+    border: 1px solid #ccc;
 
     div#dropdownContent {
       text-align: left;
@@ -37,6 +38,8 @@
       z-index: 1;
       top: -8px;
       left: 8px;
+      border-left: 1px solid #ccc;
+      border-top: 1px solid #ccc;
     }
   }
 }
@@ -45,12 +48,10 @@
   div#fixer {
     box-shadow: none;
     -webkit-box-shadow: none;
-    border: 1px solid #ccc;
+
     div#arrow {
       box-shadow: none;
       -webkit-box-shadow: none;
-      border-left: 1px solid #ccc;
-      border-top: 1px solid #ccc;
     }
   }
 }
