@@ -26,6 +26,7 @@
 </fo-label>
 
 <fo-dropdown-list *ngIf="options != null && dropdownVisible == true && disabled != true"
+                  [attr.noShadow]="noFocusShadow"
                   [attr.square]="square"
                   [options]="options"
                   [offsetHorizontal]="1"

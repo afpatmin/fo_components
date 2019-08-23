@@ -1,3 +1,7 @@
+# 1.5.0
+#### Dropdown
+* added noShadow css directive to popup
+
 # 1.4.9+2
 * Same as 1.4.9+1 but with json_annotation
 

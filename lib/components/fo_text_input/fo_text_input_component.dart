@@ -172,6 +172,10 @@ class FoTextInputComponent
   int get selectionEnd => inputElement?.selectionEnd;
 
   int get selectionStart => inputElement?.selectionStart;
+
+  String get noFocusShadow =>
+      host.attributes.containsKey('noFocusShadow') ? '1' : null;
+
   String get square => host.attributes.containsKey('square') ? '1' : null;
 
   @override

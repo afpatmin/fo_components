@@ -1,40 +1,56 @@
-@import 'package:grid_css/constants';
-@import '../../mixins';
+@import "package:grid_css/constants";
+@import "../../mixins";
 
 :host {
   position: relative;
   display: block;
-  div#fixer {   
+  div#fixer {
     position: fixed;
     z-index: 99;
     @include boxShadow();
-    div#dropdownContent {      
+    box-sizing: content-box;
+
+    div#dropdownContent {
       text-align: left;
-      background-color: white;               
+      background-color: white;
       overflow-y: auto;
-      box-sizing: border-box;      
+      box-sizing: border-box;
       z-index: 2;
       position: relative;
     }
-    div#arrow {            
+    div#arrow {
       @include boxShadow();
       background-color: white;
-      transform-origin: center center;      
+      transform-origin: center center;
       -webkit-transform-origin: center center;
       -moz-transform-origin: center center;
       -o-transform-origin: center center;
-      -ms-transform-origin: center center;      
+      -ms-transform-origin: center center;
       transform: rotate(45deg);
       -webkit-transform: rotate(45deg);
       -moz-transform: rotate(45deg);
       -o-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);      
+      -ms-transform: rotate(45deg);
       width: 16px;
       height: 16px;
       position: absolute;
       z-index: 1;
       top: -8px;
       left: 8px;
+    }
+  }
+}
+
+:host[noShadow] {
+  div#fixer {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    border: 1px solid #ccc;
+    div#arrow {
+      box-shadow: none;
+      -webkit-box-shadow: none;
+      border-left: 1px solid #ccc;
+      border-top: 1px solid #ccc;
     }
   }
 }

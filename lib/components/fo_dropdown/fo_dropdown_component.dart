@@ -24,7 +24,7 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
 
   /// Horizontal offset in pixels
   @Input()
-  int offsetHorizontal;
+  int offsetHorizontal = 0;
 
   /// Target horizontal position in pixels. If set, a marker is shown at the top of the dropdown
   @Input()
