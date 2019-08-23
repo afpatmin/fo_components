@@ -1,3 +1,6 @@
+# 1.4.9+1
+* Fixed sass_builder dependency issue (moved back from devv_dependencies to dependencies)
+
 # 1.4.9
 #### Carousel
 * Added loop input
