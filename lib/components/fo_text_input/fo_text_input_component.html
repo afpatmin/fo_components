@@ -1,5 +1,4 @@
-<fo-label [value]="label"
-          [error]="control?.valid == false && control?.pristine != true">
+<fo-label [value]="label">
   <div id="flexContainer"
        [class.error]="control?.valid == false && control?.pristine != true">
     <fo-icon *ngIf="leadingIcon != null"
