@@ -55,6 +55,10 @@ class FoTextInputComponent
   @Input()
   String placeholder;
 
+  /// Set to false if you want all options appear regardless of what the user types
+  @Input()
+  bool filterOptions = true;
+
   @Input()
   Map<String, List<FoDropdownOptionRenderable>> options;
 
@@ -80,6 +84,7 @@ class FoTextInputComponent
   String value;
 
   ChangeFunction<String> _onChange;
+
   NgControl control;
   final ChangeDetectorRef _changeDetectorRef;
   final StreamController<html.Event> _clearButtonController =
@@ -88,9 +93,8 @@ class FoTextInputComponent
       StreamController<FoButtonEvent>();
   final StreamController<html.Event> changeController =
       StreamController<html.Event>();
-  final StreamController<FoDropdownOptionRenderable>
-      _selectionChangeController =
-      StreamController<FoDropdownOptionRenderable>();
+  final StreamController<SelectionChangeEvent> _selectionChangeController =
+      StreamController<SelectionChangeEvent>();
   final StreamController<html.FocusEvent> _focusController =
       StreamController<html.FocusEvent>();
   final StreamController<String> _blurController = StreamController<String>();
@@ -101,15 +105,6 @@ class FoTextInputComponent
   FoTextInputComponent(
       @Self() @Optional() this.control, this.host, this._changeDetectorRef) {
     if (control != null) control.valueAccessor = this;
-  }
-
-  bool get dropdownVisible =>
-      options != null &&
-      (_dropdownVisible && value?.isEmpty == false ||
-          (hasFocus == true && showDropdownOnFocus == true));
-
-  set dropdownVisible(bool value) {
-    _dropdownVisible = value;
   }
 
   /// Action button triggered
@@ -124,6 +119,15 @@ class FoTextInputComponent
   /// Clear icon is clicked
   @Output('clear')
   Stream<html.Event> get clear => _clearButtonController.stream;
+
+  bool get dropdownVisible =>
+      options != null &&
+      (_dropdownVisible && (value?.isEmpty == false || filterOptions != true) ||
+          (hasFocus == true && showDropdownOnFocus == true));
+
+  set dropdownVisible(bool value) {
+    _dropdownVisible = value;
+  }
 
   int get dropdownWidth =>
       inputElement?.getBoundingClientRect()?.width?.toInt();
@@ -156,16 +160,22 @@ class FoTextInputComponent
     }
   }
 
+  String get filterValue => filterOptions == true ? value : null;
+
   @Output('focus')
   Stream<html.FocusEvent> get focus => _focusController.stream;
 
   @Output('selectionChange')
-  Stream<FoDropdownOptionRenderable> get selectionChange =>
+  Stream<SelectionChangeEvent> get selectionChange =>
       _selectionChangeController.stream;
 
   int get selectionEnd => inputElement?.selectionEnd;
 
   int get selectionStart => inputElement?.selectionStart;
+
+  String get noFocusShadow =>
+      host.attributes.containsKey('noFocusShadow') ? '1' : null;
+
   String get square => host.attributes.containsKey('square') ? '1' : null;
 
   @override
@@ -205,18 +215,18 @@ class FoTextInputComponent
   }
 
   void onFilterSelect(FoDropdownOptionRenderable event) {
+    _selectionChangeController
+        .add(SelectionChangeEvent(value, event.renderLabel));
+
     value = event.renderLabel;
     _dropdownVisible = false;
-
     if (_onChange != null) {
       _onChange(value);
     }
-    _selectionChangeController.add(event);
   }
 
   void onFocus(html.FocusEvent event) {
     event..preventDefault();
-
     hasFocus = true;
     _focusController.add(event);
   }
@@ -252,4 +262,11 @@ class FoTextInputComponent
     value = obj;
     _changeDetectorRef.markForCheck();
   }
+}
+
+class SelectionChangeEvent {
+  final String before;
+  final String after;
+
+  SelectionChangeEvent(this.before, this.after);
 }

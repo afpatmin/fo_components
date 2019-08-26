@@ -1,10 +1,8 @@
-@import 'package:fo_components/components/fo_button/mixins';
-@import 'package:grid_css/constants';
-@import 'package:fo_components/mixins';
+@import "package:fo_components/components/fo_button/mixins";
+@import "package:grid_css/constants";
+@import "package:fo_components/mixins";
 
 :host {
-  //font-size: 1rem;
-
   .hidden {
     display: none;
   }
@@ -41,27 +39,23 @@
         border-bottom-width: 1px;
         align-items: center;
 
-        fo-button {
-          font-size: 1em;
-        }
-
         div#modalHeaderTitle {
-          font-size: 1em;
           flex: auto;
           overflow: hidden;
           text-overflow: ellipsis;
           min-width: 10rem;
 
           h2 {
-            font-size: 1.2em;
+            font-size: 1em;
             margin: 0;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            font-weight: bold;
           }
         }
-
         fo-button {
+          font-size: 0.7em;
           margin-left: 0.25em;
         }
       }
@@ -73,11 +67,15 @@
       }
 
       div#modalMain {
+        font-size: 1rem;
         border-bottom-width: 1px;
         border-bottom-style: solid;
         overflow-y: auto;
         flex: auto;
-        -webkit-overflow-scrolling: touch; // Smooth scrolling on tablets/phones 
+        -webkit-overflow-scrolling: touch; // Smooth scrolling on tablets/phones
+      }
+      div#modalFooter {
+        font-size: 1rem;
       }
     }
   }
@@ -86,7 +84,6 @@
 :host[dense] {
   div#modalOverlay {
     div#modalContent {
-
       div#modalHeader,
       div#modalFooter {
         padding: 0.25em;

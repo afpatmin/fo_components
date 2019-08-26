@@ -86,6 +86,8 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
   @Output('select')
   Stream<FoDropdownOptionRenderable> get select => _selectController.stream;
 
+  String get noShadow => _host.attributes.containsKey('noShadow') ? '1' : null;
+
   String get square => _host.attributes.containsKey('square') ? '1' : null;
 
   @Output('visibleChange')

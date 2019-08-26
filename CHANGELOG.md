@@ -1,10 +1,90 @@
-# 1.4.4
+# 1.5.1
 
 #### TextInput
 
 * (BREAKING) Updated fo-text-input-colors mixin to include alertColor
 * Added css directive 'transparent' which the input have no background color
 * Added mixin fo-text-input-vertical-padding
+
+# 1.5.0
+
+#### Dropdown
+
+* added noShadow css directive to popup
+
+# 1.4.9+2
+
+* Same as 1.4.9+1 but with json_annotation
+
+# 1.4.9+1
+
+* Fixed sass_builder dependency issue (moved back from devv_dependencies to dependencies)
+
+# 1.4.9
+
+#### Carousel
+
+* Added loop input
+* (BREAKING) Replaced css directive noSlideAnimation with animateSlides input (default: true), and removed animate noFadeAnimation
+* (BREAKING) Slides are no longer animated when set externally
+
+#### DropdownList
+
+* Improved category labels design
+
+#### ErrorOutput
+
+* Now has correct width (takes border into account)
+
+#### Other
+
+* Bumped some dependencies (build_runner, json_serializable)
+
+# 1.4.8
+
+#### Dropdown
+
+* Fixed issue where position wasn't set properly when anchor/target was translated
+
+#### Carousel
+
+* Added materialIcons input
+* Added nextIcon and prevIcon inputs
+* No longer using fo-button for next/prev buttons
+
+# 1.4.7
+
+#### Carousel
+
+* Added noFadeAnimation and noSlideAnimation css directives
+
+# 1.4.6
+
+#### TextAreaInput
+
+* Font size now inherited from parent rather than monospace
+
+# 1.4.5
+
+#### TextInput
+
+* (BREAKING): selectionChange output now fires SelectionChangeEvent objects rather than FoDropdownOptionRenderables
+
+# 1.4.4+1
+
+#### TextInput
+
+* selectionChange output now fires before the actual ngModel value is set
+
+# 1.4.4
+
+#### Modal
+
+* Fixed font size so that it can be set normally: `fo-modal { font-size: 32px; }` 
+
+#### TextInput
+
+* Added filterOptions input (default: true)
 
 # 1.4.3
 
@@ -24,7 +104,13 @@
 
 * Made icon container smaller (1.8em -> 1.2em)
 
+<<<<<<< HEAD
 # 1.4.2+4 & # 1.4.2+5
+
+=======
+# 1.4.2+4 & 1.4.2+5
+
+>>>>>>> 0f6b1d6a7e77972d40cd977c7b453c2777a6c56c
 
 #### NumberInput
 

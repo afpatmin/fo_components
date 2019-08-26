@@ -24,7 +24,7 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
 
   /// Horizontal offset in pixels
   @Input()
-  int offsetHorizontal;
+  int offsetHorizontal = 0;
 
   /// Target horizontal position in pixels. If set, a marker is shown at the top of the dropdown
   @Input()
@@ -77,17 +77,19 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
   void _evaluatePosition(_) {
     final rect = host.getBoundingClientRect();
 
-    html.Element findFixedParent(html.Element e) {
+    html.Element _findFixedParent(html.Element e) {
       if (e == null) {
         return null;
-      } else if (e.getComputedStyle().position == 'fixed') {
+      } else if (e.style.position == 'fixed' ||
+          e.style.transform.contains('translate')) {
         return e;
       }
-      return findFixedParent(e.parent);
+      return _findFixedParent(e.parent);
     }
 
-    final fixedParent = findFixedParent(host);
-    if (fixedParent == null) {
+    final _fixedParent = _findFixedParent(host);
+
+    if (_fixedParent == null) {
       var newTop = rect.top;
       if (offsetTop != null) {
         newTop += offsetTop;
@@ -101,35 +103,42 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
             '${html.document.body.clientHeight - (newTop + html.window.scrollY)}px';
       }
       top = '${newTop}px';
+
+      if (anchorRight == true) {
+        right =
+            '${html.document.documentElement.clientWidth - rect.right + offsetHorizontal}px';
+        left = null;
+      } else {
+        left = '${rect.left + offsetHorizontal}px';
+        right = null;
+      }
     } else {
-      final hostRect = host.getBoundingClientRect();
-      final parentRect = fixedParent.getBoundingClientRect();
+      final parentRect = _fixedParent.getBoundingClientRect();
       if (offsetTop == null) {
         top = null;
         elementMaxHeight =
-            '${html.document.documentElement.clientHeight - hostRect.bottom}px';
+            '${html.document.documentElement.clientHeight - rect.bottom}px';
       } else if (constrainToViewPort == true) {
         final offsetTopClamped = max(0, offsetTop);
         top = '${offsetTopClamped + parentRect.top}px';
         elementMaxHeight =
-            '${html.document.documentElement.clientHeight - hostRect.bottom - offsetTopClamped}px';
+            '${html.document.documentElement.clientHeight - rect.bottom - offsetTopClamped}px';
       } else if (constrainToViewPort != true) {
         top = '${offsetTop + parentRect.top}px';
         elementMaxHeight =
-            '${html.document.body.clientHeight - hostRect.bottom - offsetTop}px';
+            '${html.document.body.clientHeight - rect.bottom - offsetTop}px';
+      }
+
+      if (anchorRight == true) {
+        right = '${offsetHorizontal}px';
+        left = null;
+      } else {
+        left = '${rect.left - parentRect.left + offsetHorizontal}px';
+        right = null;
       }
     }
 
     offsetHorizontal ??= 0;
-
-    if (anchorRight == true) {
-      right =
-          '${html.document.documentElement.clientWidth - rect.right + offsetHorizontal}px';
-      left = null;
-    } else {
-      left = '${rect.left + offsetHorizontal}px';
-      right = null;
-    }
 
     _changeDetectorRef.markForCheck();
   }

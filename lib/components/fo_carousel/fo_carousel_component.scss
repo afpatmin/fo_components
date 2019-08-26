@@ -1,6 +1,7 @@
-@import 'package:angular_components/material_button/mixins';
-@import '../fo_button/mixins';
-@import 'package:grid_css/constants.scss';
+@import "../fo_button/mixins";
+@import "package:grid_css/constants.scss";
+
+$slideTransitionSpeed: 200ms;
 
 :host {
   display: block;
@@ -10,29 +11,29 @@
   }
 
   .arrow {
-    opacity: 0.3;
+    cursor: pointer;
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     top: auto;
     bottom: 50%;
+    width: 56px;
+    height: 56px;
+    background-color: white;
+    border: 1px solid #dde2e9;
+    text-align: center;
+    box-sizing: border-box;
     -webkit-transform: translateY(50%);
     -moz-transform: translateY(50%);
     -ms-transform: translateY(50%);
     -o-transform: translateY(50%);
     transform: translateY(50%);
-    -webkit-transition: opacity 200ms;
-    -moz-transition: opacity 200ms;
-    -ms-transition: opacity 200ms;
-    -o-transition: opacity 200ms;
-    transition: opacity 200ms;
-    
-    fo-button {
-      ::ng-deep material-icon {
-        i {
-          font-size: 2em;
-        }
-      }
-    }
-    
+    -webkit-transition: background-color 200ms;
+    -moz-transition: background-color 200ms;
+    -ms-transition: background-color 200ms;
+    -o-transition: background-color 200ms;
+    transition: background-color 200ms;
   }
 
   .arrow.faded {
@@ -40,7 +41,8 @@
   }
 
   .arrow:hover {
-    opacity: 1;
+    background-color: #f8f9fa;
+    border-color: #cdd2d9;
   }
 
   #arrow-left {
@@ -56,23 +58,23 @@
   @media screen and (max-width: $medium-width-threshold - 1) {
     .arrow {
       display: none;
-    }    
+    }
   }
 
   #slide-container {
     position: relative;
     overflow: hidden;
 
-    #slide-transformer {
-      -webkit-transition: -webkit-transform 500ms;
-      -moz-transition: -moz-transform 500ms;
-      -ms-transition: -ms-transform 500ms;
-      -o-transition: -o-transform 500ms;
-      transition: transform 500ms;
-      white-space: nowrap;      
+    #slide-transformer.animate {
+      -webkit-transition: -webkit-transform $slideTransitionSpeed;
+      -moz-transition: -moz-transform $slideTransitionSpeed;
+      -ms-transition: -ms-transform $slideTransitionSpeed;
+      -o-transition: -o-transform $slideTransitionSpeed;
+      transition: transform $slideTransitionSpeed;
     }
 
     #slide-transformer {
+      white-space: nowrap;
       ::ng-deep * {
         white-space: initial;
       }

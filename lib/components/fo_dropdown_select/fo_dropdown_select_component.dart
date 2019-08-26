@@ -110,6 +110,9 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @Output('selectedIdChange')
   Stream<Object> get selectedIdChange => _selectedIdController.stream;
 
+  String get noFocusShadow =>
+      _host.attributes.containsKey('noFocusShadow') ? '1' : null;
+
   String get square => _host.attributes.containsKey('square') ? '1' : null;
 
   @override
