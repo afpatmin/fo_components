@@ -1,3 +1,9 @@
+# 1.5.1+2
+
+#### TextInput
+
+* Fixed issue where textColor from mixin didn't get set properly
+
 # 1.5.1+1
 
 #### TextInput

@@ -1,5 +1,5 @@
-@import 'package:grid_css/constants';
-@import 'mixins';
+@import "package:grid_css/constants";
+@import "mixins";
 
 $borderRadius: $x-small;
 
@@ -8,9 +8,8 @@ $borderRadius: $x-small;
   flex: auto;
   width: 100%;
   box-sizing: border-box;
-  outline: none;  
+  outline: none;
   min-width: 7rem;
-  color: #555;
   box-shadow: none;
   -webkit-box-shadow: none;
   font-size: 1em;
