@@ -1,5 +1,4 @@
-<fo-label [value]="label"
-          [error]="control?.valid == false && control?.pristine != true">
+<fo-label [value]="label">
   <textarea [disabled]="disabled"
             [placeholder]="placeholder"
             [class.error]="control?.valid == false && control?.pristine != true"
@@ -10,7 +9,6 @@
             [ngModel]="value"
             (ngModelChange)="onValueChange($event)"></textarea>
   <fo-error-output *ngIf="hasFocus == true && errorMessage != null && control?.pristine != true"
-                   class="gray-color-bright"
                    [message]="errorMessage">
   </fo-error-output>
 </fo-label>
