@@ -108,9 +108,11 @@
 }
 
 :host[transparent] {
-  div#flexContainer {
-    input {
-      background-color: transparent;
+  fo-label {
+    div#flexContainer {
+      input {
+        background-color: transparent;
+      }
     }
   }
 }

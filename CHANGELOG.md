@@ -4,6 +4,7 @@
 
 * (BREAKING) Updated fo-text-input-colors mixin to include alertColor
 * Added css directive 'transparent'
+* Added mixin fo-text-input-vertical-padding
 
 # 1.4.3
 

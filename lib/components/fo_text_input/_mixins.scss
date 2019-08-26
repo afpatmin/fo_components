@@ -39,3 +39,16 @@
     }
   }
 }
+
+@mixin fo-text-input-vertical-padding($top, $bottom) {
+  ::ng-deep fo-text-input {
+    fo-label {
+      div#flexContainer {
+        input {
+          padding-top: $top;
+          padding-bottom: $bottom;
+        }
+      }
+    }
+  }
+}
