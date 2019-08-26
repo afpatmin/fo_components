@@ -3,6 +3,7 @@
 #### TextInput
 
 * Fixed issue where textColor from mixin didn't get set properly
+* Fixed issue where fo-text-input-vertical-padding wasn't applied properly
 
 # 1.5.1+1
 

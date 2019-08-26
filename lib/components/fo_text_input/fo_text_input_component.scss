@@ -25,11 +25,13 @@
     border-style: solid;
     overflow: hidden;
     @include fo-button-vertical-padding(0.5em);
+    padding: 0.5em 0;
 
     input {
       @include inputStyle;
       line-height: 150%;
-      padding: 0.5em;
+      padding: 0 0.5em;
+
       outline: none;
       margin: 0;
       align-self: stretch;
@@ -109,10 +111,7 @@
 :host[dense] {
   fo-label {
     div#flexContainer {
-      input {
-        padding: 0.25em 0.5em;
-      }
-
+      padding: 0.25em 0;
       @include fo-button-vertical-padding(0.25em);
     }
   }
