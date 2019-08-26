@@ -8,7 +8,4 @@ import 'package:angular/angular.dart';
 class FoLabelComponent {
   @Input()
   String value;
-
-  @Input()
-  bool error = false;
 }
