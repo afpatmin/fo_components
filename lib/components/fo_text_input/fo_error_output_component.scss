@@ -11,6 +11,7 @@
   border-style: solid;
   border-radius: $x-small;
   font-size: 1em;
+  box-sizing: border-box;
 
   div#arrow {
     position: absolute;
