@@ -2,7 +2,7 @@
           [error]="control?.valid == false && control?.pristine != true">
   <textarea [disabled]="disabled"
             [placeholder]="placeholder"
-            [class.color-alert]="control?.valid == false && control?.pristine != true"
+            [class.error]="control?.valid == false && control?.pristine != true"
             noresize
             (focus)="hasFocus = true"
             (blur)="hasFocus = false"

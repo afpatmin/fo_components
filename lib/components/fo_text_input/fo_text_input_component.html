@@ -1,15 +1,15 @@
 <fo-label [value]="label"
           [error]="control?.valid == false && control?.pristine != true">
-  <div id="flexContainer">
+  <div id="flexContainer"
+       [class.error]="control?.valid == false && control?.pristine != true">
     <fo-icon *ngIf="leadingIcon != null"
-             class="gray-color leading"
+             class="leading"
              [icon]="leadingIcon"
              [material]="materialIcons"></fo-icon>
     <input type="{{type}}"
            [autoFocus]="autoFocus"
            [disabled]="disabled == true"
            [placeholder]="placeholder"
-           [class.color-alert]="control?.valid == false && control?.pristine != true"
            [ngModel]="value"
            (ngModelChange)="onValueChange($event)"
            (change)="changeController.add($event)"
@@ -28,7 +28,6 @@
                (trigger)="actionButtonController?.add($event)"></fo-button>
   </div>
   <fo-error-output *ngIf="hasFocus == true && errorMessage != null && control?.pristine != true && dropdownVisible == false"
-                   class="gray-color-bright"
                    [message]="errorMessage">
   </fo-error-output>
   <fo-dropdown-list [options]="options"

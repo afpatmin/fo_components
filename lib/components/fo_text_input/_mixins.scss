@@ -1,4 +1,4 @@
-@mixin fo-text-input-colors($textColor, $borderColor, $iconColor) {
+@mixin fo-text-input-colors($textColor, $borderColor, $iconColor, $alertColor) {
   ::ng-deep fo-text-input {
     fo-label {
       div#flexContainer {
@@ -12,6 +12,18 @@
           color: $iconColor;
         }
       }
+      div#flexContainer.error {
+        border-color: $alertColor;
+      }
+      fo-error-output {
+        border-color: $borderColor;
+        div#arrow {
+          border-color: $borderColor;
+        }
+        div#message {
+          color: $alertColor;
+        }
+      }
     }
   }
 
@@ -20,6 +32,9 @@
       textarea {
         color: $textColor;
         border-color: $borderColor;
+      }
+      textarea.error {
+        color: $alertColor;
       }
     }
   }

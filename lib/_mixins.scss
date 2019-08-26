@@ -1,18 +1,18 @@
 $transitionSpeed: 0.3s ease;
 
-@import 'package:angular_components/material_checkbox/mixins';
-@import 'package:angular_components/material_radio/mixins';
-@import 'package:angular_components/material_toggle/mixins';
+@import "package:angular_components/material_checkbox/mixins";
+@import "package:angular_components/material_radio/mixins";
+@import "package:angular_components/material_toggle/mixins";
 
-@import 'components/fo_button/mixins';
-@import 'components/fo_file_upload/mixins';
-@import 'components/fo_image_file/mixins';
-@import 'components/fo_dropdown_list/mixins';
-@import 'components/fo_dropdown_select/mixins';
-@import 'components/fo_dropdown_select_multi/mixins';
-@import 'components/fo_modal/mixins';
-@import 'components/fo_tab/mixins';
-@import 'components/fo_text_input/mixins';
+@import "components/fo_button/mixins";
+@import "components/fo_file_upload/mixins";
+@import "components/fo_image_file/mixins";
+@import "components/fo_dropdown_list/mixins";
+@import "components/fo_dropdown_select/mixins";
+@import "components/fo_dropdown_select_multi/mixins";
+@import "components/fo_modal/mixins";
+@import "components/fo_tab/mixins";
+@import "components/fo_text_input/mixins";
 
 @mixin foregroundColor($color) {
   color: $color;
@@ -48,16 +48,15 @@ $transitionSpeed: 0.3s ease;
   @include fo-label-color($grayColor);
   @include fo-modal-colors(lighten($grayColorBright, 10%));
   @include fo-tab-panel-colors(darken($grayColor, $lightstep), $primaryColor);
-  @include fo-text-input-colors($grayColor, $grayColorBright, $grayColor);
+  @include fo-text-input-colors($grayColor, $grayColorBright, $grayColor, $alertColor);
 
   material-spinner {
     border-color: $primaryColor;
   }
 
   ::ng-deep {
-    material-icon>i {
+    material-icon > i {
       margin-bottom: 0 !important;
-
     }
   }
 
@@ -172,4 +171,4 @@ $transitionSpeed: 0.3s ease;
   -webkit-box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.4);
 }
 
-@include fo-colors(#2E5266, #6E8898, #f77);
+@include fo-colors(#2e5266, #6e8898, #f77);
