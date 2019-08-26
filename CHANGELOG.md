@@ -2,9 +2,8 @@
 
 #### TextInput
 
-* Updated fo-text-input-colors mixin to include alertColor
-
-* 
+* (BREAKING) Updated fo-text-input-colors mixin to include alertColor
+* Added css directive 'transparent'
 
 # 1.4.3
 

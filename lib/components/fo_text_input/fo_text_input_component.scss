@@ -1,9 +1,9 @@
-@import 'package:grid_css/constants';
-@import '../../constants.scss';
-@import '../../mixins.scss';
-@import '../fo_button/mixins';
-@import '../fo_dropdown_list/mixins';
-@import 'shared';
+@import "package:grid_css/constants";
+@import "../../constants.scss";
+@import "../../mixins.scss";
+@import "../fo_button/mixins";
+@import "../fo_dropdown_list/mixins";
+@import "shared";
 
 :host {
   display: block;
@@ -14,7 +14,6 @@
   fo-label {
     font-size: 1em;
   }
-
 
   div#flexContainer {
     display: flex;
@@ -61,7 +60,7 @@
       margin-right: -0.25em;
     }
 
-    ::ng-deep fo-button>button {
+    ::ng-deep fo-button > button {
       border: 0;
     }
   }
@@ -70,7 +69,6 @@
     @include boxShadow();
   }
 }
-
 
 :host[noFocusShadow] {
   div#flexContainer:focus-within {
@@ -89,7 +87,6 @@
   }
 }
 
-
 :host[noRightBorder] {
   fo-label {
     div#flexContainer {
@@ -106,6 +103,14 @@
       input {
         text-align: center;
       }
+    }
+  }
+}
+
+:host[transparent] {
+  div#flexContainer {
+    input {
+      background-color: transparent;
     }
   }
 }
