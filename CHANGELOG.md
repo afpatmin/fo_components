@@ -1,3 +1,9 @@
+# 1.5.1+1
+
+#### TextInput
+
+* Replaced transparent css directive with another argument to fo-text-input-colors mixin (default: white)
+
 # 1.5.1
 
 #### TextInput

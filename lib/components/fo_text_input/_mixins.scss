@@ -1,4 +1,4 @@
-@mixin fo-text-input-colors($textColor, $borderColor, $iconColor, $alertColor) {
+@mixin fo-text-input-colors($textColor, $borderColor, $iconColor, $alertColor, $backgroundColor: white) {
   ::ng-deep fo-text-input {
     fo-label {
       div#flexContainer {
@@ -6,6 +6,7 @@
 
         input {
           color: $textColor;
+          background-color: $backgroundColor;
         }
 
         fo-icon {

@@ -30,7 +30,6 @@
       @include inputStyle;
       line-height: 150%;
       padding: 0.5em;
-      background-color: white;
       outline: none;
       margin: 0;
       align-self: stretch;
@@ -102,16 +101,6 @@
     div#flexContainer {
       input {
         text-align: center;
-      }
-    }
-  }
-}
-
-:host[transparent] {
-  fo-label {
-    div#flexContainer {
-      input {
-        background-color: transparent;
       }
     }
   }
