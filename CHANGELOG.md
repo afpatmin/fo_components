@@ -3,7 +3,7 @@
 #### TextInput
 
 * (BREAKING) Updated fo-text-input-colors mixin to include alertColor
-* Added css directive 'transparent'
+* Added css directive 'transparent' which the input have no background color
 * Added mixin fo-text-input-vertical-padding
 
 # 1.4.3
