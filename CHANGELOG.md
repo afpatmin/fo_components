@@ -1,3 +1,9 @@
+# 1.5.2+1
+
+#### DropdownList
+
+* Minor style adjustments
+
 # 1.5.2
 
 #### Dropdown
