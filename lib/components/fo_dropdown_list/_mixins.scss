@@ -5,7 +5,7 @@
     @include fo-dropdown-border-color($borderColor);
     fo-dropdown {
       div#dropdownContent {
-        fo-dropdown-option:not(:hover) {
+        fo-dropdown-option {
           fo-icon {
             color: $primaryColor;
           }
@@ -21,7 +21,7 @@
         }
 
         fo-dropdown-option:hover {
-          background-color: $primaryColor;
+          background-color: lighten($borderColor, 10%);
         }
 
         hr {

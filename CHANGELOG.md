@@ -2,7 +2,7 @@
 
 #### DropdownList
 
-* Minor style adjustments
+* Style tweaks
 
 # 1.5.2
 

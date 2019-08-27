@@ -2,7 +2,6 @@
 @mixin fo-text-input-colors($textColor, $borderColor, $iconColor, $alertColor, $backgroundColor: white) {
   ::ng-deep fo-text-input {
     @include fo-dropdown-border-color($borderColor);
-
     fo-label {
       div#flexContainer {
         border-color: $borderColor;
