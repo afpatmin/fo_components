@@ -2,6 +2,8 @@
 @import "../../mixins";
 
 :host {
+  display: block;
+
   div#filterContainer {
     margin: 0.5em;
   }

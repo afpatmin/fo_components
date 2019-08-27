@@ -1,3 +1,13 @@
+# 1.5.2
+
+#### Dropdown
+
+* Added fo-dropdown-border-color mixin
+
+#### TextInput
+
+* Fixed issue where dropdown width wasn't calculated correctly when input has icons
+
 # 1.5.1+2
 
 #### TextInput

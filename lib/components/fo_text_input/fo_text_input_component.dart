@@ -130,7 +130,7 @@ class FoTextInputComponent
   }
 
   int get dropdownWidth =>
-      inputElement?.getBoundingClientRect()?.width?.toInt();
+      host.getBoundingClientRect().width.toInt() - 2; // subtract borders
 
   String get errorMessage {
     final errors = control?.errors;

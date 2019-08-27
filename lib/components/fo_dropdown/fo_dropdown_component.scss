@@ -4,12 +4,14 @@
 :host {
   position: relative;
   display: block;
+
   div#fixer {
     position: fixed;
     z-index: 99;
     @include boxShadow();
     box-sizing: content-box;
-    border: 1px solid #ccc;
+    border-width: 1px;
+    border-style: solid;
 
     div#dropdownContent {
       text-align: left;
@@ -38,8 +40,10 @@
       z-index: 1;
       top: -8px;
       left: 8px;
-      border-left: 1px solid #ccc;
-      border-top: 1px solid #ccc;
+      border-left-width: 1px;
+      border-top-width: 1px;
+      border-left-style: solid;
+      border-top-style: solid;
     }
   }
 }

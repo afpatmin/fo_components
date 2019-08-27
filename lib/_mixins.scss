@@ -7,6 +7,7 @@ $transitionSpeed: 0.3s ease;
 @import "components/fo_button/mixins";
 @import "components/fo_file_upload/mixins";
 @import "components/fo_image_file/mixins";
+@import "components/fo_dropdown/mixins";
 @import "components/fo_dropdown_list/mixins";
 @import "components/fo_dropdown_select/mixins";
 @import "components/fo_dropdown_select_multi/mixins";
@@ -39,6 +40,7 @@ $transitionSpeed: 0.3s ease;
   @include material-toggle-theme($primaryColor);
 
   @include fo-button-colors(white, $primaryColor, $grayColorBright);
+  @include fo-dropdown-border-color($grayColorBright);
   @include fo-dropdown-list-colors($primaryColor, $grayColor, $grayColorBright);
   @include fo-dropdown-select-colors($grayColor, $grayColorBright, $primaryColor);
   @include fo-dropdown-select-multi-options-background-color($primaryColor);
