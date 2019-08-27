@@ -69,6 +69,9 @@ class FoTextInputComponent
   bool showDropdownOnFocus = false;
 
   @Input()
+  int dropdownMaxHeight;
+
+  @Input()
   bool disabled = false;
 
   /// Make sure options dropdown doesn't extend beyond the viewport

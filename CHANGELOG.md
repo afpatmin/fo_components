@@ -2,11 +2,17 @@
 
 #### Dropdown
 
-* Added fo-dropdown-border-color mixin
+* Added mixin fo-dropdown-border-color
+* Added maxHeight input
+
+#### DropdownList
+
+* Added maxHeight input
 
 #### TextInput
 
 * Fixed issue where dropdown width wasn't calculated correctly when input has icons
+* Added dropdownMaxHeight input
 
 # 1.5.1+2
 

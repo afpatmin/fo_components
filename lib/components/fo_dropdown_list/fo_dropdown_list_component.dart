@@ -58,6 +58,9 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
   int targetPosition;
 
   @Input()
+  int maxHeight;
+
+  @Input()
   Map<String, List<FoDropdownOptionRenderable>> options;
 
   @Input()

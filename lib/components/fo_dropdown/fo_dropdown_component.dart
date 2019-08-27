@@ -38,6 +38,10 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
   @Input()
   bool anchorRight = false;
 
+  /// Overrides constrainToViewPort
+  @Input()
+  int maxHeight;
+
   StreamSubscription<html.MouseEvent> _onDocumentClickListener;
   final html.Element host;
   final ChangeDetectorRef _changeDetectorRef;
@@ -47,7 +51,10 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
 
   String get targetPositonLeft => '${targetPosition}px';
 
-  String elementMaxHeight = '100px';
+  String get elementMaxHeight =>
+      maxHeight == null ? _elementMaxHeight : '${maxHeight}px';
+
+  String _elementMaxHeight = '100px';
   String top;
   String left;
   String right;
@@ -96,10 +103,10 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
       }
       if (constrainToViewPort == true) {
         newTop = max(0, newTop);
-        elementMaxHeight =
+        _elementMaxHeight =
             '${html.document.documentElement.clientHeight - newTop}px';
       } else {
-        elementMaxHeight =
+        _elementMaxHeight =
             '${html.document.body.clientHeight - (newTop + html.window.scrollY)}px';
       }
       top = '${newTop}px';
@@ -116,16 +123,16 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
       final parentRect = _fixedParent.getBoundingClientRect();
       if (offsetTop == null) {
         top = null;
-        elementMaxHeight =
+        _elementMaxHeight =
             '${html.document.documentElement.clientHeight - rect.bottom}px';
       } else if (constrainToViewPort == true) {
         final offsetTopClamped = max(0, offsetTop);
         top = '${offsetTopClamped + parentRect.top}px';
-        elementMaxHeight =
+        _elementMaxHeight =
             '${html.document.documentElement.clientHeight - rect.bottom - offsetTopClamped}px';
       } else if (constrainToViewPort != true) {
         top = '${offsetTop + parentRect.top}px';
-        elementMaxHeight =
+        _elementMaxHeight =
             '${html.document.body.clientHeight - rect.bottom - offsetTop}px';
       }
 
