@@ -10,17 +10,22 @@
             color: $primaryColor;
           }
 
-          div#label {
+          div#label,
+          td.info {
             color: $labelColor;
           }
 
           div#secondaryLabel {
-            color: darken($borderColor, 20%);
+            color: darken($borderColor, 10%);
           }
         }
 
         fo-dropdown-option:hover {
           background-color: $primaryColor;
+        }
+
+        hr {
+          border-color: $borderColor;
         }
       }
     }

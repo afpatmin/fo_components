@@ -20,7 +20,8 @@
         }
 
         div#secondaryLabel {
-          font-size: 0.9em;
+          font-size: 0.85em;
+          margin-top: 0.3em;
         }
       }
 
@@ -46,6 +47,8 @@
       }
 
       td.info {
+        font-size: 0.85em;
+        color: #59616d;
         text-align: right;
         margin-right: 0.5em;
         overflow: hidden;
