@@ -9,3 +9,24 @@
     }
   }
 }
+
+@mixin fo-number-input-button-width($value) {
+  ::ng-deep fo-number-input {
+    div#flexContainer {
+      div#leftButton,
+      div#rightButton {
+        min-width: $value;
+      }
+    }
+  }
+}
+
+@mixin fo-number-input-input-width($value) {
+  ::ng-deep fo-number-input {
+    div#flexContainer {
+      fo-text-input {
+        max-width: $value;
+      }
+    }
+  }
+}

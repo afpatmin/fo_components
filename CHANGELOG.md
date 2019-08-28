@@ -1,3 +1,9 @@
+# 1.5.4
+#### NumberInput
+* Made add/subtract buttons wider
+* Added mixin fo-number-input-button-width
+* Added mixin fo-number-input-input-width
+
 # 1.5.3
 
 #### NumberInput

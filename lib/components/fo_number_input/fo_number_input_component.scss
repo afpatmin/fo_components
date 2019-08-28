@@ -7,11 +7,12 @@
   div#flexContainer {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 100%;
 
     div#leftButton,
     div#rightButton {
-      width: 6em;
+      width: 4em;
     }
 
     fo-text-input {
