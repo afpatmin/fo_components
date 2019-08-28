@@ -1,3 +1,7 @@
+# 1.5.4+1
+#### NumberInput
+* Added square css directive to NumberInput
+
 # 1.5.4
 #### NumberInput
 * Made add/subtract buttons wider
