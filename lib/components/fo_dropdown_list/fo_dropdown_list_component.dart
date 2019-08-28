@@ -113,7 +113,7 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
   }
 
   void onSelect(html.Event event, FoDropdownOptionRenderable option) {
-    event..preventDefault();
+    event.stopPropagation();
     _selectController.add(option);
   }
 
