@@ -12,10 +12,10 @@
 
 @mixin fo-number-input-button-width($value) {
   ::ng-deep fo-number-input {
-    div#flexContainer {
+    div#flexContainer.themeable {
       div#leftButton,
       div#rightButton {
-        min-width: $value;
+        width: $value;
       }
     }
   }
@@ -23,7 +23,7 @@
 
 @mixin fo-number-input-input-width($value) {
   ::ng-deep fo-number-input {
-    div#flexContainer {
+    div#flexContainer.themeable {
       fo-text-input {
         max-width: $value;
       }
