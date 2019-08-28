@@ -1,14 +1,16 @@
 <fo-label [value]="label"></fo-label>
 <div id="flexContainer">
-  <fo-button clearSize
-             noRightBorder
-             [attr.tabindex]="tabIndexSub"
-             [disabled]="disabled || (value != null && value <= min)"
-             [materialIcon]="materialIcons"
-             (mousedown)="onMouseDown(-step)"
-             (keydown)="onKeyDown($event, -step)"
-             icon="remove">
-  </fo-button>
+  <div id="leftButton">
+    <fo-button noRightBorder
+               fullWidth
+               [attr.tabindex]="tabIndexSub"
+               [disabled]="disabled || (value != null && value <= min)"
+               [materialIcon]="materialIcons"
+               (mousedown)="onMouseDown(-step)"
+               (keydown)="onKeyDown($event, -step)"
+               icon="remove">
+    </fo-button>
+  </div>
   <fo-text-input noRightBorder
                  noLeftBorder
                  centerValue
@@ -19,15 +21,17 @@
                  [ngModel]="value?.toString()"
                  (blur)="onInputBlur($event)"
                  (ngModelChange)="setValueClamped($event)"></fo-text-input>
-  <fo-button clearSize
-             noLeftBorder
-             [attr.tabindex]="tabIndexAdd"
-             [disabled]="disabled || (value != null && value >= max)"
-             [materialIcon]="materialIcons"
-             (mousedown)="onMouseDown(step)"
-             (keydown)="onKeyDown($event, step)"
-             icon="add">
-  </fo-button>
+  <div id="rightButton">
+    <fo-button noLeftBorder
+               fullWidth
+               [attr.tabindex]="tabIndexAdd"
+               [disabled]="disabled || (value != null && value >= max)"
+               [materialIcon]="materialIcons"
+               (mousedown)="onMouseDown(step)"
+               (keydown)="onKeyDown($event, step)"
+               icon="add">
+    </fo-button>
+  </div>
   <span *ngIf="trailingText?.isNotEmpty == true"
         id="trailing">{{trailingText}}</span>
 </div>

@@ -1,4 +1,6 @@
+@import "package:fo_components/components/fo_button/mixins";
 @import "package:fo_components/components/fo_dropdown/mixins";
+
 @mixin fo-text-input-colors($textColor, $borderColor, $iconColor, $alertColor, $backgroundColor: white) {
   ::ng-deep fo-text-input {
     @include fo-dropdown-border-color($borderColor);
@@ -46,6 +48,7 @@
 @mixin fo-text-input-vertical-padding($top, $bottom) {
   ::ng-deep fo-text-input {
     fo-label {
+      @include fo-button-vertical-padding($top);
       div#flexContainer.themeable {
         padding-top: $top;
         padding-bottom: $bottom;

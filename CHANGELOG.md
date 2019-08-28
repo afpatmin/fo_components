@@ -1,3 +1,9 @@
+# 1.5.3
+
+#### NumberInput
+
+* Added materialIcons input
+
 # 1.5.2+1
 
 #### DropdownList

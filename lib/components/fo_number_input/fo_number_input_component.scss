@@ -1,19 +1,23 @@
+@import "package:fo_components/components/fo_text_input/mixins";
+@import "package:fo_components/components/fo_button/mixins";
+
 :host {
+  @include fo-text-input-vertical-padding(0.5em, 0.5em);
+  @include fo-button-vertical-padding(0.5em);
   div#flexContainer {
-    font-size: 1em;
     display: flex;
     align-items: center;
     height: 100%;
+
+    div#leftButton,
+    div#rightButton {
+      width: 3em;
+    }
 
     fo-text-input {
       flex: auto;
     }
 
-    fo-button,
-    fo-text-input,
-    fo-label {
-      font-size: 1em;
-    }
     span#trailing {
       margin-left: 1em;
     }

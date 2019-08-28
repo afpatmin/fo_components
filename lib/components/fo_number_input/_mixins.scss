@@ -1,0 +1,11 @@
+@import "package:fo_components/components/fo_text_input/mixins";
+@import "package:fo_components/components/fo_button/mixins";
+
+@mixin fo-number-input-vertical-padding($value) {
+  ::ng-deep fo-number-input {
+    div#flexContainer {
+      @include fo-button-vertical-padding($value);
+      @include fo-text-input-vertical-padding($value, $value);
+    }
+  }
+}
