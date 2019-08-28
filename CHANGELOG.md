@@ -1,3 +1,7 @@
+# 1.5.5+1
+#### DropdownList
+* Selecting a value click event no longer propagating to elements behind
+
 # 1.5.5
 #### DropdownSelect
 * Added mixin fo-dropdown-select-vertical-padding
