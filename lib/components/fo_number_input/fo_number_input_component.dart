@@ -29,6 +29,7 @@ import '../../pipes/capitalize_pipe.dart';
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
+  final html.Element _host;
   ChangeFunction<int> _onChange;
   NgControl control;
   int value;
@@ -43,6 +44,8 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
   int tabIndexNum = 0;
 
   final String msgEnterValue = Intl.message('enter value', name: 'enter_value');
+
+  String get square => _host.attributes.containsKey('square') ? '1' : null;
 
   @Input()
   bool disabled = false;
@@ -68,8 +71,11 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
   @Input()
   String trailingText = '';
 
-  FoNumberInputComponent(@Self() @Optional() this.control,
-      @Attribute('tabindex') this.tabIndex, this._changeDetectorRef) {
+  FoNumberInputComponent(
+      @Self() @Optional() this.control,
+      @Attribute('tabindex') this.tabIndex,
+      this._changeDetectorRef,
+      this._host) {
     try {
       tabIndexNum = tabIndex == null ? null : int.parse(tabIndex);
     } on FormatException catch (e) {

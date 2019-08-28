@@ -5,6 +5,7 @@
     <fo-button noRightBorder
                fullWidth
                [attr.tabindex]="tabIndexSub"
+               [attr.square]="square"
                [disabled]="disabled || (value != null && value <= min)"
                [materialIcon]="materialIcons"
                (mousedown)="onMouseDown(-step)"
@@ -17,6 +18,7 @@
                  centerValue
                  noFocusShadow
                  [attr.tabindex]="tabIndex"
+                 [attr.square]="square"
                  [disabled]="disabled"
                  [options]="options"
                  [ngModel]="value?.toString()"
@@ -26,6 +28,7 @@
     <fo-button noLeftBorder
                fullWidth
                [attr.tabindex]="tabIndexAdd"
+               [attr.square]="square"
                [disabled]="disabled || (value != null && value >= max)"
                [materialIcon]="materialIcons"
                (mousedown)="onMouseDown(step)"
