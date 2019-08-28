@@ -1,3 +1,14 @@
+# 1.5.5
+#### DropdownSelect
+* Added mixin fo-dropdown-select-vertical-padding
+* Minor layout tweaks
+* z-index now explicitly set to 1
+* Selected value icon is now primaryColor
+* Fixed issue where dropdown list was offset by 1
+
+#### DropdownList
+  * Category dividers are now full width
+
 # 1.5.4+1
 #### NumberInput
 * Added square css directive to NumberInput

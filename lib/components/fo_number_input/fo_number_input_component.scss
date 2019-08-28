@@ -2,6 +2,7 @@
 @import "package:fo_components/components/fo_button/mixins";
 
 :host {
+  display: block;
   @include fo-text-input-vertical-padding(0.5em, 0.5em);
   @include fo-button-vertical-padding(0.5em);
   div#flexContainer {

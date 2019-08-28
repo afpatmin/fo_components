@@ -14,12 +14,22 @@
             color: $selectedValueColor;
           }
 
-          fo-icon.arrow {
+          fo-icon {
             color: $iconColor;
           }
         }
       }
     }
+  }
+}
 
+@mixin fo-dropdown-select-vertical-padding($top, $bottom) {
+  ::ng-deep fo-dropdown-select {
+    fo-label {
+      div#flexContainer {
+        padding-top: $top;
+        padding-bottom: $bottom;
+      }
+    }
   }
 }
