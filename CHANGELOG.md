@@ -3,6 +3,8 @@
 #### NumberInput
 
 * Added materialIcons input
+* Fixed issue where setting text-input-padding mixin propagated into NumberInput
+* Removed default label "value"
 
 # 1.5.2+1
 
