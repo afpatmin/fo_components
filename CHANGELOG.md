@@ -1,4 +1,4 @@
-# 1.5.5+1
+# 1.5.6
 #### DropdownList
 * Selecting a value click event no longer propagating to elements behind
 
