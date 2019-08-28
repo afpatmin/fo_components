@@ -48,7 +48,7 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
   bool disabled = false;
 
   @Input()
-  String label = 'value';
+  String label;
 
   @Input()
   int max = 9999;
