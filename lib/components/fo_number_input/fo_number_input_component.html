@@ -4,6 +4,7 @@
              noRightBorder
              [attr.tabindex]="tabIndexSub"
              [disabled]="disabled || (value != null && value <= min)"
+             [materialIcon]="materialIcons"
              (mousedown)="onMouseDown(-step)"
              (keydown)="onKeyDown($event, -step)"
              icon="remove">
@@ -22,9 +23,11 @@
              noLeftBorder
              [attr.tabindex]="tabIndexAdd"
              [disabled]="disabled || (value != null && value >= max)"
+             [materialIcon]="materialIcons"
              (mousedown)="onMouseDown(step)"
              (keydown)="onKeyDown($event, step)"
              icon="add">
   </fo-button>
-  <span *ngIf="trailingText?.isNotEmpty == true" id="trailing">{{trailingText}}</span>
+  <span *ngIf="trailingText?.isNotEmpty == true"
+        id="trailing">{{trailingText}}</span>
 </div>

@@ -60,6 +60,9 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
   int step = 1;
 
   @Input()
+  bool materialIcons = true;
+
+  @Input()
   Map<String, List<FoDropdownOption>> options;
 
   @Input()
