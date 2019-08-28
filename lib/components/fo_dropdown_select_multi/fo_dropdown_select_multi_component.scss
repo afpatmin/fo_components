@@ -1,8 +1,8 @@
-@import 'package:grid_css/constants';
+@import "package:grid_css/constants";
 
 :host {
   display: block;
-  //font-size: 1rem;
+  z-index: 2;
 
   div#selectedOptions {
     border-style: dashed;

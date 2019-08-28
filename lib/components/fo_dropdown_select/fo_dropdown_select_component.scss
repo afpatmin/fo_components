@@ -1,12 +1,12 @@
-@import 'package:fo_components/components/fo_button/mixins';
-@import 'package:fo_components/components/fo_dropdown_list/mixins';
-@import 'package:grid_css/constants';
-@import '../../mixins.scss';
+@import "package:fo_components/components/fo_button/mixins";
+@import "package:fo_components/components/fo_dropdown_list/mixins";
+@import "package:grid_css/constants";
+@import "../../mixins.scss";
 
 :host {
   display: block;
   position: relative;
-  //font-size: 1rem;
+  z-index: 2;
 
   @include fo-button-vertical-padding(0.5em);
 
@@ -36,6 +36,7 @@
 
       fo-icon.arrow {
         font-size: 1.5em;
+        margin-right: 0.4em;
       }
 
       div#selectedValue {
@@ -55,7 +56,7 @@
       }
     }
 
-    ::ng-deep fo-button>button {
+    ::ng-deep fo-button > button {
       border: 0;
     }
   }
@@ -63,9 +64,7 @@
   div#flexContainer.focus {
     @include boxShadow();
   }
-
 }
-
 
 :host[centerValue] {
   div#flexContainer {
@@ -75,7 +74,7 @@
       }
 
       div#selectedValue::before {
-        content: '';
+        content: "";
         display: inline-block;
         width: 1em;
         margin: $small;
@@ -95,7 +94,6 @@
     @include fo-button-vertical-padding(0.25em);
   }
 }
-
 
 :host[noFocusShadow] {
   div#flexContainer.focus {
