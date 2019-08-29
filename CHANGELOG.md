@@ -1,4 +1,8 @@
 # 1.5.6
+#### Carousel
+* Removed default left/right offsets on arrow buttons
+* Fixed issue where clicking a slide sometimes triggered it to step
+
 #### DropdownList
 * Selecting a value click event no longer propagating to elements behind
 
