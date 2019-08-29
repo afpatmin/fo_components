@@ -4,7 +4,7 @@
 * Fixed issue where clicking a slide sometimes triggered it to step
 
 #### DropdownList
-* Selecting a value click event no longer propagating to elements behind
+* Selecting a value click event no longer propagates to elements behind
 
 # 1.5.5
 #### DropdownSelect
