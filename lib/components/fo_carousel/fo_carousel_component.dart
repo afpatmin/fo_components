@@ -140,6 +140,8 @@ class FoCarouselComponent implements OnDestroy, OnInit {
       stepBy(1);
       disableWhileStepping();
     }
+
+    _deltaX = 0;
   }
 
   void onTouchMove(dom.TouchEvent event) {
