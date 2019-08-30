@@ -1,3 +1,7 @@
+# 1.5.6+1
+#### Other
+* Bumped grid_css to ^1.0.0
+
 # 1.5.6
 #### Carousel
 * Removed default left/right offsets on arrow buttons
