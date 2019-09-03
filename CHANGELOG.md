@@ -1,3 +1,9 @@
+# 1.5.7+1
+
+#### TextInput
+
+* Fixed broken margins on textInput from previous patch
+
 # 1.5.7
 
 #### DropdownSelect

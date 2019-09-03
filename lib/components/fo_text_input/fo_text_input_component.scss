@@ -27,7 +27,7 @@
       padding: 0;
 
       outline: none;
-      margin: 0;
+      margin: 0 0.25em;
       align-self: stretch;
       border: 0;
     }
@@ -51,7 +51,7 @@
       margin-left: 0.5em;
     }
     span.leadingText {
-      margin: 0 0.25em;
+      margin-left: 0.25em;
     }
 
     ::ng-deep fo-button > button {
