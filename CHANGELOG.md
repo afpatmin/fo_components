@@ -3,6 +3,7 @@
 #### DropdownSelect
 
 * Added dropdownMaxHeight input
+* Fixed a bunch of issues with z-index
 
 #### Dropdown
 
