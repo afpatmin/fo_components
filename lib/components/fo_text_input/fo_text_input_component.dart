@@ -68,6 +68,7 @@ class FoTextInputComponent
   @Input()
   bool showDropdownOnFocus = false;
 
+  /// Max height of options dropdown, in pixels
   @Input()
   int dropdownMaxHeight;
 
