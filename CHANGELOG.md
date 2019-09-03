@@ -7,6 +7,7 @@
 #### Dropdown
 
 * Fixed issue where height was too large by default
+* Fixed issue where left offset was broke when fixedParent left isnt 0
 
 #### TextInput
 
