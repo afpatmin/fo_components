@@ -1,3 +1,9 @@
+# 1.5.7+2
+
+#### DropdownSelect 
+
+* Removed z-index
+
 # 1.5.7+1
 
 #### TextInput
