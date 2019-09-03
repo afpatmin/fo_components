@@ -22,6 +22,7 @@
 
     input {
       @include inputStyle;
+
       line-height: 150%;
       padding: 0 0.5em;
 
@@ -42,14 +43,14 @@
     }
 
     fo-icon.clear {
-      z-index: 2;
+      //z-index: 2;
       cursor: pointer;
       margin-right: 0.5em;
       margin-left: -0.25em;
     }
 
     fo-icon.leading {
-      z-index: 2;
+      //z-index: 2;
       margin-left: 0.5em;
       margin-right: -0.25em;
     }
