@@ -1,17 +1,38 @@
+# 1.5.7
+
+#### DropdownSelect
+
+* Added dropdownMaxHeight input
+
+#### Dropdown
+
+* Fixed issue where height was too large by default
+
+#### TextInput
+
+* Added leadingText input
+
 # 1.5.6+1
+
 #### Other
+
 * Bumped grid_css to ^1.0.0
 
 # 1.5.6
+
 #### Carousel
+
 * Removed default left/right offsets on arrow buttons
 * Fixed issue where clicking a slide sometimes triggered it to step
 
 #### DropdownList
+
 * Selecting a value click event no longer propagates to elements behind
 
 # 1.5.5
+
 #### DropdownSelect
+
 * Added mixin fo-dropdown-select-vertical-padding
 * Minor layout tweaks
 * z-index now explicitly set to 1
@@ -19,14 +40,19 @@
 * Fixed issue where dropdown list was offset by 1
 
 #### DropdownList
-  * Category dividers are now full width
+
+  + Category dividers are now full width
 
 # 1.5.4+1
+
 #### NumberInput
+
 * Added square css directive to NumberInput
 
 # 1.5.4
+
 #### NumberInput
+
 * Made add/subtract buttons wider
 * Added mixin fo-number-input-button-width
 * Added mixin fo-number-input-input-width
