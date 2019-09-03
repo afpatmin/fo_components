@@ -50,6 +50,9 @@ class FoTextInputComponent
   String leadingIcon;
 
   @Input()
+  String leadingText;
+
+  @Input()
   bool clearIcon;
 
   @Input()

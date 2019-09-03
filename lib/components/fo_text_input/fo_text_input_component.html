@@ -3,9 +3,13 @@
        class="themeable"
        [class.error]="control?.valid == false && control?.pristine != true">
     <fo-icon *ngIf="leadingIcon != null"
-             class="leading"
+             class="leadingIcon"
              [icon]="leadingIcon"
              [material]="materialIcons"></fo-icon>
+    <span *ngIf="leadingText != null"
+          class="leadingText">
+      {{leadingText}}
+    </span>
     <input type="{{type}}"
            [autoFocus]="autoFocus"
            [disabled]="disabled == true"

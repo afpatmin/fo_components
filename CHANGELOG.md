@@ -13,6 +13,7 @@
 #### TextInput
 
 * Added leadingText input
+* Minor margin adjustments
 
 # 1.5.6+1
 
