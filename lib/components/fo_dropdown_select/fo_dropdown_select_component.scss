@@ -6,7 +6,6 @@
 :host {
   display: block;
   position: relative;
-  z-index: 2;
 
   @include fo-button-vertical-padding(0.5em);
 

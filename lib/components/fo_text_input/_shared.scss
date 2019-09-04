@@ -4,6 +4,7 @@
 $borderRadius: $x-small;
 
 @mixin inputStyle {
+  background-color: transparent;
   transition: color $transitionSpeed, box-shadow $transitionSpeed, -webkit-box-shadow $transitionSpeed;
   flex: auto;
   width: 100%;

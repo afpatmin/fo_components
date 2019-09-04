@@ -50,6 +50,9 @@ class FoTextInputComponent
   String leadingIcon;
 
   @Input()
+  String leadingText;
+
+  @Input()
   bool clearIcon;
 
   @Input()
@@ -68,6 +71,7 @@ class FoTextInputComponent
   @Input()
   bool showDropdownOnFocus = false;
 
+  /// Max height of options dropdown, in pixels
   @Input()
   int dropdownMaxHeight;
 

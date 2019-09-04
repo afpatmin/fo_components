@@ -16,6 +16,9 @@
         fo-icon {
           color: $iconColor;
         }
+        span.leadingText {
+          color: $borderColor;
+        }
       }
       div#flexContainer.error {
         border-color: $alertColor;

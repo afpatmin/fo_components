@@ -22,11 +22,12 @@
 
     input {
       @include inputStyle;
+
       line-height: 150%;
-      padding: 0 0.5em;
+      padding: 0;
 
       outline: none;
-      margin: 0;
+      margin: 0 0.25em;
       align-self: stretch;
       border: 0;
     }
@@ -42,16 +43,15 @@
     }
 
     fo-icon.clear {
-      z-index: 2;
       cursor: pointer;
       margin-right: 0.5em;
-      margin-left: -0.25em;
     }
 
-    fo-icon.leading {
-      z-index: 2;
+    fo-icon.leadingIcon {
       margin-left: 0.5em;
-      margin-right: -0.25em;
+    }
+    span.leadingText {
+      margin-left: 0.25em;
     }
 
     ::ng-deep fo-button > button {

@@ -42,6 +42,10 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @Input()
   bool showDropdownCategoryLabels = true;
 
+  /// Max height of the dropdown, in pixels
+  @Input()
+  int dropdownMaxHeight;
+
   /// Make sure options doesn't extend beyond the viewport
   @Input()
   bool constrainToViewPort = true;
