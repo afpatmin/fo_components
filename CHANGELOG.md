@@ -1,3 +1,7 @@
+# 1.5.8
+#### DropdownList (TextInput and DropdownSelect options)
+* Selection now responding mousedown/touchstart instead of full click
+
 # 1.5.7+6
 #### DropdownSelect
 * fo-dropdown-select-icon-size no longer affect dropdown list icons, use separate mixin for that
