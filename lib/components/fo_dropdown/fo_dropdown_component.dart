@@ -140,7 +140,7 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
         right = '${offsetHorizontal}px';
         left = null;
       } else {
-        left = '${rect.left + offsetHorizontal}px';
+        left = '${rect.left - parentRect.left + offsetHorizontal}px';
         right = null;
       }
     }

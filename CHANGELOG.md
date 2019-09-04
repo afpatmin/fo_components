@@ -1,3 +1,7 @@
+# 1.5.9
+#### Dropdown
+* Fixed issue with left positioning when parent is fixed
+
 # 1.5.8
 #### DropdownList (TextInput and DropdownSelect options)
 * Selection now responding mousedown/touchstart instead of full click
