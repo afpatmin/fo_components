@@ -33,3 +33,20 @@
     }
   }
 }
+
+@mixin fo-dropdown-select-icon-size($size) {
+  ::ng-deep fo-dropdown-select {
+    fo-label > label {
+      @include fo-dropdown-list-icon-size($size);
+      div#flexContainer {
+        div#selector {
+          div#selectedValue {
+            fo-icon {
+              font-size: $size;
+            }
+          }
+        }
+      }
+    }
+  }
+}

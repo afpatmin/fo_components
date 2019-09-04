@@ -1,3 +1,7 @@
+# 1.5.7
+#### DropdownSelect
+* Added mixin fo-dropdown-select-icon-size
+
 # 1.5.6+1
 #### Other
 * Bumped grid_css to ^1.0.0
