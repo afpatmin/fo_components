@@ -1,3 +1,7 @@
+# 1.5.7+4
+#### DropdownSelect
+* fo-dropdown-select-icon-size mixin now also affects dropdown list icons
+
 # 1.5.7+3
 
 #### DropdownSelect

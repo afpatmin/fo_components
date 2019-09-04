@@ -36,8 +36,8 @@
 
 @mixin fo-dropdown-select-icon-size($size) {
   ::ng-deep fo-dropdown-select {
+    @include fo-dropdown-list-icon-size($size);
     fo-label > label {
-      @include fo-dropdown-list-icon-size($size);
       div#flexContainer {
         div#selector {
           div#selectedValue {
