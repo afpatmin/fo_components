@@ -1,3 +1,7 @@
+# 1.5.10
+#### TextInput
+* Made input background color white
+
 # 1.5.9
 #### Dropdown
 * Fixed issue with left positioning when parent is fixed
