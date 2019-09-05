@@ -1,3 +1,7 @@
+# 1.5.11
+#### TextInput
+* Fixed issue where actionButton didn't take up full height
+
 # 1.5.10
 #### TextInput
 * Made input background color white
