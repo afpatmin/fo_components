@@ -1,30 +1,53 @@
+#1.5.12
+
+#### Button
+
+* Changed disabled text and border colors
+
+#### ImageFile
+
+* Added dense attribute to upload button
+
 # 1.5.11
+
 #### TextInput
+
 * Fixed issue where actionButton didn't take up full height
 
 # 1.5.10
+
 #### TextInput
+
 * Made input background color white
 
 # 1.5.9
+
 #### Dropdown
+
 * Fixed issue with left positioning when parent is fixed
 
 # 1.5.8
+
 #### DropdownList (TextInput and DropdownSelect options)
+
 * Selection now responding mousedown/touchstart instead of full click
 
 # 1.5.7+6
+
 #### DropdownSelect
+
 * fo-dropdown-select-icon-size no longer affect dropdown list icons, use separate mixin for that
 
 # 1.5.7+4 & 1.5.7+5
+
 #### DropdownSelect
+
 * fo-dropdown-select-icon-size mixin now also affects dropdown list icons
 
 # 1.5.7+3
 
 #### DropdownSelect
+
 * Added mixin fo-dropdown-select-icon-size
 
 # 1.5.7+2
@@ -251,7 +274,6 @@
 * Made icon container smaller (1.8em -> 1.2em)
 
 # 1.4.2+4 & 1.4.2+5
-
 
 #### NumberInput
 
