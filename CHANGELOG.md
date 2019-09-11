@@ -1,3 +1,9 @@
+# 1.6.0
+#### ImageFile
+* (BREAKING) Replaced mixin fo-image-file-border-color with fo-image-file-colors
+* Added addIcon input
+* Minor style updates
+
 # 1.5.11
 #### TextInput
 * Fixed issue where actionButton didn't take up full height
