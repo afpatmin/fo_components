@@ -47,7 +47,7 @@ $transitionSpeed: 0.3s ease;
   @include fo-dropdown-select-multi-options-background-color($primaryColor);
   @include fo-dropdown-select-multi-options-border-color($grayColorBright);
   @include fo-file-upload-border-color($grayColorBright);
-  @include fo-image-file-border-color($grayColorBright);
+  @include fo-image-file-colors($grayColorBright, $grayColorBright, $grayColor);
   @include fo-label-color($grayColor);
   @include fo-modal-colors(lighten($grayColorBright, 10%));
   @include fo-tab-panel-colors(darken($grayColor, $lightstep), $primaryColor);

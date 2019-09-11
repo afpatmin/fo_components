@@ -1,10 +1,14 @@
-@mixin fo-image-file-border-color($color) {
+@mixin fo-image-file-colors($borderColor, $addIconColor, $placeholderColor) {
   ::ng-deep fo-image-file {
     div.container {
-      border-color: $color;
+      border-color: $borderColor;
 
       p#placeholder {
-        color: $color;
+        color: $placeholderColor;
+      }
+
+      fo-icon.add {
+        color: $addIconColor;
       }
     }
   }
