@@ -8,13 +8,14 @@ import 'dart:typed_data';
 
 import 'package:angular/angular.dart';
 import 'package:fo_components/components/fo_button/fo_button_component.dart';
+import 'package:fo_components/fo_components.dart';
 import 'package:intl/intl.dart';
 
 @Component(
     selector: 'fo-image-file',
     templateUrl: 'fo_image_file_component.html',
     styleUrls: ['fo_image_file_component.css'],
-    directives: [coreDirectives, FoButtonComponent],
+    directives: [coreDirectives, FoButtonComponent, FoIconComponent],
     pipes: [],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoImageFileComponent implements OnDestroy {
@@ -32,7 +33,10 @@ class FoImageFileComponent implements OnDestroy {
   String label = 'Image';
 
   @Input()
-  bool materialIcon = true;
+  bool materialIcons = true;
+
+  @Input()
+  String addIcon = 'add_a_photo';
 
   @Input()
   String alt = '';
