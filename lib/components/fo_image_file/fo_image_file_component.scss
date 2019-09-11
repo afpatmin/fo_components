@@ -1,9 +1,9 @@
-@import 'package:grid_css/constants';
-@import '../../mixins.scss';
+@import "package:grid_css/constants";
+@import "../../mixins.scss";
 
 :host {
   div.container {
-    border-width: 2px;
+    border-width: 1px;
     border-style: dashed;
     padding: 1rem;
     text-align: center;
@@ -37,7 +37,7 @@
       text-align: center;
     }
 
-    input[type=file] {
+    input[type="file"] {
       display: none !important;
     }
 
