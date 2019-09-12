@@ -1,3 +1,7 @@
+# 1.6.3
+#### Modal
+* Changed close button left margin to 1.5em (from 0.2em)
+
 # 1.6.2
 #### DropdownList
 * Fixed issue where touch events propagated to elements underneath the list
