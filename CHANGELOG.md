@@ -1,3 +1,7 @@
+# 1.6.1+1
+#### TextInput, TextAreaInput
+* Set default border color of error output to #cdd2d9;
+
 # 1.6.1
 #### TextInput, TextAreaInput
 * Some minor changes to colors
