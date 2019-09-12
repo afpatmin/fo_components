@@ -30,7 +30,7 @@ class FoImageFileComponent implements OnDestroy {
   String source = '';
 
   @Input()
-  String label = 'Image';
+  String label = '';
 
   @Input()
   bool materialIcons = true;
