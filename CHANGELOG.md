@@ -1,3 +1,7 @@
+# 1.6.1
+#### TextInput
+* Placeholder color now grey
+
 # 1.6.0
 #### ImageFile
 * (BREAKING) Replaced mixin fo-image-file-border-color with fo-image-file-colors
