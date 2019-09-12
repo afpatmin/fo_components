@@ -1,21 +1,21 @@
-@import 'package:grid_css/constants';
-@import '../../mixins';
+@import "package:grid_css/constants";
+@import "../../mixins";
 
 :host {
-    div.container {
-        border-width: 2px;
-        border-style: dashed;        
-        padding: $small;
-        text-align: center;
-        input {
-            display: none;
-        }
-        p {
-            margin: $small 0;
-        }
-        material-icon {
-          cursor: pointer;
-          margin-left: $x-small;
-        } 
+  div.container {
+    border-width: 1px;
+    border-style: dashed;
+    padding: $small;
+    text-align: center;
+    input {
+      display: none;
     }
+    p {
+      margin: $small 0;
+    }
+    material-icon {
+      cursor: pointer;
+      margin-left: $x-small;
+    }
+  }
 }
