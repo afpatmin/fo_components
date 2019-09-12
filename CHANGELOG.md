@@ -1,3 +1,7 @@
+# 1.6.2
+#### DropdownList
+* Fixed issue where touch events propagated to elements underneath the list
+
 # 1.6.1+1
 #### TextInput, TextAreaInput
 * Set default border color of error output to #cdd2d9;
