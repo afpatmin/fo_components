@@ -40,7 +40,7 @@ class FoTextAreaInputComponent
   ChangeFunction<String> _onChange;
   NgControl control;
   final StreamController _focusController = StreamController<html.FocusEvent>();
-  html.Element _host;
+  final html.Element _host;
   html.TextAreaElement inputElement;
 
   FoTextAreaInputComponent(
