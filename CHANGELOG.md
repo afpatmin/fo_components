@@ -1,6 +1,10 @@
 # 1.6.1
-#### TextInput
-* Placeholder color now grey
+#### TextInput, TextAreaInput
+* Some minor changes to colors
+* Error output border no longer affected by color mixin
+
+#### TextAreaInput
+* Changed vertical paddding 0.5em -> 0.25em
 
 # 1.6.0
 #### ImageFile

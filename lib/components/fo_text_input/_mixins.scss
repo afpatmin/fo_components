@@ -13,6 +13,14 @@
           background-color: $backgroundColor;
         }
 
+        input::placeholder {
+          color: darken($borderColor, 10%);
+        }
+
+        input::selection {
+          background-color: $borderColor;
+        }
+
         fo-icon {
           color: $iconColor;
         }
@@ -24,10 +32,12 @@
         border-color: $alertColor;
       }
       fo-error-output {
+        /*
         border-color: $borderColor;
         div#arrow {
           border-color: $borderColor;
         }
+        */
         div#message {
           color: $alertColor;
         }
@@ -43,6 +53,14 @@
       }
       textarea.error {
         color: $alertColor;
+      }
+
+      textarea::placeholder {
+        color: darken($borderColor, 10%);
+      }
+
+      textarea::selection {
+        background-color: $borderColor;
       }
     }
   }

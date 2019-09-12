@@ -63,16 +63,6 @@ $transitionSpeed: 0.3s ease;
     }
   }
 
-  ::ng-deep input::placeholder,
-  ::ng-deep textarea::placeholder {
-    color: $grayColor;
-  }
-
-  ::ng-deep input::selection,
-  ::ng-deep textarea::selection {
-    background-color: $grayColor;
-  }
-
   ::ng-deep input:disabled,
   ::ng-deep textarea:disabled {
     background-color: lighten($grayColorBright, 10%) !important;
