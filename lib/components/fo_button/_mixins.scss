@@ -1,6 +1,5 @@
 @import "package:angular_components/material_icon/mixins";
 
-
 @mixin fo-button-vertical-padding($value) {
   ::ng-deep fo-button {
     button.themeable {
@@ -11,28 +10,27 @@
 }
 
 @mixin fo-button-colors($color, $backgroundColor, $backgroundColorDisabled) {
-
   // Default
-  ::ng-deep fo-button:not([white])>button {
+  ::ng-deep fo-button:not([white]) > button {
     background-color: $backgroundColor;
     border-color: $backgroundColor;
     color: $color;
   }
 
   // Selected (white)
-  ::ng-deep fo-button[white].selected>button:not(:disabled).themeable {
+  ::ng-deep fo-button[white].selected > button:not(:disabled).themeable {
     background-color: $backgroundColor;
     border-color: $backgroundColor;
     color: $color;
   }
 
   // Selected (not white)
-  ::ng-deep fo-button:not([white]).selected>button:not(:disabled).themeable {
+  ::ng-deep fo-button:not([white]).selected > button:not(:disabled).themeable {
     filter: brightness(120%);
   }
 
   // Hover effect (not white)
-  ::ng-deep fo-button:not([noHover]):not([white])>button:not(:disabled).themeable:hover {
+  ::ng-deep fo-button:not([noHover]):not([white]) > button:not(:disabled).themeable:hover {
     filter: brightness(120%);
   }
 
@@ -44,9 +42,9 @@
   }
 
   // Disabled
-  ::ng-deep fo-button>button.themeable:disabled {
+  ::ng-deep fo-button > button.themeable:disabled {
     background-color: $backgroundColorDisabled !important;
-    border-color: darken($backgroundColorDisabled, 10%) !important;
-    color: darken($backgroundColorDisabled, 20%) !important;
+    border-color: $backgroundColorDisabled !important;
+    color: white !important;
   }
 }
