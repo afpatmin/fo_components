@@ -2,6 +2,12 @@
 #### DropdownList
 * Fixed issue where touch events propagated to elements underneath the list
 
+#### ImageFile
+* Removed default label ('image')
+
+#### FileUpload
+* Decreased border width 2px -> 1px
+
 # 1.6.1+1
 #### TextInput, TextAreaInput
 * Set default border color of error output to #cdd2d9;
