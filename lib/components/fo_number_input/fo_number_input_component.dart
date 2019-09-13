@@ -218,5 +218,6 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
   @override
   void writeValue(int obj) {
     value = obj;
+    _changeDetectorRef.markForCheck();
   }
 }

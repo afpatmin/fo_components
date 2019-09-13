@@ -1,3 +1,7 @@
+# 1.6.4
+#### NumberInput
+* Fixed issue where view didn't updated on value changes
+
 # 1.6.3
 #### Modal
 * Changed close button left margin to 1.5em (from 0.2em)
