@@ -4,10 +4,15 @@
 :host {
   position: relative;
   display: block;
+  z-index: 99;
 
   div#fixer {
     position: fixed;
-    z-index: 99;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
     @include boxShadow();
     box-sizing: content-box;
     border-width: 1px;
