@@ -1,3 +1,7 @@
+# 1.6.5
+#### Dropdown
+* Put z-index on relative element instead of fixed - should resolve z-index issues on iOS
+
 # 1.6.4
 #### NumberInput
 * Fixed issue where view didn't updated on value changes
