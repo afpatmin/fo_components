@@ -1,3 +1,7 @@
+# 1.6.5+1
+#### Dropdown
+* Fixed issue where list could not be scrolled on touch devices
+
 # 1.6.5
 #### Dropdown
 * Put z-index on relative element instead of fixed - should resolve z-index issues on iOS
