@@ -49,7 +49,7 @@ $transitionSpeed: 0.3s ease;
   @include fo-file-upload-border-color($grayColorBright);
   @include fo-image-file-colors($grayColorBright, $grayColorBright, $grayColor);
   @include fo-label-color($grayColor);
-  @include fo-modal-colors(lighten($grayColorBright, 10%));
+  @include fo-modal-colors(lighten($grayColorBright, 10%), $alertColor);
   @include fo-tab-panel-colors(darken($grayColor, $lightstep), $primaryColor);
   @include fo-text-input-colors($grayColor, $grayColorBright, $grayColor, $alertColor);
 

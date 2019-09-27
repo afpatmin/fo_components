@@ -1,3 +1,17 @@
+# 1.6.6
+#### TextInput
+* Made disabled input look better (everything is greyed out instead of just middle part)
+
+#### DropdownSelectMulti
+* Add button now stretched properly when vertical padding mixin is used
+* Fixed issue where changes to options didn't register
+
+#### Modal
+* Improved error text design
+* ..now has a header if either header text isn't null or showCloseButton is true
+* Removed dense css attribute, use fo-modal-padding to control padding
+* Added fo-modal-width mixin
+
 # 1.6.5+1
 #### Dropdown
 * Fixed issue where list could not be scrolled on touch devices

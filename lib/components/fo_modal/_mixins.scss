@@ -1,18 +1,16 @@
-@import '../fo_button/mixins';
-
-@mixin fo-modal-colors($dividerColor) {
+@mixin fo-modal-colors($dividerColor, $alertColor) {
   ::ng-deep fo-modal {
     div#modalOverlay {
       div#modalContent {
-
         div#modalHeader,
         div#modalError,
         div#modalMain {
-          border-bottom-color: $dividerColor;
+          border-color: $dividerColor;
         }
 
         div#modalError {
-          background-color: $dividerColor;
+          background-color: lighten($dividerColor, 15%);
+          color: $alertColor;
         }
       }
     }
@@ -25,7 +23,7 @@
       div#modalContent {
         div#modalHeader,
         div#modalFooter {
-          padding: $vertical $horizontal !important; 
+          padding: $vertical $horizontal !important;
         }
         div#modalMain {
           padding-left: $horizontal !important;
@@ -34,17 +32,13 @@
       }
     }
   }
-  ::ng-deep fo-modal[dense] {
+}
+
+@mixin fo-modal-width($width) {
+  ::ng-deep fo-modal {
     div#modalOverlay {
       div#modalContent {
-        div#modalHeader,
-        div#modalFooter {
-          padding: 0.5 * $vertical 0.5 * $horizontal !important; 
-        }
-        div#modalMain {
-          padding-left: 0.5 * $horizontal !important;
-          padding-right: 0.5 * $horizontal !important;
-        }
+        width: $width;
       }
     }
   }

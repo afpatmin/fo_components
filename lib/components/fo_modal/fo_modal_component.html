@@ -3,7 +3,7 @@
   <div id="modalContent"
        [style.transform]="transform">
     <div id="modalHeader"
-         *ngIf="header != null && showCloseButton == true">
+         *ngIf="header != null || showCloseButton == true">
       <div id="modalHeaderTitle">
         <h2 *ngIf="header != null">{{header}}</h2>
       </div>
@@ -17,8 +17,7 @@
                  (trigger)="close()"></fo-button>
     </div>
     <div id="modalError"
-         class="color-alert"
-         *ngIf="error != null"> {{error}} </div>
+         [class.hidden]="error == null"> {{error}} </div>
     <div id="modalMain">
       <ng-content></ng-content>
     </div>

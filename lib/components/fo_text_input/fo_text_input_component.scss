@@ -7,10 +7,6 @@
 :host {
   display: block;
   position: relative;
-  @include fo-button-vertical-padding(0.5em);
-  fo-button {
-    margin: -0.5em 0;
-  }
 
   div#flexContainer {
     background-color: white;
@@ -22,16 +18,15 @@
     border-width: 1px;
     border-style: solid;
     overflow: hidden;
-    padding: 0.5em 0;
+
+    @include fo-button-vertical-padding(0.5em);
 
     input {
       @include inputStyle;
-
+      padding: 0.5em 0.25em;
       line-height: 150%;
-      padding: 0;
-
       outline: none;
-      margin: 0 0.25em;
+      margin: 0;
       align-self: stretch;
       border: 0;
     }

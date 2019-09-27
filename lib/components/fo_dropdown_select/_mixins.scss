@@ -1,4 +1,4 @@
-@import "package:angular_components/material_icon/mixins";
+@import "package:fo_components/components/fo_button/mixins";
 
 @mixin fo-dropdown-select-colors($selectedValueColor, $borderColor, $iconColor) {
   ::ng-deep fo-dropdown-select {
@@ -24,8 +24,11 @@
   ::ng-deep fo-dropdown-select {
     fo-label {
       div#flexContainer {
-        padding-top: $top;
-        padding-bottom: $bottom;
+        @include fo-button-vertical-padding($top);
+        div#selector {
+          padding-top: $top;
+          padding-bottom: $bottom;
+        }
       }
     }
   }

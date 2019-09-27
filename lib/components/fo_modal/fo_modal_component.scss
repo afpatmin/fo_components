@@ -61,9 +61,21 @@
       }
 
       div#modalError {
-        border-bottom-style: solid;
+        border-style: solid;
+        border-top-width: 0;
         border-bottom-width: 1px;
-        padding: 0.25em 0.5em;
+        border-left-width: 1px;
+        border-right-width: 1px;
+        padding: 0.5em;
+        font-size: 0.8em;
+        height: 100%;
+      }
+      div#modalError.hidden {
+        height: 0;
+        padding: 0;
+        border-left-width: 0;
+        border-right-width: 0;
+        border-bottom-width: 0;
       }
 
       div#modalMain {

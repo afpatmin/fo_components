@@ -15,8 +15,7 @@ import '../fo_dropdown_select/fo_dropdown_select_component.dart';
     styleUrls: ['fo_dropdown_select_multi_component.css'],
     directives: [FoDropdownSelectComponent, NgClass, NgFor, NgIf],
     pipes: [CapitalizePipe])
-class FoDropdownSelectMultiComponent<T>
-    implements OnInit, AfterChanges, OnDestroy {
+class FoDropdownSelectMultiComponent<T> implements AfterChanges, OnDestroy {
   final String msgAdd = Intl.message('add', name: 'add');
   final StreamController<List<T>> selectionChangeController =
       StreamController<List<T>>();
@@ -79,9 +78,9 @@ class FoDropdownSelectMultiComponent<T>
 
   @override
   void ngAfterChanges() {
+    _updateFilteredOptions(outputEvent: false);
     if (_selectedIdsChanged == true) {
       addedOptions = [];
-
       if (selectedIds != null) {
         for (final id in selectedIds) {
           onAdd(id, outputEvent: false);
@@ -93,11 +92,6 @@ class FoDropdownSelectMultiComponent<T>
   @override
   void ngOnDestroy() {
     selectionChangeController.close();
-  }
-
-  @override
-  void ngOnInit() {
-    _updateFilteredOptions(outputEvent: false);
   }
 
   void onAdd(Object id, {bool outputEvent = true}) {
