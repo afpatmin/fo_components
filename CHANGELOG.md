@@ -2,6 +2,9 @@
 #### TextInput, FoButton, DropdownSelect, TabPanel
 * Removed dense css directive (use mixins to control padding)
 
+#### DropdownSelect
+* Minor style updates to DropdownSelect (removed outer padding and aligned arrow icon better)
+
 # 1.6.6
 #### TextInput
 * Made disabled input look better (everything is greyed out instead of just middle part)
