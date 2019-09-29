@@ -1,6 +1,6 @@
 # 1.6.7
-#### TextInput
-* Removed dense css directive (use fo-text-input-vertical-padding to control padding)
+#### TextInput, FoButton, DropdownSelect, TabPanel
+* Removed dense css directive (use mixins to control padding)
 
 # 1.6.6
 #### TextInput

@@ -93,25 +93,6 @@
   }
 }
 
-:host[dense] {
-  div#modalOverlay {
-    div#modalContent {
-      div#modalHeader,
-      div#modalFooter {
-        padding: 0.25em;
-      }
-
-      div#modalError {
-        padding: 0.25em 0.5em;
-      }
-
-      div#modalMain {
-        padding: 0.25em 0.5em;
-      }
-    }
-  }
-}
-
 :host[fullWidth] {
   div#modalOverlay {
     div#modalContent {

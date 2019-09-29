@@ -35,7 +35,7 @@
       margin: 0;
     }
 
-    ::ng-deep fo-icon>span {
+    ::ng-deep fo-icon > span {
       line-height: 150%;
     }
 
@@ -77,12 +77,6 @@
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     border-right-width: 0;
-  }
-}
-
-:host[dense] {
-  button {
-    padding: 0.25em 0.5em;
   }
 }
 

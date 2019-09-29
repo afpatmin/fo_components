@@ -1,5 +1,5 @@
-@import '../../mixins.scss';
-@import 'package:grid_css/constants';
+@import "../../mixins.scss";
+@import "package:grid_css/constants";
 
 :host {
   display: flex;
@@ -33,14 +33,6 @@
       -webkit-transition: color, background-color 300ms ease-in;
       -moz-transition: color, background-color 300ms ease-in;
       -o-transition: color, background-color 300ms ease-in;
-    }
-  }
-}
-
-:host[dense] {
-  div#tabStrip {
-    p {
-      line-height: 100%;
     }
   }
 }

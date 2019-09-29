@@ -82,18 +82,6 @@
   }
 }
 
-:host[dense] {
-  div#flexContainer {
-    div#selector {
-      div#selectedValue {
-        padding: 0.25em 0.5em;
-      }
-    }
-
-    @include fo-button-vertical-padding(0.25em);
-  }
-}
-
 :host[noFocusShadow] {
   div#flexContainer.focus {
     box-shadow: none;

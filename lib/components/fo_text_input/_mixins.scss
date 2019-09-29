@@ -63,10 +63,10 @@
 @mixin fo-text-input-vertical-padding($top, $bottom) {
   ::ng-deep fo-text-input {
     fo-label > label {
-      div#flexContainer.themeable {
+      div#flexContainer {
         input {
-          padding-top: $top;
-          padding-bottom: $bottom;
+          padding-top: $top !important;
+          padding-bottom: $bottom !important;
         }
         @include fo-button-vertical-padding($top);
       }
