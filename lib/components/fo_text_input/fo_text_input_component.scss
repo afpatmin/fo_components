@@ -100,15 +100,6 @@
   }
 }
 
-:host[dense] {
-  fo-label {
-    div#flexContainer {
-      padding: 0.25em 0;
-      @include fo-button-vertical-padding(0.25em);
-    }
-  }
-}
-
 :host[square] {
   fo-label {
     div#flexContainer {

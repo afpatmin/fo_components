@@ -1,3 +1,7 @@
+# 1.6.7
+#### TextInput
+* Removed dense css directive (use fo-text-input-vertical-padding to control padding)
+
 # 1.6.6
 #### TextInput
 * Made disabled input look better (everything is greyed out instead of just middle part)
