@@ -26,8 +26,10 @@
       div#flexContainer {
         @include fo-button-vertical-padding($top);
         div#selector {
-          padding-top: $top;
-          padding-bottom: $bottom;
+          div#selectedValue {
+            padding-top: $top !important;
+            padding-bottom: $bottom !important;
+          }
         }
       }
     }
