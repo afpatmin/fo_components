@@ -34,6 +34,7 @@
       }
 
       div#modalHeader {
+        @include fo-button-vertical-padding(0.2em);
         display: flex;
         border-bottom-style: solid;
         border-bottom-width: 1px;

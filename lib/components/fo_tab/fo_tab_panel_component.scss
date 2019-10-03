@@ -27,7 +27,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       cursor: pointer;
-      padding: $medium $small;
+      padding: 1em 0.5em;
       @include boxShadow();
       transition: color, background-color 300ms ease-in;
       -webkit-transition: color, background-color 300ms ease-in;

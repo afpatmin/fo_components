@@ -8,3 +8,13 @@
     }
   }
 }
+
+@mixin fo-tab-panel-vertical-padding($top, $bottom) {
+  ::ng-deep fo-tab-panel {
+    div#tabStrip {
+      div.tabButton {
+        padding: $bottom !important $bottom !important;
+      }
+    }
+  }
+}

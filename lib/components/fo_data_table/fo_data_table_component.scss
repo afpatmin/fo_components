@@ -1,10 +1,13 @@
-@import 'package:grid_css/grid';
-@import '../fo_button/mixins';
-@import '../fo_text_input/mixins';
-@import '../fo_dropdown_select/mixins';
-@import '../../mixins.scss';
+@import "package:grid_css/grid";
+@import "../fo_button/mixins";
+@import "../fo_text_input/mixins";
+@import "../fo_dropdown_select/mixins";
+@import "../../mixins.scss";
 
 :host {
+  @include fo-text-input-vertical-padding(0.2em, 0.2em);
+  @include fo-dropdown-select-vertical-padding(0.2em, 0.2em);
+  @include fo-button-vertical-padding(0.2em);
   display: block;
   width: 100%;
   color: #555;

@@ -1,3 +1,16 @@
+# 1.6.8
+#### Modal
+* Adjusted close button vertical padding
+
+#### DataTable
+* Adjusted buttons, text input and dropdown select vertical paddings
+
+#### TabPanel
+* Added mixin tab-panel-vertical-padding
+
+#### TextInput
+* Fixed issue where dropdown options didn't always get properly selected
+
 # 1.6.7
 #### TextInput, FoButton, DropdownSelect, TabPanel
 * Removed dense css directive (use mixins to control padding)
