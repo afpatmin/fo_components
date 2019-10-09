@@ -24,7 +24,7 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
 
   /// Horizontal offset in pixels
   @Input()
-  int offsetHorizontal = 0;
+  int offsetHorizontal;
 
   /// Target horizontal position in pixels. If set, a marker is shown at the top of the dropdown
   @Input()
@@ -33,10 +33,6 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
   /// When this is set to true, the dropdown will stay in the viewport on the vertical axis
   @Input()
   bool constrainToViewPort = true;
-
-  /// When this is set to true, the dropdown will anchor to the right of it's parent element instead of left
-  @Input()
-  bool anchorRight = false;
 
   /// Overrides constrainToViewPort
   @Input()
@@ -55,9 +51,8 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
       maxHeight == null ? _elementMaxHeight : '${maxHeight}px';
 
   String _elementMaxHeight = '100px';
-  String top;
-  String left;
-  String right;
+  String get top => offsetTop == null ? null : '${offsetTop}px';
+  String get left => offsetHorizontal == null ? null : '${offsetHorizontal}px';
 
   FoDropdownComponent(this.host, this._changeDetectorRef) {
     Future.delayed(const Duration(milliseconds: 100)).then((_) {
@@ -77,85 +72,29 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
   @override
   void ngAfterChanges() {
     if (visible == true) {
-      _evaluatePosition(null);
+      _evaluateMaxHeight(null);
     }
   }
 
-  void _evaluatePosition(_) {
-    final rect = host.getBoundingClientRect();
-
-    html.Element _findFixedParent(html.Element e) {
-      if (e == null) {
-        return null;
-      } else if (e.style.position == 'fixed' ||
-          e.style.transform.contains('translate')) {
-        return e;
-      }
-      return _findFixedParent(e.parent);
-    }
-
-    final _fixedParent = _findFixedParent(host);
-
-    if (_fixedParent == null) {
-      var newTop = rect.top;
-      if (offsetTop != null) {
-        newTop += offsetTop;
-      }
-      if (constrainToViewPort == true) {
-        newTop = max(0, newTop);
-        _elementMaxHeight =
-            '${html.document.documentElement.clientHeight - newTop - 10}px';
-      } else {
-        _elementMaxHeight =
-            '${html.document.body.clientHeight - (newTop + html.window.scrollY)}px';
-      }
-      top = '${newTop}px';
-
-      if (anchorRight == true) {
-        right =
-            '${html.document.documentElement.clientWidth - rect.right + offsetHorizontal}px';
-        left = null;
-      } else {
-        left = '${rect.left + offsetHorizontal}px';
-        right = null;
-      }
+  void _evaluateMaxHeight(_) {
+    final parentRect = host.parent.getBoundingClientRect();
+    var newY = parentRect.bottom;
+    if (constrainToViewPort == true) {
+      newY = max(0, newY);
+      _elementMaxHeight =
+          '${html.document.documentElement.clientHeight - newY - 10}px';
     } else {
-      final parentRect = _fixedParent.getBoundingClientRect();
-      if (offsetTop == null) {
-        top = null;
-        _elementMaxHeight =
-            '${html.document.documentElement.clientHeight - rect.bottom}px';
-      } else if (constrainToViewPort == true) {
-        final offsetTopClamped = max(0, offsetTop);
-        top = '${offsetTopClamped + parentRect.top}px';
-        _elementMaxHeight =
-            '${html.document.documentElement.clientHeight - rect.bottom - offsetTopClamped}px';
-      } else if (constrainToViewPort != true) {
-        top = '${offsetTop + parentRect.top}px';
-        _elementMaxHeight =
-            '${html.document.body.clientHeight - rect.bottom - offsetTop}px';
-      }
-
-      if (anchorRight == true) {
-        right = '${offsetHorizontal}px';
-        left = null;
-      } else {
-        left = '${rect.left - parentRect.left + offsetHorizontal}px';
-        right = null;
-      }
+      _elementMaxHeight = '${html.document.body.clientHeight - newY}px';
     }
-
-    offsetHorizontal ??= 0;
-
     _changeDetectorRef.markForCheck();
   }
 
   @override
   void ngAfterViewInit() {
-    _evaluatePosition(null);
+    _evaluateMaxHeight(null);
 
-    _documentScrollSub = html.document.onScroll.listen(_evaluatePosition);
-    _windowResizeSub = html.window.onResize.listen(_evaluatePosition);
+    _documentScrollSub = html.document.onScroll.listen(_evaluateMaxHeight);
+    _windowResizeSub = html.window.onResize.listen(_evaluateMaxHeight);
   }
 
   @override

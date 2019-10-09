@@ -1,7 +1,6 @@
 <div id="fixer"
      [style.top]="top"
      [style.left]="left"
-     [style.right]="right"
      (click)="$event.stopPropagation()"
      *ngIf="visible">
   <div *ngIf="targetPosition != null"
