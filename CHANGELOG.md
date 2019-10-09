@@ -1,3 +1,8 @@
+# 1.7.0
+#### Dropdown
+* Breaking: Removed input "anchorRight" from Dropdown
+* Improved dropdown (simplified logic by using absolute instead of fixed position)
+
 # 1.6.8
 #### Modal
 * Adjusted close button vertical padding
