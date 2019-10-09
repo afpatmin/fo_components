@@ -125,9 +125,15 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
     } else {
       _filteredOptions = {};
       for (final category in options.keys) {
+        final v = value.toLowerCase();
         _filteredOptions[category] = options[category]
             .where((option) =>
-                option.renderLabel.toLowerCase().contains(value.toLowerCase()))
+                option.renderLabel.toLowerCase().contains(v) ||
+                (option.renderTags != null &&
+                    option.renderTags
+                        .where((tag) =>
+                            tag != null && tag.toLowerCase().contains(v))
+                        .isNotEmpty))
             .toList(growable: false);
         if (_filteredOptions[category].isEmpty) {
           _filteredOptions.remove(category);

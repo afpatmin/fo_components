@@ -5,6 +5,7 @@ class FoDropdownOption implements FoDropdownOptionRenderable {
   String secondaryLabel;
   String info;
   String image;
+  List<String> tags;
 
   @override
   String get renderIcon => icon;
@@ -23,6 +24,9 @@ class FoDropdownOption implements FoDropdownOptionRenderable {
 
   @override
   String get renderImage => image;
+
+  @override
+  List<String> get renderTags => tags;
 }
 
 /// Objects implementing this class can be rendered by a DropdownList
@@ -33,4 +37,7 @@ abstract class FoDropdownOptionRenderable {
   String get renderLabel;
   String get renderSecondaryLabel;
   String get renderInfo;
+
+  /// Use tags to include hidden filter keywords
+  List<String> get renderTags;
 }

@@ -1,4 +1,7 @@
 # 1.7.0
+#### DropdownOptionRenderable
+* Breaking: Added required field 'renderTags'. Use tags to filter options on other values than just the renderLabel
+
 #### Dropdown
 * Breaking: Removed input "anchorRight" from Dropdown
 * Improved dropdown (simplified logic by using absolute instead of fixed position)
