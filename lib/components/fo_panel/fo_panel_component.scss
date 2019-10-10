@@ -1,6 +1,6 @@
-@import 'package:fo_components/components/fo_button/mixins';
-@import 'package:grid_css/constants';
-@import '../../mixins';
+@import "package:fo_components/components/fo_button/mixins";
+@import "package:grid_css/constants";
+@import "../../mixins";
 
 :host {
   div#foPanel {
@@ -11,9 +11,10 @@
     background-color: white;
 
     div#panelHeader {
+      @include fo-button-vertical-padding(0.2rem);
       fo-button {
         font-size: 0.9rem;
-      }      
+      }
       display: flex;
       align-items: center;
 

@@ -1,3 +1,7 @@
+# 1.7.1
+#### Panel
+* Made close button prettier
+
 # 1.7.0
 #### DropdownOptionRenderable
 * Breaking: Added required field 'renderTags'. Use tags to filter options on other values than just the renderLabel
