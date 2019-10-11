@@ -32,6 +32,9 @@ class FoTextAreaInputComponent
   bool disabled = false;
 
   @Input()
+  bool canResize = false;
+
+  @Input()
   int rows = 5;
 
   final ChangeDetectorRef _changeDetectorRef;

@@ -2,7 +2,8 @@
   <textarea [disabled]="disabled"
             [placeholder]="placeholder"
             [class.error]="control?.valid == false && control?.pristine != true"
-            noresize
+            [class.noResize]="canResize != true"
+            [attr.noresize]="canResize != true"
             (focus)="hasFocus = true"
             (blur)="hasFocus = false"
             [rows]="rows"

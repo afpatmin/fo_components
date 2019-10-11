@@ -14,11 +14,14 @@
     @include inputStyle;
     padding: 0.5em 0.25em;
     background-color: white;
-    resize: none;
     border-style: solid;
     border-radius: $borderRadius;
     border-width: 1px;
     font-family: inherit;
+    resize: vertical;
+  }
+  textarea.noResize {
+    resize: none;
   }
 
   textarea,
