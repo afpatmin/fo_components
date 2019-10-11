@@ -1,3 +1,13 @@
+# 1.7.2
+#### TextAreaInput
+* Added input 'canResize'
+
+#### DropdownSelect
+* Fix issue where selected value didn't get updated on options changes
+
+#### Rating
+* Made MaterialIcons into FoIcons
+
 # 1.7.1
 #### Panel
 * Made close button prettier
