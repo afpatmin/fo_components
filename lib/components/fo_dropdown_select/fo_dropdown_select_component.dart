@@ -56,6 +56,7 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   Map<String, List<FoDropdownOptionRenderable>> _options;
 
   bool _optionsChanged;
+  Object _selectedId;
 
   final ChangeDetectorRef _changeDetectorRef;
 
@@ -91,11 +92,12 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
     _optionsChanged = true;
   }
 
-  Object get selectedId => selectedOption?.renderId;
+  Object get selectedId => _selectedId;
 
   @Input('selectedId')
   set selectedId(Object id) {
     selectedOption = null;
+    _selectedId = id;
 
     if (options != null) {
       for (final category in options.keys) {
@@ -122,14 +124,14 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @override
   void ngAfterChanges() {
     if (_optionsChanged == true) {
-      // Make sure selectedOption is still in options
-      if (selectedOption != null) {
-        for (final category in options.keys) {
-          if (options[category].contains(selectedOption)) {
-            return;
-          }
+      // Update selected option
+      for (final category in options.keys) {
+        selectedOption = options[category].firstWhere(
+            (option) => option?.renderId == _selectedId,
+            orElse: () => null);
+        if (selectedOption != null) {
+          return;
         }
-        selectedOption = null;
       }
     }
   }
@@ -164,6 +166,7 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   void onSelect(FoDropdownOptionRenderable event) {
     dropdownVisible = false;
     selectedOption = event;
+    _selectedId = event.renderId;
     _selectedIdController.add(event.renderId);
   }
 }
