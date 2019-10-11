@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_icon/material_icon.dart';
+import 'package:fo_components/components/fo_icon/fo_icon_component.dart';
 
 import '../fo_label/fo_label_component.dart';
 
@@ -10,7 +10,7 @@ import '../fo_label/fo_label_component.dart';
   selector: 'fo-rating',
   templateUrl: 'fo_rating_component.html',
   styleUrls: ['fo_rating_component.css'],
-  directives: [FoLabelComponent, MaterialIconComponent, NgClass, NgFor],
+  directives: [FoLabelComponent, FoIconComponent, NgClass, NgFor],
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class FoRatingComponent implements AfterChanges, OnDestroy {

@@ -1,13 +1,15 @@
 <fo-label [value]="label">
   <div id="ratingContainer"
        [class.disabled]="disabled">
-    <material-icon *ngFor="let option of filled"
-                   class="color-primary"
-                   icon="star"
-                   (click)="onRatingClick(option)"></material-icon>
-    <material-icon *ngFor="let option of unfilled"
-                   icon="star_border"
-                   class="color-primary"
-                   (click)="onRatingClick(option)"></material-icon>
+    <fo-icon *ngFor="let option of filled"
+             class="color-primary"
+             icon="star"
+             [material]="true"
+             (click)="onRatingClick(option)"></fo-icon>
+    <fo-icon *ngFor="let option of unfilled"
+             icon="star_border"
+             class="color-primary"
+             [material]="true"
+             (click)="onRatingClick(option)"></fo-icon>
   </div>
 </fo-label>
