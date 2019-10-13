@@ -1,4 +1,8 @@
-# 1.7.3
+# 1.7.2+2
+#### TextAreaInput
+* TextArea with error now has alertColor border
+
+# 1.7.2+1
 #### TabPanel
 * Fixed broken vertical-padding mixin
 
