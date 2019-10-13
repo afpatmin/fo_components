@@ -1,3 +1,7 @@
+# 1.7.3
+#### TabPanel
+* Fixed broken vertical-padding mixin
+
 # 1.7.2
 #### TextAreaInput
 * Added input 'canResize'

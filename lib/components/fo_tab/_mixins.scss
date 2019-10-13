@@ -13,7 +13,8 @@
   ::ng-deep fo-tab-panel {
     div#tabStrip {
       div.tabButton {
-        padding: $bottom !important $bottom !important;
+        padding-top: $top !important;
+        padding-bottom: $bottom !important;
       }
     }
   }
