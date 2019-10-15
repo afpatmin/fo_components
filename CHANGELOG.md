@@ -1,3 +1,7 @@
+# 1.7.2+3
+#### DataTable
+* Fixed dropdown select overflow issue
+
 # 1.7.2+2
 #### TextAreaInput
 * TextArea with error now has alertColor border

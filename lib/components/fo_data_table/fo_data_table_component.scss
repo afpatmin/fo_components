@@ -12,6 +12,12 @@
   width: 100%;
   color: #555;
 
+  div.row {
+    div.col.overflow {
+      overflow: visible;
+    }
+  }
+
   fo-text-input {
     font-size: 0.8rem;
   }
