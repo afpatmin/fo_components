@@ -29,7 +29,7 @@ class FoCarouselComponent implements OnDestroy, OnInit {
   final StreamController<int> _onStepController = StreamController();
   Timer timer;
   final ChangeDetectorRef _changeDetectorRef;
-  final int _verticalThreshold;
+  final int _verticalThreshold = 40;
   int prevX;
   int _deltaX = 0;
   Timer _scrollTimer;
