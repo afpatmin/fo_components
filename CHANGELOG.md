@@ -1,3 +1,7 @@
+# 1.7.3
+#### Carousel
+* Added a small threshold (40px) to horizontal dragging on mobile so that a user can scroll vertically without triggering vertical slide
+
 # 1.7.2+2
 #### TextAreaInput
 * TextArea with error now has alertColor border
