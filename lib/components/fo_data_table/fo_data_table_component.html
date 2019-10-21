@@ -175,7 +175,7 @@
 <div class="row expand"
      *ngIf="batchOperations != null && batchOperations.isNotEmpty && batchOperations.values.first.isNotEmpty && showCheckboxes == true">
   <div class="l8 m6 s0 col"></div>
-  <div class="l4 m6 col">
+  <div class="l4 m6 col overflow">
     <div class="batch-operations-container box-shadow"
          [class.expanded]="selectedRows.isNotEmpty">
       <fo-dropdown-select [label]="msgWithSeleced"

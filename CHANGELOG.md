@@ -1,3 +1,7 @@
+# 1.7.3+1
+#### DataTable
+* Fixed issues with batchOperations dropdown
+
 # 1.7.3
 #### Carousel
 * Added a small threshold (40px) to horizontal dragging on mobile so that a user can scroll vertically without triggering vertical slide
