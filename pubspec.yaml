@@ -2,7 +2,11 @@ name: fo_components
 description: A collection of Angular components for both common and less common use cases.
 author: Patrick Minogue <patrick.minogue@gmail.com>
 homepage: https://github.com/afpatmin/fo_components
+<<<<<<< HEAD
 version: 1.7.2+3
+=======
+version: 1.7.3
+>>>>>>> 479a4882966141818a83e0c71321c0ebfe47c505
 environment:
   sdk: '>=2.2.0 <3.0.0'
 

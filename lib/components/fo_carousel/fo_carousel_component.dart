@@ -29,6 +29,7 @@ class FoCarouselComponent implements OnDestroy, OnInit {
   final StreamController<int> _onStepController = StreamController();
   Timer timer;
   final ChangeDetectorRef _changeDetectorRef;
+  final int _verticalThreshold = 40;
   int prevX;
   int _deltaX = 0;
   Timer _scrollTimer;
@@ -133,10 +134,10 @@ class FoCarouselComponent implements OnDestroy, OnInit {
       });
     }
 
-    if (_deltaX < -10) {
+    if (_deltaX < -_verticalThreshold) {
       stepBy(-1);
       disableWhileStepping();
-    } else if (_deltaX > 10) {
+    } else if (_deltaX > _verticalThreshold) {
       stepBy(1);
       disableWhileStepping();
     }
@@ -152,7 +153,9 @@ class FoCarouselComponent implements OnDestroy, OnInit {
     final x = event.touches.first.screen.x;
     prevX ??= x;
     _deltaX = prevX - x;
-    dragOffset = math.max(-0.2, math.min(0.2, _deltaX.toDouble()));
+    if (_deltaX > _verticalThreshold || _deltaX < -_verticalThreshold) {
+      dragOffset = math.max(-0.2, math.min(0.2, _deltaX.toDouble()));
+    }
   }
 
   void stepBy(int steps) {
