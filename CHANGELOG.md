@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-# 1.7.2+3
-#### DataTable
-* Fixed dropdown select overflow issue
-=======
 # 1.7.3
 #### Carousel
 * Added a small threshold (40px) to horizontal dragging on mobile so that a user can scroll vertically without triggering vertical slide
->>>>>>> 479a4882966141818a83e0c71321c0ebfe47c505
 
 # 1.7.2+2
 #### TextAreaInput
