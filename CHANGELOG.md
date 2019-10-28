@@ -1,3 +1,7 @@
+# 1.7.5
+#### Quiz
+* Improved flow and design
+
 # 1.7.4
 #### TextInput
 * ActionButton can now have icon or label
