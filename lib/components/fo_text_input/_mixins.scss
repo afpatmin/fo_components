@@ -27,6 +27,11 @@
         span.leadingText {
           color: $borderColor;
         }
+        fo-button#actionButton {
+          fo-icon {
+            color: white;
+          }
+        }
       }
       div#flexContainer.error {
         border-color: $alertColor;

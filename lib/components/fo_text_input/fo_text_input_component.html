@@ -24,8 +24,11 @@
              icon="close"
              [material]="materialIcons"
              (click)="onClear($event)"></fo-icon>
-    <fo-button *ngIf="actionButtonLabel != null"
+    <fo-button id="actionButton"
+               *ngIf="actionButtonLabel != null || actionButtonIcon != null"
                [label]="actionButtonLabel"
+               [icon]="actionButtonIcon"
+               [materialIcon]="materialIcons"
                square
                [disabled]="disabled || control?.valid == false || value?.isEmpty != false"
                (trigger)="actionButtonController?.add($event)"></fo-button>

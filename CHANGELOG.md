@@ -1,3 +1,7 @@
+# 1.7.4
+#### TextInput
+* ActionButton can now have icon or label
+
 # 1.7.3+1
 #### DataTable
 * Fixed issues with batchOperations dropdown

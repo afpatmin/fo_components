@@ -41,6 +41,9 @@ class FoTextInputComponent
   String actionButtonLabel;
 
   @Input()
+  String actionButtonIcon;
+
+  @Input()
   bool autoFocus = false;
 
   @Input()
