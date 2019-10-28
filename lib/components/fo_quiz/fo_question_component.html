@@ -12,21 +12,38 @@
                  [model]="option"
                  [disabled]="disabled"
                  [buttonColor]="buttonColor"
+                 [buttonColorActive]="buttonColorActive"
                  (trigger)="onOptionTrigger($event)"></fo-option>
     </div>
   </div>
 </div>
 <fo-quiz *ngIf="currentChildQuiz != null"
          [disabled]="disabled"
+         [buttonColor]="buttonColor"
+         [buttonColorActive]="buttonColorActive"
          [model]="currentChildQuiz"
          (done)="onChildQuizDone($event)">
 </fo-quiz>
-<div id="nextButtonContainer"
-     *ngIf="model.multiSelect == true && currentChildQuiz == null">
-  <fo-button white
-             dense
-             icon="keyboard_arrow_down"
-             [disabled]="selectedOptions.isEmpty"
-             (trigger)="onNextTrigger()">
-  </fo-button>
+<div id="stepButtons"
+     *ngIf="currentChildQuiz == null">
+  <div id="left">
+    <fo-button *ngIf="prevButtonLabel != null"
+               white
+               square
+               fullWidth
+               [label]="prevButtonLabel | capitalize"
+               [themeBackgroundColor]="buttonColor"
+               (trigger)="onPrevTrigger()">
+    </fo-button>
+  </div>
+  <div id="right">
+    <fo-button white
+               square
+               fullWidth
+               [label]="nextButtonLabel | capitalize"
+               [themeBackgroundColor]="buttonColorActive"
+               [disabled]="selectedOptions.isEmpty"
+               (trigger)="onNextTrigger()">
+    </fo-button>
+  </div>
 </div>

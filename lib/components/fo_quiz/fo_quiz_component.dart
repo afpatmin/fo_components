@@ -4,13 +4,13 @@ import 'package:angular/angular.dart';
 
 import '../../models/fo_quiz_model.dart';
 import 'fo_question_component.dart';
+import 'package:intl/intl.dart';
 
 @Component(
     selector: 'fo-quiz',
     templateUrl: 'fo_quiz_component.html',
     styleUrls: ['fo_quiz_component.css'],
-    directives: [FoQuestionComponent, NgFor],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    directives: [FoQuestionComponent, NgFor])
 class FoQuizComponent implements OnInit, OnDestroy {
   FoQuestionModel activeQuestion;
 
@@ -22,9 +22,11 @@ class FoQuizComponent implements OnInit, OnDestroy {
   @Input()
   bool disabled = false;
 
-  /// Set background color for buttons dynamically, overrides any color set by mixins and attributes.
   @Input()
-  String buttonColor = '#666';
+  String buttonColor = '#aaa';
+
+  @Input()
+  String buttonColorActive = '#888';
 
   @Output('done')
   Stream<FoQuizDoneEvent> get onDone => _doneController.stream;
@@ -39,6 +41,14 @@ class FoQuizComponent implements OnInit, OnDestroy {
     activeQuestion = model.questions.first;
   }
 
+  void onQuestionPrev(FoQuestionModel question) {
+    final index = model.questions.indexOf(question);
+    print(index);
+    if (index > 0) {
+      activeQuestion = model.questions[index - 1];
+    }
+  }
+
   void onQuestionDone(FoQuestionModel question) {
     final index = model.questions.indexOf(question);
 
@@ -49,6 +59,15 @@ class FoQuizComponent implements OnInit, OnDestroy {
       activeQuestion = model.questions[index + 1];
     }
   }
+
+  String get prevButtonLabel =>
+      activeQuestion == null || activeQuestion == model.questions.first
+          ? null
+          : Intl.message('previous', name: 'quiz_previous');
+
+  String get nextButtonLabel => activeQuestion == model.questions.last
+      ? Intl.message('send', name: 'quiz_send')
+      : Intl.message('next', name: 'quiz_next');
 
   int _calcMaxPoints(FoQuizModel quiz) {
     if (quiz == null) return 0;

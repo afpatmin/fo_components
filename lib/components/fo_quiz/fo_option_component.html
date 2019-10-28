@@ -1,6 +1,8 @@
-<fo-button [label]="model.label"
-           [themeBackgroundColor]="buttonColor"
-           [class.selected]="model.selected"
+<fo-button fullWidth
+           square
+           noHover
+           [label]="model.label"
+           [themeBackgroundColor]="currentButtonColor"
            (trigger)="onSelect()"
            [disabled]="disabled">
 </fo-button>

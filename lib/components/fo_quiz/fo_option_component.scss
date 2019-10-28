@@ -1,13 +1,14 @@
-@import 'package:grid_css/constants';
+@import "package:grid_css/constants";
 
 :host {
-  fo-button {
-    margin: $x-small;
+  display: block;
+  margin: 8px 0;
+  ::ng-deep fo-button {
+    button {
+      div#center {
+        height: 30px;
+        white-space: normal !important;
+      }
+    }
   }
-
-  fo-button.selected {
-    filter: brightness(130%);
-    -webkit-filter: brightness(130%);    
-  }
-  
 }
