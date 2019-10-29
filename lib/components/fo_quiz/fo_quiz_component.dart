@@ -60,14 +60,17 @@ class FoQuizComponent implements OnInit, OnDestroy {
     }
   }
 
+  final String quiz_previous = Intl.message('previous', name: 'quiz_previous');
+  final String quiz_send = Intl.message('send', name: 'quiz_send');
+  final String quiz_next = Intl.message('next', name: 'quiz_next');
+
   String get prevButtonLabel =>
       activeQuestion == null || activeQuestion == model.questions.first
           ? null
-          : Intl.message('previous', name: 'quiz_previous');
+          : quiz_previous;
 
-  String get nextButtonLabel => activeQuestion == model.questions.last
-      ? Intl.message('send', name: 'quiz_send')
-      : Intl.message('next', name: 'quiz_next');
+  String get nextButtonLabel =>
+      activeQuestion == model.questions.last ? quiz_send : quiz_next;
 
   int _calcMaxPoints(FoQuizModel quiz) {
     if (quiz == null) return 0;
