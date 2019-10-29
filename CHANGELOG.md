@@ -1,3 +1,7 @@
+# 1.7.5+1
+#### Quiz
+* Updated Intl messages so that they can be extracted properly
+
 # 1.7.5
 #### Quiz
 * Improved flow and design

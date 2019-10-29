@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:angular/angular.dart';
+import 'package:intl/intl.dart';
 
 import '../../models/fo_quiz_model.dart';
 import 'fo_question_component.dart';
-import 'package:intl/intl.dart';
 
 @Component(
     selector: 'fo-quiz',
@@ -28,9 +28,22 @@ class FoQuizComponent implements OnInit, OnDestroy {
   @Input()
   String buttonColorActive = '#888';
 
+  final String quiz_previous = Intl.message('previous', name: 'quiz_previous');
+
+  final String quiz_send = Intl.message('send', name: 'quiz_send');
+
+  final String quiz_next = Intl.message('next', name: 'quiz_next');
+
+  String get nextButtonLabel =>
+      activeQuestion == model.questions.last ? quiz_send : quiz_next;
+
   @Output('done')
   Stream<FoQuizDoneEvent> get onDone => _doneController.stream;
 
+  String get prevButtonLabel =>
+      activeQuestion == null || activeQuestion == model.questions.first
+          ? null
+          : quiz_previous;
   @override
   void ngOnDestroy() {
     _doneController.close();
@@ -39,14 +52,6 @@ class FoQuizComponent implements OnInit, OnDestroy {
   @override
   void ngOnInit() {
     activeQuestion = model.questions.first;
-  }
-
-  void onQuestionPrev(FoQuestionModel question) {
-    final index = model.questions.indexOf(question);
-    print(index);
-    if (index > 0) {
-      activeQuestion = model.questions[index - 1];
-    }
   }
 
   void onQuestionDone(FoQuestionModel question) {
@@ -60,17 +65,13 @@ class FoQuizComponent implements OnInit, OnDestroy {
     }
   }
 
-  final String quiz_previous = Intl.message('previous', name: 'quiz_previous');
-  final String quiz_send = Intl.message('send', name: 'quiz_send');
-  final String quiz_next = Intl.message('next', name: 'quiz_next');
-
-  String get prevButtonLabel =>
-      activeQuestion == null || activeQuestion == model.questions.first
-          ? null
-          : quiz_previous;
-
-  String get nextButtonLabel =>
-      activeQuestion == model.questions.last ? quiz_send : quiz_next;
+  void onQuestionPrev(FoQuestionModel question) {
+    final index = model.questions.indexOf(question);
+    print(index);
+    if (index > 0) {
+      activeQuestion = model.questions[index - 1];
+    }
+  }
 
   int _calcMaxPoints(FoQuizModel quiz) {
     if (quiz == null) return 0;
