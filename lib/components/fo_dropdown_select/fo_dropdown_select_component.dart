@@ -153,7 +153,7 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
                 ?.where((option) => option?.isNotEmpty == true)
                 ?.isNotEmpty ==
             true) {
-      Future.delayed(const Duration(milliseconds: 100)).then((_) {
+      Future.delayed(Duration(milliseconds: 100)).then((_) {
         dropdownVisible = !dropdownVisible;
         _changeDetectorRef.markForCheck();
       });

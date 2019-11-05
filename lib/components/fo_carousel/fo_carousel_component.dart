@@ -127,7 +127,7 @@ class FoCarouselComponent implements OnDestroy, OnInit {
 
     void disableWhileStepping() {
       disabled = true;
-      _scrollTimer = Timer(const Duration(milliseconds: 200), () {
+      _scrollTimer = Timer(Duration(milliseconds: 200), () {
         disabled = false;
         _scrollTimer = null;
         prevX = null;
@@ -187,10 +187,9 @@ class FoCarouselComponent implements OnDestroy, OnInit {
   }
 
   /// Don't animate slides for a specified duration (200ms by default)
-  void _disableSlideAnimation(
-      {duration = const Duration(milliseconds: 200)}) async {
+  void _disableSlideAnimation() async {
     _animateSlides = false;
-    await Future.delayed(duration);
+    await Future.delayed(Duration(milliseconds: 200));
     _animateSlides = _animateSlidesSetting;
     _changeDetectorRef.markForCheck();
   }

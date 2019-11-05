@@ -61,7 +61,7 @@ class BatchOperationEvent {
     pipes: [CapitalizePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDataTableComponent implements AfterChanges, OnDestroy {
-  final Function eq = const ListEquality().equals;
+  final Function eq = ListEquality().equals;
 
   final String msgFilter = Intl.message('filter', name: 'filter');
   final String msgNoResultsFound =

@@ -55,7 +55,7 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
   String get left => offsetHorizontal == null ? null : '${offsetHorizontal}px';
 
   FoDropdownComponent(this.host, this._changeDetectorRef) {
-    Future.delayed(const Duration(milliseconds: 100)).then((_) {
+    Future.delayed(Duration(milliseconds: 100)).then((_) {
       _onDocumentClickListener = html.document.onClick.listen((event) {
         if (visible && !_visibleController.isClosed) {
           _visibleController.add(false);

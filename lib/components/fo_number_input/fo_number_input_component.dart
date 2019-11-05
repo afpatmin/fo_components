@@ -123,8 +123,8 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
       var newValue = 0;
       try {
         newValue = int.parse(v);
-        if (newValue > max) throw const FormatException('Value too large!');
-        if (newValue < min) throw const FormatException('Value too small');
+        if (newValue > max) throw FormatException('Value too large!');
+        if (newValue < min) throw FormatException('Value too small');
         value = newValue;
       } on FormatException catch (e) {
         print(e);
@@ -133,7 +133,7 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
         if (value > min) {
           if (value == max) {
             value = min;
-            Future.delayed(const Duration(milliseconds: 0)).then((_) {
+            Future.delayed(Duration(milliseconds: 0)).then((_) {
               value = max;
               if (_onChange != null) {
                 _onChange(value);
@@ -144,7 +144,7 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
         } else {
           if (value == min) {
             value = max;
-            Future.delayed(const Duration(milliseconds: 0)).then((_) {
+            Future.delayed(Duration(milliseconds: 0)).then((_) {
               value = min;
               if (_onChange != null) {
                 _onChange(value);
@@ -177,11 +177,11 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
     addStepTimer?.cancel();
     addStepTimer = null;
 
-    autoAddTimer = Timer(const Duration(milliseconds: 600), () {
+    autoAddTimer = Timer(Duration(milliseconds: 600), () {
       autoAddTimer = null;
       addStepTimer?.cancel();
       addStepTimer =
-          Timer.periodic(const Duration(milliseconds: 10), (_) => add(count));
+          Timer.periodic(Duration(milliseconds: 10), (_) => add(count));
     });
   }
 

@@ -20,7 +20,7 @@ class FoDropdownSelectMultiComponent<T> implements AfterChanges, OnDestroy {
   final StreamController<List<T>> selectionChangeController =
       StreamController<List<T>>();
 
-  final _equal = const ListEquality().equals;
+  final _equal = ListEquality().equals;
 
   final dom.Element _host;
 
