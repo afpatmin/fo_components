@@ -1,3 +1,11 @@
+# 1.7.5+2
+#### NumberInput
+* Now enforces step constraint even from manual input (closes https://github.com/afpatmin/fo_components/issues/72)
+* max value now defaults to 1000 (down from 9999)
+
+#### Other
+* Bumped build_runner dependency to 1.7.2
+
 # 1.7.5+1
 #### Quiz
 * Updated Intl messages so that they can be extracted properly

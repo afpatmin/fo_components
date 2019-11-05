@@ -54,7 +54,7 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
   String label;
 
   @Input()
-  int max = 9999;
+  int max = 1000;
 
   @Input()
   int min = 0;
@@ -125,6 +125,11 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
         newValue = int.parse(v);
         if (newValue > max) throw FormatException('Value too large!');
         if (newValue < min) throw FormatException('Value too small');
+        if (step != 0) {
+          while (newValue % step != 0) {
+            newValue++;
+          }
+        }
         value = newValue;
       } on FormatException catch (e) {
         print(e);
