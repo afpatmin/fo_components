@@ -1,3 +1,7 @@
+# 1.7.5+3
+#### Quiz
+* Made step buttons wider (70px -> 100px)
+
 # 1.7.5+2
 #### NumberInput
 * Now enforces step constraint even from manual input (closes https://github.com/afpatmin/fo_components/issues/72)
