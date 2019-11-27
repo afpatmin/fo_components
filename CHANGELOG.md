@@ -1,3 +1,7 @@
+# 1.7.5+4
+#### Dropdown
+* Fixed visibleChange output logic
+
 # 1.7.5+3
 #### Quiz
 * Made step buttons wider (70px -> 100px)

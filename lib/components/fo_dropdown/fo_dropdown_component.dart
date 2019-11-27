@@ -38,7 +38,6 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
   @Input()
   int maxHeight;
 
-  StreamSubscription<html.MouseEvent> _onDocumentClickListener;
   final html.Element host;
   final ChangeDetectorRef _changeDetectorRef;
   final StreamController _visibleController = StreamController<bool>();
@@ -54,15 +53,7 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
   String get top => offsetTop == null ? null : '${offsetTop}px';
   String get left => offsetHorizontal == null ? null : '${offsetHorizontal}px';
 
-  FoDropdownComponent(this.host, this._changeDetectorRef) {
-    Future.delayed(Duration(milliseconds: 100)).then((_) {
-      _onDocumentClickListener = html.document.onClick.listen((event) {
-        if (visible && !_visibleController.isClosed) {
-          _visibleController.add(false);
-        }
-      });
-    });
-  }
+  FoDropdownComponent(this.host, this._changeDetectorRef);
 
   String get elementWidth => width == null ? 'auto' : '${width}px';
 
@@ -73,6 +64,13 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
   void ngAfterChanges() {
     if (visible == true) {
       _evaluateMaxHeight(null);
+      Future.delayed(Duration(milliseconds: 1)).then((_) {
+        html.document.onClick.first.then((event) {
+          if (!_visibleController.isClosed) {
+            _visibleController.add(false);
+          }
+        });
+      });
     }
   }
 
@@ -102,6 +100,5 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
     _visibleController.close();
     _documentScrollSub?.cancel();
     _windowResizeSub?.cancel();
-    _onDocumentClickListener?.cancel();
   }
 }
