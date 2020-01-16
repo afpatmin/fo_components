@@ -1,3 +1,7 @@
+# 1.7.5+5
+#### TextInput
+* Error message are now only shown when the input has focus, red border otherwise
+
 # 1.7.5+4
 #### Dropdown
 * Fixed visibleChange output logic

@@ -207,6 +207,7 @@ class FoTextInputComponent
     /// Delay has focus a little bit so that the dropdown list has time to detect click before being removed
     Future.delayed(Duration(milliseconds: 100)).then((_) {
       hasFocus = false;
+      _changeDetectorRef.markForCheck();
     });
     _blurController.add(value);
   }
@@ -238,7 +239,7 @@ class FoTextInputComponent
   }
 
   void onFocus(html.FocusEvent event) {
-    event..preventDefault();
+    event.preventDefault();
     hasFocus = true;
     _focusController.add(event);
   }
