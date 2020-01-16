@@ -33,7 +33,7 @@
                [disabled]="disabled || control?.valid == false || value?.isEmpty != false"
                (trigger)="actionButtonController?.add($event)"></fo-button>
   </div>
-  <fo-error-output *ngIf="hasFocus == true && errorMessage != null && control?.pristine != true && dropdownVisible == false"
+  <fo-error-output *ngIf="(hasFocus == true || hideErrorsOnBlur == false) && errorMessage != null && control?.pristine != true && dropdownVisible == false"
                    [message]="errorMessage">
   </fo-error-output>
   <fo-dropdown-list [options]="options"

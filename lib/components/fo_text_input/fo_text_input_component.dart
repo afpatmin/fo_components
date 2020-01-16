@@ -89,6 +89,9 @@ class FoTextInputComponent
   String type = 'text';
 
   @Input()
+  bool hideErrorsOnBlur = true;
+
+  @Input()
   bool materialIcons = true;
 
   String value;

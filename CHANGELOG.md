@@ -1,6 +1,10 @@
+# 1.7.5+6
+#### TextInput
+* Added input hideErrorsOnBlur (default: true) to control if error messages are shown when input doesn't have focus
+
 # 1.7.5+5
 #### TextInput
-* Error message are now only shown when the input has focus, red border otherwise
+* Error messages are now only shown when the input has focus, red border otherwise
 
 # 1.7.5+4
 #### Dropdown
