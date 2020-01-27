@@ -3,37 +3,34 @@
      (dragenter)="$event.preventDefault()"
      (dragover)="$event.preventDefault()"
      (drop)="onDrop($event)">
-  <div *ngIf="source != null && !source.isEmpty"
-       class="image">
-    <img class="box-shadow"
-         [src]="source"
-         alt="{{alt}}"
-         [style.filter]="brightnessFilter" />
-    <fo-button class="delete color-alert"
-               square
-               clearSize
-               white
-               dense
-               [materialIcon]="materialIcons"
-               [disabled]="disabled"
-               (trigger)="fileInput.value = null; clearSource()"
-               icon="delete">
-    </fo-button>
-  </div>
-  <ng-container *ngIf="source == null || source.isEmpty">
-    <fo-icon class="add"
-             (click)="fileInput.click()"
-             [material]="materialIcons"
-             [icon]="addIcon">
-    </fo-icon>
-    <p id="placeholder"
-       *ngIf="placeholder != null"> {{placeholder}} </p>
-  </ng-container>
-  <input type="file"
-         #fileInput
-         [disabled]="disabled"
-         (change)="onFileChange($event)"
-         [accept]="accept" />
-  <p *ngIf="invalidFile"
-     class="error-output background-color-alert-bright">{{msgInvalidFile}}</p>
+     <div *ngIf="source != null && !source.isEmpty"
+          class="image">
+          <img class="box-shadow"
+               [src]="source"
+               alt="{{alt}}"
+               [style.filter]="brightnessFilter" />
+          <fo-button class="delete color-alert"
+                     white
+                     [materialIcon]="materialIcons"
+                     [disabled]="disabled"
+                     (trigger)="fileInput.value = null; clearSource()"
+                     icon="delete">
+          </fo-button>
+     </div>
+     <ng-container *ngIf="source == null || source.isEmpty">
+          <fo-icon class="add"
+                   (click)="fileInput.click()"
+                   [material]="materialIcons"
+                   [icon]="addIcon">
+          </fo-icon>
+          <p id="placeholder"
+             *ngIf="placeholder != null"> {{placeholder}} </p>
+     </ng-container>
+     <input type="file"
+            #fileInput
+            [disabled]="disabled"
+            (change)="onFileChange($event)"
+            [accept]="accept" />
+     <p *ngIf="invalidFile"
+        class="error-output background-color-alert-bright">{{msgInvalidFile}}</p>
 </div>
