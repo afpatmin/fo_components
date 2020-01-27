@@ -13,7 +13,6 @@
     flex-direction: column;
 
     div.image {
-      @include boxShadow();
       position: relative;
 
       img {
