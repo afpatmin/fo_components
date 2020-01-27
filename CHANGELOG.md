@@ -1,3 +1,7 @@
+# 1.7.5+7
+#### ImageFile
+* Removed box shadow from uploaded image, and imroved delete button design
+
 # 1.7.5+6
 #### TextInput
 * Added input hideErrorsOnBlur (default: true) to control if error messages are shown when input doesn't have focus
