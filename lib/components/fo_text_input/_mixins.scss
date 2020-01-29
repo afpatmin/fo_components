@@ -68,7 +68,7 @@
 
 @mixin fo-text-input-vertical-padding($top, $bottom) {
   ::ng-deep fo-text-input {
-    fo-label > label {
+    fo-label {
       div#flexContainer {
         input {
           padding-top: $top !important;

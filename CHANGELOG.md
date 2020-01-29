@@ -1,3 +1,7 @@
+# 1.7.5+8
+#### TextInput
+* Fixed bad padding on ActionButton
+
 # 1.7.5+7
 #### ImageFile
 * Removed box shadow from uploaded image, and imroved delete button design
