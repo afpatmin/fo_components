@@ -1,3 +1,7 @@
+# 1.7.5+9
+#### TextInput
+* Minor height adjustment
+
 # 1.7.5+8
 #### TextInput
 * Fixed bad padding on ActionButton
