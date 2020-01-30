@@ -19,13 +19,14 @@
     border-width: 1px;
     border-style: solid;
     overflow: hidden;
+    box-sizing: border-box;
 
     input {
       @include inputStyle;
       padding: 0.5em 0.25em;
       line-height: 160%;
       outline: none;
-      margin: -1px 0; // compensate for border
+      margin: -2px 0; // compensate for border
       border: 0;
     }
 

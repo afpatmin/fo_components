@@ -1,3 +1,7 @@
+# 1.7.6+1
+#### TextInput, NumberInput
+* Tiny pixel perfect adjustments
+
 # 1.7.6
 #### TextInput, NumberInput
 * Minor height adjustments pixel perfect
