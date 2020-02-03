@@ -1,3 +1,7 @@
+# 1.7.6+2
+#### DropdownSelectMulti
+* Added dropdownMaxHeight input
+
 # 1.7.6+1
 #### TextInput, NumberInput
 * Tiny pixel perfect adjustments
