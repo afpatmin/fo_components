@@ -40,9 +40,12 @@ class FoDropdownSelectMultiComponent<T> implements AfterChanges, OnDestroy {
   @Input('options')
   Map<String, List<FoDropdownOptionRenderable>> allOptions;
 
+  /// Max height of the dropdown, in pixels
   @Input()
+  int dropdownMaxHeight;
 
   /// Make sure options doesn't extend beyond the viewport
+  @Input()
   bool constrainToViewPort = true;
 
   @Input()
