@@ -1,3 +1,6 @@
+# 1.7.6+3
+* EmailValidator now requires lowercase
+
 # 1.7.6+2
 #### DropdownSelectMulti
 * Added dropdownMaxHeight input
