@@ -1,3 +1,6 @@
+# 1.7.6+4
+* Added transform: translateZ(1px) to Modal 
+
 # 1.7.6+3
 * EmailValidator now requires lowercase
 

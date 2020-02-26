@@ -6,6 +6,11 @@
   .hidden {
     display: none;
   }
+  transform: translateZ(1px);
+  -webkit-transform: translateZ(1px);
+  -moz-transform: translateZ(1px);
+  -o-transform: translateZ(1px);
+  -ms-transform: translateZ(1px);
 
   div#modalOverlay {
     background-color: rgba(0, 0, 0, 0.6);
