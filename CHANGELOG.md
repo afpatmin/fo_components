@@ -1,3 +1,6 @@
+# 1.7.7
+* Added animation to dropdown
+
 # 1.7.6+4
 * Added transform: translateZ(1px) to Modal 
 

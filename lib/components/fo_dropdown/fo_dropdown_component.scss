@@ -13,14 +13,21 @@
     -moz-transform: translate3d(0, 0, 0);
     -o-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
-    @include boxShadow();
     box-sizing: content-box;
     border-width: 1px;
     border-style: solid;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    @include boxShadow();
+
+    transition: height 400ms cubic-bezier(0, 0.99, 0.24, 0.99), opacity 400ms ease 80ms;
+    -webkit-transition: height 400ms cubic-bezier(0, 0.99, 0.24, 0.99), opacity 400ms ease 80ms;
+
+    background-color: white;
 
     div#dropdownContent {
       text-align: left;
-      background-color: white;
       overflow-y: auto;
       box-sizing: border-box;
       position: relative;
@@ -48,6 +55,9 @@
       border-left-style: solid;
       border-top-style: solid;
     }
+  }
+  #fixer.visible {
+    opacity: 1;
   }
 }
 

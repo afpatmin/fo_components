@@ -14,7 +14,7 @@
     <fo-text-input [autoFocus]="visible"
                    [attr.square]="square"
                    noFocusShadow
-                   [label]="msgFilter | capitalize"
+                   [placeholder]="msgFilter | capitalize"
                    dense
                    [ngModel]="filter"
                    (ngModelChange)="updateFilteredOptions($event)">

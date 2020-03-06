@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:html' as html;
+import 'dart:html';
 import 'dart:math';
 
 import 'package:angular/angular.dart';
@@ -10,13 +11,13 @@ import 'package:angular/angular.dart';
     styleUrls: ['fo_dropdown_component.css'],
     directives: [NgClass, NgFor, NgIf, NgStyle],
     pipes: [])
-class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
+class FoDropdownComponent
+    implements AfterViewInit, OnDestroy, AfterContentChecked {
   /// Width in pixels
   @Input()
   num width;
 
-  @Input()
-  bool visible = false;
+  bool _visible = false;
 
   /// Vertical offset in pixels
   @Input()
@@ -38,33 +39,33 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
   @Input()
   int maxHeight;
 
-  final html.Element host;
   final ChangeDetectorRef _changeDetectorRef;
   final StreamController _visibleController = StreamController<bool>();
   StreamSubscription<html.Event> _documentScrollSub;
   StreamSubscription<html.Event> _windowResizeSub;
-
-  String get targetPositonLeft => '${targetPosition}px';
-
-  String get elementMaxHeight =>
-      maxHeight == null ? _elementMaxHeight : '${maxHeight}px';
-
   String _elementMaxHeight = '100px';
-  String get top => offsetTop == null ? null : '${offsetTop}px';
-  String get left => offsetHorizontal == null ? null : '${offsetHorizontal}px';
+  final html.Element host;
+  String height;
+  Element _content;
 
   FoDropdownComponent(this.host, this._changeDetectorRef);
 
+  String get elementMaxHeight =>
+      maxHeight == null ? _elementMaxHeight : '${maxHeight}px';
   String get elementWidth => width == null ? 'auto' : '${width}px';
+  String get left => offsetHorizontal == null ? null : '${offsetHorizontal}px';
+  String get opacity => visible == true ? '1' : '0';
+  String get targetPositonLeft => '${targetPosition}px';
+  String get top => offsetTop == null ? null : '${offsetTop}px';
+  bool get visible => _visible;
 
-  @Output('visibleChange')
-  Stream<bool> get visibleChange => _visibleController.stream;
-
-  @override
-  void ngAfterChanges() {
-    if (visible == true) {
+  @Input()
+  set visible(bool flag) {
+    _visible = flag;
+    if (_visible == true) {
       _evaluateMaxHeight(null);
       Future.delayed(Duration(milliseconds: 1)).then((_) {
+        _changeDetectorRef.markForCheck();
         html.document.onClick.first.then((event) {
           if (!_visibleController.isClosed) {
             _visibleController.add(false);
@@ -72,6 +73,40 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
         });
       });
     }
+  }
+
+  @Output('visibleChange')
+  Stream<bool> get visibleChange => _visibleController.stream;
+
+  String evaluateHeight() {
+    if (_content == null) {
+      return '0px';
+    }
+    final height = _content.offsetHeight;
+    final max = int.parse(
+        _elementMaxHeight.substring(0, _elementMaxHeight.indexOf('px')));
+    _changeDetectorRef.markForCheck();
+    return height > max ? '${max}px' : '${height}px';
+  }
+
+  @override
+  void ngAfterContentChecked() {
+    height = evaluateHeight();
+    _evaluateMaxHeight(null);
+  }
+
+  @override
+  void ngAfterViewInit() {
+    _content = host.querySelector('#dropdownContent');
+    _documentScrollSub = html.document.onScroll.listen(_evaluateMaxHeight);
+    _windowResizeSub = html.window.onResize.listen(_evaluateMaxHeight);
+  }
+
+  @override
+  void ngOnDestroy() {
+    _visibleController.close();
+    _documentScrollSub?.cancel();
+    _windowResizeSub?.cancel();
   }
 
   void _evaluateMaxHeight(_) {
@@ -85,20 +120,5 @@ class FoDropdownComponent implements AfterViewInit, AfterChanges, OnDestroy {
       _elementMaxHeight = '${html.document.body.clientHeight - newY}px';
     }
     _changeDetectorRef.markForCheck();
-  }
-
-  @override
-  void ngAfterViewInit() {
-    _evaluateMaxHeight(null);
-
-    _documentScrollSub = html.document.onScroll.listen(_evaluateMaxHeight);
-    _windowResizeSub = html.window.onResize.listen(_evaluateMaxHeight);
-  }
-
-  @override
-  void ngOnDestroy() {
-    _visibleController.close();
-    _documentScrollSub?.cancel();
-    _windowResizeSub?.cancel();
   }
 }

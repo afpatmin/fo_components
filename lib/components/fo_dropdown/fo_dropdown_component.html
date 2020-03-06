@@ -1,8 +1,9 @@
 <div id="fixer"
      [style.top]="top"
      [style.left]="left"
-     (click)="$event.stopPropagation()"
-     *ngIf="visible">
+     [style.height]="height"
+     [style.opacity]="opacity"
+     (click)="$event.stopPropagation()">
   <div *ngIf="targetPosition != null"
        [style.left]="targetPositonLeft"
        id="arrow"></div>
