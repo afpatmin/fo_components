@@ -27,10 +27,6 @@ class FoDropdownComponent
   @Input()
   int offsetHorizontal;
 
-  /// Target horizontal position in pixels. If set, a marker is shown at the top of the dropdown
-  @Input()
-  int targetPosition;
-
   /// When this is set to true, the dropdown will stay in the viewport on the vertical axis
   @Input()
   bool constrainToViewPort = true;
@@ -55,7 +51,6 @@ class FoDropdownComponent
   String get elementWidth => width == null ? 'auto' : '${width}px';
   String get left => offsetHorizontal == null ? null : '${offsetHorizontal}px';
   String get opacity => visible == true ? '1' : '0';
-  String get targetPositonLeft => '${targetPosition}px';
   String get top => offsetTop == null ? null : '${offsetTop}px';
   bool get visible => _visible;
 

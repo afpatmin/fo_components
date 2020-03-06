@@ -1,3 +1,6 @@
+# 1.8.0
+* Breaking: removed targetPosition input from dropdown (no longer supported)
+
 # 1.7.7+3
 * Dropdown now sets height to 0 on close
 

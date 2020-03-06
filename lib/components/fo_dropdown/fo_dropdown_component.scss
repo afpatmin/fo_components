@@ -24,36 +24,12 @@
     transition: height 400ms cubic-bezier(0, 0.99, 0.24, 0.99), opacity 400ms ease;
     -webkit-transition: height 400ms cubic-bezier(0, 0.99, 0.24, 0.99), opacity 400ms ease;
 
-    background-color: white;
-
     div#dropdownContent {
+      background-color: white;
       text-align: left;
       overflow-y: auto;
       box-sizing: border-box;
       position: relative;
-    }
-    div#arrow {
-      @include boxShadow();
-      background-color: white;
-      transform-origin: center center;
-      -webkit-transform-origin: center center;
-      -moz-transform-origin: center center;
-      -o-transform-origin: center center;
-      -ms-transform-origin: center center;
-      transform: rotate(45deg);
-      -webkit-transform: rotate(45deg);
-      -moz-transform: rotate(45deg);
-      -o-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-      width: 16px;
-      height: 16px;
-      position: absolute;
-      top: -8px;
-      left: 8px;
-      border-left-width: 1px;
-      border-top-width: 1px;
-      border-left-style: solid;
-      border-top-style: solid;
     }
   }
   #fixer.visible {
