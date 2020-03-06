@@ -43,7 +43,7 @@ class FoDropdownComponent
   final StreamController _visibleController = StreamController<bool>();
   StreamSubscription<html.Event> _documentScrollSub;
   StreamSubscription<html.Event> _windowResizeSub;
-  String _elementMaxHeight = '100px';
+  int _elementMaxHeight = 100;
   final html.Element host;
   String height;
   Element _content;
@@ -51,7 +51,7 @@ class FoDropdownComponent
   FoDropdownComponent(this.host, this._changeDetectorRef);
 
   String get elementMaxHeight =>
-      maxHeight == null ? _elementMaxHeight : '${maxHeight}px';
+      maxHeight == null ? '${_elementMaxHeight}px' : '${maxHeight}px';
   String get elementWidth => width == null ? 'auto' : '${width}px';
   String get left => offsetHorizontal == null ? null : '${offsetHorizontal}px';
   String get opacity => visible == true ? '1' : '0';
@@ -83,10 +83,11 @@ class FoDropdownComponent
       return '0px';
     }
     final height = _content.offsetHeight;
-    final max = int.parse(
-        _elementMaxHeight.substring(0, _elementMaxHeight.indexOf('px')));
+
     _changeDetectorRef.markForCheck();
-    return height > max ? '${max}px' : '${height}px';
+    return height > _elementMaxHeight
+        ? '${_elementMaxHeight}px'
+        : '${height}px';
   }
 
   @override
@@ -115,9 +116,9 @@ class FoDropdownComponent
     if (constrainToViewPort == true) {
       newY = max(0, newY);
       _elementMaxHeight =
-          '${html.document.documentElement.clientHeight - newY - 10}px';
+          html.document.documentElement.clientHeight - newY - 10;
     } else {
-      _elementMaxHeight = '${html.document.body.clientHeight - newY}px';
+      _elementMaxHeight = html.document.body.clientHeight - newY;
     }
     _changeDetectorRef.markForCheck();
   }
