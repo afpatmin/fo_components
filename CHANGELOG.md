@@ -1,3 +1,9 @@
+# 1.7.7+2
+* Dropdown Bugfix #2 rounding error
+
+# 1.7.7+1
+* Bugfix when dropdown height in other unit than px
+
 # 1.7.7
 * Added animation to dropdown
 
