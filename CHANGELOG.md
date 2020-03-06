@@ -1,3 +1,6 @@
+# 1.7.7+3
+* Dropdown now sets height to 0 on close
+
 # 1.7.7+2
 * Dropdown Bugfix #2 rounding error
 

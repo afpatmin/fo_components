@@ -62,6 +62,7 @@ class FoDropdownComponent
   @Input()
   set visible(bool flag) {
     _visible = flag;
+    height = evaluateHeight();
     if (_visible == true) {
       _evaluateMaxHeight(null);
       Future.delayed(Duration(milliseconds: 1)).then((_) {

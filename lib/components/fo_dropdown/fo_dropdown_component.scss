@@ -21,8 +21,8 @@
     overflow: hidden;
     @include boxShadow();
 
-    transition: height 400ms cubic-bezier(0, 0.99, 0.24, 0.99), opacity 400ms ease 80ms;
-    -webkit-transition: height 400ms cubic-bezier(0, 0.99, 0.24, 0.99), opacity 400ms ease 80ms;
+    transition: height 400ms cubic-bezier(0, 0.99, 0.24, 0.99), opacity 400ms ease;
+    -webkit-transition: height 400ms cubic-bezier(0, 0.99, 0.24, 0.99), opacity 400ms ease;
 
     background-color: white;
 
