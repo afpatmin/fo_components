@@ -112,7 +112,7 @@ class FoDropdownComponent
 
   void _evaluateMaxHeight(_) {
     final parentRect = host.parent.getBoundingClientRect();
-    var newY = parentRect.bottom;
+    var newY = parentRect.bottom.round();
     if (constrainToViewPort == true) {
       newY = max(0, newY);
       _elementMaxHeight =
