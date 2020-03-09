@@ -1,3 +1,6 @@
+# 1.8.0+1
+* Fixed style issue with dropdown border being visible longer than animation
+
 # 1.8.0
 * Breaking: removed targetPosition input from dropdown (no longer supported)
 

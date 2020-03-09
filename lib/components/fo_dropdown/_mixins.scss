@@ -1,11 +1,7 @@
 @mixin fo-dropdown-border-color($color) {
   ::ng-deep fo-dropdown {
-    div#fixer {
+    div#fixer.visible {
       border-color: $color;
-      div#arrow {
-        border-left-color: $color;
-        border-top-color: $color;
-      }
     }
   }
 }
