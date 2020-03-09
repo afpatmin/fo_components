@@ -1,3 +1,6 @@
+# 1.8+0+2
+* Fixed the issue described in 1.8.0+1 for real this time
+
 # 1.8.0+1
 * Fixed style issue with dropdown border being visible longer than animation
 
