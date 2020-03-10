@@ -1,3 +1,6 @@
+# 1.8.0+3
+* Added mixin fo-button-horizontal-padding
+
 # 1.8+0+2
 * Fixed the issue described in 1.8.0+1 for real this time
 
