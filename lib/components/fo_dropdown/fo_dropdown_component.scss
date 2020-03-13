@@ -16,6 +16,7 @@
     box-sizing: content-box;
     border-width: 1px;
     border-style: solid;
+    border-color: transparent;
     height: 0;
     opacity: 0;
     overflow: hidden;
@@ -31,9 +32,6 @@
       box-sizing: border-box;
       position: relative;
     }
-  }
-  #fixer.visible {
-    opacity: 1;
   }
 }
 

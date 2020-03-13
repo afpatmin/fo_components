@@ -3,6 +3,15 @@
 * Removed grid/grid.css import from data-table
 * Added deprecation-notice to DataTable
 
+# 1.8.0+3
+* Added mixin fo-button-horizontal-padding
+
+# 1.8+0+2
+* Fixed the issue described in 1.8.0+1 for real this time
+
+# 1.8.0+1
+* Fixed style issue with dropdown border being visible longer than animation
+
 # 1.8.0
 * Breaking: removed targetPosition input from dropdown (no longer supported)
 
