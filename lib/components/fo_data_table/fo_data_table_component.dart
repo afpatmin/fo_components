@@ -60,6 +60,7 @@ class BatchOperationEvent {
     providers: [materialProviders],
     pipes: [CapitalizePipe, RangePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
+@Deprecated('This component will be removed after 2.0')
 class FoDataTableComponent implements AfterChanges, OnDestroy {
   final Function eq = ListEquality().equals;
 
