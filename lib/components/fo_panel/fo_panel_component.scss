@@ -1,5 +1,4 @@
 @import "package:fo_components/components/fo_button/mixins";
-@import "package:grid_css/constants";
 @import "../../mixins";
 
 :host {
@@ -7,7 +6,7 @@
     @include boxShadow();
     overflow: hidden;
     display: block;
-    padding: $medium;
+    padding: 1rem;
     background-color: white;
 
     div#panelHeader {

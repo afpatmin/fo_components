@@ -1,5 +1,4 @@
 @import "package:angular_components/material_icon/mixins";
-@import "package:grid_css/constants";
 @import "../../constants.scss";
 
 :host {
@@ -25,7 +24,7 @@
     border-style: solid;
     box-sizing: border-box;
     color: white;
-    border-radius: $x-small;
+    border-radius: 0.25rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -90,8 +89,8 @@
 
 :host[clearSize] {
   button {
-    padding-left: $x-small;
-    padding-right: $x-small;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
   }
 }
 
@@ -99,8 +98,8 @@
   width: 100%;
 
   button {
-    padding-left: $small;
-    padding-right: $small;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 }
 

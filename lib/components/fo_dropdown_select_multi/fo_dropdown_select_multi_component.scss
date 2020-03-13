@@ -1,5 +1,3 @@
-@import "package:grid_css/constants";
-
 :host {
   display: block;
   z-index: 2;
@@ -28,7 +26,7 @@
       }
 
       li.round {
-        border-radius: $x-small;
+        border-radius: 0.25rem;
       }
 
       li.disabled {

@@ -1,5 +1,4 @@
 @import "../fo_button/mixins";
-@import "package:grid_css/constants.scss";
 
 $slideTransitionSpeed: 200ms;
 
@@ -55,7 +54,7 @@ $slideTransitionSpeed: 200ms;
     right: 0;
   }
 
-  @media screen and (max-width: $medium-width-threshold - 1) {
+  @media screen and (max-width: 1099) {
     .arrow {
       display: none;
     }

@@ -1,7 +1,6 @@
-@import "package:grid_css/constants";
 @import "mixins";
 
-$borderRadius: $x-small;
+$borderRadius: 0.25rem;
 
 @mixin inputStyle {
   background-color: transparent;

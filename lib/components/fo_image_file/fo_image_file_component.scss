@@ -1,4 +1,3 @@
-@import "package:grid_css/constants";
 @import "../../mixins.scss";
 
 :host {
@@ -23,8 +22,8 @@
 
       fo-button.delete {
         position: absolute;
-        top: $small;
-        right: $small;
+        top: 0.5rem;
+        right: 0.5rem;
       }
     }
 
@@ -47,8 +46,8 @@
 
     p.error-output {
       color: white;
-      padding: $medium;
-      margin: $medium 0 0 0;
+      padding: 1rem;
+      margin: 1rem 0 0 0;
     }
   }
 }

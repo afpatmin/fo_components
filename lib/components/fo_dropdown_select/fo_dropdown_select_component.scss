@@ -1,6 +1,5 @@
 @import "package:fo_components/components/fo_button/mixins";
 @import "package:fo_components/components/fo_dropdown_list/mixins";
-@import "package:grid_css/constants";
 @import "../../mixins.scss";
 
 :host {
@@ -21,7 +20,7 @@
 
     cursor: pointer;
     display: flex;
-    border-radius: $x-small;
+    border-radius: 0.25rem;
     border-width: 1px;
     border-style: solid;
     overflow: hidden;
@@ -77,7 +76,7 @@
         content: "";
         display: inline-block;
         width: 1em;
-        margin: $small;
+        margin: 0.5rem;
       }
     }
   }
