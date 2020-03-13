@@ -1,3 +1,6 @@
+# 1.8.1+2
+* Bugfix: removed all old imports to grid_css/constants
+
 # 1.8.1+1
 * Maintenance: updated grid_css to 2.0.0
 * Removed targetPosition input from DropdownList
