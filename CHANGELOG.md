@@ -1,3 +1,7 @@
+# 1.8.1+1
+* Maintenance: updated grid_css to 2.0.0
+* Removed targetPosition input from DropdownList
+
 # 1.8.1
 * Maintenance: updated grid_css to 1.0.1
 * Removed grid/grid.css import from data-table
