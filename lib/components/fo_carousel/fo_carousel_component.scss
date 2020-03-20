@@ -21,7 +21,7 @@ $slideTransitionSpeed: 200ms;
     width: 56px;
     height: 56px;
     background-color: white;
-    border: 1px solid white;
+    border: 1px solid #cdd2d9;
     text-align: center;
     box-sizing: border-box;
     -webkit-transform: translateY(50%);
@@ -64,6 +64,9 @@ $slideTransitionSpeed: 200ms;
   #arrow-right {
     left: auto;
     right: 0;
+  }
+  .arrow.below#arrow-right {
+    border-left: 0;
   }
 
   #slide-container {

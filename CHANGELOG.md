@@ -1,3 +1,7 @@
+# 1.9.0+1
+#### Carousel
+* Minor style fixes
+
 # 1.9.0
 #### Carousel
 * Breaking: Replaced internal media rule with @input [arrowsBelow] so that the client app can decide 
