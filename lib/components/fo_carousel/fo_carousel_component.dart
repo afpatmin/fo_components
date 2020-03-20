@@ -24,7 +24,7 @@ import 'fo_carousel_slide_component.dart';
       MaterialRadioGroupComponent,
       NgFor
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.Default)
 class FoCarouselComponent implements OnDestroy, OnInit {
   final StreamController<int> _onStepController = StreamController();
   Timer timer;
@@ -51,6 +51,9 @@ class FoCarouselComponent implements OnDestroy, OnInit {
 
   @Input()
   bool showArrowButtons = true;
+
+  @Input()
+  bool arrowsBelow = false;
 
   @Input()
   bool disabled = false;
@@ -124,22 +127,10 @@ class FoCarouselComponent implements OnDestroy, OnInit {
     if (disabled == true) {
       return;
     }
-
-    void disableWhileStepping() {
-      disabled = true;
-      _scrollTimer = Timer(Duration(milliseconds: 200), () {
-        disabled = false;
-        _scrollTimer = null;
-        prevX = null;
-      });
-    }
-
     if (_deltaX < -_verticalThreshold) {
       stepBy(-1);
-      disableWhileStepping();
     } else if (_deltaX > _verticalThreshold) {
       stepBy(1);
-      disableWhileStepping();
     }
 
     _deltaX = 0;
@@ -172,8 +163,8 @@ class FoCarouselComponent implements OnDestroy, OnInit {
       } else {
         _step += steps;
         if (step >= slides.length || step < 0) {
-          _disableSlideAnimation();
-          _step = 0;
+          _step -= steps;
+          return;
         }
       }
 

@@ -2,12 +2,13 @@
   display: inline-block;
   width: 100%;
   padding: 0;
+  flex-shrink: 0;
 }
 
 :host[top] {
-  vertical-align: top;
+  align-self: flex-start;
 }
 
 :host[bottom] {
-  vertical-align: bottom;
+  align-self: flex-end;
 }

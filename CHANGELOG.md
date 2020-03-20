@@ -1,3 +1,11 @@
+# 1.9.0
+#### Carousel
+* Breaking: Replaced internal media rule with @input [arrowsBelow] so that the client app can decide 
+* changeDetection is now ChangeDetectionStrategy.default instead of onPush
+* No longer disabled while sliding
+* Now using flex for alignment
+* Minor style fixes
+
 # 1.8.1+2
 * Bugfix: removed all old imports to grid_css/constants
 

@@ -19,8 +19,8 @@
   <ng-container *ngIf="showArrowButtons">
     <div class="arrow"
          (click)="stepBy(-1)"
-         [class.disabled]="disabled"
-         [class.faded]="step <= 0 && loop != true"
+         [class.disabled]="disabled || (loop == false && step < 1)"
+         [class.below]="arrowsBelow == true"
          id="arrow-left">
       <fo-icon [material]="materialIcons"
                [icon]="prevIcon">
@@ -28,8 +28,8 @@
     </div>
     <div class="arrow"
          (click)="stepBy(1)"
-         [class.disabled]="disabled"
-         [class.faded]="step >= slides.length - 1 && loop != true"
+         [class.disabled]="disabled || (loop == false && step >= slides.length - 1)"
+         [class.below]="arrowsBelow == true"
          id="arrow-right">
       <fo-icon [material]="materialIcons"
                [icon]="nextIcon">
