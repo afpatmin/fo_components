@@ -1,3 +1,7 @@
+# 1.9.1
+* Bugfix: fixed #75 (bad background color for InputComponents with leading-/trailingicons)
+* Style: made ImageFile delete button more dense
+
 # 1.9.0+1
 #### Carousel
 * Minor style fixes

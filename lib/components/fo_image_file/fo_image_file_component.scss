@@ -1,4 +1,5 @@
 @import "../../mixins.scss";
+@import "package:fo_components/components/fo_button/mixins";
 
 :host {
   div.container {
@@ -19,6 +20,8 @@
         height: auto;
         margin: 0 auto;
       }
+
+      @include fo-button-vertical-padding(0.2rem);
 
       fo-button.delete {
         position: absolute;
