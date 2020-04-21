@@ -5,16 +5,21 @@
   ::ng-deep fo-text-input {
     @include fo-dropdown-border-color($borderColor);
     fo-label {
+      div#flexContainer.disabled {
+        background-color: darken($backgroundColor, 5%);
+      }
       div#flexContainer {
         border-color: $borderColor;
+        background-color: $backgroundColor;
 
         input {
           color: $textColor;
-          background-color: $backgroundColor;
+          background-color: transparent;
         }
 
         input::placeholder {
-          color: darken($borderColor, 10%);
+          color: $textColor;
+          opacity: 0.3;
         }
 
         input::selection {
@@ -50,13 +55,19 @@
         color: $textColor;
         border-color: $borderColor;
       }
+
+      textarea:disabled {
+        background-color: darken($backgroundColor, 10%);
+      }
+
       textarea.error {
         color: $alertColor;
         border-color: $alertColor;
       }
 
       textarea::placeholder {
-        color: darken($borderColor, 10%);
+        color: $textColor;
+        opacity: 0.3;
       }
 
       textarea::selection {

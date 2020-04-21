@@ -24,6 +24,10 @@
     resize: none;
   }
 
+  textarea:disabled {
+    background-color: white;
+  }
+
   textarea,
   textarea:focus {
     font-size: 1em;

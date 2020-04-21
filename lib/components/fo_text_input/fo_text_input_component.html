@@ -1,6 +1,7 @@
 <fo-label [value]="label">
   <div id="flexContainer"
-       [class.error]="control?.valid == false && control?.pristine != true">
+       [class.error]="control?.valid == false && control?.pristine != true"
+       [class.disabled]="disabled == true">
     <fo-icon *ngIf="leadingIcon != null"
              class="leadingIcon"
              [icon]="leadingIcon"

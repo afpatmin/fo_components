@@ -51,7 +51,7 @@ $transitionSpeed: 0.3s ease;
   @include fo-label-color($grayColor);
   @include fo-modal-colors(lighten($grayColorBright, 10%), $alertColor);
   @include fo-tab-panel-colors(darken($grayColor, $lightstep), $primaryColor);
-  @include fo-text-input-colors($grayColor, $grayColorBright, $grayColor, $alertColor);
+  @include fo-text-input-colors($primaryColor, $grayColorBright, $secondaryColor, $alertColor);
 
   material-spinner {
     border-color: $primaryColor;
@@ -60,17 +60,6 @@ $transitionSpeed: 0.3s ease;
   ::ng-deep {
     material-icon > i {
       margin-bottom: 0 !important;
-    }
-  }
-
-  ::ng-deep input:disabled,
-  ::ng-deep textarea:disabled {
-    background-color: lighten($grayColorBright, 10%) !important;
-  }
-
-  ::ng-deep fo-dropdown-select {
-    div#selector.disabled {
-      background-color: lighten($grayColorBright, 10%) !important;
     }
   }
 
