@@ -89,4 +89,33 @@
       }
     }
   }
+  ::ng-deep fo-textarea-input {
+    fo-label {
+      textarea {
+        padding-top: $top !important;
+        padding-bottom: $bottom !important;
+      }
+    }
+  }
+}
+
+@mixin fo-text-input-horizontal-padding($left, $right) {
+  ::ng-deep fo-text-input {
+    fo-label {
+      div#flexContainer {
+        input {
+          padding-left: $left !important;
+          padding-right: $right !important;
+        }
+      }
+    }
+  }
+  ::ng-deep fo-textarea-input {
+    fo-label {
+      textarea {
+        padding-left: $left !important;
+        padding-right: $right !important;
+      }
+    }
+  }
 }
