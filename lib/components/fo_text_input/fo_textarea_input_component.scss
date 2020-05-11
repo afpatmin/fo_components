@@ -11,6 +11,7 @@
   }
 
   textarea {
+    vertical-align: bottom;
     @include inputStyle;
     padding: 0.5em 0.25em;
     background-color: white;
@@ -19,6 +20,9 @@
     border-width: 1px;
     font-family: inherit;
     resize: vertical;
+  }
+  textarea::-webkit-scrollbar {
+    display: none;
   }
   textarea.noResize {
     resize: none;
