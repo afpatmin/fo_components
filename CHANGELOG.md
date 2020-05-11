@@ -1,3 +1,7 @@
+# 1.9.1+2
+* Bugfix: Eliminated whitespace below textarea
+* Removed scrollbar from textarea
+
 # 1.9.1+1
 * Bugfix: fixed #76 (button alignment with icons)
 * Added mixin fo-text-input-horizontal-padding 
