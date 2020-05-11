@@ -1,3 +1,7 @@
+# 1.9.1+1
+* Bugfix: fixed #76 (button alignment with icons)
+* Added mixin fo-text-input-horizontal-padding 
+
 # 1.9.1
 * Bugfix: fixed #75 (bad background color for InputComponents with leading-/trailingicons)
 * Style: made ImageFile delete button more dense
