@@ -1,3 +1,6 @@
+# 1.9.1+3
+* NumberInput now hints inputMode
+
 # 1.9.1+2
 * Bugfix: Eliminated whitespace below textarea
 * Removed scrollbar from textarea
