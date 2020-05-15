@@ -21,15 +21,28 @@
 }
 
 @mixin fo-dropdown-select-vertical-padding($top, $bottom) {
-  ::ng-deep fo-dropdown-select {
-    fo-label {
-      div#flexContainer {
-        @include fo-button-vertical-padding($top);
-        div#selector {
-          div#selectedValue {
-            padding-top: $top !important;
-            padding-bottom: $bottom !important;
-          }
+  ::ng-deep fo-dropdown-select > fo-label > label {
+    div#flexContainer {
+      @include fo-button-vertical-padding($top);
+      div#selector {
+        div#selectedValue {
+          padding-top: $top !important;
+          padding-bottom: $bottom !important;
+        }
+      }
+    }
+  }
+}
+
+@mixin fo-dropdown-select-horizontal-padding($left, $right) {
+  ::ng-deep fo-dropdown-select > fo-label > label {
+    div#flexContainer {
+      div#selector {
+        div#selectedValue {
+          padding-left: $left !important;
+        }
+        fo-icon.arrow {
+          padding-right: $right !important;
         }
       }
     }

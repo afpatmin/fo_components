@@ -1,3 +1,6 @@
+# 1.9.1+4
+* Added mixin fo-dropdown-select-horizontal-padding
+
 # 1.9.1+3
 * NumberInput now hints inputMode
 
