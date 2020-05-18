@@ -1,3 +1,6 @@
+# 1.10.0
+* Breaking: Changed signature of TextInput's SelectionChangeEvent (added 'value' member) 
+
 # 1.9.1+4
 * Added mixin fo-dropdown-select-horizontal-padding
 
