@@ -1,3 +1,7 @@
+# 1.9.1+2
+* Bugfix: Modal close button no longer inherits horizontal-padding
+* Style: Modal close button font size now 1em (up from 0.7em)
+
 # 1.9.1+1
 * Bugfix: fixed #76 (button alignment with icons)
 * Added mixin fo-text-input-horizontal-padding 
