@@ -1,6 +1,19 @@
-# 1.9.1+2
+# 1.10.1
 * Bugfix: Modal close button no longer inherits horizontal-padding
 * Style: Modal close button font size now 1em (up from 0.7em)
+
+# 1.10.0
+* Breaking: Changed signature of TextInput's SelectionChangeEvent (added 'value' member) 
+
+# 1.9.1+4
+* Added mixin fo-dropdown-select-horizontal-padding
+
+# 1.9.1+3
+* NumberInput now hints inputMode
+
+# 1.9.1+2
+* Bugfix: Eliminated whitespace below textarea
+* Removed scrollbar from textarea
 
 # 1.9.1+1
 * Bugfix: fixed #76 (button alignment with icons)

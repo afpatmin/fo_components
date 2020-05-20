@@ -233,7 +233,7 @@ class FoTextInputComponent
 
   void onFilterSelect(FoDropdownOptionRenderable event) {
     _selectionChangeController
-        .add(SelectionChangeEvent(value, event.renderLabel));
+        .add(SelectionChangeEvent(value, event.renderLabel, event.renderId));
     value = event.renderLabel;
     _dropdownVisible = false;
     if (_onChange != null) {
@@ -281,8 +281,9 @@ class FoTextInputComponent
 }
 
 class SelectionChangeEvent {
-  final String before;
-  final String after;
+  final String labelBefore;
+  final String labelAfter;
+  final String value;
 
-  SelectionChangeEvent(this.before, this.after);
+  SelectionChangeEvent(this.labelBefore, this.labelAfter, this.value);
 }
