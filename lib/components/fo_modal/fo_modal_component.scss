@@ -39,6 +39,7 @@
 
       div#modalHeader {
         @include fo-button-vertical-padding(0.2em);
+        @include fo-button-horizontal-padding(0.4em);
         display: flex;
         border-bottom-style: solid;
         border-bottom-width: 1px;
@@ -60,7 +61,7 @@
           }
         }
         fo-button {
-          font-size: 0.7em;
+          font-size: 1em;
           margin-left: 1.5em;
         }
       }

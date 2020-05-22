@@ -22,6 +22,9 @@ class FoImageFileComponent implements OnDestroy {
   final String msgInvalidFile =
       Intl.message('invalid file', name: 'invalid_file');
 
+  Map<String, String> get styles =>
+      {'filter': brightnessFilter, 'background-image': 'url($source)'};
+
   @Input()
   String accept = 'image/jpg,image/jpeg,image/png,image/gif';
 
@@ -61,6 +64,16 @@ class FoImageFileComponent implements OnDestroy {
 
   @Input()
   int brightness = 100;
+
+  void onDelete() {
+    if (disabled != true) {
+      fileInput.value = null;
+      clearSource();
+    }
+  }
+
+  @ViewChild('fileInput')
+  dom.InputElement fileInput;
 
   String _base64Data = '';
   bool invalidFile = false;
@@ -193,6 +206,9 @@ class FoImageFileComponent implements OnDestroy {
     /// Done reading metadata, read actual image
     _reader.readAsDataUrl(_file);
   }
+
+  String get backgroundImage =>
+      source?.isEmpty != false ? 'url($source)' : null;
 
   void _generateScaledImage(dom.ProgressEvent e) {
     final b64 = StringBuffer()..write(_reader.result.toString());

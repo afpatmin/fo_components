@@ -1,5 +1,12 @@
-# 1.10.0+1
+# 1.10.2+1
 * Bugfix: TextInput and TextAreaInput sometimes didn't update error output
+
+# 1.10.2
+* ImageFile now cropping and maintaining size
+
+# 1.10.1
+* Bugfix: Modal close button no longer inherits horizontal-padding
+* Style: Modal close button font size now 1em (up from 0.7em)
 
 # 1.10.0
 * Breaking: Changed signature of TextInput's SelectionChangeEvent (added 'value' member) 

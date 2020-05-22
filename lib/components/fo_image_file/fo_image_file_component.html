@@ -1,25 +1,22 @@
 <label>{{label}}</label>
 <div class="container"
+     [class.border]="source == null || source.isEmpty"
      (dragenter)="$event.preventDefault()"
      (dragover)="$event.preventDefault()"
-     (drop)="onDrop($event)">
-     <div *ngIf="source != null && !source.isEmpty"
-          class="image">
-          <img class="box-shadow"
-               [src]="source"
-               alt="{{alt}}"
-               [style.filter]="brightnessFilter" />
-          <fo-button class="delete color-alert"
-                     white
-                     [materialIcon]="materialIcons"
-                     [disabled]="disabled"
-                     (trigger)="fileInput.value = null; clearSource()"
-                     icon="delete">
-          </fo-button>
-     </div>
+     (drop)="onDrop($event)"
+     (click)="fileInput.click()">
+     <div id="image"
+          [ngStyle]="styles"></div>
+     <fo-icon *ngIf="source != null && source.isNotEmpty"
+              icon="delete"
+              id="delete"
+              square
+              white
+              [material]="materialIcons"
+              (click)="onDelete(); $event.stopPropagation()">
+     </fo-icon>
      <ng-container *ngIf="source == null || source.isEmpty">
           <fo-icon class="add"
-                   (click)="fileInput.click()"
                    [material]="materialIcons"
                    [icon]="addIcon">
           </fo-icon>
