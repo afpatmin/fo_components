@@ -1,3 +1,6 @@
+# 1.10.0+1
+* Bugfix: TextInput and TextAreaInput sometimes didn't update error output
+
 # 1.10.0
 * Breaking: Changed signature of TextInput's SelectionChangeEvent (added 'value' member) 
 

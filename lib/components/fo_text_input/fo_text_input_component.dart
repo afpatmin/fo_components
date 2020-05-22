@@ -20,7 +20,9 @@ import 'fo_error_output_component.dart';
 @Component(
     selector: 'fo-text-input',
     templateUrl: 'fo_text_input_component.html',
-    styleUrls: ['fo_text_input_component.css'],
+    styleUrls: [
+      'fo_text_input_component.css'
+    ],
     directives: [
       AutoFocusDirective,
       FoButtonComponent,
@@ -32,9 +34,12 @@ import 'fo_error_output_component.dart';
       NgClass,
       NgIf
     ],
-    pipes: [CapitalizePipe],
-    providers: [datepickerBindings],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    pipes: [
+      CapitalizePipe
+    ],
+    providers: [
+      datepickerBindings
+    ])
 class FoTextInputComponent
     implements ControlValueAccessor<String>, AfterViewInit, OnDestroy {
   @Input()
@@ -99,7 +104,6 @@ class FoTextInputComponent
   ChangeFunction<String> _onChange;
 
   NgControl control;
-  final ChangeDetectorRef _changeDetectorRef;
   final StreamController<html.Event> _clearButtonController =
       StreamController<html.Event>();
   final StreamController<FoButtonEvent> actionButtonController =
@@ -115,8 +119,7 @@ class FoTextInputComponent
   html.Element host;
   html.InputElement inputElement;
   bool hasFocus = false;
-  FoTextInputComponent(
-      @Self() @Optional() this.control, this.host, this._changeDetectorRef) {
+  FoTextInputComponent(@Self() @Optional() this.control, this.host) {
     if (control != null) control.valueAccessor = this;
   }
 
@@ -210,7 +213,6 @@ class FoTextInputComponent
     /// Delay has focus a little bit so that the dropdown list has time to detect click before being removed
     Future.delayed(Duration(milliseconds: 100)).then((_) {
       hasFocus = false;
-      _changeDetectorRef.markForCheck();
     });
     _blurController.add(value);
   }
@@ -276,7 +278,6 @@ class FoTextInputComponent
   @override
   void writeValue(String obj) {
     value = obj;
-    _changeDetectorRef.markForCheck();
   }
 }
 

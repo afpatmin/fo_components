@@ -10,7 +10,9 @@ import 'fo_error_output_component.dart';
 @Component(
     selector: 'fo-textarea-input',
     templateUrl: 'fo_textarea_input_component.html',
-    styleUrls: ['fo_textarea_input_component.css'],
+    styleUrls: [
+      'fo_textarea_input_component.css'
+    ],
     directives: [
       FoErrorOutputComponent,
       FoLabelComponent,
@@ -18,8 +20,9 @@ import 'fo_error_output_component.dart';
       NgClass,
       NgIf
     ],
-    pipes: [CapitalizePipe],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    pipes: [
+      CapitalizePipe
+    ])
 class FoTextAreaInputComponent
     implements ControlValueAccessor<String>, AfterViewInit, OnDestroy {
   @Input()
@@ -37,7 +40,6 @@ class FoTextAreaInputComponent
   @Input()
   int rows = 5;
 
-  final ChangeDetectorRef _changeDetectorRef;
   bool hasFocus = false;
   String value;
   ChangeFunction<String> _onChange;
@@ -46,8 +48,7 @@ class FoTextAreaInputComponent
   final html.Element _host;
   html.TextAreaElement inputElement;
 
-  FoTextAreaInputComponent(
-      @Self() @Optional() this.control, this._host, this._changeDetectorRef) {
+  FoTextAreaInputComponent(@Self() @Optional() this.control, this._host) {
     if (control != null) control.valueAccessor = this;
   }
 
@@ -110,7 +111,6 @@ class FoTextAreaInputComponent
   @override
   void writeValue(String obj) {
     value = obj;
-    _changeDetectorRef.markForCheck();
   }
 
   @override
