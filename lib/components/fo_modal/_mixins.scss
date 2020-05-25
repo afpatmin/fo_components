@@ -23,7 +23,7 @@
       div#modalContent {
         div#modalHeader,
         div#modalFooter {
-          padding: $vertical $horizontal !important;
+          padding: $vertical 0 !important;
         }
         div#modalMain {
           padding-left: $horizontal !important;

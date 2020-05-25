@@ -1,4 +1,7 @@
 # 1.10.2+1
+* Bugfix: Modal padding mixin did double padding
+
+# 1.10.2+1
 * Bugfix: TextInput and TextAreaInput sometimes didn't update error output
 
 # 1.10.2
