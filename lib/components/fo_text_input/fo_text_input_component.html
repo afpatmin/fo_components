@@ -37,7 +37,8 @@
   <fo-error-output *ngIf="(hasFocus == true || hideErrorsOnBlur == false) && errorMessage != null && control?.pristine != true && dropdownVisible == false"
                    [message]="errorMessage">
   </fo-error-output>
-  <fo-dropdown-list [options]="options"
+  <fo-dropdown-list *ngIf="options != null"
+                    [options]="options"
                     [showCategoryLabels]="showDropdownCategoryLabels"
                     [offsetTop]="null"
                     [attr.noShadow]="noFocusShadow"
