@@ -1,3 +1,6 @@
+# 1.10.2+3
+* Bugfix: TextInput no longer adding dropdown to template when options is null
+
 # 1.10.2+2
 * Bugfix: Modal padding mixin did double padding
 
