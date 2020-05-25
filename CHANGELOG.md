@@ -1,4 +1,4 @@
-# 1.10.2+1
+# 1.10.2+2
 * Bugfix: Modal padding mixin did double padding
 
 # 1.10.2+1
