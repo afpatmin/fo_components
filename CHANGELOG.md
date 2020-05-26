@@ -1,5 +1,6 @@
 # 1.10.3
 * Added css directive [cover] to ImageFile
+* Added default height 40px to ImageFile
 
 # 1.10.2+4
 * Bugfix: Fixed a crash in TextInput with dropdown options introduced with 1.10.2+1
