@@ -1,3 +1,6 @@
+# 1.10.3+1
+* ImageFile no longer repeats (whoops)
+
 # 1.10.3
 * Added css directive [cover] to ImageFile
 * Added default height 40px to ImageFile
