@@ -115,12 +115,18 @@ class FoTextInputComponent
   final StreamController<html.FocusEvent> _focusController =
       StreamController<html.FocusEvent>();
   final StreamController<String> _blurController = StreamController<String>();
+  StreamSubscription _windowResizeSub;
   bool _dropdownVisible = false;
   html.Element host;
   html.InputElement inputElement;
   bool hasFocus = false;
+  int dropdownWidth;
+
   FoTextInputComponent(@Self() @Optional() this.control, this.host) {
     if (control != null) control.valueAccessor = this;
+
+    _windowResizeSub = html.window.onResize.listen(
+        (_) => dropdownWidth = host.getBoundingClientRect().width.toInt() - 2);
   }
 
   /// Action button triggered
@@ -142,11 +148,9 @@ class FoTextInputComponent
           (hasFocus == true && showDropdownOnFocus == true));
 
   set dropdownVisible(bool value) {
+    dropdownWidth = host.getBoundingClientRect().width.toInt() - 2;
     _dropdownVisible = value;
   }
-
-  int get dropdownWidth =>
-      host.getBoundingClientRect().width.toInt() - 2; // subtract borders
 
   String get errorMessage {
     final errors = control?.errors;
@@ -181,6 +185,9 @@ class FoTextInputComponent
   @Output('focus')
   Stream<html.FocusEvent> get focus => _focusController.stream;
 
+  String get noFocusShadow =>
+      host.attributes.containsKey('noFocusShadow') ? '1' : null;
+
   @Output('selectionChange')
   Stream<SelectionChangeEvent> get selectionChange =>
       _selectionChangeController.stream;
@@ -188,9 +195,6 @@ class FoTextInputComponent
   int get selectionEnd => inputElement?.selectionEnd;
 
   int get selectionStart => inputElement?.selectionStart;
-
-  String get noFocusShadow =>
-      host.attributes.containsKey('noFocusShadow') ? '1' : null;
 
   String get square => host.attributes.containsKey('square') ? '1' : null;
 
@@ -207,6 +211,7 @@ class FoTextInputComponent
     _focusController.close();
     _blurController.close();
     _clearButtonController.close();
+    _windowResizeSub.cancel();
   }
 
   void onBlur(html.Event event) {
@@ -216,6 +221,8 @@ class FoTextInputComponent
     });
     _blurController.add(value);
   }
+
+  int get dropdownTopOffset => square == null ? null : -1;
 
   void onClear(html.Event event) {
     // Prevent the input from gaining focus

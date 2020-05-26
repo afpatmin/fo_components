@@ -1,3 +1,7 @@
+# 1.10.2+4
+* Bugfix: Fixed a crash in TextInput with dropdown options introduced with 1.10.2+1
+* Style: Minor style/alignment adjustments to TextInput and DropdownSelect 
+
 # 1.10.2+3
 * Bugfix: TextInput no longer adding dropdown to template when options is null
 
