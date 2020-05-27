@@ -1,3 +1,7 @@
+# 1.10.3+2
+* Style: minor adjustments to textInput and dropdown selects
+* Style: TextInput text color now set to darker gray instead of primaryColor and icon color is set to PrimaryColor instead of SecondaryColor
+
 # 1.10.3+1
 * ImageFile no longer repeats (whoops)
 
