@@ -1,5 +1,17 @@
+# 1.10.3+2
+* Style: minor adjustments to textInput and dropdown selects
+* Style: TextInput text color now set to darker gray instead of primaryColor and icon color is set to PrimaryColor instead of SecondaryColor
+
+# 1.10.3+1
+* ImageFile no longer repeats (whoops)
+
+# 1.10.3
+* Added css directive [cover] to ImageFile
+* Added default height 40px to ImageFile
+
 # 1.10.2+4
-* Style/Bugfix: fo-modal-padding mixin no longer causes header/button to have 0 horizontal padding
+* Bugfix: Fixed a crash in TextInput with dropdown options introduced with 1.10.2+1
+* Style: Minor style/alignment adjustments to TextInput and DropdownSelect 
 
 # 1.10.2+3
 * Bugfix: TextInput no longer adding dropdown to template when options is null

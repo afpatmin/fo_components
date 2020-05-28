@@ -163,6 +163,8 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
       ..stopPropagation();
   }
 
+  int get dropdownTopOffset => square == null ? null : -1;
+
   void onSelect(FoDropdownOptionRenderable event) {
     dropdownVisible = false;
     selectedOption = event;

@@ -3,6 +3,7 @@
 
 :host {
   div.container {
+    height: 40px;
     cursor: pointer;
     position: relative;
     border-style: dashed;
@@ -24,10 +25,10 @@
       width: 100%;
       height: 100%;
       z-index: 1;
-      background-size: cover;
+      background-size: contain;
       background-position: center center;
+      background-repeat: no-repeat;
     }
-
     fo-icon#delete {
       z-index: 2;
       font-size: 16px;
@@ -68,5 +69,12 @@
   }
   div.container:hover {
     background-color: white;
+  }
+}
+:host[cover] {
+  div.container {
+    div#image {
+      background-size: cover;
+    }
   }
 }

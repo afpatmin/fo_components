@@ -51,7 +51,7 @@ $transitionSpeed: 0.3s ease;
   @include fo-label-color($grayColor);
   @include fo-modal-colors(lighten($grayColorBright, 10%), $alertColor);
   @include fo-tab-panel-colors(darken($grayColor, $lightstep), $primaryColor);
-  @include fo-text-input-colors($primaryColor, $grayColorBright, $secondaryColor, $alertColor);
+  @include fo-text-input-colors(darken($grayColor, $lightstep), $grayColorBright, $primaryColor, $alertColor);
 
   material-spinner {
     border-color: $primaryColor;
