@@ -1,3 +1,6 @@
+# 1.10.3+3
+* Style/Bugfix: fo-modal-padding mixin no longer causes header/button to have 0 horizontal padding
+
 # 1.10.3+2
 * Style: minor adjustments to textInput and dropdown selects
 * Style: TextInput text color now set to darker gray instead of primaryColor and icon color is set to PrimaryColor instead of SecondaryColor
