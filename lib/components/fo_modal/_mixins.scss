@@ -25,6 +25,14 @@
         div#modalFooter {
           padding: $vertical 0 !important;
         }
+        div#modalHeader {
+          div#modalHeaderTitle {
+            margin-left: $horizontal;
+          }
+          fo-button {
+            margin-right: $horizontal;
+          }
+        }
         div#modalMain {
           padding-left: $horizontal !important;
           padding-right: $horizontal !important;

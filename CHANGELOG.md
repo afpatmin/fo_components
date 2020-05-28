@@ -1,3 +1,6 @@
+# 1.10.2+4
+* Style/Bugfix: fo-modal-padding mixin no longer causes header/button to have 0 horizontal padding
+
 # 1.10.2+3
 * Bugfix: TextInput no longer adding dropdown to template when options is null
 
