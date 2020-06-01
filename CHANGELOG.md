@@ -1,3 +1,6 @@
+# 1.10.3+4
+* Style/Bugfix: fo-modal-padding mixin no longer causes footer to have 0 horizontal padding
+
 # 1.10.3+3
 * Style/Bugfix: fo-modal-padding mixin no longer causes header/button to have 0 horizontal padding
 
