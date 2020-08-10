@@ -75,7 +75,7 @@ class FoDropdownComponent
   Stream<bool> get visibleChange => _visibleController.stream;
 
   String evaluateHeight() {
-    if (_content == null) {
+    if (_content == null || visible != true) {
       return '0px';
     }
     final height = _content.offsetHeight;
