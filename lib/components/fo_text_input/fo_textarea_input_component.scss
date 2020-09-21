@@ -11,8 +11,10 @@
   }
 
   textarea {
+    overflow: hidden;
     vertical-align: bottom;
     @include inputStyle;
+    background-color: #555;
     padding: 0.5em 0.25em;
     background-color: white;
     border-style: solid;

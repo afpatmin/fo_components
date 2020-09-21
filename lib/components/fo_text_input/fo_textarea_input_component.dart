@@ -40,6 +40,9 @@ class FoTextAreaInputComponent
   @Input()
   int rows = 5;
 
+  @Input()
+  bool elastic = false;
+
   bool hasFocus = false;
   String value;
   ChangeFunction<String> _onChange;
@@ -85,6 +88,12 @@ class FoTextAreaInputComponent
 
   void onValueChange(String event) {
     value = event;
+    if (elastic) {
+      inputElement.style.minHeight = '1em';
+      inputElement.style.minHeight =
+          '${inputElement.scrollHeight + 2}px'; // +2 because border is not included in scrollHeight
+    }
+
     if (_onChange != null) {
       _onChange(value);
     }
