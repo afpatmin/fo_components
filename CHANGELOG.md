@@ -1,3 +1,6 @@
+# 1.10.4
+* Feat: added input 'elastic' to TextAreaInput. Makes the component resize height automatically based on input
+
 # 1.10.3+5
 * Bugfix: Dropdown sometimes blocked content underneath even when dropdown was closed
 
