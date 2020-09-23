@@ -1,5 +1,6 @@
-# 1.10.4+1
+# 1.10.4+1 & 1.10.4+2
 * Bugfix: TextareaInput could not scroll
+* Bugfix: Elastic TextareaInput height now evaluated after view init
 
 # 1.10.4
 * Feat: added input 'elastic' to TextAreaInput. Makes the component resize height automatically based on input

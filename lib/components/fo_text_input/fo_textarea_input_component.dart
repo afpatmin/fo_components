@@ -130,5 +130,10 @@ class FoTextAreaInputComponent
   @override
   void ngAfterViewInit() {
     inputElement = _host.querySelector('textarea');
+    if (elastic) {
+      inputElement.style.minHeight = '1em';
+      inputElement.style.minHeight =
+          '${inputElement.scrollHeight + 2}px'; // +2 because border is not included in scrollHeight
+    }
   }
 }
