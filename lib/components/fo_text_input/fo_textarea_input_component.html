@@ -1,5 +1,6 @@
 <fo-label [value]="label">
   <textarea #textArea
+            [class.elastic]="elastic == true"
             [disabled]="disabled"
             [placeholder]="placeholder"
             [class.error]="control?.valid == false && control?.pristine != true"

@@ -11,7 +11,6 @@
   }
 
   textarea {
-    overflow: hidden;
     vertical-align: bottom;
     @include inputStyle;
     background-color: #555;
@@ -42,6 +41,10 @@
   textarea:focus {
     @include boxShadow();
   }
+}
+
+textarea.elastic {
+  overflow: hidden;
 }
 
 :host[noFocusShadow] {
