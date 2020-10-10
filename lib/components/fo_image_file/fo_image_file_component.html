@@ -13,7 +13,7 @@
               square
               white
               [material]="materialIcons"
-              (click)="onDelete(); $event.stopPropagation()">
+              (click)="onDelete($event)">
      </fo-icon>
      <ng-container *ngIf="source == null || source.isEmpty">
           <fo-icon class="add"

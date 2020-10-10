@@ -14,7 +14,9 @@ import 'fo_dropdown_option_component.dart';
 @Component(
     selector: 'fo-dropdown-list',
     templateUrl: 'fo_dropdown_list_component.html',
-    styleUrls: ['fo_dropdown_list_component.css'],
+    styleUrls: [
+      'fo_dropdown_list_component.css'
+    ],
     directives: [
       NgClass,
       NgFor,
@@ -25,8 +27,9 @@ import 'fo_dropdown_option_component.dart';
       formDirectives,
       FoTextInputComponent
     ],
-    pipes: [CapitalizePipe],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    pipes: [
+      CapitalizePipe
+    ])
 class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
   @Input()
   num width;

@@ -1,3 +1,9 @@
+# 2.0.0 (BREAKING CHANGES)
+* Updated angular dependency to 6.0.0
+* Updated min-sdk to 2.10.1
+* Removed deprecated DataTableComponent
+* Added OnPush changeDetectionStrategy to Label, Dropdown and DropdownOption
+
 # 1.10.4+1 & 1.10.4+2
 * Bugfix: TextareaInput could not scroll
 * Bugfix: Elastic TextareaInput height now evaluated after view init

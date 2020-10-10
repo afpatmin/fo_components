@@ -65,7 +65,8 @@ class FoImageFileComponent implements OnDestroy {
   @Input()
   int brightness = 100;
 
-  void onDelete() {
+  void onDelete(dom.Event e) {
+    e.stopPropagation();
     if (disabled != true) {
       fileInput.value = null;
       clearSource();
