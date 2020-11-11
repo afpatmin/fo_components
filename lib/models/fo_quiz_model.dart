@@ -54,7 +54,7 @@ class FoOptionModel {
   @JsonKey(nullable: false)
   int score;
 
-  @JsonKey(nullable: false)
+  @JsonKey(ignore: true)
   bool selected;
 
   FoQuizModel child;
