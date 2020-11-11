@@ -1,3 +1,6 @@
+# 2.0.1
+* Bugfix: FoQuizOption no longer serializing 'selected' property
+
 # 2.0.0 (BREAKING CHANGES)
 * Updated angular dependency to 6.0.0
 * Updated min-sdk to 2.10.1
