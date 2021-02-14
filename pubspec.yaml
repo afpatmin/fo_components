@@ -1,12 +1,12 @@
 name: fo_components
 description: A collection of Angular components for both common and less common use cases.
 homepage: https://github.com/afpatmin/fo_components
-version: 2.0.0+1
+version: 2.0.1+1
 environment:
   sdk: '>=2.10.1 <3.0.0'
 
 dependencies:
-  angular: ^6.0.0
+  angular: ^6.0.1
   angular_components: ^1.0.1
   angular_forms: ^3.0.0
   collection: ^1.14.13

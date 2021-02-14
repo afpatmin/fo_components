@@ -1,3 +1,6 @@
+# 2.0.1+1
+* Added attribute FoTextInput.autocomplete
+
 # 2.0.1
 * Bugfix: FoQuizOption no longer serializing 'selected' property
 
