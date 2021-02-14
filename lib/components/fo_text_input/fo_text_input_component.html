@@ -11,6 +11,7 @@
       {{leadingText}}
     </span>
     <input type="{{type}}"
+           [attr.autocomplete]="autocomplete"
            [autoFocus]="autoFocus"
            [disabled]="disabled == true"
            [placeholder]="placeholder"

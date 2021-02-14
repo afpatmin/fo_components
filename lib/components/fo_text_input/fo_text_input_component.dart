@@ -198,6 +198,8 @@ class FoTextInputComponent
 
   String get square => host.attributes.containsKey('square') ? '1' : null;
 
+  String get autocomplete => host.attributes['autocomplete'];
+
   @override
   void ngAfterViewInit() {
     inputElement = host.querySelector('input');
