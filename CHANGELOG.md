@@ -1,5 +1,6 @@
 # 2.0.1+1
 * Added attribute FoTextInput.autocomplete
+* Updated some dependencies in preparation for null safety
 
 # 2.0.1
 * Bugfix: FoQuizOption no longer serializing 'selected' property
