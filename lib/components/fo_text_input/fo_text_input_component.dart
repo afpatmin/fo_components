@@ -20,9 +20,7 @@ import 'fo_error_output_component.dart';
 @Component(
     selector: 'fo-text-input',
     templateUrl: 'fo_text_input_component.html',
-    styleUrls: [
-      'fo_text_input_component.css'
-    ],
+    styleUrls: ['fo_text_input_component.css'],
     directives: [
       AutoFocusDirective,
       FoButtonComponent,
@@ -34,12 +32,9 @@ import 'fo_error_output_component.dart';
       NgClass,
       NgIf
     ],
-    pipes: [
-      CapitalizePipe
-    ],
-    providers: [
-      datepickerBindings
-    ])
+    pipes: [CapitalizePipe],
+    providers: [datepickerBindings],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoTextInputComponent
     implements ControlValueAccessor<String>, AfterViewInit, OnDestroy {
   @Input()

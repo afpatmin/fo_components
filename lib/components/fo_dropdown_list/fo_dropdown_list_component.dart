@@ -14,9 +14,7 @@ import 'fo_dropdown_option_component.dart';
 @Component(
     selector: 'fo-dropdown-list',
     templateUrl: 'fo_dropdown_list_component.html',
-    styleUrls: [
-      'fo_dropdown_list_component.css'
-    ],
+    styleUrls: ['fo_dropdown_list_component.css'],
     directives: [
       NgClass,
       NgFor,
@@ -27,9 +25,8 @@ import 'fo_dropdown_option_component.dart';
       formDirectives,
       FoTextInputComponent
     ],
-    pipes: [
-      CapitalizePipe
-    ])
+    pipes: [CapitalizePipe],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
   @Input()
   num width;
@@ -59,8 +56,29 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
   @Input()
   int maxHeight;
 
+  @ViewChild(FoDropdownComponent)
+  FoDropdownComponent dropdown;
+
   @Input()
-  Map<String, List<FoDropdownOptionRenderable>> options;
+  set options(Map<String, List<FoDropdownOptionRenderable>> o) {
+    _options = o;
+    if (_options != null) {
+      for (final category in _options.values) {
+        for (final option in category) {
+          if (option?.renderImage != null) {
+            final image = html.ImageElement(src: option.renderImage);
+            image.onLoad.listen((_e) {
+              dropdown.evaluateHeight();
+            });
+          }
+        }
+      }
+    }
+  }
+
+  Map<String, List<FoDropdownOptionRenderable>> get options => _options;
+
+  Map<String, List<FoDropdownOptionRenderable>> _options;
 
   @Input()
   String filter;

@@ -13,16 +13,15 @@ import '../fo_label/fo_label_component.dart';
 @Component(
     selector: 'fo-dropdown-select',
     templateUrl: 'fo_dropdown_select_component.html',
-    styleUrls: [
-      'fo_dropdown_select_component.css'
-    ],
+    styleUrls: ['fo_dropdown_select_component.css'],
     directives: [
       coreDirectives,
       FoButtonComponent,
       FoDropdownListComponent,
       FoIconComponent,
       FoLabelComponent,
-    ])
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @Input()
   String label;
