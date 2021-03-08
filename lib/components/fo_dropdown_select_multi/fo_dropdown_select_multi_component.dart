@@ -10,11 +10,13 @@ import '../fo_dropdown_list/fo_dropdown_option.dart';
 import '../fo_dropdown_select/fo_dropdown_select_component.dart';
 
 @Component(
-    selector: 'fo-dropdown-select-multi',
-    templateUrl: 'fo_dropdown_select_multi_component.html',
-    styleUrls: ['fo_dropdown_select_multi_component.css'],
-    directives: [FoDropdownSelectComponent, NgClass, NgFor, NgIf],
-    pipes: [CapitalizePipe])
+  selector: 'fo-dropdown-select-multi',
+  templateUrl: 'fo_dropdown_select_multi_component.html',
+  styleUrls: ['fo_dropdown_select_multi_component.css'],
+  directives: [FoDropdownSelectComponent, NgClass, NgFor, NgIf],
+  pipes: [CapitalizePipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+)
 class FoDropdownSelectMultiComponent<T> implements AfterChanges, OnDestroy {
   final String msgAdd = Intl.message('add', name: 'add');
   final StreamController<List<T>> selectionChangeController =

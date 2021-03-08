@@ -1,3 +1,6 @@
+# 2.1.1
+* FoDropdownSelectMulti now has OnPush changeDetection
+
 # 2.1.0
 * FoModal, FoTextInput, FoTextareaInput, FoDropdownSelect now has OnPush changeDetection
 * Fixed issue where dropdown didn't update height properly when options contains images (see https://github.com/afpatmin/fo_components/issues/78)
