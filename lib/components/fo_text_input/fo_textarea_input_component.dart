@@ -8,21 +8,19 @@ import '../fo_label/fo_label_component.dart';
 import 'fo_error_output_component.dart';
 
 @Component(
-    selector: 'fo-textarea-input',
-    templateUrl: 'fo_textarea_input_component.html',
-    styleUrls: [
-      'fo_textarea_input_component.css'
-    ],
-    directives: [
-      FoErrorOutputComponent,
-      FoLabelComponent,
-      formDirectives,
-      NgClass,
-      NgIf
-    ],
-    pipes: [
-      CapitalizePipe
-    ])
+  selector: 'fo-textarea-input',
+  templateUrl: 'fo_textarea_input_component.html',
+  styleUrls: ['fo_textarea_input_component.css'],
+  directives: [
+    FoErrorOutputComponent,
+    FoLabelComponent,
+    formDirectives,
+    NgClass,
+    NgIf
+  ],
+  pipes: [CapitalizePipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+)
 class FoTextAreaInputComponent
     implements ControlValueAccessor<String>, AfterViewInit, OnDestroy {
   @Input()
