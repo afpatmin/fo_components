@@ -23,6 +23,8 @@ import 'fo_error_output_component.dart';
 )
 class FoTextAreaInputComponent
     implements ControlValueAccessor<String>, AfterViewInit, OnDestroy {
+  final ChangeDetectorRef _changeDetectorRef;
+
   @Input()
   String label;
 
@@ -49,7 +51,11 @@ class FoTextAreaInputComponent
   final html.Element _host;
   html.TextAreaElement inputElement;
 
-  FoTextAreaInputComponent(@Self() @Optional() this.control, this._host) {
+  FoTextAreaInputComponent(
+    @Self() @Optional() this.control,
+    this._host,
+    this._changeDetectorRef,
+  ) {
     if (control != null) control.valueAccessor = this;
   }
 
@@ -118,6 +124,7 @@ class FoTextAreaInputComponent
   @override
   void writeValue(String obj) {
     value = obj;
+    _changeDetectorRef.markForCheck();
   }
 
   @override

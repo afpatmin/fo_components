@@ -37,6 +37,7 @@ import 'fo_error_output_component.dart';
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoTextInputComponent
     implements ControlValueAccessor<String>, AfterViewInit, OnDestroy {
+  final ChangeDetectorRef _changeDetectorRef;
   @Input()
   String actionButtonLabel;
 
@@ -117,7 +118,8 @@ class FoTextInputComponent
   bool hasFocus = false;
   int dropdownWidth;
 
-  FoTextInputComponent(@Self() @Optional() this.control, this.host) {
+  FoTextInputComponent(
+      @Self() @Optional() this.control, this.host, this._changeDetectorRef) {
     if (control != null) control.valueAccessor = this;
 
     _windowResizeSub = html.window.onResize.listen(
@@ -282,6 +284,7 @@ class FoTextInputComponent
   @override
   void writeValue(String obj) {
     value = obj;
+    _changeDetectorRef.markForCheck();
   }
 }
 

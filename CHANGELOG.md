@@ -1,6 +1,7 @@
 # 2.1.1
 * FoDropdownSelectMulti and FoNumberInput now has OnPush changeDetection
-* FoTExtareaInput now has OnPush for real
+* FoTextareaInput now has OnPush for real
+* Fixed issue where FoTextInput/FoTextAreaInput didnt detect changes properly
 
 # 2.1.0
 * FoModal, FoTextInput, FoTextareaInput, FoDropdownSelect now has OnPush changeDetection
