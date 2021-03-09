@@ -16,17 +16,19 @@ import 'package:intl/intl.dart';
 import '../../pipes/capitalize_pipe.dart';
 
 @Component(
-    selector: 'fo-number-input',
-    styleUrls: ['fo_number_input_component.css'],
-    templateUrl: 'fo_number_input_component.html',
-    directives: [
-      coreDirectives,
-      FoButtonComponent,
-      FoLabelComponent,
-      FoTextInputComponent,
-      formDirectives,
-    ],
-    pipes: [CapitalizePipe])
+  selector: 'fo-number-input',
+  styleUrls: ['fo_number_input_component.css'],
+  templateUrl: 'fo_number_input_component.html',
+  directives: [
+    coreDirectives,
+    FoButtonComponent,
+    FoLabelComponent,
+    FoTextInputComponent,
+    formDirectives,
+  ],
+  pipes: [CapitalizePipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+)
 class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
   final html.Element _host;
   ChangeFunction<int> _onChange;

@@ -1,5 +1,5 @@
 # 2.1.1
-* FoDropdownSelectMulti now has OnPush changeDetection
+* FoDropdownSelectMulti and FoNumberInput now has OnPush changeDetection
 * FoTExtareaInput now has OnPush for real
 
 # 2.1.0
