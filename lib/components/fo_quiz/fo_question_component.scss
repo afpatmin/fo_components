@@ -42,6 +42,9 @@
     color: white;
     display: flex;
     justify-content: space-between;
+    fo-button.is-hidden {
+      display: none;
+    }
     div#left {
       width: 100px;
     }

@@ -7,10 +7,12 @@ import '../../models/fo_quiz_model.dart';
 import 'fo_question_component.dart';
 
 @Component(
-    selector: 'fo-quiz',
-    templateUrl: 'fo_quiz_component.html',
-    styleUrls: ['fo_quiz_component.css'],
-    directives: [FoQuestionComponent, NgFor])
+  selector: 'fo-quiz',
+  templateUrl: 'fo_quiz_component.html',
+  styleUrls: ['fo_quiz_component.css'],
+  directives: [FoQuestionComponent, NgFor],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+)
 class FoQuizComponent implements OnInit, OnDestroy {
   FoQuestionModel activeQuestion;
 
@@ -23,10 +25,12 @@ class FoQuizComponent implements OnInit, OnDestroy {
   bool disabled = false;
 
   @Input()
-  String buttonColor = '#aaa';
+  String buttonColor = '#888';
 
   @Input()
-  String buttonColorActive = '#888';
+  @Deprecated(
+      'This has been deprecated and will be removed in next major release')
+  String buttonColorActive = '#aaa';
 
   final String quiz_previous = Intl.message('previous', name: 'quiz_previous');
 

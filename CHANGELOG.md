@@ -1,3 +1,8 @@
+# 2.2.0
+* FoQuiz now uses changeDetection.OnPush
+* Visual improvements to FoQuiz
+* Deprecated FoQuiz input 'buttonColorActive', only input used now is buttonColor, 'active' button color is now set internally
+
 # 2.1.1
 * FoDropdownSelectMulti and FoNumberInput now has OnPush changeDetection
 * FoTextareaInput now has OnPush for real

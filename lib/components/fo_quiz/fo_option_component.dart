@@ -6,10 +6,12 @@ import 'package:fo_components/components/fo_button/fo_button_component.dart';
 import '../../models/fo_quiz_model.dart';
 
 @Component(
-    selector: 'fo-option',
-    templateUrl: 'fo_option_component.html',
-    styleUrls: ['fo_option_component.css'],
-    directives: [FoButtonComponent, NgIf])
+  selector: 'fo-option',
+  templateUrl: 'fo_option_component.html',
+  styleUrls: ['fo_option_component.css'],
+  directives: [FoButtonComponent, NgIf],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+)
 class FoOptionComponent implements OnDestroy {
   final StreamController<FoOptionModel> _triggerController = StreamController();
 
@@ -21,12 +23,6 @@ class FoOptionComponent implements OnDestroy {
 
   @Input()
   String buttonColor;
-
-  @Input()
-  String buttonColorActive;
-
-  String get currentButtonColor =>
-      model.selected == true ? buttonColorActive : buttonColor;
 
   @Output('trigger')
   Stream<FoOptionModel> get onTrigger => _triggerController.stream;

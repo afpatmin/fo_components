@@ -9,21 +9,19 @@ import 'fo_option_component.dart';
 import 'fo_quiz_component.dart';
 
 @Component(
-    selector: 'fo-question',
-    templateUrl: 'fo_question_component.html',
-    styleUrls: [
-      'fo_question_component.css'
-    ],
-    directives: [
-      FoButtonComponent,
-      FoOptionComponent,
-      FoQuizComponent,
-      NgFor,
-      NgIf
-    ],
-    pipes: [
-      CapitalizePipe
-    ])
+  selector: 'fo-question',
+  templateUrl: 'fo_question_component.html',
+  styleUrls: ['fo_question_component.css'],
+  directives: [
+    FoButtonComponent,
+    FoOptionComponent,
+    FoQuizComponent,
+    NgFor,
+    NgIf
+  ],
+  pipes: [CapitalizePipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+)
 class FoQuestionComponent implements AfterChanges, OnDestroy {
   bool leftHidden = true;
   bool rightHidden = true;
@@ -31,6 +29,7 @@ class FoQuestionComponent implements AfterChanges, OnDestroy {
   FoQuizModel currentChildQuiz;
   final StreamController<FoQuestionModel> prevController = StreamController();
   final StreamController<FoQuestionModel> doneController = StreamController();
+  final ChangeDetectorRef _changeDetectorRef;
 
   @Input()
   FoQuestionModel model;
@@ -42,15 +41,12 @@ class FoQuestionComponent implements AfterChanges, OnDestroy {
   String buttonColor;
 
   @Input()
-  String buttonColorActive;
-
-  @Input()
   String prevButtonLabel;
 
   @Input()
   String nextButtonLabel;
 
-  FoQuestionComponent();
+  FoQuestionComponent(this._changeDetectorRef);
 
   @Output('prev')
   Stream<FoQuestionModel> get onPrev => prevController.stream;
@@ -75,6 +71,7 @@ class FoQuestionComponent implements AfterChanges, OnDestroy {
     });
     Future.delayed(Duration(milliseconds: 600)).then((_) {
       rightHidden = false;
+      _changeDetectorRef.markForCheck();
     });
   }
 
