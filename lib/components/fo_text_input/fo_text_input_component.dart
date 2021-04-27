@@ -260,6 +260,7 @@ class FoTextInputComponent
         (actionButtonLabel != null && event?.keyCode == html.KeyCode.ENTER ||
             event?.keyCode == html.KeyCode.MAC_ENTER &&
                 value?.isEmpty == false)) {
+      event.stopPropagation();
       actionButtonController.add(FoButtonEvent());
     }
   }
