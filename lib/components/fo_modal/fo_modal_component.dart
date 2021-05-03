@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:html' as dom;
 import 'package:angular/angular.dart';
 import 'package:fo_components/components/fo_button/fo_button_component.dart';
 
@@ -19,9 +18,6 @@ class FoModalComponent implements OnDestroy {
     _onVisibleChangeController.add(false);
     visible = false;
   }
-
-  String get transform =>
-      'translateX(-${0.5 * (dom.window.innerWidth - dom.document.documentElement.clientWidth)}px)';
 
   @Input()
   String header;
