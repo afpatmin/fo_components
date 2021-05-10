@@ -32,6 +32,9 @@ class FoQuestionComponent implements AfterChanges, OnDestroy {
   final ChangeDetectorRef _changeDetectorRef;
 
   @Input()
+  int index;
+
+  @Input()
   FoQuestionModel model;
 
   @Input()

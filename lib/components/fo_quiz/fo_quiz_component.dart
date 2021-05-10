@@ -15,6 +15,7 @@ import 'fo_question_component.dart';
 )
 class FoQuizComponent implements OnInit, OnDestroy {
   FoQuestionModel activeQuestion;
+  int activeIndex;
 
   final _doneController = StreamController<FoQuizDoneEvent>();
 
@@ -56,24 +57,27 @@ class FoQuizComponent implements OnInit, OnDestroy {
   @override
   void ngOnInit() {
     activeQuestion = model.questions.first;
+    activeIndex = 0;
   }
 
   void onQuestionDone(FoQuestionModel question) {
-    final index = model.questions.indexOf(question);
+    activeIndex = model.questions.indexOf(question);
 
-    if (index == model.questions.length - 1) {
+    if (activeIndex == model.questions.length - 1) {
       _doneController
           .add(FoQuizDoneEvent(_calcScore(model), _calcMaxPoints(model)));
     } else {
-      activeQuestion = model.questions[index + 1];
+      activeIndex++;
+      activeQuestion = model.questions[activeIndex];
     }
   }
 
   void onQuestionPrev(FoQuestionModel question) {
-    final index = model.questions.indexOf(question);
-    print(index);
-    if (index > 0) {
-      activeQuestion = model.questions[index - 1];
+    activeIndex = model.questions.indexOf(question);
+
+    if (activeIndex > 0) {
+      activeIndex--;
+      activeQuestion = model.questions[activeIndex];
     }
   }
 
