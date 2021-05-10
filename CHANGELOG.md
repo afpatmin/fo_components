@@ -1,3 +1,6 @@
+# 2.2.1
+* Added index to FoQuestion label
+
 # 2.2.0
 * FoQuiz now uses changeDetection.OnPush
 * Visual improvements to FoQuiz
