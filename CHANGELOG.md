@@ -1,5 +1,6 @@
 # 2.2.1
 * Added index to FoQuestion label
+* Calculate and store maxScore in FoQuiz OnInit
 
 # 2.2.0
 * FoQuiz now uses changeDetection.OnPush

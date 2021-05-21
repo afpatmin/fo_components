@@ -54,18 +54,20 @@ class FoQuizComponent implements OnInit, OnDestroy {
     _doneController.close();
   }
 
+  int maxPoints;
+
   @override
   void ngOnInit() {
     activeQuestion = model.questions.first;
     activeIndex = 0;
+    maxPoints = _calcMaxPoints(model);
   }
 
   void onQuestionDone(FoQuestionModel question) {
     activeIndex = model.questions.indexOf(question);
 
     if (activeIndex == model.questions.length - 1) {
-      _doneController
-          .add(FoQuizDoneEvent(_calcScore(model), _calcMaxPoints(model)));
+      _doneController.add(FoQuizDoneEvent(_calcScore(model), maxPoints));
     } else {
       activeIndex++;
       activeQuestion = model.questions[activeIndex];
