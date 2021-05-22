@@ -16,6 +16,7 @@ import 'fo_question_component.dart';
 class FoQuizComponent implements OnInit, OnDestroy {
   FoQuestionModel activeQuestion;
   int activeIndex;
+  final ChangeDetectorRef _changeDetectorRef;
 
   final _doneController = StreamController<FoQuizDoneEvent>();
 
@@ -38,6 +39,8 @@ class FoQuizComponent implements OnInit, OnDestroy {
   final String quiz_send = Intl.message('send', name: 'quiz_send');
 
   final String quiz_next = Intl.message('next', name: 'quiz_next');
+
+  FoQuizComponent(this._changeDetectorRef);
 
   String get nextButtonLabel =>
       activeQuestion == model.questions.last ? quiz_send : quiz_next;
@@ -76,6 +79,7 @@ class FoQuizComponent implements OnInit, OnDestroy {
   void restart() {
     activeQuestion = model.questions.first;
     activeIndex = 0;
+    _changeDetectorRef.markForCheck();
   }
 
   void onQuestionPrev(FoQuestionModel question) {
