@@ -58,8 +58,7 @@ class FoQuizComponent implements OnInit, OnDestroy {
 
   @override
   void ngOnInit() {
-    activeQuestion = model.questions.first;
-    activeIndex = 0;
+    restart();
     maxPoints = _calcMaxPoints(model);
   }
 
@@ -72,6 +71,11 @@ class FoQuizComponent implements OnInit, OnDestroy {
       activeIndex++;
       activeQuestion = model.questions[activeIndex];
     }
+  }
+
+  void restart() {
+    activeQuestion = model.questions.first;
+    activeIndex = 0;
   }
 
   void onQuestionPrev(FoQuestionModel question) {
