@@ -1,4 +1,5 @@
 # 2.2.1
+* Changed Modal maxheight to 87vh (down from 95vh to accomodate ios bottom navbar)
 * Added index to FoQuestion label
 * Calculate and store maxScore in FoQuiz OnInit
 * Added method FoQuiz.restart() 
