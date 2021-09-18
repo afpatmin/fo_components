@@ -1,10 +1,4 @@
-@import 'package:angular_components/material_icon/mixins';
-
 :host {
   display: inline-flex;
   align-items: center;
-
-  material-icon {
-    @include material-icon-size(1em);
-  }
 }

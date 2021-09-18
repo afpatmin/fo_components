@@ -5,13 +5,11 @@
     -moz-user-select: none;
     -ms-user-select: none;
 
-    material-icon {
+    fo-icon {
       cursor: pointer;
     }
   }
   div#ratingContainer.disabled {
     opacity: 0.5;
   }
-
-
 }
