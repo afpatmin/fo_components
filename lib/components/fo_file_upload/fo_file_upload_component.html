@@ -10,8 +10,7 @@
   <p *ngIf="!valid"
      class="margin-top-small margin-bottom-small">
     <fo-button (trigger)="input.click()"
-               dense
-               white
+               [white]="true"
                [materialIcon]="materialIcon"
                [disabled]="disabled"
                icon="folder_open">
@@ -19,8 +18,7 @@
   </p>
   <p *ngIf="valid"
      class="margin-top-small margin-bottom-small">
-    <fo-button dense
-               white
+    <fo-button [white]="true"
                [disabled]="disabled || !valid"
                [materialIcon]="materialIcon"
                (trigger)="upload()"
@@ -36,6 +34,6 @@
     </ng-container>
   </p>
   <p class="color-alert"
-     *ngIf="file != null && file.size > maxByteSize"> {{msgMaxFilesizeExceeded | capitalize}}
+     *ngIf="file != null && file.size > maxByteSize"> {{$pipe.capitalize(msgMaxFilesizeExceeded)}}
     ({{(maxByteSize/1024).ceil()}}kb) </p>
 </div>

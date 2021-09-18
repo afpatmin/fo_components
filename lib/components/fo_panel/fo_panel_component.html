@@ -1,8 +1,8 @@
 <div id="foPanel"
      *ngIf="visible">
   <div id="panelHeader">
-    <h3>{{header | capitalize}}</h3>
-    <fo-button white
+    <h3>{{$pipe.capitalize(header)}}</h3>
+    <fo-button [white]="true"
                icon="close"
                (trigger)="onClose()">
     </fo-button>

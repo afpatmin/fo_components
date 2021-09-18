@@ -94,9 +94,7 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
       StreamController<FoDropdownOptionRenderable>();
   Map<String, List<FoDropdownOptionRenderable>> _filteredOptions = {};
 
-  final html.Element _host;
-
-  FoDropdownListComponent(this._host);
+  FoDropdownListComponent();
 
   Map<String, List<FoDropdownOptionRenderable>> get filteredOptions =>
       _filteredOptions;
@@ -104,9 +102,11 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
   @Output('select')
   Stream<FoDropdownOptionRenderable> get select => _selectController.stream;
 
-  String? get noShadow => _host.attributes.containsKey('noShadow') ? '1' : null;
+  @Input()
+  bool shadow = true;
 
-  String? get square => _host.attributes.containsKey('square') ? '1' : null;
+  @Input()
+  bool square = false;
 
   @Output('visibleChange')
   Stream<bool> get visibleChange => visibleController.stream;

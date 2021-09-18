@@ -4,6 +4,7 @@
      [style.height]="height"
      [style.opacity]="opacity"
      [class.visible]="visible"
+     [class.noShadow]="shadow == false"
      (click)="$event.stopPropagation()">
   <div id="dropdownContent"
        [style.width]="elementWidth"

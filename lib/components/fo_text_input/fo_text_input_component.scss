@@ -60,47 +60,39 @@
   div#flexContainer:focus-within {
     @include boxShadow();
   }
-}
 
-:host[noFocusShadow] {
-  div#flexContainer:focus-within {
-    box-shadow: none;
-    -webkit-box-shadow: none;
-  }
-}
-
-:host[noLeftBorder] {
-  fo-label {
+  fo-label.noLeftBorder {
     div#flexContainer {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       border-left-width: 0;
     }
   }
-}
 
-:host[noRightBorder] {
-  fo-label {
+  fo-label.noRightBorder {
     div#flexContainer {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
       border-right-width: 0;
     }
   }
-}
 
-:host[centerValue] {
-  fo-label {
+  fo-label.noFocusShadow {
+    div#flexContainer:focus-within {
+      box-shadow: none;
+      -webkit-box-shadow: none;
+    }
+  }
+
+  fo-label.centerValue {
     div#flexContainer {
       input {
         text-align: center;
       }
     }
   }
-}
 
-:host[square] {
-  fo-label {
+  fo-label.square {
     div#flexContainer {
       border-radius: 0;
     }

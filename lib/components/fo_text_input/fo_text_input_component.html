@@ -1,4 +1,9 @@
-<fo-label [value]="label">
+<fo-label [value]="label"
+          [class.noLeftBorder]="leftBorder == false"
+          [class.noRightBorder]="rightBorder == false"
+          [class.noFocusShadow]="focusShadow == false"
+          [class.centerValue]="centerValue"
+          [class.square]="square">
   <div id="flexContainer"
        [class.error]="control?.valid == false && control?.pristine != true"
        [class.disabled]="disabled == true">
@@ -12,7 +17,7 @@
     </span>
     <input type="{{type}}"
            [attr.autocomplete]="autocomplete"
-           [autoFocus]="autoFocus"
+           [attr.autoFocus]="autoFocus"
            [disabled]="disabled == true"
            [placeholder]="placeholder"
            [ngModel]="value"
@@ -31,7 +36,7 @@
                [label]="actionButtonLabel"
                [icon]="actionButtonIcon"
                [materialIcon]="materialIcons"
-               square
+               [square]="true"
                [disabled]="disabled || control?.valid == false || value?.isEmpty != false"
                (trigger)="actionButtonController?.add($event)"></fo-button>
   </div>
@@ -42,7 +47,7 @@
                     [options]="options"
                     [showCategoryLabels]="showDropdownCategoryLabels"
                     [offsetTop]="dropdownTopOffset"
-                    [attr.noShadow]="noFocusShadow"
+                    [shadow]="focusShadow"
                     [attr.square]="square"
                     [filter]="filterValue"
                     [maxHeight]="dropdownMaxHeight"

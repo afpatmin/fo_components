@@ -25,8 +25,7 @@ import 'fo_error_output_component.dart';
       FoLabelComponent,
       formDirectives,
       FoIconComponent,
-      NgClass,
-      NgIf
+      coreDirectives,
     ],
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
@@ -82,6 +81,9 @@ class FoTextInputComponent
   bool constrainToViewPort = true;
 
   @Input()
+  bool centerValue = false;
+
+  @Input()
   String type = 'text';
 
   @Input()
@@ -114,6 +116,15 @@ class FoTextInputComponent
   bool hasFocus = false;
   int? dropdownWidth;
 
+  @Input()
+  bool leftBorder = true;
+
+  @Input()
+  bool rightBorder = true;
+
+  @Input()
+  bool focusShadow = true;
+
   FoTextInputComponent(
       @Self() @Optional() this.control, this.host, this._changeDetectorRef) {
     control?.valueAccessor = this;
@@ -127,6 +138,8 @@ class FoTextInputComponent
   Stream<FoButtonEvent> get actionButtonTrigger =>
       actionButtonController.stream;
 
+  String? get autocomplete => host.attributes['autocomplete'];
+
   /// Component lost focus
   @Output('blur')
   Stream<String> get blur => _blurController.stream;
@@ -134,6 +147,8 @@ class FoTextInputComponent
   /// Clear icon is clicked
   @Output('clear')
   Stream<html.Event> get clear => _clearButtonController.stream;
+
+  int? get dropdownTopOffset => square ? null : -1;
 
   bool get dropdownVisible =>
       (_dropdownVisible && (value.isNotEmpty || filterOptions != true) ||
@@ -177,9 +192,6 @@ class FoTextInputComponent
   @Output('focus')
   Stream<html.FocusEvent> get focus => _focusController.stream;
 
-  String? get noFocusShadow =>
-      host.attributes.containsKey('noFocusShadow') ? '1' : null;
-
   @Output('selectionChange')
   Stream<SelectionChangeEvent> get selectionChange =>
       _selectionChangeController.stream;
@@ -188,9 +200,8 @@ class FoTextInputComponent
 
   int? get selectionStart => inputElement.selectionStart;
 
-  String? get square => host.attributes.containsKey('square') ? '1' : null;
-
-  String? get autocomplete => host.attributes['autocomplete'];
+  @Input()
+  bool square = false;
 
   @override
   void ngAfterViewInit() {
@@ -215,8 +226,6 @@ class FoTextInputComponent
     });
     _blurController.add(value);
   }
-
-  int? get dropdownTopOffset => square == null ? null : -1;
 
   void onClear(html.Event event) {
     // Prevent the input from gaining focus

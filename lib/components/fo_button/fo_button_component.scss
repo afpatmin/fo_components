@@ -58,50 +58,35 @@
       }
     }
   }
-}
 
-:host[noLeftBorder] {
-  button {
+  button.noLeftBorder {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-left-width: 0;
   }
-}
-
-:host[noRightBorder] {
-  button {
+  button.noRightBorder {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     border-right-width: 0;
   }
-}
-
-:host[white] {
-  button {
+  button.white {
     color: inherit;
     background-color: white;
     border-color: #dde2e9;
   }
-}
 
-:host[clearSize] {
-  button {
+  button.clearSize {
     padding-left: 0.25rem;
     padding-right: 0.25rem;
   }
-}
-
-:host[fullWidth] {
-  width: 100%;
-
-  button {
+  button.fullWidth {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
-}
-
-:host[square] {
-  button {
+  button.square {
     border-radius: 0;
   }
+}
+:host.fullWidth {
+  width: 100%;
 }

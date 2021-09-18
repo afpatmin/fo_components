@@ -1,6 +1,4 @@
-<material-icon *ngIf="material == true"                              
-               baseline
-               [icon]="icon"></material-icon>
+<span *ngIf="material == true">{{icon}}</span>
 <ng-container *ngIf="material != true">
   <span [class]="iconClass"
         [style.font-size]="size">

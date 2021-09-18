@@ -6,7 +6,7 @@
                     [attr.square]="square"
                     [attr.noFocusShadow]="noFocusShadow"
                     [showSearch]="showSearch"
-                    [actionButtonLabel]="msgAdd | capitalize"
+                    [actionButtonLabel]="$pipe.capitalize(msgAdd)"
                     [materialIcons]="materialIcons"
                     [dropdownMaxHeight]="dropdownMaxHeight"
                     [constrainToViewPort]="constrainToViewPort"

@@ -2,10 +2,10 @@
 <div id="flexContainer"
      class="themeable">
   <div id="leftButton">
-    <fo-button noRightBorder
-               fullWidth
+    <fo-button [rightBorder]="false"
+               class="fullWidth"
                [attr.tabindex]="tabIndexSub"
-               [attr.square]="square"
+               [square]="square"
                [disabled]="disabled || (value != null && value <= min)"
                [materialIcon]="materialIcons"
                (mousedown)="onMouseDown(-step)"
@@ -13,10 +13,10 @@
                icon="remove">
     </fo-button>
   </div>
-  <fo-text-input noRightBorder
-                 noLeftBorder
-                 centerValue
-                 noFocusShadow
+  <fo-text-input [leftBorder]="false"
+                 [rightBorder]="false"
+                 [centerValue]="true"
+                 [focusShadow]="false"
                  pattern="[0-9]*"
                  inputmode="numeric"
                  [attr.tabindex]="tabIndex"
@@ -27,10 +27,10 @@
                  (blur)="onInputBlur($event)"
                  (ngModelChange)="setValueClamped($event)"></fo-text-input>
   <div id="rightButton">
-    <fo-button noLeftBorder
-               fullWidth
+    <fo-button [leftBorder]="false"
+               class="fullWidth"
                [attr.tabindex]="tabIndexAdd"
-               [attr.square]="square"
+               [square]="square"
                [disabled]="disabled || (value != null && value >= max)"
                [materialIcon]="materialIcons"
                (mousedown)="onMouseDown(step)"

@@ -2,6 +2,11 @@
         class="themeable background-color-primary"
         [style.background-color]="themeBackgroundColor"
         [style.border-color]="themeBackgroundColor"
+        [class.white]="white"
+        [class.square]="square"
+        [class.noLeftBorder]="leftBorder != true"
+        [class.noRightBorder]="rightBorder != true"
+        [class.clearSize]="clearSize"
         (click)="onClick()">
   <div id="leading"
        *ngIf="label != null && leadingIcon != null">

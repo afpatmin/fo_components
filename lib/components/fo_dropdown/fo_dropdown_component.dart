@@ -19,6 +19,9 @@ class FoDropdownComponent
 
   bool _visible = false;
 
+  @Input()
+  bool shadow = true;
+
   /// Vertical offset in pixels
   @Input()
   int? offsetTop;

@@ -13,19 +13,16 @@ class FoButtonComponent implements OnDestroy {
   @Input()
   String? label;
 
-  @Input()
-
   /// Button icon, don't use when the button has a label (use leading-/trailingIcon for that)
+  @Input()
   String? icon;
 
-  @Input()
-
   /// Only use when the button also has a label
+  @Input()
   String? leadingIcon;
 
-  @Input()
-
   /// Only use when the button also has a label
+  @Input()
   String? trailingIcon;
 
   /// Set text/icon color dynamically, overrides any color set by mixins and attributes
@@ -55,6 +52,21 @@ class FoButtonComponent implements OnDestroy {
       StreamController<FoButtonEvent>();
 
   FoButtonComponent();
+
+  @Input()
+  bool white = false;
+
+  @Input()
+  bool square = false;
+
+  @Input()
+  bool rightBorder = true;
+
+  @Input()
+  bool leftBorder = true;
+
+  @Input()
+  bool clearSize = false;
 
   @override
   void ngOnDestroy() {

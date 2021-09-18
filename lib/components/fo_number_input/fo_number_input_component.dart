@@ -30,9 +30,8 @@ import '../../pipes/capitalize_pipe.dart';
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
-  final html.Element _host;
   ChangeFunction<int>? _onChange;
-  NgControl control;
+  NgControl? control;
   int? value;
   StreamSubscription<html.KeyboardEvent>? _keyUpListener;
   StreamSubscription<html.MouseEvent>? _mouseUpListener;
@@ -46,7 +45,8 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
 
   final String msgEnterValue = Intl.message('enter value', name: 'enter_value');
 
-  String? get square => _host.attributes.containsKey('square') ? '1' : null;
+  @Input()
+  bool square = false;
 
   @Input()
   bool disabled = false;
@@ -72,11 +72,8 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
   @Input()
   String trailingText = '';
 
-  FoNumberInputComponent(
-      @Self() @Optional() this.control,
-      @Attribute('tabindex') this.tabIndex,
-      this._changeDetectorRef,
-      this._host) {
+  FoNumberInputComponent(@Self() @Optional() this.control,
+      @Attribute('tabindex') this.tabIndex, this._changeDetectorRef) {
     try {
       tabIndexNum = tabIndex == null ? null : int.parse(tabIndex!);
     } on FormatException catch (e) {
@@ -87,7 +84,7 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
     _touchEndListener = html.document.onTouchEnd.listen(onMouseUp);
     _keyUpListener = html.document.onKeyUp.listen(onMouseUp);
 
-    control.valueAccessor = this;
+    control?.valueAccessor = this;
   }
 
   String get formattedValue => value == null ? '-' : value.toString();
