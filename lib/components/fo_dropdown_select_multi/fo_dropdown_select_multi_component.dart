@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:html' as dom;
 
 import 'package:angular/angular.dart';
 import 'package:collection/collection.dart';
@@ -24,8 +23,6 @@ class FoDropdownSelectMultiComponent<T> implements AfterChanges, OnDestroy {
 
   final _equal = ListEquality().equals;
 
-  final dom.Element _host;
-
   @Input()
   String? label;
 
@@ -39,8 +36,8 @@ class FoDropdownSelectMultiComponent<T> implements AfterChanges, OnDestroy {
 
   bool _selectedIdsChanged = true;
 
-  @Input('options')
-  Map<String, List<FoDropdownOptionRenderable>> allOptions = {};
+  @Input()
+  Map<String, List<FoDropdownOptionRenderable>> options = {};
 
   /// Max height of the dropdown, in pixels
   @Input()
@@ -58,13 +55,19 @@ class FoDropdownSelectMultiComponent<T> implements AfterChanges, OnDestroy {
 
   Map<String, List<FoDropdownOptionRenderable>> filteredOptions = {};
 
-  Object? selectedId;
+  T? selectedId;
 
   List<FoDropdownOptionRenderable> addedOptions = [];
 
-  FoDropdownSelectMultiComponent(this._host);
+  @Input()
+  bool square = false;
+
+  @Input()
+  bool focusShadow = true;
+  FoDropdownSelectMultiComponent();
 
   List<T> get selectedIds => _selectedIds;
+
   @Input('selectedIds')
   set selectedIds(List<T> value) {
     _selectedIdsChanged = !_equal(value, _selectedIds);
@@ -73,13 +76,6 @@ class FoDropdownSelectMultiComponent<T> implements AfterChanges, OnDestroy {
 
   @Output('selectedIdsChange')
   Stream<List<T>> get selectedIdsChange => selectionChangeController.stream;
-
-  String? get square => _host.attributes.containsKey('square') ? '1' : null;
-
-  String? get dense => _host.attributes.containsKey('dense') ? '1' : null;
-
-  String? get noFocusShadow =>
-      _host.attributes.containsKey('noFocusShadow') ? '1' : null;
 
   @override
   void ngAfterChanges() {
@@ -97,12 +93,12 @@ class FoDropdownSelectMultiComponent<T> implements AfterChanges, OnDestroy {
     selectionChangeController.close();
   }
 
-  void onAdd(T id, {bool outputEvent = true}) {
+  void onAdd(T? id, {bool outputEvent = true}) {
     if (disabled != true) {
-      for (final category in allOptions.keys) {
+      for (final category in options.keys) {
         try {
-          final match = allOptions[category]!
-              .firstWhere((option) => option.renderId == id);
+          final match =
+              options[category]!.firstWhere((option) => option.renderId == id);
           addedOptions.add(match);
           _updateFilteredOptions(outputEvent: outputEvent);
           break;
@@ -121,8 +117,8 @@ class FoDropdownSelectMultiComponent<T> implements AfterChanges, OnDestroy {
   void _updateFilteredOptions({bool outputEvent = true}) {
     // Reset filtered options to contain all options
     filteredOptions = <String, List<FoDropdownOptionRenderable>>{};
-    for (final category in allOptions.keys) {
-      filteredOptions[category] = allOptions[category]!.toList();
+    for (final category in options.keys) {
+      filteredOptions[category] = options[category]!.toList();
     }
 
     // Remove any options found in addedOptions list

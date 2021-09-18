@@ -14,7 +14,7 @@ class FoIconComponent implements AfterChanges {
   String size = '1em !important';
 
   @Input()
-  String icon = '';
+  String? icon;
 
   /// If this flag is set, fo_icon uses material icon instead
   @Input()

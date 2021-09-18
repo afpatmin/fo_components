@@ -6,7 +6,7 @@
                class="fullWidth"
                [attr.tabindex]="tabIndexSub"
                [square]="square"
-               [disabled]="disabled || (value != null && value <= min)"
+               [disabled]="disabled || (value != null && value! <= min)"
                [materialIcon]="materialIcons"
                (mousedown)="onMouseDown(-step)"
                (keydown)="onKeyDown($event, -step)"
@@ -20,7 +20,7 @@
                  pattern="[0-9]*"
                  inputmode="numeric"
                  [attr.tabindex]="tabIndex"
-                 [attr.square]="square"
+                 [square]="square"
                  [disabled]="disabled"
                  [options]="options"
                  [ngModel]="value?.toString()"
@@ -31,13 +31,13 @@
                class="fullWidth"
                [attr.tabindex]="tabIndexAdd"
                [square]="square"
-               [disabled]="disabled || (value != null && value >= max)"
+               [disabled]="disabled || (value != null && value! >= max)"
                [materialIcon]="materialIcons"
                (mousedown)="onMouseDown(step)"
                (keydown)="onKeyDown($event, step)"
                icon="add">
     </fo-button>
   </div>
-  <span *ngIf="trailingText?.isNotEmpty == true"
+  <span *ngIf="trailingText.isNotEmpty"
         id="trailing">{{trailingText}}</span>
 </div>

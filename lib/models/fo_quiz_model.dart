@@ -34,7 +34,7 @@ class FoQuestionModel {
 @JsonSerializable()
 class FoOptionModel {
   FoOptionModel(this.value, this.label,
-      {required this.child, this.selected = false, this.score = 0});
+      {this.child, this.selected = false, this.score = 0});
 
   factory FoOptionModel.fromJson(Map<String, dynamic> json) =>
       _$FoOptionModelFromJson(json);

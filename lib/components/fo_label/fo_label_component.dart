@@ -8,5 +8,5 @@ import 'package:angular/angular.dart';
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoLabelComponent {
   @Input()
-  String value = '';
+  String? value;
 }

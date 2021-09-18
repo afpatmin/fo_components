@@ -20,7 +20,7 @@
 <fo-quiz *ngIf="currentChildQuiz != null"
          [disabled]="disabled"
          [buttonColor]="buttonColor"
-         [model]="currentChildQuiz"
+         [model]="currentChildQuiz!"
          (done)="onChildQuizDone($event)">
 </fo-quiz>
 <div id="stepButtons"
@@ -30,7 +30,7 @@
                [white]="true"
                [square]="true"
                class="fullWidth"
-               [label]="$pipe.capitalize(prevButtonLabel)"
+               [label]="$pipe.capitalize(prevButtonLabel!)"
                [themeBackgroundColor]="buttonColor"
                (trigger)="onPrevTrigger()">
     </fo-button>
@@ -40,7 +40,7 @@
                [white]="true"
                [square]="true"
                class="fullWidth"
-               [label]="$pipe.capitalize(nextButtonLabel)"
+               [label]="$pipe.capitalize(nextButtonLabel!)"
                [themeBackgroundColor]="buttonColor"
                (trigger)="onNextTrigger()">
     </fo-button>

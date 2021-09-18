@@ -32,6 +32,7 @@ import 'fo_error_output_component.dart';
 class FoTextInputComponent
     implements ControlValueAccessor<String>, AfterViewInit, OnDestroy {
   final ChangeDetectorRef _changeDetectorRef;
+
   @Input()
   String? actionButtonLabel;
 
@@ -138,7 +139,8 @@ class FoTextInputComponent
   Stream<FoButtonEvent> get actionButtonTrigger =>
       actionButtonController.stream;
 
-  String? get autocomplete => host.attributes['autocomplete'];
+  @Input()
+  String? autocomplete;
 
   /// Component lost focus
   @Output('blur')

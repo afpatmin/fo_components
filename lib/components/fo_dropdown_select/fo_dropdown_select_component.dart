@@ -59,12 +59,11 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
 
   final ChangeDetectorRef _changeDetectorRef;
 
-  final StreamController<Object> _selectedIdController =
-      StreamController<Object>();
+  final StreamController<Object?> _selectedIdController =
+      StreamController<Object?>();
 
   final StreamController<FoButtonEvent> _actionButtonController =
       StreamController<FoButtonEvent>();
-  final dom.Element _host;
   bool dropdownVisible = false;
   FoDropdownOptionRenderable? selectedOption;
 
@@ -73,11 +72,19 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @ViewChild('selector')
   dom.Element? selectorElement;
 
-  FoDropdownSelectComponent(this._host, this._changeDetectorRef);
+  @Input()
+  bool square = false;
+
+  @Input()
+  bool focusShadow = true;
+
+  FoDropdownSelectComponent(this._changeDetectorRef);
 
   @Output('actionButtonTrigger')
   Stream<FoButtonEvent> get actionButtonTrigger =>
       _actionButtonController.stream;
+
+  int get dropdownTopOffset => square ? 0 : -1;
 
   int? get dropdownWidth =>
       selectorElement?.getBoundingClientRect().width.round();
@@ -109,12 +116,7 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   }
 
   @Output('selectedIdChange')
-  Stream<Object> get selectedIdChange => _selectedIdController.stream;
-
-  String? get noFocusShadow =>
-      _host.attributes.containsKey('noFocusShadow') ? '1' : null;
-
-  String? get square => _host.attributes.containsKey('square') ? '1' : null;
+  Stream<Object?> get selectedIdChange => _selectedIdController.stream;
 
   @override
   void ngAfterChanges() {
@@ -153,8 +155,6 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
       ..preventDefault()
       ..stopPropagation();
   }
-
-  int? get dropdownTopOffset => square == null ? null : -1;
 
   void onSelect(FoDropdownOptionRenderable event) {
     dropdownVisible = false;

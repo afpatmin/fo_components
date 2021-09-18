@@ -11,7 +11,7 @@
                  [icon]="selectedOption?.renderIcon"
                  [material]="materialIcons">
         </fo-icon>
-        <span>{{selectedOption == null ? placeholder : selectedOption.renderLabel}}</span>
+        <span>{{selectedOption == null ? placeholder : selectedOption!.renderLabel!}}</span>
       </div>
       <fo-icon class="arrow"
                [material]="true"
@@ -19,15 +19,15 @@
     </div>
     <fo-button *ngIf="actionButtonLabel != null"
                [label]="actionButtonLabel"
-               square
+               [square]="square"
                [disabled]="disabled || selectedOption == null"
                (trigger)="onActionButtonTrigger($event)"></fo-button>
   </div>
 </fo-label>
 
 <fo-dropdown-list *ngIf="options != null && dropdownVisible == true && disabled != true"
-                  [attr.noShadow]="noFocusShadow"
-                  [attr.square]="square"
+                  [shadow]="focusShadow"
+                  [square]="square"
                   [options]="options"
                   [offsetTop]="dropdownTopOffset"
                   [showSearch]="showSearch"

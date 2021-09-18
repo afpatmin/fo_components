@@ -22,6 +22,9 @@ class FoDropdownComponent
   @Input()
   bool shadow = true;
 
+  @Input()
+  bool square = false;
+
   /// Vertical offset in pixels
   @Input()
   int? offsetTop;

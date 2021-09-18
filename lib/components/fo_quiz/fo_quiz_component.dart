@@ -27,7 +27,16 @@ class FoQuizComponent implements OnInit, OnDestroy {
   bool disabled = false;
 
   @Input()
-  String buttonColor = '#888';
+  set buttonColor(String? v) {
+    if (v == null) {
+      _buttonColor = '#888';
+    } else {
+      _buttonColor = v;
+    }
+  }
+
+  String _buttonColor = '#888';
+  String get buttonColor => _buttonColor;
 
   final String quiz_previous = Intl.message('previous', name: 'quiz_previous');
 

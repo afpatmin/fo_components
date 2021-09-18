@@ -1,7 +1,6 @@
 <fo-dropdown *ngIf="options != null && filteredOptions != null"
              [width]="width"
              [shadow]="shadow"
-             [attr.square]="square"
              [offsetTop]="offsetTop"
              [offsetHorizontal]="offsetHorizontal"
              [maxHeight]="maxHeight"
@@ -11,7 +10,7 @@
   <div id="filterContainer"
        *ngIf="showSearch == true">
     <fo-text-input [autoFocus]="visible"
-                   [attr.square]="square"
+                   [square]="square"
                    [focusShadow]="false"
                    [placeholder]="$pipe.capitalize(msgFilter)"
                    [ngModel]="filter"
