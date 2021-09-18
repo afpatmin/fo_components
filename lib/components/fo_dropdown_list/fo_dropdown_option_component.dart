@@ -10,7 +10,7 @@ import 'fo_dropdown_option.dart';
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDropdownOptionComponent {
   @Input()
-  FoDropdownOptionRenderable model;
+  FoDropdownOptionRenderable? model;
 
   @Input()
   bool materialIcon = true;

@@ -29,7 +29,7 @@ import 'fo_dropdown_option_component.dart';
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
   @Input()
-  num width;
+  num? width;
 
   @Input()
   bool visible = false;
@@ -47,30 +47,28 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
   bool materialIcons = true;
 
   @Input()
-  int offsetTop;
+  int offsetTop = 0;
 
   /// Horizontal offset in pixels
   @Input()
-  int offsetHorizontal;
+  int offsetHorizontal = 0;
 
   @Input()
-  int maxHeight;
+  int? maxHeight;
 
   @ViewChild(FoDropdownComponent)
-  FoDropdownComponent dropdown;
+  FoDropdownComponent? dropdown;
 
   @Input()
   set options(Map<String, List<FoDropdownOptionRenderable>> o) {
     _options = o;
-    if (_options != null) {
-      for (final category in _options.values) {
-        for (final option in category) {
-          if (option?.renderImage != null) {
-            final image = html.ImageElement(src: option.renderImage);
-            image.onLoad.listen((_e) {
-              dropdown.evaluateHeight();
-            });
-          }
+    for (final category in _options.values) {
+      for (final option in category) {
+        if (option.renderImage != null) {
+          final image = html.ImageElement(src: option.renderImage);
+          image.onLoad.listen((_e) {
+            dropdown?.evaluateHeight();
+          });
         }
       }
     }
@@ -78,10 +76,10 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
 
   Map<String, List<FoDropdownOptionRenderable>> get options => _options;
 
-  Map<String, List<FoDropdownOptionRenderable>> _options;
+  Map<String, List<FoDropdownOptionRenderable>> _options = {};
 
   @Input()
-  String filter;
+  String? filter;
 
   @Input()
   bool showSearch = false;
@@ -91,10 +89,10 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
     ..id = null
     ..label = '-';
 
-  final StreamController visibleController = StreamController<bool>();
-  final StreamController _selectController =
+  final StreamController<bool> visibleController = StreamController<bool>();
+  final StreamController<FoDropdownOptionRenderable> _selectController =
       StreamController<FoDropdownOptionRenderable>();
-  Map<String, List<FoDropdownOptionRenderable>> _filteredOptions;
+  Map<String, List<FoDropdownOptionRenderable>> _filteredOptions = {};
 
   final html.Element _host;
 
@@ -106,9 +104,9 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
   @Output('select')
   Stream<FoDropdownOptionRenderable> get select => _selectController.stream;
 
-  String get noShadow => _host.attributes.containsKey('noShadow') ? '1' : null;
+  String? get noShadow => _host.attributes.containsKey('noShadow') ? '1' : null;
 
-  String get square => _host.attributes.containsKey('square') ? '1' : null;
+  String? get square => _host.attributes.containsKey('square') ? '1' : null;
 
   @Output('visibleChange')
   Stream<bool> get visibleChange => visibleController.stream;
@@ -136,23 +134,21 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
     _selectController.add(option);
   }
 
-  void updateFilteredOptions(String value) {
+  void updateFilteredOptions(String? value) {
     if (value == null || value.isEmpty) {
       _filteredOptions = Map.from(options);
     } else {
       _filteredOptions = {};
       for (final category in options.keys) {
         final v = value.toLowerCase();
-        _filteredOptions[category] = options[category]
+        _filteredOptions[category] = options[category]!
             .where((option) =>
                 option.renderLabel.toLowerCase().contains(v) ||
-                (option.renderTags != null &&
-                    option.renderTags
-                        .where((tag) =>
-                            tag != null && tag.toLowerCase().contains(v))
-                        .isNotEmpty))
+                (option.renderTags
+                    .where((tag) => tag.toLowerCase().contains(v))
+                    .isNotEmpty))
             .toList(growable: false);
-        if (_filteredOptions[category].isEmpty) {
+        if (_filteredOptions[category]!.isEmpty) {
           _filteredOptions.remove(category);
         }
       }

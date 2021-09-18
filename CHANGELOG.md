@@ -1,3 +1,10 @@
+# 3.0.0 - null safety (BREAKING CHANGES)
+* Updated angular dependency to 7.0.0 and added null-safety
+* Removed NotificationComponent
+* Temporarily Removed radio buttons from carousel
+* Removed dependency on angular_components
+
+
 # 2.2.1
 * Changed Modal maxheight to 87vh (down from 95vh to accomodate ios bottom navbar)
 * Added index to FoQuestion label

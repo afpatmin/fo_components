@@ -15,17 +15,17 @@ class FoDropdownComponent
     implements AfterViewInit, OnDestroy, AfterContentChecked {
   /// Width in pixels
   @Input()
-  num width;
+  num? width;
 
   bool _visible = false;
 
   /// Vertical offset in pixels
   @Input()
-  int offsetTop;
+  int? offsetTop;
 
   /// Horizontal offset in pixels
   @Input()
-  int offsetHorizontal;
+  int? offsetHorizontal;
 
   /// When this is set to true, the dropdown will stay in the viewport on the vertical axis
   @Input()
@@ -33,25 +33,25 @@ class FoDropdownComponent
 
   /// Overrides constrainToViewPort
   @Input()
-  int maxHeight;
+  int? maxHeight;
 
   final ChangeDetectorRef _changeDetectorRef;
-  final StreamController _visibleController = StreamController<bool>();
-  StreamSubscription<html.Event> _documentScrollSub;
-  StreamSubscription<html.Event> _windowResizeSub;
+  final StreamController<bool> _visibleController = StreamController<bool>();
+  StreamSubscription<html.Event>? _documentScrollSub;
+  StreamSubscription<html.Event>? _windowResizeSub;
   int _elementMaxHeight = 100;
   final html.Element host;
-  String height;
-  Element _content;
+  String? height;
+  Element? _content;
 
   FoDropdownComponent(this.host, this._changeDetectorRef);
 
   String get elementMaxHeight =>
       maxHeight == null ? '${_elementMaxHeight}px' : '${maxHeight}px';
   String get elementWidth => width == null ? 'auto' : '${width}px';
-  String get left => offsetHorizontal == null ? null : '${offsetHorizontal}px';
+  String? get left => offsetHorizontal == null ? null : '${offsetHorizontal}px';
   String get opacity => visible == true ? '1' : '0';
-  String get top => offsetTop == null ? null : '${offsetTop}px';
+  String? get top => offsetTop == null ? null : '${offsetTop}px';
   bool get visible => _visible;
 
   @Input()
@@ -78,7 +78,7 @@ class FoDropdownComponent
     if (_content == null || visible != true) {
       return '0px';
     }
-    final height = _content.offsetHeight;
+    final height = _content!.offsetHeight;
 
     _changeDetectorRef.markForCheck();
     return height > _elementMaxHeight
@@ -107,14 +107,14 @@ class FoDropdownComponent
   }
 
   void _evaluateMaxHeight(_) {
-    final parentRect = host.parent.getBoundingClientRect();
+    final parentRect = host.parent!.getBoundingClientRect();
     var newY = parentRect.bottom.round();
     if (constrainToViewPort == true) {
       newY = max(0, newY);
       _elementMaxHeight =
-          html.document.documentElement.clientHeight - newY - 10;
+          html.document.documentElement!.clientHeight - newY - 10;
     } else {
-      _elementMaxHeight = html.document.body.clientHeight - newY;
+      _elementMaxHeight = html.document.body!.clientHeight - newY;
     }
     _changeDetectorRef.markForCheck();
   }

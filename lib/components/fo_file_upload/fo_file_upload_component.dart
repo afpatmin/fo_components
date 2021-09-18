@@ -17,8 +17,8 @@ import '../fo_icon/fo_icon_component.dart';
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FileUploadComponent implements OnDestroy {
   final StreamController<dom.File> onUploadController = StreamController();
-  dom.FileUploadInputElement _fileInput;
-  dom.File file;
+  dom.FileUploadInputElement? _fileInput;
+  dom.File? file;
 
   final String msgMaxFilesizeExceeded =
       Intl.message('max filesize exceeded', name: 'max_filesize_exceeded');
@@ -42,7 +42,7 @@ class FileUploadComponent implements OnDestroy {
 
   @Output('upload')
   Stream<dom.File> get onUploadOutput => onUploadController.stream;
-  bool get valid => file != null && file.size <= maxByteSize;
+  bool get valid => file != null && file!.size <= maxByteSize;
 
   void clearSelection() {
     file = null;
@@ -58,17 +58,17 @@ class FileUploadComponent implements OnDestroy {
     event.preventDefault();
     if (disabled != true) {
       final dt = event.dataTransfer;
-      file = (dt.files.isEmpty) ? null : file = dt.files.last;
+      file = (dt.files!.isEmpty) ? null : file = dt.files!.last;
     }
   }
 
   void onFileChange(dom.Event event) {
-    _fileInput = event.target;
-    file = (_fileInput.files.isNotEmpty) ? _fileInput.files.last : null;
+    _fileInput = event.target as dom.FileUploadInputElement;
+    file = (_fileInput!.files!.isNotEmpty) ? _fileInput!.files!.last : null;
   }
 
   void upload() {
-    onUploadController.add(file);
+    onUploadController.add(file!);
     clearSelection();
   }
 }

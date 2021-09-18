@@ -20,19 +20,19 @@ class FoModalComponent implements OnDestroy {
   }
 
   @Input()
-  String header;
+  String? header;
 
   @Input()
-  String buttonColor;
+  String? buttonColor;
 
   @Input()
-  String buttonBackgroundColor;
+  String? buttonBackgroundColor;
 
   @Input()
   bool materialIcon = true;
 
   @Input()
-  String error;
+  String? error;
 
   @Input()
   bool visible = false;

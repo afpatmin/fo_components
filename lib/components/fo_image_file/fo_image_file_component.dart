@@ -68,24 +68,24 @@ class FoImageFileComponent implements OnDestroy {
   void onDelete(dom.Event e) {
     e.stopPropagation();
     if (disabled != true) {
-      fileInput.value = null;
+      fileInput!.value = null;
       clearSource();
     }
   }
 
   @ViewChild('fileInput')
-  dom.InputElement fileInput;
+  dom.InputElement? fileInput;
 
   String _base64Data = '';
   bool invalidFile = false;
-  int _byteSize;
+  int _byteSize = 0;
   int _orientation = 0;
   final dom.FileReader _metaReader = dom.FileReader();
   final dom.FileReader _reader = dom.FileReader();
   final ChangeDetectorRef _changeDetectorRef;
   final StreamController<String> _onSourceChangeController = StreamController();
-  dom.FileUploadInputElement _fileInput;
-  dom.File _file;
+  dom.FileUploadInputElement? _fileInput;
+  dom.File? _file;
 
   FoImageFileComponent(this._changeDetectorRef) {
     _metaReader.onLoad.listen(_extractExifOrientationAndLoadImage);
@@ -110,7 +110,7 @@ class FoImageFileComponent implements OnDestroy {
     event.preventDefault();
     final dt = event.dataTransfer;
     try {
-      if (dt.files.isNotEmpty) _processFile(dt.files.last);
+      if (dt.files!.isNotEmpty) _processFile(dt.files!.last);
     } on Exception catch (e) {
       invalidFile = true;
       print(e);
@@ -118,9 +118,9 @@ class FoImageFileComponent implements OnDestroy {
   }
 
   void onFileChange(dom.Event event) {
-    _fileInput = event.target;
+    _fileInput = event.target as dom.FileUploadInputElement;
     try {
-      if (_fileInput.files.isNotEmpty) _processFile(_fileInput.files.last);
+      if (_fileInput!.files!.isNotEmpty) _processFile(_fileInput!.files!.last);
     } on Exception catch (e) {
       invalidFile = true;
       print(e);
@@ -130,15 +130,15 @@ class FoImageFileComponent implements OnDestroy {
   /// Loads image only after exif orientation has been extracted
   void _extractExifOrientationAndLoadImage(dom.ProgressEvent e) {
     _orientation = 0;
-    final buffer = Uint8List(e.loaded)
-      ..setRange(0, e.loaded, _metaReader.result);
+    final buffer = Uint8List(e.loaded!)
+      ..setRange(0, e.loaded!, _metaReader.result as Iterable<int>);
 
     final byteData = ByteData.view(buffer.buffer);
 
     /// skip first two bytes (0xFF 0xD8) indicating this is is a jpg file
     var byteOffset = 2;
 
-    while (byteOffset <= e.loaded) {
+    while (byteOffset <= e.loaded!) {
       /// First byte is always 0xFF and second byte (0x**) is always identifier of what comes next
       byteOffset += 1;
       final identifier = byteData.getUint8(byteOffset);
@@ -205,11 +205,11 @@ class FoImageFileComponent implements OnDestroy {
     }
 
     /// Done reading metadata, read actual image
-    _reader.readAsDataUrl(_file);
+    _reader.readAsDataUrl(_file!);
   }
 
-  String get backgroundImage =>
-      source?.isEmpty != false ? 'url($source)' : null;
+  String? get backgroundImage =>
+      source.isEmpty != false ? 'url($source)' : null;
 
   void _generateScaledImage(dom.ProgressEvent e) {
     final b64 = StringBuffer()..write(_reader.result.toString());
@@ -232,27 +232,27 @@ class FoImageFileComponent implements OnDestroy {
 
     temp.onLoad.listen((_) {
       dom.CanvasElement canvas;
+      final w = temp.width!;
+      final h = temp.height!;
 
       /// make sure the image is not bigger than maxDimension x maxDimension pixels, if it is, scale down and maintain aspect ratio
-      if (temp.width > maxWidth || temp.height > maxHeight) {
-        final scaleFactor = (temp.width > temp.height)
-            ? maxWidth.toDouble() / temp.width
-            : maxHeight.toDouble() / temp.height;
-        final scaledWidth = (temp.width * scaleFactor).toInt();
-        final scaledHeight = (temp.height * scaleFactor).toInt();
+      if (w > maxWidth || h > maxHeight) {
+        final scaleFactor =
+            (w > h) ? maxWidth.toDouble() / w : maxHeight.toDouble() / h;
+        final scaledWidth = (w * scaleFactor).toInt();
+        final scaledHeight = (h * scaleFactor).toInt();
 
         canvas = dom.CanvasElement(width: scaledWidth, height: scaledHeight);
         _transformContextExifOrientation(
             canvas, _orientation, scaledWidth, scaledHeight);
         canvas.context2D
           ..imageSmoothingEnabled = false
-          ..drawImageScaledFromSource(temp, 0, 0, temp.width, temp.height, 0, 0,
-              scaledWidth, scaledHeight);
+          ..drawImageScaledFromSource(
+              temp, 0, 0, w, h, 0, 0, scaledWidth, scaledHeight);
       } else {
-        canvas = dom.CanvasElement(width: temp.width, height: temp.height);
+        canvas = dom.CanvasElement(width: w, height: h);
         //final context = canvas.context2D;
-        _transformContextExifOrientation(
-            canvas, _orientation, temp.width, temp.height);
+        _transformContextExifOrientation(canvas, _orientation, w, h);
         canvas.context2D
           ..imageSmoothingEnabled = false
           ..drawImage(temp, 0, 0);
@@ -262,11 +262,11 @@ class FoImageFileComponent implements OnDestroy {
       _byteSize = maxByteSize + 1;
       var quality = 0.9;
       while (_byteSize > maxByteSize && quality > 0.1) {
-        source = canvas.toDataUrl(_file.type, quality);
+        source = canvas.toDataUrl(_file!.type, quality);
         quality -= 0.1;
 
-        if (source.contains('data:${_file.type};base64,')) {
-          _base64Data = source.substring('data:${_file.type};base64,'.length);
+        if (source.contains('data:${_file!.type};base64,')) {
+          _base64Data = source.substring('data:${_file!.type};base64,'.length);
           _byteSize = base64.decode(_base64Data).length;
         } else
           print('invalid src: $source');
@@ -277,22 +277,22 @@ class FoImageFileComponent implements OnDestroy {
   }
 
   void _processFile(dom.File file) {
-    _base64Data = source = null;
+    _base64Data = source = '';
     invalidFile = false;
     _file = file;
 
     /// Verify this is .jpeg/.png/.bmp/.gif
     /// JPG file - read EXIF metadata so that we can figure out image orientation and rotate accordingly
-    if (_file.type == 'image/jpeg' || _file.type == 'image/jpg') {
+    if (_file!.type == 'image/jpeg' || _file!.type == 'image/jpg') {
       /// EXIF specifications states metadata will always be in the first 64kb of the file, we double it just in case.
-      _metaReader.readAsArrayBuffer(_file.slice(0, 131072));
+      _metaReader.readAsArrayBuffer(_file!.slice(0, 131072));
     }
 
     /// Any other supported format, skip metadata
-    else if (_file.type == 'image/png' ||
-        _file.type == 'image/gif' ||
-        _file.type == 'image/bmp')
-      _reader.readAsDataUrl(_file);
+    else if (_file!.type == 'image/png' ||
+        _file!.type == 'image/gif' ||
+        _file!.type == 'image/bmp')
+      _reader.readAsDataUrl(_file!);
     else
       throw Exception('Invalid file');
   }

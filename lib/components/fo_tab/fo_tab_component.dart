@@ -19,16 +19,16 @@ class FoTabComponent {
   bool _active = false;
 
   @Input()
-  String label;
+  String? label;
 
   @Input()
-  String icon;
+  String? icon;
 
   @Input()
-  String labelColor;
+  String? labelColor;
 
   @Input()
-  String backgroundColor;
+  String? backgroundColor;
 
   final dom.Element _host;
 }

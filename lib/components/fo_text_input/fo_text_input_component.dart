@@ -2,9 +2,6 @@ import 'dart:async';
 import 'dart:html' as html;
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/angular_components.dart';
-import 'package:angular_components/focus/focus.dart';
-import 'package:angular_components/material_datepicker/module.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:fo_components/components/fo_icon/fo_icon_component.dart';
 import 'package:intl/intl.dart';
@@ -22,7 +19,6 @@ import 'fo_error_output_component.dart';
     templateUrl: 'fo_text_input_component.html',
     styleUrls: ['fo_text_input_component.css'],
     directives: [
-      AutoFocusDirective,
       FoButtonComponent,
       FoDropdownListComponent,
       FoErrorOutputComponent,
@@ -33,41 +29,40 @@ import 'fo_error_output_component.dart';
       NgIf
     ],
     pipes: [CapitalizePipe],
-    providers: [datepickerBindings],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoTextInputComponent
     implements ControlValueAccessor<String>, AfterViewInit, OnDestroy {
   final ChangeDetectorRef _changeDetectorRef;
   @Input()
-  String actionButtonLabel;
+  String? actionButtonLabel;
 
   @Input()
-  String actionButtonIcon;
+  String? actionButtonIcon;
 
   @Input()
   bool autoFocus = false;
 
   @Input()
-  String label;
+  String? label;
 
   @Input()
-  String leadingIcon;
+  String? leadingIcon;
 
   @Input()
-  String leadingText;
+  String? leadingText;
 
   @Input()
-  bool clearIcon;
+  bool? clearIcon;
 
   @Input()
-  String placeholder;
+  String? placeholder;
 
   /// Set to false if you want all options appear regardless of what the user types
   @Input()
   bool filterOptions = true;
 
   @Input()
-  Map<String, List<FoDropdownOptionRenderable>> options;
+  Map<String, List<FoDropdownOptionRenderable>> options = {};
 
   @Input()
   bool showDropdownCategoryLabels = true;
@@ -77,7 +72,7 @@ class FoTextInputComponent
 
   /// Max height of options dropdown, in pixels
   @Input()
-  int dropdownMaxHeight;
+  int? dropdownMaxHeight;
 
   @Input()
   bool disabled = false;
@@ -95,11 +90,12 @@ class FoTextInputComponent
   @Input()
   bool materialIcons = true;
 
-  String value;
+  String value = '';
 
-  ChangeFunction<String> _onChange;
+  ChangeFunction<String>? _onChange;
 
-  NgControl control;
+  NgControl? control;
+
   final StreamController<html.Event> _clearButtonController =
       StreamController<html.Event>();
   final StreamController<FoButtonEvent> actionButtonController =
@@ -111,16 +107,16 @@ class FoTextInputComponent
   final StreamController<html.FocusEvent> _focusController =
       StreamController<html.FocusEvent>();
   final StreamController<String> _blurController = StreamController<String>();
-  StreamSubscription _windowResizeSub;
+  late StreamSubscription _windowResizeSub;
   bool _dropdownVisible = false;
-  html.Element host;
-  html.InputElement inputElement;
+  late html.Element host;
+  late html.InputElement inputElement;
   bool hasFocus = false;
-  int dropdownWidth;
+  int? dropdownWidth;
 
   FoTextInputComponent(
       @Self() @Optional() this.control, this.host, this._changeDetectorRef) {
-    if (control != null) control.valueAccessor = this;
+    control?.valueAccessor = this;
 
     _windowResizeSub = html.window.onResize.listen(
         (_) => dropdownWidth = host.getBoundingClientRect().width.toInt() - 2);
@@ -140,8 +136,7 @@ class FoTextInputComponent
   Stream<html.Event> get clear => _clearButtonController.stream;
 
   bool get dropdownVisible =>
-      options != null &&
-      (_dropdownVisible && (value?.isEmpty == false || filterOptions != true) ||
+      (_dropdownVisible && (value.isNotEmpty || filterOptions != true) ||
           (hasFocus == true && showDropdownOnFocus == true));
 
   set dropdownVisible(bool value) {
@@ -149,7 +144,7 @@ class FoTextInputComponent
     _dropdownVisible = value;
   }
 
-  String get errorMessage {
+  String? get errorMessage {
     final errors = control?.errors;
     if (errors == null) {
       return null;
@@ -177,34 +172,34 @@ class FoTextInputComponent
     }
   }
 
-  String get filterValue => filterOptions == true ? value : null;
+  String? get filterValue => filterOptions == true ? value : null;
 
   @Output('focus')
   Stream<html.FocusEvent> get focus => _focusController.stream;
 
-  String get noFocusShadow =>
+  String? get noFocusShadow =>
       host.attributes.containsKey('noFocusShadow') ? '1' : null;
 
   @Output('selectionChange')
   Stream<SelectionChangeEvent> get selectionChange =>
       _selectionChangeController.stream;
 
-  int get selectionEnd => inputElement?.selectionEnd;
+  int? get selectionEnd => inputElement.selectionEnd;
 
-  int get selectionStart => inputElement?.selectionStart;
+  int? get selectionStart => inputElement.selectionStart;
 
-  String get square => host.attributes.containsKey('square') ? '1' : null;
+  String? get square => host.attributes.containsKey('square') ? '1' : null;
 
-  String get autocomplete => host.attributes['autocomplete'];
+  String? get autocomplete => host.attributes['autocomplete'];
 
   @override
   void ngAfterViewInit() {
-    inputElement = host.querySelector('input');
+    inputElement = host.querySelector('input') as html.InputElement;
   }
 
   @override
   void ngOnDestroy() {
-    actionButtonController?.close();
+    actionButtonController.close();
     changeController.close();
     _selectionChangeController.close();
     _focusController.close();
@@ -221,7 +216,7 @@ class FoTextInputComponent
     _blurController.add(value);
   }
 
-  int get dropdownTopOffset => square == null ? null : -1;
+  int? get dropdownTopOffset => square == null ? null : -1;
 
   void onClear(html.Event event) {
     // Prevent the input from gaining focus
@@ -229,7 +224,7 @@ class FoTextInputComponent
     value = '';
     _dropdownVisible = false;
     if (_onChange != null) {
-      _onChange(value);
+      _onChange!(value);
     }
     _clearButtonController.add(event);
   }
@@ -240,12 +235,12 @@ class FoTextInputComponent
   }
 
   void onFilterSelect(FoDropdownOptionRenderable event) {
-    _selectionChangeController
-        .add(SelectionChangeEvent(value, event.renderLabel, event.renderId));
+    _selectionChangeController.add(SelectionChangeEvent(
+        value, event.renderLabel, event.renderId.toString()));
     value = event.renderLabel;
     _dropdownVisible = false;
     if (_onChange != null) {
-      _onChange(value);
+      _onChange!(value);
     }
   }
 
@@ -257,9 +252,8 @@ class FoTextInputComponent
 
   void onKeyUp(html.Event event) {
     if (event is html.KeyboardEvent &&
-        (actionButtonLabel != null && event?.keyCode == html.KeyCode.ENTER ||
-            event?.keyCode == html.KeyCode.MAC_ENTER &&
-                value?.isEmpty == false)) {
+        (actionButtonLabel != null && event.keyCode == html.KeyCode.ENTER ||
+            event.keyCode == html.KeyCode.MAC_ENTER && value.isNotEmpty)) {
       event.stopPropagation();
       actionButtonController.add(FoButtonEvent());
     }
@@ -268,10 +262,10 @@ class FoTextInputComponent
   void onValueChange(String event) {
     value = event;
     if (_onChange != null) {
-      _onChange(value);
+      _onChange!(value);
     }
 
-    _dropdownVisible = options != null && value?.isEmpty == false;
+    _dropdownVisible = value.isNotEmpty;
   }
 
   @override

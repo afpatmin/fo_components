@@ -32,15 +32,15 @@ class FoImageMapComponent implements AfterViewInit, OnDestroy {
   bool disabled = false;
 
   @Input()
-  List<Object> selectedIds = [];
+  List<String> selectedIds = [];
 
   @Input()
   bool showSelector = true;
 
   @ViewChild('image')
-  html.ImageElement image;
+  html.ImageElement? image;
 
-  String viewBox;
+  String? viewBox;
 
   FoImageMapComponent();
 
@@ -60,8 +60,8 @@ class FoImageMapComponent implements AfterViewInit, OnDestroy {
 
   @override
   void ngAfterViewInit() {
-    image.onLoad.listen((_) {
-      final rect = image.getBoundingClientRect();
+    image!.onLoad.listen((_) {
+      final rect = image!.getBoundingClientRect();
 
       final ratio = rect.width.toDouble() / rect.height;
 
@@ -71,8 +71,8 @@ class FoImageMapComponent implements AfterViewInit, OnDestroy {
 }
 
 abstract class FoShape {
-  final int _x;
-  final int _y;
+  final int? _x;
+  final int? _y;
 
   /// Can be either rectangle, polygon or ellipse
   final String type;
@@ -142,15 +142,15 @@ class FoZoneModel extends FoDropdownOption {
     for (final shp in shapes) {
       switch (shp.type) {
         case 'ellipse':
-          ellipses.add(shp);
+          ellipses.add(shp as FoShapeEllipse);
           break;
 
         case 'rectangle':
-          rectangles.add(shp);
+          rectangles.add(shp as FoShapeRectangle);
           break;
 
         case 'polygon':
-          polygons.add(shp);
+          polygons.add(shp as FoShapePolygon);
           break;
 
         default:

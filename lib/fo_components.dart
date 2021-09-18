@@ -13,7 +13,6 @@ export 'components/fo_icon/fo_icon_component.dart';
 export 'components/fo_image_file/fo_image_file_component.dart';
 export 'components/fo_image_map/fo_image_map_component.dart';
 export 'components/fo_modal/fo_modal_component.dart';
-export 'components/fo_notification/fo_notification_component.dart';
 export 'components/fo_number_input/fo_number_input_component.dart';
 export 'components/fo_panel/fo_panel_component.dart';
 export 'components/fo_quiz/fo_quiz_component.dart';

@@ -6,8 +6,6 @@ import 'dart:html' as dom;
 import 'dart:math' as math;
 
 import 'package:angular/angular.dart';
-import 'package:angular_components/material_radio/material_radio.dart';
-import 'package:angular_components/material_radio/material_radio_group.dart';
 import 'package:fo_components/components/fo_icon/fo_icon_component.dart';
 
 import 'fo_carousel_slide_component.dart';
@@ -16,23 +14,16 @@ import 'fo_carousel_slide_component.dart';
     selector: 'fo-carousel',
     styleUrls: ['fo_carousel_component.css'],
     templateUrl: 'fo_carousel_component.html',
-    directives: [
-      FoIconComponent,
-      FoCarouselSlideComponent,
-      NgIf,
-      MaterialRadioComponent,
-      MaterialRadioGroupComponent,
-      NgFor
-    ],
+    directives: [FoIconComponent, FoCarouselSlideComponent, NgIf, NgFor],
     changeDetection: ChangeDetectionStrategy.Default)
 class FoCarouselComponent implements OnDestroy, OnInit {
   final StreamController<int> _onStepController = StreamController();
-  Timer timer;
+  Timer? timer;
   final ChangeDetectorRef _changeDetectorRef;
   final int _verticalThreshold = 40;
-  int prevX;
+  int prevX = 0;
   int _deltaX = 0;
-  Timer _scrollTimer;
+  Timer? _scrollTimer;
   int _step = 0;
   bool _animateSlides = true;
   bool _animateSlidesSetting = true;
@@ -62,7 +53,7 @@ class FoCarouselComponent implements OnDestroy, OnInit {
   bool loop = false;
 
   @Input()
-  int duration;
+  int? duration;
 
   double dragOffset = 0.0;
 
@@ -105,7 +96,7 @@ class FoCarouselComponent implements OnDestroy, OnInit {
   void ngOnInit() {
     if (duration != null) {
       timer =
-          Timer.periodic(Duration(milliseconds: duration), (_) => stepBy(1));
+          Timer.periodic(Duration(milliseconds: duration!), (_) => stepBy(1));
     }
   }
 
@@ -116,7 +107,7 @@ class FoCarouselComponent implements OnDestroy, OnInit {
 
       timer?.cancel();
       if (duration != null) {
-        timer = Timer(Duration(milliseconds: duration), () => stepBy(1));
+        timer = Timer(Duration(milliseconds: duration!), () => stepBy(1));
       }
       _changeDetectorRef.markForCheck();
     }
@@ -141,8 +132,8 @@ class FoCarouselComponent implements OnDestroy, OnInit {
       return;
     }
 
-    final x = event.touches.first.screen.x;
-    prevX ??= x;
+    final x = event.touches!.first.screen.x.round();
+    prevX = x;
     _deltaX = prevX - x;
     if (_deltaX > _verticalThreshold || _deltaX < -_verticalThreshold) {
       dragOffset = math.max(-0.2, math.min(0.2, _deltaX.toDouble()));
@@ -171,7 +162,7 @@ class FoCarouselComponent implements OnDestroy, OnInit {
       _onStepController.add(step);
       timer?.cancel();
       if (duration != null) {
-        timer = Timer(Duration(milliseconds: duration), () => stepBy(1));
+        timer = Timer(Duration(milliseconds: duration!), () => stepBy(1));
       }
       _changeDetectorRef.markForCheck();
     }

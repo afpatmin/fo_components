@@ -9,12 +9,7 @@
   </div>
   <div id="radioButtons"
        *ngIf="showRadioButtons == true">
-    <material-radio-group class="no-left-margin">
-      <material-radio *ngFor="let slide of slides; let i=index"
-                      [disabled]="disabled"
-                      [checked]="step == i"
-                      (checkedChange)="onButtonChange(i, $event)"></material-radio>
-    </material-radio-group>
+    <p>RADIO BUTTONS NOT IMPLEMENTED</p>
   </div>
   <ng-container *ngIf="showArrowButtons">
     <div class="arrow"

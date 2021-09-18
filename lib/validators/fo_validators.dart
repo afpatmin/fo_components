@@ -1,8 +1,9 @@
 import 'package:angular_forms/angular_forms.dart';
 import 'package:intl/intl.dart';
 
+// ignore: avoid_classes_with_only_static_members
 class FoValidators {
-  static Map<String, String> alpha(AbstractControl control) {
+  static Map<String, String>? alpha(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
     if (RegExp(r'[a-zA-ZåäöÅÄÖ ]').allMatches(control.value).length !=
@@ -15,7 +16,7 @@ class FoValidators {
       return null;
   }
 
-  static Map<String, String> alphaEn(AbstractControl control) {
+  static Map<String, String>? alphaEn(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
     if (RegExp(r'[a-zA-Z ]').allMatches(control.value).length !=
@@ -28,7 +29,7 @@ class FoValidators {
       return null;
   }
 
-  static Map<String, String> alphaNumeric(AbstractControl control) {
+  static Map<String, String>? alphaNumeric(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
     final value = control.value;
@@ -42,7 +43,7 @@ class FoValidators {
       return null;
   }
 
-  static Map<String, String> alphaNumericEn(AbstractControl control) {
+  static Map<String, String>? alphaNumericEn(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
     final value = control.value;
@@ -56,7 +57,7 @@ class FoValidators {
       return null;
   }
 
-  static Map<String, String> email(AbstractControl control) {
+  static Map<String, String>? email(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
     final r = RegExp(r'(^[a-z0-9_.+-]+@[a-z0-9-]+\.[a-z0-9-.]+$)');
@@ -68,7 +69,7 @@ class FoValidators {
       return null;
   }
 
-  static Map<String, String> integer(AbstractControl control) {
+  static Map<String, String>? integer(AbstractControl control) {
     if (Validators.required(control) != null)
       return null;
     else if (control.value == null)
@@ -88,7 +89,7 @@ class FoValidators {
     }
   }
 
-  static Map<String, String> linkedInId(AbstractControl control) {
+  static Map<String, String>? linkedInId(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
     if (RegExp(r'[a-z0-9åäö\-\\/]{5,50}').stringMatch(control.value) !=
@@ -101,7 +102,7 @@ class FoValidators {
       return null;
   }
 
-  static Map<String, String> metaDescription(AbstractControl control) {
+  static Map<String, String>? metaDescription(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
     final value = control.value;
@@ -117,7 +118,7 @@ class FoValidators {
       return null;
   }
 
-  static Map<String, String> noWhiteSpace(AbstractControl control) {
+  static Map<String, String>? noWhiteSpace(AbstractControl control) {
     if (Validators.required(control) != null) return null;
     if (control.value.toString().contains(' ')) {
       return {
@@ -128,7 +129,7 @@ class FoValidators {
       return null;
   }
 
-  static Map<String, String> numeric(AbstractControl control) {
+  static Map<String, String>? numeric(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
     if (control.value is num)
@@ -146,7 +147,7 @@ class FoValidators {
     }
   }
 
-  static Map<String, String> phoneNumber(AbstractControl control) {
+  static Map<String, String>? phoneNumber(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
     if (RegExp(r'([+][1-9]{1,3})?[0-9\- ]{6,32}').stringMatch(control.value) !=
@@ -159,7 +160,7 @@ class FoValidators {
       return null;
   }
 
-  static Map<String, String> url(AbstractControl control) {
+  static Map<String, String>? url(AbstractControl control) {
     if (Validators.required(control) != null) return null;
     final r = RegExp(
         r'https?://(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)');
@@ -171,7 +172,7 @@ class FoValidators {
       return null;
   }
 
-  static Map<String, String> youtubeId(AbstractControl control) {
+  static Map<String, String>? youtubeId(AbstractControl control) {
     if (Validators.required(control) != null) return null;
     if (RegExp(r'[a-zA-Z0-9_-]{11}').stringMatch(control.value) !=
         control.value) {

@@ -16,13 +16,13 @@ class FoOptionComponent implements OnDestroy {
   final StreamController<FoOptionModel> _triggerController = StreamController();
 
   @Input()
-  FoOptionModel model;
+  FoOptionModel? model;
 
   @Input()
   bool disabled = false;
 
   @Input()
-  String buttonColor;
+  String? buttonColor;
 
   @Output('trigger')
   Stream<FoOptionModel> get onTrigger => _triggerController.stream;
@@ -33,7 +33,9 @@ class FoOptionComponent implements OnDestroy {
   }
 
   void onSelect() {
-    model.selected = !model.selected;
-    _triggerController.add(model);
+    if (model != null) {
+      model!.selected = !model!.selected;
+      _triggerController.add(model!);
+    }
   }
 }

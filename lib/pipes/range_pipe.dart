@@ -1,13 +1,13 @@
-import 'package:angular/di.dart' show Pipe, PipeTransform;
+import 'package:angular/angular.dart';
 
 @Pipe('range')
-class RangePipe implements PipeTransform {
+class RangePipe {
   Iterable<Object> transform(Iterable<Object> value, int from, int to) {
-    final filtered = <Object>[];
+    final output = <Object>[];
     for (var i = from; i < to; i++) {
       if (i >= value.length) break;
-      filtered.add(value.elementAt(i));
+      output.add(value.elementAt(i));
     }
-    return filtered;
+    return output;
   }
 }
