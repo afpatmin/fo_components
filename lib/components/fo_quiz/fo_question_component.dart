@@ -98,7 +98,8 @@ class FoQuestionComponent implements AfterChanges, OnDestroy {
       if (currentChildQuiz == null) {
         doneController.add(model);
       }
-    } finally {}
+      // ignore: avoid_catching_errors, empty_catches
+    } on StateError {}
   }
 
   void onPrevTrigger() {

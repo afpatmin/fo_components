@@ -102,7 +102,8 @@ class FoDropdownSelectMultiComponent<T> implements AfterChanges, OnDestroy {
           addedOptions.add(match);
           _updateFilteredOptions(outputEvent: outputEvent);
           break;
-        } finally {}
+          // ignore: avoid_catching_errors, empty_catches
+        } on StateError {}
       }
     }
   }

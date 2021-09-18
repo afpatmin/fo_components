@@ -110,7 +110,8 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
           selectedOption =
               options[category]!.firstWhere((e) => e.renderId == id);
           return;
-        } finally {}
+          // ignore: avoid_catching_errors, empty_catches
+        } on StateError {}
       }
     }
   }
@@ -127,7 +128,8 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
           selectedOption = options[category]!
               .firstWhere((option) => option.renderId == _selectedId);
           return;
-        } finally {}
+          // ignore: avoid_catching_errors, empty_catches
+        } on StateError {}
       }
     }
   }

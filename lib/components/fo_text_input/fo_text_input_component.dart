@@ -288,8 +288,8 @@ class FoTextInputComponent
   void registerOnTouched(TouchFunction f) {}
 
   @override
-  void writeValue(String obj) {
-    value = obj;
+  void writeValue(String? obj) {
+    value = obj == null ? '' : obj;
     _changeDetectorRef.markForCheck();
   }
 }
