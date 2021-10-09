@@ -13,14 +13,14 @@
               [material]="materialIcons"
               (click)="onDelete($event)">
      </fo-icon>
-     <ng-container *ngIf="source == null || source.isEmpty">
+     <div *ngIf="source == null || source.isEmpty">
           <fo-icon class="add"
                    [material]="materialIcons"
                    [icon]="addIcon">
           </fo-icon>
           <p id="placeholder"
-             *ngIf="placeholder != null"> {{placeholder}} </p>
-     </ng-container>
+             *ngIf="placeholder.isNotEmpty">{{placeholder}}</p>
+     </div>
      <input type="file"
             #fileInput
             [disabled]="disabled"

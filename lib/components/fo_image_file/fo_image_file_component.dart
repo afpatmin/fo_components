@@ -18,6 +18,10 @@ import 'package:intl/intl.dart';
     directives: [coreDirectives, FoButtonComponent, FoIconComponent],
     pipes: [],
     changeDetection: ChangeDetectionStrategy.OnPush)
+
+/// A component that loads an image file and converts it to base64 data.
+/// When an image has been loaded, it's immediately displayed to the user and
+/// 'sourceChanged' event fires containing the base64 data
 class FoImageFileComponent implements OnDestroy {
   final String msgInvalidFile =
       Intl.message('invalid file', name: 'invalid_file');
