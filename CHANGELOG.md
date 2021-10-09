@@ -7,6 +7,8 @@
 * Made dropdown snappier
 * Carousel no longer supports radio buttons
 * Removed intermediate step from FileUpload
+* Renamed fo-image-file-max-height mixin to fo-image-file-height so that it reflects intent better
+* Renamed FileUploadComponent to FoFileUploadComponent for consistency
 
 # 2.2.1
 * Changed Modal maxheight to 87vh (down from 95vh to accomodate ios bottom navbar)
