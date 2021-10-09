@@ -28,7 +28,6 @@
   <div id="left">
     <fo-button *ngIf="prevButtonLabel != null && !rightHidden"
                [white]="true"
-               [square]="true"
                class="fullWidth"
                [label]="$pipe.capitalize(prevButtonLabel!)"
                [themeBackgroundColor]="buttonColor"
@@ -38,7 +37,6 @@
   <div id="right">
     <fo-button *ngIf="selectedOptions.isNotEmpty && !rightHidden"
                [white]="true"
-               [square]="true"
                class="fullWidth"
                [label]="$pipe.capitalize(nextButtonLabel!)"
                [themeBackgroundColor]="buttonColor"

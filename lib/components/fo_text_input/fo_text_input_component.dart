@@ -124,13 +124,7 @@ class FoTextInputComponent
   bool rightBorder = true;
 
   @Input()
-  bool focusShadow = true;
-
-  @Input()
   String? autocomplete;
-
-  @Input()
-  bool square = false;
 
   FoTextInputComponent(
       @Self() @Optional() this.control, this.host, this._changeDetectorRef) {
@@ -153,7 +147,7 @@ class FoTextInputComponent
   @Output('clear')
   Stream<html.Event> get clear => _clearButtonController.stream;
 
-  int? get dropdownTopOffset => square ? null : -1;
+  int get dropdownTopOffset => -1;
 
   bool get dropdownVisible =>
       (_dropdownVisible && (value.isNotEmpty || filterOptions != true) ||

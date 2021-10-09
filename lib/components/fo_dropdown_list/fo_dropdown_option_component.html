@@ -1,26 +1,26 @@
 <table>
   <tr>
     <td class="icon"
-        *ngIf="model?.renderIcon?.isEmpty == false && model?.renderImage?.isEmpty != false">
-      <fo-icon [icon]="model?.renderIcon"
+        *ngIf="model?.icon?.isEmpty == false && model?.image?.isEmpty != false">
+      <fo-icon [icon]="model?.icon"
                [material]="materialIcon">
       </fo-icon>
     </td>
     <td id="image"
-        *ngIf="model?.renderImage?.isEmpty == false">
-      <img [src]="model?.renderImage"
+        *ngIf="model?.image?.isEmpty == false">
+      <img [src]="model?.image"
            alt="image">
     </td>
     <td>
       <div id="label"
-           [class.semi-bold]="model?.renderSecondaryLabel?.isEmpty == false">{{model?.renderLabel}}</div>
-      <div id="secondaryLabel">{{model?.renderSecondaryLabel}}</div>
+           [class.semi-bold]="model?.secondaryLabel?.isEmpty == false">{{model?.label}}</div>
+      <div id="secondaryLabel">{{model?.secondaryLabel}}</div>
     </td>
     <td class="info"
-        *ngIf="model?.renderInfo?.isEmpty == false"> {{model?.renderInfo}} </td>
+        *ngIf="model?.info?.isEmpty == false"> {{model?.info}} </td>
     <td class="icon"
-        *ngIf="model?.renderIcon?.isEmpty == false && model?.renderImage?.isEmpty == false">
-      <fo-icon [icon]="model?.renderIcon"
+        *ngIf="model?.icon?.isEmpty == false && model?.image?.isEmpty == false">
+      <fo-icon [icon]="model?.icon"
                [material]="materialIcon">
       </fo-icon>
     </td>

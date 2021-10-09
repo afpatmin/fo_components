@@ -1,11 +1,21 @@
 class FoDropdownOption {
-  Object? id;
-  String? icon;
-  String label = '';
-  String? secondaryLabel;
-  String? info;
-  String? image;
+  final Object? id;
+  final String label;
+  final String? icon;
+  final String? secondaryLabel;
+  final String? info;
+  final String? image;
 
   /// Use tags to include hidden filter keywords
-  List<String> tags = [];
+  final List<String> tags;
+
+  FoDropdownOption(
+    this.id,
+    this.label, {
+    this.icon,
+    this.secondaryLabel,
+    this.info,
+    this.image,
+    this.tags = const [],
+  });
 }

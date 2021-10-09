@@ -46,9 +46,6 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
   final String msgEnterValue = Intl.message('enter value', name: 'enter_value');
 
   @Input()
-  bool square = false;
-
-  @Input()
   bool disabled = false;
 
   @Input()

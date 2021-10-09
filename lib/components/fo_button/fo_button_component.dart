@@ -57,9 +57,6 @@ class FoButtonComponent implements OnDestroy {
   bool white = false;
 
   @Input()
-  bool square = false;
-
-  @Input()
   bool rightBorder = true;
 
   @Input()

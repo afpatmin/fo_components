@@ -1,9 +1,10 @@
 # 3.0.0 - null safety (BREAKING CHANGES)
 * Updated angular dependency to 7.0.0 and added null-safety
-* Removed NotificationComponent
+* Removed ImageMap, Notification, DropdownSelectMulti
 * Removed dependency on angular_components
 * Carousel no longer supports radio buttons
 * Removed focus shadow from inputs selects, and dropdowns
+* Removed everything with square, might implement this as a theme later
 * Removed transitions from dropdown
 
 # 2.2.1

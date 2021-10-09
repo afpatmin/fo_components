@@ -72,19 +72,13 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @ViewChild('selector')
   dom.Element? selectorElement;
 
-  @Input()
-  bool square = false;
-
-  @Input()
-  bool focusShadow = true;
-
   FoDropdownSelectComponent(this._changeDetectorRef);
 
   @Output('actionButtonTrigger')
   Stream<FoButtonEvent> get actionButtonTrigger =>
       _actionButtonController.stream;
 
-  int get dropdownTopOffset => square ? 0 : -1;
+  int get dropdownTopOffset => -1;
 
   int? get dropdownWidth =>
       selectorElement?.getBoundingClientRect().width.round();
@@ -149,10 +143,8 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
         options.values.where((option) => option.isNotEmpty).isNotEmpty) {
       dropdownVisible = !dropdownVisible;
       _changeDetectorRef.markForCheck();
+      e.preventDefault();
     }
-    e
-      ..preventDefault()
-      ..stopPropagation();
   }
 
   void onSelect(FoDropdownOption event) {

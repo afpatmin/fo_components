@@ -85,9 +85,7 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
   bool showSearch = false;
 
   final String msgFilter = Intl.message('filter', name: 'filter');
-  final FoDropdownOption nullOption = FoDropdownOption()
-    ..id = null
-    ..label = '-';
+  final FoDropdownOption nullOption = FoDropdownOption(null, '-');
 
   final StreamController<bool> visibleController = StreamController<bool>();
   final StreamController<FoDropdownOption> _selectController =
@@ -100,12 +98,6 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
 
   @Output('select')
   Stream<FoDropdownOption> get select => _selectController.stream;
-
-  @Input()
-  bool shadow = true;
-
-  @Input()
-  bool square = false;
 
   @Output('visibleChange')
   Stream<bool> get visibleChange => visibleController.stream;
