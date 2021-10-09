@@ -15,7 +15,7 @@ import '../fo_icon/fo_icon_component.dart';
     directives: [NgIf, FoButtonComponent, FoIconComponent],
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
-class FileUploadComponent implements OnDestroy {
+class FoFileUploadComponent implements OnDestroy {
   final StreamController<dom.File> onUploadController = StreamController();
   dom.FileUploadInputElement? _fileInput;
   dom.File? file;
@@ -38,7 +38,7 @@ class FileUploadComponent implements OnDestroy {
   @Input()
   int maxByteSize = 1048576;
 
-  FileUploadComponent();
+  FoFileUploadComponent();
 
   @Output('upload')
   Stream<dom.File> get onUploadOutput => onUploadController.stream;

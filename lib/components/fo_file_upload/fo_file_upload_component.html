@@ -27,13 +27,13 @@
   </p>
   <p>
     <span *ngIf="file == null">...</span>
-    <ng-container *ngIf="file != null"> {{file.name}} ({{(file.size / 1024).ceil()}}kb) <fo-icon icon="cancel"
+    <!-- <ng-container *ngIf="file != null"> {{file?.name}} ({{(file.size / 1024).ceil()}}kb) <fo-icon icon="cancel"
                class="color-alert"
                [material]="materialIcon"
                (click)="clearSelection()"></fo-icon>
-    </ng-container>
+    </ng-container> -->
   </p>
   <p class="color-alert"
-     *ngIf="file != null && file.size > maxByteSize"> {{$pipe.capitalize(msgMaxFilesizeExceeded)}}
+     *ngIf="file != null && file?.size > maxByteSize"> {{$pipe.capitalize(msgMaxFilesizeExceeded)}}
     ({{(maxByteSize/1024).ceil()}}kb) </p>
 </div>
