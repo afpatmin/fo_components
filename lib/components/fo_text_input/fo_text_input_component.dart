@@ -286,7 +286,7 @@ class FoTextInputComponent
 
   @override
   void writeValue(String? obj) {
-    value = obj == null ? '' : obj;
+    value = obj ?? '';
     _changeDetectorRef.markForCheck();
   }
 }

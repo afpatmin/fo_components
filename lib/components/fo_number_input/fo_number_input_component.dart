@@ -140,8 +140,9 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
                 _onChange!(value!);
               }
             });
-          } else
+          } else {
             value = max;
+          }
         } else {
           if (value == min) {
             value = max;
@@ -200,9 +201,9 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
   void registerOnTouched(TouchFunction f) {}
 
   void setValueClamped(String v) {
-    if (v.isEmpty)
+    if (v.isEmpty) {
       value = 0;
-    else {
+    } else {
       try {
         value = int.parse(v);
       } on FormatException {

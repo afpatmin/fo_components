@@ -12,8 +12,9 @@ class FoValidators {
         'error': Intl.message('Enter alphabet characters only',
             name: 'fo_validator_error_alpha')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
   static Map<String, String>? alphaEn(AbstractControl control) {
@@ -25,8 +26,9 @@ class FoValidators {
         'error': Intl.message('Enter alphabet characters only',
             name: 'fo_validator_error_alpha_en')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
   static Map<String, String>? alphaNumeric(AbstractControl control) {
@@ -39,8 +41,9 @@ class FoValidators {
         'error': Intl.message('Enter alpha-numeric characters only',
             name: 'fo_validator_error_alpha_numeric')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
   static Map<String, String>? alphaNumericEn(AbstractControl control) {
@@ -53,8 +56,9 @@ class FoValidators {
         'error': Intl.message('Enter alpha-numeric characters only',
             name: 'fo_validator_error_alpha_numeric_en')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
   static Map<String, String>? email(AbstractControl control) {
@@ -65,18 +69,19 @@ class FoValidators {
       return {
         'error': Intl.message('Invalid email', name: 'fo_validator_error_email')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
   static Map<String, String>? integer(AbstractControl control) {
-    if (Validators.required(control) != null)
+    if (Validators.required(control) != null) {
       return null;
-    else if (control.value == null)
+    } else if (control.value == null) {
       return null;
-    else if (control.value is int)
+    } else if (control.value is int) {
       return null;
-    else {
+    } else {
       try {
         int.parse(control.value);
       } on FormatException {
@@ -98,8 +103,9 @@ class FoValidators {
         'error': Intl.message('Invalid LinkedIn id',
             name: 'fo_validator_error_linkedin_id')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
   static Map<String, String>? metaDescription(AbstractControl control) {
@@ -114,8 +120,9 @@ class FoValidators {
         'error': Intl.message('Enter a value without special characters',
             name: 'fo_validator_error_meta_description')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
   static Map<String, String>? noWhiteSpace(AbstractControl control) {
@@ -125,16 +132,17 @@ class FoValidators {
         'error': Intl.message('Enter a value without spaces',
             name: 'fo_validator_error_no_white_space')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
   static Map<String, String>? numeric(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
-    if (control.value is num)
+    if (control.value is num) {
       return null;
-    else {
+    } else {
       try {
         num.parse(control.value);
       } on FormatException {
@@ -156,8 +164,9 @@ class FoValidators {
         'error': Intl.message('Enter a valid phone number',
             name: 'fo_validator_error_phone_number')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
   static Map<String, String>? url(AbstractControl control) {
@@ -168,8 +177,9 @@ class FoValidators {
       return {
         'error': Intl.message('Invalid URL', name: 'fo_validator_error_url')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
   static Map<String, String>? youtubeId(AbstractControl control) {
@@ -180,7 +190,8 @@ class FoValidators {
         'error': Intl.message('Invalid Youtube id',
             name: 'fo_validator_error_youtube_id')
       };
-    } else
+    } else {
       return null;
+    }
   }
 }

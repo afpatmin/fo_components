@@ -193,8 +193,9 @@ class FoImageFileComponent implements OnDestroy {
 
               _orientation = byteData.getUint16(byteOffset, endian);
               byteOffset += 4;
-            } else
+            } else {
               byteOffset += 10;
+            }
 
             /// 12 bytes per entry
           }
@@ -268,8 +269,9 @@ class FoImageFileComponent implements OnDestroy {
         if (source.contains('data:${_file!.type};base64,')) {
           _base64Data = source.substring('data:${_file!.type};base64,'.length);
           _byteSize = base64.decode(_base64Data).length;
-        } else
+        } else {
           print('invalid src: $source');
+        }
       }
       _onSourceChangeController.add(source);
       _changeDetectorRef.markForCheck();
@@ -291,10 +293,11 @@ class FoImageFileComponent implements OnDestroy {
     /// Any other supported format, skip metadata
     else if (_file!.type == 'image/png' ||
         _file!.type == 'image/gif' ||
-        _file!.type == 'image/bmp')
+        _file!.type == 'image/bmp') {
       _reader.readAsDataUrl(_file!);
-    else
+    } else {
       throw Exception('Invalid file');
+    }
   }
 
   void _transformContextExifOrientation(
