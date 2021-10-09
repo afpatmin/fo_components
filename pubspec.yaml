@@ -3,7 +3,7 @@ description: A collection of AngularDart components.
 homepage: https://github.com/afpatmin/fo_components
 version: 2.2.1
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.13.0 <3.0.0"
 
 dependencies:
   angular: ^7.0.2
