@@ -62,7 +62,7 @@ class FoTextInputComponent
   bool filterOptions = true;
 
   @Input()
-  Map<String, List<FoDropdownOptionRenderable>> options = {};
+  Map<String, List<FoDropdownOption>> options = {};
 
   @Input()
   bool showDropdownCategoryLabels = true;
@@ -126,6 +126,12 @@ class FoTextInputComponent
   @Input()
   bool focusShadow = true;
 
+  @Input()
+  String? autocomplete;
+
+  @Input()
+  bool square = false;
+
   FoTextInputComponent(
       @Self() @Optional() this.control, this.host, this._changeDetectorRef) {
     control?.valueAccessor = this;
@@ -138,9 +144,6 @@ class FoTextInputComponent
   @Output('actionButtonTrigger')
   Stream<FoButtonEvent> get actionButtonTrigger =>
       actionButtonController.stream;
-
-  @Input()
-  String? autocomplete;
 
   /// Component lost focus
   @Output('blur')
@@ -202,9 +205,6 @@ class FoTextInputComponent
 
   int? get selectionStart => inputElement.selectionStart;
 
-  @Input()
-  bool square = false;
-
   @override
   void ngAfterViewInit() {
     inputElement = host.querySelector('input') as html.InputElement;
@@ -245,10 +245,10 @@ class FoTextInputComponent
     disabled = isDisabled;
   }
 
-  void onFilterSelect(FoDropdownOptionRenderable event) {
-    _selectionChangeController.add(SelectionChangeEvent(
-        value, event.renderLabel, event.renderId.toString()));
-    value = event.renderLabel;
+  void onFilterSelect(FoDropdownOption event) {
+    _selectionChangeController
+        .add(SelectionChangeEvent(value, event.label, event.id.toString()));
+    value = event.label;
     _dropdownVisible = false;
     if (_onChange != null) {
       _onChange!(value);

@@ -52,7 +52,7 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @Input()
   bool materialIcons = true;
 
-  Map<String, List<FoDropdownOptionRenderable>> _options = {};
+  Map<String, List<FoDropdownOption>> _options = {};
 
   bool? _optionsChanged;
   Object? _selectedId;
@@ -65,7 +65,7 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   final StreamController<FoButtonEvent> _actionButtonController =
       StreamController<FoButtonEvent>();
   bool dropdownVisible = false;
-  FoDropdownOptionRenderable? selectedOption;
+  FoDropdownOption? selectedOption;
 
   @Input()
   bool showSearch = false;
@@ -89,10 +89,10 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   int? get dropdownWidth =>
       selectorElement?.getBoundingClientRect().width.round();
 
-  Map<String, List<FoDropdownOptionRenderable>> get options => _options;
+  Map<String, List<FoDropdownOption>> get options => _options;
 
   @Input()
-  set options(Map<String, List<FoDropdownOptionRenderable>> value) {
+  set options(Map<String, List<FoDropdownOption>> value) {
     _options = value;
     _optionsChanged = true;
   }
@@ -107,8 +107,7 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
     for (final category in options.keys) {
       if (options[category] != null) {
         try {
-          selectedOption =
-              options[category]!.firstWhere((e) => e.renderId == id);
+          selectedOption = options[category]!.firstWhere((e) => e.id == id);
           return;
           // ignore: avoid_catching_errors, empty_catches
         } on StateError {}
@@ -126,7 +125,7 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
       for (final category in options.keys) {
         try {
           selectedOption = options[category]!
-              .firstWhere((option) => option.renderId == _selectedId);
+              .firstWhere((option) => option.id == _selectedId);
           return;
           // ignore: avoid_catching_errors, empty_catches
         } on StateError {}
@@ -156,10 +155,10 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
       ..stopPropagation();
   }
 
-  void onSelect(FoDropdownOptionRenderable event) {
+  void onSelect(FoDropdownOption event) {
     dropdownVisible = false;
     selectedOption = event;
-    _selectedId = event.renderId;
-    _selectedIdController.add(event.renderId);
+    _selectedId = event.id;
+    _selectedIdController.add(event.id);
   }
 }

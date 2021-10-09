@@ -37,7 +37,7 @@ class FoDropdownSelectMultiComponent<T> implements AfterChanges, OnDestroy {
   bool _selectedIdsChanged = true;
 
   @Input()
-  Map<String, List<FoDropdownOptionRenderable>> options = {};
+  Map<String, List<FoDropdownOption>> options = {};
 
   /// Max height of the dropdown, in pixels
   @Input()
@@ -53,11 +53,11 @@ class FoDropdownSelectMultiComponent<T> implements AfterChanges, OnDestroy {
   @Input()
   bool materialIcons = true;
 
-  Map<String, List<FoDropdownOptionRenderable>> filteredOptions = {};
+  Map<String, List<FoDropdownOption>> filteredOptions = {};
 
   T? selectedId;
 
-  List<FoDropdownOptionRenderable> addedOptions = [];
+  List<FoDropdownOption> addedOptions = [];
 
   @Input()
   bool square = false;
@@ -98,7 +98,7 @@ class FoDropdownSelectMultiComponent<T> implements AfterChanges, OnDestroy {
       for (final category in options.keys) {
         try {
           final match =
-              options[category]!.firstWhere((option) => option.renderId == id);
+              options[category]!.firstWhere((option) => option.id == id);
           addedOptions.add(match);
           _updateFilteredOptions(outputEvent: outputEvent);
           break;
@@ -110,23 +110,23 @@ class FoDropdownSelectMultiComponent<T> implements AfterChanges, OnDestroy {
 
   void onRemove(Object id) {
     if (disabled != true) {
-      addedOptions.removeWhere((o) => o.renderId == id);
+      addedOptions.removeWhere((o) => o.id == id);
       _updateFilteredOptions();
     }
   }
 
   void _updateFilteredOptions({bool outputEvent = true}) {
     // Reset filtered options to contain all options
-    filteredOptions = <String, List<FoDropdownOptionRenderable>>{};
+    filteredOptions = <String, List<FoDropdownOption>>{};
     for (final category in options.keys) {
       filteredOptions[category] = options[category]!.toList();
     }
 
     // Remove any options found in addedOptions list
-    final addedOptionIds = addedOptions.map((o) => o.renderId);
+    final addedOptionIds = addedOptions.map((o) => o.id);
     for (final category in filteredOptions.keys) {
       filteredOptions[category]!
-          .removeWhere((option) => addedOptionIds.contains(option.renderId));
+          .removeWhere((option) => addedOptionIds.contains(option.id));
     }
 
     if (outputEvent == true) {

@@ -60,12 +60,12 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
   FoDropdownComponent? dropdown;
 
   @Input()
-  set options(Map<String, List<FoDropdownOptionRenderable>> o) {
+  set options(Map<String, List<FoDropdownOption>> o) {
     _options = o;
     for (final category in _options.values) {
       for (final option in category) {
-        if (option.renderImage != null) {
-          final image = html.ImageElement(src: option.renderImage);
+        if (option.image != null) {
+          final image = html.ImageElement(src: option.image);
           image.onLoad.listen((_e) {
             dropdown?.evaluateHeight();
           });
@@ -74,9 +74,9 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
     }
   }
 
-  Map<String, List<FoDropdownOptionRenderable>> get options => _options;
+  Map<String, List<FoDropdownOption>> get options => _options;
 
-  Map<String, List<FoDropdownOptionRenderable>> _options = {};
+  Map<String, List<FoDropdownOption>> _options = {};
 
   @Input()
   String? filter;
@@ -90,17 +90,16 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
     ..label = '-';
 
   final StreamController<bool> visibleController = StreamController<bool>();
-  final StreamController<FoDropdownOptionRenderable> _selectController =
-      StreamController<FoDropdownOptionRenderable>();
-  Map<String, List<FoDropdownOptionRenderable>> _filteredOptions = {};
+  final StreamController<FoDropdownOption> _selectController =
+      StreamController<FoDropdownOption>();
+  Map<String, List<FoDropdownOption>> _filteredOptions = {};
 
   FoDropdownListComponent();
 
-  Map<String, List<FoDropdownOptionRenderable>> get filteredOptions =>
-      _filteredOptions;
+  Map<String, List<FoDropdownOption>> get filteredOptions => _filteredOptions;
 
   @Output('select')
-  Stream<FoDropdownOptionRenderable> get select => _selectController.stream;
+  Stream<FoDropdownOption> get select => _selectController.stream;
 
   @Input()
   bool shadow = true;
@@ -127,7 +126,7 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
     _selectController.close();
   }
 
-  void onSelect(html.Event event, FoDropdownOptionRenderable option) {
+  void onSelect(html.Event event, FoDropdownOption option) {
     event
       ..preventDefault()
       ..stopPropagation();
@@ -143,8 +142,8 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
         final v = value.toLowerCase();
         _filteredOptions[category] = options[category]!
             .where((option) =>
-                option.renderLabel.toLowerCase().contains(v) ||
-                (option.renderTags
+                option.label.toLowerCase().contains(v) ||
+                (option.tags
                     .where((tag) => tag.toLowerCase().contains(v))
                     .isNotEmpty))
             .toList(growable: false);
