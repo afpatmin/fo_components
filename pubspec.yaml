@@ -1,13 +1,13 @@
 name: fo_components
-description: A collection of Angular components for both common and less common use cases.
+description: A collection of AngularDart components.
 homepage: https://github.com/afpatmin/fo_components
 version: 2.2.1
 environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  angular: ^7.0.0
-  angular_forms: ^4.0.0
+  angular: ^7.0.2
+  angular_forms: ^4.0.1
   collection: ^1.15.0
   grid_css: ^3.0.0
   intl: ^0.17.0
@@ -15,5 +15,5 @@ dependencies:
   sass_builder: ^2.1.4
 
 dev_dependencies:
-  build_runner: ^2.1.2
-  json_serializable: ^5.0.1
+  build_runner: ^2.1.4
+  json_serializable: ^5.0.2
