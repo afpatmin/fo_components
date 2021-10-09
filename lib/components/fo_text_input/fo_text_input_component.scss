@@ -13,7 +13,6 @@
     background-color: white;
     display: flex;
     align-items: center;
-    height: 100%;
     border-radius: $borderRadius;
     border-width: 1px;
     border-style: solid;
@@ -23,7 +22,7 @@
     input {
       @include inputStyle;
       padding: 0.5em 0.25em;
-      line-height: 160%;
+      line-height: 1.5em;
       outline: none;
       margin: 0;
       border: 0;
