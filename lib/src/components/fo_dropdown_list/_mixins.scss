@@ -1,4 +1,4 @@
-@import "package:fo_components/components/fo_dropdown/mixins";
+@import "../../../src/components/fo_dropdown/mixins";
 
 @mixin fo-dropdown-list-colors($primaryColor, $labelColor, $borderColor) {
   ::ng-deep fo-dropdown-list {

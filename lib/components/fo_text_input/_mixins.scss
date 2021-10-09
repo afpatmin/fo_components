@@ -1,5 +1,5 @@
-@import "package:fo_components/components/fo_button/mixins";
-@import "package:fo_components/components/fo_dropdown/mixins";
+@import "../fo_button/mixins";
+@import "../../src/components/fo_dropdown/mixins";
 
 @mixin fo-text-input-colors($textColor, $borderColor, $iconColor, $alertColor, $backgroundColor: white) {
   ::ng-deep fo-text-input {
