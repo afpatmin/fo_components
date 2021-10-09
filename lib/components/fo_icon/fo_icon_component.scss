@@ -1,4 +1,8 @@
 :host {
   display: inline-flex;
   align-items: center;
+
+  .material-icons {
+    font-size: 1em;
+  }
 }
