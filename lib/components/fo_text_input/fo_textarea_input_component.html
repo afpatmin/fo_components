@@ -5,13 +5,12 @@
             [placeholder]="placeholder"
             [class.error]="control?.valid == false && control?.pristine != true"
             [class.noResize]="canResize != true"
-            [attr.noresize]="canResize != true"
             (focus)="hasFocus = true"
             (blur)="hasFocus = false"
             [rows]="rows"
             [ngModel]="value"
             (ngModelChange)="onValueChange($event)"></textarea>
   <fo-error-output *ngIf="hasFocus == true && errorMessage != null && control?.pristine != true"
-                   [message]="errorMessage">
+                   [message]="errorMessage!">
   </fo-error-output>
 </fo-label>

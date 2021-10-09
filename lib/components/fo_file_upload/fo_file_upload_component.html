@@ -33,7 +33,7 @@
                (click)="clearSelection()"></fo-icon>
     </ng-container> -->
   </p>
-  <p class="color-alert"
-     *ngIf="file != null && file?.size > maxByteSize"> {{$pipe.capitalize(msgMaxFilesizeExceeded)}}
-    ({{(maxByteSize/1024).ceil()}}kb) </p>
+  <!-- <p class="color-alert"
+     *ngIf="file?.size != null && file.size > maxByteSize"> {{$pipe.capitalize(msgMaxFilesizeExceeded)}}
+    ({{(maxByteSize/1024).ceil()}}kb) </p> -->
 </div>
