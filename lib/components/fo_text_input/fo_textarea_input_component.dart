@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:html' as html;
+
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:intl/intl.dart';
+
+import '../../../src/components/fo_label/fo_label_component.dart';
 import '../../pipes/capitalize_pipe.dart';
-import '../fo_label/fo_label_component.dart';
 import 'fo_error_output_component.dart';
 
 @Component(

@@ -5,13 +5,13 @@ import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:intl/intl.dart';
 
+import '../../../src/components/fo_label/fo_label_component.dart';
 import '../../fo_dropdown_option.dart';
 import '../../pipes/capitalize_pipe.dart';
 import '../../src/components/fo_dropdown_list/fo_dropdown_list_component.dart';
 import '../fo_button/fo_button_component.dart';
 import '../fo_button/fo_button_event.dart';
 import '../fo_icon/fo_icon_component.dart';
-import '../fo_label/fo_label_component.dart';
 import 'fo_error_output_component.dart';
 
 export '../../fo_dropdown_option.dart';
