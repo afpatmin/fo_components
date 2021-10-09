@@ -148,10 +148,8 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   void onClick(dom.Event e) {
     if (disabled != true &&
         options.values.where((option) => option.isNotEmpty).isNotEmpty) {
-      Future.delayed(Duration(milliseconds: 100)).then((_) {
-        dropdownVisible = !dropdownVisible;
-        _changeDetectorRef.markForCheck();
-      });
+      dropdownVisible = !dropdownVisible;
+      _changeDetectorRef.markForCheck();
     }
     e
       ..preventDefault()
