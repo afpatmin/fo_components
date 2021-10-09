@@ -1,27 +1,28 @@
 @import "package:fo_components/components/fo_button/mixins";
 
-@mixin fo-dropdown-select-colors($selectedValueColor, $borderColor, $iconColor) {
+@mixin fo-dropdown-select-colors($selectedValueColor, $borderColor, $iconColor, $backgroundColor: white) {
   ::ng-deep fo-dropdown-select {
-    fo-label {
-      div#flexContainer {
-        border-color: $borderColor;
+    div#flexContainer {
+      border-color: $borderColor;
 
-        div#selector {
-          div#selectedValue {
-            color: $selectedValueColor;
-          }
-
-          fo-icon {
-            color: $iconColor;
-          }
+      div#selector {
+        div#selectedValue {
+          color: $selectedValueColor;
         }
+
+        fo-icon {
+          color: $iconColor;
+        }
+      }
+      div#selector.disabled {
+        background-color: darken($backgroundColor, 5%) !important;
       }
     }
   }
 }
 
 @mixin fo-dropdown-select-vertical-padding($top, $bottom) {
-  ::ng-deep fo-dropdown-select > fo-label > label {
+  ::ng-deep fo-dropdown-select > {
     div#flexContainer {
       @include fo-button-vertical-padding($top);
       div#selector {
@@ -35,7 +36,7 @@
 }
 
 @mixin fo-dropdown-select-horizontal-padding($left, $right) {
-  ::ng-deep fo-dropdown-select > fo-label > label {
+  ::ng-deep fo-dropdown-select > {
     div#flexContainer {
       div#selector {
         div#selectedValue {
@@ -51,13 +52,11 @@
 
 @mixin fo-dropdown-select-icon-size($size) {
   ::ng-deep fo-dropdown-select {
-    fo-label > label {
-      div#flexContainer {
-        div#selector {
-          div#selectedValue {
-            fo-icon {
-              font-size: $size;
-            }
+    div#flexContainer {
+      div#selector {
+        div#selectedValue {
+          fo-icon {
+            font-size: $size;
           }
         }
       }

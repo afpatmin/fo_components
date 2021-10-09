@@ -11,7 +11,7 @@
 
         input:disabled ~ .mark {
             border-color: $border !important;
-            background-color: $border !important;
+            background-color: darken(white, 5%) !important;
         }
     }
 }
