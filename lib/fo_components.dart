@@ -6,6 +6,7 @@ library fo_components;
 export 'components/fo_button/fo_button_component.dart';
 export 'components/fo_carousel/fo_carousel_component.dart';
 export 'components/fo_carousel/fo_carousel_slide_component.dart';
+export 'components/fo_check/fo_check_component.dart';
 export 'components/fo_dropdown_select/fo_dropdown_select_component.dart';
 export 'components/fo_file_upload/fo_file_upload_component.dart';
 export 'components/fo_icon/fo_icon_component.dart';
@@ -19,6 +20,7 @@ export 'components/fo_tab/fo_tab_component.dart';
 export 'components/fo_tab/fo_tab_panel_component.dart';
 export 'components/fo_text_input/fo_text_input_component.dart';
 export 'components/fo_text_input/fo_textarea_input_component.dart';
+export 'components/fo_toggle/fo_toggle_component.dart';
 
 export 'pipes/capitalize_pipe.dart';
 export 'pipes/currency_pipe.dart';

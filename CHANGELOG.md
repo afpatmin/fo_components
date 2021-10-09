@@ -1,6 +1,6 @@
 # 3.0.0 - null safety (BREAKING CHANGES)
 * Updated angular dependency to 7.0.0 and added null-safety
-* Added LoadIndicator component
+* Added LoadIndicator, Check component
 * Removed ImageMap, Notification, DropdownSelectMulti components
 * Removed angular_components dependency
 * Removed everything with 'square' and 'focus', might implement these in theme mixin later
@@ -29,7 +29,7 @@
 # 2.1.0
 * FoModal, FoTextInput, FoTextareaInput, FoDropdownSelect now has OnPush changeDetection
 * Fixed issue where dropdown didn't update height properly when options contains images (see https://github.com/afpatmin/fo_components/issues/78)
-* Removeod deprecated @JsonKey(nullable) annotation
+* Removed deprecated @JsonKey(nullable) annotation
 
 # 2.0.1+1
 * Added attribute FoTextInput.autocomplete
