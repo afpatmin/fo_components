@@ -15,12 +15,12 @@ import 'fo_carousel_slide_component.dart';
     styleUrls: ['fo_carousel_component.css'],
     templateUrl: 'fo_carousel_component.html',
     directives: [FoIconComponent, FoCarouselSlideComponent, NgIf, NgFor],
-    changeDetection: ChangeDetectionStrategy.Default)
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoCarouselComponent implements OnDestroy, OnInit {
   final StreamController<int> _onStepController = StreamController();
   Timer? timer;
   final ChangeDetectorRef _changeDetectorRef;
-  final int _verticalThreshold = 40;
+
   int prevX = 0;
   int _deltaX = 0;
   Timer? _scrollTimer;
@@ -36,9 +36,6 @@ class FoCarouselComponent implements OnDestroy, OnInit {
 
   @Input()
   String prevIcon = 'keyboard_arrow_left';
-
-  @Input()
-  bool showRadioButtons = false;
 
   @Input()
   bool showArrowButtons = true;
@@ -118,9 +115,10 @@ class FoCarouselComponent implements OnDestroy, OnInit {
     if (disabled == true) {
       return;
     }
-    if (_deltaX < -_verticalThreshold) {
+
+    if (_deltaX < 0) {
       stepBy(-1);
-    } else if (_deltaX > _verticalThreshold) {
+    } else if (_deltaX > 0) {
       stepBy(1);
     }
 
@@ -133,11 +131,10 @@ class FoCarouselComponent implements OnDestroy, OnInit {
     }
 
     final x = event.touches!.first.screen.x.round();
-    prevX = x;
     _deltaX = prevX - x;
-    if (_deltaX > _verticalThreshold || _deltaX < -_verticalThreshold) {
-      dragOffset = math.max(-0.2, math.min(0.2, _deltaX.toDouble()));
-    }
+    prevX = x;
+
+    dragOffset = math.max(-0.2, math.min(0.2, _deltaX.toDouble()));
   }
 
   void stepBy(int steps) {
