@@ -1,5 +1,3 @@
-@import "../../mixins";
-
 :host {
   div.container {
     border-width: 1px;
@@ -8,9 +6,6 @@
     text-align: center;
     input {
       display: none;
-    }
-    p {
-      margin: 0.5rem 0;
     }
   }
 }

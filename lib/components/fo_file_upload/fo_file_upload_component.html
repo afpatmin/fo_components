@@ -1,39 +1,19 @@
-<label>{{label}}</label>
-<div class="container"
-     (dragenter)="$event.preventDefault()"
-     (dragover)="$event.preventDefault()"
-     (drop)="onDrop($event)">
-  <input #input
-         type="file"
-         (change)="onFileChange($event)"
-         [accept]="accept" />
-  <p *ngIf="!valid"
-     class="margin-top-small margin-bottom-small">
-    <fo-button (trigger)="input.click()"
-               [white]="true"
-               [materialIcon]="materialIcon"
-               [disabled]="disabled"
-               icon="folder_open">
-    </fo-button>
-  </p>
-  <p *ngIf="valid"
-     class="margin-top-small margin-bottom-small">
-    <fo-button [white]="true"
-               [disabled]="disabled || !valid"
-               [materialIcon]="materialIcon"
-               (trigger)="upload()"
-               icon="file_upload">
-    </fo-button>
-  </p>
-  <p>
-    <span *ngIf="file == null">...</span>
-    <!-- <ng-container *ngIf="file != null"> {{file?.name}} ({{(file.size / 1024).ceil()}}kb) <fo-icon icon="cancel"
-               class="color-alert"
-               [material]="materialIcon"
-               (click)="clearSelection()"></fo-icon>
-    </ng-container> -->
-  </p>
-  <!-- <p class="color-alert"
-     *ngIf="file?.size != null && file.size > maxByteSize"> {{$pipe.capitalize(msgMaxFilesizeExceeded)}}
-    ({{(maxByteSize/1024).ceil()}}kb) </p> -->
-</div>
+<fo-label [value]="label">
+   <div class="container"
+        (dragenter)="$event.preventDefault()"
+        (dragover)="$event.preventDefault()"
+        (drop)="onDrop($event)">
+      <input #input
+             type="file"
+             (change)="onFileChange($event)"
+             [accept]="accept" />
+      <div class="margin-top-small margin-bottom-small">
+         <fo-button (trigger)="input.click()"
+                    [white]="true"
+                    [materialIcon]="materialIcon"
+                    [disabled]="disabled"
+                    icon="folder_open">
+         </fo-button>
+      </div>
+   </div>
+</fo-label>
