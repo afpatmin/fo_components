@@ -1,7 +1,7 @@
 @import "../../constants.scss";
 @import "../../mixins.scss";
 @import "../fo_button/mixins";
-@import "../fo_dropdown_list/mixins";
+@import "../../src/components/fo_dropdown_list/mixins";
 @import "shared";
 
 :host {

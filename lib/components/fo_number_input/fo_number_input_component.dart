@@ -8,9 +8,9 @@ import 'dart:math' as math;
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:fo_components/components/fo_button/fo_button_component.dart';
-import 'package:fo_components/components/fo_dropdown_list/fo_dropdown_option.dart';
 import 'package:fo_components/components/fo_label/fo_label_component.dart';
 import 'package:fo_components/components/fo_text_input/fo_text_input_component.dart';
+import 'package:fo_components/fo_dropdown_option.dart';
 import 'package:intl/intl.dart';
 
 import '../../pipes/capitalize_pipe.dart';

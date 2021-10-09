@@ -5,10 +5,10 @@ import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:intl/intl.dart';
 
-import '../../pipes/capitalize_pipe.dart';
-import '../fo_dropdown/fo_dropdown_component.dart';
-import '../fo_text_input/fo_text_input_component.dart';
-import 'fo_dropdown_option.dart';
+import '../../../components/fo_dropdown/fo_dropdown_component.dart';
+import '../../../components/fo_text_input/fo_text_input_component.dart';
+import '../../../fo_dropdown_option.dart';
+import '../../../pipes/capitalize_pipe.dart';
 import 'fo_dropdown_option_component.dart';
 
 @Component(

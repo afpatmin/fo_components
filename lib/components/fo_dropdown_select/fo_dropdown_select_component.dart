@@ -3,12 +3,14 @@ import 'dart:html' as dom;
 
 import 'package:angular/angular.dart';
 
+import '../../fo_dropdown_option.dart';
+import '../../src/components/fo_dropdown_list/fo_dropdown_list_component.dart';
 import '../fo_button/fo_button_component.dart';
 import '../fo_button/fo_button_event.dart';
-import '../fo_dropdown_list/fo_dropdown_list_component.dart';
-import '../fo_dropdown_list/fo_dropdown_option.dart';
 import '../fo_icon/fo_icon_component.dart';
 import '../fo_label/fo_label_component.dart';
+
+export '../../fo_dropdown_option.dart';
 
 @Component(
     selector: 'fo-dropdown-select',
@@ -17,9 +19,9 @@ import '../fo_label/fo_label_component.dart';
     directives: [
       coreDirectives,
       FoButtonComponent,
-      FoDropdownListComponent,
       FoIconComponent,
       FoLabelComponent,
+      FoDropdownListComponent,
     ],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
