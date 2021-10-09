@@ -2,6 +2,7 @@
 @import "../../mixins";
 
 :host {
+  display: block;
   div#foPanel {
     @include boxShadow();
     overflow: hidden;
