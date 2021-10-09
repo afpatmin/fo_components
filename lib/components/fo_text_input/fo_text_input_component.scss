@@ -14,7 +14,6 @@
     display: flex;
     align-items: center;
     height: 100%;
-    transition: box-shadow $transitionSpeed;
     border-radius: $borderRadius;
     border-width: 1px;
     border-style: solid;
@@ -36,8 +35,6 @@
 
     fo-icon {
       font-size: 1em;
-      box-shadow: none;
-      -webkit-box-shadow: none;
     }
 
     fo-icon.clear {
@@ -57,10 +54,6 @@
     }
   }
 
-  div#flexContainer:focus-within {
-    @include boxShadow();
-  }
-
   fo-label.noLeftBorder {
     div#flexContainer {
       border-top-left-radius: 0;
@@ -74,13 +67,6 @@
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
       border-right-width: 0;
-    }
-  }
-
-  fo-label.noFocusShadow {
-    div#flexContainer:focus-within {
-      box-shadow: none;
-      -webkit-box-shadow: none;
     }
   }
 

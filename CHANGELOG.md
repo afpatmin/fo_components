@@ -3,6 +3,7 @@
 * Removed NotificationComponent
 * Removed dependency on angular_components
 * Carousel no longer supports radio buttons
+* Removed focus shadow from inputs and selects
 
 # 2.2.1
 * Changed Modal maxheight to 87vh (down from 95vh to accomodate ios bottom navbar)

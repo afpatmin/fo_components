@@ -59,10 +59,6 @@
       border: 0;
     }
   }
-
-  div#flexContainer.focus {
-    @include boxShadow();
-  }
 }
 
 :host[centerValue] {
@@ -79,13 +75,6 @@
         margin: 0.5rem;
       }
     }
-  }
-}
-
-:host[noFocusShadow] {
-  div#flexContainer.focus {
-    box-shadow: none;
-    -webkit-box-shadow: none;
   }
 }
 
