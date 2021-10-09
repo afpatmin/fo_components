@@ -34,7 +34,7 @@
                [label]="actionButtonLabel"
                [icon]="actionButtonIcon"
                [materialIcon]="materialIcons"
-               [disabled]="disabled || control?.valid == false || value.isNotEmpty"
+               [disabled]="disabled || control?.valid == false || value.isEmpty"
                (trigger)="actionButtonController.add($event)"></fo-button>
   </div>
   <fo-error-output *ngIf="(hasFocus == true || hideErrorsOnBlur == false) && errorMessage != null && control?.pristine != true && dropdownVisible == false"
