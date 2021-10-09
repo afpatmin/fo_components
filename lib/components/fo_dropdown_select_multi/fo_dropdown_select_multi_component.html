@@ -17,6 +17,6 @@
     <li *ngFor="let option of addedOptions"
         (click)="onRemove(option.renderId)"
         [class.disabled]="disabled"
-        [class.round]="square == null"> {{option.renderLabel}} </li>
+        [class.round]="square == false"> {{option.renderLabel}} </li>
   </ul>
 </div>
