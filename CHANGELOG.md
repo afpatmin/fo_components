@@ -1,6 +1,6 @@
 # 3.0.0 - null safety (BREAKING CHANGES)
 * Updated angular dependency to 7.0.0 and added null-safety
-* Added LoadIndicator, DatePicker components
+* Added LoadIndicator component
 * Removed ImageMap, Notification, DropdownSelectMulti components
 * Removed angular_components dependency
 * Removed everything with 'square' and 'focus', might implement these in theme mixin later

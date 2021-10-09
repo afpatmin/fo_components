@@ -45,6 +45,9 @@ class FoFileUploadComponent implements OnDestroy {
   String label = 'Select a file';
 
   @Input()
+  String uploadingLabel = 'Uploading...';
+
+  @Input()
   bool uploading = false;
 
   @Output('fileChange')

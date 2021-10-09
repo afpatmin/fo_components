@@ -10,14 +10,17 @@
              [accept]="accept" />
       <div id="content"
            class="margin-top-small margin-bottom-small">
-         <fo-button *ngIf="uploading == false"
+         <fo-button *ngIf="!uploading"
                     (trigger)="input.click()"
                     [white]="true"
                     [materialIcon]="materialIcon"
                     [disabled]="disabled"
                     icon="folder_open">
          </fo-button>
-         <fo-load-indicator *ngIf="uploading == true"></fo-load-indicator>
+         <ng-container *ngIf="uploading">
+            <fo-load-indicator></fo-load-indicator>
+            <fo-label [value]="uploadingLabel"></fo-label>
+         </ng-container>
       </div>
    </div>
 </fo-label>
