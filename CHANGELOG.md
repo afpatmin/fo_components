@@ -1,11 +1,12 @@
 # 3.0.0 - null safety (BREAKING CHANGES)
 * Updated angular dependency to 7.0.0 and added null-safety
-* Removed ImageMap, Notification, DropdownSelectMulti
-* Removed dependency on angular_components
+* Added LoadIndicator, DatePicker components
+* Removed ImageMap, Notification, DropdownSelectMulti components
+* Removed angular_components dependency
+* Removed everything with 'square' and 'focus', might implement these in theme mixin later
+* Made dropdown snappier
 * Carousel no longer supports radio buttons
-* Removed focus shadow from inputs selects, and dropdowns
-* Removed everything with square, might implement this as a theme later
-* Removed transitions from dropdown
+* Removed intermediate step from FileUpload
 
 # 2.2.1
 * Changed Modal maxheight to 87vh (down from 95vh to accomodate ios bottom navbar)
