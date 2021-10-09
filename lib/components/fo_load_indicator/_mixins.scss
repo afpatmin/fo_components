@@ -1,0 +1,9 @@
+@mixin fo-load-indicator-color($color) {
+    ::ng-deep fo-load-indicator {
+        div.ripple {
+            div {
+                border-color: $color !important;
+            }
+        }
+    }
+}

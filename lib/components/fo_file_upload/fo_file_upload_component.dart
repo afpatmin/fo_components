@@ -7,6 +7,7 @@ import '../../pipes/capitalize_pipe.dart';
 import '../fo_button/fo_button_component.dart';
 import '../fo_icon/fo_icon_component.dart';
 import '../fo_label/fo_label_component.dart';
+import '../fo_load_indicator/fo_load_indicator_component.dart';
 
 @Component(
     selector: 'fo-file-upload',
@@ -17,6 +18,7 @@ import '../fo_label/fo_label_component.dart';
       FoButtonComponent,
       FoIconComponent,
       FoLabelComponent,
+      FoLoadIndicatorComponent,
     ],
     pipes: [CapitalizePipe],
     changeDetection: ChangeDetectionStrategy.OnPush)
@@ -60,7 +62,7 @@ class FoFileUploadComponent implements OnDestroy {
 
   void onDrop(dom.MouseEvent event) {
     event.preventDefault();
-    if (disabled != true) {
+    if (disabled == false && uploading == false) {
       final dt = event.dataTransfer;
       file = (dt.files!.isEmpty) ? null : file = dt.files!.last;
       if (file != null) {
