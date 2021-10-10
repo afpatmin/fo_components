@@ -1,15 +1,20 @@
 :host {
+    display: flex;
+    align-items: center;
     #checkContainer {
-        display: block;
+        width: 1.2em;
+        height: 1.2em;
         position: relative;
-        padding-left: 1.4em;
         cursor: pointer;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        border: 1px solid; // #ccc;
+        border-radius: 0.2em;
+        box-sizing: content-box;
+        margin-right: 0.3em;
 
-        // Hide the default checkbox
         input {
             position: absolute;
             opacity: 0;
@@ -19,42 +24,28 @@
             margin: 0;
         }
 
-        // Show the checkmark when checked
-        input:checked ~ .mark:after {
-            display: block;
-        }
-
-        // Create a custom checkbox
         .mark {
             position: absolute;
             top: 0;
             left: 0;
-            height: 1em;
-            width: 1em;
+            height: 1.2em;
+            width: 1.2em;
             background-color: white;
-            border: 1px solid #ccc;
             border-radius: 0.2em;
-            box-sizing: content-box;
-        }
+            box-sizing: border-box;
 
-        // Create the checkmark/indicator (hidden when not checked)
-        .mark:after {
-            content: "";
-            position: absolute;
-            display: none;
-        }
-
-        // Style the checkmark/indicator
-        .mark:after {
-            left: 0.29em;
-            top: 0.08em;
-            width: 0.2em;
-            height: 0.5em;
-            border: solid white;
-            border-width: 0 0.2em 0.2em 0;
-            -webkit-transform: rotate(45deg);
-            -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
+            .marker {
+                position: absolute;
+                display: none;
+                left: 0.2em;
+                top: 0.2em;
+                width: 0.8em;
+                height: 0.8em;
+                border-radius: 0.1em;
+            }
+            .marker.visible {
+                display: block;
+            }
         }
     }
 }

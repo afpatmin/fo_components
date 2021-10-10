@@ -1,20 +1,22 @@
 @mixin fo-check-colors($higlight, $border) {
     ::ng-deep fo-check > #checkContainer {
+        border-color: $border !important;
         input ~ .mark {
             border-color: $border !important;
         }
 
-        input:checked ~ .mark {
-            border-color: $higlight !important;
-            background-color: $higlight !important;
+        div.mark {
+            div.marker {
+                background-color: $higlight !important;
+            }
         }
 
-        input:disabled ~ .mark {
+        input:disabled ~ div.mark {
             border-color: $border !important;
             background-color: darken(white, 5%) !important;
-        }
-        input:disabled ~ .mark:after {
-            border-color: darken(white, 25%) !important;
+            div.marker {
+                background-color: darken(white, 25%) !important;
+            }
         }
     }
 }

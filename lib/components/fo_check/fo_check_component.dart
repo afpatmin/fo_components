@@ -8,7 +8,10 @@ import '../../src/components/fo_label/fo_label_component.dart';
   selector: 'fo-check',
   templateUrl: 'fo_check_component.html',
   styleUrls: ['fo_check_component.css'],
-  directives: [coreDirectives, FoLabelComponent],
+  directives: [
+    coreDirectives,
+    FoLabelComponent,
+  ],
   providers: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
