@@ -19,6 +19,7 @@
     height: 0;
     opacity: 0;
     overflow: hidden;
+    box-sizing: border-box;
 
     div#dropdownContent {
       background-color: white;

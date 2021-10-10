@@ -1,0 +1,65 @@
+<fo-label [value]="label"
+          (click)="onClick($event)"></fo-label>
+<div id="flexContainer"
+     [class.focus]="dropdownVisible">
+    <div id="selector"
+         [class.disabled]="disabled == true"
+         (click)="onClick($event)">
+        <div id="selectedDate">
+            {{$pipe.date($pipe.bloc(datePickerCubit).selectedDate)}}
+        </div>
+        <fo-icon class="arrow"
+                 [material]="true"
+                 icon="keyboard_arrow_down"></fo-icon>
+    </div>
+</div>
+
+<fo-dropdown [(visible)]="dropdownVisible"
+             [width]="248"
+             [offsetTop]="-1">
+    <div id="calendar">
+        <div id="steppers">
+            <div class="stepper"
+                 id="year">
+                <fo-icon icon="keyboard_arrow_left"
+                         [material]="true"
+                         (click)="datePickerCubit.setYear(datePickerCubit.state.selectedDate.year - 1)"></fo-icon>
+                <div>{{$pipe.bloc(datePickerCubit).selectedDate.year}}</div>
+                <fo-icon icon="keyboard_arrow_right"
+                         [material]="true"
+                         (click)="datePickerCubit.setYear(datePickerCubit.state.selectedDate.year + 1)"></fo-icon>
+            </div>
+            <div class="stepper"
+                 id="month">
+                <fo-icon icon="keyboard_arrow_left"
+                         [material]="true"
+                         (click)="datePickerCubit.setMonth(datePickerCubit.state.selectedDate.month - 1)"></fo-icon>
+                <div>{{$pipe.date($pipe.bloc(datePickerCubit).selectedDate, 'MMM')}}</div>
+                <fo-icon icon="keyboard_arrow_right"
+                         [material]="true"
+                         (click)="datePickerCubit.setMonth(datePickerCubit.state.selectedDate.month + 1)"></fo-icon>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <td *ngFor="let weekday of weekdays">{{weekday}}</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let week of weeks">
+                    <td *ngFor="let day of week"
+                        [class.highlight]="$pipe.bloc(datePickerCubit).selectedDate.day == day"
+                        (click)="datePickerCubit.setDay(day)">{{day}}</td>
+                </tr>
+                <tr>
+                    <td *ngFor="let day of lastWeek"
+                        [class.inactive]="$pipe.bloc(datePickerCubit).availableDays.contains(day) == false"
+                        [class.highlight]="$pipe.bloc(datePickerCubit).selectedDate.day == day"
+                        (click)="datePickerCubit.setDay(day)">{{day}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</fo-dropdown>

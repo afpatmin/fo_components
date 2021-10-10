@@ -1,0 +1,78 @@
+@mixin fo-date-picker-colors($selectedValueColor, $borderColor, $highlightColor, $backgroundColor: white) {
+    ::ng-deep fo-date-picker {
+        div#flexContainer {
+            border-color: $borderColor;
+
+            div#selector {
+                div#selectedDate {
+                    color: $selectedValueColor;
+                }
+
+                fo-icon {
+                    color: $highlightColor;
+                }
+            }
+            div#selector.disabled {
+                background-color: darken($backgroundColor, 5%) !important;
+            }
+        }
+        fo-dropdown {
+            thead {
+                tr {
+                    td {
+                        color: $highlightColor;
+                    }
+                }
+            }
+            td.highlight {
+                background-color: $highlightColor;
+                color: white;
+            }
+            td.inactive {
+                color: $borderColor;
+            }
+        }
+    }
+}
+
+@mixin fo-date-picker-vertical-padding($top, $bottom) {
+    ::ng-deep fo-date-picker > {
+        div#flexContainer {
+            div#selector {
+                div#selectedDate {
+                    padding-top: $top !important;
+                    padding-bottom: $bottom !important;
+                }
+            }
+        }
+    }
+}
+
+@mixin fo-date-picker-horizontal-padding($left, $right) {
+    ::ng-deep fo-date-picker > {
+        div#flexContainer {
+            div#selector {
+                div#selectedDate {
+                    padding-left: $left !important;
+                }
+                fo-icon.arrow {
+                    padding-right: $right !important;
+                }
+            }
+        }
+    }
+}
+
+@mixin fo-date-picker-select-icon-size($size) {
+    ::ng-deep fo-date-picker {
+        div#flexContainer {
+            div#selector {
+                div#selectedDate {
+                    fo-icon {
+                        font-size: $size;
+                    }
+                }
+            }
+        }
+    }
+}

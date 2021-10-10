@@ -1,0 +1,92 @@
+@import "package:fo_components/components/fo_button/mixins";
+@import "package:fo_components/src/components/fo_dropdown_list/mixins";
+@import "../../mixins.scss";
+
+:host {
+    display: block;
+    position: relative;
+    width: 250px;
+
+    div#flexContainer {
+        cursor: pointer;
+        display: flex;
+        border-radius: 0.25rem;
+        border-width: 1px;
+        border-style: solid;
+        overflow: hidden;
+
+        div#selector {
+            background-color: white;
+            flex: 1;
+            display: flex;
+            align-items: center;
+
+            fo-icon.arrow {
+                font-size: 1.5em;
+                margin-right: 0.15em;
+                line-height: 1em;
+            }
+
+            div#selectedDate {
+                flex: 1;
+                line-height: 1.5em;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                padding: 0.5em;
+                user-select: none;
+                display: flex;
+                align-items: center;
+
+                fo-icon {
+                    margin-right: 0.25em;
+                }
+            }
+        }
+    }
+
+    div#calendar {
+        font-size: 16px;
+        padding: 6px;
+        box-sizing: border-box;
+        div#steppers {
+            display: flex;
+            justify-content: space-between;
+            div.stepper {
+                display: flex;
+                align-items: center;
+                div {
+                    width: 3em;
+                    text-align: center;
+                }
+                fo-icon {
+                    user-select: none;
+                    border: 1px solid #eee;
+                    border-radius: 0.25rem;
+                    cursor: pointer;
+                    font-size: 1.5em;
+                }
+            }
+        }
+        table {
+            width: 100%;
+            margin-top: 4px;
+            table-layout: fixed;
+            tr {
+                td {
+                    text-align: center;
+                }
+            }
+            tbody {
+                tr {
+                    td {
+                        user-select: none;
+                        cursor: pointer;
+                        line-height: 150%;
+                        border-radius: 0.25rem;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -13,9 +13,7 @@ import 'package:angular/angular.dart';
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDropdownComponent
     implements AfterViewInit, OnDestroy, AfterContentChecked {
-  /// Width in pixels
-  @Input()
-  num? width;
+  num _width = 0;
 
   bool _visible = false;
 
@@ -36,24 +34,26 @@ class FoDropdownComponent
   int? maxHeight;
 
   final ChangeDetectorRef _changeDetectorRef;
+
   final StreamController<bool> _visibleController = StreamController<bool>();
+
   StreamSubscription<html.Event>? _documentScrollSub;
   StreamSubscription<html.Event>? _windowResizeSub;
   int _elementMaxHeight = 100;
   final html.Element host;
   String? height;
   Element? _content;
-
   FoDropdownComponent(this.host, this._changeDetectorRef);
-
   String get elementMaxHeight =>
       maxHeight == null ? '${_elementMaxHeight}px' : '${maxHeight}px';
-  String get elementWidth => width == null ? 'auto' : '${width}px';
+
+  // ignore: unnecessary_null_comparison
+  String get elementWidth => width == 0 ? 'auto' : '${width}px';
+
   String? get left => offsetHorizontal == null ? null : '${offsetHorizontal}px';
   String get opacity => visible == true ? '1' : '0';
   String? get top => offsetTop == null ? null : '${offsetTop}px';
   bool get visible => _visible;
-
   @Input()
   set visible(bool flag) {
     _visible = flag;
@@ -73,6 +73,14 @@ class FoDropdownComponent
 
   @Output('visibleChange')
   Stream<bool> get visibleChange => _visibleController.stream;
+
+  num get width => _width;
+
+  /// Width in pixels
+  @Input()
+  set width(num? v) {
+    _width = v ?? 0;
+  }
 
   String evaluateHeight() {
     if (_content == null || visible != true) {
