@@ -1,33 +1,31 @@
-<fo-label [value]="label">
-  <div id="flexContainer"
-       [class.focus]="dropdownVisible">
-    <div id="selector"
-         #selector
-         [class.noRightBorder]="actionButtonLabel != null"
-         [class.disabled]="disabled == true"
-         (click)="onClick($event)">
-      <div id="selectedValue">
-        <fo-icon *ngIf="selectedOption?.renderIcon != null"
-                 [icon]="selectedOption?.renderIcon"
-                 [material]="materialIcons">
-        </fo-icon>
-        <span>{{selectedOption == null ? placeholder : selectedOption.renderLabel}}</span>
-      </div>
-      <fo-icon class="arrow"
-               [material]="true"
-               icon="keyboard_arrow_down"></fo-icon>
+<fo-label [value]="label"
+          (click)="onClick($event)"></fo-label>
+<div id="flexContainer"
+     [class.focus]="dropdownVisible">
+  <div id="selector"
+       #selector
+       [class.noRightBorder]="actionButtonLabel != null"
+       [class.disabled]="disabled == true"
+       (click)="onClick($event)">
+    <div id="selectedValue">
+      <fo-icon *ngIf="selectedOption?.icon != null"
+               [icon]="selectedOption?.icon"
+               [material]="materialIcons">
+      </fo-icon>
+      <span>{{selectedOption == null ? placeholder : selectedOption!.label}}</span>
     </div>
-    <fo-button *ngIf="actionButtonLabel != null"
-               [label]="actionButtonLabel"
-               square
-               [disabled]="disabled || selectedOption == null"
-               (trigger)="onActionButtonTrigger($event)"></fo-button>
+    <fo-icon class="arrow"
+             [material]="true"
+             icon="keyboard_arrow_down"></fo-icon>
   </div>
-</fo-label>
+  <fo-button *ngIf="actionButtonLabel != null"
+             [label]="actionButtonLabel"
+             [disabled]="disabled || selectedOption == null"
+             (trigger)="onActionButtonTrigger($event)"></fo-button>
+</div>
+
 
 <fo-dropdown-list *ngIf="options != null && dropdownVisible == true && disabled != true"
-                  [attr.noShadow]="noFocusShadow"
-                  [attr.square]="square"
                   [options]="options"
                   [offsetTop]="dropdownTopOffset"
                   [showSearch]="showSearch"

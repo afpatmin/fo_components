@@ -3,12 +3,14 @@ import 'dart:html' as dom;
 
 import 'package:angular/angular.dart';
 
+import '../../../src/components/fo_label/fo_label_component.dart';
+import '../../fo_dropdown_option.dart';
+import '../../src/components/fo_dropdown_list/fo_dropdown_list_component.dart';
 import '../fo_button/fo_button_component.dart';
 import '../fo_button/fo_button_event.dart';
-import '../fo_dropdown_list/fo_dropdown_list_component.dart';
-import '../fo_dropdown_list/fo_dropdown_option.dart';
 import '../fo_icon/fo_icon_component.dart';
-import '../fo_label/fo_label_component.dart';
+
+export '../../fo_dropdown_option.dart';
 
 @Component(
     selector: 'fo-dropdown-select',
@@ -17,17 +19,17 @@ import '../fo_label/fo_label_component.dart';
     directives: [
       coreDirectives,
       FoButtonComponent,
-      FoDropdownListComponent,
       FoIconComponent,
       FoLabelComponent,
+      FoDropdownListComponent,
     ],
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @Input()
-  String label;
+  String? label;
 
   @Input()
-  String actionButtonLabel;
+  String? actionButtonLabel;
 
   @Input()
   bool disabled = false;
@@ -43,7 +45,7 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
 
   /// Max height of the dropdown, in pixels
   @Input()
-  int dropdownMaxHeight;
+  int? dropdownMaxHeight;
 
   /// Make sure options doesn't extend beyond the viewport
   @Input()
@@ -52,85 +54,77 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @Input()
   bool materialIcons = true;
 
-  Map<String, List<FoDropdownOptionRenderable>> _options;
+  Map<String, List<FoDropdownOption>> _options = {};
 
-  bool _optionsChanged;
-  Object _selectedId;
+  bool? _optionsChanged;
+  Object? _selectedId;
 
   final ChangeDetectorRef _changeDetectorRef;
 
-  final StreamController<Object> _selectedIdController =
-      StreamController<Object>();
+  final StreamController<Object?> _selectedIdController =
+      StreamController<Object?>();
 
   final StreamController<FoButtonEvent> _actionButtonController =
       StreamController<FoButtonEvent>();
-  final dom.Element _host;
-
   bool dropdownVisible = false;
+  FoDropdownOption? selectedOption;
 
-  FoDropdownOptionRenderable selectedOption;
   @Input()
   bool showSearch = false;
   @ViewChild('selector')
-  dom.Element selectorElement;
+  dom.Element? selectorElement;
 
-  FoDropdownSelectComponent(this._host, this._changeDetectorRef);
+  FoDropdownSelectComponent(this._changeDetectorRef);
 
   @Output('actionButtonTrigger')
   Stream<FoButtonEvent> get actionButtonTrigger =>
       _actionButtonController.stream;
 
-  int get dropdownWidth =>
-      selectorElement.getBoundingClientRect().width.round();
+  int get dropdownTopOffset => -1;
 
-  Map<String, List<FoDropdownOptionRenderable>> get options => _options;
+  int? get dropdownWidth =>
+      selectorElement?.getBoundingClientRect().width.round();
+
+  Map<String, List<FoDropdownOption>> get options => _options;
 
   @Input()
-  set options(Map<String, List<FoDropdownOptionRenderable>> value) {
+  set options(Map<String, List<FoDropdownOption>> value) {
     _options = value;
     _optionsChanged = true;
   }
 
-  Object get selectedId => _selectedId;
+  Object? get selectedId => _selectedId;
 
   @Input('selectedId')
-  set selectedId(Object id) {
+  set selectedId(Object? id) {
     selectedOption = null;
     _selectedId = id;
 
-    if (options != null) {
-      for (final category in options.keys) {
-        if (options[category] != null) {
-          selectedOption = options[category]
-              .firstWhere((e) => e?.renderId == id, orElse: () => null);
-
-          if (selectedOption != null) {
-            return;
-          }
-        }
+    for (final category in options.keys) {
+      if (options[category] != null) {
+        try {
+          selectedOption = options[category]!.firstWhere((e) => e.id == id);
+          return;
+          // ignore: avoid_catching_errors, empty_catches
+        } on StateError {}
       }
     }
   }
 
   @Output('selectedIdChange')
-  Stream<Object> get selectedIdChange => _selectedIdController.stream;
-
-  String get noFocusShadow =>
-      _host.attributes.containsKey('noFocusShadow') ? '1' : null;
-
-  String get square => _host.attributes.containsKey('square') ? '1' : null;
+  Stream<Object?> get selectedIdChange => _selectedIdController.stream;
 
   @override
   void ngAfterChanges() {
     if (_optionsChanged == true) {
       // Update selected option
       for (final category in options.keys) {
-        selectedOption = options[category].firstWhere(
-            (option) => option?.renderId == _selectedId,
-            orElse: () => null);
-        if (selectedOption != null) {
+        try {
+          selectedOption = options[category]!
+              .firstWhere((option) => option.id == _selectedId);
           return;
-        }
+          // ignore: avoid_catching_errors, empty_catches
+        } on StateError {}
       }
     }
   }
@@ -148,26 +142,17 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
 
   void onClick(dom.Event e) {
     if (disabled != true &&
-        options?.values
-                ?.where((option) => option?.isNotEmpty == true)
-                ?.isNotEmpty ==
-            true) {
-      Future.delayed(Duration(milliseconds: 100)).then((_) {
-        dropdownVisible = !dropdownVisible;
-        _changeDetectorRef.markForCheck();
-      });
+        options.values.where((option) => option.isNotEmpty).isNotEmpty) {
+      dropdownVisible = !dropdownVisible;
+      _changeDetectorRef.markForCheck();
+      e.preventDefault();
     }
-    e
-      ..preventDefault()
-      ..stopPropagation();
   }
 
-  int get dropdownTopOffset => square == null ? null : -1;
-
-  void onSelect(FoDropdownOptionRenderable event) {
+  void onSelect(FoDropdownOption event) {
     dropdownVisible = false;
     selectedOption = event;
-    _selectedId = event.renderId;
-    _selectedIdController.add(event.renderId);
+    _selectedId = event.id;
+    _selectedIdController.add(event.id);
   }
 }

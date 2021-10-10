@@ -20,27 +20,27 @@
 <fo-quiz *ngIf="currentChildQuiz != null"
          [disabled]="disabled"
          [buttonColor]="buttonColor"
-         [model]="currentChildQuiz"
+         [model]="currentChildQuiz!"
          (done)="onChildQuizDone($event)">
 </fo-quiz>
 <div id="stepButtons"
      *ngIf="currentChildQuiz == null">
   <div id="left">
     <fo-button *ngIf="prevButtonLabel != null && !rightHidden"
-               white
-               square
-               fullWidth
-               [label]="prevButtonLabel | capitalize"
+               [white]="true"
+               class="fullWidth"
+               [disabled]="disabled"
+               [label]="$pipe.capitalize(prevButtonLabel!)"
                [themeBackgroundColor]="buttonColor"
                (trigger)="onPrevTrigger()">
     </fo-button>
   </div>
   <div id="right">
     <fo-button *ngIf="selectedOptions.isNotEmpty && !rightHidden"
-               white
-               square
-               fullWidth
-               [label]="nextButtonLabel | capitalize"
+               [white]="true"
+               class="fullWidth"
+               [disabled]="disabled"
+               [label]="$pipe.capitalize(nextButtonLabel!)"
                [themeBackgroundColor]="buttonColor"
                (trigger)="onNextTrigger()">
     </fo-button>

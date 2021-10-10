@@ -1,5 +1,3 @@
-@import "package:angular_components/material_icon/mixins";
-
 @mixin fo-button-vertical-padding($value) {
   ::ng-deep fo-button {
     button.themeable {
@@ -26,28 +24,29 @@
     color: $color;
   }
 
-  // Selected (white)
-  ::ng-deep fo-button[white].selected > button:not(:disabled).themeable {
-    background-color: $backgroundColor;
-    border-color: $backgroundColor;
-    color: $color;
-  }
-
-  // Selected (not white)
-  ::ng-deep fo-button:not([white]).selected > button:not(:disabled).themeable {
+  // Selected
+  ::ng-deep fo-button.selected > button:not(:disabled).themeable {
     filter: brightness(120%);
   }
 
-  // Hover effect (not white)
-  ::ng-deep fo-button:not([noHover]):not([white]) > button:not(:disabled).themeable:hover {
+  // Hover effect
+  ::ng-deep fo-button > button:not(:disabled).themeable:hover {
     filter: brightness(120%);
   }
 
   // Hover effect (white)
-  ::ng-deep fo-button[white]:not([noHover])button:not(:disabled).themeable:hover {
+  ::ng-deep fo-button > button:not(:disabled).themeable.white:hover {
     background-color: $backgroundColor;
     border-color: $backgroundColor;
     color: white;
+    filter: none;
+  }
+
+  // Selected (white)
+  ::ng-deep fo-button.selected > button:not(:disabled).themeable.white {
+    background-color: $backgroundColor;
+    border-color: $backgroundColor;
+    color: $color;
   }
 
   // Disabled

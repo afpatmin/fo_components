@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:async';
 
 import 'package:angular/angular.dart';
@@ -14,31 +16,37 @@ import 'fo_question_component.dart';
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class FoQuizComponent implements OnInit, OnDestroy {
-  FoQuestionModel activeQuestion;
-  int activeIndex;
+  late FoQuestionModel activeQuestion;
+  int activeIndex = 0;
   final ChangeDetectorRef _changeDetectorRef;
 
   final _doneController = StreamController<FoQuizDoneEvent>();
 
   @Input()
-  FoQuizModel model;
+  late FoQuizModel model;
 
   @Input()
   bool disabled = false;
 
   @Input()
-  String buttonColor = '#888';
+  set buttonColor(String? v) {
+    if (v == null) {
+      _buttonColor = '#888';
+    } else {
+      _buttonColor = v;
+    }
+  }
 
-  @Input()
-  @Deprecated(
-      'This has been deprecated and will be removed in next major release')
-  String buttonColorActive = '#aaa';
+  String _buttonColor = '#888';
+  String get buttonColor => _buttonColor;
 
   final String quiz_previous = Intl.message('previous', name: 'quiz_previous');
 
   final String quiz_send = Intl.message('send', name: 'quiz_send');
 
   final String quiz_next = Intl.message('next', name: 'quiz_next');
+
+  late int maxPoints;
 
   FoQuizComponent(this._changeDetectorRef);
 
@@ -47,17 +55,13 @@ class FoQuizComponent implements OnInit, OnDestroy {
 
   @Output('done')
   Stream<FoQuizDoneEvent> get onDone => _doneController.stream;
+  String? get prevButtonLabel =>
+      activeQuestion == model.questions.first ? null : quiz_previous;
 
-  String get prevButtonLabel =>
-      activeQuestion == null || activeQuestion == model.questions.first
-          ? null
-          : quiz_previous;
   @override
   void ngOnDestroy() {
     _doneController.close();
   }
-
-  int maxPoints;
 
   @override
   void ngOnInit() {
@@ -66,6 +70,9 @@ class FoQuizComponent implements OnInit, OnDestroy {
   }
 
   void onQuestionDone(FoQuestionModel question) {
+    if (disabled) {
+      return;
+    }
     activeIndex = model.questions.indexOf(question);
 
     if (activeIndex == model.questions.length - 1) {
@@ -74,12 +81,6 @@ class FoQuizComponent implements OnInit, OnDestroy {
       activeIndex++;
       activeQuestion = model.questions[activeIndex];
     }
-  }
-
-  void restart() {
-    activeQuestion = model.questions.first;
-    activeIndex = 0;
-    _changeDetectorRef.markForCheck();
   }
 
   void onQuestionPrev(FoQuestionModel question) {
@@ -91,8 +92,16 @@ class FoQuizComponent implements OnInit, OnDestroy {
     }
   }
 
-  int _calcMaxPoints(FoQuizModel quiz) {
-    if (quiz == null) return 0;
+  void restart() {
+    activeQuestion = model.questions.first;
+    activeIndex = 0;
+    _changeDetectorRef.markForCheck();
+  }
+
+  int _calcMaxPoints(FoQuizModel? quiz) {
+    if (quiz == null) {
+      return 0;
+    }
     var maxPoints = 0;
 
     /// Add all options in multi-selects
@@ -101,7 +110,7 @@ class FoQuizComponent implements OnInit, OnDestroy {
         if (option.score > 0) {
           maxPoints += option.score;
         }
-        maxPoints += _calcMaxPoints(option.child);
+        maxPoints += _calcMaxPoints(option.child!);
       }
     }
 
@@ -123,7 +132,7 @@ class FoQuizComponent implements OnInit, OnDestroy {
     return maxPoints;
   }
 
-  int _calcScore(FoQuizModel quiz) {
+  int _calcScore(FoQuizModel? quiz) {
     if (quiz == null) return 0;
     var score = 0;
     for (final question in quiz.questions) {

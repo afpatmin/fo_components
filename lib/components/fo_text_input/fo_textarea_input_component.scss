@@ -1,5 +1,4 @@
 @import "../../mixins";
-@import "../fo_label/mixins";
 @import "shared";
 
 :host {
@@ -34,24 +33,7 @@
     font-size: 1em;
   }
 
-  textarea:focus {
-    @include boxShadow();
-  }
-}
-
-textarea.elastic {
-  overflow: hidden;
-}
-
-:host[noFocusShadow] {
-  textarea:focus {
-    box-shadow: none;
-    -webkit-box-shadow: none;
-  }
-}
-
-:host[square] {
-  textarea {
-    border-radius: 0;
+  textarea.elastic {
+    overflow: hidden;
   }
 }

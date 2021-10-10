@@ -1,5 +1,3 @@
-@import "../../mixins";
-
 :host {
   div.container {
     border-width: 1px;
@@ -9,12 +7,11 @@
     input {
       display: none;
     }
-    p {
-      margin: 0.5rem 0;
-    }
-    material-icon {
-      cursor: pointer;
-      margin-left: 0.25rem;
+    div#content {
+      display: flex;
+      height: 2.5em;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

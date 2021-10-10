@@ -3,10 +3,6 @@ $slideTransitionSpeed: 200ms;
 :host {
   display: block;
 
-  #radioButtons {
-    text-align: center;
-  }
-
   .arrow {
     cursor: pointer;
     user-select: none;
@@ -34,6 +30,9 @@ $slideTransitionSpeed: 200ms;
     -ms-transition: background-color 200ms;
     -o-transition: background-color 200ms;
     transition: background-color 200ms;
+    border-radius: 5px;
+
+    font-size: 24px;
   }
 
   .arrow.below {

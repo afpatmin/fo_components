@@ -14,10 +14,10 @@
   }
 }
 
-@mixin fo-image-file-min-height($height) {
+@mixin fo-image-file-height($height) {
   ::ng-deep fo-image-file {
     div.container {
-      min-height: $height;
+      height: $height !important;
     }
   }
 }

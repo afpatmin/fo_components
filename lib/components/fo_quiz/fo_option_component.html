@@ -1,7 +1,5 @@
-<fo-button fullWidth
-           square
-           noHover
-           [label]="model.label"
+<fo-button class="fullWidth"
+           [label]="model?.label"
            [themeBackgroundColor]="buttonColor"
            (trigger)="onSelect()"
            [disabled]="disabled">

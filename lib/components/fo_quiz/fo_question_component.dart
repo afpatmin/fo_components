@@ -26,28 +26,28 @@ class FoQuestionComponent implements AfterChanges, OnDestroy {
   bool leftHidden = true;
   bool rightHidden = true;
   bool transition = false;
-  FoQuizModel currentChildQuiz;
+  FoQuizModel? currentChildQuiz;
   final StreamController<FoQuestionModel> prevController = StreamController();
   final StreamController<FoQuestionModel> doneController = StreamController();
   final ChangeDetectorRef _changeDetectorRef;
 
   @Input()
-  int index;
+  late int index;
 
   @Input()
-  FoQuestionModel model;
+  late FoQuestionModel model;
 
   @Input()
   bool disabled = false;
 
   @Input()
-  String buttonColor;
+  String? buttonColor;
 
   @Input()
-  String prevButtonLabel;
+  String? prevButtonLabel;
 
   @Input()
-  String nextButtonLabel;
+  String? nextButtonLabel;
 
   FoQuestionComponent(this._changeDetectorRef);
 
@@ -89,12 +89,17 @@ class FoQuestionComponent implements AfterChanges, OnDestroy {
     /// If there is one, show that, otherwise emit done
     final index = model.options.indexOf(
         model.options.firstWhere((option) => option.child == currentChildQuiz));
-    final nextOptionWithChildQuiz = model.options.skip(index + 1).firstWhere(
-        (option) => option.child != null && option.selected,
-        orElse: () => null);
 
-    currentChildQuiz = nextOptionWithChildQuiz?.child;
-    if (currentChildQuiz == null) doneController.add(model);
+    try {
+      final nextOptionWithChildQuiz =
+          model.options.skip(index + 1).firstWhere((option) => option.selected);
+
+      currentChildQuiz = nextOptionWithChildQuiz.child;
+      if (currentChildQuiz == null) {
+        doneController.add(model);
+      }
+      // ignore: avoid_catching_errors, empty_catches
+    } on StateError {}
   }
 
   void onPrevTrigger() {
@@ -103,11 +108,11 @@ class FoQuestionComponent implements AfterChanges, OnDestroy {
 
   void onNextTrigger() {
     final selected = selectedOptions;
-
-    currentChildQuiz = selected
-        .firstWhere((option) => option.child != null, orElse: () => null)
-        ?.child;
-    if (currentChildQuiz == null) {
+    try {
+      currentChildQuiz =
+          selected.firstWhere((option) => option.child != null).child;
+      // ignore: avoid_catching_errors
+    } on StateError {
       doneController.add(model);
     }
   }

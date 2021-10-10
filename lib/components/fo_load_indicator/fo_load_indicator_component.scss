@@ -1,0 +1,37 @@
+:host {
+    display: flex;
+    align-items: center;
+    @keyframes spin {
+        from {
+            transform: rotate(0);
+        }
+        to {
+            transform: rotate(359deg);
+        }
+    }
+    .spinner {
+        width: 3em;
+        height: 3em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+
+        .circleBorder {
+            width: 1.5em;
+            height: 1.5em;
+            padding: 3px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            animation: spin 0.8s linear 0s infinite;
+        }
+        .circleCore {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            border-radius: 50%;
+        }
+    }
+}

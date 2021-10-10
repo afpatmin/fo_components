@@ -1,20 +1,20 @@
 $transitionSpeed: 0.3s ease;
 
-@import "package:angular_components/material_checkbox/mixins";
-@import "package:angular_components/material_radio/mixins";
-@import "package:angular_components/material_toggle/mixins";
-
 @import "components/fo_button/mixins";
 @import "components/fo_file_upload/mixins";
 @import "components/fo_image_file/mixins";
-@import "components/fo_dropdown/mixins";
-@import "components/fo_dropdown_list/mixins";
+@import "components/fo_date_picker/mixins";
+@import "src/components/fo_dropdown/mixins";
+@import "src/components/fo_dropdown_list/mixins";
 @import "components/fo_dropdown_select/mixins";
-@import "components/fo_dropdown_select_multi/mixins";
-@import "components/fo_label/mixins";
+@import "src/components/fo_label/mixins";
 @import "components/fo_modal/mixins";
 @import "components/fo_tab/mixins";
 @import "components/fo_text_input/mixins";
+@import "components/fo_load_indicator/mixins";
+@import "components/fo_check/mixins";
+@import "components/fo_radio/mixins";
+@import "components/fo_toggle/mixins";
 
 @mixin foregroundColor($color) {
   color: $color;
@@ -36,32 +36,21 @@ $transitionSpeed: 0.3s ease;
   $alertColorDark: darken($alertColor, $lightstep);
   $alertColorBright: lighten($alertColor, $lightstep);
 
-  @include material-checkbox-color($primaryColor);
-  @include material-radio-color($primaryColor);
-  @include material-toggle-theme($primaryColor);
-
+  @include fo-load-indicator-color($primaryColor);
+  @include fo-check-colors($primaryColor, $grayColorBright);
+  @include fo-radio-colors($primaryColor, $grayColorBright);
+  @include fo-toggle-colors($primaryColor, $grayColorBright);
   @include fo-button-colors(white, $primaryColor, $grayColorBright);
   @include fo-dropdown-border-color($grayColorBright);
   @include fo-dropdown-list-colors($primaryColor, $grayColor, $grayColorBright);
+  @include fo-date-picker-colors($grayColor, $grayColorBright, $primaryColor);
   @include fo-dropdown-select-colors($grayColor, $grayColorBright, $primaryColor);
-  @include fo-dropdown-select-multi-options-background-color($primaryColor);
-  @include fo-dropdown-select-multi-options-border-color($grayColorBright);
   @include fo-file-upload-border-color($grayColorBright);
   @include fo-image-file-colors($grayColorBright, $grayColorBright, $grayColor);
   @include fo-label-color($grayColor);
   @include fo-modal-colors(lighten($grayColorBright, 10%), $alertColor);
   @include fo-tab-panel-colors(darken($grayColor, $lightstep), $primaryColor);
   @include fo-text-input-colors(darken($grayColor, $lightstep), $grayColorBright, $primaryColor, $alertColor);
-
-  material-spinner {
-    border-color: $primaryColor;
-  }
-
-  ::ng-deep {
-    material-icon > i {
-      margin-bottom: 0 !important;
-    }
-  }
 
   ::ng-deep .black-color {
     @include foregroundColor(#555);
@@ -149,8 +138,8 @@ $transitionSpeed: 0.3s ease;
 }
 
 @mixin boxShadow() {
-  box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.4);
-  -webkit-box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.2);
 }
 
 @include fo-colors(#2e5266, #008898, #f77);

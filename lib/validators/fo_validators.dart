@@ -1,8 +1,9 @@
 import 'package:angular_forms/angular_forms.dart';
 import 'package:intl/intl.dart';
 
+// ignore: avoid_classes_with_only_static_members
 class FoValidators {
-  static Map<String, String> alpha(AbstractControl control) {
+  static Map<String, String>? alpha(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
     if (RegExp(r'[a-zA-ZåäöÅÄÖ ]').allMatches(control.value).length !=
@@ -11,11 +12,12 @@ class FoValidators {
         'error': Intl.message('Enter alphabet characters only',
             name: 'fo_validator_error_alpha')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
-  static Map<String, String> alphaEn(AbstractControl control) {
+  static Map<String, String>? alphaEn(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
     if (RegExp(r'[a-zA-Z ]').allMatches(control.value).length !=
@@ -24,11 +26,12 @@ class FoValidators {
         'error': Intl.message('Enter alphabet characters only',
             name: 'fo_validator_error_alpha_en')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
-  static Map<String, String> alphaNumeric(AbstractControl control) {
+  static Map<String, String>? alphaNumeric(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
     final value = control.value;
@@ -38,11 +41,12 @@ class FoValidators {
         'error': Intl.message('Enter alpha-numeric characters only',
             name: 'fo_validator_error_alpha_numeric')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
-  static Map<String, String> alphaNumericEn(AbstractControl control) {
+  static Map<String, String>? alphaNumericEn(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
     final value = control.value;
@@ -52,11 +56,12 @@ class FoValidators {
         'error': Intl.message('Enter alpha-numeric characters only',
             name: 'fo_validator_error_alpha_numeric_en')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
-  static Map<String, String> email(AbstractControl control) {
+  static Map<String, String>? email(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
     final r = RegExp(r'(^[a-z0-9_.+-]+@[a-z0-9-]+\.[a-z0-9-.]+$)');
@@ -64,18 +69,19 @@ class FoValidators {
       return {
         'error': Intl.message('Invalid email', name: 'fo_validator_error_email')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
-  static Map<String, String> integer(AbstractControl control) {
-    if (Validators.required(control) != null)
+  static Map<String, String>? integer(AbstractControl control) {
+    if (Validators.required(control) != null) {
       return null;
-    else if (control.value == null)
+    } else if (control.value == null) {
       return null;
-    else if (control.value is int)
+    } else if (control.value is int) {
       return null;
-    else {
+    } else {
       try {
         int.parse(control.value);
       } on FormatException {
@@ -88,7 +94,7 @@ class FoValidators {
     }
   }
 
-  static Map<String, String> linkedInId(AbstractControl control) {
+  static Map<String, String>? linkedInId(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
     if (RegExp(r'[a-z0-9åäö\-\\/]{5,50}').stringMatch(control.value) !=
@@ -97,11 +103,12 @@ class FoValidators {
         'error': Intl.message('Invalid LinkedIn id',
             name: 'fo_validator_error_linkedin_id')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
-  static Map<String, String> metaDescription(AbstractControl control) {
+  static Map<String, String>? metaDescription(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
     final value = control.value;
@@ -113,27 +120,29 @@ class FoValidators {
         'error': Intl.message('Enter a value without special characters',
             name: 'fo_validator_error_meta_description')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
-  static Map<String, String> noWhiteSpace(AbstractControl control) {
+  static Map<String, String>? noWhiteSpace(AbstractControl control) {
     if (Validators.required(control) != null) return null;
     if (control.value.toString().contains(' ')) {
       return {
         'error': Intl.message('Enter a value without spaces',
             name: 'fo_validator_error_no_white_space')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
-  static Map<String, String> numeric(AbstractControl control) {
+  static Map<String, String>? numeric(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
-    if (control.value is num)
+    if (control.value is num) {
       return null;
-    else {
+    } else {
       try {
         num.parse(control.value);
       } on FormatException {
@@ -146,7 +155,7 @@ class FoValidators {
     }
   }
 
-  static Map<String, String> phoneNumber(AbstractControl control) {
+  static Map<String, String>? phoneNumber(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
     if (RegExp(r'([+][1-9]{1,3})?[0-9\- ]{6,32}').stringMatch(control.value) !=
@@ -155,11 +164,12 @@ class FoValidators {
         'error': Intl.message('Enter a valid phone number',
             name: 'fo_validator_error_phone_number')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
-  static Map<String, String> url(AbstractControl control) {
+  static Map<String, String>? url(AbstractControl control) {
     if (Validators.required(control) != null) return null;
     final r = RegExp(
         r'https?://(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)');
@@ -167,11 +177,12 @@ class FoValidators {
       return {
         'error': Intl.message('Invalid URL', name: 'fo_validator_error_url')
       };
-    } else
+    } else {
       return null;
+    }
   }
 
-  static Map<String, String> youtubeId(AbstractControl control) {
+  static Map<String, String>? youtubeId(AbstractControl control) {
     if (Validators.required(control) != null) return null;
     if (RegExp(r'[a-zA-Z0-9_-]{11}').stringMatch(control.value) !=
         control.value) {
@@ -179,7 +190,8 @@ class FoValidators {
         'error': Intl.message('Invalid Youtube id',
             name: 'fo_validator_error_youtube_id')
       };
-    } else
+    } else {
       return null;
+    }
   }
 }

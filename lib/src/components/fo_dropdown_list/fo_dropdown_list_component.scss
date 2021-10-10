@@ -1,0 +1,21 @@
+:host {
+  display: block;
+
+  div#filterContainer {
+    margin: 0.5em;
+  }
+  div.category {
+    color: #717c8b;
+    font-size: 0.75em;
+    padding: 5px 5px 0 5px;
+    margin: 1em 0.5em 0.25em 0.5em;
+  }
+  div.category:first-child {
+    margin-top: 0.5em;
+  }
+  hr {
+    border-top: 0;
+    border-style: solid;
+    margin: 0;
+  }
+}

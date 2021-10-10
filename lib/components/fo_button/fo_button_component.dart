@@ -11,30 +11,27 @@ import 'fo_button_event.dart';
     changeDetection: ChangeDetectionStrategy.OnPush)
 class FoButtonComponent implements OnDestroy {
   @Input()
-  String label;
-
-  @Input()
+  String? label;
 
   /// Button icon, don't use when the button has a label (use leading-/trailingIcon for that)
-  String icon;
-
   @Input()
+  String? icon;
 
   /// Only use when the button also has a label
-  String leadingIcon;
-
   @Input()
+  String? leadingIcon;
 
   /// Only use when the button also has a label
-  String trailingIcon;
+  @Input()
+  String? trailingIcon;
 
   /// Set text/icon color dynamically, overrides any color set by mixins and attributes
   @Input()
-  String themeColor;
+  String? themeColor;
 
   /// Set background color dynamically, overrides any color set by mixins and attributes.
   @Input()
-  String themeBackgroundColor;
+  String? themeBackgroundColor;
 
   @Input()
   bool disabled = false;
@@ -51,9 +48,22 @@ class FoButtonComponent implements OnDestroy {
     }
   }
 
-  final StreamController _triggerController = StreamController<FoButtonEvent>();
+  final StreamController<FoButtonEvent> _triggerController =
+      StreamController<FoButtonEvent>();
 
   FoButtonComponent();
+
+  @Input()
+  bool white = false;
+
+  @Input()
+  bool rightBorder = true;
+
+  @Input()
+  bool leftBorder = true;
+
+  @Input()
+  bool clearSize = false;
 
   @override
   void ngOnDestroy() {

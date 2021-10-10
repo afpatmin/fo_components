@@ -1,0 +1,54 @@
+@import "../../../src/components/fo_dropdown/mixins";
+
+@mixin fo-dropdown-list-colors($primaryColor, $labelColor, $borderColor) {
+  ::ng-deep fo-dropdown-list {
+    @include fo-dropdown-border-color($borderColor);
+    fo-dropdown {
+      div#dropdownContent {
+        fo-dropdown-option {
+          fo-icon {
+            color: $primaryColor;
+          }
+
+          div#label,
+          td.info {
+            color: $labelColor;
+          }
+
+          div#secondaryLabel {
+            color: darken($borderColor, 10%);
+          }
+        }
+
+        fo-dropdown-option:hover {
+          background-color: lighten($borderColor, 10%);
+        }
+
+        hr {
+          border-color: $borderColor;
+        }
+      }
+    }
+  }
+}
+
+@mixin fo-dropdown-list-icon-size($size) {
+  ::ng-deep fo-dropdown-list {
+    fo-dropdown {
+      div#dropdownContent {
+        fo-dropdown-option {
+          table {
+            tr {
+              td.icon {
+                width: $size !important;
+                fo-icon {
+                  font-size: $size;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

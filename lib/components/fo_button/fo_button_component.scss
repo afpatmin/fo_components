@@ -1,4 +1,3 @@
-@import "package:angular_components/material_icon/mixins";
 @import "../../constants.scss";
 
 :host {
@@ -8,12 +7,11 @@
   button {
     width: 100%;
     height: 100%;
-    line-height: 150%;
+    line-height: 1.5em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 1em;
-    @include material-icon-size(1em);
     user-select: none;
     -webkit-user-select: none;
     transition: all 0.3s ease;
@@ -29,8 +27,7 @@
     justify-content: space-between;
     align-items: center;
 
-    fo-icon,
-    material-icon {
+    fo-icon {
       margin: 0;
     }
 
@@ -61,50 +58,32 @@
       }
     }
   }
-}
 
-:host[noLeftBorder] {
-  button {
+  button.noLeftBorder {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-left-width: 0;
   }
-}
-
-:host[noRightBorder] {
-  button {
+  button.noRightBorder {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     border-right-width: 0;
   }
-}
-
-:host[white] {
-  button {
+  button.white {
     color: inherit;
     background-color: white;
     border-color: #dde2e9;
   }
-}
 
-:host[clearSize] {
-  button {
+  button.clearSize {
     padding-left: 0.25rem;
     padding-right: 0.25rem;
   }
-}
-
-:host[fullWidth] {
-  width: 100%;
-
-  button {
+  button.fullWidth {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
 }
-
-:host[square] {
-  button {
-    border-radius: 0;
-  }
+:host.fullWidth {
+  width: 100%;
 }

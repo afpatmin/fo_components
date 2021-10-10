@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:angular/angular.dart';
-import 'package:fo_components/components/fo_icon/fo_icon_component.dart';
 
-import '../fo_label/fo_label_component.dart';
+import '../../../src/components/fo_label/fo_label_component.dart';
+import '../fo_icon/fo_icon_component.dart';
 
 @Component(
   selector: 'fo-rating',
@@ -21,18 +21,17 @@ class FoRatingComponent implements AfterChanges, OnDestroy {
   bool disabled = false;
 
   @Input()
-  int value;
+  int value = 0;
 
   @Input()
-  String label;
+  String label = '';
 
   final StreamController<int> _valueChangeController = StreamController();
 
   List<int> _options = [];
 
-  List<int> get filled => value == null
-      ? []
-      : _options.where((o) => value >= o).toList(growable: false);
+  List<int> get filled =>
+      _options.where((o) => value >= o).toList(growable: false);
 
   int get max => _max;
 
@@ -42,9 +41,8 @@ class FoRatingComponent implements AfterChanges, OnDestroy {
     _maxChanged = true;
   }
 
-  List<int> get unfilled => value == null
-      ? _options
-      : _options.where((o) => value < o).toList(growable: false);
+  List<int> get unfilled =>
+      _options.where((o) => value < o).toList(growable: false);
 
   @Output('valueChange')
   Stream<int> get valueChange => _valueChangeController.stream;
@@ -53,10 +51,10 @@ class FoRatingComponent implements AfterChanges, OnDestroy {
   void ngAfterChanges() {
     /// Max value has changed, reset starlist
     if (_maxChanged == true) {
-      _options = max == null ? [] : List.generate(max, (i) => i + 1);
+      _options = List.generate(max, (i) => i + 1);
 
       // Reset selected value to max
-      value = (value == null || max == null) ? null : min(value, max);
+      value = min(value, max);
       _valueChangeController.add(value);
       _maxChanged = false;
     }

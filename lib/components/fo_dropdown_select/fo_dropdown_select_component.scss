@@ -1,5 +1,5 @@
 @import "package:fo_components/components/fo_button/mixins";
-@import "package:fo_components/components/fo_dropdown_list/mixins";
+@import "package:fo_components/src/components/fo_dropdown_list/mixins";
 @import "../../mixins.scss";
 
 :host {
@@ -7,11 +7,6 @@
   position: relative;
 
   @include fo-button-vertical-padding(0.5em);
-
-  fo-dropdown-list,
-  fo-label {
-    font-size: 1em;
-  }
 
   div#flexContainer {
     fo-button {
@@ -27,7 +22,6 @@
 
     div#selector {
       background-color: white;
-      transition: box-shadow $transitionSpeed;
       flex: 1;
       display: flex;
       align-items: center;
@@ -40,7 +34,7 @@
 
       div#selectedValue {
         flex: 1;
-        line-height: 160%;
+        line-height: 1.5em;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -56,12 +50,9 @@
     }
 
     ::ng-deep fo-button > button {
-      border: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     }
-  }
-
-  div#flexContainer.focus {
-    @include boxShadow();
   }
 }
 
@@ -79,18 +70,5 @@
         margin: 0.5rem;
       }
     }
-  }
-}
-
-:host[noFocusShadow] {
-  div#flexContainer.focus {
-    box-shadow: none;
-    -webkit-box-shadow: none;
-  }
-}
-
-:host[square] {
-  div#flexContainer {
-    border-radius: 0;
   }
 }

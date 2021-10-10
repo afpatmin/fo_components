@@ -1,4 +1,7 @@
-<fo-label [value]="label">
+<fo-label [value]="label"
+          [class.noLeftBorder]="leftBorder == false"
+          [class.noRightBorder]="rightBorder == false"
+          [class.centerValue]="centerValue">
   <div id="flexContainer"
        [class.error]="control?.valid == false && control?.pristine != true"
        [class.disabled]="disabled == true">
@@ -12,7 +15,7 @@
     </span>
     <input type="{{type}}"
            [attr.autocomplete]="autocomplete"
-           [autoFocus]="autoFocus"
+           [attr.autoFocus]="autoFocus.toString()"
            [disabled]="disabled == true"
            [placeholder]="placeholder"
            [ngModel]="value"
@@ -31,19 +34,16 @@
                [label]="actionButtonLabel"
                [icon]="actionButtonIcon"
                [materialIcon]="materialIcons"
-               square
-               [disabled]="disabled || control?.valid == false || value?.isEmpty != false"
-               (trigger)="actionButtonController?.add($event)"></fo-button>
+               [disabled]="disabled || control?.valid == false || value.isEmpty"
+               (trigger)="actionButtonController.add($event)"></fo-button>
   </div>
   <fo-error-output *ngIf="(hasFocus == true || hideErrorsOnBlur == false) && errorMessage != null && control?.pristine != true && dropdownVisible == false"
-                   [message]="errorMessage">
+                   [message]="errorMessage!">
   </fo-error-output>
   <fo-dropdown-list *ngIf="options != null"
                     [options]="options"
                     [showCategoryLabels]="showDropdownCategoryLabels"
                     [offsetTop]="dropdownTopOffset"
-                    [attr.noShadow]="noFocusShadow"
-                    [attr.square]="square"
                     [filter]="filterValue"
                     [maxHeight]="dropdownMaxHeight"
                     [constrainToViewPort]="constrainToViewPort"

@@ -1,0 +1,32 @@
+<fo-dropdown *ngIf="options != null && filteredOptions != null"
+             [width]="width"
+             [offsetTop]="offsetTop"
+             [offsetHorizontal]="offsetHorizontal"
+             [maxHeight]="maxHeight"
+             [constrainToViewPort]="constrainToViewPort"
+             [visible]="visible"
+             (visibleChange)="visibleController.add($event)">
+  <div id="filterContainer"
+       *ngIf="showSearch == true">
+    <fo-text-input [autoFocus]="visible"
+                   [placeholder]="$pipe.capitalize(msgFilter)"
+                   [ngModel]="filter"
+                   (ngModelChange)="updateFilteredOptions($event)">
+    </fo-text-input>
+  </div>
+  <div *ngIf="allowNullSelection && filter?.isEmpty != false">
+    <fo-dropdown-option [model]="nullOption"
+                        [materialIcon]="materialIcons"
+                        (click)="onSelect($event, nullOption)"></fo-dropdown-option>
+  </div>
+  <div *ngFor="let category of filteredOptions.keys">
+    <div *ngIf="showCategoryLabels == true && category.isNotEmpty"
+         class="category"><strong>{{category}}</strong></div>
+    <fo-dropdown-option *ngFor="let option of filteredOptions[category]"
+                        [model]="option"
+                        [materialIcon]="materialIcons"
+                        (click)="onSelect($event, option)">
+    </fo-dropdown-option>
+    <hr *ngIf="category != filteredOptions.keys.last">
+  </div>
+</fo-dropdown>

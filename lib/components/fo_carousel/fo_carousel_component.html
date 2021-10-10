@@ -1,5 +1,5 @@
 <div id="slide-container"
-     (touchstart)="prevX = null"
+     (touchstart)="prevX = 0"
      (touchmove)="onTouchMove($event)"
      (touchend)="onTouchEnd($event)">
   <div id="slide-transformer"
@@ -7,15 +7,7 @@
        [style.transform]="transform">
     <ng-content></ng-content>
   </div>
-  <div id="radioButtons"
-       *ngIf="showRadioButtons == true">
-    <material-radio-group class="no-left-margin">
-      <material-radio *ngFor="let slide of slides; let i=index"
-                      [disabled]="disabled"
-                      [checked]="step == i"
-                      (checkedChange)="onButtonChange(i, $event)"></material-radio>
-    </material-radio-group>
-  </div>
+
   <ng-container *ngIf="showArrowButtons">
     <div class="arrow"
          (click)="stepBy(-1)"

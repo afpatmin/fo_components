@@ -1,41 +1,25 @@
-<label>{{label}}</label>
-<div class="container"
-     (dragenter)="$event.preventDefault()"
-     (dragover)="$event.preventDefault()"
-     (drop)="onDrop($event)">
-  <input #input
-         type="file"
-         (change)="onFileChange($event)"
-         [accept]="accept" />
-  <p *ngIf="!valid"
-     class="margin-top-small margin-bottom-small">
-    <fo-button (trigger)="input.click()"
-               dense
-               white
-               [materialIcon]="materialIcon"
-               [disabled]="disabled"
-               icon="folder_open">
-    </fo-button>
-  </p>
-  <p *ngIf="valid"
-     class="margin-top-small margin-bottom-small">
-    <fo-button dense
-               white
-               [disabled]="disabled || !valid"
-               [materialIcon]="materialIcon"
-               (trigger)="upload()"
-               icon="file_upload">
-    </fo-button>
-  </p>
-  <p>
-    <span *ngIf="file == null">...</span>
-    <ng-container *ngIf="file != null"> {{file.name}} ({{(file.size / 1024).ceil()}}kb) <fo-icon icon="cancel"
-               class="color-alert"
-               [material]="materialIcon"
-               (click)="clearSelection()"></fo-icon>
-    </ng-container>
-  </p>
-  <p class="color-alert"
-     *ngIf="file != null && file.size > maxByteSize"> {{msgMaxFilesizeExceeded | capitalize}}
-    ({{(maxByteSize/1024).ceil()}}kb) </p>
-</div>
+<fo-label [value]="label">
+   <div class="container"
+        (dragenter)="$event.preventDefault()"
+        (dragover)="$event.preventDefault()"
+        (drop)="onDrop($event)">
+      <input #input
+             type="file"
+             (change)="onFileChange($event)"
+             [disabled]="disabled || uploading"
+             [accept]="accept" />
+      <div id="content"
+           class="margin-top-small margin-bottom-small">
+         <fo-button *ngIf="!uploading"
+                    (trigger)="input.click()"
+                    [white]="true"
+                    [materialIcon]="materialIcon"
+                    [disabled]="disabled"
+                    icon="folder_open">
+         </fo-button>
+         <ng-container *ngIf="uploading">
+            <fo-load-indicator [label]="uploadingLabel"></fo-load-indicator>
+         </ng-container>
+      </div>
+   </div>
+</fo-label>

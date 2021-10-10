@@ -1,0 +1,7 @@
+:host {
+    display: flex;
+    flex-wrap: wrap;
+    ::ng-deep fo-radio {
+        margin-right: 1em;
+    }
+}

@@ -12,5 +12,5 @@ class FoErrorOutputComponent {
   FoErrorOutputComponent();
 
   @Input()
-  String message;
+  late String message;
 }

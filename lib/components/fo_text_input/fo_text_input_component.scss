@@ -1,7 +1,7 @@
 @import "../../constants.scss";
 @import "../../mixins.scss";
 @import "../fo_button/mixins";
-@import "../fo_dropdown_list/mixins";
+@import "../../src/components/fo_dropdown_list/mixins";
 @import "shared";
 
 :host {
@@ -13,8 +13,6 @@
     background-color: white;
     display: flex;
     align-items: center;
-    height: 100%;
-    transition: box-shadow $transitionSpeed;
     border-radius: $borderRadius;
     border-width: 1px;
     border-style: solid;
@@ -24,7 +22,7 @@
     input {
       @include inputStyle;
       padding: 0.5em 0.25em;
-      line-height: 160%;
+      line-height: 1.5em;
       outline: none;
       margin: 0;
       border: 0;
@@ -36,8 +34,6 @@
 
     fo-icon {
       font-size: 1em;
-      box-shadow: none;
-      -webkit-box-shadow: none;
     }
 
     fo-icon.clear {
@@ -53,56 +49,32 @@
     }
 
     ::ng-deep fo-button > button {
-      border: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     }
   }
 
-  div#flexContainer:focus-within {
-    @include boxShadow();
-  }
-}
-
-:host[noFocusShadow] {
-  div#flexContainer:focus-within {
-    box-shadow: none;
-    -webkit-box-shadow: none;
-  }
-}
-
-:host[noLeftBorder] {
-  fo-label {
+  fo-label.noLeftBorder {
     div#flexContainer {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       border-left-width: 0;
     }
   }
-}
 
-:host[noRightBorder] {
-  fo-label {
+  fo-label.noRightBorder {
     div#flexContainer {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
       border-right-width: 0;
     }
   }
-}
 
-:host[centerValue] {
-  fo-label {
+  fo-label.centerValue {
     div#flexContainer {
       input {
         text-align: center;
       }
-    }
-  }
-}
-
-:host[square] {
-  fo-label {
-    div#flexContainer {
-      border-radius: 0;
     }
   }
 }

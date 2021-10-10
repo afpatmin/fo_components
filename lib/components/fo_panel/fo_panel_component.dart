@@ -10,12 +10,13 @@ import '../../pipes/capitalize_pipe.dart';
     directives: [FoButtonComponent, NgIf],
     pipes: [CapitalizePipe])
 class FoPanelComponent implements OnDestroy {
-  final StreamController _visibleChangeController = StreamController<bool>();
+  final StreamController<bool> _visibleChangeController =
+      StreamController<bool>();
 
   FoPanelComponent();
 
   @Input()
-  String header;
+  String? header;
 
   @Input()
   bool visible = true;

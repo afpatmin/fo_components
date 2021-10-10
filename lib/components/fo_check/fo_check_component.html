@@ -1,0 +1,9 @@
+<label id="checkContainer">
+    <fo-label [value]="label"
+              (click)="onChange()"></fo-label>
+    <input type="checkbox"
+           [checked]="checked"
+           [disabled]="disabled"
+           (change)="onChange()">
+    <span class="mark"></span>
+</label>

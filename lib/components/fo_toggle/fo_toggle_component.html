@@ -1,0 +1,9 @@
+<label class="switch">
+    <input type="checkbox"
+           [checked]="checked"
+           [disabled]="disabled"
+           (change)="onChange()">
+    <span class="slider"></span>
+</label>
+<fo-label [value]="label"
+          (click)="onChange()"></fo-label>

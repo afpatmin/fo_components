@@ -1,21 +1,16 @@
-import 'package:angular/di.dart' show Pipe, PipeTransform;
+import 'package:angular/angular.dart' show Pipe;
 
 /// Add currency symbol to a value
 /// "<p>{{'100' | currency:'USD'}}</p>" evaluates to "<p>$100</p>"
 @Pipe('focurrency')
-class FoCurrencyPipe implements PipeTransform {
-  String transform(Object value, String currency) {
-    if (value == null) return null;
-    if (currency == null) return value;
-
+class FoCurrencyPipe {
+  String? transform(Object value, String currency) {
     switch (currency.toUpperCase()) {
       case 'EUR':
         return '€$value';
-        break;
 
       case 'GBP':
         return '£$value';
-        break;
 
       case 'SEK':
         return '$value kr';
@@ -27,4 +22,6 @@ class FoCurrencyPipe implements PipeTransform {
         return '$value $currency';
     }
   }
+
+  bool supports(Object obj) => obj is String || obj is num;
 }

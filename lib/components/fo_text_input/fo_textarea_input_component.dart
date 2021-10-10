@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:html' as html;
+
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:intl/intl.dart';
+
+import '../../../src/components/fo_label/fo_label_component.dart';
 import '../../pipes/capitalize_pipe.dart';
-import '../fo_label/fo_label_component.dart';
 import 'fo_error_output_component.dart';
 
 @Component(
@@ -26,10 +28,10 @@ class FoTextAreaInputComponent
   final ChangeDetectorRef _changeDetectorRef;
 
   @Input()
-  String label;
+  String? label;
 
   @Input()
-  String placeholder;
+  String? placeholder;
 
   @Input()
   bool disabled = false;
@@ -44,22 +46,23 @@ class FoTextAreaInputComponent
   bool elastic = false;
 
   bool hasFocus = false;
-  String value;
-  ChangeFunction<String> _onChange;
-  NgControl control;
-  final StreamController _focusController = StreamController<html.FocusEvent>();
+  String value = '';
+  ChangeFunction<String>? _onChange;
+  NgControl? control;
+  final StreamController<html.FocusEvent> _focusController =
+      StreamController<html.FocusEvent>();
   final html.Element _host;
-  html.TextAreaElement inputElement;
+  late html.TextAreaElement inputElement;
 
   FoTextAreaInputComponent(
     @Self() @Optional() this.control,
     this._host,
     this._changeDetectorRef,
   ) {
-    if (control != null) control.valueAccessor = this;
+    if (control != null) control?.valueAccessor = this;
   }
 
-  String get errorMessage {
+  String? get errorMessage {
     final errors = control?.errors;
     if (errors == null) {
       return null;
@@ -99,7 +102,7 @@ class FoTextAreaInputComponent
     }
 
     if (_onChange != null) {
-      _onChange(value);
+      _onChange!(value);
     }
   }
 
@@ -134,7 +137,7 @@ class FoTextAreaInputComponent
 
   @override
   void ngAfterViewInit() {
-    inputElement = _host.querySelector('textarea');
+    inputElement = _host.querySelector('textarea') as html.TextAreaElement;
     if (elastic) {
       inputElement.style.minHeight = '1em';
       inputElement.style.minHeight =

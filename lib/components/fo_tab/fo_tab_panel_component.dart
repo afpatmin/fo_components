@@ -12,7 +12,7 @@ import 'fo_tab_component.dart';
   directives: [FoIconComponent, FoTabComponent, NgFor, NgIf],
 )
 class FoTabPanelComponent implements AfterChanges, OnDestroy {
-  List<FoTabComponent> _tabs;
+  List<FoTabComponent> _tabs = [];
 
   @Input()
   int tabIndex = 0;
@@ -37,16 +37,14 @@ class FoTabPanelComponent implements AfterChanges, OnDestroy {
     _evaluateActiveTab();
   }
 
-  String backgroundColor(FoTabComponent tab) =>
+  String? backgroundColor(FoTabComponent tab) =>
       tab.active ? tab.backgroundColor : 'white';
 
-  String color(FoTabComponent tab) => tab.active ? 'white' : tab.labelColor;
+  String? color(FoTabComponent tab) => tab.active ? 'white' : tab.labelColor;
 
-  bool hideIcons(String size) =>
-      hideIconsOn == null ? false : hideIconsOn.contains(size);
+  bool hideIcons(String size) => hideIconsOn.contains(size);
 
-  bool hideLabels(String size) =>
-      hideLabelsOn == null ? false : hideLabelsOn.contains(size);
+  bool hideLabels(String size) => hideLabelsOn.contains(size);
 
   @override
   void ngOnDestroy() {
@@ -67,7 +65,7 @@ class FoTabPanelComponent implements AfterChanges, OnDestroy {
   }
 
   void _evaluateActiveTab() {
-    if (_tabs != null && _tabs.isNotEmpty) {
+    if (_tabs.isNotEmpty) {
       for (final tab in tabs) {
         tab.active = false;
       }
