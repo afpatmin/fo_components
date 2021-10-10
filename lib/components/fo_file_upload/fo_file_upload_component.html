@@ -18,8 +18,7 @@
                     icon="folder_open">
          </fo-button>
          <ng-container *ngIf="uploading">
-            <fo-load-indicator></fo-load-indicator>
-            <fo-label [value]="uploadingLabel"></fo-label>
+            <fo-load-indicator [label]="uploadingLabel"></fo-load-indicator>
          </ng-container>
       </div>
    </div>

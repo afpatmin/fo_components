@@ -1,36 +1,37 @@
 :host {
-    div.ripple {
-        display: inline-block;
-        position: relative;
-        width: 32px;
-        height: 32px;
-
-        div {
-            position: absolute;
-            border: 2px solid #888;
-            opacity: 1;
-            border-radius: 50%;
-            animation: ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    display: flex;
+    align-items: center;
+    @keyframes spin {
+        from {
+            transform: rotate(0);
         }
-        div:nth-child(2) {
-            animation-delay: -0.5s;
+        to {
+            transform: rotate(359deg);
         }
     }
+    .spinner {
+        width: 3em;
+        height: 3em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
 
-    @keyframes ripple {
-        0% {
-            top: 15px;
-            left: 15px;
-            width: 0;
-            height: 0;
-            opacity: 1;
+        .circleBorder {
+            width: 1.5em;
+            height: 1.5em;
+            padding: 3px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            animation: spin 0.8s linear 0s infinite;
         }
-        100% {
-            top: 0px;
-            left: 0px;
-            width: 30px;
-            height: 30px;
-            opacity: 0;
+        .circleCore {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            border-radius: 50%;
         }
     }
 }

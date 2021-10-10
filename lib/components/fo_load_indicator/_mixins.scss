@@ -1,8 +1,9 @@
 @mixin fo-load-indicator-color($color) {
     ::ng-deep fo-load-indicator {
-        div.ripple {
-            div {
-                border-color: $color !important;
+        .spinner {
+            .circleBorder {
+                background: $color;
+                background: linear-gradient(0deg, transparent 33%, $color 100%);
             }
         }
     }
