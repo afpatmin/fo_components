@@ -1,6 +1,6 @@
 # 3.0.0 - null safety (BREAKING CHANGES)
 * Updated angular dependency to 7.0.0 and added null-safety
-* Added LoadIndicator, Check component
+* Added LoadIndicator, Check-, Radio-, Toggle- components
 * Removed ImageMap, Notification, DropdownSelectMulti components
 * Removed angular_components dependency
 * Removed everything with 'square' and 'focus', might implement these in theme mixin later
@@ -9,6 +9,7 @@
 * Removed intermediate step from FileUpload
 * Renamed fo-image-file-max-height mixin to fo-image-file-height so that it reflects intent better
 * Renamed FileUploadComponent to FoFileUploadComponent for consistency
+* Toned down shadows
 
 # 2.2.1
 * Changed Modal maxheight to 87vh (down from 95vh to accomodate ios bottom navbar)

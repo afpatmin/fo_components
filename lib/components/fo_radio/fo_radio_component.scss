@@ -1,15 +1,20 @@
 :host {
+    display: flex;
     #checkContainer {
-        display: block;
+        width: 1em;
+        height: 1em;
         position: relative;
-        padding-left: 1.4em;
         cursor: pointer;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        border: 1px solid; // #ccc;
+        border-radius: 0.2em;
+        box-sizing: content-box;
+        margin-right: 0.3em;
 
-        // Hide the default checkbox
+        // Hide the default radio button
         input {
             position: absolute;
             opacity: 0;
@@ -24,7 +29,6 @@
             display: block;
         }
 
-        // Create a custom checkbox
         .mark {
             position: absolute;
             top: 0;
@@ -32,9 +36,8 @@
             height: 1em;
             width: 1em;
             background-color: white;
-            border: 1px solid #ccc;
             border-radius: 0.2em;
-            box-sizing: content-box;
+            box-sizing: border-box;
         }
 
         // Create the checkmark/indicator (hidden when not checked)
@@ -46,15 +49,12 @@
 
         // Style the checkmark/indicator
         .mark:after {
-            left: 0.29em;
-            top: 0.08em;
-            width: 0.2em;
-            height: 0.5em;
-            border: solid white;
-            border-width: 0 0.2em 0.2em 0;
-            -webkit-transform: rotate(45deg);
-            -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
+            left: 0.2em;
+            top: 0.2em;
+            width: 0.6em;
+            height: 0.6em;
+            background-color: white;
+            border-radius: 0.2em;
         }
     }
 }

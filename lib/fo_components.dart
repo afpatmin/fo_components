@@ -15,6 +15,8 @@ export 'components/fo_modal/fo_modal_component.dart';
 export 'components/fo_number_input/fo_number_input_component.dart';
 export 'components/fo_panel/fo_panel_component.dart';
 export 'components/fo_quiz/fo_quiz_component.dart';
+export 'components/fo_radio/fo_radio_component.dart';
+export 'components/fo_radio/fo_radio_group_component.dart';
 export 'components/fo_rating/fo_rating_component.dart';
 export 'components/fo_tab/fo_tab_component.dart';
 export 'components/fo_tab/fo_tab_panel_component.dart';

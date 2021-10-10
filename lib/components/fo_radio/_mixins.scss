@@ -1,11 +1,12 @@
-@mixin fo-check-colors($higlight, $border) {
-    ::ng-deep fo-check > #checkContainer {
+@mixin fo-radio-colors($higlight, $border) {
+    ::ng-deep fo-radio > #checkContainer {
+        border-color: $border !important;
         input ~ .mark {
             border-color: $border !important;
         }
 
-        input:checked ~ .mark {
-            border-color: $higlight !important;
+        input:checked ~ .mark:after {
+            //border-color: $higlight !important;
             background-color: $higlight !important;
         }
 
@@ -13,8 +14,9 @@
             border-color: $border !important;
             background-color: darken(white, 5%) !important;
         }
+
         input:disabled ~ .mark:after {
-            border-color: darken(white, 25%) !important;
+            background-color: darken(white, 25%) !important;
         }
     }
 }

@@ -12,6 +12,7 @@ $transitionSpeed: 0.3s ease;
 @import "components/fo_text_input/mixins";
 @import "components/fo_load_indicator/mixins";
 @import "components/fo_check/mixins";
+@import "components/fo_radio/mixins";
 @import "components/fo_toggle/mixins";
 
 @mixin foregroundColor($color) {
@@ -36,6 +37,7 @@ $transitionSpeed: 0.3s ease;
 
   @include fo-load-indicator-color($primaryColor);
   @include fo-check-colors($primaryColor, $grayColorBright);
+  @include fo-radio-colors($primaryColor, $grayColorBright);
   @include fo-toggle-colors($primaryColor, $grayColorBright);
   @include fo-button-colors(white, $primaryColor, $grayColorBright);
   @include fo-dropdown-border-color($grayColorBright);
@@ -134,8 +136,8 @@ $transitionSpeed: 0.3s ease;
 }
 
 @mixin boxShadow() {
-  box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.4);
-  -webkit-box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.2);
 }
 
 @include fo-colors(#2e5266, #008898, #f77);
