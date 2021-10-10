@@ -9,7 +9,7 @@ dependencies:
   angular: ^7.0.2
   angular_bloc: ^7.1.0
   angular_forms: ^4.0.1
-  bloc: 7.2.1
+  bloc: ^7.2.1
   collection: ^1.15.0
   copy_with_extension: ^2.0.2
   equatable: ^2.0.3
