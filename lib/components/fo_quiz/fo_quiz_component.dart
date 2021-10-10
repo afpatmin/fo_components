@@ -70,6 +70,9 @@ class FoQuizComponent implements OnInit, OnDestroy {
   }
 
   void onQuestionDone(FoQuestionModel question) {
+    if (disabled) {
+      return;
+    }
     activeIndex = model.questions.indexOf(question);
 
     if (activeIndex == model.questions.length - 1) {

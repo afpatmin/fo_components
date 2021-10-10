@@ -29,6 +29,7 @@
     <fo-button *ngIf="prevButtonLabel != null && !rightHidden"
                [white]="true"
                class="fullWidth"
+               [disabled]="disabled"
                [label]="$pipe.capitalize(prevButtonLabel!)"
                [themeBackgroundColor]="buttonColor"
                (trigger)="onPrevTrigger()">
@@ -38,6 +39,7 @@
     <fo-button *ngIf="selectedOptions.isNotEmpty && !rightHidden"
                [white]="true"
                class="fullWidth"
+               [disabled]="disabled"
                [label]="$pipe.capitalize(nextButtonLabel!)"
                [themeBackgroundColor]="buttonColor"
                (trigger)="onNextTrigger()">
