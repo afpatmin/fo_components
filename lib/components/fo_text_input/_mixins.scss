@@ -5,9 +5,6 @@
   ::ng-deep fo-text-input {
     @include fo-dropdown-border-color($borderColor);
     fo-label {
-      div#flexContainer.disabled {
-        background-color: darken($backgroundColor, 5%);
-      }
       div#flexContainer {
         border-color: $borderColor;
         background-color: $backgroundColor;
@@ -37,6 +34,9 @@
             color: white;
           }
         }
+      }
+      div#flexContainer.disabled {
+        background-color: darken($backgroundColor, 5%) !important;
       }
       div#flexContainer.error {
         border-color: $alertColor;
