@@ -12,6 +12,7 @@ $transitionSpeed: 0.3s ease;
 @import "components/fo_text_input/mixins";
 @import "components/fo_load_indicator/mixins";
 @import "components/fo_check/mixins";
+@import "components/fo_toggle/mixins";
 
 @mixin foregroundColor($color) {
   color: $color;
@@ -35,6 +36,7 @@ $transitionSpeed: 0.3s ease;
 
   @include fo-load-indicator-color($primaryColor);
   @include fo-check-colors($primaryColor, $grayColorBright);
+  @include fo-toggle-colors($primaryColor, $grayColorBright);
   @include fo-button-colors(white, $primaryColor, $grayColorBright);
   @include fo-dropdown-border-color($grayColorBright);
   @include fo-dropdown-list-colors($primaryColor, $grayColor, $grayColorBright);
