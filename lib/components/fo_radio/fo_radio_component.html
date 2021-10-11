@@ -1,9 +1,9 @@
-<label id="checkContainer">
-    <input type="radio"
-           [checked]="checked"
-           [disabled]="disabled"
-           (change)="onChange()">
-    <span class="mark"></span>
-</label>
+<div id="radioContainer"
+     (click)="onChange()"
+     [class.disabled]="disabled">
+     <div class="marker"
+          [class.visible]="checked">
+     </div>
+</div>
 <fo-label [value]="label"
           (click)="onChange()"></fo-label>

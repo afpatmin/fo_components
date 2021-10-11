@@ -1,16 +1,19 @@
 @mixin fo-toggle-colors($higlight, $border) {
     ::ng-deep fo-toggle {
-        label.switch {
-            border: 1px solid $border;
+        div.slider {
+            border-color: $border;
+            background-color: white;
+            div.marker {
+                border-color: $border;
+                background-color: white;
+            }
         }
-        .slider::before {
-            border: 1px solid $border;
-            box-shadow: 1px 1px 2px $border;
+
+        div.slider.checked {
+            background-color: $higlight;
         }
-        input:checked + .slider {
-            background-color: $higlight !important;
-        }
-        input:disabled + .slider {
+
+        div.slider.disabled {
             background-color: darken(white, 5%) !important;
         }
     }

@@ -1,13 +1,9 @@
-<label id="checkContainer">
-    <input type="check"
-           [checked]="checked"
-           [disabled]="disabled">
-    <div class="mark"
-         (click)="onChange()">
-        <div class="marker"
-             [class.visible]="checked">
-        </div>
-    </div>
-</label>
+<div id="checkContainer"
+     [class.disabled]="disabled"
+     (click)="onChange()">
+     <div class="marker"
+          [class.visible]="checked">
+     </div>
+</div>
 <fo-label [value]="label"
           (click)="onChange()"></fo-label>
