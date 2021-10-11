@@ -1,6 +1,7 @@
 # 3.0.1
 * Some design improvements on check/radio/toggle components
-# 3.0.0 - null safety (BREAKING CHANGES)
+* Improved documentation a bit (WIP)
+# 3.0.0
 * Updated angular dependency to 7.0.0 and added null-safety
 * Added DatePicker, LoadIndicator, Check-, Radio- and Toggle- components
 * Removed ImageMap, Notification, DropdownSelectMulti components
