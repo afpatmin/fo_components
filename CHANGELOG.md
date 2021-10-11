@@ -1,3 +1,5 @@
+# 3.0.1
+* Some design improvements on check/radio/toggle components
 # 3.0.0 - null safety (BREAKING CHANGES)
 * Updated angular dependency to 7.0.0 and added null-safety
 * Added DatePicker, LoadIndicator, Check-, Radio- and Toggle- components

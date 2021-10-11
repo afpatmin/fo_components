@@ -1,7 +1,7 @@
 name: fo_components
 description: A collection of AngularDart components.
 homepage: https://github.com/afpatmin/fo_components
-version: 3.0.0
+version: 3.0.1
 environment:
   sdk: ">=2.13.0 <3.0.0"
 
