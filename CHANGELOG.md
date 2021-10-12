@@ -1,3 +1,7 @@
+# 3.0.1+2
+* Added missing @Input annotation to FoRadio.checked
+* FoPanel now uses changeDetectionStrategy.OnPush
+
 # 3.0.1
 * Some design improvements on check/radio/toggle components
 * Improved documentation a bit (WIP)

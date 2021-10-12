@@ -8,7 +8,8 @@ import '../../pipes/capitalize_pipe.dart';
     templateUrl: 'fo_panel_component.html',
     styleUrls: ['fo_panel_component.css'],
     directives: [FoButtonComponent, NgIf],
-    pipes: [CapitalizePipe])
+    pipes: [CapitalizePipe],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoPanelComponent implements OnDestroy {
   final StreamController<bool> _visibleChangeController =
       StreamController<bool>();

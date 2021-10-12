@@ -21,6 +21,7 @@ class FoRadioComponent implements OnDestroy {
   @Input()
   String label = '';
 
+  @Input()
   bool checked = false;
 
   @Input()
