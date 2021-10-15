@@ -60,7 +60,7 @@ class FoDropdownComponent
     height = evaluateHeight();
     if (_visible == true) {
       _evaluateMaxHeight(null);
-      Future.delayed(Duration(milliseconds: 1)).then((_) {
+      Future<void>.delayed(Duration(milliseconds: 1)).then((_) {
         _changeDetectorRef.markForCheck();
         html.document.onClick.first.then((event) {
           if (!_visibleController.isClosed) {
@@ -114,7 +114,7 @@ class FoDropdownComponent
     _windowResizeSub?.cancel();
   }
 
-  void _evaluateMaxHeight(_) {
+  void _evaluateMaxHeight(html.Event? e) {
     final parentRect = host.parent!.getBoundingClientRect();
     var newY = parentRect.bottom.round();
     if (constrainToViewPort == true) {

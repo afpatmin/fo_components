@@ -1,3 +1,8 @@
+# 3.1.0
+* Added ProgressBar
+* Set white background on Radio and Check components
+* Renamed fo-file-upload-border-color mixin to to fo-file-upload-colors
+
 # 3.0.1+2
 * Added missing @Input annotation to FoRadio.checked
 * FoPanel now uses changeDetectionStrategy.OnPush

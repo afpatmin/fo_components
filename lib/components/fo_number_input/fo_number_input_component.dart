@@ -134,7 +134,7 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
         if (value! > min) {
           if (value == max) {
             value = min;
-            Future.delayed(Duration(milliseconds: 0)).then((_) {
+            Future<void>.delayed(Duration(milliseconds: 0)).then((_) {
               value = max;
               if (_onChange != null) {
                 _onChange!(value!);
@@ -146,7 +146,7 @@ class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
         } else {
           if (value == min) {
             value = max;
-            Future.delayed(Duration(milliseconds: 0)).then((_) {
+            Future<void>.delayed(Duration(milliseconds: 0)).then((_) {
               value = min;
               if (_onChange != null) {
                 _onChange!(value!);

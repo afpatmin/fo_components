@@ -113,7 +113,7 @@ class FoTextInputComponent
   final StreamController<html.FocusEvent> _focusController =
       StreamController<html.FocusEvent>();
   final StreamController<String> _blurController = StreamController<String>();
-  late StreamSubscription _windowResizeSub;
+  late StreamSubscription<html.Event> _windowResizeSub;
   bool _dropdownVisible = false;
   late html.Element host;
   late html.InputElement inputElement;
@@ -168,21 +168,21 @@ class FoTextInputComponent
     } else if (errors.containsKey('required')) {
       return Intl.message('this field is required', name: 'error_required');
     } else if (errors.containsKey('error')) {
-      return errors['error'];
+      return errors['error'] as String;
     } else if (errors.containsKey('minlength')) {
       return Intl.message(
           'enter at least ${errors['minlength']['requiredLength']} characters',
-          args: [errors['minlength']['requiredLength']],
+          args: [errors['minlength']['requiredLength'] as String],
           name: 'error_min_length');
     } else if (errors.containsKey('maxlength')) {
       return Intl.message(
           'enter max ${errors['maxlength']['requiredLength']} characters',
-          args: [errors['maxlength']['requiredLength']],
+          args: [errors['maxlength']['requiredLength'] as String],
           name: 'error_max_length');
     } else if (errors.containsKey('pattern')) {
       return Intl.message(
           'invalid pattern, required: ${errors['pattern']['requiredPattern']}',
-          args: [errors['pattern']['requiredPattern']],
+          args: [errors['pattern']['requiredPattern'] as String],
           name: 'error_invalid_pattern');
     } else {
       return errors.toString();
@@ -220,7 +220,7 @@ class FoTextInputComponent
 
   void onBlur(html.Event event) {
     /// Delay has focus a little bit so that the dropdown list has time to detect click before being removed
-    Future.delayed(Duration(milliseconds: 100)).then((_) {
+    Future<void>.delayed(Duration(milliseconds: 100)).then((_) {
       hasFocus = false;
     });
     _blurController.add(value);

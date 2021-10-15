@@ -1,11 +1,9 @@
+// ignore_for_file: implicit_dynamic_function
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:fo_components/cubits/date_picker/date_picker_cubit.dart';
 import 'package:test/test.dart';
 
-/*
-class MockDatePickerCubit extends MockCubit<DateTime>
-    implements DatePickerCubit {}
-*/
 void main() {
   final date = DateTime(2020, 7, 8);
   final dateDays = 31;
@@ -38,8 +36,8 @@ void main() {
         'should not pretend like nothing happened if user tries to set a month outside of range 1-12',
         build: () => DatePickerCubit(date),
         act: (DatePickerCubit cubit) => cubit.setMonth(13),
-        expect: () => [],
-        errors: () => []);
+        expect: () => <DatePickerState>[],
+        errors: () => <DatePickerState>[]);
 
     blocTest(
         'should set the new selectedDate.day to last day of the month if the new month doesnt have enough days',
@@ -67,8 +65,8 @@ void main() {
         'should pretend like nothing happened if the month doesnt have enough days',
         build: () => DatePickerCubit(date),
         act: (DatePickerCubit cubit) => cubit.setDay(dateDays + 1),
-        expect: () => [],
-        errors: () => []);
+        expect: () => <DatePickerState>[],
+        errors: () => <DatePickerState>[]);
 
     blocTest(
         'should throw StateError if user tries to set a day outside of range 1-32',

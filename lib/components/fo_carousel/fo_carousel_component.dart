@@ -168,7 +168,7 @@ class FoCarouselComponent implements OnDestroy, OnInit {
   /// Don't animate slides for a specified duration (200ms by default)
   void _disableSlideAnimation() async {
     _animateSlides = false;
-    await Future.delayed(Duration(milliseconds: 200));
+    await Future<void>.delayed(Duration(milliseconds: 200));
     _animateSlides = _animateSlidesSetting;
     _changeDetectorRef.markForCheck();
   }

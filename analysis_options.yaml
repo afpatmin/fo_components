@@ -1,10 +1,16 @@
 include: package:lints/recommended.yaml
 
 analyzer:
-  exclude:
-    - .dart_tool/
-    - build/
-    - .packages
-    - lib/models/fo_quiz_model.g.dart
+  exclude: [build/**, lib/models/*.g.dart]
+  language:
+    strict-raw-types: true
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
   errors:
     uri_has_not_been_generated: ignore
+
+linter:
+  rules:
+    - cancel_subscriptions
+#    - public_member_api_docs

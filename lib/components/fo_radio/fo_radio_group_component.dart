@@ -37,7 +37,7 @@ class FoRadioGroupComponent implements AfterContentInit, OnDestroy {
     }
   }
 
-  final List<StreamSubscription> _subs = [];
+  final List<StreamSubscription<Object?>> _subs = [];
 
   final ChangeDetectorRef _changeDetectorRef;
   FoRadioGroupComponent(this._changeDetectorRef);
