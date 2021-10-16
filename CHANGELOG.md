@@ -1,5 +1,6 @@
 # 3.1.0
 * Added ProgressBar
+* Added ReorderList
 * Set white background on Radio and Check components
 * Renamed fo-file-upload-border-color mixin to to fo-file-upload-colors
 
