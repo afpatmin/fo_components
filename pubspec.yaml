@@ -2,7 +2,7 @@ name: fo_components
 description: A collection of AngularDart components for common use cases;
   buttons, text input, dropdown select etc.
 homepage: https://github.com/afpatmin/fo_components
-version: 3.0.1+2
+version: 3.1.0
 environment:
   sdk: ">=2.13.0 <3.0.0"
 
