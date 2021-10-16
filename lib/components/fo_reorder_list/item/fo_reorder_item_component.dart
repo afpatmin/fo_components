@@ -2,11 +2,11 @@ import 'package:angular/angular.dart';
 
 @Component(
   selector: 'fo-reorder-item',
-  templateUrl: 'reorder_list_component.html',
-  styleUrls: ['reorder_list_component.css'],
+  templateUrl: 'fo_reorder_item_component.html',
+  styleUrls: ['fo_reorder_item_component.css'],
   directives: [coreDirectives],
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
-class FoReorderItemComponentComponent {
-  FoReorderItemComponentComponent();
+class FoReorderItemComponent {
+  FoReorderItemComponent();
 }
