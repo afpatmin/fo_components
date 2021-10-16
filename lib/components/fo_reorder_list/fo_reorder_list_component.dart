@@ -15,13 +15,22 @@ import 'package:fo_components/directives/reorder_item_directive.dart';
 class FoReorderListComponent implements OnDestroy {
   final firstDropZone = dom.DivElement()..className = 'extraDropZone';
   final lastDropZone = dom.DivElement()..className = 'extraDropZone';
+  final dom.Element _host;
   StreamSubscription<DropzoneEvent>? _itemDropSubscription;
   StreamSubscription<DropzoneEvent>? _firstDropSubscription;
   StreamSubscription<DropzoneEvent>? _lastDropSubscription;
+  final StreamController<FoReorderEvent> _reorderController =
+      StreamController<FoReorderEvent>.broadcast();
+
+  @Input()
+  bool disabled = false;
+
+  @Output('reorder')
+  Stream<FoReorderEvent> get onReorder => _reorderController.stream;
 
   late List<dom.Element> _items;
 
-  FoReorderListComponent() {
+  FoReorderListComponent(this._host) {
     _firstDropSubscription =
         Dropzone(firstDropZone).onDrop.listen(_onDropOverFirst);
     _lastDropSubscription =
@@ -33,9 +42,7 @@ class FoReorderListComponent implements OnDestroy {
     _items = value.map((e) => e.element).toList();
 
     if (_items.isNotEmpty) {
-      final parent = _items.first.parent!;
-
-      parent.children
+      _host.children
         ..insert(0, firstDropZone)
         ..add(lastDropZone);
 
@@ -50,6 +57,7 @@ class FoReorderListComponent implements OnDestroy {
     _itemDropSubscription?.cancel();
     _firstDropSubscription?.cancel();
     _lastDropSubscription?.cancel();
+    _reorderController.close();
 
     _itemDropSubscription = null;
     _firstDropSubscription = null;
@@ -57,33 +65,55 @@ class FoReorderListComponent implements OnDestroy {
   }
 
   void _onDropOverFirst(DropzoneEvent event) {
-    _items
-      ..remove(event.draggableElement)
-      ..insert(0, event.draggableElement);
-    _refreshView();
+    if (!disabled) {
+      _reorderController
+          .add(FoReorderEvent(_items.indexOf(event.draggableElement), 0));
+      _items
+        ..remove(event.draggableElement)
+        ..insert(0, event.draggableElement);
+
+      _refreshView();
+    }
   }
 
   void _onDropOverItem(DropzoneEvent event) {
-    _items
-      ..remove(event.draggableElement)
-      ..insert(_items.indexOf(event.dropzoneElement), event.draggableElement);
-    _refreshView();
+    if (!disabled) {
+      _reorderController.add(FoReorderEvent(
+          _items.indexOf(event.draggableElement),
+          _items.indexOf(event.dropzoneElement)));
+      _items
+        ..remove(event.draggableElement)
+        ..insert(_items.indexOf(event.dropzoneElement), event.draggableElement);
+      _refreshView();
+    }
   }
 
   void _onDropOverLast(DropzoneEvent event) {
-    _items
-      ..remove(event.draggableElement)
-      ..add(event.draggableElement);
-    _refreshView();
+    if (!disabled) {
+      _reorderController.add(FoReorderEvent(
+          _items.indexOf(event.draggableElement), _items.length - 1));
+      _items
+        ..remove(event.draggableElement)
+        ..add(event.draggableElement);
+
+      _refreshView();
+    }
   }
 
   void _refreshView() {
     if (_items.isNotEmpty) {
-      _items.first.parent!.children
+      _host.children
         ..clear()
         ..add(firstDropZone)
         ..addAll(_items)
         ..add(lastDropZone);
     }
   }
+}
+
+class FoReorderEvent {
+  final int sourceIndex;
+  final int destIndex;
+
+  const FoReorderEvent(this.sourceIndex, this.destIndex);
 }
