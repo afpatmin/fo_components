@@ -172,17 +172,17 @@ class FoTextInputComponent
     } else if (errors.containsKey('minlength')) {
       return Intl.message(
           'enter at least ${errors['minlength']['requiredLength']} characters',
-          args: [errors['minlength']['requiredLength'] as String],
+          args: [errors['minlength']['requiredLength'].toString()],
           name: 'error_min_length');
     } else if (errors.containsKey('maxlength')) {
       return Intl.message(
           'enter max ${errors['maxlength']['requiredLength']} characters',
-          args: [errors['maxlength']['requiredLength'] as String],
+          args: [errors['maxlength']['requiredLength'].toString()],
           name: 'error_max_length');
     } else if (errors.containsKey('pattern')) {
       return Intl.message(
           'invalid pattern, required: ${errors['pattern']['requiredPattern']}',
-          args: [errors['pattern']['requiredPattern'] as String],
+          args: [errors['pattern']['requiredPattern'].toString()],
           name: 'error_invalid_pattern');
     } else {
       return errors.toString();
