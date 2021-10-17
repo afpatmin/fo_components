@@ -1,3 +1,9 @@
+
+# 3.1.0+1
+* Fixed issue where TextInput didn't handle error messages properly
+* Dropdown filter input is now fixed at top of dropdown
+* Some updates to docs
+
 # 3.1.0
 * Added ProgressBar
 * Added ReorderList
