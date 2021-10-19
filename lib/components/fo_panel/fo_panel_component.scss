@@ -2,29 +2,15 @@
 @import "../../mixins";
 
 :host {
-  display: block;
   div#foPanel {
     @include boxShadow();
     overflow: hidden;
     display: block;
     padding: 1rem;
     background-color: white;
+  }
 
-    div#panelHeader {
-      @include fo-button-vertical-padding(0.2rem);
-      fo-button {
-        font-size: 0.9rem;
-      }
-      display: flex;
-      align-items: center;
-
-      h3 {
-        flex: 1;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        margin: 0;
-      }
-    }
+  div#foPanelDescription {
+    color: gray;
   }
 }

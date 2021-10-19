@@ -1,11 +1,7 @@
-<div id="foPanel"
-     *ngIf="visible">
-  <div id="panelHeader">
-    <h3 *ngIf="header != null">{{$pipe.capitalize(header!)}}</h3>
-    <fo-button [white]="true"
-               icon="close"
-               (trigger)="onClose()">
-    </fo-button>
+<div id="foPanel">
+  <div (click)="toggleExpanded()">{{header}}</div>
+  <div id="foPanelDescription">{{description}}</div>
+  <div *ngIf="expanded">
+    <ng-content></ng-content>
   </div>
-  <ng-content></ng-content>
 </div>
