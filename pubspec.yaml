@@ -15,7 +15,6 @@ dependencies:
   copy_with_extension: ^2.0.2
   dnd: ^2.0.1
   equatable: ^2.0.3
-  grid_css: ^3.0.0
   intl: ^0.17.0
   json_annotation: ^4.1.0
   sass_builder: ^2.1.4
