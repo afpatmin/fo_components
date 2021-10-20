@@ -1,6 +1,7 @@
 <fo-label [value]="label"
           (click)="onClick($event)"></fo-label>
 <div id="flexContainer"
+     tabindex="0"
      [class.focus]="dropdownVisible">
     <div id="selector"
          [class.disabled]="disabled == true"

@@ -69,21 +69,21 @@ class FoTextAreaInputComponent
     } else if (errors.containsKey('required')) {
       return Intl.message('this field is required', name: 'error_required');
     } else if (errors.containsKey('error')) {
-      return errors['error'];
+      return errors['error'] as String;
     } else if (errors.containsKey('minlength')) {
       return Intl.message(
           'enter at least ${errors['minlength']['requiredLength']} characters',
-          args: [errors['minlength']['requiredLength']],
+          args: [errors['minlength']['requiredLength'].toString()],
           name: 'error_min_length');
     } else if (errors.containsKey('maxlength')) {
       return Intl.message(
           'enter max ${errors['maxlength']['requiredLength']} characters',
-          args: [errors['maxlength']['requiredLength']],
+          args: [errors['maxlength']['requiredLength'].toString()],
           name: 'error_max_length');
     } else if (errors.containsKey('pattern')) {
       return Intl.message(
           'invalid pattern, required: ${errors['pattern']['requiredPattern']}',
-          args: [errors['pattern']['requiredPattern']],
+          args: [errors['pattern']['requiredPattern'].toString()],
           name: 'error_invalid_pattern');
     } else {
       return errors.toString();

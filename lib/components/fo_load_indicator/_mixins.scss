@@ -1,6 +1,9 @@
-@mixin fo-load-indicator-color($color) {
+@mixin fo-load-indicator-colors($color, $backgroundColor) {
     ::ng-deep fo-load-indicator {
         .spinner {
+            .circleCore {
+                background-color: $backgroundColor;
+            }
             .circleBorder {
                 background: $color;
                 background: linear-gradient(0deg, transparent 33%, $color 100%);

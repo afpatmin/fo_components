@@ -1,3 +1,19 @@
+
+# 3.1.0+1
+* Fixed issue where TextInput didn't handle error messages properly
+* Dropdown filter input is now fixed at top of dropdown
+* Some updates to docs
+
+# 3.1.0
+* Added ProgressBar
+* Added ReorderList
+* Set white background on Radio and Check components
+* Renamed fo-file-upload-border-color mixin to to fo-file-upload-colors
+
+# 3.0.1+2
+* Added missing @Input annotation to FoRadio.checked
+* FoPanel now uses changeDetectionStrategy.OnPush
+
 # 3.0.1
 * Some design improvements on check/radio/toggle components
 * Improved documentation a bit (WIP)

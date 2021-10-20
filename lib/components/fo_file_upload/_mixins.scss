@@ -1,7 +1,12 @@
-@mixin fo-file-upload-border-color($color) {
+@mixin fo-file-upload-colors($iconColor, $borderColor) {
   ::ng-deep fo-file-upload {
     div.container {
-      border-color: $color;
+      border-color: $borderColor;
+      div#content {
+        fo-icon {
+          color: $iconColor;
+        }
+      }
     }
   }
 }

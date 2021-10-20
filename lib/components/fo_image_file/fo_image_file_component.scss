@@ -1,5 +1,4 @@
 @import "../../mixins.scss";
-@import "package:fo_components/components/fo_button/mixins";
 
 :host {
   div.container {
@@ -14,8 +13,6 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    transition: background-color 200ms ease;
-    -webkit-transition: background-color 200ms ease;
 
     div#image {
       pointer-events: none;
@@ -66,9 +63,6 @@
   }
   div.container.border {
     border-width: 1px;
-  }
-  div.container:hover {
-    background-color: white;
   }
 }
 :host[cover] {

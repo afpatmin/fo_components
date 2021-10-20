@@ -8,10 +8,14 @@
       display: none;
     }
     div#content {
+      cursor: pointer;
       display: flex;
       height: 2.5em;
       align-items: center;
       justify-content: center;
+      fo-icon {
+        font-size: 2em;
+      }
     }
   }
 }

@@ -66,13 +66,13 @@ class FoQuestionComponent implements AfterChanges, OnDestroy {
     rightHidden = true;
     transition = false;
 
-    Future.delayed(Duration(milliseconds: 100)).then((_) {
+    Future<void>.delayed(Duration(milliseconds: 100)).then((_) {
       transition = true;
     });
-    Future.delayed(Duration(milliseconds: 300)).then((_) {
+    Future<void>.delayed(Duration(milliseconds: 300)).then((_) {
       leftHidden = false;
     });
-    Future.delayed(Duration(milliseconds: 600)).then((_) {
+    Future<void>.delayed(Duration(milliseconds: 600)).then((_) {
       rightHidden = false;
       _changeDetectorRef.markForCheck();
     });

@@ -5,7 +5,6 @@ import 'package:angular/angular.dart';
 
 import '../../../src/components/fo_label/fo_label_component.dart';
 import '../../pipes/capitalize_pipe.dart';
-import '../fo_button/fo_button_component.dart';
 import '../fo_icon/fo_icon_component.dart';
 import '../fo_load_indicator/fo_load_indicator_component.dart';
 
@@ -15,7 +14,6 @@ import '../fo_load_indicator/fo_load_indicator_component.dart';
     styleUrls: ['fo_file_upload_component.css'],
     directives: [
       NgIf,
-      FoButtonComponent,
       FoIconComponent,
       FoLabelComponent,
       FoLoadIndicatorComponent,

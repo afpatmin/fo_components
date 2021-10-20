@@ -1,0 +1,12 @@
+@mixin fo-progress-bar-colors($color, $backgroundColor, $borderColor) {
+    ::ng-deep fo-progress-bar {
+        div#bar {
+            background-color: $backgroundColor;
+            border-color: $borderColor;
+        }
+
+        div#bar > div#progress {
+            background-color: $color;
+        }
+    }
+}

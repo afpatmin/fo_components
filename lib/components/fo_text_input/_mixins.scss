@@ -57,7 +57,7 @@
       }
 
       textarea:disabled {
-        background-color: darken($backgroundColor, 10%);
+        background-color: darken($backgroundColor, 5%);
       }
 
       textarea.error {

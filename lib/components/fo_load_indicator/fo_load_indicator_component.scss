@@ -1,5 +1,5 @@
 :host {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     @keyframes spin {
         from {
@@ -30,7 +30,6 @@
         .circleCore {
             width: 100%;
             height: 100%;
-            background-color: white;
             border-radius: 50%;
         }
     }
