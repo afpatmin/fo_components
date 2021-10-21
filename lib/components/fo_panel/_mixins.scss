@@ -1,0 +1,9 @@
+@mixin fo-panel-colors($descriptionColor) {
+    ::ng-deep fo-panel {
+        div#header {
+            div#description {
+                color: $descriptionColor;
+            }
+        }
+    }
+}

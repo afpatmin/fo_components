@@ -5,6 +5,9 @@
         color: $color;
         background-color: $backgroundColor;
       }
+      div.tabButton.disabled {
+        background-color: lighten($backgroundColor, 20%);
+      }
     }
   }
 }

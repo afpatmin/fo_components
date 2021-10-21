@@ -1,6 +1,7 @@
 <div id="tabStrip">
   <div *ngFor="let tab of tabs"
        class="tabButton"
+       [class.disabled]="disabled"
        [style.color]="color(tab)"
        [style.background-color]="backgroundColor(tab)"
        (click)="onTabClick(tab)">

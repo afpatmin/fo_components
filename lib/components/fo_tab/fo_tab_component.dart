@@ -5,7 +5,8 @@ import 'package:angular/angular.dart';
     selector: 'fo-tab',
     templateUrl: 'fo_tab_component.html',
     styleUrls: ['fo_tab_component.css'],
-    directives: [NgClass])
+    directives: [NgClass],
+    changeDetection: ChangeDetectionStrategy.OnPush)
 class FoTabComponent {
   FoTabComponent(this._host);
 

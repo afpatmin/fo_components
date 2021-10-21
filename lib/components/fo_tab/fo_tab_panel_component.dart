@@ -9,13 +9,23 @@ import 'fo_tab_component.dart';
   selector: 'fo-tab-panel',
   templateUrl: 'fo_tab_panel_component.html',
   styleUrls: ['fo_tab_panel_component.css'],
-  directives: [FoIconComponent, FoTabComponent, NgFor, NgIf],
+  directives: [
+    FoIconComponent,
+    FoTabComponent,
+    NgClass,
+    NgFor,
+    NgIf,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class FoTabPanelComponent implements AfterChanges, OnDestroy {
   List<FoTabComponent> _tabs = [];
 
   @Input()
   int tabIndex = 0;
+
+  @Input()
+  bool disabled = false;
 
   @Input()
   List<String> hideIconsOn = [];
@@ -52,11 +62,13 @@ class FoTabPanelComponent implements AfterChanges, OnDestroy {
   }
 
   void onTabClick(FoTabComponent tab) {
-    for (final t in tabs) {
-      t.active = false;
+    if (!disabled) {
+      for (final t in tabs) {
+        t.active = false;
+      }
+      tab.active = true;
+      _tabIndexChangeController.add(tabs.indexOf(tab));
     }
-    tab.active = true;
-    _tabIndexChangeController.add(tabs.indexOf(tab));
   }
 
   @override

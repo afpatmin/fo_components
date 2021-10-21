@@ -12,6 +12,7 @@ $transitionSpeed: 0.3s ease;
 @import "components/fo_tab/mixins";
 @import "components/fo_text_input/mixins";
 @import "components/fo_load_indicator/mixins";
+@import "components/fo_panel/mixins";
 @import "components/fo_progress_bar/mixins";
 @import "components/fo_check/mixins";
 @import "components/fo_radio/mixins";
@@ -51,6 +52,7 @@ $transitionSpeed: 0.3s ease;
   @include fo-image-file-colors($grayColorBright, $grayColorBright, $grayColor);
   @include fo-label-color(darken($grayColor, $lightstep));
   @include fo-modal-colors(lighten($grayColorBright, 10%), $alertColor);
+  @include fo-panel-colors($grayColor);
   @include fo-tab-panel-colors(darken($grayColor, $lightstep), $primaryColor);
   @include fo-text-input-colors(darken($grayColor, $lightstep), $grayColorBright, $primaryColor, $alertColor);
 

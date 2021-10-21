@@ -1,3 +1,8 @@
+# 3.1.1
+* Panel is now expandable, can be disabled, and accepts a secondary input 'description' (shown under header)
+* DatePicker now accepts null dates as input
+* Changed ChangeDetectionStrategy of TabPanel to OnPush
+* TabPanel can now be disabled via input
 
 # 3.1.0+1
 * Fixed issue where TextInput didn't handle error messages properly
@@ -29,14 +34,10 @@
 * Renamed fo-image-file-max-height mixin to fo-image-file-height so that it reflects intent better
 * Renamed FileUploadComponent to FoFileUploadComponent for consistency
 * Toned down shadows
-
-# 2.2.1
 * Changed Modal maxheight to 87vh (down from 95vh to accomodate ios bottom navbar)
 * Added index to FoQuestion label
 * Calculate and store maxScore in FoQuiz OnInit
 * Added method FoQuiz.restart() 
-
-# 2.2.0
 * FoQuiz now uses changeDetection.OnPush
 * Visual improvements to FoQuiz
 * Deprecated FoQuiz input 'buttonColorActive', only input used now is buttonColor, 'active' button color is now set internally

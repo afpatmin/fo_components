@@ -1,7 +1,17 @@
 <div id="foPanel">
-  <div (click)="toggleExpanded()">{{header}}</div>
-  <div id="foPanelDescription">{{description}}</div>
-  <div *ngIf="expanded">
+  <div id="header"
+       (click)="toggleExpanded()"
+       [class.expanded]="expanded">
+    <div>
+      <div>{{header}}</div>
+      <div id="description">{{description}}</div>
+    </div>
+    <fo-icon *ngIf="!disabled"
+             icon="keyboard_arrow_down"
+             [material]="true"></fo-icon>
+  </div>
+  <div *ngIf="expanded"
+       id="content">
     <ng-content></ng-content>
   </div>
 </div>

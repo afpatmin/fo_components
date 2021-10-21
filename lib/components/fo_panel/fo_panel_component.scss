@@ -8,9 +8,23 @@
     display: block;
     padding: 1rem;
     background-color: white;
-  }
-
-  div#foPanelDescription {
-    color: gray;
+    div#header {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      fo-icon {
+        font-size: 1.5em;
+        transition: transform 0.3s ease;
+      }
+    }
+    div#header.expanded {
+      fo-icon {
+        transform: rotateX(-180deg);
+      }
+    }
+    div#content {
+      margin-top: 0.5rem;
+    }
   }
 }
