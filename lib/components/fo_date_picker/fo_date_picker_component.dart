@@ -26,9 +26,10 @@ import '../fo_icon/fo_icon_component.dart';
 class FoDatePickerComponent {
   final DatePickerCubit datePickerCubit;
   final List<String> weekdays;
+  final ChangeDetectorRef _changeDetectorRef;
 
-  FoDatePickerComponent()
-      : datePickerCubit = DatePickerCubit(DateTime.now()),
+  FoDatePickerComponent(this._changeDetectorRef)
+      : datePickerCubit = DatePickerCubit(null),
         weekdays = List.generate(
             7,
             (index) => DateFormat(DateFormat.ABBR_WEEKDAY)
@@ -43,15 +44,18 @@ class FoDatePickerComponent {
   final List<int> lastWeek = [29, 30, 31];
 
   @Input()
-  set date(DateTime v) {
+  set date(DateTime? v) {
     datePickerCubit.setDate(v);
+    if (v == null) {
+      dropdownVisible = false;
+    }
   }
 
   @Input()
   String label = 'Pick a date';
 
   @Output('dateChange')
-  Stream<DateTime> get onDateChange =>
+  Stream<DateTime?> get onDateChange =>
       datePickerCubit.stream.map((event) => event.selectedDate);
 
   @Input()
@@ -59,9 +63,26 @@ class FoDatePickerComponent {
 
   bool dropdownVisible = false;
 
+  void advanceMonth(int howMany) {
+    if (datePickerCubit.state.selectedDate != null) {
+      datePickerCubit
+          .setMonth(datePickerCubit.state.selectedDate!.month + howMany);
+    }
+  }
+
+  void advanceYear(int howMany) {
+    if (datePickerCubit.state.selectedDate != null) {
+      datePickerCubit
+          .setYear(datePickerCubit.state.selectedDate!.year + howMany);
+    }
+  }
+
   void onClick(dom.Event e) {
     if (!disabled) {
       dropdownVisible = !dropdownVisible;
+      if (dropdownVisible && datePickerCubit.state.selectedDate == null) {
+        datePickerCubit.setDate(DateTime.now());
+      }
     }
   }
 }

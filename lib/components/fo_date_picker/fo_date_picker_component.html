@@ -7,7 +7,12 @@
          [class.disabled]="disabled == true"
          (click)="onClick($event)">
         <div id="selectedDate">
-            {{$pipe.date($pipe.bloc(datePickerCubit).selectedDate)}}
+            <span *ngIf="datePickerCubit.state.selectedDate != null">
+                {{$pipe.date($pipe.bloc(datePickerCubit).selectedDate)}}
+            </span>
+            <span *ngIf="datePickerCubit.state.selectedDate == null">
+                -
+            </span>
         </div>
         <fo-icon class="arrow"
                  [material]="true"
@@ -24,21 +29,22 @@
                  id="year">
                 <fo-icon icon="keyboard_arrow_left"
                          [material]="true"
-                         (click)="datePickerCubit.setYear(datePickerCubit.state.selectedDate.year - 1)"></fo-icon>
-                <div>{{$pipe.bloc(datePickerCubit).selectedDate.year}}</div>
+                         (click)="advanceYear(-1)"></fo-icon>
+                <div>{{$pipe.bloc(datePickerCubit).selectedDate?.year}}</div>
                 <fo-icon icon="keyboard_arrow_right"
                          [material]="true"
-                         (click)="datePickerCubit.setYear(datePickerCubit.state.selectedDate.year + 1)"></fo-icon>
+                         (click)="advanceYear(1)"></fo-icon>
             </div>
             <div class="stepper"
                  id="month">
                 <fo-icon icon="keyboard_arrow_left"
                          [material]="true"
-                         (click)="datePickerCubit.setMonth(datePickerCubit.state.selectedDate.month - 1)"></fo-icon>
-                <div>{{$pipe.date($pipe.bloc(datePickerCubit).selectedDate, 'MMM')}}</div>
+                         (click)="advanceMonth(-1)"></fo-icon>
+                <div *ngIf="datePickerCubit.state.selectedDate != null">
+                    {{$pipe.date($pipe.bloc(datePickerCubit).selectedDate, 'MMM')}}</div>
                 <fo-icon icon="keyboard_arrow_right"
                          [material]="true"
-                         (click)="datePickerCubit.setMonth(datePickerCubit.state.selectedDate.month + 1)"></fo-icon>
+                         (click)="advanceMonth(1)"></fo-icon>
             </div>
         </div>
         <table>
@@ -50,13 +56,13 @@
             <tbody>
                 <tr *ngFor="let week of weeks">
                     <td *ngFor="let day of week"
-                        [class.highlight]="$pipe.bloc(datePickerCubit).selectedDate.day == day"
+                        [class.highlight]="$pipe.bloc(datePickerCubit).selectedDate?.day == day"
                         (click)="datePickerCubit.setDay(day)">{{day}}</td>
                 </tr>
                 <tr>
                     <td *ngFor="let day of lastWeek"
                         [class.inactive]="$pipe.bloc(datePickerCubit).availableDays.contains(day) == false"
-                        [class.highlight]="$pipe.bloc(datePickerCubit).selectedDate.day == day"
+                        [class.highlight]="$pipe.bloc(datePickerCubit).selectedDate?.day == day"
                         (click)="datePickerCubit.setDay(day)">{{day}}
                     </td>
                 </tr>

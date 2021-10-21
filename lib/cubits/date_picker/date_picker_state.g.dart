@@ -16,4 +16,13 @@ extension DatePickerStateCopyWith on DatePickerState {
       selectedDate: selectedDate ?? this.selectedDate,
     );
   }
+
+  DatePickerState copyWithNull({
+    bool selectedDate = false,
+  }) {
+    return DatePickerState(
+      availableDays: availableDays,
+      selectedDate: selectedDate == true ? null : this.selectedDate,
+    );
+  }
 }

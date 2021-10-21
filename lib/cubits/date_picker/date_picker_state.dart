@@ -3,9 +3,9 @@ import 'package:equatable/equatable.dart';
 
 part 'date_picker_state.g.dart';
 
-@CopyWith()
+@CopyWith(generateCopyWithNull: true)
 class DatePickerState extends Equatable {
-  final DateTime selectedDate;
+  final DateTime? selectedDate;
   final List<int> availableDays;
 
   DatePickerState({required this.selectedDate, required this.availableDays});
