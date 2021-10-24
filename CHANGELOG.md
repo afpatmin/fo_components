@@ -1,6 +1,7 @@
 # 3.1.1+1
 * Fixed issue where TextareaInput couldn't accept [ngModel]="null"
 * Increased width of DatePicker to 300px (up from 250px)
+* Improved ProgressBar design so that it works well with different colors
 
 # 3.1.1
 * Panel is now expandable, can be disabled, and accepts a secondary input 'description' (shown under header)

@@ -38,7 +38,7 @@ $transitionSpeed: 0.3s ease;
   $alertColorDark: darken($alertColor, $lightstep);
   $alertColorBright: lighten($alertColor, $lightstep);
 
-  @include fo-progress-bar-colors($primaryColor, white, $grayColorBright);
+  @include fo-progress-bar-colors($primaryColor, $grayColorBright);
   @include fo-load-indicator-colors($primaryColor, white);
   @include fo-check-colors($primaryColor, lighten($grayColor, $lightstep));
   @include fo-radio-colors($primaryColor, lighten($grayColor, $lightstep));
