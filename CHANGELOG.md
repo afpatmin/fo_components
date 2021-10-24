@@ -2,6 +2,7 @@
 * Fixed issue where TextareaInput couldn't accept [ngModel]="null"
 * Increased width of DatePicker to 300px (up from 250px)
 * Improved ProgressBar design so that it works well with different colors
+* Improved Toggle design (drop shadow and grey background on slider)
 * Check, Radio and Toggle now have display: inline-flex so they inline with text properly
 
 # 3.1.1

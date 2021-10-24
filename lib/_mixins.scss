@@ -42,7 +42,7 @@ $transitionSpeed: 0.3s ease;
   @include fo-load-indicator-colors($primaryColor, white);
   @include fo-check-colors($primaryColor, lighten($grayColor, $lightstep));
   @include fo-radio-colors($primaryColor, lighten($grayColor, $lightstep));
-  @include fo-toggle-colors($primaryColor, lighten($grayColor, $lightstep));
+  @include fo-toggle-color($primaryColor);
   @include fo-button-colors(white, $primaryColor, $grayColorBright);
   @include fo-dropdown-border-color($grayColorBright);
   @include fo-dropdown-list-colors($primaryColor, $grayColor, $grayColorBright);

@@ -1,6 +1,7 @@
 :host {
     display: inline-flex;
     align-items: center;
+    cursor: pointer;
 
     div.slider {
         outline: none;
@@ -8,19 +9,16 @@
         width: 2em;
         height: 1em;
         border-radius: 1.25em;
-        border-width: 1px;
-        border-style: solid;
         transition: background-color 0.1s ease;
         div.marker {
             width: 1.25em;
             height: 1.25em;
             margin-top: -0.125em;
             margin-left: -0.125em;
-            border-width: 1px;
-            border-style: solid;
             box-sizing: border-box;
             border-radius: 1em;
-            transition: transform 0.1s ease;
+            transition: transform 0.1s ease, background-color 0.1s ease;
+            box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
         }
     }
     div.slider.checked {
