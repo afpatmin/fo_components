@@ -26,9 +26,8 @@ import '../fo_icon/fo_icon_component.dart';
 class FoDatePickerComponent {
   final DatePickerCubit datePickerCubit;
   final List<String> weekdays;
-  final ChangeDetectorRef _changeDetectorRef;
 
-  FoDatePickerComponent(this._changeDetectorRef)
+  FoDatePickerComponent()
       : datePickerCubit = DatePickerCubit(null),
         weekdays = List.generate(
             7,
