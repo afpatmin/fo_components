@@ -1,4 +1,4 @@
-@mixin fo-tab-panel-colors($color, $backgroundColor) {
+@mixin fo-tab-panel-colors($color, $backgroundColor, $backgroundColorDisabled) {
   ::ng-deep fo-tab-panel {
     div#tabStrip {
       div.tabButton {
@@ -6,7 +6,7 @@
         background-color: $backgroundColor;
       }
       div.tabButton.disabled {
-        background-color: lighten($backgroundColor, 20%);
+        background-color: $backgroundColorDisabled;
       }
     }
   }

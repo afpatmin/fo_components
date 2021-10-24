@@ -53,7 +53,7 @@ $transitionSpeed: 0.3s ease;
   @include fo-label-color(darken($grayColor, $lightstep));
   @include fo-modal-colors(lighten($grayColorBright, 10%), $alertColor);
   @include fo-panel-colors($grayColor);
-  @include fo-tab-panel-colors(darken($grayColor, $lightstep), $primaryColor);
+  @include fo-tab-panel-colors(darken($grayColor, $lightstep), $primaryColor, $grayColorBright);
   @include fo-text-input-colors(darken($grayColor, $lightstep), $grayColorBright, $primaryColor, $alertColor);
 
   ::ng-deep .black-color {
