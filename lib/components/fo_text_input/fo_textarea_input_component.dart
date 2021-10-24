@@ -125,8 +125,8 @@ class FoTextAreaInputComponent
   void registerOnTouched(TouchFunction f) {}
 
   @override
-  void writeValue(String obj) {
-    value = obj;
+  void writeValue(String? obj) {
+    value = obj ?? '';
     _changeDetectorRef.markForCheck();
   }
 
