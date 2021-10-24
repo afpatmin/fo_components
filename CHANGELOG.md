@@ -1,3 +1,6 @@
+# 3.1.1+1
+* Fixed issue where TextareaInput couldn't accept [ngModel]="null"
+
 # 3.1.1
 * Panel is now expandable, can be disabled, and accepts a secondary input 'description' (shown under header)
 * DatePicker now accepts null dates as input
