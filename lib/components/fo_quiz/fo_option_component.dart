@@ -34,7 +34,7 @@ class FoOptionComponent implements OnDestroy {
 
   void onSelect() {
     if (model != null) {
-      model!.selected = !model!.selected;
+      model = model!.copyWith(selected: model!.selected);
       _triggerController.add(model!);
     }
   }
