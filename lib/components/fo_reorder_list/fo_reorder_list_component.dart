@@ -4,6 +4,7 @@ import 'dart:html' as dom;
 import 'package:angular/angular.dart';
 import 'package:dnd/dnd.dart';
 import 'package:fo_components/directives/reorder_item_directive.dart';
+export 'package:fo_components/directives/reorder_item_directive.dart';
 
 @Component(
   selector: 'fo-reorder-list',
@@ -33,8 +34,9 @@ class FoReorderListComponent implements OnDestroy {
   FoReorderListComponent(this._host) {
     _firstDropSubscription =
         Dropzone(firstDropZone).onDrop.listen(_onDropOverFirst);
-    _lastDropSubscription =
-        Dropzone(lastDropZone).onDrop.listen(_onDropOverLast);
+    _lastDropSubscription = Dropzone(lastDropZone, overClass: 'fo-dragover')
+        .onDrop
+        .listen(_onDropOverLast);
   }
 
   @ContentChildren(ReorderItemDirective)
@@ -46,9 +48,16 @@ class FoReorderListComponent implements OnDestroy {
         ..insert(0, firstDropZone)
         ..add(lastDropZone);
 
-      Draggable(_items, avatarHandler: AvatarHandler.clone());
+      Draggable(
+        _items,
+        avatarHandler: AvatarHandler.clone(),
+        draggingClass: 'fo-dragging',
+        draggingClassBody: 'fo-dragging-body',
+      );
 
-      _itemDropSubscription = Dropzone(_items).onDrop.listen(_onDropOverItem);
+      _itemDropSubscription = Dropzone(_items, overClass: 'fo-dragover')
+          .onDrop
+          .listen(_onDropOverItem);
     }
   }
 
@@ -78,13 +87,16 @@ class FoReorderListComponent implements OnDestroy {
 
   void _onDropOverItem(DropzoneEvent event) {
     if (!disabled) {
-      _reorderController.add(FoReorderEvent(
-          _items.indexOf(event.draggableElement),
-          _items.indexOf(event.dropzoneElement)));
-      _items
-        ..remove(event.draggableElement)
-        ..insert(_items.indexOf(event.dropzoneElement), event.draggableElement);
-      _refreshView();
+      if (event.draggableElement != event.dropzoneElement) {
+        _reorderController.add(FoReorderEvent(
+            _items.indexOf(event.draggableElement),
+            _items.indexOf(event.dropzoneElement)));
+        _items
+          ..remove(event.draggableElement)
+          ..insert(
+              _items.indexOf(event.dropzoneElement), event.draggableElement);
+        _refreshView();
+      }
     }
   }
 
