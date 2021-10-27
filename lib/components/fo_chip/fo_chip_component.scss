@@ -1,12 +1,9 @@
 :host {
   div#foChip {
     display: inline;
-    font-size: 0.6em;
     color: rgb(249, 255, 246);
     background-color: rgb(50, 131, 50);
-    padding: 3px 7px 3px 7px;
-    border-radius: 10px;
-    position: relative;
-    bottom: 0.2em;
+    padding: 0.1em 0.2em 0.1em 0.2em;
+    border-radius: 6px;
   }
 }

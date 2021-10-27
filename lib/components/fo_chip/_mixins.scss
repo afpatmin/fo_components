@@ -1,0 +1,9 @@
+@mixin fo-chip-colors($color, $backgroundColor, $backgroundColorDisabled) {
+  ::ng-deep fo-chip {
+    div#foChip {
+      background-color: $backgroundColor;
+      border-color: $backgroundColor;
+      color: $color;
+    }
+  }
+}
