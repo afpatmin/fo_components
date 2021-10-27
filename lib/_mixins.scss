@@ -38,11 +38,11 @@ $transitionSpeed: 0.3s ease;
   $alertColorDark: darken($alertColor, $lightstep);
   $alertColorBright: lighten($alertColor, $lightstep);
 
-  @include fo-progress-bar-colors($primaryColor, white, $grayColorBright);
+  @include fo-progress-bar-colors($primaryColor, $grayColorBright);
   @include fo-load-indicator-colors($primaryColor, white);
   @include fo-check-colors($primaryColor, lighten($grayColor, $lightstep));
   @include fo-radio-colors($primaryColor, lighten($grayColor, $lightstep));
-  @include fo-toggle-colors($primaryColor, lighten($grayColor, $lightstep));
+  @include fo-toggle-color($primaryColor);
   @include fo-button-colors(white, $primaryColor, $grayColorBright);
   @include fo-dropdown-border-color($grayColorBright);
   @include fo-dropdown-list-colors($primaryColor, $grayColor, $grayColorBright);
@@ -53,7 +53,7 @@ $transitionSpeed: 0.3s ease;
   @include fo-label-color(darken($grayColor, $lightstep));
   @include fo-modal-colors(lighten($grayColorBright, 10%), $alertColor);
   @include fo-panel-colors($grayColor);
-  @include fo-tab-panel-colors(darken($grayColor, $lightstep), $primaryColor);
+  @include fo-tab-panel-colors(darken($grayColor, $lightstep), $primaryColor, $grayColorBright);
   @include fo-text-input-colors(darken($grayColor, $lightstep), $grayColorBright, $primaryColor, $alertColor);
 
   ::ng-deep .black-color {

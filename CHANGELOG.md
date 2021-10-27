@@ -1,3 +1,16 @@
+# 3.1.1+2
+* Increased margin on Toggle label to 0.5em (up from 0.3em)
+* Fixed crash on reorderlist when dropping an item on its original position
+* Reorderitem now have css class '.fo-dragging' whenever it is being dragged
+* Reorderitem now have css class '.fo-dragover' while something is dragged over it
+
+# 3.1.1+1
+* Fixed issue where TextareaInput couldn't accept [ngModel]="null"
+* Increased width of DatePicker to 300px (up from 250px)
+* Improved ProgressBar design so that it works well with different colors
+* Improved Toggle design (drop shadow and grey background on slider)
+* Check, Radio and Toggle now have display: inline-flex so they inline with text properly
+
 # 3.1.1
 * Panel is now expandable, can be disabled, and accepts a secondary input 'description' (shown under header)
 * DatePicker now accepts null dates as input

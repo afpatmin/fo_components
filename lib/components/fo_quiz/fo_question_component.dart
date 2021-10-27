@@ -118,10 +118,10 @@ class FoQuestionComponent implements AfterChanges, OnDestroy {
   }
 
   void onOptionTrigger(FoOptionModel option) {
-    if (model.multiSelect == false) {
-      final others = model.options.where((o) => o != option);
-      for (final o in others) {
-        o.selected = false;
+    if (!model.multiSelect) {
+      for (var i = 0; i < model.options.length; i++) {
+        model.options[i] =
+            model.options[i].copyWith(selected: model.options[i] == option);
       }
     }
   }

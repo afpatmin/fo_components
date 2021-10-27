@@ -2,9 +2,10 @@
 @import "../../mixins";
 
 :host {
+  display: block;
   div#foPanel {
     @include boxShadow();
-    overflow: hidden;
+    overflow: visible;
     display: block;
     padding: 1rem;
     background-color: white;

@@ -1,9 +1,15 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'fo_quiz_model.g.dart';
 
 @JsonSerializable()
-class FoQuizModel {
-  FoQuizModel(this.questions);
+@CopyWith()
+class FoQuizModel extends Equatable {
+  const FoQuizModel({
+    required this.questions,
+    this.passScore = 0,
+  });
 
   factory FoQuizModel.fromJson(Map<String, dynamic> json) =>
       _$FoQuizModelFromJson(json);
@@ -12,12 +18,23 @@ class FoQuizModel {
 
   final List<FoQuestionModel> questions;
 
-  int passScore = 0;
+  final int passScore;
+
+  @override
+  List<Object> get props => [
+        questions,
+        passScore,
+      ];
 }
 
 @JsonSerializable()
-class FoQuestionModel {
-  FoQuestionModel(this.label, this.options, {this.multiSelect = false});
+@CopyWith()
+class FoQuestionModel extends Equatable {
+  const FoQuestionModel({
+    required this.label,
+    required this.options,
+    this.multiSelect = false,
+  });
 
   factory FoQuestionModel.fromJson(Map<String, dynamic> json) =>
       _$FoQuestionModelFromJson(json);
@@ -28,27 +45,49 @@ class FoQuestionModel {
 
   final List<FoOptionModel> options;
 
-  bool multiSelect;
+  final bool multiSelect;
+
+  @override
+  List<Object> get props => [
+        label,
+        options,
+        multiSelect,
+      ];
 }
 
 @JsonSerializable()
-class FoOptionModel {
-  FoOptionModel(this.value, this.label,
-      {this.child, this.selected = false, this.score = 0});
+@CopyWith()
+class FoOptionModel extends Equatable {
+  const FoOptionModel({
+    required this.value,
+    required this.label,
+    this.child,
+    this.selected = false,
+    this.score = 0,
+  });
 
   factory FoOptionModel.fromJson(Map<String, dynamic> json) =>
       _$FoOptionModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$FoOptionModelToJson(this);
 
-  final String value;
+  final Object value;
 
   final String label;
 
-  int score;
+  final int score;
 
   @JsonKey(ignore: true)
-  bool selected;
+  final bool selected;
 
-  FoQuizModel? child;
+  final FoQuizModel? child;
+
+  @override
+  List<Object?> get props => [
+        value,
+        label,
+        score,
+        selected,
+        child,
+      ];
 }
