@@ -1,6 +1,10 @@
 # 3.1.1+2
 * Tweaked NumberInput layout
 * Added expandedChange output to Panel
+* Increased margin on Toggle label to 0.5em (up from 0.3em)
+* Fixed crash on reorderlist when dropping an item on its original position
+* Reorderitem now have css class '.fo-dragging' whenever it is being dragged
+* Reorderitem now have css class '.fo-dragover' while something is dragged over it
 
 # 3.1.1+1
 * Fixed issue where TextareaInput couldn't accept [ngModel]="null"
