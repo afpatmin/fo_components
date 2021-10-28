@@ -110,7 +110,7 @@ class FoQuizComponent implements OnInit, OnDestroy {
         if (option.score > 0) {
           maxPoints += option.score;
         }
-        maxPoints += _calcMaxPoints(option.child!);
+        maxPoints += _calcMaxPoints(option.child);
       }
     }
 
