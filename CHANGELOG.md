@@ -1,5 +1,6 @@
 # 3.1.1+2
 * Tweaked NumberInput layout
+* Added expandedChange output to Panel
 
 # 3.1.1+1
 * Fixed issue where TextareaInput couldn't accept [ngModel]="null"
