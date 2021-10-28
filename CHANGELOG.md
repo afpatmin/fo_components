@@ -1,5 +1,6 @@
 # 3.1.1+4
 * Fixed null-safety problem in Quiz
+* Quiz can now be themed using mixin
 
 # 3.1.1+3
 * Tweaked NumberInput layout

@@ -27,7 +27,6 @@
      *ngIf="currentChildQuiz == null">
   <div id="left">
     <fo-button *ngIf="prevButtonLabel != null && !rightHidden"
-               [white]="true"
                class="fullWidth"
                [disabled]="disabled"
                [label]="$pipe.capitalize(prevButtonLabel!)"
@@ -37,7 +36,6 @@
   </div>
   <div id="right">
     <fo-button *ngIf="selectedOptions.isNotEmpty && !rightHidden"
-               [white]="true"
                class="fullWidth"
                [disabled]="disabled"
                [label]="$pipe.capitalize(nextButtonLabel!)"
