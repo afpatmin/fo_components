@@ -1,6 +1,3 @@
-//@import "package:fo_components/components/fo_text_input/mixins";
-//@import "package:fo_components/components/fo_button/mixins";
-
 :host {
   display: block;
   div#flexContainer {
@@ -8,7 +5,12 @@
     align-items: stretch;
     justify-content: center;
 
+    fo-button {
+      height: 100%;
+    }
+
     fo-text-input {
+      flex: 1;
       box-sizing: border-box;
     }
 

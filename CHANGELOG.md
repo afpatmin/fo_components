@@ -1,3 +1,6 @@
+# 3.1.1+2
+* Tweaked NumberInput layout
+
 # 3.1.1+1
 * Fixed issue where TextareaInput couldn't accept [ngModel]="null"
 * Increased width of DatePicker to 300px (up from 250px)
