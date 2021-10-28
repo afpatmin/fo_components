@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:angular/angular.dart';
 
 import '../fo_icon/fo_icon_component.dart';
@@ -15,8 +17,10 @@ import '../fo_icon/fo_icon_component.dart';
     changeDetection: ChangeDetectionStrategy.OnPush)
 
 /// Panel component
-class FoPanelComponent {
+class FoPanelComponent implements OnDestroy {
   FoPanelComponent();
+
+  final StreamController<bool> _expandedChangeController = StreamController();
 
   /// Header to the panel, always shown
   @Input()
@@ -34,9 +38,18 @@ class FoPanelComponent {
   @Input()
   bool disabled = false;
 
+  @Output('expandedChange')
+  Stream<bool> get expandedChange => _expandedChangeController.stream;
+
   void toggleExpanded() {
     if (!disabled) {
       expanded = !expanded;
+      _expandedChangeController.add(expanded);
     }
+  }
+
+  @override
+  void ngOnDestroy() {
+    _expandedChangeController.close();
   }
 }
