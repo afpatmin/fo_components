@@ -1,3 +1,6 @@
+# 3.1.1+5
+* Fixed issue where Quiz.multiselect didn't work as expected
+
 # 3.1.1+4
 * Fixed null-safety problem in Quiz
 * Quiz can now be themed using mixin
