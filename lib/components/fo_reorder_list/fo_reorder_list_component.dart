@@ -13,9 +13,9 @@ export 'package:fo_components/directives/reorder_item_directive.dart';
   directives: [coreDirectives],
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
-class FoReorderListComponent implements OnDestroy {
-  final firstDropZone = dom.DivElement()..className = 'extraDropZone';
-  final lastDropZone = dom.DivElement()..className = 'extraDropZone';
+class FoReorderListComponent implements OnDestroy, AfterContentInit {
+  final firstDropZone = dom.DivElement()..style.height = '30px';
+  final lastDropZone = dom.DivElement()..style.height = '30px';
   final dom.Element _host;
   StreamSubscription<DropzoneEvent>? _itemDropSubscription;
   StreamSubscription<DropzoneEvent>? _firstDropSubscription;
@@ -32,8 +32,9 @@ class FoReorderListComponent implements OnDestroy {
   late List<dom.Element> _items;
 
   FoReorderListComponent(this._host) {
-    _firstDropSubscription =
-        Dropzone(firstDropZone).onDrop.listen(_onDropOverFirst);
+    _firstDropSubscription = Dropzone(firstDropZone, overClass: 'fo-dragover')
+        .onDrop
+        .listen(_onDropOverFirst);
     _lastDropSubscription = Dropzone(lastDropZone, overClass: 'fo-dragover')
         .onDrop
         .listen(_onDropOverLast);
@@ -44,10 +45,6 @@ class FoReorderListComponent implements OnDestroy {
     _items = value.map((e) => e.element).toList();
 
     if (_items.isNotEmpty) {
-      _host.children
-        ..insert(0, firstDropZone)
-        ..add(lastDropZone);
-
       Draggable(
         _items,
         avatarHandler: AvatarHandler.clone(),
@@ -59,6 +56,12 @@ class FoReorderListComponent implements OnDestroy {
           .onDrop
           .listen(_onDropOverItem);
     }
+  }
+
+  /// Padding, in pixels to be used as the first and last dropzone
+  @Input()
+  set padding(int v) {
+    firstDropZone.style.height = lastDropZone.style.height = '${v}px';
   }
 
   @override
@@ -120,6 +123,13 @@ class FoReorderListComponent implements OnDestroy {
         ..addAll(_items)
         ..add(lastDropZone);
     }
+  }
+
+  @override
+  void ngAfterContentInit() {
+    _host.children
+      ..insert(0, firstDropZone)
+      ..add(lastDropZone);
   }
 }
 
