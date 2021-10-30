@@ -2,11 +2,16 @@
   <div id="header"
        (click)="toggleExpanded()"
        [class.expanded]="expanded">
-    <div>
+    <fo-icon *ngIf="icon != null"
+             id="icon"
+             [icon]="icon"
+             [material]="true"></fo-icon>
+    <div id="texts">
       <div>{{header}}</div>
       <div id="description">{{description}}</div>
     </div>
-    <fo-icon *ngIf="!disabled"
+    <fo-icon id="expandIcon"
+             *ngIf="!disabled"
              icon="keyboard_arrow_down"
              [material]="true"></fo-icon>
   </div>

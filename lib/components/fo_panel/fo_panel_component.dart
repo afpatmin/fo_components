@@ -25,13 +25,17 @@ class FoPanelComponent implements OnDestroy {
 
   final StreamController<bool> _expandedChangeController = StreamController();
 
-  /// Header to the panel, always shown
+  /// Header, always shown
   @Input()
-  String? header;
+  String header = '';
 
-  /// Description of the descripion, shown under the header
+  /// Description, shown under the header
   @Input()
   String? description;
+
+  /// Optional material icon to show next to header
+  @Input()
+  String? icon;
 
   /// Toggle whether or not the panel should be expanded, with its contents visible
   @Input()

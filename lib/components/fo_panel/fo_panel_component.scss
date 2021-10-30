@@ -14,13 +14,23 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      fo-icon {
+      fo-icon#icon {
+        font-size: 1.5em;
+        margin-right: 0.5em;
+      }
+      div#texts {
+        flex: 1;
+        div#description {
+          font-size: 0.9em;
+        }
+      }
+      fo-icon#expandIcon {
         font-size: 1.5em;
         transition: transform 0.3s ease;
       }
     }
     div#header.expanded {
-      fo-icon {
+      fo-icon#expandIcon {
         transform: rotateX(-180deg);
       }
     }

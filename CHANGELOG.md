@@ -2,6 +2,7 @@
 * Quiz: Fixed issue where multiselect didn't work as expected
 * ReorderList: Added fo-reorder-list-vertical-padding mixin
 * Panel: Expanding/collapsing panel is now animated
+* Panel: Added optional headerIcon input
 
 # 3.1.1+4
 * Fixed null-safety problem in Quiz
