@@ -16,9 +16,7 @@
              [material]="true"></fo-icon>
   </div>
   <div id="content"
-       [style.height]="contentHeight">
-    <div id="contentInner">
-      <ng-content></ng-content>
-    </div>
+       *ngIf="expanded">
+    <ng-content></ng-content>
   </div>
 </div>

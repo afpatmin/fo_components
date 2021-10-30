@@ -19,10 +19,7 @@ import '../fo_icon/fo_icon_component.dart';
     changeDetection: ChangeDetectionStrategy.Default)
 
 /// Panel component
-class FoPanelComponent implements AfterViewInit, OnDestroy {
-  final dom.Element _host;
-  final ChangeDetectorRef _changeDetectorRef;
-
+class FoPanelComponent implements OnDestroy {
   final StreamController<bool> _expandedChangeController = StreamController();
 
   /// Header, always shown
@@ -37,8 +34,6 @@ class FoPanelComponent implements AfterViewInit, OnDestroy {
   @Input()
   String? icon;
 
-  dom.Element? innerContent;
-
   /// Toggle whether or not the panel should be expanded, with its contents visible
   @Input()
   bool expanded = false;
@@ -47,24 +42,10 @@ class FoPanelComponent implements AfterViewInit, OnDestroy {
   @Input()
   bool disabled = false;
 
-  FoPanelComponent(
-    this._host,
-    this._changeDetectorRef,
-  );
-
-  String get contentHeight => expanded && innerContent != null
-      ? '${innerContent?.getBoundingClientRect().height.round()}px'
-      : '0';
+  FoPanelComponent();
 
   @Output('expandedChange')
   Stream<bool> get expandedChange => _expandedChangeController.stream;
-
-  @override
-  Future<void> ngAfterViewInit() async {
-    /// Give the changedetector some time
-    await Future<void>.delayed(const Duration(milliseconds: 100));
-    innerContent = _host.querySelector('#contentInner');
-  }
 
   @override
   void ngOnDestroy() {
