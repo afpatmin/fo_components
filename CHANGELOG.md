@@ -1,4 +1,4 @@
-# 3.1.2
+# 3.1.2+1
 * Panel: auto-resize when content changed
 * ReorderList: removed fo-reorder-list-vertical-padding again
 
