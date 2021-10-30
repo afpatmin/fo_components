@@ -1,4 +1,4 @@
-# 3.1.3+1 & 3.1.3+2
+# 3.1.3+1, 3.1.3+2 & 3.1.3+3
 * Modal and TabPanel now uses ChangeDetectionStrategy.Default
 * Fixed crash when panel starts out as expanded
 
