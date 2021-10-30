@@ -1,8 +1,11 @@
+# 3.1.3+1
+* Modal and TabPanel now uses ChangeDetectionStrategy.Default
+
 # 3.1.3
 * Quiz: Fixed issue where multiselect didn't work as expected
 * Panel: Expanding/collapsing panel is now animated
 * Panel: Added optional headerIcon input
-* Panel now uses ChangeDetectionStrategy.default
+* Panel now uses ChangeDetectionStrategy.Default
 * Some minor improvements to reorderlist
 
 # 3.1.1+4
