@@ -1,5 +1,6 @@
 # 3.1.2+2 & 3.1.2+3
 * Fixed some bugs introduced in 3.1.2+1
+* Panel now uses ChangeDetectionStrategy.default
 
 # 3.1.2+1
 * Panel: auto-resize when content changed

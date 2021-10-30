@@ -21,9 +21,10 @@ class FoReorderEvent {
   directives: [coreDirectives],
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
-class FoReorderListComponent implements OnDestroy {
+class FoReorderListComponent implements AfterContentInit, OnDestroy {
   final dom.Element _host;
   StreamSubscription<DropzoneEvent>? _itemDropSubscription;
+  StreamSubscription<DropzoneEvent>? _lastItemDropSubscription;
   final StreamController<FoReorderEvent> _reorderController =
       StreamController<FoReorderEvent>.broadcast();
 
@@ -58,20 +59,25 @@ class FoReorderListComponent implements OnDestroy {
   @override
   void ngOnDestroy() {
     _itemDropSubscription?.cancel();
-    _reorderController.close();
     _itemDropSubscription = null;
+    _lastItemDropSubscription?.cancel();
+    _lastItemDropSubscription = null;
+    _reorderController.close();
   }
 
   void _onDropOverItem(DropzoneEvent event) {
     if (!disabled) {
       if (event.draggableElement != event.dropzoneElement) {
-        _reorderController.add(FoReorderEvent(
-            _items.indexOf(event.draggableElement),
-            _items.indexOf(event.dropzoneElement)));
+        var dropIndex = _items.indexOf(event.dropzoneElement);
+        if (dropIndex < 0) {
+          dropIndex = _items.length - 1;
+        }
+
+        _reorderController.add(
+            FoReorderEvent(_items.indexOf(event.draggableElement), dropIndex));
         _items
           ..remove(event.draggableElement)
-          ..insert(
-              _items.indexOf(event.dropzoneElement), event.draggableElement);
+          ..insert(dropIndex, event.draggableElement);
         _refreshView();
       }
     }
@@ -81,7 +87,16 @@ class FoReorderListComponent implements OnDestroy {
     if (_items.isNotEmpty) {
       _host.children
         ..clear()
-        ..addAll(_items);
+        ..addAll(_items)
+        ..add(last);
     }
+  }
+
+  final last = dom.DivElement()..style.height = '20px';
+
+  @override
+  void ngAfterContentInit() {
+    _host.children.add(last);
+    _lastItemDropSubscription = Dropzone(last).onDrop.listen(_onDropOverItem);
   }
 }

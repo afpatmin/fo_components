@@ -1,7 +1,7 @@
-<div id="foPanel">
+<div id="foPanel"
+     [class.expanded]="expanded">
   <div id="header"
-       (click)="toggleExpanded()"
-       [class.expanded]="expanded">
+       (click)="toggleExpanded()">
     <fo-icon *ngIf="icon != null"
              id="icon"
              [icon]="icon"

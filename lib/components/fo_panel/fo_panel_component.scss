@@ -29,17 +29,19 @@
         transition: transform 0.3s ease;
       }
     }
-    div#header.expanded {
-      fo-icon#expandIcon {
-        transform: rotateX(-180deg);
-      }
-    }
     div#content {
       transition: height 0.3s ease;
       overflow: hidden;
       height: 0;
       div#contentInner {
         padding: 0 1rem 1rem 1rem;
+      }
+    }
+  }
+  div#foPanel.expanded {
+    div#header {
+      fo-icon#expandIcon {
+        transform: rotateX(-180deg);
       }
     }
   }

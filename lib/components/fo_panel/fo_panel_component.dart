@@ -16,13 +16,11 @@ import '../fo_icon/fo_icon_component.dart';
       FoIconComponent,
     ],
     pipes: [],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.Default)
 
 /// Panel component
-class FoPanelComponent
-    implements AfterViewInit, OnDestroy, AfterContentChecked {
+class FoPanelComponent implements AfterViewInit, OnDestroy {
   final dom.Element _host;
-  final ChangeDetectorRef _changeDetectorRef;
 
   final StreamController<bool> _expandedChangeController = StreamController();
 
@@ -50,7 +48,6 @@ class FoPanelComponent
 
   FoPanelComponent(
     this._host,
-    this._changeDetectorRef,
   );
 
   String get contentHeight => expanded && innerContent != null
@@ -75,10 +72,5 @@ class FoPanelComponent
       expanded = !expanded;
       _expandedChangeController.add(expanded);
     }
-  }
-
-  @override
-  void ngAfterContentChecked() {
-    _changeDetectorRef.markForCheck();
   }
 }
