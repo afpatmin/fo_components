@@ -1,4 +1,4 @@
-# 3.1.1+5
+# 3.1.2
 * Quiz: Fixed issue where multiselect didn't work as expected
 * ReorderList: Added fo-reorder-list-vertical-padding mixin
 * Panel: Expanding/collapsing panel is now animated
