@@ -39,32 +39,12 @@ class FoReorderListComponent implements OnDestroy {
     _items = value.map((e) => e.element).toList();
 
     if (_items.isNotEmpty) {
-      final draggable = Draggable(
+      Draggable(
         _items,
         avatarHandler: AvatarHandler.clone(),
         draggingClass: 'fo-dragging',
         draggingClassBody: 'fo-dragging-body',
       );
-      draggable.onDragEnd.forEach((event) {
-        if (!disabled) {
-          if (event.position.y < _items.first.getBoundingClientRect().top) {
-            _reorderController
-                .add(FoReorderEvent(_items.indexOf(event.draggableElement), 0));
-            _items
-              ..remove(event.draggableElement)
-              ..insert(0, event.draggableElement);
-            _refreshView();
-          } else if (event.position.y >
-              _items.last.getBoundingClientRect().bottom) {
-            FoReorderEvent(
-                _items.indexOf(event.draggableElement), _items.length - 1);
-            _items
-              ..remove(event.draggableElement)
-              ..add(event.draggableElement);
-            _refreshView();
-          }
-        }
-      });
 
       _itemDropSubscription = Dropzone(_items, overClass: 'fo-dragover')
           .onDrop

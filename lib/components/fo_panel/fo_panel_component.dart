@@ -78,8 +78,8 @@ class FoPanelComponent
   }
 
   @override
-  void ngAfterContentChecked() {
-    print('checked');
+  Future<void> ngAfterContentChecked() async {
+    await Future<void>.delayed(const Duration(milliseconds: 100));
     _changeDetectorRef.markForCheck();
   }
 }
