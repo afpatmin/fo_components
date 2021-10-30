@@ -1,6 +1,7 @@
 # 3.1.1+5
-* Fixed issue where Quiz.multiselect didn't work as expected
-* ReorderList: added fo-reorder-list-vertical-padding mixin
+* Quiz: Fixed issue where multiselect didn't work as expected
+* ReorderList: Added fo-reorder-list-vertical-padding mixin
+* Panel: Expanding/collapsing panel is now animated
 
 # 3.1.1+4
 * Fixed null-safety problem in Quiz

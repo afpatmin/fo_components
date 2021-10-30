@@ -10,8 +10,9 @@
              icon="keyboard_arrow_down"
              [material]="true"></fo-icon>
   </div>
-  <div *ngIf="expanded"
-       id="content">
-    <ng-content></ng-content>
+  <div id="content">
+    <div id="contentInner">
+      <ng-content></ng-content>
+    </div>
   </div>
 </div>

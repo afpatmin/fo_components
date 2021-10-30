@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html' as dom;
 
 import 'package:angular/angular.dart';
 
@@ -18,7 +19,9 @@ import '../fo_icon/fo_icon_component.dart';
 
 /// Panel component
 class FoPanelComponent implements OnDestroy {
-  FoPanelComponent();
+  FoPanelComponent(this._host);
+
+  final dom.Element _host;
 
   final StreamController<bool> _expandedChangeController = StreamController();
 
@@ -32,7 +35,21 @@ class FoPanelComponent implements OnDestroy {
 
   /// Toggle whether or not the panel should be expanded, with its contents visible
   @Input()
-  bool expanded = false;
+  set expanded(bool v) {
+    _expanded = v;
+    if (v) {
+      final content = _host.querySelector('#content');
+      final contentInner = content?.querySelector('#contentInner');
+      content?.style.height =
+          '${contentInner?.getBoundingClientRect().height.toInt()}px';
+    } else {
+      _host.querySelector('#content')?.style.height = '0';
+    }
+  }
+
+  bool get expanded => _expanded;
+
+  bool _expanded = false;
 
   /// Toggle whether or not the panel should be disabled
   @Input()
