@@ -11,6 +11,7 @@ import '../fo_icon/fo_icon_component.dart';
     styleUrls: ['fo_panel_component.css'],
     directives: [
       NgClass,
+      NgStyle,
       NgIf,
       FoIconComponent,
     ],
@@ -18,10 +19,10 @@ import '../fo_icon/fo_icon_component.dart';
     changeDetection: ChangeDetectionStrategy.OnPush)
 
 /// Panel component
-class FoPanelComponent implements OnDestroy {
-  FoPanelComponent(this._host);
-
+class FoPanelComponent
+    implements AfterViewInit, OnDestroy, AfterContentChecked {
   final dom.Element _host;
+  final ChangeDetectorRef _changeDetectorRef;
 
   final StreamController<bool> _expandedChangeController = StreamController();
 
@@ -37,30 +38,37 @@ class FoPanelComponent implements OnDestroy {
   @Input()
   String? icon;
 
+  dom.Element? innerContent;
+
   /// Toggle whether or not the panel should be expanded, with its contents visible
   @Input()
-  set expanded(bool v) {
-    _expanded = v;
-    if (v) {
-      final content = _host.querySelector('#content');
-      final contentInner = content?.querySelector('#contentInner');
-      content?.style.height =
-          '${contentInner?.getBoundingClientRect().height.toInt()}px';
-    } else {
-      _host.querySelector('#content')?.style.height = '0';
-    }
-  }
-
-  bool get expanded => _expanded;
-
-  bool _expanded = false;
+  bool expanded = false;
 
   /// Toggle whether or not the panel should be disabled
   @Input()
   bool disabled = false;
 
+  FoPanelComponent(
+    this._host,
+    this._changeDetectorRef,
+  );
+
+  String get contentHeight => expanded && innerContent != null
+      ? '${innerContent?.getBoundingClientRect().height.round()}px'
+      : '0';
+
   @Output('expandedChange')
   Stream<bool> get expandedChange => _expandedChangeController.stream;
+
+  @override
+  void ngAfterViewInit() {
+    innerContent = _host.querySelector('#contentInner');
+  }
+
+  @override
+  void ngOnDestroy() {
+    _expandedChangeController.close();
+  }
 
   void toggleExpanded() {
     if (!disabled) {
@@ -70,7 +78,8 @@ class FoPanelComponent implements OnDestroy {
   }
 
   @override
-  void ngOnDestroy() {
-    _expandedChangeController.close();
+  void ngAfterContentChecked() {
+    print('checked');
+    _changeDetectorRef.markForCheck();
   }
 }

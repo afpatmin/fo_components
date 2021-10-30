@@ -15,7 +15,8 @@
              icon="keyboard_arrow_down"
              [material]="true"></fo-icon>
   </div>
-  <div id="content">
+  <div id="content"
+       [style.height]="contentHeight">
     <div id="contentInner">
       <ng-content></ng-content>
     </div>

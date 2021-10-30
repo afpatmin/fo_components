@@ -1,4 +1,7 @@
 # 3.1.2
+* Panel: auto-resize when content changed
+
+# 3.1.2
 * Quiz: Fixed issue where multiselect didn't work as expected
 * ReorderList: Added fo-reorder-list-vertical-padding mixin
 * Panel: Expanding/collapsing panel is now animated
