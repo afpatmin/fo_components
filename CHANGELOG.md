@@ -1,16 +1,9 @@
-# 3.1.2+2 - 3.1.2+4
-* Fixed some bugs introduced in 3.1.2+1
-* Panel now uses ChangeDetectionStrategy.default
-
-# 3.1.2+1
-* Panel: auto-resize when content changed
-* ReorderList: removed fo-reorder-list-vertical-padding again
-
-# 3.1.2
+# 3.1.3
 * Quiz: Fixed issue where multiselect didn't work as expected
-* ReorderList: Added fo-reorder-list-vertical-padding mixin
 * Panel: Expanding/collapsing panel is now animated
 * Panel: Added optional headerIcon input
+* Panel now uses ChangeDetectionStrategy.default
+* Some minor improvements to reorderlist
 
 # 3.1.1+4
 * Fixed null-safety problem in Quiz
