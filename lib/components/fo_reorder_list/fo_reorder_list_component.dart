@@ -14,8 +14,12 @@ export 'package:fo_components/directives/reorder_item_directive.dart';
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class FoReorderListComponent implements OnDestroy, AfterContentInit {
-  final firstDropZone = dom.DivElement()..style.height = '30px';
-  final lastDropZone = dom.DivElement()..style.height = '30px';
+  final firstDropZone = dom.DivElement()
+    ..className = 'extraDropZone'
+    ..id = 'top';
+  final lastDropZone = dom.DivElement()
+    ..className = 'extraDropZone'
+    ..id = 'bottom';
   final dom.Element _host;
   StreamSubscription<DropzoneEvent>? _itemDropSubscription;
   StreamSubscription<DropzoneEvent>? _firstDropSubscription;
@@ -56,12 +60,6 @@ class FoReorderListComponent implements OnDestroy, AfterContentInit {
           .onDrop
           .listen(_onDropOverItem);
     }
-  }
-
-  /// Padding, in pixels to be used as the first and last dropzone
-  @Input()
-  set padding(int v) {
-    firstDropZone.style.height = lastDropZone.style.height = '${v}px';
   }
 
   @override

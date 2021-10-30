@@ -2,4 +2,8 @@
     display: block;
     position: relative;
     overflow: hidden;
+
+    ::ng-deep .extraDropZone {
+        height: 30px;
+    }
 }

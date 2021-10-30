@@ -1,6 +1,6 @@
 # 3.1.1+5
 * Fixed issue where Quiz.multiselect didn't work as expected
-* ReorderList: added [padding] input to set extra height of first and last dropzones
+* ReorderList: added fo-reorder-list-vertical-padding mixin
 
 # 3.1.1+4
 * Fixed null-safety problem in Quiz
