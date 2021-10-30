@@ -21,6 +21,7 @@ import '../fo_icon/fo_icon_component.dart';
 /// Panel component
 class FoPanelComponent implements AfterViewInit, OnDestroy {
   final dom.Element _host;
+  final ChangeDetectorRef _changeDetectorRef;
 
   final StreamController<bool> _expandedChangeController = StreamController();
 
@@ -48,6 +49,7 @@ class FoPanelComponent implements AfterViewInit, OnDestroy {
 
   FoPanelComponent(
     this._host,
+    this._changeDetectorRef,
   );
 
   String get contentHeight => expanded && innerContent != null
@@ -58,7 +60,9 @@ class FoPanelComponent implements AfterViewInit, OnDestroy {
   Stream<bool> get expandedChange => _expandedChangeController.stream;
 
   @override
-  void ngAfterViewInit() {
+  Future<void> ngAfterViewInit() async {
+    /// Give the changedetector some time
+    await Future<void>.delayed(const Duration(milliseconds: 100));
     innerContent = _host.querySelector('#contentInner');
   }
 
