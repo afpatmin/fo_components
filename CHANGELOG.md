@@ -1,5 +1,6 @@
 # 3.1.2
 * Panel: auto-resize when content changed
+* ReorderList: removed fo-reorder-list-vertical-padding again
 
 # 3.1.2
 * Quiz: Fixed issue where multiselect didn't work as expected

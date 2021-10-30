@@ -1,8 +1,0 @@
-@mixin fo-reorder-list-vertical-padding($top, $bottom) {
-    ::ng-deep div.extraDropZone#top {
-        height: $top;
-    }
-    ::ng-deep div.extraDropZone#bottom {
-        height: $bottom;
-    }
-}
