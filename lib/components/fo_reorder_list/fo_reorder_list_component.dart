@@ -42,15 +42,17 @@ class FoReorderListComponent implements AfterContentInit, OnDestroy {
   @ContentChildren(ReorderItemDirective)
   set items(List<ReorderItemDirective> value) {
     _items = value.map((e) => e.element).toList();
+    print('set items');
 
     if (_items.isNotEmpty) {
-      Draggable(
+      _draggable?.destroy();
+      _draggable = Draggable(
         _items,
         avatarHandler: AvatarHandler.clone(),
         draggingClass: 'fo-dragging',
         draggingClassBody: 'fo-dragging-body',
       );
-
+      _itemDropSubscription?.cancel();
       _itemDropSubscription = Dropzone(_items, overClass: 'fo-dragover')
           .onDrop
           .listen(_onDropOverItem);
@@ -95,6 +97,8 @@ class FoReorderListComponent implements AfterContentInit, OnDestroy {
       }
     }
   }
+
+  Draggable? _draggable;
 
   void _refreshView() {
     if (_items.isNotEmpty) {
