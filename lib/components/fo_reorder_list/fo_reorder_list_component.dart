@@ -21,7 +21,7 @@ class FoReorderEvent {
   directives: [coreDirectives],
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
-class FoReorderListComponent implements AfterContentInit, OnDestroy {
+class FoReorderListComponent implements OnDestroy {
   final dom.Element _host;
 
   final StreamController<FoReorderEvent> _reorderController =
@@ -31,13 +31,9 @@ class FoReorderListComponent implements AfterContentInit, OnDestroy {
   bool disabled = false;
 
   late List<dom.Element> _items;
-
   bool _internallyDisabled = false;
 
-  final last = dom.DivElement()..style.height = '20px';
-
   Draggable? _draggable;
-
   Dropzone? _dropzones;
 
   FoReorderListComponent(this._host);
@@ -63,12 +59,6 @@ class FoReorderListComponent implements AfterContentInit, OnDestroy {
 
   @Output('reorder')
   Stream<FoReorderEvent> get onReorder => _reorderController.stream;
-
-  @override
-  void ngAfterContentInit() {
-    _host.children.add(last);
-    //Dropzone(last).onDrop.listen(_onDropOverItem);
-  }
 
   @override
   void ngOnDestroy() {
@@ -102,8 +92,7 @@ class FoReorderListComponent implements AfterContentInit, OnDestroy {
     if (_items.isNotEmpty) {
       _host.children
         ..clear()
-        ..addAll(_items)
-        ..add(last);
+        ..addAll(_items);
     }
   }
 }
