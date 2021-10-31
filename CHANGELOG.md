@@ -1,6 +1,7 @@
-# 3.1.3+1, 3.1.3+2 & 3.1.3+3
+# 3.1.3+1 - 3.1.3+4
 * Modal and TabPanel now uses ChangeDetectionStrategy.Default
 * Fixed crash when panel starts out as expanded
+* ReorderList: Imposed limit on how often reorder event can occur (once every 200ms)
 
 # 3.1.3
 * Quiz: Fixed issue where multiselect didn't work as expected

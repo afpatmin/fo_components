@@ -33,6 +33,10 @@ class FoReorderListComponent implements AfterContentInit, OnDestroy {
 
   late List<dom.Element> _items;
 
+  bool _internallyDisabled = false;
+
+  final last = dom.DivElement()..style.height = '20px';
+
   FoReorderListComponent(this._host);
 
   @ContentChildren(ReorderItemDirective)
@@ -57,6 +61,12 @@ class FoReorderListComponent implements AfterContentInit, OnDestroy {
   Stream<FoReorderEvent> get onReorder => _reorderController.stream;
 
   @override
+  void ngAfterContentInit() {
+    _host.children.add(last);
+    _lastItemDropSubscription = Dropzone(last).onDrop.listen(_onDropOverItem);
+  }
+
+  @override
   void ngOnDestroy() {
     _itemDropSubscription?.cancel();
     _itemDropSubscription = null;
@@ -65,20 +75,23 @@ class FoReorderListComponent implements AfterContentInit, OnDestroy {
     _reorderController.close();
   }
 
-  void _onDropOverItem(DropzoneEvent event) {
-    if (!disabled) {
+  Future<void> _onDropOverItem(DropzoneEvent event) async {
+    if (!disabled && !_internallyDisabled) {
       if (event.draggableElement != event.dropzoneElement) {
         var dropIndex = _items.indexOf(event.dropzoneElement);
         if (dropIndex < 0) {
           dropIndex = _items.length - 1;
         }
 
+        _internallyDisabled = true;
         _reorderController.add(
             FoReorderEvent(_items.indexOf(event.draggableElement), dropIndex));
         _items
           ..remove(event.draggableElement)
           ..insert(dropIndex, event.draggableElement);
         _refreshView();
+        await Future<void>.delayed(const Duration(milliseconds: 200));
+        _internallyDisabled = false;
       }
     }
   }
@@ -90,13 +103,5 @@ class FoReorderListComponent implements AfterContentInit, OnDestroy {
         ..addAll(_items)
         ..add(last);
     }
-  }
-
-  final last = dom.DivElement()..style.height = '20px';
-
-  @override
-  void ngAfterContentInit() {
-    _host.children.add(last);
-    _lastItemDropSubscription = Dropzone(last).onDrop.listen(_onDropOverItem);
   }
 }
