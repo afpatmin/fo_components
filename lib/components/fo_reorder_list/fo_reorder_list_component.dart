@@ -23,8 +23,7 @@ class FoReorderEvent {
 )
 class FoReorderListComponent implements AfterContentInit, OnDestroy {
   final dom.Element _host;
-  StreamSubscription<DropzoneEvent>? _itemDropSubscription;
-  StreamSubscription<DropzoneEvent>? _lastItemDropSubscription;
+
   final StreamController<FoReorderEvent> _reorderController =
       StreamController<FoReorderEvent>.broadcast();
 
@@ -36,6 +35,10 @@ class FoReorderListComponent implements AfterContentInit, OnDestroy {
   bool _internallyDisabled = false;
 
   final last = dom.DivElement()..style.height = '20px';
+
+  Draggable? _draggable;
+
+  Dropzone? _dropzones;
 
   FoReorderListComponent(this._host);
 
@@ -52,10 +55,9 @@ class FoReorderListComponent implements AfterContentInit, OnDestroy {
         draggingClass: 'fo-dragging',
         draggingClassBody: 'fo-dragging-body',
       );
-      _itemDropSubscription?.cancel();
-      _itemDropSubscription = Dropzone(_items, overClass: 'fo-dragover')
-          .onDrop
-          .listen(_onDropOverItem);
+      _dropzones?.destroy();
+      _dropzones = Dropzone(_items, overClass: 'fo-dragover')
+        ..onDrop.listen(_onDropOverItem);
     }
   }
 
@@ -65,15 +67,13 @@ class FoReorderListComponent implements AfterContentInit, OnDestroy {
   @override
   void ngAfterContentInit() {
     _host.children.add(last);
-    _lastItemDropSubscription = Dropzone(last).onDrop.listen(_onDropOverItem);
+    //Dropzone(last).onDrop.listen(_onDropOverItem);
   }
 
   @override
   void ngOnDestroy() {
-    _itemDropSubscription?.cancel();
-    _itemDropSubscription = null;
-    _lastItemDropSubscription?.cancel();
-    _lastItemDropSubscription = null;
+    _draggable?.destroy();
+    _dropzones?.destroy();
     _reorderController.close();
   }
 
@@ -97,8 +97,6 @@ class FoReorderListComponent implements AfterContentInit, OnDestroy {
       }
     }
   }
-
-  Draggable? _draggable;
 
   void _refreshView() {
     if (_items.isNotEmpty) {
