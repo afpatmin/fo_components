@@ -41,7 +41,6 @@ class FoReorderListComponent implements OnDestroy {
   @ContentChildren(ReorderItemDirective)
   set items(List<ReorderItemDirective> value) {
     _items = value.map((e) => e.element).toList();
-    print('set items');
 
     if (_items.isNotEmpty) {
       _draggable?.destroy();
