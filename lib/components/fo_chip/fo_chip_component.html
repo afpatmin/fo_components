@@ -1,5 +1,8 @@
-<div id="foChip">{{name}}
-  <fo-icon icon="close-outline"
-           [material]="false"
-           id="foIcon"></fo-icon>
+<div *ngFor="let chip of chipsList">
+  <div id="foChip">{{chip}}
+    <fo-icon (click)="closeController.add(chipsList)"
+             icon="close-outline"
+             [material]="false"
+             id="foIcon"></fo-icon>
+  </div>
 </div>

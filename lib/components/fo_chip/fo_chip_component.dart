@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:angular/angular.dart';
 import 'package:fo_components/components/fo_icon/fo_icon_component.dart';
 
@@ -9,9 +11,15 @@ import 'package:fo_components/components/fo_icon/fo_icon_component.dart';
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class FoChipComponent {
-  // Add name/tag to chip
   @Input()
-  String? name = 'Chip';
+  List<String> chipsList = ['Chip'];
 
-  String myCloseIcon = 'close-outline';
+  final StreamController<List<String>> closeController =
+      StreamController<List<String>>();
+
+  @Output('close')
+  Stream<List<String>> get close => closeController.stream;
+
+  //end of experiment
+
 }
