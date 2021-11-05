@@ -66,11 +66,14 @@ class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
 
   final StreamController<FoButtonEvent> _actionButtonController =
       StreamController<FoButtonEvent>();
+
   bool dropdownVisible = false;
+
   FoDropdownOption? selectedOption;
 
   @Input()
   bool showSearch = false;
+
   @ViewChild('selector')
   dom.Element? selectorElement;
 
