@@ -1,0 +1,6 @@
+@import "../fo_button/mixins";
+@mixin fo-quiz-colors($color, $backgroundColor, $backgroundColorDisabled) {
+    ::ng-deep fo-quiz {
+        @include fo-button-colors($color, $backgroundColor, $backgroundColorDisabled);
+    }
+}

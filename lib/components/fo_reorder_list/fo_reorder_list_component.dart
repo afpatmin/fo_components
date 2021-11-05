@@ -4,7 +4,15 @@ import 'dart:html' as dom;
 import 'package:angular/angular.dart';
 import 'package:dnd/dnd.dart';
 import 'package:fo_components/directives/reorder_item_directive.dart';
+
 export 'package:fo_components/directives/reorder_item_directive.dart';
+
+class FoReorderEvent {
+  final int sourceIndex;
+  final int destIndex;
+
+  const FoReorderEvent(this.sourceIndex, this.destIndex);
+}
 
 @Component(
   selector: 'fo-reorder-list',
@@ -14,101 +22,68 @@ export 'package:fo_components/directives/reorder_item_directive.dart';
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class FoReorderListComponent implements OnDestroy {
-  final firstDropZone = dom.DivElement()..className = 'extraDropZone';
-  final lastDropZone = dom.DivElement()..className = 'extraDropZone';
   final dom.Element _host;
-  StreamSubscription<DropzoneEvent>? _itemDropSubscription;
-  StreamSubscription<DropzoneEvent>? _firstDropSubscription;
-  StreamSubscription<DropzoneEvent>? _lastDropSubscription;
+
   final StreamController<FoReorderEvent> _reorderController =
       StreamController<FoReorderEvent>.broadcast();
 
   @Input()
   bool disabled = false;
 
-  @Output('reorder')
-  Stream<FoReorderEvent> get onReorder => _reorderController.stream;
-
   late List<dom.Element> _items;
+  bool _internallyDisabled = false;
 
-  FoReorderListComponent(this._host) {
-    _firstDropSubscription =
-        Dropzone(firstDropZone).onDrop.listen(_onDropOverFirst);
-    _lastDropSubscription = Dropzone(lastDropZone, overClass: 'fo-dragover')
-        .onDrop
-        .listen(_onDropOverLast);
-  }
+  Draggable? _draggable;
+  Dropzone? _dropzones;
+
+  FoReorderListComponent(this._host);
 
   @ContentChildren(ReorderItemDirective)
   set items(List<ReorderItemDirective> value) {
     _items = value.map((e) => e.element).toList();
 
     if (_items.isNotEmpty) {
-      _host.children
-        ..insert(0, firstDropZone)
-        ..add(lastDropZone);
-
-      Draggable(
+      _draggable?.destroy();
+      _draggable = Draggable(
         _items,
         avatarHandler: AvatarHandler.clone(),
         draggingClass: 'fo-dragging',
         draggingClassBody: 'fo-dragging-body',
       );
-
-      _itemDropSubscription = Dropzone(_items, overClass: 'fo-dragover')
-          .onDrop
-          .listen(_onDropOverItem);
+      _dropzones?.destroy();
+      _dropzones = Dropzone(_items, overClass: 'fo-dragover')
+        ..onDrop.listen(_onDropOverItem);
     }
   }
+
+  @Output('reorder')
+  Stream<FoReorderEvent> get onReorder => _reorderController.stream;
 
   @override
   void ngOnDestroy() {
-    _itemDropSubscription?.cancel();
-    _firstDropSubscription?.cancel();
-    _lastDropSubscription?.cancel();
+    _draggable?.destroy();
+    _dropzones?.destroy();
     _reorderController.close();
-
-    _itemDropSubscription = null;
-    _firstDropSubscription = null;
-    _lastDropSubscription = null;
   }
 
-  void _onDropOverFirst(DropzoneEvent event) {
-    if (!disabled) {
-      _reorderController
-          .add(FoReorderEvent(_items.indexOf(event.draggableElement), 0));
-      _items
-        ..remove(event.draggableElement)
-        ..insert(0, event.draggableElement);
-
-      _refreshView();
-    }
-  }
-
-  void _onDropOverItem(DropzoneEvent event) {
-    if (!disabled) {
+  Future<void> _onDropOverItem(DropzoneEvent event) async {
+    if (!disabled && !_internallyDisabled) {
       if (event.draggableElement != event.dropzoneElement) {
-        _reorderController.add(FoReorderEvent(
-            _items.indexOf(event.draggableElement),
-            _items.indexOf(event.dropzoneElement)));
+        var dropIndex = _items.indexOf(event.dropzoneElement);
+        if (dropIndex < 0) {
+          dropIndex = _items.length - 1;
+        }
+
+        _internallyDisabled = true;
+        _reorderController.add(
+            FoReorderEvent(_items.indexOf(event.draggableElement), dropIndex));
         _items
           ..remove(event.draggableElement)
-          ..insert(
-              _items.indexOf(event.dropzoneElement), event.draggableElement);
+          ..insert(dropIndex, event.draggableElement);
         _refreshView();
+        await Future<void>.delayed(const Duration(milliseconds: 200));
+        _internallyDisabled = false;
       }
-    }
-  }
-
-  void _onDropOverLast(DropzoneEvent event) {
-    if (!disabled) {
-      _reorderController.add(FoReorderEvent(
-          _items.indexOf(event.draggableElement), _items.length - 1));
-      _items
-        ..remove(event.draggableElement)
-        ..add(event.draggableElement);
-
-      _refreshView();
     }
   }
 
@@ -116,16 +91,7 @@ class FoReorderListComponent implements OnDestroy {
     if (_items.isNotEmpty) {
       _host.children
         ..clear()
-        ..add(firstDropZone)
-        ..addAll(_items)
-        ..add(lastDropZone);
+        ..addAll(_items);
     }
   }
-}
-
-class FoReorderEvent {
-  final int sourceIndex;
-  final int destIndex;
-
-  const FoReorderEvent(this.sourceIndex, this.destIndex);
 }

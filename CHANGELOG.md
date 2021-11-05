@@ -1,3 +1,23 @@
+# 3.1.3+1 - 3.1.3+4
+* Modal and TabPanel now uses ChangeDetectionStrategy.Default
+* Fixed crash when panel starts out as expanded
+* ReorderList: Imposed limit on how often reorder event can occur (once every 200ms)
+
+# 3.1.3
+* Quiz: Fixed issue where multiselect didn't work as expected
+* Panel: Expanding/collapsing panel is now animated
+* Panel: Added optional headerIcon input
+* Panel now uses ChangeDetectionStrategy.Default
+* Some minor improvements to reorderlist
+
+# 3.1.1+4
+* Fixed null-safety problem in Quiz
+* Quiz can now be themed using mixin
+
+# 3.1.1+3
+* Tweaked NumberInput layout
+* Added expandedChange output to Panel
+
 # 3.1.1+2
 * Increased margin on Toggle label to 0.5em (up from 0.3em)
 * Fixed crash on reorderlist when dropping an item on its original position
