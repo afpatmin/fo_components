@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:fo_components/components/fo_icon/fo_icon_component.dart';
 
+/// A chip component that can be used for tagging something with labels
 @Component(
   selector: 'fo-chip',
   templateUrl: 'fo_chip_component.html',
@@ -12,14 +13,10 @@ import 'package:fo_components/components/fo_icon/fo_icon_component.dart';
 )
 class FoChipComponent {
   @Input()
-  List<String> chipsList = ['Chip'];
+  String name = '';
 
-  final StreamController<List<String>> closeController =
-      StreamController<List<String>>();
+  final StreamController<String> closeController = StreamController<String>();
 
   @Output('close')
-  Stream<List<String>> get close => closeController.stream;
-
-  //end of experiment
-
+  Stream<String> get close => closeController.stream;
 }
