@@ -17,6 +17,7 @@ $transitionSpeed: 0.3s ease;
 @import "components/fo_check/mixins";
 @import "components/fo_radio/mixins";
 @import "components/fo_toggle/mixins";
+@import "components/fo_chip/mixins";
 @import "components/fo_quiz/mixins";
 
 @mixin foregroundColor($color) {
@@ -56,6 +57,7 @@ $transitionSpeed: 0.3s ease;
   @include fo-panel-colors($grayColor);
   @include fo-tab-panel-colors(darken($grayColor, $lightstep), $primaryColor, $grayColorBright);
   @include fo-text-input-colors(darken($grayColor, $lightstep), $grayColorBright, $primaryColor, $alertColor);
+  @include fo-chip-colors($primaryColor, white, $grayColorBright);
   @include fo-quiz-colors(white, $primaryColor, $grayColorBright);
 
   ::ng-deep .black-color {
