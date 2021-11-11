@@ -9,12 +9,11 @@ import 'package:angular/angular.dart';
   changeDetection: ChangeDetectionStrategy.OnPush,
 )
 class FoTimePickerComponent {
-  String greeting = '';
+  String time = '';
   String name = 'OK';
   String inputType = 'button';
-  bool someone = false;
 
-  dynamic goodJob() {
-    greeting = 'Chosen time goes here';
+  dynamic chosenTime() {
+    time = 'Chosen time goes here';
   }
 }
