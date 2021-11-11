@@ -1,0 +1,13 @@
+:host {
+  div#wrap {
+    border: solid black;
+    border-width: 0.1em;
+    padding: 0.5em;
+    padding-top: 0.3em;
+    display: inline;
+  }
+
+  button#ok-button {
+    margin-left: 1em;
+  }
+}
