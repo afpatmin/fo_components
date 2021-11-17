@@ -4,21 +4,16 @@ class Time {
 
   Time({required this.hour, required this.minute});
 
-  String? format(int x) {
-    String addZero = '0';
-    if ("$hour".length < 2) {
-      String x = addZero + "$hour";
+  //String _format(int x) {
 
-      return "$x + $minute";
-    }
-  }
+  //  }
 
   @override
   String toString() {
     if ("$hour".length < 2 && "$minute".length < 2) {
       return "0$hour:0$minute";
     }
-    if ("$minute".length < 2 && "$minute".length == 2) {
+    if ("$hour".length < 2 && "$minute".length == 2) {
       return "0$hour:$minute";
     }
     if ("$hour".length == 2 && "$minute".length < 2) {
