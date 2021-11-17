@@ -1,21 +1,13 @@
-<br>
+<fo-label [value]="label"></fo-label>
 <div id="wrap">
-       <input type="number"
-              name="time"
+       <input [ngModel]="hour"
+              (ngModelChange)="onHourChange($event)"
+              type="number"
+              min="0"
+              max="23" />
+       <input [ngModel]="minute"
+              (ngModelChange)="onMinuteChange($event)"
+              type="number"
               min="00"
-              max="23"
-              placeholder="Hrs">
-       <input type="number"
-              name="time"
-              min="00"
-              max="59"
-              placeholder="Mins">
-       <input [type]="inputType"
-              [value]="name"
-              (click)="chosenTime()">
-       <button>Cancel</button>
+              max="59" />
 </div>
-
-<br><br>
-
-<div [innerHtml]="time">hello there</div>
