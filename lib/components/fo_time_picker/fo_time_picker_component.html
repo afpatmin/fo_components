@@ -1,5 +1,14 @@
-<fo-label [value]="label"></fo-label>
+<fo-label id="label"
+          [value]="label"></fo-label>
 <div id="wrap">
+       <fo-dropdown-select id="timepicker-hour"
+                           [options]="hourOptions"></fo-dropdown-select>
+       <fo-dropdown-select id="timepicker-minute"
+                           [options]="minuteOptions"></fo-dropdown-select>
+</div>
+
+<fo-label [value]="label"></fo-label>
+<div>
        <input [ngModel]="hour"
               (ngModelChange)="onHourChange($event)"
               type="number"
