@@ -1,3 +1,6 @@
+# 3.1.4
+* Fixed issue where DatePicker always assumed month started on a monday
+
 # 3.1.3+1 - 3.1.3+4
 * Modal and TabPanel now uses ChangeDetectionStrategy.Default
 * Fixed crash when panel starts out as expanded
