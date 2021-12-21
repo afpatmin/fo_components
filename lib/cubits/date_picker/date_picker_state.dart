@@ -6,10 +6,10 @@ part 'date_picker_state.g.dart';
 @CopyWith(generateCopyWithNull: true)
 class DatePickerState extends Equatable {
   final DateTime? selectedDate;
-  final List<int> availableDays;
+  final List<List<DateTime>> days;
 
-  DatePickerState({required this.selectedDate, required this.availableDays});
+  DatePickerState({required this.selectedDate, required this.days});
 
   @override
-  List<Object?> get props => [selectedDate, availableDays];
+  List<Object?> get props => [selectedDate, days];
 }
