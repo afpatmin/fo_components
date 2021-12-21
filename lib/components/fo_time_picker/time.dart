@@ -4,10 +4,6 @@ class Time {
 
   Time({required this.hour, required this.minute});
 
-  //String _format(int x) {
-
-  //  }
-
   @override
   String toString() {
     if ("$hour".length < 2 && "$minute".length < 2) {
