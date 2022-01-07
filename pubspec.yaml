@@ -12,7 +12,7 @@ dependencies:
   angular_forms: ^4.0.1
   bloc: ^8.0.1
   collection: ^1.15.0
-  copy_with_extension: ^2.0.2
+  copy_with_extension: ^4.0.0
   dnd: ^2.0.1
   equatable: ^2.0.3
   intl: ^0.17.0
@@ -22,7 +22,7 @@ dependencies:
 dev_dependencies:
   bloc_test: ^9.0.1
   build_runner: ^2.1.4
-  copy_with_extension_gen: ^2.0.2
+  copy_with_extension_gen: ^4.0.0
   json_serializable: ^5.0.2
   lints: ^1.0.1
   test: ^1.18.2
