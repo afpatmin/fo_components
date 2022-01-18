@@ -3,70 +3,64 @@
 <div id="flexContainer"
      tabindex="0"
      [class.focus]="dropdownVisible">
-    <div id="selector"
-         [class.disabled]="disabled == true"
-         (click)="onClick($event)">
-        <div id="selectedDate">
-            <span *ngIf="datePickerCubit.state.selectedDate != null">
-                {{$pipe.date($pipe.bloc(datePickerCubit).selectedDate)}}
-            </span>
-            <span *ngIf="datePickerCubit.state.selectedDate == null">
-                -
-            </span>
-        </div>
-        <fo-icon class="arrow"
-                 [material]="true"
-                 icon="keyboard_arrow_down"></fo-icon>
+  <div id="selector"
+       [class.disabled]="disabled == true"
+       (click)="onClick($event)">
+    <div id="selectedDate">
+      <span *ngIf="datePickerCubit.state.selectedDate != null">
+        {{$pipe.date($pipe.bloc(datePickerCubit).selectedDate)}}
+      </span>
+      <span *ngIf="datePickerCubit.state.selectedDate == null">
+        -
+      </span>
     </div>
+    <fo-icon class="arrow"
+             [material]="true"
+             icon="keyboard_arrow_down"></fo-icon>
+  </div>
 </div>
 
 <fo-dropdown [(visible)]="dropdownVisible"
              [width]="298"
              [offsetTop]="-1">
-    <div id="calendar">
-        <div id="steppers">
-            <div class="stepper"
-                 id="year">
-                <fo-icon icon="keyboard_arrow_left"
-                         [material]="true"
-                         (click)="advanceYear(-1)"></fo-icon>
-                <div>{{$pipe.bloc(datePickerCubit).selectedDate?.year}}</div>
-                <fo-icon icon="keyboard_arrow_right"
-                         [material]="true"
-                         (click)="advanceYear(1)"></fo-icon>
-            </div>
-            <div class="stepper"
-                 id="month">
-                <fo-icon icon="keyboard_arrow_left"
-                         [material]="true"
-                         (click)="advanceMonth(-1)"></fo-icon>
-                <div *ngIf="datePickerCubit.state.selectedDate != null">
-                    {{$pipe.date($pipe.bloc(datePickerCubit).selectedDate, 'MMM')}}</div>
-                <fo-icon icon="keyboard_arrow_right"
-                         [material]="true"
-                         (click)="advanceMonth(1)"></fo-icon>
-            </div>
-        </div>
-        <table>
-            <thead>
-                <tr>
-                    <td *ngFor="let weekday of weekdays">{{weekday}}</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let week of weeks">
-                    <td *ngFor="let day of week"
-                        [class.highlight]="$pipe.bloc(datePickerCubit).selectedDate?.day == day"
-                        (click)="datePickerCubit.setDay(day)">{{day}}</td>
-                </tr>
-                <tr>
-                    <td *ngFor="let day of lastWeek"
-                        [class.inactive]="$pipe.bloc(datePickerCubit).availableDays.contains(day) == false"
-                        [class.highlight]="$pipe.bloc(datePickerCubit).selectedDate?.day == day"
-                        (click)="datePickerCubit.setDay(day)">{{day}}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+  <div id="calendar">
+    <div id="steppers">
+      <div class="stepper"
+           id="year">
+        <fo-icon icon="keyboard_arrow_left"
+                 [material]="true"
+                 (click)="advanceYear(-1)"></fo-icon>
+        <div>{{$pipe.bloc(datePickerCubit).selectedDate?.year}}</div>
+        <fo-icon icon="keyboard_arrow_right"
+                 [material]="true"
+                 (click)="advanceYear(1)"></fo-icon>
+      </div>
+      <div class="stepper"
+           id="month">
+        <fo-icon icon="keyboard_arrow_left"
+                 [material]="true"
+                 (click)="advanceMonth(-1)"></fo-icon>
+        <div *ngIf="datePickerCubit.state.selectedDate != null">
+          {{$pipe.date($pipe.bloc(datePickerCubit).selectedDate, 'MMM')}}</div>
+        <fo-icon icon="keyboard_arrow_right"
+                 [material]="true"
+                 (click)="advanceMonth(1)"></fo-icon>
+      </div>
     </div>
+    <table>
+      <thead>
+        <tr>
+          <td *ngFor="let weekday of weekdays">{{weekday}}</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let week of $pipe.bloc(datePickerCubit).days">
+          <td *ngFor="let date of week"
+              [class.highlight]="$pipe.bloc(datePickerCubit).selectedDate == date"
+              [class.inactive]="$pipe.bloc(datePickerCubit).selectedDate?.month != date.month"
+              (click)="datePickerCubit.setDate(date)">{{date.day}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </fo-dropdown>

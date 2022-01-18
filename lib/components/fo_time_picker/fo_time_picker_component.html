@@ -1,0 +1,13 @@
+<fo-label id="label"
+          [value]="label"></fo-label>
+<div id="wrap">
+       <fo-dropdown-select [showDropdownCategoryLabels]="false"
+                           id="timepicker-hour"
+                           [options]="hourOptions"
+                           (selectedIdChange)="onHourChange($event)"
+                           [selectedId]="hour"></fo-dropdown-select>
+       <fo-dropdown-select id="timepicker-minute"
+                           [options]="minuteOptions"
+                           (selectedIdChange)="onMinuteChange($event)"
+                           [selectedId]="minute"></fo-dropdown-select>
+</div>

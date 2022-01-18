@@ -8,9 +8,9 @@ environment:
 
 dependencies:
   angular: ^7.0.2
-  angular_bloc: ^7.1.0
+  angular_bloc: ^8.0.0
   angular_forms: ^4.0.1
-  bloc: ^7.2.1
+  bloc: ^8.0.1
   collection: ^1.15.0
   copy_with_extension: ^4.0.0
   dnd: ^2.0.1
@@ -20,7 +20,7 @@ dependencies:
   sass_builder: ^2.1.4
 
 dev_dependencies:
-  bloc_test: ^8.3.0
+  bloc_test: ^9.0.1
   build_runner: ^2.1.4
   copy_with_extension_gen: ^4.0.0
   json_serializable: ^5.0.2

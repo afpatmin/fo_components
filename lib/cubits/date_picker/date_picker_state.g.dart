@@ -8,11 +8,11 @@ part of 'date_picker_state.dart';
 
 extension DatePickerStateCopyWith on DatePickerState {
   DatePickerState copyWith({
-    List<int>? availableDays,
+    List<List<DateTime>>? days,
     DateTime? selectedDate,
   }) {
     return DatePickerState(
-      availableDays: availableDays ?? this.availableDays,
+      days: days ?? this.days,
       selectedDate: selectedDate ?? this.selectedDate,
     );
   }
@@ -21,7 +21,7 @@ extension DatePickerStateCopyWith on DatePickerState {
     bool selectedDate = false,
   }) {
     return DatePickerState(
-      availableDays: availableDays,
+      days: days,
       selectedDate: selectedDate == true ? null : this.selectedDate,
     );
   }

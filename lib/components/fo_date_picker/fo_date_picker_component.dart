@@ -34,14 +34,6 @@ class FoDatePickerComponent {
             (index) => DateFormat(DateFormat.ABBR_WEEKDAY)
                 .format(DateTime(2021, 10, 11 + index)));
 
-  final List<List<int>> weeks = [
-    List.generate(7, (index) => index + 1, growable: false),
-    List.generate(7, (index) => index + 8, growable: false),
-    List.generate(7, (index) => index + 15, growable: false),
-    List.generate(7, (index) => index + 22, growable: false),
-  ];
-  final List<int> lastWeek = [29, 30, 31];
-
   @Input()
   set date(DateTime? v) {
     datePickerCubit.setDate(v);

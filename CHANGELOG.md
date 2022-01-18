@@ -1,6 +1,9 @@
 # 3.2.0
 * Bumped copy_with_extension to ^4.0.0 (up from ^2.0.2)
 
+# 3.1.4
+* Fixed issue where DatePicker always assumed month started on a monday
+
 # 3.1.3+1 - 3.1.3+4
 * Modal and TabPanel now uses ChangeDetectionStrategy.Default
 * Fixed crash when panel starts out as expanded

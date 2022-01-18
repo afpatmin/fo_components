@@ -6,7 +6,6 @@ import 'package:test/test.dart';
 
 void main() {
   final date = DateTime(2020, 7, 8);
-  final dateDays = 31;
 
   group('setYear', () {
     blocTest('should emit a state the new year selected',
@@ -15,22 +14,16 @@ void main() {
         expect: () => [
               DatePickerState(
                   selectedDate: DateTime(1983, date.month, date.day),
-                  availableDays: List.generate(dateDays, (index) => index + 1,
-                      growable: false))
+                  days: DatePickerCubit.generateDays(
+                      DateTime(1983, date.month, date.day)))
             ]);
   });
 
   group('setMonth', () {
-    blocTest(
-        'should emit a state with 31 available dates when month is set to october',
+    blocTest('should emit a state',
         build: () => DatePickerCubit(date),
         act: (DatePickerCubit cubit) => cubit.setMonth(10),
-        expect: () => [
-              DatePickerState(
-                  selectedDate: DateTime(date.year, 10, date.day),
-                  availableDays:
-                      List.generate(31, (index) => index + 1, growable: false))
-            ]);
+        expect: () => [isA<DatePickerState>()]);
 
     blocTest(
         'should not pretend like nothing happened if user tries to set a month outside of range 1-12',
@@ -43,36 +36,9 @@ void main() {
         'should set the new selectedDate.day to last day of the month if the new month doesnt have enough days',
         build: () => DatePickerCubit(DateTime(2020, 10, 31)),
         act: (DatePickerCubit cubit) => cubit.setMonth(11),
-        expect: () => [
-              DatePickerState(
-                  selectedDate: DateTime(2020, 11, 30),
-                  availableDays:
-                      List.generate(30, (index) => index + 1, growable: false))
-            ]);
-  });
-
-  group('setDay', () {
-    blocTest('should set the new selectedDate.day to the new day',
-        build: () => DatePickerCubit(date),
-        act: (DatePickerCubit cubit) => cubit.setDay(12),
-        expect: () => [
-              DatePickerState(
-                  selectedDate: DateTime(date.year, date.month, 12),
-                  availableDays: List.generate(dateDays, (index) => index + 1,
-                      growable: false))
-            ]);
-    blocTest(
-        'should pretend like nothing happened if the month doesnt have enough days',
-        build: () => DatePickerCubit(date),
-        act: (DatePickerCubit cubit) => cubit.setDay(dateDays + 1),
-        expect: () => <DatePickerState>[],
-        errors: () => <DatePickerState>[]);
-
-    blocTest(
-        'should throw StateError if user tries to set a day outside of range 1-32',
-        build: () => DatePickerCubit(date),
-        act: (DatePickerCubit cubit) => cubit.setDay(33),
-        errors: () => [isA<StateError>()]);
+        expect: () => [isA<DatePickerState>()],
+        verify: (DatePickerCubit cubit) =>
+            cubit.state.selectedDate == DateTime(2020, 11, 30));
   });
 
   group('setDate', () {
@@ -82,8 +48,7 @@ void main() {
         expect: () => [
               DatePickerState(
                   selectedDate: DateTime(1983, 3, 24),
-                  availableDays:
-                      List.generate(31, (index) => index + 1, growable: false))
+                  days: DatePickerCubit.generateDays(DateTime(1983, 3, 24)))
             ]);
   });
 }
