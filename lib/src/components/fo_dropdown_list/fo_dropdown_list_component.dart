@@ -7,7 +7,6 @@ import 'package:fo_components/src/components/fo_dropdown/fo_dropdown_component.d
 import 'package:intl/intl.dart';
 
 import '../../../components/fo_text_input/fo_text_input_component.dart';
-import '../../../fo_dropdown_option.dart';
 import '../../../pipes/capitalize_pipe.dart';
 import 'fo_dropdown_option_component.dart';
 

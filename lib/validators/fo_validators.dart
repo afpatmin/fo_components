@@ -114,7 +114,7 @@ class FoValidators {
 
     final value = control.value as String;
     final r = RegExp(r'[a-zA-ZåäöÅÄÖ0-9,.! ]');
-    if (value is String && r.allMatches(value).length != value.length) {
+    if (r.allMatches(value).length != value.length) {
       return {
         'error': Intl.message('Enter a value without special characters',
             name: 'fo_validator_error_meta_description')
