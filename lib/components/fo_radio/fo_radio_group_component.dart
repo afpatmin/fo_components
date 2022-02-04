@@ -33,6 +33,7 @@ class FoRadioGroupComponent implements AfterContentInit, OnDestroy {
         } else {
           child.checked = false;
         }
+        _changeDetectorRef.markChildForCheck(child);
       }
     }
   }
@@ -61,6 +62,7 @@ class FoRadioGroupComponent implements AfterContentInit, OnDestroy {
           }
         }
       }));
+      _changeDetectorRef.markChildForCheck(child);
     }
   }
 
