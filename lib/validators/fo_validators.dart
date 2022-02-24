@@ -64,7 +64,7 @@ class FoValidators {
   static Map<String, String>? email(AbstractControl control) {
     if (Validators.required(control) != null) return null;
 
-    final r = RegExp(r'(^[a-z0-9_.+-]+@[a-z0-9-]+\.[a-z0-9-.]+$)');
+    final r = RegExp(r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)');
     if (r.stringMatch(control.value as String) != control.value) {
       return {
         'error': Intl.message('Invalid email', name: 'fo_validator_error_email')
