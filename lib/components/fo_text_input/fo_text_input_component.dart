@@ -253,17 +253,22 @@ class FoTextInputComponent
   }
 
   void onFocus(html.FocusEvent event) {
-    event.preventDefault();
+    event
+      ..preventDefault()
+      ..stopPropagation();
     hasFocus = true;
     _focusController.add(event);
   }
 
   void onKeyUp(html.Event event) {
     if (event is html.KeyboardEvent &&
-        (actionButtonLabel != null && event.keyCode == html.KeyCode.ENTER ||
-            event.keyCode == html.KeyCode.MAC_ENTER && value.isNotEmpty)) {
+        (event.keyCode == html.KeyCode.ENTER ||
+            event.keyCode == html.KeyCode.MAC_ENTER)) {
       event.stopPropagation();
-      actionButtonController.add(FoButtonEvent());
+
+      if (actionButtonLabel != null) {
+        actionButtonController.add(FoButtonEvent());
+      }
     }
   }
 
