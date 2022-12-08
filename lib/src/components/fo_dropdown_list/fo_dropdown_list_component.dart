@@ -65,7 +65,7 @@ class FoDropdownListComponent<T> implements AfterChanges, OnDestroy {
       for (final option in category) {
         if (option.image != null) {
           final image = html.ImageElement(src: option.image);
-          image.onLoad.listen((_e) {
+          image.onLoad.listen((e) {
             dropdown?.evaluateHeight();
           });
         }

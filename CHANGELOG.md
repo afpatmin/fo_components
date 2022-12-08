@@ -1,3 +1,7 @@
+# 3.3.0
+* Require dart 2.18.0
+* Bumped copy_with_extension to ^5.0.0
+
 # 3.2.0
 * Bumped copy_with_extension to ^4.0.0 (up from ^2.0.2)
 
