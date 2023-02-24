@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 
 import '../../../src/components/fo_label/fo_label_component.dart';
 import '../fo_icon/fo_icon_component.dart';

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 import 'package:fo_components/pipes/capitalize_pipe.dart';
 
 import '../../models/fo_quiz_model.dart';

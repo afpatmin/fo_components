@@ -1,4 +1,4 @@
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 import 'package:fo_components/src/components/fo_label/fo_label_component.dart';
 
 @Component(

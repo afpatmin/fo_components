@@ -1,5 +1,5 @@
 import 'dart:html' as dom;
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 import 'package:angular_bloc/angular_bloc.dart';
 import 'package:intl/intl.dart';
 

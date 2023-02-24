@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 import 'package:fo_components/components/fo_icon/fo_icon_component.dart';
 import 'fo_button_event.dart';
 

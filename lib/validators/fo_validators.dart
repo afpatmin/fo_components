@@ -1,4 +1,4 @@
-import 'package:angular_forms/angular_forms.dart';
+import 'package:ngforms/angular_forms.dart';
 import 'package:intl/intl.dart';
 
 // ignore: avoid_classes_with_only_static_members

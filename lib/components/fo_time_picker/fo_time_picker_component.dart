@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:angular/angular.dart';
-import 'package:angular_forms/angular_forms.dart';
+import 'package:ngdart/angular.dart';
+import 'package:ngforms/angular_forms.dart';
 import 'package:fo_components/components/fo_dropdown_select/fo_dropdown_select_component.dart';
 
 import '../../src/components/fo_label/fo_label_component.dart';

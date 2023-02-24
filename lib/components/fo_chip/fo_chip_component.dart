@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 import 'package:fo_components/components/fo_icon/fo_icon_component.dart';
 
 /// A chip component that can be used for tagging something with labels

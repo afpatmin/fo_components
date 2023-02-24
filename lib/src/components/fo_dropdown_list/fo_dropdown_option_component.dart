@@ -1,4 +1,4 @@
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 
 import '../../../components/fo_icon/fo_icon_component.dart';
 import '../../../fo_dropdown_option.dart';

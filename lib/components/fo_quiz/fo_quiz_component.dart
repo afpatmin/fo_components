@@ -2,7 +2,7 @@
 
 import 'dart:async';
 
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 import 'package:intl/intl.dart';
 
 import '../../models/fo_quiz_model.dart';

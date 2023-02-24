@@ -5,7 +5,7 @@ import 'dart:async';
 import 'dart:html' as dom;
 import 'dart:math' as math;
 
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 import 'package:fo_components/components/fo_icon/fo_icon_component.dart';
 
 import 'fo_carousel_slide_component.dart';

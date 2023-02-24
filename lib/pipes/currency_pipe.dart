@@ -1,4 +1,4 @@
-import 'package:angular/angular.dart' show Pipe;
+import 'package:ngdart/angular.dart' show Pipe;
 
 /// Add currency symbol to a value
 /// "<p>{{'100' | currency:'USD'}}</p>" evaluates to "<p>$100</p>"

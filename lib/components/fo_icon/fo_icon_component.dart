@@ -1,4 +1,4 @@
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 
 /// An icon component. Make sure to have imported the icomoon font and style into your project.
 @Component(

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 import 'package:fo_components/components/fo_button/fo_button_component.dart';
 
 @Component(

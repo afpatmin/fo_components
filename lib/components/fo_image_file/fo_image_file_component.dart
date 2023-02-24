@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'dart:html' as dom;
 import 'dart:typed_data';
 
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 import 'package:fo_components/components/fo_button/fo_button_component.dart';
 import 'package:fo_components/components/fo_icon/fo_icon_component.dart';
 import 'package:fo_components/src/components/fo_label/fo_label_component.dart';

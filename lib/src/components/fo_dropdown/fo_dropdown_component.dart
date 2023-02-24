@@ -3,7 +3,7 @@ import 'dart:html' as html;
 import 'dart:html';
 import 'dart:math';
 
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 
 @Component(
     selector: 'fo-dropdown',

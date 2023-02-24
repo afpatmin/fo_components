@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 
 import '../fo_icon/fo_icon_component.dart';
 
