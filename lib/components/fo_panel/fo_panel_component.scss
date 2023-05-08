@@ -3,43 +3,52 @@
 
 :host {
   display: block;
-  div#foPanel {
+
+  div.foPanel {
     @include boxShadow();
     overflow: visible;
     display: block;
     background-color: white;
+
     div#header {
       padding: 1rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       fo-icon#icon {
         font-size: 1.5em;
         margin-right: 0.5em;
       }
+
       div#texts {
         flex: 1;
+
         div#description {
           font-size: 0.9em;
         }
       }
+
       fo-icon#expandIcon {
         font-size: 1.5em;
         transition: transform 0.3s ease;
       }
     }
+
     div#content {
       padding: 0 1rem 1rem 1rem;
       display: none;
     }
   }
-  div#foPanel.expanded {
+
+  div.foPanel.expanded {
     div#header {
       fo-icon#expandIcon {
         transform: rotateX(-180deg);
       }
     }
+
     div#content {
       display: block;
     }
