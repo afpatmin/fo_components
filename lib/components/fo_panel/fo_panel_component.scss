@@ -10,7 +10,7 @@
     display: block;
     background-color: white;
 
-    div#header {
+    div.fo-panel-header {
       padding: 1rem;
       cursor: pointer;
       display: flex;
@@ -36,21 +36,21 @@
       }
     }
 
-    div#content {
-      padding: 0 1rem 1rem 1rem;
-      display: none;
-    }
-  }
-
-  div.foPanel.expanded {
-    div#header {
+    div.fo-panel-header.expanded {
       fo-icon#expandIcon {
         transform: rotateX(-180deg);
       }
     }
 
-    div#content {
+    div.fo-panel-content {
+      padding: 0 1rem 1rem 1rem;
+      display: none;
+    }
+
+    div.fo-panel-content.expanded {
       display: block;
     }
   }
+
+  div.foPanel.expanded {}
 }

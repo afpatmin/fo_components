@@ -1,7 +1,7 @@
-<div class="foPanel"
-     [class.expanded]="expanded">
-  <div id="header"
-       (click)="toggleExpanded()">
+<div class="foPanel">
+  <div class="fo-panel-header"
+       (click)="toggleExpanded()"
+       [class.expanded]="expanded">
     <fo-icon *ngIf="icon != null"
              id="icon"
              [icon]="icon"
@@ -15,7 +15,8 @@
              icon="keyboard_arrow_down"
              [material]="true"></fo-icon>
   </div>
-  <div id="content">
+  <div class="fo-panel-content"
+       [class.expanded]="exanded">
     <ng-content></ng-content>
   </div>
 </div>

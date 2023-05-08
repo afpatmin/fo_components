@@ -10,11 +10,10 @@ import '../fo_icon/fo_icon_component.dart';
     styleUrls: ['fo_panel_component.css'],
     directives: [
       NgClass,
-      NgStyle,
       NgIf,
       FoIconComponent,
     ],
-    pipes: [],
+    encapsulation: ViewEncapsulation.Emulated,
     changeDetection: ChangeDetectionStrategy.Default)
 
 /// Panel component
