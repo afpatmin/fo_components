@@ -31,6 +31,7 @@
     }
     div#content {
       padding: 0 1rem 1rem 1rem;
+      display: none;
     }
   }
   div#foPanel.expanded {
@@ -39,5 +40,7 @@
         transform: rotateX(-180deg);
       }
     }
+    div#content {
+      display: block;
   }
 }
