@@ -9,7 +9,7 @@ import 'fo_radio_component.dart';
   templateUrl: 'fo_radio_group_component.html',
   styleUrls: ['fo_radio_group_component.css'],
   directives: [coreDirectives],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.onPush,
 )
 class FoRadioGroupComponent implements AfterContentInit, OnDestroy {
   final StreamController<Object?> _valueChangeController =

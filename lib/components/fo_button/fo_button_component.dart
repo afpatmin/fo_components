@@ -8,7 +8,7 @@ import 'fo_button_event.dart';
     templateUrl: 'fo_button_component.html',
     styleUrls: ['fo_button_component.css'],
     directives: [FoIconComponent, NgClass, NgIf],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.onPush)
 class FoButtonComponent implements OnDestroy {
   @Input()
   String? label;

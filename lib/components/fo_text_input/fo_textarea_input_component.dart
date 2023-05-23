@@ -21,7 +21,7 @@ import 'fo_error_output_component.dart';
     NgIf
   ],
   pipes: [CapitalizePipe],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.onPush,
 )
 class FoTextAreaInputComponent
     implements ControlValueAccessor<String>, AfterViewInit, OnDestroy {

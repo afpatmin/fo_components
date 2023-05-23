@@ -6,7 +6,7 @@ import 'package:fo_components/src/components/fo_label/fo_label_component.dart';
   templateUrl: 'fo_load_indicator_component.html',
   styleUrls: ['fo_load_indicator_component.css'],
   directives: [FoLabelComponent, NgIf],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.onPush,
 )
 class FoLoadIndicatorComponent {
   @Input()

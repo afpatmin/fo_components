@@ -10,7 +10,7 @@ import '../../src/components/fo_label/fo_label_component.dart';
   styleUrls: ['fo_toggle_component.css'],
   directives: [coreDirectives, FoLabelComponent],
   providers: [],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.onPush,
 )
 class FoToggleComponent implements OnDestroy {
   final StreamController<bool> _checkedController = StreamController<bool>();

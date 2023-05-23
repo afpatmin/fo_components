@@ -16,7 +16,7 @@ import 'fo_tab_component.dart';
     NgFor,
     NgIf,
   ],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.checkAlways,
 )
 class FoTabPanelComponent implements AfterChanges, OnDestroy {
   List<FoTabComponent> _tabs = [];

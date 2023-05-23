@@ -26,7 +26,7 @@ import '../../pipes/capitalize_pipe.dart';
     formDirectives,
   ],
   pipes: [CapitalizePipe],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.onPush,
 )
 class FoNumberInputComponent implements OnDestroy, ControlValueAccessor<int> {
   ChangeFunction<int>? _onChange;

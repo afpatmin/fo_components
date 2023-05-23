@@ -9,7 +9,7 @@ import 'package:fo_components/components/fo_icon/fo_icon_component.dart';
   templateUrl: 'fo_chip_component.html',
   styleUrls: ['fo_chip_component.css'],
   directives: [coreDirectives, FoIconComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.onPush,
 )
 class FoChipComponent {
   @Input()

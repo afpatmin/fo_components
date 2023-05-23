@@ -9,7 +9,7 @@
 * Fixed issue where DatePicker always assumed month started on a monday
 
 # 3.1.3+1 - 3.1.3+4
-* Modal and TabPanel now uses ChangeDetectionStrategy.Default
+* Modal and TabPanel now uses ChangeDetectionStrategy.checkAlways
 * Fixed crash when panel starts out as expanded
 * ReorderList: Imposed limit on how often reorder event can occur (once every 200ms)
 
@@ -17,7 +17,7 @@
 * Quiz: Fixed issue where multiselect didn't work as expected
 * Panel: Expanding/collapsing panel is now animated
 * Panel: Added optional headerIcon input
-* Panel now uses ChangeDetectionStrategy.Default
+* Panel now uses ChangeDetectionStrategy.checkAlways
 * Some minor improvements to reorderlist
 
 # 3.1.1+4
@@ -60,7 +60,7 @@
 
 # 3.0.1+2
 * Added missing @Input annotation to FoRadio.checked
-* FoPanel now uses changeDetectionStrategy.OnPush
+* FoPanel now uses ChangeDetectionStrategy.onPush
 
 # 3.0.1
 * Some design improvements on check/radio/toggle components
@@ -183,7 +183,7 @@
 # 1.9.0
 #### Carousel
 * Breaking: Replaced internal media rule with @input [arrowsBelow] so that the client app can decide 
-* changeDetection is now ChangeDetectionStrategy.default instead of onPush
+* changeDetection is now ChangeDetectionStrategy.checkAlways instead of onPush
 * No longer disabled while sliding
 * Now using flex for alignment
 * Minor style fixes

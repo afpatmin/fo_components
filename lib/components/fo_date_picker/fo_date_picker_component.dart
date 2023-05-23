@@ -21,7 +21,7 @@ import '../fo_icon/fo_icon_component.dart';
     FoLabelComponent
   ],
   pipes: [BlocPipe, DatePipe],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.onPush,
 )
 class FoDatePickerComponent {
   final DatePickerCubit datePickerCubit;

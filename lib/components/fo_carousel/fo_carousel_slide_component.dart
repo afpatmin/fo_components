@@ -7,5 +7,5 @@ import 'package:ngdart/angular.dart';
     selector: 'fo-carousel-slide',
     styleUrls: ['fo_carousel_slide_component.css'],
     templateUrl: 'fo_carousel_slide_component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.onPush)
 class FoCarouselSlideComponent {}

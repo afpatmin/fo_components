@@ -13,7 +13,7 @@ import '../../src/components/fo_label/fo_label_component.dart';
     FoLabelComponent,
   ],
   providers: [],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.onPush,
 )
 class FoCheckComponent implements OnDestroy {
   final StreamController<bool> _checkedController = StreamController<bool>();

@@ -20,7 +20,7 @@ import 'fo_quiz_component.dart';
     NgIf
   ],
   pipes: [CapitalizePipe],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.onPush,
 )
 class FoQuestionComponent implements AfterChanges, OnDestroy {
   bool leftHidden = true;

@@ -9,7 +9,7 @@ import '../../src/components/fo_label/fo_label_component.dart';
   templateUrl: 'fo_radio_component.html',
   styleUrls: ['fo_radio_component.css'],
   directives: [coreDirectives, FoLabelComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.onPush,
 )
 class FoRadioComponent implements OnDestroy {
   final StreamController<Object?> _checkedController =

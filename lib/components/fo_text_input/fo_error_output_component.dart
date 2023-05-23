@@ -7,7 +7,7 @@ import '../../pipes/capitalize_pipe.dart';
     styleUrls: ['fo_error_output_component.css'],
     directives: [NgIf],
     pipes: [CapitalizePipe],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.onPush)
 class FoErrorOutputComponent {
   FoErrorOutputComponent();
 

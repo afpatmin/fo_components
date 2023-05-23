@@ -5,7 +5,7 @@ import 'package:ngdart/angular.dart';
     templateUrl: 'fo_label_component.html',
     styleUrls: ['fo_label_component.css'],
     directives: [NgClass, NgIf],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.onPush)
 class FoLabelComponent {
   @Input()
   String? value;

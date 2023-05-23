@@ -6,7 +6,7 @@ import 'package:ngdart/angular.dart';
     templateUrl: 'fo_tab_component.html',
     styleUrls: ['fo_tab_component.css'],
     directives: [NgClass],
-    changeDetection: ChangeDetectionStrategy.Default)
+    changeDetection: ChangeDetectionStrategy.checkAlways)
 class FoTabComponent {
   FoTabComponent(this._host);
 

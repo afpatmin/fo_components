@@ -23,7 +23,7 @@ export '../../fo_dropdown_option.dart';
       FoLabelComponent,
       FoDropdownListComponent,
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.onPush)
 class FoDropdownSelectComponent implements AfterChanges, OnDestroy {
   @Input()
   String? label;

@@ -5,8 +5,6 @@ analyzer:
   language:
     strict-raw-types: true
   strong-mode:
-    implicit-casts: false
-    implicit-dynamic: false
   errors:
     uri_has_not_been_generated: ignore
 

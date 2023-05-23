@@ -22,7 +22,7 @@ import 'package:intl/intl.dart';
       FoIconComponent,
       FoLabelComponent
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.onPush)
 
 /// A component that loads an image file and converts it to base64 data.
 /// When an image has been loaded, it's immediately displayed to the user and

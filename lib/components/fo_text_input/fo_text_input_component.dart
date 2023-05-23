@@ -31,7 +31,7 @@ export '../../fo_dropdown_option.dart';
       coreDirectives,
     ],
     pipes: [CapitalizePipe],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.onPush)
 class FoTextInputComponent
     implements ControlValueAccessor<String>, AfterViewInit, OnDestroy {
   final ChangeDetectorRef _changeDetectorRef;

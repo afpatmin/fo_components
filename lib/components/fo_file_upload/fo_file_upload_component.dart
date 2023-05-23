@@ -19,7 +19,7 @@ import '../fo_load_indicator/fo_load_indicator_component.dart';
       FoLoadIndicatorComponent,
     ],
     pipes: [CapitalizePipe],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.onPush)
 
 /// A component which lets the user select or drop a single file from their
 /// local drive. When the file has been processed, a fileChange event is fired

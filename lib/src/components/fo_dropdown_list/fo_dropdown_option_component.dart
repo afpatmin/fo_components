@@ -8,7 +8,7 @@ import '../../../fo_dropdown_option.dart';
     templateUrl: 'fo_dropdown_option_component.html',
     styleUrls: ['fo_dropdown_option_component.css'],
     directives: [FoIconComponent, coreDirectives],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.onPush)
 class FoDropdownOptionComponent {
   @Input()
   FoDropdownOption? model;

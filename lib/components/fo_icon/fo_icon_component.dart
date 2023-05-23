@@ -6,7 +6,7 @@ import 'package:ngdart/angular.dart';
     templateUrl: 'fo_icon_component.html',
     styleUrls: ['fo_icon_component.css'],
     directives: [NgFor, NgIf, NgStyle],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.onPush)
 class FoIconComponent implements AfterChanges {
   String get iconClass => 'icon-$icon';
 

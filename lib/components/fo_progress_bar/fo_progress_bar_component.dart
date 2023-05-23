@@ -6,7 +6,7 @@ import 'dart:math' as math;
   templateUrl: 'fo_progress_bar_component.html',
   styleUrls: ['fo_progress_bar_component.css'],
   directives: [coreDirectives],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.onPush,
 )
 class FoProgressBarComponent {
   @Input()

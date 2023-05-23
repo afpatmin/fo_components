@@ -10,7 +10,7 @@ import 'package:ngdart/angular.dart';
     templateUrl: 'fo_dropdown_component.html',
     styleUrls: ['fo_dropdown_component.css'],
     directives: [NgClass, NgFor, NgIf, NgStyle],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.onPush)
 class FoDropdownComponent
     implements AfterViewInit, OnDestroy, AfterContentChecked {
   num _width = 0;

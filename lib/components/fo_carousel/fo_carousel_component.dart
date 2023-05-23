@@ -15,7 +15,7 @@ import 'fo_carousel_slide_component.dart';
     styleUrls: ['fo_carousel_component.css'],
     templateUrl: 'fo_carousel_component.html',
     directives: [FoIconComponent, FoCarouselSlideComponent, NgIf, NgFor],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    changeDetection: ChangeDetectionStrategy.onPush)
 class FoCarouselComponent implements OnDestroy, OnInit {
   final StreamController<int> _onStepController = StreamController();
   Timer? timer;

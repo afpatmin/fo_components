@@ -19,7 +19,7 @@ class FoReorderEvent {
   templateUrl: 'fo_reorder_list_component.html',
   styleUrls: ['fo_reorder_list_component.css'],
   directives: [coreDirectives],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.onPush,
 )
 class FoReorderListComponent implements OnDestroy {
   final dom.Element _host;

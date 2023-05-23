@@ -10,7 +10,7 @@ import '../../models/fo_quiz_model.dart';
   templateUrl: 'fo_option_component.html',
   styleUrls: ['fo_option_component.css'],
   directives: [FoButtonComponent, NgIf],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.onPush,
 )
 class FoOptionComponent implements OnDestroy {
   final StreamController<FoOptionModel> _triggerController = StreamController();

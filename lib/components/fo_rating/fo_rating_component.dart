@@ -11,7 +11,7 @@ import '../fo_icon/fo_icon_component.dart';
   templateUrl: 'fo_rating_component.html',
   styleUrls: ['fo_rating_component.css'],
   directives: [FoLabelComponent, FoIconComponent, NgClass, NgFor],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.onPush,
 )
 class FoRatingComponent implements AfterChanges, OnDestroy {
   bool _maxChanged = true;

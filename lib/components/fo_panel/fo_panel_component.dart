@@ -15,7 +15,7 @@ import '../fo_icon/fo_icon_component.dart';
       FoIconComponent,
     ],
     pipes: [],
-    changeDetection: ChangeDetectionStrategy.Default)
+    changeDetection: ChangeDetectionStrategy.checkAlways)
 
 /// Panel component
 class FoPanelComponent implements OnDestroy {

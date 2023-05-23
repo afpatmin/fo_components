@@ -18,7 +18,7 @@ import 'time.dart';
     FoLabelComponent,
     FoDropdownSelectComponent
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.onPush,
 )
 class FoTimePickerComponent {
   int? hour;

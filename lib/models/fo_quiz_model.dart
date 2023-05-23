@@ -77,7 +77,7 @@ class FoOptionModel extends Equatable {
 
   final int score;
 
-  @JsonKey(ignore: true)
+  @JsonKey()
   final bool selected;
 
   final FoQuizModel? child;

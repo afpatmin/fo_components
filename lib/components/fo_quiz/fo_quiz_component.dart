@@ -13,7 +13,7 @@ import 'fo_question_component.dart';
   templateUrl: 'fo_quiz_component.html',
   styleUrls: ['fo_quiz_component.css'],
   directives: [FoQuestionComponent, NgFor],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.onPush,
 )
 class FoQuizComponent implements OnInit, OnDestroy {
   late FoQuestionModel activeQuestion;
