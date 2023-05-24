@@ -37,9 +37,6 @@ class FoButtonComponent implements OnDestroy {
   bool disabled = false;
     
   @Input()
-  bool fullWidth = false;
-
-  @Input()
   bool materialIcon = true;
 
   @Output('trigger')
