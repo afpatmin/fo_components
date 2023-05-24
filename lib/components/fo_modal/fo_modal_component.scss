@@ -95,7 +95,7 @@
   }
 }
 
-:host[fullWidth] {
+:host.fullWidth {
   div#modalOverlay {
     div#modalContent {
       width: 90vw;
@@ -103,7 +103,7 @@
   }
 }
 
-:host[fullHeight] {
+:host.fullHeight {
   div#modalOverlay {
     div#modalContent {
       height: 95vh;
