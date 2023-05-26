@@ -54,8 +54,7 @@ class _$DatePickerStateCWProxyImpl implements _$DatePickerStateCWProxy {
           // ignore: cast_nullable_to_non_nullable
           : selectedDate as DateTime?,
       days: days == const $CopyWithPlaceholder() || days == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.days!
+          ? _value.days
           // ignore: cast_nullable_to_non_nullable
           : days as List<List<DateTime>>,
     );

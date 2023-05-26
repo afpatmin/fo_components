@@ -50,13 +50,11 @@ class _$FoQuizModelCWProxyImpl implements _$FoQuizModelCWProxy {
   }) {
     return FoQuizModel(
       questions: questions == const $CopyWithPlaceholder() || questions == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.questions!
+          ? _value.questions
           // ignore: cast_nullable_to_non_nullable
           : questions as List<FoQuestionModel>,
       passScore: passScore == const $CopyWithPlaceholder() || passScore == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.passScore!
+          ? _value.passScore
           // ignore: cast_nullable_to_non_nullable
           : passScore as int,
     );
@@ -121,19 +119,16 @@ class _$FoQuestionModelCWProxyImpl implements _$FoQuestionModelCWProxy {
   }) {
     return FoQuestionModel(
       label: label == const $CopyWithPlaceholder() || label == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.label!
+          ? _value.label
           // ignore: cast_nullable_to_non_nullable
           : label as String,
       options: options == const $CopyWithPlaceholder() || options == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.options!
+          ? _value.options
           // ignore: cast_nullable_to_non_nullable
           : options as List<FoOptionModel>,
       multiSelect:
           multiSelect == const $CopyWithPlaceholder() || multiSelect == null
-              // ignore: unnecessary_non_null_assertion
-              ? _value.multiSelect!
+              ? _value.multiSelect
               // ignore: cast_nullable_to_non_nullable
               : multiSelect as bool,
     );
@@ -210,13 +205,11 @@ class _$FoOptionModelCWProxyImpl implements _$FoOptionModelCWProxy {
   }) {
     return FoOptionModel(
       value: value == const $CopyWithPlaceholder() || value == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.value!
+          ? _value.value
           // ignore: cast_nullable_to_non_nullable
           : value as Object,
       label: label == const $CopyWithPlaceholder() || label == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.label!
+          ? _value.label
           // ignore: cast_nullable_to_non_nullable
           : label as String,
       child: child == const $CopyWithPlaceholder()
@@ -224,13 +217,11 @@ class _$FoOptionModelCWProxyImpl implements _$FoOptionModelCWProxy {
           // ignore: cast_nullable_to_non_nullable
           : child as FoQuizModel?,
       selected: selected == const $CopyWithPlaceholder() || selected == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.selected!
+          ? _value.selected
           // ignore: cast_nullable_to_non_nullable
           : selected as bool,
       score: score == const $CopyWithPlaceholder() || score == null
-          // ignore: unnecessary_non_null_assertion
-          ? _value.score!
+          ? _value.score
           // ignore: cast_nullable_to_non_nullable
           : score as int,
     );
@@ -283,6 +274,7 @@ FoOptionModel _$FoOptionModelFromJson(Map<String, dynamic> json) =>
       child: json['child'] == null
           ? null
           : FoQuizModel.fromJson(json['child'] as Map<String, dynamic>),
+      selected: json['selected'] as bool? ?? false,
       score: json['score'] as int? ?? 0,
     );
 
@@ -291,5 +283,6 @@ Map<String, dynamic> _$FoOptionModelToJson(FoOptionModel instance) =>
       'value': instance.value,
       'label': instance.label,
       'score': instance.score,
+      'selected': instance.selected,
       'child': instance.child,
     };
