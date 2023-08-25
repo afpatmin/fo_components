@@ -37,6 +37,9 @@ class FoFileUploadComponent implements OnDestroy {
   bool materialIcon = true;
 
   @Input()
+  String icon = 'folder_open';
+
+  @Input()
   bool disabled = false;
 
   @Input()

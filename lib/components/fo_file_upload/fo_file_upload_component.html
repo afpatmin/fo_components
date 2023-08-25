@@ -11,7 +11,7 @@
       <div id="content"
            class="margin-top-small margin-bottom-small">
          <fo-icon [material]="materialIcon"
-                  icon="folder_open">
+                  [icon]="icon">
          </fo-icon>
          <ng-container *ngIf="uploading">
             <fo-load-indicator [label]="uploadingLabel"></fo-load-indicator>
